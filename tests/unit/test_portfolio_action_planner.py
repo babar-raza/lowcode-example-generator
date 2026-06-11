@@ -32,10 +32,10 @@ _REPO_ROOT = Path(__file__).resolve().parents[2]
 # Test Action model
 # ---------------------------------------------------------------------------
 
+
 class TestActionModel:
     def test_action_to_dict_has_required_fields(self):
-        a = Action(id="TEST", family="pdf", type="BLOCKER_RETEST",
-                   current_state="blocked", desired_state="unblocked")
+        a = Action(id="TEST", family="pdf", type="BLOCKER_RETEST", current_state="blocked", desired_state="unblocked")
         d = a.to_dict()
         assert d["id"] == "TEST"
         assert d["family"] == "pdf"
@@ -45,22 +45,44 @@ class TestActionModel:
         assert "blocker" in d
 
     def test_action_board_to_json_is_valid(self):
-        board = ActionBoard(actions=[
-            Action(id="A1", family="cells", type="DENOMINATOR_RECONCILIATION",
-                   current_state="x", desired_state="y", impact=50),
-        ])
+        board = ActionBoard(
+            actions=[
+                Action(
+                    id="A1",
+                    family="cells",
+                    type="DENOMINATOR_RECONCILIATION",
+                    current_state="x",
+                    desired_state="y",
+                    impact=50,
+                ),
+            ]
+        )
         j = board.to_json()
         parsed = json.loads(j)
         assert len(parsed["actions"]) == 1
         assert parsed["actions"][0]["id"] == "A1"
 
     def test_safe_actions_filters_correctly(self):
-        board = ActionBoard(actions=[
-            Action(id="SAFE", family="cells", type="DENOMINATOR_RECONCILIATION",
-                   current_state="x", desired_state="y", safe_to_execute_now=True),
-            Action(id="BLOCKED", family="pdf", type="MERGE_READY_PR",
-                   current_state="x", desired_state="y", safe_to_execute_now=False),
-        ])
+        board = ActionBoard(
+            actions=[
+                Action(
+                    id="SAFE",
+                    family="cells",
+                    type="DENOMINATOR_RECONCILIATION",
+                    current_state="x",
+                    desired_state="y",
+                    safe_to_execute_now=True,
+                ),
+                Action(
+                    id="BLOCKED",
+                    family="pdf",
+                    type="MERGE_READY_PR",
+                    current_state="x",
+                    desired_state="y",
+                    safe_to_execute_now=False,
+                ),
+            ]
+        )
         assert len(board.safe_actions()) == 1
         assert board.safe_actions()[0].id == "SAFE"
         assert len(board.blocked_actions()) == 1
@@ -70,6 +92,7 @@ class TestActionModel:
 # ---------------------------------------------------------------------------
 # Test compute_action_board against real repo
 # ---------------------------------------------------------------------------
+
 
 class TestComputeActionBoard:
     @pytest.fixture(scope="class")
@@ -133,6 +156,7 @@ class TestComputeActionBoard:
 # Test gate-dependent behavior
 # ---------------------------------------------------------------------------
 
+
 class TestGateBehavior:
     def test_pdf_merge_absent_when_no_pr_ready(self):
         """With pr_dry_run_ready_count=0, PDF_MERGE_PRS is not generated regardless of gate."""
@@ -154,19 +178,18 @@ class TestGateBehavior:
 # Test dirty state ranking
 # ---------------------------------------------------------------------------
 
+
 class TestDirtyStateRanking:
     def test_dirty_state_ranks_first(self):
         mock_dirty = DirtyState(source=["src/fake_dirty_file.py"])
-        with mock.patch("plugin_examples.portfolio_action_planner._check_dirty_state",
-                        return_value=mock_dirty):
+        with mock.patch("plugin_examples.portfolio_action_planner._check_dirty_state", return_value=mock_dirty):
             board = compute_action_board(_REPO_ROOT)
             assert board.actions[0].id == "CLOSE_DIRTY_STATE"
             assert board.actions[0].impact == 100
 
     def test_no_dirty_action_when_clean(self):
         mock_dirty = DirtyState()
-        with mock.patch("plugin_examples.portfolio_action_planner._check_dirty_state",
-                        return_value=mock_dirty):
+        with mock.patch("plugin_examples.portfolio_action_planner._check_dirty_state", return_value=mock_dirty):
             board = compute_action_board(_REPO_ROOT)
             ids = [a.id for a in board.actions]
             assert "CLOSE_DIRTY_STATE" not in ids
@@ -175,6 +198,7 @@ class TestDirtyStateRanking:
 # ---------------------------------------------------------------------------
 # Test contract conservation feed
 # ---------------------------------------------------------------------------
+
 
 class TestContractConservation:
     def test_no_backfill_when_contracts_match_pilot(self):
@@ -188,13 +212,22 @@ class TestContractConservation:
 # Test render_markdown
 # ---------------------------------------------------------------------------
 
+
 class TestRenderMarkdown:
     def test_render_produces_markdown_table(self):
-        board = ActionBoard(actions=[
-            Action(id="A1", family="cells", type="DENOMINATOR_RECONCILIATION",
-                   current_state="x", desired_state="y", impact=50,
-                   safe_to_execute_now=True),
-        ])
+        board = ActionBoard(
+            actions=[
+                Action(
+                    id="A1",
+                    family="cells",
+                    type="DENOMINATOR_RECONCILIATION",
+                    current_state="x",
+                    desired_state="y",
+                    impact=50,
+                    safe_to_execute_now=True,
+                ),
+            ]
+        )
         md = render_markdown(board)
         assert "| Rank |" in md
         assert "| 1 | A1 |" in md
@@ -208,6 +241,7 @@ class TestRenderMarkdown:
 # ---------------------------------------------------------------------------
 # Test constants
 # ---------------------------------------------------------------------------
+
 
 class TestConstants:
     def test_active_families_count(self):
@@ -232,6 +266,7 @@ class TestConstants:
 # ---------------------------------------------------------------------------
 # Test v2 freshness metadata
 # ---------------------------------------------------------------------------
+
 
 class TestFreshnessMetadata:
     def test_board_has_generated_from_head(self):
@@ -261,6 +296,7 @@ class TestFreshnessMetadata:
 # Test v2 conflict recovery action
 # ---------------------------------------------------------------------------
 
+
 class TestConflictRecoveryAction:
     def test_conflict_recovery_absent_when_all_published(self):
         """PDF_PR_CONFLICT_RECOVERY should not appear when pr_dry_run_ready_count is 0."""
@@ -280,6 +316,7 @@ class TestConflictRecoveryAction:
 # Test v2 taskcard IDs
 # ---------------------------------------------------------------------------
 
+
 class TestTaskcardIds:
     def test_blocker_actions_have_taskcard_ids(self):
         board = compute_action_board(_REPO_ROOT)
@@ -291,15 +328,14 @@ class TestTaskcardIds:
         assert psd.taskcard_id == "TC-PSD-REFLECTION"
 
     def test_taskcard_id_omitted_from_dict_when_none(self):
-        a = Action(id="X", family="cells", type="BLOCKER_RETEST",
-                   current_state="x", desired_state="y")
+        a = Action(id="X", family="cells", type="BLOCKER_RETEST", current_state="x", desired_state="y")
         d = a.to_dict()
         assert "taskcard_id" not in d
 
     def test_taskcard_id_present_in_dict_when_set(self):
-        a = Action(id="X", family="pdf", type="BLOCKER_RETEST",
-                   current_state="x", desired_state="y",
-                   taskcard_id="TC-TEST")
+        a = Action(
+            id="X", family="pdf", type="BLOCKER_RETEST", current_state="x", desired_state="y", taskcard_id="TC-TEST"
+        )
         d = a.to_dict()
         assert d["taskcard_id"] == "TC-TEST"
 
@@ -307,6 +343,7 @@ class TestTaskcardIds:
 # ---------------------------------------------------------------------------
 # Test v2 metrics summary
 # ---------------------------------------------------------------------------
+
 
 class TestMetricsSummary:
     def test_metrics_summary_structure(self):
@@ -331,6 +368,7 @@ class TestMetricsSummary:
 # ---------------------------------------------------------------------------
 # Test v3 dirty-state categorization
 # ---------------------------------------------------------------------------
+
 
 class TestDirtyStateCategorization:
     def test_source_file_classified_as_source(self):
@@ -359,8 +397,16 @@ class TestDirtyStateCategorization:
         assert _classify_dirty_path("pyproject.toml") == "unknown"
 
     def test_package_artifact_classified(self):
-        assert _classify_dirty_path("workspace/pr-dry-run/pdf-controlled-pilot-pr5/examples/pdf/lowcode/jpeg/input.pdf") == "package_artifact"
-        assert _classify_dirty_path("workspace/pr-dry-run/pdf-controlled-pilot-pr9/examples/pdf/lowcode/signature/test.pfx") == "package_artifact"
+        assert (
+            _classify_dirty_path("workspace/pr-dry-run/pdf-controlled-pilot-pr5/examples/pdf/lowcode/jpeg/input.pdf")
+            == "package_artifact"
+        )
+        assert (
+            _classify_dirty_path(
+                "workspace/pr-dry-run/pdf-controlled-pilot-pr9/examples/pdf/lowcode/signature/test.pfx"
+            )
+            == "package_artifact"
+        )
 
     def test_package_artifact_does_not_create_close_dirty_state(self):
         dirty = DirtyState(package_artifact=["workspace/pr-dry-run/foo/input.pdf"])
@@ -388,8 +434,10 @@ class TestDirtyStateCategorization:
 
     def test_mixed_dirty_state_summary(self):
         dirty = DirtyState(
-            source=["src/a.py"], config=["pipeline/configs/x.json"],
-            evidence=["workspace/foo.json"], artifact=["output.pdf"]
+            source=["src/a.py"],
+            config=["pipeline/configs/x.json"],
+            evidence=["workspace/foo.json"],
+            artifact=["output.pdf"],
         )
         s = dirty.summary()
         assert "1 source" in s
@@ -399,8 +447,9 @@ class TestDirtyStateCategorization:
         assert dirty.actionable_count == 2
 
     def test_dirty_state_to_dict_has_all_counts(self):
-        dirty = DirtyState(source=["a.py"], test=["t.py"], artifact=["o.pdf"],
-                           package_artifact=["workspace/pr-dry-run/x/input.pdf"])
+        dirty = DirtyState(
+            source=["a.py"], test=["t.py"], artifact=["o.pdf"], package_artifact=["workspace/pr-dry-run/x/input.pdf"]
+        )
         d = dirty.to_dict()
         assert d["source_dirty_count"] == 1
         assert d["config_dirty_count"] == 0
@@ -422,8 +471,7 @@ class TestDirtyStateCategorization:
     def test_evidence_only_dirty_no_close_action(self):
         """Only evidence/artifact dirty should NOT produce CLOSE_DIRTY_STATE."""
         dirty = DirtyState(evidence=["workspace/foo.json"], artifact=["output.pdf"])
-        with mock.patch("plugin_examples.portfolio_action_planner._check_dirty_state",
-                        return_value=dirty):
+        with mock.patch("plugin_examples.portfolio_action_planner._check_dirty_state", return_value=dirty):
             board = compute_action_board(_REPO_ROOT)
             ids = [a.id for a in board.actions]
             assert "CLOSE_DIRTY_STATE" not in ids
@@ -450,6 +498,7 @@ class TestPorcelainPathParsing:
 # ---------------------------------------------------------------------------
 # Test execution state semantics
 # ---------------------------------------------------------------------------
+
 
 class TestExecutionStateSemantics:
     """Verify planner distinguishes executed no-op checks from required next actions."""
@@ -514,11 +563,24 @@ class TestExecutionStateSemantics:
     def test_next_required_actions_excludes_executed_noops(self):
         board = ActionBoard()
         board.actions = [
-            Action(id="VERSION_DRIFT_CHECK", family="x", type="VERSION_DRIFT_RERUN",
-                   current_state="", desired_state="", safe_to_execute_now=True),
-            Action(id="PDF_MERGE_PRS", family="pdf", type="MERGE_READY_PR",
-                   current_state="", desired_state="", safe_to_execute_now=False,
-                   approval_required="APPROVE_MERGE_PR", execution_state="blocked_by_approval"),
+            Action(
+                id="VERSION_DRIFT_CHECK",
+                family="x",
+                type="VERSION_DRIFT_RERUN",
+                current_state="",
+                desired_state="",
+                safe_to_execute_now=True,
+            ),
+            Action(
+                id="PDF_MERGE_PRS",
+                family="pdf",
+                type="MERGE_READY_PR",
+                current_state="",
+                desired_state="",
+                safe_to_execute_now=False,
+                approval_required="APPROVE_MERGE_PR",
+                execution_state="blocked_by_approval",
+            ),
         ]
         board.mark_executed("VERSION_DRIFT_CHECK", changed=False, cycle=1)
         required = board.next_required_actions()
@@ -541,10 +603,16 @@ class TestExecutionStateSemantics:
         assert a.safe_to_execute_now is False
 
     def test_action_to_dict_includes_execution_state(self):
-        a = Action(id="TEST", family="x", type="TEST",
-                   current_state="", desired_state="",
-                   execution_state="recurring_check_satisfied",
-                   executed_this_sprint=True, next_required=False)
+        a = Action(
+            id="TEST",
+            family="x",
+            type="TEST",
+            current_state="",
+            desired_state="",
+            execution_state="recurring_check_satisfied",
+            executed_this_sprint=True,
+            next_required=False,
+        )
         d = a.to_dict()
         assert d["execution_state"] == "recurring_check_satisfied"
         assert d["executed_this_sprint"] is True
@@ -552,11 +620,10 @@ class TestExecutionStateSemantics:
 
     def test_board_blocked_actions_have_execution_state(self):
         dirty = DirtyState()
-        with mock.patch("plugin_examples.portfolio_action_planner._check_dirty_state",
-                        return_value=dirty), \
-             mock.patch("plugin_examples.portfolio_action_planner._get_head_sha",
-                        return_value="abc1234"):
+        with (
+            mock.patch("plugin_examples.portfolio_action_planner._check_dirty_state", return_value=dirty),
+            mock.patch("plugin_examples.portfolio_action_planner._get_head_sha", return_value="abc1234"),
+        ):
             board = compute_action_board(_REPO_ROOT)
             for a in board.blocked_actions():
-                assert a.execution_state.startswith("blocked_by_"), \
-                    f"{a.id} has execution_state={a.execution_state}"
+                assert a.execution_state.startswith("blocked_by_"), f"{a.id} has execution_state={a.execution_state}"

@@ -12,7 +12,6 @@ from plugin_examples.evidence_validator.models import RuleResult
 logger = logging.getLogger(__name__)
 
 
-
 class Sprint72to75Rules:
     """Rule mixin for evidence validation."""
 
@@ -29,13 +28,15 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="remote/remote-proof-consistency-audit.json must be present",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="remote/remote-proof-consistency-audit.json not found",
             )
         return RuleResult(
             rule_id=rule_id,
             description="remote/remote-proof-consistency-audit.json is present",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="remote/remote-proof-consistency-audit.json exists",
         )
 
@@ -51,7 +52,8 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="remote/remote-proof-consistency-audit.json must exist with consistent=true",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="remote/remote-proof-consistency-audit.json not found",
             )
         try:
@@ -60,20 +62,23 @@ class Sprint72to75Rules:
                 return RuleResult(
                     rule_id=rule_id,
                     description="remote/remote-proof-consistency-audit.json must have consistent=true",
-                    severity="FAILURE", passed=False,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail=f"consistent={data.get('consistent')} — remote proof is not consistent",
                 )
         except (OSError, ValueError) as e:
             return RuleResult(
                 rule_id=rule_id,
                 description="remote/remote-proof-consistency-audit.json must be valid JSON",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=str(e),
             )
         return RuleResult(
             rule_id=rule_id,
             description="remote/remote-proof-consistency-audit.json confirms consistent=true",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="remote-proof-consistency-audit.json: consistent=true",
         )
 
@@ -90,7 +95,8 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="remote/remote-proof-summary.md must exist and state 0/42 README I/O",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="remote/remote-proof-summary.md not found",
             )
         content = summary_file.read_text(encoding="utf-8")
@@ -99,7 +105,8 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="remote/remote-proof-summary.md must not claim 42/42 README I/O sections",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="remote-proof-summary.md still contains the incorrect '42/42 examples have README I/O sections' claim",
             )
         # Must state 0/42
@@ -107,13 +114,15 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="remote/remote-proof-summary.md must state 0/42 remote README I/O",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="remote-proof-summary.md does not contain '0/42' — corrected count not stated",
             )
         return RuleResult(
             rule_id=rule_id,
             description="remote/remote-proof-summary.md correctly states 0/42 remote README I/O sections",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="remote-proof-summary.md contains '0/42' and does not contain the incorrect 42/42 claim",
         )
 
@@ -130,7 +139,8 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Both remote-proof-summary.md and remote-readme-io-audit-final.json must exist",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Missing: {'remote-proof-summary.md' if not summary_file.exists() else 'remote-readme-io-audit-final.json'}",
             )
         try:
@@ -141,7 +151,8 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="remote-readme-io-audit-final.json must be valid JSON",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=str(e),
             )
         summary_content = summary_file.read_text(encoding="utf-8")
@@ -151,13 +162,15 @@ class Sprint72to75Rules:
                 return RuleResult(
                     rule_id=rule_id,
                     description="remote-proof-summary.md must not contradict audit io_doc_count=0",
-                    severity="FAILURE", passed=False,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail=f"Audit io_doc_count=0 but summary claims '42/42 examples have README I/O sections'",
                 )
         return RuleResult(
             rule_id=rule_id,
             description=f"remote-proof-summary.md is consistent with audit io_doc_count={io_doc_count}/{total}",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"Audit io_doc_count={io_doc_count}, summary does not contradict this",
         )
 
@@ -173,7 +186,8 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="history/remote-proof-summary-superseded.md must be present",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="history/remote-proof-summary-superseded.md not found — incorrect Sprint 68 artifact not archived",
             )
         content = superseded_file.read_text(encoding="utf-8")
@@ -181,13 +195,15 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="history/remote-proof-summary-superseded.md must be non-empty",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="history/remote-proof-summary-superseded.md is empty",
             )
         return RuleResult(
             rule_id=rule_id,
             description="history/remote-proof-summary-superseded.md is present and non-empty",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"history/remote-proof-summary-superseded.md: {len(content)} bytes",
         )
 
@@ -202,7 +218,8 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="remote/remote-readme-io-audit-final.json must exist",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="remote/remote-readme-io-audit-final.json not found",
             )
         try:
@@ -214,20 +231,23 @@ class Sprint72to75Rules:
                 return RuleResult(
                     rule_id=rule_id,
                     description="remote-readme-io-audit-final.json io_doc_count must match actual has_io_section=true count",
-                    severity="FAILURE", passed=False,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail=f"io_doc_count={io_doc_count} but actual has_io_section=true count={actual_io_count}",
                 )
         except (OSError, ValueError) as e:
             return RuleResult(
                 rule_id=rule_id,
                 description="remote-readme-io-audit-final.json must be valid JSON",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=str(e),
             )
         return RuleResult(
             rule_id=rule_id,
             description=f"remote-readme-io-audit-final.json io_doc_count={io_doc_count} matches has_io_section=true count",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"io_doc_count={io_doc_count} confirmed consistent with {len(records)} records",
         )
 
@@ -243,7 +263,8 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="remote/remote-vs-handoff-final.json must exist with current sprint paths",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="remote/remote-vs-handoff-final.json not found",
             )
         try:
@@ -253,20 +274,23 @@ class Sprint72to75Rules:
                 return RuleResult(
                     rule_id=rule_id,
                     description="remote/remote-vs-handoff-final.json must use current sprint handoff paths",
-                    severity="FAILURE", passed=False,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail=f"Stale sprint paths in remote-vs-handoff-final.json: {stale}",
                 )
         except (OSError, ValueError) as e:
             return RuleResult(
                 rule_id=rule_id,
                 description="remote/remote-vs-handoff-final.json must be readable",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=str(e),
             )
         return RuleResult(
             rule_id=rule_id,
             description="remote/remote-vs-handoff-final.json handoff_paths use current sprint",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="remote-vs-handoff-final.json scanned — all handoff_paths point to current sprint",
         )
 
@@ -285,7 +309,8 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="02-weekly-review-claim-vs-proof-matrix.md must exist",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="02-weekly-review-claim-vs-proof-matrix.md not found — weekly review items not classified",
             )
         content = matrix_file.read_text(encoding="utf-8")
@@ -300,13 +325,15 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Weekly review matrix must contain classification labels",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Missing classification labels in matrix: {missing}",
             )
         return RuleResult(
             rule_id=rule_id,
             description="Weekly review claim matrix present and contains classification labels",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="02-weekly-review-claim-vs-proof-matrix.md found with required classifications",
         )
 
@@ -322,7 +349,8 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="pdf-publication/pdf-pr-reconciliation.json must exist",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="pdf-pr-reconciliation.json not found — PDF publication truth not reconciled against remote state",
             )
         try:
@@ -331,7 +359,8 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="pdf-publication/pdf-pr-reconciliation.json must be valid JSON",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=str(e),
             )
         verdict = data.get("claim_verdict", "")
@@ -339,13 +368,15 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="pdf-pr-reconciliation.json must contain claim_verdict field",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="claim_verdict field missing from pdf-pr-reconciliation.json",
             )
         return RuleResult(
             rule_id=rule_id,
             description="PDF publication truth reconciled with current remote evidence",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"pdf-pr-reconciliation.json present, claim_verdict={verdict}",
         )
 
@@ -360,7 +391,8 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="formimporter/formimporter-repro-inventory.json must exist",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="formimporter-repro-inventory.json not found — FormImporter taskcard not durable",
             )
         try:
@@ -369,7 +401,8 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="formimporter-repro-inventory.json must be valid JSON",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=str(e),
             )
         trigger = data.get("next_retest_trigger", "")
@@ -377,13 +410,15 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="formimporter-repro-inventory.json must have next_retest_trigger",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="next_retest_trigger field missing from formimporter-repro-inventory.json",
             )
         return RuleResult(
             rule_id=rule_id,
             description="FormImporter taskcard is durable with retest trigger",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"formimporter-repro-inventory.json present, trigger={trigger}",
         )
 
@@ -398,7 +433,8 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="version-drift/words-version-drift-current.json must exist",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="words-version-drift-current.json not found — Words version drift not documented",
             )
         try:
@@ -407,20 +443,23 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="words-version-drift-current.json must be valid JSON",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=str(e),
             )
         if "drift" not in data:
             return RuleResult(
                 rule_id=rule_id,
                 description="words-version-drift-current.json must have drift field",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="drift field missing from words-version-drift-current.json",
             )
         return RuleResult(
             rule_id=rule_id,
             description="Words version drift documented with drift classification",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"words-version-drift-current.json present, drift={data.get('drift')}",
         )
 
@@ -436,7 +475,8 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="post-merge-runtime/post-merge-validation-matrix.json must exist",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="post-merge-validation-matrix.json not found — Email/Slides post-merge runtime not classified",
             )
         try:
@@ -445,7 +485,8 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="post-merge-validation-matrix.json must be valid JSON",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=str(e),
             )
         records = data.get("records", [])
@@ -453,13 +494,15 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="post-merge-validation-matrix.json must have records",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="records array is empty in post-merge-validation-matrix.json",
             )
         return RuleResult(
             rule_id=rule_id,
             description="Post-merge runtime validation matrix present with records",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"post-merge-validation-matrix.json present, {len(records)} records",
         )
 
@@ -475,7 +518,8 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="git/dirty-file-classification.md must exist",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="dirty-file-classification.md not found — dirty tree not explicitly classified",
             )
         content = classif_file.read_text(encoding="utf-8")
@@ -483,13 +527,15 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="git/dirty-file-classification.md must be substantive (not empty/minimal)",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="dirty-file-classification.md is too short to be substantive",
             )
         return RuleResult(
             rule_id=rule_id,
             description="Dirty tree classification document present and substantive",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="git/dirty-file-classification.md found with content",
         )
 
@@ -505,7 +551,8 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="governance/sprint27-strict-contract-revalidation.md must exist",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="sprint27-strict-contract-revalidation.md not found — Sprint 27 evidence status ambiguous",
             )
         content = gov_file.read_text(encoding="utf-8")
@@ -515,13 +562,15 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="sprint27-strict-contract-revalidation.md must contain governance classifications",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Missing in sprint27-strict-contract-revalidation.md: {missing}",
             )
         return RuleResult(
             rule_id=rule_id,
             description="Sprint 27 governance classification document present with required labels",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="sprint27-strict-contract-revalidation.md found with GOVERNANCE_EXCEPTION_REQUIRED and HISTORICAL_NON_COMPLIANT",
         )
 
@@ -541,7 +590,8 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="final-verdict.md not found — skipping weekly review verdict check",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="final-verdict.md not found",
             )
 
@@ -552,7 +602,8 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Weekly review matrix present — verdict COMPLETE is allowed",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="02-weekly-review-claim-vs-proof-matrix.md present; weekly review items classified",
             )
 
@@ -561,13 +612,15 @@ class Sprint72to75Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Verdict must not claim completion without weekly review classification matrix",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="final-verdict.md suggests completion but 02-weekly-review-claim-vs-proof-matrix.md is absent",
             )
         return RuleResult(
             rule_id=rule_id,
             description="No weekly review matrix but verdict does not overclaim",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="02-weekly-review-claim-vs-proof-matrix.md absent but verdict does not claim completion",
         )
 

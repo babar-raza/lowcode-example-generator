@@ -77,77 +77,49 @@ class TestWordsTypeRoleClassification:
             f"MailMergeDataSource must be data_source_adapter, got {mmds['role']!r}. "
             "It has no callable operations and no consumers in the LowCode API."
         )
-        assert mmds["standalone_allowed"] is False, (
-            "MailMergeDataSource must not be standalone — no LowCode consumer"
-        )
-        assert mmds["confidence"] > 0.70, (
-            f"Reclassified confidence must exceed prior 0.70, got {mmds['confidence']}"
-        )
-        assert "prior_classification" in mmds, (
-            "MailMergeDataSource must document its prior_classification for audit trail"
-        )
+        assert mmds["standalone_allowed"] is False, "MailMergeDataSource must not be standalone — no LowCode consumer"
+        assert mmds["confidence"] > 0.70, f"Reclassified confidence must exceed prior 0.70, got {mmds['confidence']}"
+        assert (
+            "prior_classification" in mmds
+        ), "MailMergeDataSource must document its prior_classification for audit trail"
 
     def test_words_options_types_not_standalone(self):
         """All options types must have standalone_allowed=false."""
         classifications = self._get_classifications()
-        options_types = [
-            name for name, c in classifications.items()
-            if c["role"] == "options"
-        ]
-        assert len(options_types) >= 3, (
-            f"Expected at least 3 options types, found {len(options_types)}: {options_types}"
-        )
+        options_types = [name for name, c in classifications.items() if c["role"] == "options"]
+        assert (
+            len(options_types) >= 3
+        ), f"Expected at least 3 options types, found {len(options_types)}: {options_types}"
         for name in options_types:
             c = classifications[name]
-            assert c["standalone_allowed"] is False, (
-                f"Options type {name!r} must have standalone_allowed=false"
-            )
+            assert c["standalone_allowed"] is False, f"Options type {name!r} must have standalone_allowed=false"
 
     def test_abstract_base_not_standalone(self):
         """Abstract base classes must have standalone_allowed=false."""
         classifications = self._get_classifications()
-        abstract_types = [
-            name for name, c in classifications.items()
-            if c["role"] == "abstract_base"
-        ]
+        abstract_types = [name for name, c in classifications.items() if c["role"] == "abstract_base"]
         assert len(abstract_types) >= 1, "Expected at least one abstract_base type"
         for name in abstract_types:
             c = classifications[name]
-            assert c["standalone_allowed"] is False, (
-                f"Abstract type {name!r} must have standalone_allowed=false"
-            )
+            assert c["standalone_allowed"] is False, f"Abstract type {name!r} must have standalone_allowed=false"
 
     def test_settings_model_types_not_standalone(self):
         """All settings_model (context) types must have standalone_allowed=false."""
         classifications = self._get_classifications()
-        context_types = [
-            name for name, c in classifications.items()
-            if c["role"] == "settings_model"
-        ]
-        assert len(context_types) >= 8, (
-            f"Expected at least 8 settings_model types, found {len(context_types)}"
-        )
+        context_types = [name for name, c in classifications.items() if c["role"] == "settings_model"]
+        assert len(context_types) >= 8, f"Expected at least 8 settings_model types, found {len(context_types)}"
         for name in context_types:
             c = classifications[name]
-            assert c["standalone_allowed"] is False, (
-                f"Settings model {name!r} must not be standalone"
-            )
+            assert c["standalone_allowed"] is False, f"Settings model {name!r} must not be standalone"
 
     def test_operation_facades_standalone_allowed(self):
         """Operation facade types must have standalone_allowed=true."""
         classifications = self._get_classifications()
-        facades = [
-            name for name, c in classifications.items()
-            if c["role"] == "operation_facade"
-        ]
-        assert len(facades) >= 8, (
-            f"Expected at least 8 operation_facade types, found {len(facades)}: {facades}"
-        )
+        facades = [name for name, c in classifications.items() if c["role"] == "operation_facade"]
+        assert len(facades) >= 8, f"Expected at least 8 operation_facade types, found {len(facades)}: {facades}"
         for name in facades:
             c = classifications[name]
-            assert c["standalone_allowed"] is True, (
-                f"Operation facade {name!r} must have standalone_allowed=true"
-            )
+            assert c["standalone_allowed"] is True, f"Operation facade {name!r} must have standalone_allowed=true"
 
     def test_converter_classified_as_operation_facade(self):
         """Converter must be operation_facade with high confidence."""
@@ -209,9 +181,9 @@ class TestWordsConsumerRelationships:
         cmap = self._get_map()
         assert "MailMergeDataSource" in cmap
         mmds = cmap["MailMergeDataSource"]
-        assert mmds["consumers"] == [], (
-            f"MailMergeDataSource must have no LowCode consumers, found: {mmds['consumers']}"
-        )
+        assert (
+            mmds["consumers"] == []
+        ), f"MailMergeDataSource must have no LowCode consumers, found: {mmds['consumers']}"
         assert mmds["generation_blocked"] is True
 
     def test_split_options_has_required_consumer(self):
@@ -220,13 +192,9 @@ class TestWordsConsumerRelationships:
         assert "SplitOptions" in cmap
         so = cmap["SplitOptions"]
         assert len(so["consumers"]) >= 1
-        splitter_consumer = next(
-            (c for c in so["consumers"] if c["consumer_type"] == "Splitter"), None
-        )
+        splitter_consumer = next((c for c in so["consumers"] if c["consumer_type"] == "Splitter"), None)
         assert splitter_consumer is not None, "Splitter must be a consumer of SplitOptions"
-        assert splitter_consumer["is_optional"] is False, (
-            "SplitOptions is a REQUIRED parameter for Splitter.Split()"
-        )
+        assert splitter_consumer["is_optional"] is False, "SplitOptions is a REQUIRED parameter for Splitter.Split()"
         assert so["null_safe"] is False
 
     def test_mail_merge_options_is_optional_consumer(self):
@@ -234,9 +202,7 @@ class TestWordsConsumerRelationships:
         cmap = self._get_map()
         assert "MailMergeOptions" in cmap
         mmo = cmap["MailMergeOptions"]
-        merger_consumer = next(
-            (c for c in mmo["consumers"] if c["consumer_type"] == "MailMerger"), None
-        )
+        merger_consumer = next((c for c in mmo["consumers"] if c["consumer_type"] == "MailMerger"), None)
         assert merger_consumer is not None, "MailMerger must be a consumer of MailMergeOptions"
         assert merger_consumer["is_optional"] is True
 
@@ -247,9 +213,9 @@ class TestWordsConsumerRelationships:
         for type_name, entry in cmap.items():
             if entry.get("generation_blocked") is True:
                 # must have a block reason
-                assert entry.get("block_reason") or entry.get("consumer_block_reason"), (
-                    f"{type_name} is generation_blocked but has no block_reason documented"
-                )
+                assert entry.get("block_reason") or entry.get(
+                    "consumer_block_reason"
+                ), f"{type_name} is generation_blocked but has no block_reason documented"
 
 
 # ---------------------------------------------------------------------------
@@ -265,26 +231,22 @@ class TestWordsOptionsUsageReview:
     def test_words_options_review_blocks_unknown_required_properties(self):
         """SplitOptions must document that SplitCriteria has unknown enum values."""
         options = self._get_options()
-        split_key = next(
-            (k for k in options if "SplitOptions" in k), None
-        )
+        split_key = next((k for k in options if "SplitOptions" in k), None)
         assert split_key is not None, "SplitOptions must be in options review"
         so = options[split_key]
-        assert "SplitCriteria" in so.get("required_properties_inferred", []) or \
-               "SplitCriteria" in so.get("unknown_required_properties", "") or \
-               so.get("required_properties_inferred") is not None, (
-            "SplitOptions must document SplitCriteria as required property"
-        )
-        assert so["safe_default_possible"] is False, (
-            "SplitOptions must have safe_default_possible=false (SplitCriteria required)"
-        )
+        assert (
+            "SplitCriteria" in so.get("required_properties_inferred", [])
+            or "SplitCriteria" in so.get("unknown_required_properties", "")
+            or so.get("required_properties_inferred") is not None
+        ), "SplitOptions must document SplitCriteria as required property"
+        assert (
+            so["safe_default_possible"] is False
+        ), "SplitOptions must have safe_default_possible=false (SplitCriteria required)"
 
     def test_mail_merge_options_safe_to_instantiate(self):
         """MailMergeOptions must be documented as safe to instantiate with defaults."""
         options = self._get_options()
-        mmo_key = next(
-            (k for k in options if "MailMergeOptions" in k), None
-        )
+        mmo_key = next((k for k in options if "MailMergeOptions" in k), None)
         assert mmo_key is not None, "MailMergeOptions must be in options review"
         mmo = options[mmo_key]
         assert mmo["null_option_allowed"] is True
@@ -293,9 +255,7 @@ class TestWordsOptionsUsageReview:
     def test_report_builder_options_safe_to_instantiate(self):
         """ReportBuilderOptions must be documented as safe to instantiate with defaults."""
         options = self._get_options()
-        rbo_key = next(
-            (k for k in options if "ReportBuilderOptions" in k), None
-        )
+        rbo_key = next((k for k in options if "ReportBuilderOptions" in k), None)
         assert rbo_key is not None, "ReportBuilderOptions must be in options review"
         rbo = options[rbo_key]
         assert rbo["null_option_allowed"] is True
@@ -306,9 +266,9 @@ class TestWordsOptionsUsageReview:
         data = _load(OPTIONS_REVIEW)
         summary = data.get("summary", {})
         verdict = summary.get("followup_words_options_aware_review_verdict", "")
-        assert verdict == "CLOSED_VERIFIED", (
-            f"followup-words-options-aware-review must be CLOSED_VERIFIED, got {verdict!r}"
-        )
+        assert (
+            verdict == "CLOSED_VERIFIED"
+        ), f"followup-words-options-aware-review must be CLOSED_VERIFIED, got {verdict!r}"
 
 
 # ---------------------------------------------------------------------------
@@ -324,19 +284,14 @@ class TestWordsGenerationCandidateRank:
     def test_words_workflow_root_requires_output_strategy(self):
         """Every ready_for_controlled_pilot scenario must have expected_output_strategy."""
         candidates = self._get_candidates()
-        ready = [
-            c for c in candidates.values()
-            if c.get("status") == "ready_for_controlled_pilot"
-        ]
+        ready = [c for c in candidates.values() if c.get("status") == "ready_for_controlled_pilot"]
         assert len(ready) >= 1, "At least one ready_for_controlled_pilot scenario required"
         for c in ready:
             assert c.get("expected_output_strategy"), (
-                f"Scenario {c['scenario_id']} is ready_for_controlled_pilot "
-                f"but missing expected_output_strategy"
+                f"Scenario {c['scenario_id']} is ready_for_controlled_pilot " f"but missing expected_output_strategy"
             )
             assert c.get("fixture_strategy"), (
-                f"Scenario {c['scenario_id']} is ready_for_controlled_pilot "
-                f"but missing fixture_strategy"
+                f"Scenario {c['scenario_id']} is ready_for_controlled_pilot " f"but missing fixture_strategy"
             )
 
     def test_mail_merge_data_source_not_in_candidates(self):
@@ -351,9 +306,9 @@ class TestWordsGenerationCandidateRank:
     def test_ready_for_controlled_pilot_count(self):
         """At least 4 scenarios must be ready_for_controlled_pilot."""
         data = _load(CANDIDATE_RANK)
-        assert data["ready_for_controlled_pilot_count"] >= 4, (
-            f"Expected at least 4 ready scenarios, got {data['ready_for_controlled_pilot_count']}"
-        )
+        assert (
+            data["ready_for_controlled_pilot_count"] >= 4
+        ), f"Expected at least 4 ready scenarios, got {data['ready_for_controlled_pilot_count']}"
 
     def test_words_001_converter_is_ready(self):
         """WORDS-001 (Converter.Convert) must be ready_for_controlled_pilot."""
@@ -383,10 +338,7 @@ class TestWordsGenerationCandidateRank:
     def test_mail_merger_is_blocked(self):
         """MailMerger must be blocked_unclear_semantics due to template+data coupling."""
         candidates = self._get_candidates()
-        mail_merger_scenarios = [
-            c for c in candidates.values()
-            if "MailMerger" in c.get("workflow_root_type", "")
-        ]
+        mail_merger_scenarios = [c for c in candidates.values() if "MailMerger" in c.get("workflow_root_type", "")]
         assert len(mail_merger_scenarios) >= 1, "MailMerger must have a candidate entry"
         for c in mail_merger_scenarios:
             assert c["status"] == "blocked_unclear_semantics", (
@@ -398,8 +350,7 @@ class TestWordsGenerationCandidateRank:
         """ReportBuilder must be blocked_unclear_semantics due to LINQ template coupling."""
         candidates = self._get_candidates()
         report_builder_scenarios = [
-            c for c in candidates.values()
-            if "ReportBuilder" in c.get("workflow_root_type", "")
+            c for c in candidates.values() if "ReportBuilder" in c.get("workflow_root_type", "")
         ]
         assert len(report_builder_scenarios) >= 1, "ReportBuilder must have a candidate entry"
         for c in report_builder_scenarios:
@@ -411,14 +362,9 @@ class TestWordsGenerationCandidateRank:
     def test_blocked_scenarios_have_block_reason(self):
         """Every non-ready scenario must document a blocked_reason."""
         candidates = self._get_candidates()
-        blocked = [
-            c for c in candidates.values()
-            if c.get("status") != "ready_for_controlled_pilot"
-        ]
+        blocked = [c for c in candidates.values() if c.get("status") != "ready_for_controlled_pilot"]
         for c in blocked:
-            assert c.get("blocked_reason"), (
-                f"Scenario {c['scenario_id']} is not ready but has no blocked_reason"
-            )
+            assert c.get("blocked_reason"), f"Scenario {c['scenario_id']} is not ready but has no blocked_reason"
 
 
 # ---------------------------------------------------------------------------
@@ -435,43 +381,39 @@ class TestWordsGenerationReadinessConditions:
         """If generation_ready=true for Words, role_classification_review must be set."""
         words = self._get_words_entry()
         if words.get("generation_ready") is True:
-            assert words.get("role_classification_review"), (
-                "generation_ready=true requires role_classification_review to be set"
-            )
-            assert Path(REPO_ROOT / words["role_classification_review"]).exists(), (
-                f"role_classification_review file must exist: {words['role_classification_review']}"
-            )
+            assert words.get(
+                "role_classification_review"
+            ), "generation_ready=true requires role_classification_review to be set"
+            assert Path(
+                REPO_ROOT / words["role_classification_review"]
+            ).exists(), f"role_classification_review file must exist: {words['role_classification_review']}"
 
     def test_words_generation_ready_requires_options_review(self):
         """If generation_ready=true for Words, options_usage_review must be set."""
         words = self._get_words_entry()
         if words.get("generation_ready") is True:
-            assert words.get("options_usage_review"), (
-                "generation_ready=true requires options_usage_review to be set"
-            )
-            assert Path(REPO_ROOT / words["options_usage_review"]).exists(), (
-                f"options_usage_review file must exist: {words['options_usage_review']}"
-            )
+            assert words.get("options_usage_review"), "generation_ready=true requires options_usage_review to be set"
+            assert Path(
+                REPO_ROOT / words["options_usage_review"]
+            ).exists(), f"options_usage_review file must exist: {words['options_usage_review']}"
 
     def test_words_generation_ready_requires_candidate_rank(self):
         """If generation_ready=true for Words, generation_candidate_rank must be set."""
         words = self._get_words_entry()
         if words.get("generation_ready") is True:
-            assert words.get("generation_candidate_rank"), (
-                "generation_ready=true requires generation_candidate_rank to be set"
-            )
-            assert Path(REPO_ROOT / words["generation_candidate_rank"]).exists(), (
-                f"generation_candidate_rank file must exist: {words['generation_candidate_rank']}"
-            )
+            assert words.get(
+                "generation_candidate_rank"
+            ), "generation_ready=true requires generation_candidate_rank to be set"
+            assert Path(
+                REPO_ROOT / words["generation_candidate_rank"]
+            ).exists(), f"generation_candidate_rank file must exist: {words['generation_candidate_rank']}"
 
     def test_words_generation_ready_requires_controlled_pilot_scenarios(self):
         """If generation_ready=true for Words, controlled_pilot_scenarios must be non-empty."""
         words = self._get_words_entry()
         if words.get("generation_ready") is True:
             scenarios = words.get("controlled_pilot_scenarios", [])
-            assert len(scenarios) >= 1, (
-                "generation_ready=true requires at least one controlled_pilot_scenario"
-            )
+            assert len(scenarios) >= 1, "generation_ready=true requires at least one controlled_pilot_scenario"
 
     def test_words_generation_still_blocked_until_review_passes(self):
         """Words generation_ready may only be true if all review artifacts exist.
@@ -502,18 +444,14 @@ class TestWordsGenerationReadinessConditions:
         data = _load(READINESS_RANK)
         pdf = next(e for e in data if e["family"] == "pdf")
         # PDF pilot completed — generation_ready=true now
-        assert pdf["generation_ready"] is True, (
-            "PDF generation_ready should be True after controlled pilot completion"
-        )
+        assert pdf["generation_ready"] is True, "PDF generation_ready should be True after controlled pilot completion"
         # Pilot scope is restricted to 4 types
-        assert pdf.get("controlled_pilot_approved") is True, (
-            "PDF must have controlled_pilot_approved=True (4 types: Merger, Splitter, Optimizer, TextExtractor)"
-        )
+        assert (
+            pdf.get("controlled_pilot_approved") is True
+        ), "PDF must have controlled_pilot_approved=True (4 types: Merger, Splitter, Optimizer, TextExtractor)"
 
     def test_cells_generation_ready_unchanged(self):
         """Cells generation_ready must remain true — not modified by Words review."""
         data = _load(READINESS_RANK)
         cells = next(e for e in data if e["family"] == "cells")
-        assert cells["generation_ready"] is True, (
-            "Cells generation_ready must remain true after Words review"
-        )
+        assert cells["generation_ready"] is True, "Cells generation_ready must remain true after Words review"

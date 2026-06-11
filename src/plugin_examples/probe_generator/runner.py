@@ -23,9 +23,7 @@ import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
-_LICENSE_KEYWORDS = frozenset(
-    ["trial", "license", "watermark", "evaluation", "Aspose.License"]
-)
+_LICENSE_KEYWORDS = frozenset(["trial", "license", "watermark", "evaluation", "Aspose.License"])
 
 _DEFAULT_TIMEOUT = 60  # seconds
 
@@ -166,8 +164,7 @@ class ProbeRunner:
 
         # Phase 3: run (PR-05: output path as CLI arg)
         run_result = self._run_cmd(
-            ["dotnet", "run", "--project", str(csproj_path), "--no-build",
-             "-c", "Release", "--", str(output_path)],
+            ["dotnet", "run", "--project", str(csproj_path), "--no-build", "-c", "Release", "--", str(output_path)],
             cwd=probe_dir,
         )
         run_ok = run_result["exit_code"] == 0
@@ -201,17 +198,14 @@ class ProbeRunner:
 
         # Phase 5: classify (PR-10)
         combined_output = (
-            run_result["stdout"] + run_result["stderr"]
-            + build_result["stdout"] + build_result["stderr"]
+            run_result["stdout"] + run_result["stderr"] + build_result["stdout"] + build_result["stderr"]
         ).lower()
 
         taxonomy: str | None = None
         failure_detail = ""
 
         if not run_ok or not output_validated:
-            has_license_keyword = any(
-                kw.lower() in combined_output for kw in _LICENSE_KEYWORDS
-            )
+            has_license_keyword = any(kw.lower() in combined_output for kw in _LICENSE_KEYWORDS)
             if output_size == 0 and has_license_keyword:
                 taxonomy = "PROBE_FAILED_LICENSE"
                 failure_detail = "Zero-byte output with license/trial keywords in output"
@@ -258,8 +252,12 @@ class ProbeRunner:
             }
         except subprocess.TimeoutExpired as exc:
             return {
-                "stdout": (exc.stdout or b"").decode("utf-8", errors="replace") if isinstance(exc.stdout, bytes) else (exc.stdout or ""),
-                "stderr": (exc.stderr or b"").decode("utf-8", errors="replace") if isinstance(exc.stderr, bytes) else (exc.stderr or ""),
+                "stdout": (exc.stdout or b"").decode("utf-8", errors="replace")
+                if isinstance(exc.stdout, bytes)
+                else (exc.stdout or ""),
+                "stderr": (exc.stderr or b"").decode("utf-8", errors="replace")
+                if isinstance(exc.stderr, bytes)
+                else (exc.stderr or ""),
                 "exit_code": -1,
                 "timed_out": True,
             }

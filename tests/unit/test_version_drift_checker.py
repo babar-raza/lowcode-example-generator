@@ -121,6 +121,7 @@ class TestRunVersionDriftCheck:
         _write_denominator(tmp_path, "cells", "26.4.0")
 
         import urllib.error
+
         with patch("urllib.request.urlopen", side_effect=urllib.error.HTTPError(None, 404, "Not Found", {}, None)):
             report = run_version_drift_check(families=["cells"], repo_root=tmp_path)
 

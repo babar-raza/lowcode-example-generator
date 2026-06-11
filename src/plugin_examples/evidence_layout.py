@@ -21,30 +21,32 @@ logger = logging.getLogger(__name__)
 # Taxonomy: files written to evidence_dir/latest/ during a single family run.
 # These MUST be promoted to families/{family}/ to avoid cross-family collision.
 # ---------------------------------------------------------------------------
-FAMILY_SCOPED_EVIDENCE_FILES: frozenset[str] = frozenset({
-    "aggregate-gate-results.json",
-    "api-consumer-relationships.json",
-    "api-delta-report.json",
-    "blocked-scenarios.json",
-    "example-gate-results.json",
-    "example-impact-report.json",
-    "example-reviewer-results.json",
-    "fixture-strategy-plan.json",
-    "gate-results.json",
-    "generated-fixtures.json",
-    "llm-fewshot-patterns.json",
-    "llm-preflight.json",
-    "plugin-type-role-classification.json",
-    "publishing-report.json",
-    "repair-attempts.json",
-    "reviewer-preflight.json",
-    "runnable-entrypoint-scores.json",
-    "scenario-feedback-updates.json",
-    "scenario-input-format-map.json",
-    "stale-existing-examples.json",
-    "validation-results.json",
-    "pr-candidate-manifest.json",
-})
+FAMILY_SCOPED_EVIDENCE_FILES: frozenset[str] = frozenset(
+    {
+        "aggregate-gate-results.json",
+        "api-consumer-relationships.json",
+        "api-delta-report.json",
+        "blocked-scenarios.json",
+        "example-gate-results.json",
+        "example-impact-report.json",
+        "example-reviewer-results.json",
+        "fixture-strategy-plan.json",
+        "gate-results.json",
+        "generated-fixtures.json",
+        "llm-fewshot-patterns.json",
+        "llm-preflight.json",
+        "plugin-type-role-classification.json",
+        "publishing-report.json",
+        "repair-attempts.json",
+        "reviewer-preflight.json",
+        "runnable-entrypoint-scores.json",
+        "scenario-feedback-updates.json",
+        "scenario-input-format-map.json",
+        "stale-existing-examples.json",
+        "validation-results.json",
+        "pr-candidate-manifest.json",
+    }
+)
 
 # ---------------------------------------------------------------------------
 # Global aggregate files that are intentionally written to the latest/ root
@@ -55,23 +57,25 @@ FAMILY_SCOPED_EVIDENCE_FILES: frozenset[str] = frozenset({
 # Files NOT in this set that are written to latest/ root should raise a WARNING
 # in promote_family_evidence() — they should prefer families/{family}/ paths.
 # ---------------------------------------------------------------------------
-GLOBAL_AGGREGATE_ALLOWLIST: frozenset[str] = frozenset({
-    # Manifest files (aggregated across all families)
-    "release-status.json",
-    "scenario-catalog.json",
-    "all-family-lowcode-discovery.json",
-    "family-generation-readiness-rank.json",
-    "family-publish-readiness.json",
-    "family-publishing-target-audit.json",
-    "family-repo-access-check.json",
-    "family-repo-access-resolution.json",
-    # Pipeline-level metadata
-    "_last_promoted_by.json",
-    "open-taskcard-closure-matrix.json",
-    "example-lifecycle-records.json",
-    # Denominator and contract registries (global scope)
-    "remediation-execution-state.json",
-})
+GLOBAL_AGGREGATE_ALLOWLIST: frozenset[str] = frozenset(
+    {
+        # Manifest files (aggregated across all families)
+        "release-status.json",
+        "scenario-catalog.json",
+        "all-family-lowcode-discovery.json",
+        "family-generation-readiness-rank.json",
+        "family-publish-readiness.json",
+        "family-publishing-target-audit.json",
+        "family-repo-access-check.json",
+        "family-repo-access-resolution.json",
+        # Pipeline-level metadata
+        "_last_promoted_by.json",
+        "open-taskcard-closure-matrix.json",
+        "example-lifecycle-records.json",
+        # Denominator and contract registries (global scope)
+        "remediation-execution-state.json",
+    }
+)
 
 # Files that already carry a {family}- prefix in their name — safe at top level.
 ALREADY_FAMILY_PREFIXED_PATTERNS: tuple[str, ...] = (
@@ -137,15 +141,13 @@ def promote_family_evidence(
             # it risks cross-family contamination. Only GLOBAL_AGGREGATE_ALLOWLIST
             # files and ALREADY_FAMILY_PREFIXED_PATTERNS files are safe here.
             is_family_scoped = f.name in FAMILY_SCOPED_EVIDENCE_FILES
-            is_allowlisted = (
-                f.name in GLOBAL_AGGREGATE_ALLOWLIST
-                or _is_already_family_prefixed(f.name)
-            )
+            is_allowlisted = f.name in GLOBAL_AGGREGATE_ALLOWLIST or _is_already_family_prefixed(f.name)
             if is_family_scoped and not is_allowlisted:
                 logger.debug(
                     "Writing family-scoped file '%s' to latest/ root (backward compat). "
                     "Prefer families/%s/ path — will be overwritten by next family run.",
-                    f.name, family,
+                    f.name,
+                    family,
                 )
             shutil.copy2(f, dst_top / f.name)
             files_promoted.append(f.name)

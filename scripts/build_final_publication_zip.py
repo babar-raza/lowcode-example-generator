@@ -3,7 +3,11 @@
 Pass 1: Collect all files, compute SHA-256, write artifact-verification.
 Pass 2: Rebuild ZIP including artifact-verification file.
 """
-import hashlib, json, os, sys, zipfile
+import hashlib
+import json
+import os
+import sys
+import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 

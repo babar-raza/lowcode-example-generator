@@ -8,6 +8,7 @@ from dataclasses import dataclass, field
 @dataclass
 class RuleResult:
     """Result of evaluating one validation rule."""
+
     rule_id: str
     description: str
     severity: str  # "FAILURE" | "WARNING"
@@ -19,6 +20,7 @@ class RuleResult:
 @dataclass
 class ValidationReport:
     """Complete validation report for a sprint bundle."""
+
     bundle_dir: str
     sprint_id: str
     total_rules: int

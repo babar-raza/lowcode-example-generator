@@ -9,32 +9,49 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
+# ── RISK-10: Gate Isolation Guard ─────────────────────────────────────
+# Gate evaluation functions must remain 100% deterministic.
+# AI/LLM modules must NEVER be imported here — gate verdicts must not
+# be influenced by model output. This is enforced by CI (build-and-test.yml).
+_GATE_ISOLATION_FORBIDDEN = frozenset(
+    {
+        "plugin_examples.llm_router",
+        "plugin_examples.healing_intelligence",
+        "plugin_examples.generator",
+    }
+)
+
 # Per-example verdict taxonomy
-EXAMPLE_VERDICTS = frozenset({
-    "EXAMPLE_READY_FOR_PR_DRY_RUN",
-    "EXAMPLE_BLOCKED_RESTORE_FAILED",
-    "EXAMPLE_BLOCKED_BUILD_FAILED",
-    "EXAMPLE_BLOCKED_RUN_FAILED",
-    "EXAMPLE_BLOCKED_OUTPUT_VALIDATION_FAILED",
-    "EXAMPLE_BLOCKED_REVIEWER_FAILED",
-    "EXAMPLE_BLOCKED_MISSING_FIXTURE",
-    "EXAMPLE_BLOCKED_RUNTIME_CONTEXT_REQUIRED",
-    "EXAMPLE_NOT_EVALUATED",
-})
+EXAMPLE_VERDICTS = frozenset(
+    {
+        "EXAMPLE_READY_FOR_PR_DRY_RUN",
+        "EXAMPLE_BLOCKED_RESTORE_FAILED",
+        "EXAMPLE_BLOCKED_BUILD_FAILED",
+        "EXAMPLE_BLOCKED_RUN_FAILED",
+        "EXAMPLE_BLOCKED_OUTPUT_VALIDATION_FAILED",
+        "EXAMPLE_BLOCKED_REVIEWER_FAILED",
+        "EXAMPLE_BLOCKED_MISSING_FIXTURE",
+        "EXAMPLE_BLOCKED_RUNTIME_CONTEXT_REQUIRED",
+        "EXAMPLE_NOT_EVALUATED",
+    }
+)
 
 # Aggregate gate statuses
-AGGREGATE_STATUSES = frozenset({
-    "passed_all",
-    "passed_partial",
-    "failed_all",
-    "blocked",
-    "skipped",
-})
+AGGREGATE_STATUSES = frozenset(
+    {
+        "passed_all",
+        "passed_partial",
+        "failed_all",
+        "blocked",
+        "skipped",
+    }
+)
 
 
 @dataclass
 class ExampleGateResult:
     """Per-example gate evaluation."""
+
     scenario_id: str
     example_path: str
     restore_status: str = "not_evaluated"
@@ -51,6 +68,7 @@ class ExampleGateResult:
 @dataclass
 class AggregateGateResult:
     """Aggregate gate results across all examples."""
+
     total_generated: int = 0
     total_built: int = 0
     total_runtime_passed: int = 0
@@ -66,6 +84,7 @@ class AggregateGateResult:
 def _get_contract_output_kind(project_dir: str, scenario_id: str) -> str:
     """Get contract output_kind from manifest or store (returns 'file' as default)."""
     import json as _json_inner
+
     manifest_path = Path(project_dir) / "example.manifest.json"
     if manifest_path.exists():
         try:
@@ -102,10 +121,7 @@ def _advisory_output_validation(project_dir: str, scenario_id: str) -> str:
 
     # directory types produce an output directory
     if output_kind == "directory":
-        output_dirs = [
-            d for d in project_path.iterdir()
-            if d.is_dir() and d.name.startswith("output")
-        ]
+        output_dirs = [d for d in project_path.iterdir() if d.is_dir() and d.name.startswith("output")]
         if output_dirs:
             return "advisory_passed"
         return "advisory_no_output"
@@ -126,12 +142,14 @@ def _advisory_output_validation(project_dir: str, scenario_id: str) -> str:
         from plugin_examples.verifier_bridge.output_validator import (
             validate_output_file_semantic,
         )
+
         for out_file in output_files:
             result = validate_output_file_semantic(out_file)
             if not result.get("valid", True):
                 logger.warning(
                     "Advisory output validation failed for %s: %s",
-                    out_file, result.get("reason", "unknown"),
+                    out_file,
+                    result.get("reason", "unknown"),
                 )
                 return "advisory_failed"
         return "advisory_passed"
@@ -147,6 +165,7 @@ def _advisory_code_contract_validation(project_dir: str, scenario_id: str) -> st
     advisory_no_contract, or not_evaluated.
     """
     from pathlib import Path as _Path
+
     project_path = _Path(project_dir)
     program_cs = project_path / "Program.cs"
 
@@ -159,6 +178,7 @@ def _advisory_code_contract_validation(project_dir: str, scenario_id: str) -> st
     if manifest_path.exists():
         try:
             import json as _json
+
             manifest = _json.loads(manifest_path.read_text(encoding="utf-8"))
             if manifest.get("contract_id"):
                 contract_dict = {
@@ -181,6 +201,7 @@ def _advisory_code_contract_validation(project_dir: str, scenario_id: str) -> st
                 _slug = parts[1]
                 _type_guess = "".join(p.capitalize() for p in _slug.split("-"))
                 from plugin_examples.format_authority.store import get_contract
+
                 fc = get_contract(_fam, _type_guess)
                 contract_dict = fc.to_dict()
         except Exception:
@@ -189,13 +210,15 @@ def _advisory_code_contract_validation(project_dir: str, scenario_id: str) -> st
     try:
         code = program_cs.read_text(encoding="utf-8")
         from plugin_examples.gates.code_contract_validator import validate_code_against_contract
+
         result = validate_code_against_contract(code, contract_dict)
         if result.valid:
             return "advisory_passed"
         failed = [c["check"] for c in result.checks if not c["passed"]]
         logger.warning(
             "Advisory contract validation failed for %s: %s",
-            scenario_id, failed,
+            scenario_id,
+            failed,
         )
         return "advisory_failed"
     except Exception as exc:
@@ -211,6 +234,7 @@ def evaluate_example_gates(
     reviewer_passed: bool = False,
     skip_run: bool = False,
     contract_blocking_mode: bool = True,
+    strict_output_validation: bool = False,
 ) -> list[ExampleGateResult]:
     """Evaluate gates for each individual example.
 
@@ -223,6 +247,8 @@ def evaluate_example_gates(
         skip_run: Whether runtime was skipped.
         contract_blocking_mode: When True (default), advisory_failed contract/output
             validation blocks PR_DRY_RUN_READY. Set to False for legacy advisory mode.
+        strict_output_validation: When True, advisory_no_output and advisory_failed
+            output validation results block publication instead of being advisory-only.
 
     Returns:
         List of ExampleGateResult, one per generated example.
@@ -302,6 +328,14 @@ def evaluate_example_gates(
 
         # Code contract validation (advisory or blocking depending on mode)
         eg.code_contract_validation_status = _advisory_code_contract_validation(epath, sid)
+
+        # Strict output validation gate (promotes advisory → blocking when strict mode enabled)
+        if strict_output_validation:
+            if eg.output_validation_status in ("advisory_no_output", "advisory_failed"):
+                eg.final_example_verdict = "EXAMPLE_BLOCKED_OUTPUT_VALIDATION_FAILED"
+                eg.blocked_reason = f"Output validation {eg.output_validation_status} (strict mode)"
+                results.append(eg)
+                continue
 
         # Contract blocking gate (promotes advisory → blocking when contract_blocking_mode=True)
         if contract_blocking_mode:
@@ -441,25 +475,18 @@ def _compute_manifest_counts(included: list[dict], excluded: list[dict]) -> dict
     candidates are included in the manifest but are NOT live-publishable without
     a replay or current-run pass — they are tracked separately.
     """
-    current_run = [
-        e for e in included
-        if e.get("candidate_integrity_status", "current_run") == "current_run"
-    ]
-    replay_validated = [
-        e for e in included
-        if e.get("candidate_integrity_status") == "replay_validated"
-    ]
+    current_run = [e for e in included if e.get("candidate_integrity_status", "current_run") == "current_run"]
+    replay_validated = [e for e in included if e.get("candidate_integrity_status") == "replay_validated"]
     prior_run_preserved = [
-        e for e in included
-        if e.get("candidate_integrity_status") in (
+        e
+        for e in included
+        if e.get("candidate_integrity_status")
+        in (
             "prior_run_preserved_not_reattempted",
             "prior_run_preserved_regression_protected",
         )
     ]
-    quarantined = [
-        e for e in excluded
-        if e.get("candidate_integrity_status") == "demoted_quarantined"
-    ]
+    quarantined = [e for e in excluded if e.get("candidate_integrity_status") == "demoted_quarantined"]
     live_publishable = current_run + replay_validated
     return {
         "included_manifest_candidate_count": len(included),
@@ -488,18 +515,22 @@ def build_pr_candidate_manifest(
 
     for eg in example_gates:
         if eg.publish_candidate:
-            included.append({
-                "scenario_id": eg.scenario_id,
-                "example_path": eg.example_path,
-                "final_example_verdict": eg.final_example_verdict,
-            })
+            included.append(
+                {
+                    "scenario_id": eg.scenario_id,
+                    "example_path": eg.example_path,
+                    "final_example_verdict": eg.final_example_verdict,
+                }
+            )
         else:
-            excluded.append({
-                "scenario_id": eg.scenario_id,
-                "example_path": eg.example_path,
-                "final_example_verdict": eg.final_example_verdict,
-                "blocked_reason": eg.blocked_reason,
-            })
+            excluded.append(
+                {
+                    "scenario_id": eg.scenario_id,
+                    "example_path": eg.example_path,
+                    "final_example_verdict": eg.final_example_verdict,
+                    "blocked_reason": eg.blocked_reason,
+                }
+            )
             reason = eg.final_example_verdict
             exclusion_reasons.setdefault(reason, []).append(eg.scenario_id)
 
@@ -562,6 +593,7 @@ def _verdict_to_scenario_status(verdict: str) -> str:
 
 
 # --- Writers ---
+
 
 def write_example_gate_results(
     example_gates: list[ExampleGateResult],
@@ -669,20 +701,12 @@ def merge_pr_candidate_manifests(
             _prior_quarantined.add(sid)
             _prior_quarantined_entries[sid] = e
 
-    existing_included = {
-        e["scenario_id"]: e
-        for e in existing.get("included_examples", [])
-    }
+    existing_included = {e["scenario_id"]: e for e in existing.get("included_examples", [])}
 
-    new_included = {
-        e["scenario_id"]: e
-        for e in new_manifest.get("included_examples", [])
-    }
+    new_included = {e["scenario_id"]: e for e in new_manifest.get("included_examples", [])}
 
     # All scenario_ids attempted in the new run (pass or fail)
-    new_run_attempted = set(
-        e["scenario_id"] for e in new_manifest.get("included_examples", [])
-    ) | set(
+    new_run_attempted = set(e["scenario_id"] for e in new_manifest.get("included_examples", [])) | set(
         e["scenario_id"] for e in new_manifest.get("excluded_examples", [])
     )
 
@@ -711,28 +735,29 @@ def merge_pr_candidate_manifests(
 
     # Excluded = new run's excluded entries whose scenarios aren't in merged_included
     # Also add demoted scenarios that were in existing as quarantined excluded entries
-    merged_excluded = [
-        e for e in new_manifest.get("excluded_examples", [])
-        if e["scenario_id"] not in merged_included
-    ]
+    merged_excluded = [e for e in new_manifest.get("excluded_examples", []) if e["scenario_id"] not in merged_included]
     # Add quarantined demoted scenarios from prior runs (existing_included entries demoted now)
     for sid in _demoted:
         if sid in existing_included and sid not in merged_included:
             entry = existing_included[sid]
-            merged_excluded.append({
-                **entry,
-                "final_example_verdict": "EXAMPLE_BLOCKED_DEMOTED_IN_LATEST_RUN",
-                "blocked_reason": "Scenario was demoted in scenario_feedback_updates for the latest run",
-                "candidate_integrity_status": "demoted_quarantined",
-            })
+            merged_excluded.append(
+                {
+                    **entry,
+                    "final_example_verdict": "EXAMPLE_BLOCKED_DEMOTED_IN_LATEST_RUN",
+                    "blocked_reason": "Scenario was demoted in scenario_feedback_updates for the latest run",
+                    "candidate_integrity_status": "demoted_quarantined",
+                }
+            )
     # Carry forward persisted quarantines not cleared by a current_run pass
     already_in_excluded_ids = {e["scenario_id"] for e in merged_excluded}
     for sid, entry in _prior_quarantined_entries.items():
         if sid not in merged_included and sid not in already_in_excluded_ids:
-            merged_excluded.append({
-                **entry,
-                "candidate_integrity_status": "demoted_quarantined",
-            })
+            merged_excluded.append(
+                {
+                    **entry,
+                    "candidate_integrity_status": "demoted_quarantined",
+                }
+            )
 
     exclusion_reasons: dict[str, list[str]] = {}
     for e in merged_excluded:
@@ -783,15 +808,17 @@ def write_pr_candidate_manifest(
     if scenario_feedback:
         for update in scenario_feedback.get("updates", []):
             new_status = update.get("new_status", "")
-            if new_status.startswith("blocked") or new_status in (
-                "demoted", "quarantined", "failed", "excluded"
-            ):
+            if new_status.startswith("blocked") or new_status in ("demoted", "quarantined", "failed", "excluded"):
                 sid = update.get("scenario_id")
                 if sid:
                     demoted_ids.add(sid)
 
     # Determine the prior manifest to merge from: run-local first, then global fallback
-    prior_path = path if path.exists() else (prior_manifest_path if prior_manifest_path and prior_manifest_path.exists() else None)
+    prior_path = (
+        path
+        if path.exists()
+        else (prior_manifest_path if prior_manifest_path and prior_manifest_path.exists() else None)
+    )
 
     final_manifest = manifest
     if merge_existing and prior_path is not None:
@@ -802,7 +829,9 @@ def write_pr_candidate_manifest(
             logger.info(
                 "PR candidate manifest merged from %s: %d included (%d current_run, %d prior_run_preserved, %d demoted/quarantined)",
                 prior_path,
-                final_manifest.get("included_manifest_candidate_count", len(final_manifest.get("included_examples", []))),
+                final_manifest.get(
+                    "included_manifest_candidate_count", len(final_manifest.get("included_examples", []))
+                ),
                 final_manifest.get("current_run_pr_eligible_count", 0),
                 final_manifest.get("prior_run_preserved_count", 0),
                 len(demoted_ids),

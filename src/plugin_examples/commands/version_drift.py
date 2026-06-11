@@ -11,15 +11,21 @@ def add_parser(subparsers):
         help="Check NuGet version drift for all confirmed LowCode families",
     )
     parser.add_argument(
-        "--family", metavar="FAMILY", default=None,
+        "--family",
+        metavar="FAMILY",
+        default=None,
         help="Limit check to one family (default: all confirmed LowCode families)",
     )
     parser.add_argument(
-        "--output", metavar="PATH", default=None,
+        "--output",
+        metavar="PATH",
+        default=None,
         help="Write drift report JSON to this path",
     )
     parser.add_argument(
-        "--json", dest="json_output", action="store_true",
+        "--json",
+        dest="json_output",
+        action="store_true",
         help="Print report as JSON to stdout",
     )
     parser.set_defaults(func=handle)
@@ -46,7 +52,11 @@ def handle(args) -> int:
     else:
         print(f"version-drift: {report.overall_verdict}")
         for r in report.families:
-            drift_info = f"{r.denominator_version} -> {r.latest_nuget_version}" if r.drift else f"{r.latest_nuget_version} (current)"
+            drift_info = (
+                f"{r.denominator_version} -> {r.latest_nuget_version}"
+                if r.drift
+                else f"{r.latest_nuget_version} (current)"
+            )
             print(f"  {r.family}: {r.status} | {drift_info}")
         print(f"Drifted: {report.drifted_count} | Current: {report.current_count} | Errors: {report.error_count}")
 

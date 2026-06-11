@@ -1,5 +1,8 @@
 """Wave 19 evidence bundle freeze + external sidecar + attestation + sprint closeout."""
-import hashlib, json, os, zipfile
+import hashlib
+import json
+import os
+import zipfile
 from pathlib import Path
 from datetime import datetime
 

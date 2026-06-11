@@ -7,6 +7,7 @@ These validators prevent the Wave 11/12 closeout defects from recurring:
 - BMV: Ensure bundle metadata (SHA, commit, entry count) is internally consistent
        BMV-06 (Wave 13+): external .sha256 sidecar verification
 """
+
 from __future__ import annotations
 import pathlib
 from typing import Any
@@ -26,6 +27,7 @@ def _is_closed_status(status: str | None) -> bool:
 # ---------------------------------------------------------------------------
 # TCC — Taskcard Closeout Consistency
 # ---------------------------------------------------------------------------
+
 
 def tcc_01_no_pending_taskcards(taskcards: list[dict]) -> dict[str, Any]:
     """TCC-01: All taskcards must be in a closed state at closeout time.
@@ -110,9 +112,7 @@ def tcc_05_taskcards_before_closeout(taskcards: list[dict], closeout_date: str) 
     }
 
 
-def tcc_06_closeout_verdict_matches_taskcard_completion(
-    taskcards: list[dict], closeout_verdict: str
-) -> dict[str, Any]:
+def tcc_06_closeout_verdict_matches_taskcard_completion(taskcards: list[dict], closeout_verdict: str) -> dict[str, Any]:
     """TCC-06: If closeout_verdict=SPRINT_COMPLETE, all taskcards must be closed.
 
     Closed states: COMPLETE or DEFERRED_TO_* (deferred tasks are formally acknowledged).
@@ -141,6 +141,7 @@ def tcc_06_closeout_verdict_matches_taskcard_completion(
 # ---------------------------------------------------------------------------
 # BMV — Bundle Metadata Verification
 # ---------------------------------------------------------------------------
+
 
 def bmv_01_bundle_sha_not_pending(closeout: dict) -> dict[str, Any]:
     """BMV-01: Bundle SHA in sprint-closeout.json must not be PENDING or empty.
@@ -231,9 +232,7 @@ def bmv_05_pytest_passed_count_positive(closeout: dict) -> dict[str, Any]:
     }
 
 
-def bmv_06_sidecar_sha_exists(
-    closeout: dict, root: "pathlib.Path | None" = None
-) -> dict[str, Any]:
+def bmv_06_sidecar_sha_exists(closeout: dict, root: "pathlib.Path | None" = None) -> dict[str, Any]:
     """BMV-06: If sidecar_path is in closeout, verify the sidecar file exists and contains a valid SHA-256.
 
     Implements the Wave 13+ external sidecar proof protocol:
@@ -276,6 +275,7 @@ def bmv_06_sidecar_sha_exists(
 # Aggregate runners
 # ---------------------------------------------------------------------------
 
+
 def run_all_tcc_validators(
     taskcards: list[dict],
     expected_lane_count: int,
@@ -302,9 +302,7 @@ def run_all_tcc_validators(
     }
 
 
-def run_all_bmv_validators(
-    closeout: dict, root: "pathlib.Path | None" = None
-) -> dict[str, Any]:
+def run_all_bmv_validators(closeout: dict, root: "pathlib.Path | None" = None) -> dict[str, Any]:
     """Run all BMV-01..BMV-06 validators and return aggregate result."""
     results = [
         bmv_01_bundle_sha_not_pending(closeout),

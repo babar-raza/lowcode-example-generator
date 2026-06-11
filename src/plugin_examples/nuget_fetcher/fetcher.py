@@ -75,7 +75,10 @@ def _revalidate_sha_manifest(package_id: str, version: str, nupkg_path: Path) ->
     if stored_sha and actual_sha != stored_sha:
         logger.warning(
             "NuGet SHA mismatch for %s %s: expected=%s actual=%s — deleting corrupted file",
-            package_id, version, stored_sha, actual_sha,
+            package_id,
+            version,
+            stored_sha,
+            actual_sha,
         )
         nupkg_path.unlink(missing_ok=True)
         return None
@@ -105,6 +108,7 @@ def _record_sha_manifest(package_id: str, version: str, sha256: str, source_url:
     }
     _save_sha_manifest(manifest)
 
+
 NUGET_SERVICE_INDEX = "https://api.nuget.org/v3/index.json"
 
 # Semver pre-release indicator: anything with a hyphen after the version core
@@ -132,9 +136,7 @@ def _get_service_url(resource_type: str) -> str:
         if resource.get("@type", "").startswith(resource_type):
             return resource["@id"]
 
-    raise NuGetFetchError(
-        f"NuGet service index missing resource type: {resource_type}"
-    )
+    raise NuGetFetchError(f"NuGet service index missing resource type: {resource_type}")
 
 
 def resolve_latest_stable(
@@ -155,30 +157,20 @@ def resolve_latest_stable(
         resp.raise_for_status()
     except requests.HTTPError as e:
         if resp.status_code == 404:
-            raise PackageNotFoundError(
-                f"Package not found on NuGet: {package_id}"
-            ) from e
-        raise NuGetFetchError(
-            f"Failed to list versions for {package_id}: {e}"
-        ) from e
+            raise PackageNotFoundError(f"Package not found on NuGet: {package_id}") from e
+        raise NuGetFetchError(f"Failed to list versions for {package_id}: {e}") from e
     except requests.RequestException as e:
-        raise NuGetFetchError(
-            f"Network error listing versions for {package_id}: {e}"
-        ) from e
+        raise NuGetFetchError(f"Network error listing versions for {package_id}: {e}") from e
 
     versions: list[str] = resp.json().get("versions", [])
     if not versions:
-        raise PackageNotFoundError(
-            f"No versions found for package: {package_id}"
-        )
+        raise PackageNotFoundError(f"No versions found for package: {package_id}")
 
     if not allow_prerelease:
         versions = [v for v in versions if not _PRERELEASE_RE.match(v)]
 
     if not versions:
-        raise PackageNotFoundError(
-            f"No stable versions found for package: {package_id}"
-        )
+        raise PackageNotFoundError(f"No stable versions found for package: {package_id}")
 
     return versions[-1]
 
@@ -215,7 +207,11 @@ def _download_nupkg(
             if attempt < max_retries:
                 logger.warning(
                     "Download attempt %d/%d for %s %s failed: %s — retrying",
-                    attempt, max_retries, package_id, version, e,
+                    attempt,
+                    max_retries,
+                    package_id,
+                    version,
+                    e,
                 )
             # Clean up partial download
             if target_path.exists():
@@ -251,14 +247,10 @@ def fetch_package(
     # Resolve version
     if version_policy == "pinned":
         if not pinned_version:
-            raise ValueError(
-                "pinned_version is required when version_policy is 'pinned'"
-            )
+            raise ValueError("pinned_version is required when version_policy is 'pinned'")
         version = pinned_version
     else:
-        version = resolve_latest_stable(
-            package_id, allow_prerelease=allow_prerelease
-        )
+        version = resolve_latest_stable(package_id, allow_prerelease=allow_prerelease)
 
     logger.info("Resolved %s version: %s", package_id, version)
 

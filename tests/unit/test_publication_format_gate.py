@@ -52,16 +52,17 @@ def test_gate_contract_exists_for_real_type():
 def test_gate_passes_with_valid_code_and_manifest(tmp_path):
     """Gate passes when contract exists, code validates, and manifest has contract snapshot."""
     # Write a valid Program.cs
-    code = '''using Aspose.Cells.LowCode;
+    code = """using Aspose.Cells.LowCode;
 var converter = new JsonConverter();
 converter.Process("input.xlsx", "output.json");
 Console.WriteLine("Example: cells-json-converter");
-'''
+"""
     program_cs = tmp_path / "Program.cs"
     program_cs.write_text(code)
 
     # Write a manifest with contract snapshot
     from plugin_examples.format_authority.store import get_contract
+
     fc = get_contract("cells", "JsonConverter")
     manifest_data = {
         "scenario_id": "cells-json-converter",

@@ -3,6 +3,7 @@
 Catches wrong-stream evidence, README gaps, branch naming, PR state inflation,
 branch cleanup, post-merge state, and more.
 """
+
 from __future__ import annotations
 
 import re
@@ -61,7 +62,10 @@ def check_plv_03_branch_naming(pr_packet: dict, result: PlvResult) -> None:
     legacy_ok = pr_packet.get("branch_legacy_grandfathered", False)
     if ns == "NON_LOWCODE_PLUGIN" and branch.startswith("lowcode/"):
         if legacy_ok:
-            result.warn("PLV-03", f"Branch '{branch}' uses lowcode/ prefix (grandfathered legacy; use plugins/ for new branches)")
+            result.warn(
+                "PLV-03",
+                f"Branch '{branch}' uses lowcode/ prefix (grandfathered legacy; use plugins/ for new branches)",
+            )
         else:
             result.fail("PLV-03", f"New branch '{branch}' must not use lowcode/ prefix for NON_LOWCODE_PLUGIN family")
     else:
@@ -129,9 +133,9 @@ def check_plv_07_pr_state_not_inflated(registry_entry: dict, result: PlvResult) 
 
 
 # ── PLV-08: Branch cleanup: merged PR branch must be deleted or explicitly retained
-def check_plv_08_branch_cleanup(branch_name: str, is_deleted: bool,
-                                  is_merged: bool, retention_reason: str,
-                                  result: PlvResult) -> None:
+def check_plv_08_branch_cleanup(
+    branch_name: str, is_deleted: bool, is_merged: bool, retention_reason: str, result: PlvResult
+) -> None:
     if not is_merged:
         result.ok("PLV-08", f"Branch '{branch_name}' not yet merged — cleanup not required")
         return
@@ -148,9 +152,11 @@ def check_plv_09_post_merge_state(registry_entry: dict, result: PlvResult) -> No
     merged_at = registry_entry.get("merged_at", "")
     status = registry_entry.get("registry_status", "")
     if merged_at and status not in ("MERGED", "BRANCH_CLEANED", "PUBLISHED"):
-        result.fail("PLV-09",
-                    f"PR is merged (merged_at={merged_at}) but registry_status={status!r} not updated",
-                    detail=registry_entry.get("slug", "?"))
+        result.fail(
+            "PLV-09",
+            f"PR is merged (merged_at={merged_at}) but registry_status={status!r} not updated",
+            detail=registry_entry.get("slug", "?"),
+        )
     else:
         result.ok("PLV-09", f"Post-merge state consistent: {status}")
 
@@ -178,9 +184,7 @@ def check_plv_12_ov_not_only_contract(example_dir: Path, result: PlvResult) -> N
     ov = example_dir / "output-validation.json"
     eo = example_dir / "expected-output.json"
     if ov.exists() and not eo.exists():
-        result.fail("PLV-12",
-                    "output-validation.json exists but expected-output.json is missing",
-                    str(example_dir))
+        result.fail("PLV-12", "output-validation.json exists but expected-output.json is missing", str(example_dir))
     else:
         result.ok("PLV-12", "output-validation.json does not substitute expected-output.json")
 
@@ -213,9 +217,9 @@ def check_plv_14_ci_workflow(repo_root: Path, result: PlvResult) -> None:
 
 
 # ── PLV-15: Final evidence authority validator ────────────────────────────────
-def check_plv_15_evidence_authority(bundle_path: str, sha_file: str, attestation_file: str,
-                                     result: PlvResult) -> None:
+def check_plv_15_evidence_authority(bundle_path: str, sha_file: str, attestation_file: str, result: PlvResult) -> None:
     from pathlib import Path as P
+
     b = P(bundle_path)
     s = P(sha_file)
     a = P(attestation_file)
@@ -232,23 +236,39 @@ def check_plv_15_evidence_authority(bundle_path: str, sha_file: str, attestation
 
 
 # ── PLV-16: Fixture source repos never appear as publication targets ───────────
-_FIXTURE_SOURCE_REPO_OWNERS = frozenset({
-    "aspose-barcode", "aspose-svg", "aspose-cad", "aspose-cells", "aspose-words",
-    "aspose-html", "aspose-font", "aspose-imaging", "aspose-gis", "aspose-finance",
-    "aspose-omr", "aspose-note", "aspose-tasks", "aspose-page", "aspose-ocr",
-    "aspose-3d", "aspose-psd", "aspose-zip",
-})
+_FIXTURE_SOURCE_REPO_OWNERS = frozenset(
+    {
+        "aspose-barcode",
+        "aspose-svg",
+        "aspose-cad",
+        "aspose-cells",
+        "aspose-words",
+        "aspose-html",
+        "aspose-font",
+        "aspose-imaging",
+        "aspose-gis",
+        "aspose-finance",
+        "aspose-omr",
+        "aspose-note",
+        "aspose-tasks",
+        "aspose-page",
+        "aspose-ocr",
+        "aspose-3d",
+        "aspose-psd",
+        "aspose-zip",
+    }
+)
 
-_APPROVED_PUBLICATION_REPOS = frozenset({
-    "aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples",
-    "aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples",
-    "aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples",
-})
+_APPROVED_PUBLICATION_REPOS = frozenset(
+    {
+        "aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples",
+        "aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples",
+        "aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples",
+    }
+)
 
 
-def check_plv_16_fixture_source_not_publication_target(
-    code_or_config_refs: list[str], result: PlvResult
-) -> None:
+def check_plv_16_fixture_source_not_publication_target(code_or_config_refs: list[str], result: PlvResult) -> None:
     """Verify no publication code references fixture source repos as write targets.
 
     ``code_or_config_refs`` is a list of repo strings (owner/repo) that appear
@@ -311,13 +331,15 @@ def run_all_plv_checks(
     check_plv_06_root_readme_index(repo_root, family, slugs, result)
     check_plv_13_central_package_management(repo_root, result)
     check_plv_14_ci_workflow(repo_root, result)
-    for entry in (registry_entries or []):
+    for entry in registry_entries or []:
         check_plv_07_pr_state_not_inflated(entry, result)
         check_plv_09_post_merge_state(entry, result)
-    for rec in (branch_cleanup_records or []):
+    for rec in branch_cleanup_records or []:
         check_plv_08_branch_cleanup(
-            rec.get("branch", ""), rec.get("deleted", False),
-            rec.get("merged", False), rec.get("retention_reason", ""),
+            rec.get("branch", ""),
+            rec.get("deleted", False),
+            rec.get("merged", False),
+            rec.get("retention_reason", ""),
             result,
         )
     if bundle_path:

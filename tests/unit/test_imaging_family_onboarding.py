@@ -64,17 +64,18 @@ class TestImagingConfigLoads:
             with open(config_path, encoding="utf-8") as f:
                 data = yaml.safe_load(f)
             # Must still be a LowCode family
-            assert "LowCode" in str(data["plugin_detection"]["namespace_patterns"]), (
-                f"{family}.yml namespace_patterns lost LowCode after imaging onboarding"
-            )
+            assert "LowCode" in str(
+                data["plugin_detection"]["namespace_patterns"]
+            ), f"{family}.yml namespace_patterns lost LowCode after imaging onboarding"
             # Must NOT have fallback_strategy
-            assert data["plugin_detection"].get("fallback_strategy") is None, (
-                f"{family}.yml unexpectedly got fallback_strategy"
-            )
+            assert (
+                data["plugin_detection"].get("fallback_strategy") is None
+            ), f"{family}.yml unexpectedly got fallback_strategy"
 
     def test_fixture_gen_creates_valid_png(self, tmp_path):
         """fixture_gen.py must produce a valid PNG file without external dependencies."""
-        import importlib.util, sys
+        import importlib.util
+        import sys
 
         spec = importlib.util.spec_from_file_location("fixture_gen", FIXTURE_GEN)
         module = importlib.util.module_from_spec(spec)

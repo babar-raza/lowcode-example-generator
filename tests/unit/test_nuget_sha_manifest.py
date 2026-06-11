@@ -1,4 +1,5 @@
 """Tests for NuGet SHA-256 manifest revalidation — Wave 25 Lane D."""
+
 from __future__ import annotations
 
 import hashlib
@@ -19,13 +20,16 @@ from plugin_examples.nuget_fetcher.fetcher import (
 
 # ── Helper ─────────────────────────────────────────────────────────────────────
 
+
 def _patch_sha_path(tmp_path: Path):
     """Redirect SHA manifest to a temp path for isolation."""
     import plugin_examples.nuget_fetcher.fetcher as mod
+
     return patch.object(mod, "_SHA_MANIFEST_PATH", tmp_path / "sha-manifest.json")
 
 
 # ── _record_sha_manifest ──────────────────────────────────────────────────────
+
 
 def test_record_creates_manifest(tmp_path):
     with _patch_sha_path(tmp_path):
@@ -43,6 +47,7 @@ def test_record_creates_manifest(tmp_path):
 
 # ── _revalidate_sha_manifest — file missing ───────────────────────────────────
 
+
 def test_revalidate_returns_none_when_file_missing(tmp_path):
     with _patch_sha_path(tmp_path):
         result = _revalidate_sha_manifest("Aspose.BarCode", "26.5.0", tmp_path / "nonexistent.nupkg")
@@ -50,6 +55,7 @@ def test_revalidate_returns_none_when_file_missing(tmp_path):
 
 
 # ── _revalidate_sha_manifest — SHA mismatch deletes file ─────────────────────
+
 
 def test_revalidate_deletes_corrupted_file(tmp_path):
     nupkg = tmp_path / "Aspose.BarCode.26.5.0.nupkg"
@@ -67,6 +73,7 @@ def test_revalidate_deletes_corrupted_file(tmp_path):
     manifest_path.write_text(json.dumps(manifest_data))
 
     import plugin_examples.nuget_fetcher.fetcher as mod
+
     with patch.object(mod, "_SHA_MANIFEST_PATH", manifest_path):
         result = _revalidate_sha_manifest("Aspose.BarCode", "26.5.0", nupkg)
 
@@ -75,6 +82,7 @@ def test_revalidate_deletes_corrupted_file(tmp_path):
 
 
 # ── _revalidate_sha_manifest — SHA matches ────────────────────────────────────
+
 
 def test_revalidate_returns_sha_when_file_matches(tmp_path):
     content = b"valid nupkg content"
@@ -93,6 +101,7 @@ def test_revalidate_returns_sha_when_file_matches(tmp_path):
     manifest_path.write_text(json.dumps(manifest_data))
 
     import plugin_examples.nuget_fetcher.fetcher as mod
+
     with patch.object(mod, "_SHA_MANIFEST_PATH", manifest_path):
         result = _revalidate_sha_manifest("Aspose.BarCode", "26.5.0", nupkg)
 
@@ -101,12 +110,14 @@ def test_revalidate_returns_sha_when_file_matches(tmp_path):
 
 # ── _revalidate_sha_manifest — TTL skips revalidation ────────────────────────
 
+
 def test_revalidate_skips_within_ttl(tmp_path):
     content = b"some bytes"
     nupkg = tmp_path / "pkg.nupkg"
     nupkg.write_bytes(content)
 
     from datetime import datetime, timezone
+
     now_iso = datetime.now(timezone.utc).isoformat(timespec="seconds")
 
     manifest_path = tmp_path / "sha-manifest.json"
@@ -120,6 +131,7 @@ def test_revalidate_skips_within_ttl(tmp_path):
     manifest_path.write_text(json.dumps(manifest_data))
 
     import plugin_examples.nuget_fetcher.fetcher as mod
+
     with patch.object(mod, "_SHA_MANIFEST_PATH", manifest_path):
         result = _revalidate_sha_manifest("Aspose.BarCode", "26.5.0", nupkg)
 

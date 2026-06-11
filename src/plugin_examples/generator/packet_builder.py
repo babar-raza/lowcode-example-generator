@@ -15,6 +15,7 @@ class UnknownSymbolError(Exception):
 @dataclass
 class PromptPacket:
     """Constrained prompt packet for LLM generation."""
+
     scenario_id: str
     target_type: str
     target_namespace: str
@@ -64,8 +65,7 @@ def build_packet(
     unknown = [s for s in required_symbols if s not in catalog_symbols]
     if unknown:
         raise UnknownSymbolError(
-            f"Scenario {scenario.get('scenario_id')} references unknown symbols: "
-            f"{', '.join(unknown)}"
+            f"Scenario {scenario.get('scenario_id')} references unknown symbols: " f"{', '.join(unknown)}"
         )
 
     target_type = scenario.get("target_type", "")
@@ -92,7 +92,7 @@ def build_packet(
         "Do NOT use any interactive console input methods",
         "Do NOT wrap the plugin API call in try/catch that silently swallows exceptions",
         "After calling the plugin API, validate that the output file exists and print its size",
-        "Print a deterministic success line like: Console.WriteLine(\"Done. Output: \" + outputPath);",
+        'Print a deterministic success line like: Console.WriteLine("Done. Output: " + outputPath);',
         "Validate that the input file exists before calling the plugin API: "
         "if (!File.Exists(inputPath)) throw new FileNotFoundException(inputPath);",
         "Demonstrate ONLY the single primary API method for this scenario — the FIRST method "
@@ -122,7 +122,9 @@ def build_packet(
 
     # Inject family-specific programmatic fixture guidance
     fixture_constraints, fixture_appendix = _build_programmatic_fixture_guidance(
-        _family_name, type_short, input_strategy,
+        _family_name,
+        type_short,
+        input_strategy,
     )
     if fixture_constraints:
         constraints.extend(fixture_constraints)
@@ -142,7 +144,7 @@ def build_packet(
             "FORBIDDEN: input.docx — PDF LowCode always uses .pdf files, never .docx",
             "FORBIDDEN: new PluginOptions() — PluginOptions is an abstract base; use the concrete options class for this type",
             "FORBIDDEN: LowCodePluginOptions — this class does not exist; use the concrete options class (MergeOptions, SplitOptions, OptimizeOptions, TextExtractorOptions)",
-            "FORBIDDEN: AddInput(string) or AddOutput(string) with a plain string path — always wrap in FileDataSource: AddInput(new FileDataSource(\"input.pdf\"))",
+            'FORBIDDEN: AddInput(string) or AddOutput(string) with a plain string path — always wrap in FileDataSource: AddInput(new FileDataSource("input.pdf"))',
             "FORBIDDEN: string array overloads of Process() — always use the options object overload Process(IPluginOptions)",
             "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources — this sub-namespace does NOT exist. FileDataSource lives in Aspose.Pdf.LowCode. Use 'using Aspose.Pdf.LowCode;' only.",
             "REQUIRED: always include 'using Aspose.Pdf.LowCode;'",
@@ -151,14 +153,14 @@ def build_packet(
         if type_short == "html":
             constraints += [
                 "REQUIRED: Html plugin converts HTML -> PDF. Input MUST be an HTML file, NOT a PDF.",
-                "REQUIRED: create HTML input file: File.WriteAllText(\"input.html\", \"<html><body><h1>Hello</h1></body></html>\");",
+                'REQUIRED: create HTML input file: File.WriteAllText("input.html", "<html><body><h1>Hello</h1></body></html>");',
                 "REQUIRED: use HtmlToPdfOptions as the options class (NOT PluginOptions, NOT PdfConverterOptions)",
-                "REQUIRED: options.AddInput(new FileDataSource(\"input.html\")) — HTML file as input",
-                "REQUIRED: options.AddOutput(new FileDataSource(\"output.pdf\")) — PDF file as output",
+                'REQUIRED: options.AddInput(new FileDataSource("input.html")) — HTML file as input',
+                'REQUIRED: options.AddOutput(new FileDataSource("output.pdf")) — PDF file as output',
                 "REQUIRED: new Html().Process(options) — use the LowCode Html plugin",
                 "FORBIDDEN: new Aspose.Pdf.Document() for Html plugin — no PDF fixture needed; input is HTML",
                 "FORBIDDEN: TextFragment for Html plugin — input is an HTML string, not a PDF document",
-                "FORBIDDEN: AddInput(new FileDataSource(\"input.pdf\")) — Html plugin takes HTML file input, NOT PDF",
+                'FORBIDDEN: AddInput(new FileDataSource("input.pdf")) — Html plugin takes HTML file input, NOT PDF',
                 "FORBIDDEN: HtmlLoadOptions — use HtmlToPdfOptions (LowCode namespace)",
             ]
         else:
@@ -167,8 +169,8 @@ def build_packet(
                 "REQUIRED: create input PDF programmatically in code before calling the API:\n"
                 "    var doc = new Aspose.Pdf.Document();\n"
                 "    doc.Pages.Add();\n"
-                "    doc.Save(\"input.pdf\");",
-                "REQUIRED: use AddInput(new FileDataSource(\"input.pdf\")) to set the input on the options object",
+                '    doc.Save("input.pdf");',
+                'REQUIRED: use AddInput(new FileDataSource("input.pdf")) to set the input on the options object',
             ]
         # Per-type exact class name hints — prevent hallucination of wrong options class
         _pdf_type_hints = {
@@ -176,34 +178,34 @@ def build_packet(
                 "MergeOptions",
                 "Merger",
                 "var options = new MergeOptions();\n"
-                "    options.AddInput(new FileDataSource(\"input.pdf\"));\n"
-                "    options.AddOutput(new FileDataSource(\"output.pdf\"));\n"
+                '    options.AddInput(new FileDataSource("input.pdf"));\n'
+                '    options.AddOutput(new FileDataSource("output.pdf"));\n'
                 "    var result = new Merger().Process(options);",
             ),
             "splitter": (
                 "SplitOptions",
                 "Splitter",
                 "var options = new SplitOptions();\n"
-                "    options.AddInput(new FileDataSource(\"input.pdf\"));\n"
-                "    options.AddOutput(new FileDataSource(\"output.pdf\"));\n"
+                '    options.AddInput(new FileDataSource("input.pdf"));\n'
+                '    options.AddOutput(new FileDataSource("output.pdf"));\n'
                 "    var result = new Splitter().Process(options);",
             ),
             "optimizer": (
                 "OptimizeOptions",
                 "Optimizer",
                 "var options = new OptimizeOptions();\n"
-                "    options.AddInput(new FileDataSource(\"input.pdf\"));\n"
-                "    options.AddOutput(new FileDataSource(\"output.pdf\"));\n"
+                '    options.AddInput(new FileDataSource("input.pdf"));\n'
+                '    options.AddOutput(new FileDataSource("output.pdf"));\n'
                 "    var result = new Optimizer().Process(options);",
             ),
             "textextractor": (
                 "TextExtractorOptions",
                 "TextExtractor",
                 "var options = new TextExtractorOptions();\n"
-                "    options.AddInput(new FileDataSource(\"input.pdf\"));\n"
+                '    options.AddInput(new FileDataSource("input.pdf"));\n'
                 "    var result = new TextExtractor().Process(options);\n"
                 "    if (result.ResultCollection.Count > 0 && result.ResultCollection[0] is StringResult sr)\n"
-                "        Console.WriteLine(\"Extracted: \" + sr.Text);",
+                '        Console.WriteLine("Extracted: " + sr.Text);',
             ),
         }
         if type_short in _pdf_type_hints:
@@ -227,7 +229,7 @@ def build_packet(
             ]
         else:
             constraints += [
-                "REQUIRED: use AddOutput(new FileDataSource(\"output.pdf\")) to set the output on the options object",
+                'REQUIRED: use AddOutput(new FileDataSource("output.pdf")) to set the output on the options object',
             ]
 
     # Inject FormatContract authority constraint if available
@@ -244,6 +246,7 @@ def build_packet(
     if _fc_family and _type_name:
         try:
             from plugin_examples.format_authority.store import get_contract
+
             _fc = get_contract(_fc_family, _type_name)
             _format_contract_dict = _fc.to_dict()
             _fc_out = _fc.canonical_output_format
@@ -261,9 +264,7 @@ def build_packet(
                     "Do NOT use AddOutput() or create an output file."
                 )
             elif _fc_kind == "directory":
-                constraints.append(
-                    "FORMAT CONTRACT: This type produces directory output via FolderOutputHandler."
-                )
+                constraints.append("FORMAT CONTRACT: This type produces directory output via FolderOutputHandler.")
         except (KeyError, ImportError):
             pass
 
@@ -312,7 +313,8 @@ def build_packet(
                 "DiagramConverter.Process(inputPath, outputPath) converts Visio to Visio formats ONLY (VDX, VSDX, VSD). "
                 "DiagramConverter does NOT support PDF, SVG, or PNG output. "
                 "Core Aspose.Diagram API is allowed ONLY for creating the input fixture."
-                if _family_name == "diagram" else ""
+                if _family_name == "diagram"
+                else ""
             )
         )
     )
@@ -367,7 +369,7 @@ def _build_fixture_instruction(input_strategy: str, input_files: list[str]) -> s
         return (
             f"\nINPUT FILES: The following input files are provided in the project directory "
             f"and will be available at runtime via AppContext.BaseDirectory: {files_list}\n"
-            f"Use Path.Combine(AppContext.BaseDirectory, \"{input_files[0]}\") to reference them.\n"
+            f'Use Path.Combine(AppContext.BaseDirectory, "{input_files[0]}") to reference them.\n'
             f"Do NOT create these files in code — they already exist.\n"
             f"Do NOT reference any other input files not listed here."
         )
@@ -375,7 +377,7 @@ def _build_fixture_instruction(input_strategy: str, input_files: list[str]) -> s
         files_list = ", ".join(input_files)
         return (
             f"\nINPUT FILES: The following fixture files are provided in the project directory: {files_list}\n"
-            f"Use Path.Combine(AppContext.BaseDirectory, \"{input_files[0]}\") to reference them.\n"
+            f'Use Path.Combine(AppContext.BaseDirectory, "{input_files[0]}") to reference them.\n'
             f"Do NOT create these files in code — they already exist.\n"
             f"Do NOT reference any other input files not listed here."
         )
@@ -406,17 +408,17 @@ def _build_fewshot_snippet(input_strategy: str, input_files: list[str]) -> str:
         "```csharp\n"
         "// Locate input file from project output directory\n"
         f'string inputPath = Path.Combine(AppContext.BaseDirectory, "{filename}");\n'
-        'if (!File.Exists(inputPath))\n'
+        "if (!File.Exists(inputPath))\n"
         '    throw new FileNotFoundException("Input fixture not found", inputPath);\n'
         "\n"
-        '// Define output path\n'
+        "// Define output path\n"
         'string outputPath = Path.Combine(AppContext.BaseDirectory, "output.xlsx");\n'
         "\n"
         "// Call the plugin API\n"
         "// TypeName.Process(inputPath, outputPath);\n"
         "\n"
         "// Validate output\n"
-        'if (File.Exists(outputPath))\n'
+        "if (File.Exists(outputPath))\n"
         '    Console.WriteLine($"Done. Output: {outputPath} ({new FileInfo(outputPath).Length} bytes)");\n'
         "else\n"
         '    throw new InvalidOperationException("Output file was not created");\n'
@@ -443,7 +445,7 @@ _PROGRAMMATIC_FIXTURE_GUIDANCE: dict[str, dict] = {
             "var shape = page.Shapes.GetShape(shapeId);\n"
             "if (shape != null)\n"
             "{\n"
-            "    shape.Name = \"SampleShape\";\n"
+            '    shape.Name = "SampleShape";\n'
             "    // XForm properties are DoubleValue objects — set via .Value, not direct assignment\n"
             "    shape.XForm.PinX.Value = 2.0;\n"
             "    shape.XForm.PinY.Value = 2.0;\n"
@@ -487,16 +489,16 @@ _PROGRAMMATIC_FIXTURE_GUIDANCE: dict[str, dict] = {
             "// Create a PDF input file using Aspose.Pdf (core API — allowed for fixture setup only)\n"
             "var doc = new Aspose.Pdf.Document();\n"
             "var page = doc.Pages.Add();\n"
-            "page.Paragraphs.Add(new Aspose.Pdf.Text.TextFragment(\"LowCode PDF Example\"));\n"
-            "doc.Save(\"input.pdf\");"
+            'page.Paragraphs.Add(new Aspose.Pdf.Text.TextFragment("LowCode PDF Example"));\n'
+            'doc.Save("input.pdf");'
         ),
         "operation_examples": {
             "docconverter": (
                 "// LowCode operation: convert PDF to DOCX (OOXML format)\n"
                 "var options = new PdfToDocOptions();\n"
                 "options.SaveFormat = SaveFormat.DocX;  // DocX = OOXML .docx; Doc = OLE2 .doc\n"
-                "options.AddInput(new FileDataSource(\"input.pdf\"));\n"
-                "options.AddOutput(new FileDataSource(\"output.docx\"));\n"
+                'options.AddInput(new FileDataSource("input.pdf"));\n'
+                'options.AddOutput(new FileDataSource("output.docx"));\n'
                 "var result = new DocConverter().Process(options);\n"
                 "// result.ResultCollection.Count > 0 on success\n"
                 "// CRITICAL: PdfConverterOptions is abstract — use PdfToDocOptions"
@@ -505,8 +507,8 @@ _PROGRAMMATIC_FIXTURE_GUIDANCE: dict[str, dict] = {
                 "// LowCode operation: convert PDF to XLSX\n"
                 "var options = new PdfToXlsOptions();\n"
                 "options.Format = PdfToXlsOptions.ExcelFormat.XLSX;  // nested enum\n"
-                "options.AddInput(new FileDataSource(\"input.pdf\"));\n"
-                "options.AddOutput(new FileDataSource(\"output.xlsx\"));\n"
+                'options.AddInput(new FileDataSource("input.pdf"));\n'
+                'options.AddOutput(new FileDataSource("output.xlsx"));\n'
                 "var result = new XlsConverter().Process(options);\n"
                 "// result.ResultCollection.Count > 0 on success\n"
                 "// CRITICAL: ExcelFormat is PdfToXlsOptions.ExcelFormat (nested), NOT ExcelFormat directly"
@@ -515,12 +517,12 @@ _PROGRAMMATIC_FIXTURE_GUIDANCE: dict[str, dict] = {
                 "// LowCode operation: convert HTML to PDF\n"
                 "// CRITICAL: Html plugin converts HTML -> PDF. Input MUST be an HTML file, NOT a PDF!\n"
                 "// Step 1: Create HTML input file (no Aspose.Pdf.Document needed for Html plugin)\n"
-                "System.IO.File.WriteAllText(\"input.html\",\n"
-                "    \"<html><body><h1>Hello LowCode</h1><p>HTML to PDF.</p></body></html>\");\n"
+                'System.IO.File.WriteAllText("input.html",\n'
+                '    "<html><body><h1>Hello LowCode</h1><p>HTML to PDF.</p></body></html>");\n'
                 "// Step 2: Convert HTML to PDF using LowCode Html plugin\n"
                 "var options = new HtmlToPdfOptions();\n"
-                "options.AddInput(new FileDataSource(\"input.html\"));\n"
-                "options.AddOutput(new FileDataSource(\"output.pdf\"));\n"
+                'options.AddInput(new FileDataSource("input.html"));\n'
+                'options.AddOutput(new FileDataSource("output.pdf"));\n'
                 "var result = new Html().Process(options);\n"
                 "// result.ResultCollection.Count > 0 on success"
             ),
@@ -592,15 +594,10 @@ def _build_programmatic_fixture_guidance(
     if op_code:
         label = (
             "\nCOMPLETE EXAMPLE — REFERENCE PATTERN (this type uses its own input creation, not the PDF fixture above):\n"
-            if skip_default_fixture else
-            "\nLOWCODE OPERATION — REFERENCE PATTERN:\n"
+            if skip_default_fixture
+            else "\nLOWCODE OPERATION — REFERENCE PATTERN:\n"
         )
-        parts.append(
-            f"{label}"
-            "```csharp\n"
-            f"{op_code}\n"
-            "```"
-        )
+        parts.append(f"{label}" "```csharp\n" f"{op_code}\n" "```")
 
     return constraints, "\n".join(parts)
 
@@ -652,8 +649,10 @@ def _build_user_prompt(
         # Properties
         for prop in type_details.get("properties", [])[:10]:
             access = []
-            if prop.get("can_read"): access.append("get")
-            if prop.get("can_write"): access.append("set")
+            if prop.get("can_read"):
+                access.append("get")
+            if prop.get("can_write"):
+                access.append("set")
             prompt_parts.append(f"  Property: {prop.get('type', '')} {prop['name']} {{ {'; '.join(access)} }}")
         # Methods
         for m in type_details.get("methods", []):
@@ -661,11 +660,13 @@ def _build_user_prompt(
             static = "static " if m.get("is_static") else ""
             prompt_parts.append(f"  Method: {static}{m.get('return_type', 'void')} {m['name']}({params})")
 
-    prompt_parts.append("\nIMPORTANT: Demonstrate ONLY the FIRST method listed in 'Methods to demonstrate' "
-                       "above. Use its simplest string-path overload. Do NOT call other methods from "
-                       "the list — they are shown for catalog context only. Do NOT pass null for "
-                       "LowCodeLoadOptions or LowCodeSaveOptions. Only use the constructors, methods, "
-                       "and properties listed above. Use valid output file extensions recognised by "
-                       "Aspose (e.g. '.docx', '.pdf', '.xlsx') — never use '.out' or other ambiguous extensions.")
+    prompt_parts.append(
+        "\nIMPORTANT: Demonstrate ONLY the FIRST method listed in 'Methods to demonstrate' "
+        "above. Use its simplest string-path overload. Do NOT call other methods from "
+        "the list — they are shown for catalog context only. Do NOT pass null for "
+        "LowCodeLoadOptions or LowCodeSaveOptions. Only use the constructors, methods, "
+        "and properties listed above. Use valid output file extensions recognised by "
+        "Aspose (e.g. '.docx', '.pdf', '.xlsx') — never use '.out' or other ambiguous extensions."
+    )
 
     return "\n".join(prompt_parts)

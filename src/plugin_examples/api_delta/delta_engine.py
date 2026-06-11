@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class TypeDelta:
     """Change record for a single type."""
+
     full_name: str
     namespace: str
     change_type: str  # added, removed, modified
@@ -25,6 +26,7 @@ class TypeDelta:
 @dataclass
 class DeltaResult:
     """Result of API delta computation."""
+
     initial_run: bool
     old_version: str | None
     new_version: str
@@ -65,13 +67,15 @@ def compute_delta(
         )
         for ns in new_catalog.get("namespaces", []):
             for t in ns.get("types", []):
-                result.added_types.append(TypeDelta(
-                    full_name=t["full_name"],
-                    namespace=ns["namespace"],
-                    change_type="added",
-                    added_methods=[m["name"] for m in t.get("methods", [])],
-                    added_properties=[p["name"] for p in t.get("properties", [])],
-                ))
+                result.added_types.append(
+                    TypeDelta(
+                        full_name=t["full_name"],
+                        namespace=ns["namespace"],
+                        change_type="added",
+                        added_methods=[m["name"] for m in t.get("methods", [])],
+                        added_properties=[p["name"] for p in t.get("properties", [])],
+                    )
+                )
         logger.info("Initial run delta: %d new types", len(result.added_types))
         return result
 
@@ -91,24 +95,28 @@ def compute_delta(
     # Added types
     for name in sorted(new_names - old_names):
         t, ns = new_types[name]
-        result.added_types.append(TypeDelta(
-            full_name=name,
-            namespace=ns,
-            change_type="added",
-            added_methods=[m["name"] for m in t.get("methods", [])],
-            added_properties=[p["name"] for p in t.get("properties", [])],
-        ))
+        result.added_types.append(
+            TypeDelta(
+                full_name=name,
+                namespace=ns,
+                change_type="added",
+                added_methods=[m["name"] for m in t.get("methods", [])],
+                added_properties=[p["name"] for p in t.get("properties", [])],
+            )
+        )
 
     # Removed types
     for name in sorted(old_names - new_names):
         t, ns = old_types[name]
-        result.removed_types.append(TypeDelta(
-            full_name=name,
-            namespace=ns,
-            change_type="removed",
-            removed_methods=[m["name"] for m in t.get("methods", [])],
-            removed_properties=[p["name"] for p in t.get("properties", [])],
-        ))
+        result.removed_types.append(
+            TypeDelta(
+                full_name=name,
+                namespace=ns,
+                change_type="removed",
+                removed_methods=[m["name"] for m in t.get("methods", [])],
+                removed_properties=[p["name"] for p in t.get("properties", [])],
+            )
+        )
 
     # Modified types
     for name in sorted(old_names & new_names):
@@ -120,8 +128,11 @@ def compute_delta(
 
     logger.info(
         "Delta: %d added, %d removed, %d modified (v%s -> v%s)",
-        len(result.added_types), len(result.removed_types),
-        len(result.modified_types), old_version, new_version,
+        len(result.added_types),
+        len(result.removed_types),
+        len(result.modified_types),
+        old_version,
+        new_version,
     )
     return result
 
@@ -195,7 +206,7 @@ def apply_auto_steering_candidates(
                 "symbol": sym,
                 "reason": f"Removed in delta: {family} v{delta.old_version} → v{delta.new_version}",
                 "source": "auto_delta",
-                "status": "CANDIDATE",   # NEVER auto-promoted to CONFIRMED
+                "status": "CANDIDATE",  # NEVER auto-promoted to CONFIRMED
                 "added_at": now,
                 "occurrence_count": 1,
             }

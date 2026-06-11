@@ -106,6 +106,7 @@ _SYSTEM_HEALTH: dict[str, str] = {
 @dataclass
 class FamilyDashboardEntry:
     """Dashboard entry for a single family."""
+
     family: str
     status: str
     published: int
@@ -122,6 +123,7 @@ class FamilyDashboardEntry:
 @dataclass
 class PortfolioDashboard:
     """Complete portfolio release dashboard."""
+
     generated_at: str
     sprint: str
     total_published: int
@@ -184,19 +186,21 @@ def build_portfolio_dashboard(
         if d.get("blocked_type"):
             notes.append(d["blocked_type"])
 
-        entries.append(FamilyDashboardEntry(
-            family=family,
-            status=status,
-            published=pub,
-            pilot_allowed=pilot,
-            workflow_root_types=wrt,
-            pending_pr=pending,
-            package_version=d.get("package_version", "unknown"),
-            prs_merged=d.get("prs_merged", 0),
-            open_taskcards=d.get("open_taskcards", 0),
-            coverage_pct=coverage_pct,
-            notes=notes,
-        ))
+        entries.append(
+            FamilyDashboardEntry(
+                family=family,
+                status=status,
+                published=pub,
+                pilot_allowed=pilot,
+                workflow_root_types=wrt,
+                pending_pr=pending,
+                package_version=d.get("package_version", "unknown"),
+                prs_merged=d.get("prs_merged", 0),
+                open_taskcards=d.get("open_taskcards", 0),
+                coverage_pct=coverage_pct,
+                notes=notes,
+            )
+        )
 
         total_published += pub
         total_pr_ready += pending
@@ -209,6 +213,7 @@ def build_portfolio_dashboard(
             discovery += 1
 
     import os
+
     gate = os.environ.get("PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL", "NOT_SET")
     gate_status = "READY" if gate == "APPROVE_LIVE_PR" else "NOT_SET"
 

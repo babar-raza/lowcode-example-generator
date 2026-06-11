@@ -30,9 +30,7 @@ class MetricsConfig:
     command_to_item_name: dict[str, str] = field(default_factory=dict)
     verdict_to_status: dict[str, str] = field(default_factory=dict)
 
-    allowed_statuses: list[str] = field(
-        default_factory=lambda: ["success", "partial_success", "failure"]
-    )
+    allowed_statuses: list[str] = field(default_factory=lambda: ["success", "partial_success", "failure"])
     allowed_job_types: list[str] = field(
         default_factory=lambda: ["Examples Generation", "Discovery", "Publishing", "Reporting", "Test"]
     )
@@ -63,9 +61,7 @@ class MetricsConfig:
         # Unknown verdicts mapping to success is never allowed
         for verdict, status in self.verdict_to_status.items():
             if status not in self.allowed_statuses:
-                errors.append(
-                    f"verdict_to_status[{verdict}] maps to invalid status '{status}'"
-                )
+                errors.append(f"verdict_to_status[{verdict}] maps to invalid status '{status}'")
         return errors
 
     def validate_family(self, family: str) -> str | None:
@@ -101,12 +97,7 @@ def load_metrics_config(
         override: Dict of field overrides (for testing).
     """
     if config_path is None:
-        config_path = (
-            Path(__file__).resolve().parents[3]
-            / "pipeline"
-            / "configs"
-            / "metrics.yml"
-        )
+        config_path = Path(__file__).resolve().parents[3] / "pipeline" / "configs" / "metrics.yml"
 
     raw: dict = {}
     if config_path.exists():
@@ -150,7 +141,9 @@ def load_metrics_config(
         command_to_item_name=raw.get("command_to_item_name", {}),
         verdict_to_status=raw.get("verdict_to_status", {}),
         allowed_statuses=raw.get("allowed_statuses", ["success", "partial_success", "failure"]),
-        allowed_job_types=raw.get("allowed_job_types", ["Examples Generation", "Discovery", "Publishing", "Reporting", "Test"]),
+        allowed_job_types=raw.get(
+            "allowed_job_types", ["Examples Generation", "Discovery", "Publishing", "Reporting", "Test"]
+        ),
         api_endpoint=raw.get("api_endpoint", ""),
         post_ledger_path=raw.get("post_ledger_path", "workspace/verification/agent-metrics-post-ledger.jsonl"),
         ledger_max_entries=raw.get("ledger_max_entries", 500),

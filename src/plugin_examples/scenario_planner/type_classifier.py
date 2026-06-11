@@ -28,10 +28,20 @@ UNKNOWN = "unknown"
 STANDALONE_ROLES = frozenset({WORKFLOW_ROOT, OPERATION_FACADE})
 
 # Roles that may NOT be standalone example roots
-NON_STANDALONE_ROLES = frozenset({
-    OPTIONS, PROVIDER_CALLBACK, EVENT_CALLBACK, RESULT_MODEL,
-    SETTINGS_MODEL, ENUM, UTILITY, ABSTRACT_BASE, INTERFACE_CONTRACT, UNKNOWN,
-})
+NON_STANDALONE_ROLES = frozenset(
+    {
+        OPTIONS,
+        PROVIDER_CALLBACK,
+        EVENT_CALLBACK,
+        RESULT_MODEL,
+        SETTINGS_MODEL,
+        ENUM,
+        UTILITY,
+        ABSTRACT_BASE,
+        INTERFACE_CONTRACT,
+        UNKNOWN,
+    }
+)
 
 # Workflow verb patterns (types with these in their name are candidate roots)
 _WORKFLOW_VERBS = re.compile(
@@ -51,6 +61,7 @@ _CALLBACK_PATTERNS = re.compile(
 @dataclass
 class TypeRole:
     """Classification of a single reflected type."""
+
     full_name: str
     name: str
     role: str
@@ -84,9 +95,12 @@ def classify_type(type_info: dict) -> TypeRole:
     method_count = len(methods)
 
     base = dict(
-        full_name=full_name, name=name,
-        has_static_methods=has_static, has_instance_methods=has_instance,
-        has_constructors=has_ctors, method_count=method_count,
+        full_name=full_name,
+        name=name,
+        has_static_methods=has_static,
+        has_instance_methods=has_instance,
+        has_constructors=has_ctors,
+        method_count=method_count,
     )
 
     # Enum
@@ -95,70 +109,68 @@ def classify_type(type_info: dict) -> TypeRole:
 
     # Interface
     if kind == "interface":
-        return TypeRole(**base, role=INTERFACE_CONTRACT, confidence=1.0,
-                        reason="Interface type")
+        return TypeRole(**base, role=INTERFACE_CONTRACT, confidence=1.0, reason="Interface type")
 
     # Abstract class
     if kind == "abstract_class" or name.startswith("Abstract"):
-        return TypeRole(**base, role=ABSTRACT_BASE, confidence=1.0,
-                        reason="Abstract class")
+        return TypeRole(**base, role=ABSTRACT_BASE, confidence=1.0, reason="Abstract class")
 
     # Provider/callback patterns
     if _CALLBACK_PATTERNS.search(name):
-        return TypeRole(**base, role=PROVIDER_CALLBACK, confidence=0.95,
-                        reason=f"Name matches callback/provider pattern: {name}")
+        return TypeRole(
+            **base, role=PROVIDER_CALLBACK, confidence=0.95, reason=f"Name matches callback/provider pattern: {name}"
+        )
 
     # Options types
     if name.endswith("Options") or name.endswith("Option"):
-        return TypeRole(**base, role=OPTIONS, confidence=0.9,
-                        reason=f"Name ends with Options: {name}")
+        return TypeRole(**base, role=OPTIONS, confidence=0.9, reason=f"Name ends with Options: {name}")
 
     # Result/Info models
     if name.endswith("Result") or name.endswith("Info"):
-        return TypeRole(**base, role=RESULT_MODEL, confidence=0.9,
-                        reason=f"Name ends with Result/Info: {name}")
+        return TypeRole(**base, role=RESULT_MODEL, confidence=0.9, reason=f"Name ends with Result/Info: {name}")
 
     # Settings models
     if name.endswith("Settings") or name.endswith("Config"):
-        return TypeRole(**base, role=SETTINGS_MODEL, confidence=0.85,
-                        reason=f"Name ends with Settings/Config: {name}")
+        return TypeRole(**base, role=SETTINGS_MODEL, confidence=0.85, reason=f"Name ends with Settings/Config: {name}")
 
     # SaveOptions types (specific to Aspose — have SaveOptions in name, but not Providers)
     if "SaveOptions" in name and not _WORKFLOW_VERBS.search(name) and "Provider" not in name:
-        return TypeRole(**base, role=OPTIONS, confidence=0.9,
-                        reason=f"SaveOptions type: {name}")
+        return TypeRole(**base, role=OPTIONS, confidence=0.9, reason=f"SaveOptions type: {name}")
 
     # LoadOptions types
     if "LoadOptions" in name:
-        return TypeRole(**base, role=OPTIONS, confidence=0.9,
-                        reason=f"LoadOptions type: {name}")
+        return TypeRole(**base, role=OPTIONS, confidence=0.9, reason=f"LoadOptions type: {name}")
 
     # Workflow root: static methods + workflow verb
     if _WORKFLOW_VERBS.search(name) and has_static and method_count > 0:
-        return TypeRole(**base, role=WORKFLOW_ROOT, confidence=0.95,
-                        reason=f"Workflow verb + static methods: {name}")
+        return TypeRole(**base, role=WORKFLOW_ROOT, confidence=0.95, reason=f"Workflow verb + static methods: {name}")
 
     # Operation facade: workflow verb + instance methods
     if _WORKFLOW_VERBS.search(name) and has_instance and method_count > 0:
-        return TypeRole(**base, role=OPERATION_FACADE, confidence=0.85,
-                        reason=f"Workflow verb + instance methods: {name}")
+        return TypeRole(
+            **base, role=OPERATION_FACADE, confidence=0.85, reason=f"Workflow verb + instance methods: {name}"
+        )
 
     # Workflow root: any type with static public methods that isn't options/callback
     if has_static and method_count > 0:
-        return TypeRole(**base, role=WORKFLOW_ROOT, confidence=0.7,
-                        reason=f"Has static methods, no special suffix: {name}")
+        return TypeRole(
+            **base, role=WORKFLOW_ROOT, confidence=0.7, reason=f"Has static methods, no special suffix: {name}"
+        )
 
     # No methods at all
     if method_count == 0:
         if len(properties) > 0:
-            return TypeRole(**base, role=SETTINGS_MODEL, confidence=0.6,
-                            reason=f"No methods, has properties: {name}")
+            return TypeRole(**base, role=SETTINGS_MODEL, confidence=0.6, reason=f"No methods, has properties: {name}")
         # Workflow verb type with constructors but 0 reflected methods — likely
         # inherits Process() from a base IPlugin implementation (e.g. TextExtractor).
         # Classify as OPERATION_FACADE so it can be planned as a scenario.
         if _WORKFLOW_VERBS.search(name) and has_ctors:
-            return TypeRole(**base, role=OPERATION_FACADE, confidence=0.6,
-                            reason=f"Workflow verb with constructors, Process likely inherited: {name}")
+            return TypeRole(
+                **base,
+                role=OPERATION_FACADE,
+                confidence=0.6,
+                reason=f"Workflow verb with constructors, Process likely inherited: {name}",
+            )
         # Format-named IPlugin implementors (e.g. Jpeg, Png, Tiff, Ofd) — concrete
         # classes with constructors but 0 visible methods. By this point the type is
         # not an enum, interface, abstract class, options, result, settings, or
@@ -166,29 +178,35 @@ def classify_type(type_info: dict) -> TypeRole:
         # IPlugin implementor whose Process() is fully inherited and invisible to
         # reflection. Classify as OPERATION_FACADE so it can be planned as a scenario.
         if has_ctors:
-            return TypeRole(**base, role=OPERATION_FACADE, confidence=0.5,
-                            reason=f"No methods, no properties, has constructors — IPlugin implementor (inherited Process()): {name}")
-        return TypeRole(**base, role=UNKNOWN, confidence=0.3,
-                        reason=f"No methods, no properties, no constructors: {name}")
+            return TypeRole(
+                **base,
+                role=OPERATION_FACADE,
+                confidence=0.5,
+                reason=f"No methods, no properties, has constructors — IPlugin implementor (inherited Process()): {name}",
+            )
+        return TypeRole(
+            **base, role=UNKNOWN, confidence=0.3, reason=f"No methods, no properties, no constructors: {name}"
+        )
 
     # IPlugin implementor: has Process method (the IPlugin contract) + constructors.
     # Applies to non-verb-named LowCode types like 'Html' (HTML→PDF converter) that
     # are concrete IPlugin implementations but don't follow the *Converter naming pattern.
-    has_process_method = any(
-        m.get("name") == "Process" or (isinstance(m, str) and m == "Process")
-        for m in methods
-    )
+    has_process_method = any(m.get("name") == "Process" or (isinstance(m, str) and m == "Process") for m in methods)
     if has_process_method and has_ctors:
-        return TypeRole(**base, role=OPERATION_FACADE, confidence=0.75,
-                        reason=f"Has Process method (IPlugin pattern) + constructors, no workflow verb: {name}")
+        return TypeRole(
+            **base,
+            role=OPERATION_FACADE,
+            confidence=0.75,
+            reason=f"Has Process method (IPlugin pattern) + constructors, no workflow verb: {name}",
+        )
 
     # Instance-only with constructors but no workflow verb
     if has_instance and has_ctors and not has_static:
-        return TypeRole(**base, role=UTILITY, confidence=0.5,
-                        reason=f"Instance methods with constructors, no workflow verb: {name}")
+        return TypeRole(
+            **base, role=UTILITY, confidence=0.5, reason=f"Instance methods with constructors, no workflow verb: {name}"
+        )
 
-    return TypeRole(**base, role=UNKNOWN, confidence=0.3,
-                    reason=f"Could not classify: {name}")
+    return TypeRole(**base, role=UNKNOWN, confidence=0.3, reason=f"Could not classify: {name}")
 
 
 def classify_catalog(catalog: dict, plugin_namespaces: list[str]) -> list[TypeRole]:

@@ -1,4 +1,5 @@
 """Tests for catalog-level drift detection — Wave 25 Lane C."""
+
 from __future__ import annotations
 
 import json
@@ -16,6 +17,7 @@ from plugin_examples.website_catalog.drift_detector import (
 
 
 # ── detect_catalog_drift ───────────────────────────────────────────────────────
+
 
 def test_no_prior_evidence_all_added(tmp_path):
     current = [
@@ -81,16 +83,16 @@ def test_mixed_drift_classified_correctly(tmp_path):
     prior_data = {
         "discovery_metadata": {"run_id": "run-prior-004"},
         "plugins": [
-            {"url": "https://example.com/plugin/a", "page_hash": "hash-a"},   # unchanged
-            {"url": "https://example.com/plugin/b", "page_hash": "hash-b"},   # changed
-            {"url": "https://example.com/plugin/c", "page_hash": "hash-c"},   # removed
+            {"url": "https://example.com/plugin/a", "page_hash": "hash-a"},  # unchanged
+            {"url": "https://example.com/plugin/b", "page_hash": "hash-b"},  # changed
+            {"url": "https://example.com/plugin/c", "page_hash": "hash-c"},  # removed
         ],
     }
     prior_path.write_text(json.dumps(prior_data), encoding="utf-8")
     current = [
-        {"url": "https://example.com/plugin/a", "page_hash": "hash-a"},    # unchanged
-        {"url": "https://example.com/plugin/b", "page_hash": "hash-b-new"}, # changed
-        {"url": "https://example.com/plugin/d", "page_hash": "hash-d"},    # added
+        {"url": "https://example.com/plugin/a", "page_hash": "hash-a"},  # unchanged
+        {"url": "https://example.com/plugin/b", "page_hash": "hash-b-new"},  # changed
+        {"url": "https://example.com/plugin/d", "page_hash": "hash-d"},  # added
     ]
     report = detect_catalog_drift(prior_path, current)
     assert "https://example.com/plugin/a" in report.unchanged
@@ -110,17 +112,34 @@ def test_missing_prior_file_treated_as_no_prior(tmp_path):
 
 def test_drift_report_to_dict_has_required_keys():
     report = DriftReport(
-        added=["a"], removed=[], changed=[], unchanged=["b"],
-        has_drift=True, run_id="run-test", compared_against="NONE",
+        added=["a"],
+        removed=[],
+        changed=[],
+        unchanged=["b"],
+        has_drift=True,
+        run_id="run-test",
+        compared_against="NONE",
     )
     d = report.to_dict()
-    for key in ["run_id", "generated_at", "compared_against", "has_drift",
-                "added_count", "removed_count", "changed_count", "unchanged_count",
-                "added", "removed", "changed", "unchanged"]:
+    for key in [
+        "run_id",
+        "generated_at",
+        "compared_against",
+        "has_drift",
+        "added_count",
+        "removed_count",
+        "changed_count",
+        "unchanged_count",
+        "added",
+        "removed",
+        "changed",
+        "unchanged",
+    ]:
         assert key in d, f"Missing key: {key}"
 
 
 # ── make_discovery_metadata ────────────────────────────────────────────────────
+
 
 def test_discovery_metadata_has_required_fields():
     meta = make_discovery_metadata()
@@ -130,6 +149,7 @@ def test_discovery_metadata_has_required_fields():
 
 def test_discovery_metadata_expires_after_ttl():
     from datetime import datetime, timezone
+
     meta = make_discovery_metadata(ttl_seconds=3600)
     validated = datetime.fromisoformat(meta["validated_at"])
     expires = datetime.fromisoformat(meta["expires_at"])
@@ -144,10 +164,15 @@ def test_discovery_metadata_not_stale_immediately():
 
 def test_discovery_metadata_stale_when_expired():
     from datetime import datetime, timezone, timedelta
+
     now = datetime.now(timezone.utc)
     past = (now - timedelta(hours=2)).isoformat(timespec="seconds")
-    meta = {"validated_at": past, "run_id": "old", "ttl_seconds": 3600,
-            "expires_at": (now - timedelta(hours=1)).isoformat(timespec="seconds")}
+    meta = {
+        "validated_at": past,
+        "run_id": "old",
+        "ttl_seconds": 3600,
+        "expires_at": (now - timedelta(hours=1)).isoformat(timespec="seconds"),
+    }
     assert is_discovery_stale(meta) is True
 
 
@@ -157,6 +182,7 @@ def test_discovery_metadata_stale_when_no_expires_at():
 
 
 # ── backward compat: compute_page_hash ────────────────────────────────────────
+
 
 def test_compute_page_hash_string_and_bytes_equal():
     content = "hello world"

@@ -25,12 +25,12 @@ from plugin_examples.dependencies.assembly_identity import (
 
 # Real .NET DLL from the project build output — always present after dotnet build.
 _REFLECTOR_DLL = (
-    Path(__file__).resolve().parents[2]
-    / "tools" / "DllReflector" / "bin" / "Release" / "net8.0" / "DllReflector.dll"
+    Path(__file__).resolve().parents[2] / "tools" / "DllReflector" / "bin" / "Release" / "net8.0" / "DllReflector.dll"
 )
 
 
 # ── Tests ──────────────────────────────────────────────────────────────────
+
 
 class TestReadAssemblyIdentity:
     def test_read_assembly_identity_extracts_name_version(self):
@@ -193,18 +193,23 @@ class TestDiscoverySweepDedup:
             return {"namespaces": []}
 
         with (
-            patch("plugin_examples.nuget_fetcher.fetch_package", return_value={
-                "version": "1.0.0", "cached_path": str(tmp_path / "pkg.nupkg"), "sha256": "abc"
-            }),
+            patch(
+                "plugin_examples.nuget_fetcher.fetch_package",
+                return_value={"version": "1.0.0", "cached_path": str(tmp_path / "pkg.nupkg"), "sha256": "abc"},
+            ),
             patch("plugin_examples.nuget_fetcher.resolve_dependencies", return_value=[]),
             patch("plugin_examples.nupkg_extractor.extract_package", return_value=extraction),
             patch("plugin_examples.reflection_catalog.build_catalog", side_effect=capturing_build_catalog),
-            patch("plugin_examples.plugin_detector.detect_plugin_namespaces", return_value=MagicMock(
-                matched_namespaces=[], is_eligible=False,
-                public_plugin_type_count=0, public_plugin_method_count=0,
-            )),
-            patch("plugin_examples.plugin_detector.write_source_of_truth_proof",
-                  return_value=tmp_path / "proof.json"),
+            patch(
+                "plugin_examples.plugin_detector.detect_plugin_namespaces",
+                return_value=MagicMock(
+                    matched_namespaces=[],
+                    is_eligible=False,
+                    public_plugin_type_count=0,
+                    public_plugin_method_count=0,
+                ),
+            ),
+            patch("plugin_examples.plugin_detector.write_source_of_truth_proof", return_value=tmp_path / "proof.json"),
             patch("plugin_examples.family_config.load_family_config", return_value=cfg),
         ):
             # Make config_path appear to exist
@@ -248,20 +253,23 @@ class TestDiscoverySweepDedup:
         cfg.existing_examples.sources = []
 
         with (
-            patch("plugin_examples.nuget_fetcher.fetch_package", return_value={
-                "version": "1.0.0", "cached_path": str(tmp_path / "pkg.nupkg"), "sha256": "x"
-            }),
+            patch(
+                "plugin_examples.nuget_fetcher.fetch_package",
+                return_value={"version": "1.0.0", "cached_path": str(tmp_path / "pkg.nupkg"), "sha256": "x"},
+            ),
             patch("plugin_examples.nuget_fetcher.resolve_dependencies", return_value=[]),
             patch("plugin_examples.nupkg_extractor.extract_package", return_value=extraction),
-            patch("plugin_examples.reflection_catalog.build_catalog",
-                  return_value={"namespaces": []}),
-            patch("plugin_examples.plugin_detector.detect_plugin_namespaces",
-                  return_value=MagicMock(
-                      matched_namespaces=[], is_eligible=False,
-                      public_plugin_type_count=0, public_plugin_method_count=0,
-                  )),
-            patch("plugin_examples.plugin_detector.write_source_of_truth_proof",
-                  return_value=tmp_path / "proof.json"),
+            patch("plugin_examples.reflection_catalog.build_catalog", return_value={"namespaces": []}),
+            patch(
+                "plugin_examples.plugin_detector.detect_plugin_namespaces",
+                return_value=MagicMock(
+                    matched_namespaces=[],
+                    is_eligible=False,
+                    public_plugin_type_count=0,
+                    public_plugin_method_count=0,
+                ),
+            ),
+            patch("plugin_examples.plugin_detector.write_source_of_truth_proof", return_value=tmp_path / "proof.json"),
             patch("plugin_examples.family_config.load_family_config", return_value=cfg),
         ):
             with patch.object(Path, "exists", return_value=True):
@@ -315,9 +323,9 @@ class TestPdfGenerationReadiness:
 
         pdf_rank = next(r for r in ranks if r["family"] == "pdf")
 
-        assert pdf_rank["generation_ready"] is False, (
-            f"PDF must not be generation_ready even after reflection success — got {pdf_rank}"
-        )
+        assert (
+            pdf_rank["generation_ready"] is False
+        ), f"PDF must not be generation_ready even after reflection success — got {pdf_rank}"
         assert "family_status_is_discovery_only" in pdf_rank["generation_blocked_by"]
         assert pdf_rank["reflection_status"] == "succeeded"
         assert pdf_rank["discovery_status"] == "eligible_lowcode_found"

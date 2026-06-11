@@ -11,11 +11,13 @@ def add_parser(subparsers):
         help="Check FormImporter defect status against latest NuGet version",
     )
     parser.add_argument(
-        "--run-repro", action="store_true",
+        "--run-repro",
+        action="store_true",
         help="Run repro harness if version has advanced beyond 26.5.0",
     )
     parser.add_argument(
-        "--output", metavar="PATH",
+        "--output",
+        metavar="PATH",
         help="Write JSON report to this path",
     )
     parser.set_defaults(func=handle)
@@ -26,7 +28,8 @@ def handle(args) -> int:
     """Handle the formimporter-watch command."""
     from pathlib import Path as _Path
     from plugin_examples.package_watcher.formimporter_watch import (
-        check_formimporter, write_watch_report,
+        check_formimporter,
+        write_watch_report,
     )
 
     repo_root = _Path(__file__).resolve().parents[3]

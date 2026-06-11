@@ -40,6 +40,7 @@ _OUTPUT_EXTENDED_PATTERNS = [
 @dataclass
 class ExampleFact:
     """Verified publication fact for a single example."""
+
     example_name: str
     api_symbol: str
     source_file_path: str
@@ -80,6 +81,7 @@ def _extract_all_extensions(patterns: list[re.Pattern], source: str) -> list[str
 @dataclass
 class ExampleReadmeFacts:
     """Complete set of verified facts for a family's README."""
+
     family: str
     generated_at: str
     source_artifact: str
@@ -111,48 +113,101 @@ def _extract_extension(pattern: re.Pattern, source: str) -> tuple[str, str]:
 # Patterns for API method extraction from Program.cs
 # Pattern 1: Static call — ClassName.MethodName(
 _STATIC_API_CALL = re.compile(
-    r'(?:await\s+)?'                      # optional await
-    r'(?:Aspose\.\w+\.LowCode\.)?'        # optional full namespace
-    r'([A-Z][A-Za-z]+)\.([A-Z][A-Za-z]+)\(',  # ClassName.MethodName(
+    r"(?:await\s+)?"  # optional await
+    r"(?:Aspose\.\w+\.LowCode\.)?"  # optional full namespace
+    r"([A-Z][A-Za-z]+)\.([A-Z][A-Za-z]+)\(",  # ClassName.MethodName(
 )
 # Pattern 2: Instance call — new ClassName().Process(
 _INSTANCE_API_CALL = re.compile(
-    r'new\s+([A-Z][A-Za-z]+)\(\)\s*\.\s*([A-Z][A-Za-z]+)\(',
+    r"new\s+([A-Z][A-Za-z]+)\(\)\s*\.\s*([A-Z][A-Za-z]+)\(",
 )
 # Pattern 3: Variable call — variable.Process( where variable = new ClassName()
 _VAR_DECL = re.compile(
-    r'(?:var|[A-Z]\w+)\s+(\w+)\s*=\s*new\s+([A-Z][A-Za-z]+)\(\)',
+    r"(?:var|[A-Z]\w+)\s+(\w+)\s*=\s*new\s+([A-Z][A-Za-z]+)\(\)",
 )
 _VAR_CALL = re.compile(
-    r'(\w+)\.\s*([A-Z][A-Za-z]+)\(',
+    r"(\w+)\.\s*([A-Z][A-Za-z]+)\(",
 )
 
 # Methods to ignore — these are not LowCode API operations
 _IGNORE_METHODS = {
-    "Dispose", "Save", "Add", "Exists", "Delete", "Combine", "GetTempPath",
-    "GetCurrentDirectory", "CreateDirectory", "WriteAllText", "ReadAllBytes",
-    "GetFileName", "WriteLine", "Write", "InsertField", "Writeln",
-    "AddAutoShape", "AddTextFrame", "GetBytes", "AddInput", "AddOutput",
-    "Create", "AddYears", "Rectangle", "Export",
+    "Dispose",
+    "Save",
+    "Add",
+    "Exists",
+    "Delete",
+    "Combine",
+    "GetTempPath",
+    "GetCurrentDirectory",
+    "CreateDirectory",
+    "WriteAllText",
+    "ReadAllBytes",
+    "GetFileName",
+    "WriteLine",
+    "Write",
+    "InsertField",
+    "Writeln",
+    "AddAutoShape",
+    "AddTextFrame",
+    "GetBytes",
+    "AddInput",
+    "AddOutput",
+    "Create",
+    "AddYears",
+    "Rectangle",
+    "Export",
 }
 
 # Classes to ignore — framework/fixture classes, not LowCode
 _IGNORE_CLASSES = {
-    "File", "Path", "Directory", "Console", "Document", "DocumentBuilder",
-    "Presentation", "FileInfo", "Environment", "Encoding", "MemoryStream",
-    "CertificateRequest", "RSA", "TextFragment", "Now",
-    "Aspose", "Int32", "Pdf", "Slides", "Words", "Cells",
-    "SaveFormat", "ShapeType", "GC",
+    "File",
+    "Path",
+    "Directory",
+    "Console",
+    "Document",
+    "DocumentBuilder",
+    "Presentation",
+    "FileInfo",
+    "Environment",
+    "Encoding",
+    "MemoryStream",
+    "CertificateRequest",
+    "RSA",
+    "TextFragment",
+    "Now",
+    "Aspose",
+    "Int32",
+    "Pdf",
+    "Slides",
+    "Words",
+    "Cells",
+    "SaveFormat",
+    "ShapeType",
+    "GC",
 }
 
 # Classes that are Options, not operations — ignore when they appear as ClassName.Method
 _IGNORE_OPTION_CLASSES = {
-    "HtmlToPdfOptions", "PdfToDocOptions", "PdfToXlsOptions", "JpegOptions",
-    "PngOptions", "TiffOptions", "MergeOptions", "SplitOptions", "OptimizeOptions",
-    "TextExtractorOptions", "ImageExtractorOptions", "TableOptions", "TocOptions",
-    "FormFlattenAllFieldsOptions", "FormRemoveAllFieldsOptions",
-    "FormExporterToJsonOptions", "FormImporterJsonOptions",
-    "EncryptionOptions", "SignOptions", "PdfAConvertOptions",
+    "HtmlToPdfOptions",
+    "PdfToDocOptions",
+    "PdfToXlsOptions",
+    "JpegOptions",
+    "PngOptions",
+    "TiffOptions",
+    "MergeOptions",
+    "SplitOptions",
+    "OptimizeOptions",
+    "TextExtractorOptions",
+    "ImageExtractorOptions",
+    "TableOptions",
+    "TocOptions",
+    "FormFlattenAllFieldsOptions",
+    "FormRemoveAllFieldsOptions",
+    "FormExporterToJsonOptions",
+    "FormImporterJsonOptions",
+    "EncryptionOptions",
+    "SignOptions",
+    "PdfAConvertOptions",
     "Options",
 }
 
@@ -185,8 +240,7 @@ def _extract_api_method(source: str) -> tuple[str, str]:
         m = _INSTANCE_API_CALL.search(stripped)
         if m:
             cls, method = m.group(1), m.group(2)
-            if (cls not in _IGNORE_CLASSES and cls not in _IGNORE_OPTION_CLASSES
-                    and method not in _IGNORE_METHODS):
+            if cls not in _IGNORE_CLASSES and cls not in _IGNORE_OPTION_CLASSES and method not in _IGNORE_METHODS:
                 candidates.append((cls, method, i))
                 continue
 
@@ -202,8 +256,7 @@ def _extract_api_method(source: str) -> tuple[str, str]:
         m = _STATIC_API_CALL.search(stripped)
         if m:
             cls, method = m.group(1), m.group(2)
-            if (cls not in _IGNORE_CLASSES and cls not in _IGNORE_OPTION_CLASSES
-                    and method not in _IGNORE_METHODS):
+            if cls not in _IGNORE_CLASSES and cls not in _IGNORE_OPTION_CLASSES and method not in _IGNORE_METHODS:
                 candidates.append((cls, method, i))
                 continue
 
@@ -251,21 +304,23 @@ def extract_example_readme_facts(
         program_cs = package_path / "examples" / family / "lowcode" / name / "Program.cs"
 
         if not program_cs.exists():
-            facts.facts.append(ExampleFact(
-                example_name=name,
-                api_symbol="",
-                source_file_path=str(program_cs.relative_to(package_path)),
-                source_file_sha256="",
-                snippet_mode="none",
-                snippet_content="",
-                snippet_content_sha256="",
-                input_extension="",
-                output_extension="",
-                input_extension_source="",
-                output_extension_source="",
-                proof_source="blocked_unverified",
-                validation_status="blocked_unverified",
-            ))
+            facts.facts.append(
+                ExampleFact(
+                    example_name=name,
+                    api_symbol="",
+                    source_file_path=str(program_cs.relative_to(package_path)),
+                    source_file_sha256="",
+                    snippet_mode="none",
+                    snippet_content="",
+                    snippet_content_sha256="",
+                    input_extension="",
+                    output_extension="",
+                    input_extension_source="",
+                    output_extension_source="",
+                    proof_source="blocked_unverified",
+                    validation_status="blocked_unverified",
+                )
+            )
             continue
 
         source = program_cs.read_text(encoding="utf-8")
@@ -299,9 +354,7 @@ def extract_example_readme_facts(
         # API symbol from manifest if available
         api_symbol = ""
         if manifest_reader:
-            manifest_path = (
-                package_path / "examples" / family / "lowcode" / name / "example.manifest.json"
-            )
+            manifest_path = package_path / "examples" / family / "lowcode" / name / "example.manifest.json"
             api_symbol = manifest_reader(manifest_path) or ""
 
         # Extract API method from source code — takes priority over manifest
@@ -327,24 +380,26 @@ def extract_example_readme_facts(
                 "input extension" if not input_ext else "output extension",
             )
 
-        facts.facts.append(ExampleFact(
-            example_name=name,
-            api_symbol=api_symbol,
-            source_file_path=str(program_cs.relative_to(package_path)),
-            source_file_sha256=file_hash,
-            snippet_mode=snippet_mode,
-            snippet_content=snippet_content,
-            snippet_content_sha256=_sha256(snippet_content),
-            input_extension=input_ext,
-            output_extension=output_ext,
-            input_extension_source=input_src,
-            output_extension_source=output_src,
-            proof_source=proof_source,
-            validation_status=validation_status,
-            api_method_extracted=api_method,
-            api_method_source=api_method_src,
-            api_method_validation=api_method_valid,
-        ))
+        facts.facts.append(
+            ExampleFact(
+                example_name=name,
+                api_symbol=api_symbol,
+                source_file_path=str(program_cs.relative_to(package_path)),
+                source_file_sha256=file_hash,
+                snippet_mode=snippet_mode,
+                snippet_content=snippet_content,
+                snippet_content_sha256=_sha256(snippet_content),
+                input_extension=input_ext,
+                output_extension=output_ext,
+                input_extension_source=input_src,
+                output_extension_source=output_src,
+                proof_source=proof_source,
+                validation_status=validation_status,
+                api_method_extracted=api_method,
+                api_method_source=api_method_src,
+                api_method_validation=api_method_valid,
+            )
+        )
 
     return facts
 

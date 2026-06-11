@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class RuntimeFailureClassification:
     """Classification of a runtime failure."""
+
     scenario_id: str
     exit_code: int
     classification: str
@@ -65,8 +66,8 @@ _PATTERNS: list[tuple[str, str, bool, str]] = [
         "pdf_merger_wrong_overload",
         True,
         "PDF: Merger.Process() called with wrong argument types (e.g. string array). "
-        "Use: var options = new MergeOptions(); options.AddInput(new FileDataSource(\"input.pdf\")); "
-        "options.AddOutput(new FileDataSource(\"output.pdf\")); new Merger().Process(options);",
+        'Use: var options = new MergeOptions(); options.AddInput(new FileDataSource("input.pdf")); '
+        'options.AddOutput(new FileDataSource("output.pdf")); new Merger().Process(options);',
     ),
     (
         r"TextAbsorber|pdfDoc\.Pages\.Accept\(absorber\)",
@@ -74,7 +75,7 @@ _PATTERNS: list[tuple[str, str, bool, str]] = [
         True,
         "PDF: Code references TextAbsorber (core Aspose.Pdf.Text API) instead of LowCode TextExtractor. "
         "Replace with: var options = new TextExtractorOptions(); "
-        "options.AddInput(new FileDataSource(\"input.pdf\")); "
+        'options.AddInput(new FileDataSource("input.pdf")); '
         "var result = new TextExtractor().Process(options); "
         "Console.WriteLine(((StringResult)result.ResultCollection[0]).Text);",
     ),
@@ -212,12 +213,14 @@ def classify_validation_results(validation_results: list) -> list[RuntimeFailure
     classifications = []
     for vr in validation_results:
         if vr.run and not vr.run.success:
-            classifications.append(classify_runtime_failure(
-                scenario_id=vr.scenario_id,
-                exit_code=vr.run.exit_code,
-                stdout=vr.run.stdout or "",
-                stderr=vr.run.stderr or "",
-            ))
+            classifications.append(
+                classify_runtime_failure(
+                    scenario_id=vr.scenario_id,
+                    exit_code=vr.run.exit_code,
+                    stdout=vr.run.stdout or "",
+                    stderr=vr.run.stderr or "",
+                )
+            )
     return classifications
 
 

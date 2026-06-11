@@ -1,5 +1,6 @@
 """Wave 19 state docs, publication readiness, backlog exhaustion, target publication evidence."""
-import json, os
+import json
+import os
 from pathlib import Path
 
 REPO = Path("c:/Users/prora/OneDrive/Documents/GitHub/lowcode-example-generator-gitlab")

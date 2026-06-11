@@ -72,6 +72,7 @@ TARGET_REPOS: dict[str, dict] = {
 @dataclass
 class RepoHealthResult:
     """Health check result for one target repo."""
+
     family: str
     owner: str
     repo: str
@@ -89,6 +90,7 @@ class RepoHealthResult:
 @dataclass
 class TargetRepoHealthReport:
     """Full health report for all target repos."""
+
     generated_at: str
     families: list[RepoHealthResult] = field(default_factory=list)
     healthy_count: int = 0
@@ -134,7 +136,10 @@ def _check_repo_via_gh_cli(owner: str, repo: str, branch: str) -> dict:
     try:
         result = subprocess.run(
             ["gh", "repo", "view", f"{owner}/{repo}", "--json", "name,defaultBranchRef"],
-            capture_output=True, text=True, timeout=15, env=env
+            capture_output=True,
+            text=True,
+            timeout=15,
+            env=env,
         )
         if result.returncode == 0:
             data = json.loads(result.stdout)
@@ -174,9 +179,7 @@ def run_target_repo_health_check(
     if families is None:
         families = list(TARGET_REPOS.keys())
 
-    report = TargetRepoHealthReport(
-        generated_at=datetime.now(timezone.utc).isoformat()
-    )
+    report = TargetRepoHealthReport(generated_at=datetime.now(timezone.utc).isoformat())
 
     for family in families:
         if family not in TARGET_REPOS:

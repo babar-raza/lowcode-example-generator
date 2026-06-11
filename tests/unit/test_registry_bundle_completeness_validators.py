@@ -2,6 +2,7 @@
 Unit tests for Registry Bundle Completeness Validators (RBC-01..RBC-08)
 Sprint: lowcode-plugin-canonical-package-wave11-20260605
 """
+
 import json
 import tempfile
 from pathlib import Path
@@ -24,8 +25,15 @@ from src.plugin_examples.fixture_factory.registry_bundle_completeness_validators
 # ─── Helpers ──────────────────────────────────────────────────────────────────
 
 
-def make_package_dir(tmp: Path, family: str, slug: str, *, verdict: str = "PASS",
-                     include_logs: bool = True, include_manifest: bool = True) -> Path:
+def make_package_dir(
+    tmp: Path,
+    family: str,
+    slug: str,
+    *,
+    verdict: str = "PASS",
+    include_logs: bool = True,
+    include_manifest: bool = True,
+) -> Path:
     pkg = tmp / family / slug
     pkg.mkdir(parents=True)
     # Program.cs
@@ -45,13 +53,15 @@ def make_package_dir(tmp: Path, family: str, slug: str, *, verdict: str = "PASS"
     # package-manifest.json
     if include_manifest:
         (pkg / "package-manifest.json").write_text(
-            json.dumps({
-                "package_key": f"{family}/{slug}",
-                "family": family,
-                "plugin_slug": slug,
-                "canonical_url": f"https://example.com/{slug}/",
-                "identity_status": "CANONICAL_IDENTITY_VERIFIED",
-            }),
+            json.dumps(
+                {
+                    "package_key": f"{family}/{slug}",
+                    "family": family,
+                    "plugin_slug": slug,
+                    "canonical_url": f"https://example.com/{slug}/",
+                    "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+                }
+            ),
             encoding="utf-8",
         )
     # log files

@@ -1,4 +1,5 @@
 """Registry-driven example package generator."""
+
 import json
 import os
 import subprocess
@@ -108,8 +109,13 @@ class ExamplePackageGenerator:
     SPRINT = "lowcode-plugin-example-factory-parallel-wave-20260605"
     GENERATED_AT = "2026-06-05"
 
-    def __init__(self, output_root: Path, template_registry: Optional[FamilyTemplateRegistry] = None,
-                 sprint: str = SPRINT, generated_at: str = GENERATED_AT):
+    def __init__(
+        self,
+        output_root: Path,
+        template_registry: Optional[FamilyTemplateRegistry] = None,
+        sprint: str = SPRINT,
+        generated_at: str = GENERATED_AT,
+    ):
         self.output_root = output_root
         self.templates = template_registry or FamilyTemplateRegistry()
         self.sprint = sprint
@@ -132,10 +138,9 @@ class ExamplePackageGenerator:
         # .csproj
         extra_pkg_lines = ""
         if extra_packages:
-            extra_pkg_lines = "\n".join(
-                f'    <PackageReference Include="{p}" Version="{v}" />'
-                for p, v in extra_packages
-            ) + "\n"
+            extra_pkg_lines = (
+                "\n".join(f'    <PackageReference Include="{p}" Version="{v}" />' for p, v in extra_packages) + "\n"
+            )
 
         csproj_content = CSPROJ_TEMPLATE.format(
             TARGET=template.dotnet_target,
@@ -197,10 +202,18 @@ class ExamplePackageGenerator:
         """Run dotnet restore, build, run. Returns result dict with logs."""
         result = {"restore": None, "build": None, "run": None, "output_files": [], "verdict": "UNKNOWN"}
 
-        for step, cmd in [("restore", ["dotnet", "restore"]), ("build", ["dotnet", "build"]), ("run", ["dotnet", "run"])]:
+        for step, cmd in [
+            ("restore", ["dotnet", "restore"]),
+            ("build", ["dotnet", "build"]),
+            ("run", ["dotnet", "run"]),
+        ]:
             proc = subprocess.run(cmd, capture_output=True, text=True, cwd=str(pkg_dir), timeout=120)
             log = proc.stdout + proc.stderr
-            result[step] = {"exit_code": proc.returncode, "log": log, "status": "SUCCESS" if proc.returncode == 0 else "FAILED"}
+            result[step] = {
+                "exit_code": proc.returncode,
+                "log": log,
+                "status": "SUCCESS" if proc.returncode == 0 else "FAILED",
+            }
             log_path = pkg_dir / f"{step}.log"
             log_path.write_text(log)
             if proc.returncode != 0 and step != "run":

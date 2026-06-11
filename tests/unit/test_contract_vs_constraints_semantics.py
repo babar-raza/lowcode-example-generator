@@ -5,6 +5,7 @@ code tokens that will appear in generated C#, NOT instruction text.
 Human-readable instructions like 'REQUIRED: 2 input files...' always fail
 the per_type_constraints check because they are never code substrings.
 """
+
 from __future__ import annotations
 import re
 from pathlib import Path
@@ -17,6 +18,7 @@ PIPELINE_DIR = REPO / "pipeline"
 def _load_constraints(family: str) -> dict[str, list[str]]:
     """Load per_type_constraints from a family YAML config."""
     import yaml  # type: ignore
+
     config_path = PIPELINE_DIR / f"{family}.yml"
     if not config_path.exists():
         return {}
@@ -38,8 +40,8 @@ def _is_instruction_text(constraint: str) -> bool:
         r"^Must ",
         r"^Use ",
         r"^The example",
-        r" — ",   # em-dash separator (instruction explanation)
-        r" \(",   # parenthetical note
+        r" — ",  # em-dash separator (instruction explanation)
+        r" \(",  # parenthetical note
     ]
     for pat in instruction_patterns:
         if re.search(pat, constraint):
@@ -51,14 +53,14 @@ def _looks_like_code_token(constraint: str) -> bool:
     """Return True if constraint looks like a code token that would appear in generated C#."""
     # Code tokens: file paths in quotes, method calls, class names, identifiers
     code_patterns = [
-        r'"[^"]{2,}"',        # quoted string literal
-        r'\w+\.[A-Z]\w+\(',   # method call pattern ClassName.Method(
-        r'WriteAll\w+',       # File.WriteAll* methods
-        r'\.Save\(',          # .Save( call
-        r'AddInput|AddOutput', # LowCode plugin API
-        r'input\d*\.\w+',    # input file reference
-        r'output\.\w+',       # output file reference
-        r'\.docx|\.xlsx|\.pdf|\.png|\.html|\.txt|\.eml|\.csv|\.json', # format extension
+        r'"[^"]{2,}"',  # quoted string literal
+        r"\w+\.[A-Z]\w+\(",  # method call pattern ClassName.Method(
+        r"WriteAll\w+",  # File.WriteAll* methods
+        r"\.Save\(",  # .Save( call
+        r"AddInput|AddOutput",  # LowCode plugin API
+        r"input\d*\.\w+",  # input file reference
+        r"output\.\w+",  # output file reference
+        r"\.docx|\.xlsx|\.pdf|\.png|\.html|\.txt|\.eml|\.csv|\.json",  # format extension
     ]
     for pat in code_patterns:
         if re.search(pat, constraint):
@@ -86,10 +88,7 @@ class TestConstraintSemantics:
                 for c in items:
                     if isinstance(c, str) and _is_instruction_text(c):
                         violations.append(f"{fam}/{type_key}: {c!r}")
-        assert not violations, (
-            "Found per_type_constraints that look like instruction text:\n"
-            + "\n".join(violations)
-        )
+        assert not violations, "Found per_type_constraints that look like instruction text:\n" + "\n".join(violations)
 
     def test_constraints_are_strings(self):
         """All constraint items must be strings."""
@@ -99,8 +98,7 @@ class TestConstraintSemantics:
                 if not isinstance(items, list):
                     continue
                 for c in items:
-                    assert isinstance(c, str), \
-                        f"{fam}/{type_key}: constraint is not a string: {c!r}"
+                    assert isinstance(c, str), f"{fam}/{type_key}: constraint is not a string: {c!r}"
 
     def test_constraints_not_empty_strings(self):
         """Constraint items must not be empty strings."""
@@ -110,8 +108,7 @@ class TestConstraintSemantics:
                 if not isinstance(items, list):
                     continue
                 for c in items:
-                    assert c.strip(), \
-                        f"{fam}/{type_key}: constraint is empty string"
+                    assert c.strip(), f"{fam}/{type_key}: constraint is empty string"
 
     def test_required_constraints_are_code_tokens(self):
         """REQUIRED constraints must contain actual code-like substrings."""

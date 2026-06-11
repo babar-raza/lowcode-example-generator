@@ -13,6 +13,7 @@ Governance:
 - Publisher replay requires reviewer evidence and gate verdict in publishable range
 - Typed deserialization: ValidationResult/DotnetResult are reconstructed from JSON, not plain dicts
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -32,20 +33,31 @@ logger = logging.getLogger(__name__)
 
 VALID_REPLAY_STEPS = frozenset({"generation", "validation", "reviewer", "publisher"})
 
-_INFRA_STAGES = frozenset({
-    "nuget_fetch", "dependency_resolution", "extraction", "reflection",
-})
+_INFRA_STAGES = frozenset(
+    {
+        "nuget_fetch",
+        "dependency_resolution",
+        "extraction",
+        "reflection",
+    }
+)
 
 # Gate verdicts that are acceptable for publisher replay
-_PUBLISHABLE_VERDICTS = frozenset({
-    "PR_DRY_RUN_READY", "PR_READY", "FULL_E2E_PASSED",
-    "PARTIAL_PR_DRY_RUN_READY", "PARTIAL_PR_READY",
-})
+_PUBLISHABLE_VERDICTS = frozenset(
+    {
+        "PR_DRY_RUN_READY",
+        "PR_READY",
+        "FULL_E2E_PASSED",
+        "PARTIAL_PR_DRY_RUN_READY",
+        "PARTIAL_PR_READY",
+    }
+)
 
 
 # ---------------------------------------------------------------------------
 # Exception
 # ---------------------------------------------------------------------------
+
 
 class ReplayIntegrityError(RuntimeError):
     """Raised when a replay integrity check fails (fail-closed)."""
@@ -54,6 +66,7 @@ class ReplayIntegrityError(RuntimeError):
 # ---------------------------------------------------------------------------
 # Internal check collector
 # ---------------------------------------------------------------------------
+
 
 class _Checks:
     """Collects integrity check results; raises only after all checks run."""
@@ -71,13 +84,15 @@ class _Checks:
         message: str = "",
     ) -> None:
         """Record a check result. status: pass | fail | warn | skipped."""
-        self.items.append({
-            "check_id": check_id,
-            "status": status,
-            "expected": expected,
-            "actual": actual,
-            "message": message,
-        })
+        self.items.append(
+            {
+                "check_id": check_id,
+                "status": status,
+                "expected": expected,
+                "actual": actual,
+                "message": message,
+            }
+        )
         if status == "fail":
             self._hard_failures.append(f"[{check_id}] {message}")
         elif status == "warn":
@@ -86,9 +101,7 @@ class _Checks:
     def raise_if_failed(self) -> None:
         if self._hard_failures:
             msg = "; ".join(self._hard_failures)
-            raise ReplayIntegrityError(
-                f"Replay blocked by {len(self._hard_failures)} integrity failure(s): {msg}"
-            )
+            raise ReplayIntegrityError(f"Replay blocked by {len(self._hard_failures)} integrity failure(s): {msg}")
 
     @property
     def overall(self) -> str:
@@ -102,6 +115,7 @@ class _Checks:
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
 
 def _sha256_file(path: Path) -> str:
     h = hashlib.sha256()
@@ -154,6 +168,7 @@ def _find_validation_results(prior_run_dir: Path) -> Path | None:
 # Public API
 # ---------------------------------------------------------------------------
 
+
 def find_prior_run(family: str, repo_root: Path) -> str | None:
     """Return the most recent pilot-{family}-YYYYMMDD-HHMMSS run ID, or None.
 
@@ -165,8 +180,7 @@ def find_prior_run(family: str, repo_root: Path) -> str | None:
         return None
     prefix = f"pilot-{family}-"
     candidates = sorted(
-        [d.name for d in runs_dir.iterdir()
-         if d.is_dir() and d.name.startswith(prefix)],
+        [d.name for d in runs_dir.iterdir() if d.is_dir() and d.name.startswith(prefix)],
         reverse=True,
     )
     return candidates[0] if candidates else None
@@ -187,8 +201,7 @@ def stages_to_skip(replay_from: str) -> frozenset[str]:
     if replay_from == "publisher":
         return frozenset(_INFRA_STAGES | {"generation", "validation", "reviewer"})
     raise ValueError(
-        f"Unknown replay_from value: {replay_from!r}. "
-        f"Must be one of: {', '.join(sorted(VALID_REPLAY_STEPS))}"
+        f"Unknown replay_from value: {replay_from!r}. " f"Must be one of: {', '.join(sorted(VALID_REPLAY_STEPS))}"
     )
 
 
@@ -209,7 +222,8 @@ def check_replay_integrity(
     catalog_file = _find_catalog(prior_run_dir, family)
     if catalog_file is None:
         checks.record(
-            "catalog_exists", "fail",
+            "catalog_exists",
+            "fail",
             message=(
                 f"api-catalog.json not found in prior run '{prior_run_dir.name}'. "
                 f"Searched: evidence/latest/, evidence/, catalog/{family}/"
@@ -222,9 +236,7 @@ def check_replay_integrity(
     checks.record("catalog_exists", "pass", message=str(catalog_file.relative_to(prior_run_dir)))
 
     # 2. Catalog hash vs denominator
-    denominator_file = (
-        repo_root / "pipeline" / "configs" / "denominators" / f"{family}.json"
-    )
+    denominator_file = repo_root / "pipeline" / "configs" / "denominators" / f"{family}.json"
     if denominator_file.exists():
         try:
             denom = json.loads(denominator_file.read_text(encoding="utf-8"))
@@ -232,12 +244,11 @@ def check_replay_integrity(
             if expected_hash:
                 # Use canonical JSON hash (same as scenario_planner.compute_catalog_hash)
                 _catalog_data = json.loads(catalog_file.read_text(encoding="utf-8"))
-                actual_hash = _sha256_text(
-                    json.dumps(_catalog_data, sort_keys=True, ensure_ascii=False)
-                )
+                actual_hash = _sha256_text(json.dumps(_catalog_data, sort_keys=True, ensure_ascii=False))
                 if actual_hash != expected_hash:
                     checks.record(
-                        "catalog_hash", "fail",
+                        "catalog_hash",
+                        "fail",
                         expected=expected_hash[:16] + "…",
                         actual=actual_hash[:16] + "…",
                         message=(
@@ -246,18 +257,15 @@ def check_replay_integrity(
                         ),
                     )
                 else:
-                    checks.record("catalog_hash", "pass",
-                                  expected=expected_hash[:16] + "…",
-                                  actual=actual_hash[:16] + "…")
+                    checks.record(
+                        "catalog_hash", "pass", expected=expected_hash[:16] + "…", actual=actual_hash[:16] + "…"
+                    )
             else:
-                checks.record("catalog_hash", "skipped",
-                              message="No api_catalog_sha256 field in denominator")
+                checks.record("catalog_hash", "skipped", message="No api_catalog_sha256 field in denominator")
         except Exception as exc:
-            checks.record("catalog_hash", "warn",
-                          message=f"Could not verify catalog hash: {exc}")
+            checks.record("catalog_hash", "warn", message=f"Could not verify catalog hash: {exc}")
     else:
-        checks.record("catalog_hash", "skipped",
-                      message=f"No denominator file for family '{family}'")
+        checks.record("catalog_hash", "skipped", message=f"No denominator file for family '{family}'")
 
     # 3. Package version from catalog vs family YAML
     try:
@@ -268,17 +276,17 @@ def check_replay_integrity(
             or catalog_data.get("version")
             or ""
         )
-        family_yml = (
-            repo_root / "pipeline" / "configs" / "families" / f"{family}.yml"
-        )
+        family_yml = repo_root / "pipeline" / "configs" / "families" / f"{family}.yml"
         if family_yml.exists():
             yml_text = family_yml.read_text(encoding="utf-8")
             m = re.search(r'pinned_version\s*:\s*["\']?([0-9][0-9.]+)["\']?', yml_text)
             yml_version = m.group(1) if m else ""
             if yml_version and catalog_version and yml_version != catalog_version:
                 checks.record(
-                    "package_version", "fail",
-                    expected=yml_version, actual=catalog_version,
+                    "package_version",
+                    "fail",
+                    expected=yml_version,
+                    actual=catalog_version,
                     message=(
                         "Package version in family config differs from prior run catalog. "
                         "The NuGet package was updated; replay would use stale API definitions."
@@ -286,24 +294,27 @@ def check_replay_integrity(
                 )
             else:
                 checks.record(
-                    "package_version", "pass",
-                    expected=yml_version, actual=catalog_version,
+                    "package_version",
+                    "pass",
+                    expected=yml_version,
+                    actual=catalog_version,
                     message="Package version verified (or not pinned)",
                 )
         else:
-            checks.record("package_version", "skipped",
-                          message="Family YAML not found")
+            checks.record("package_version", "skipped", message="Family YAML not found")
     except Exception as exc:
-        checks.record("package_version", "warn",
-                      message=f"Could not verify package version: {exc}")
+        checks.record("package_version", "warn", message=f"Could not verify package version: {exc}")
 
     # 4. Family config hash (warn only — user may intentionally update config)
     _check_stored_hash(
-        checks, prior_run_dir, "load_config", "config_hash",
+        checks,
+        prior_run_dir,
+        "load_config",
+        "config_hash",
         check_id="config_hash",
-        current_hash_fn=lambda: _sha256_file(
-            repo_root / "pipeline" / "configs" / "families" / f"{family}.yml"
-        ) if (repo_root / "pipeline" / "configs" / "families" / f"{family}.yml").exists() else "",
+        current_hash_fn=lambda: _sha256_file(repo_root / "pipeline" / "configs" / "families" / f"{family}.yml")
+        if (repo_root / "pipeline" / "configs" / "families" / f"{family}.yml").exists()
+        else "",
         warn_only=True,
         warn_message=(
             "Family config YAML has changed since the prior run. "
@@ -313,7 +324,10 @@ def check_replay_integrity(
 
     # 5. Denominator hash (warn only)
     _check_stored_hash(
-        checks, prior_run_dir, "scenario_planning", "denominator_hash",
+        checks,
+        prior_run_dir,
+        "scenario_planning",
+        "denominator_hash",
         check_id="denominator_hash",
         current_hash_fn=lambda: _sha256_file(denominator_file) if denominator_file.exists() else "",
         warn_only=True,
@@ -322,7 +336,10 @@ def check_replay_integrity(
 
     # 6. Constraints hash — hard fail for validation+ (code generated against old constraints)
     _check_stored_hash(
-        checks, prior_run_dir, "load_config", "constraints_hash",
+        checks,
+        prior_run_dir,
+        "load_config",
+        "constraints_hash",
         check_id="constraints_hash",
         current_hash_fn=lambda: _compute_constraints_hash(
             repo_root / "pipeline" / "configs" / "families" / f"{family}.yml"
@@ -341,18 +358,18 @@ def check_replay_integrity(
             sc = json.loads(scenario_catalog.read_text(encoding="utf-8"))
             if sc.get("family") and sc["family"] != family:
                 checks.record(
-                    "scenario_contract_family", "fail",
-                    expected=family, actual=sc["family"],
+                    "scenario_contract_family",
+                    "fail",
+                    expected=family,
+                    actual=sc["family"],
                     message="scenario-catalog.json family does not match requested family.",
                 )
             else:
                 checks.record("scenario_contract_family", "pass")
         else:
-            checks.record("scenario_contract_family", "skipped",
-                          message="No scenario-catalog.json in prior run")
+            checks.record("scenario_contract_family", "skipped", message="No scenario-catalog.json in prior run")
     except Exception as exc:
-        checks.record("scenario_contract_family", "warn",
-                      message=f"Could not verify scenario contract: {exc}")
+        checks.record("scenario_contract_family", "warn", message=f"Could not verify scenario contract: {exc}")
 
     # 8. Generated projects exist (for validation/reviewer/publisher)
     if replay_from in {"validation", "reviewer", "publisher"}:
@@ -379,6 +396,7 @@ def check_replay_integrity(
 # Restore functions
 # ---------------------------------------------------------------------------
 
+
 def restore_catalog(prior_run_dir: Path, family: str) -> tuple[dict, Path]:
     """Load and return (catalog_dict, catalog_path) from prior run.
 
@@ -386,15 +404,11 @@ def restore_catalog(prior_run_dir: Path, family: str) -> tuple[dict, Path]:
     """
     catalog_file = _find_catalog(prior_run_dir, family)
     if catalog_file is None:
-        raise ReplayIntegrityError(
-            f"api-catalog.json not found in prior run '{prior_run_dir.name}'"
-        )
+        raise ReplayIntegrityError(f"api-catalog.json not found in prior run '{prior_run_dir.name}'")
     try:
         data = json.loads(catalog_file.read_text(encoding="utf-8"))
     except Exception as exc:
-        raise ReplayIntegrityError(
-            f"Failed to parse api-catalog.json from '{prior_run_dir.name}': {exc}"
-        ) from exc
+        raise ReplayIntegrityError(f"Failed to parse api-catalog.json from '{prior_run_dir.name}': {exc}") from exc
     return data, catalog_file
 
 
@@ -411,21 +425,15 @@ def restore_generated_projects(
     """
     index_file = _find_example_index(prior_run_dir)
     if index_file is None:
-        raise ReplayIntegrityError(
-            f"example-index.json not found in prior run '{prior_run_dir.name}'"
-        )
+        raise ReplayIntegrityError(f"example-index.json not found in prior run '{prior_run_dir.name}'")
     try:
         raw = json.loads(index_file.read_text(encoding="utf-8"))
     except Exception as exc:
-        raise ReplayIntegrityError(
-            f"Failed to parse example-index.json from '{prior_run_dir.name}': {exc}"
-        ) from exc
+        raise ReplayIntegrityError(f"Failed to parse example-index.json from '{prior_run_dir.name}': {exc}") from exc
 
     examples = raw if isinstance(raw, list) else raw.get("examples", [])
     if not examples:
-        logger.warning(
-            "replay: example-index.json in '%s' has no examples", prior_run_dir.name
-        )
+        logger.warning("replay: example-index.json in '%s' has no examples", prior_run_dir.name)
         return []
 
     repo_root_resolved = repo_root.resolve()
@@ -447,8 +455,7 @@ def restore_generated_projects(
                 resolved_original = original_path
             if not str(resolved_original).startswith(str(repo_root_resolved)):
                 raise ReplayIntegrityError(
-                    f"project_dir for scenario '{scenario_id}' escapes repo_root: "
-                    f"{original_path}"
+                    f"project_dir for scenario '{scenario_id}' escapes repo_root: " f"{original_path}"
                 )
 
         # Determine actual project_dir, falling back to prior run's generated/ dir
@@ -460,27 +467,17 @@ def restore_generated_projects(
 
         # Final repo_root safety check (also catches relative paths resolving outside)
         if not str(project_dir).startswith(str(repo_root_resolved)):
-            raise ReplayIntegrityError(
-                f"project_dir for scenario '{scenario_id}' escapes repo_root: "
-                f"{project_dir}"
-            )
+            raise ReplayIntegrityError(f"project_dir for scenario '{scenario_id}' escapes repo_root: " f"{project_dir}")
 
         if not project_dir.is_dir():
-            raise ReplayIntegrityError(
-                f"project_dir for scenario '{scenario_id}' does not exist: "
-                f"{project_dir}"
-            )
+            raise ReplayIntegrityError(f"project_dir for scenario '{scenario_id}' does not exist: " f"{project_dir}")
 
         # Validate Program.cs
         program_path = project_dir / "Program.cs"
         if not program_path.exists():
-            raise ReplayIntegrityError(
-                f"Program.cs missing for scenario '{proj.get('scenario_id')}': {program_path}"
-            )
+            raise ReplayIntegrityError(f"Program.cs missing for scenario '{proj.get('scenario_id')}': {program_path}")
         if program_path.stat().st_size == 0:
-            raise ReplayIntegrityError(
-                f"Program.cs is empty for scenario '{proj.get('scenario_id')}': {program_path}"
-            )
+            raise ReplayIntegrityError(f"Program.cs is empty for scenario '{proj.get('scenario_id')}': {program_path}")
 
         # Rewrite paths
         proj["project_dir"] = str(project_dir)
@@ -514,9 +511,7 @@ def restore_validation_results(prior_run_dir: Path) -> list:
 
     results_file = _find_validation_results(prior_run_dir)
     if results_file is None:
-        raise ReplayIntegrityError(
-            f"validation-results.json not found in prior run '{prior_run_dir.name}'"
-        )
+        raise ReplayIntegrityError(f"validation-results.json not found in prior run '{prior_run_dir.name}'")
     try:
         raw = json.loads(results_file.read_text(encoding="utf-8"))
     except Exception as exc:
@@ -526,9 +521,7 @@ def restore_validation_results(prior_run_dir: Path) -> list:
 
     records = raw.get("results", raw) if isinstance(raw, dict) else raw
     if not isinstance(records, list):
-        raise ReplayIntegrityError(
-            f"validation-results.json has unexpected structure in '{prior_run_dir.name}'"
-        )
+        raise ReplayIntegrityError(f"validation-results.json has unexpected structure in '{prior_run_dir.name}'")
 
     def _to_dotnet(d: dict | None) -> "DotnetResult | None":
         if not d:
@@ -545,9 +538,7 @@ def restore_validation_results(prior_run_dir: Path) -> list:
     out = []
     for rec in records:
         if not isinstance(rec, dict):
-            raise ReplayIntegrityError(
-                f"Unexpected record type {type(rec)} in validation-results.json"
-            )
+            raise ReplayIntegrityError(f"Unexpected record type {type(rec)} in validation-results.json")
         vr = ValidationResult(
             scenario_id=rec["scenario_id"],
             passed=bool(rec.get("passed", False)),
@@ -581,9 +572,7 @@ def copy_reviewer_evidence(prior_run_dir: Path, evidence_dir: Path, family: str)
     try:
         reviewer_data = json.loads(src.read_text(encoding="utf-8"))
     except Exception as exc:
-        raise ReplayIntegrityError(
-            f"Failed to parse example-reviewer-results.json: {exc}"
-        ) from exc
+        raise ReplayIntegrityError(f"Failed to parse example-reviewer-results.json: {exc}") from exc
 
     # Verify reviewer was actually available (not just a stub unavailable result)
     if not reviewer_data.get("available", False):
@@ -619,10 +608,22 @@ def write_replay_manifest(
 
     # Determine which stages are regenerated vs executed
     _stage_order = [
-        "load_config", "nuget_fetch", "dependency_resolution", "extraction",
-        "reflection", "plugin_detection", "api_delta", "impact_mapping",
-        "fixture_registry", "example_mining", "scenario_planning", "llm_preflight",
-        "generation", "validation", "reviewer", "publisher",
+        "load_config",
+        "nuget_fetch",
+        "dependency_resolution",
+        "extraction",
+        "reflection",
+        "plugin_detection",
+        "api_delta",
+        "impact_mapping",
+        "fixture_registry",
+        "example_mining",
+        "scenario_planning",
+        "llm_preflight",
+        "generation",
+        "validation",
+        "reviewer",
+        "publisher",
     ]
     replay_idx = _stage_order.index(replay_from) if replay_from in _stage_order else len(_stage_order)
     regenerated = [s for s in _stage_order[:replay_idx] if s not in skipped_stages and s != "load_config"]
@@ -649,40 +650,46 @@ def write_replay_manifest(
         "overall_integrity": integrity_result.get("overall", "unknown"),
     }
 
-    (evidence_latest / "replay-manifest.json").write_text(
-        json.dumps(manifest, indent=2), encoding="utf-8"
-    )
+    (evidence_latest / "replay-manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
 
     # Restored artifacts report
     restored = []
     if replay_from in {"validation", "reviewer", "publisher"}:
-        restored.append({
-            "stage": "generation",
-            "artifact": "example-index.json",
-            "status": "restored",
-            "source": reuse_run_id,
-        })
+        restored.append(
+            {
+                "stage": "generation",
+                "artifact": "example-index.json",
+                "status": "restored",
+                "source": reuse_run_id,
+            }
+        )
     if replay_from in {"reviewer", "publisher"}:
-        restored.append({
-            "stage": "validation",
-            "artifact": "validation-results.json",
-            "status": "restored",
-            "source": reuse_run_id,
-        })
+        restored.append(
+            {
+                "stage": "validation",
+                "artifact": "validation-results.json",
+                "status": "restored",
+                "source": reuse_run_id,
+            }
+        )
     if replay_from == "publisher":
-        restored.append({
-            "stage": "reviewer",
-            "artifact": "example-reviewer-results.json",
+        restored.append(
+            {
+                "stage": "reviewer",
+                "artifact": "example-reviewer-results.json",
+                "status": "restored",
+                "source": reuse_run_id,
+            }
+        )
+    # Catalog is always restored for any replay
+    restored.append(
+        {
+            "stage": "reflection",
+            "artifact": "api-catalog.json",
             "status": "restored",
             "source": reuse_run_id,
-        })
-    # Catalog is always restored for any replay
-    restored.append({
-        "stage": "reflection",
-        "artifact": "api-catalog.json",
-        "status": "restored",
-        "source": reuse_run_id,
-    })
+        }
+    )
 
     report = {
         "reuse_run_id": reuse_run_id,
@@ -691,14 +698,13 @@ def write_replay_manifest(
         "created_at": manifest["created_at"],
         "restored_artifacts": restored,
     }
-    (evidence_latest / "restored-artifacts-report.json").write_text(
-        json.dumps(report, indent=2), encoding="utf-8"
-    )
+    (evidence_latest / "restored-artifacts-report.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
 
 
 # ---------------------------------------------------------------------------
 # Internal helpers
 # ---------------------------------------------------------------------------
+
 
 def _compute_constraints_hash(family_yml: Path) -> str:
     if not family_yml.exists():
@@ -732,8 +738,7 @@ def _check_stored_hash(
                 stored_hash = stage.get("artifacts", {}).get(artifact_key)
                 break
         if not stored_hash:
-            checks.record(check_id, "skipped",
-                          message=f"No stored {artifact_key!r} in prior run's {stage_name} stage")
+            checks.record(check_id, "skipped", message=f"No stored {artifact_key!r} in prior run's {stage_name} stage")
             return
         current_hash = current_hash_fn()
         if not current_hash:
@@ -741,14 +746,15 @@ def _check_stored_hash(
             return
         if stored_hash != current_hash:
             severity = "warn" if warn_only else "fail"
-            checks.record(check_id, severity,
-                          expected=stored_hash[:16] + "…",
-                          actual=current_hash[:16] + "…",
-                          message=warn_message)
+            checks.record(
+                check_id,
+                severity,
+                expected=stored_hash[:16] + "…",
+                actual=current_hash[:16] + "…",
+                message=warn_message,
+            )
         else:
-            checks.record(check_id, "pass",
-                          expected=stored_hash[:16] + "…",
-                          actual=current_hash[:16] + "…")
+            checks.record(check_id, "pass", expected=stored_hash[:16] + "…", actual=current_hash[:16] + "…")
     except Exception as exc:
         checks.record(check_id, "warn", message=f"Could not verify {check_id}: {exc}")
 
@@ -763,25 +769,23 @@ def _check_generated_projects(
     index_file = _find_example_index(prior_run_dir)
     if index_file is None:
         checks.record(
-            "generated_projects_index", "fail",
-            message=f"example-index.json not found in prior run '{prior_run_dir.name}'"
+            "generated_projects_index",
+            "fail",
+            message=f"example-index.json not found in prior run '{prior_run_dir.name}'",
         )
         return
     try:
         raw = json.loads(index_file.read_text(encoding="utf-8"))
         examples = raw if isinstance(raw, list) else raw.get("examples", [])
     except Exception as exc:
-        checks.record("generated_projects_index", "fail",
-                      message=f"Failed to parse example-index.json: {exc}")
+        checks.record("generated_projects_index", "fail", message=f"Failed to parse example-index.json: {exc}")
         return
 
     if not examples:
-        checks.record("generated_projects_index", "warn",
-                      message="example-index.json has no examples")
+        checks.record("generated_projects_index", "warn", message="example-index.json has no examples")
         return
 
-    checks.record("generated_projects_index", "pass",
-                  message=f"{len(examples)} example(s) in index")
+    checks.record("generated_projects_index", "pass", message=f"{len(examples)} example(s) in index")
 
     repo_root_resolved = repo_root.resolve()
     missing_dirs = []
@@ -815,22 +819,20 @@ def _check_generated_projects(
 
     if path_escapes:
         checks.record(
-            "generated_project_path_safety", "fail",
-            message=f"project_dir escapes repo_root for: {', '.join(path_escapes)}"
+            "generated_project_path_safety",
+            "fail",
+            message=f"project_dir escapes repo_root for: {', '.join(path_escapes)}",
         )
     if missing_dirs:
-        checks.record(
-            "generated_project_dirs", "fail",
-            message=f"project_dir missing for: {', '.join(missing_dirs)}"
-        )
+        checks.record("generated_project_dirs", "fail", message=f"project_dir missing for: {', '.join(missing_dirs)}")
     if missing_cs:
-        checks.record(
-            "generated_program_cs", "fail",
-            message=f"Program.cs missing for: {', '.join(missing_cs)}"
-        )
+        checks.record("generated_program_cs", "fail", message=f"Program.cs missing for: {', '.join(missing_cs)}")
     if not path_escapes and not missing_dirs and not missing_cs:
-        checks.record("generated_projects_all_present", "pass",
-                      message=f"All {len(examples)} project dirs and Program.cs files verified")
+        checks.record(
+            "generated_projects_all_present",
+            "pass",
+            message=f"All {len(examples)} project dirs and Program.cs files verified",
+        )
 
 
 def _check_validation_results(checks: _Checks, prior_run_dir: Path) -> None:
@@ -838,8 +840,9 @@ def _check_validation_results(checks: _Checks, prior_run_dir: Path) -> None:
     results_file = _find_validation_results(prior_run_dir)
     if results_file is None:
         checks.record(
-            "validation_results_exists", "fail",
-            message=f"validation-results.json not found in prior run '{prior_run_dir.name}'"
+            "validation_results_exists",
+            "fail",
+            message=f"validation-results.json not found in prior run '{prior_run_dir.name}'",
         )
         return
     try:
@@ -852,13 +855,9 @@ def _check_validation_results(checks: _Checks, prior_run_dir: Path) -> None:
             for field in ("scenario_id", "passed"):
                 if field not in rec:
                     raise ValueError(f"Missing required field '{field}' in record")
-        checks.record(
-            "validation_results_valid", "pass",
-            message=f"{len(records)} validation result(s) verified"
-        )
+        checks.record("validation_results_valid", "pass", message=f"{len(records)} validation result(s) verified")
     except Exception as exc:
-        checks.record("validation_results_valid", "fail",
-                      message=f"validation-results.json invalid: {exc}")
+        checks.record("validation_results_valid", "fail", message=f"validation-results.json invalid: {exc}")
 
 
 def _check_publisher_evidence(checks: _Checks, prior_run_dir: Path) -> None:
@@ -869,30 +868,32 @@ def _check_publisher_evidence(checks: _Checks, prior_run_dir: Path) -> None:
     reviewer_file = evidence_latest / "example-reviewer-results.json"
     if not reviewer_file.exists():
         checks.record(
-            "publisher_reviewer_evidence", "fail",
-            message="example-reviewer-results.json not found. Publisher replay requires reviewer evidence."
+            "publisher_reviewer_evidence",
+            "fail",
+            message="example-reviewer-results.json not found. Publisher replay requires reviewer evidence.",
         )
     else:
         try:
             rd = json.loads(reviewer_file.read_text(encoding="utf-8"))
             if not rd.get("available", False):
                 checks.record(
-                    "publisher_reviewer_available", "fail",
+                    "publisher_reviewer_available",
+                    "fail",
                     message="Reviewer evidence shows available=false. "
-                            "Publisher replay requires a run where reviewer actually executed."
+                    "Publisher replay requires a run where reviewer actually executed.",
                 )
             else:
                 checks.record("publisher_reviewer_available", "pass")
         except Exception as exc:
-            checks.record("publisher_reviewer_available", "fail",
-                          message=f"Could not parse reviewer evidence: {exc}")
+            checks.record("publisher_reviewer_available", "fail", message=f"Could not parse reviewer evidence: {exc}")
 
     # Gate results verdict
     gate_file = evidence_latest / "gate-results.json"
     if not gate_file.exists():
         checks.record(
-            "publisher_gate_results", "fail",
-            message="gate-results.json not found. Publisher replay requires prior gate evidence."
+            "publisher_gate_results",
+            "fail",
+            message="gate-results.json not found. Publisher replay requires prior gate evidence.",
         )
     else:
         try:
@@ -900,26 +901,22 @@ def _check_publisher_evidence(checks: _Checks, prior_run_dir: Path) -> None:
             verdict = gd.get("verdict", "")
             if verdict not in _PUBLISHABLE_VERDICTS:
                 checks.record(
-                    "publisher_gate_verdict", "fail",
+                    "publisher_gate_verdict",
+                    "fail",
                     expected=f"one of {sorted(_PUBLISHABLE_VERDICTS)}",
                     actual=verdict,
                     message=f"Gate verdict '{verdict}' is not in publishable range. "
-                            "Publisher replay blocked on stale non-publishable gate results."
+                    "Publisher replay blocked on stale non-publishable gate results.",
                 )
             else:
-                checks.record("publisher_gate_verdict", "pass",
-                              actual=verdict)
+                checks.record("publisher_gate_verdict", "pass", actual=verdict)
         except Exception as exc:
-            checks.record("publisher_gate_verdict", "fail",
-                          message=f"Could not parse gate-results.json: {exc}")
+            checks.record("publisher_gate_verdict", "fail", message=f"Could not parse gate-results.json: {exc}")
 
     # PR candidate manifest
     manifest_file = evidence_latest / "pr-candidate-manifest.json"
     if not manifest_file.exists():
-        checks.record(
-            "publisher_pr_manifest", "fail",
-            message="pr-candidate-manifest.json not found."
-        )
+        checks.record("publisher_pr_manifest", "fail", message="pr-candidate-manifest.json not found.")
     else:
         try:
             md = json.loads(manifest_file.read_text(encoding="utf-8"))
@@ -931,17 +928,16 @@ def _check_publisher_evidence(checks: _Checks, prior_run_dir: Path) -> None:
             )
             if count == 0:
                 checks.record(
-                    "publisher_candidate_count", "fail",
+                    "publisher_candidate_count",
+                    "fail",
                     actual=str(count),
                     message="No candidates in prior pr-candidate-manifest.json "
-                            "(included_manifest_candidate_count=0). Nothing to replay."
+                    "(included_manifest_candidate_count=0). Nothing to replay.",
                 )
             else:
-                checks.record("publisher_candidate_count", "pass",
-                              actual=str(count))
+                checks.record("publisher_candidate_count", "pass", actual=str(count))
         except Exception as exc:
-            checks.record("publisher_pr_manifest", "fail",
-                          message=f"Could not parse pr-candidate-manifest.json: {exc}")
+            checks.record("publisher_pr_manifest", "fail", message=f"Could not parse pr-candidate-manifest.json: {exc}")
 
 
 def _build_result(

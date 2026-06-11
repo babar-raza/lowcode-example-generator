@@ -17,12 +17,7 @@ from plugin_examples.publisher.readme_facts import extract_example_readme_facts
 
 logger = logging.getLogger(__name__)
 
-_TEMPLATE_PATH = (
-    Path(__file__).resolve().parents[3]
-    / "templates"
-    / "root-readme"
-    / "lowcode-family-readme.md.j2"
-)
+_TEMPLATE_PATH = Path(__file__).resolve().parents[3] / "templates" / "root-readme" / "lowcode-family-readme.md.j2"
 
 # Nuget base URL for badge + package page construction
 _NUGET_BASE = "https://www.nuget.org/packages"
@@ -91,25 +86,27 @@ def read_manifest_api_symbol(manifest_path: Path) -> str | None:
 @dataclass
 class ExampleEntry:
     """Metadata for a single validated example in the README."""
-    name: str                   # directory name, e.g. "html-converter"
-    api_class: str              # LowCode API class name, e.g. "HtmlConverter"
-    input_format: str           # e.g. "xlsx"
-    output_format: str          # e.g. "html"
-    description: str = ""       # optional human-readable description
-    source_snippet: str = ""    # Program.cs content (full or excerpt)
+
+    name: str  # directory name, e.g. "html-converter"
+    api_class: str  # LowCode API class name, e.g. "HtmlConverter"
+    input_format: str  # e.g. "xlsx"
+    output_format: str  # e.g. "html"
+    description: str = ""  # optional human-readable description
+    source_snippet: str = ""  # Program.cs content (full or excerpt)
     source_file_path: str = ""  # relative path to Program.cs
-    snippet_sha256: str = ""    # SHA256 of the snippet content
-    operation_kind: str = ""    # converter|transform|merger|splitter|extractor|...
-    input_format_display: str = ""   # e.g. "N × pdf", "pdf"
+    snippet_sha256: str = ""  # SHA256 of the snippet content
+    operation_kind: str = ""  # converter|transform|merger|splitter|extractor|...
+    input_format_display: str = ""  # e.g. "N × pdf", "pdf"
     output_format_display: str = ""  # e.g. "docx", "pdf (1→N)", "text (stdout)"
 
 
 @dataclass
 class ReadmeContext:
     """All variables available in the Jinja2 README template."""
+
     family: str
     display_name: str
-    product_name: str               # short product name, e.g. "Cells" (used in URLs)
+    product_name: str  # short product name, e.g. "Cells" (used in URLs)
     nuget_package_id: str
     package_version: str
     target_repo_owner: str
@@ -133,7 +130,7 @@ class ReadmeContext:
     gate_verdict: str = "PR_DRY_RUN_READY"
     generation_date: str = ""
     validation_summary: dict = field(default_factory=dict)
-    typical_outputs: str = ""   # family-aware output examples for prose
+    typical_outputs: str = ""  # family-aware output examples for prose
 
 
 def _infer_api_class(example_name: str) -> str:
@@ -184,7 +181,9 @@ def _classify_op_kind_from_name(name: str) -> str:
 
 
 def _compute_display_fields(
-    op_kind: str, input_fmt: str, output_fmt: str,
+    op_kind: str,
+    input_fmt: str,
+    output_fmt: str,
 ) -> tuple[str, str]:
     """Compute display-friendly format strings for README table.
 
@@ -285,9 +284,7 @@ def build_readme_context(
         raise ValueError(f"family_config.github is required for family '{family}'")
     pub_repo = getattr(github_cfg, "published_plugin_examples_repo", None)
     if pub_repo is None:
-        raise ValueError(
-            f"family_config.github.published_plugin_examples_repo is required for family '{family}'"
-        )
+        raise ValueError(f"family_config.github.published_plugin_examples_repo is required for family '{family}'")
     target_repo_owner: str = pub_repo.owner
     target_repo_name: str = pub_repo.repo
 
@@ -312,15 +309,10 @@ def build_readme_context(
     nuget_url = f"{_NUGET_BASE}/{nuget_package_id}"
     target_repo_url = f"https://github.com/{target_repo_owner}/{target_repo_name}"
     nuget_version_badge_url = (
-        f"https://img.shields.io/nuget/v/{nuget_package_id}.svg?style=flat"
-        f"&label=NuGet%3A%20{nuget_package_id}"
+        f"https://img.shields.io/nuget/v/{nuget_package_id}.svg?style=flat" f"&label=NuGet%3A%20{nuget_package_id}"
     )
-    nuget_downloads_badge_url = (
-        f"https://img.shields.io/nuget/dt/{nuget_package_id}.svg?style=flat"
-    )
-    github_license_badge_url = (
-        f"https://img.shields.io/github/license/{target_repo_owner}/{target_repo_name}"
-    )
+    nuget_downloads_badge_url = f"https://img.shields.io/nuget/dt/{nuget_package_id}.svg?style=flat"
+    github_license_badge_url = f"https://img.shields.io/github/license/{target_repo_owner}/{target_repo_name}"
     # All Aspose .NET product links come from the canonical builder — no aspose.com constants.
     _aspose_links = build_aspose_net_links(slug)
     product_page_url = _aspose_links.product_page_url
@@ -343,7 +335,8 @@ def build_readme_context(
         logger.warning(
             "Family '%s' inherits xlsx as default_input_extension — this is likely wrong. "
             "Set template_hints.default_input_extension in %s.yml.",
-            family, family,
+            family,
+            family,
         )
 
     # --- Build example entries ---
@@ -354,6 +347,7 @@ def build_readme_context(
     if package_path_map:
         # Multi-package mode: extract facts per-example from their own packages
         from plugin_examples.publisher.readme_facts import ExampleReadmeFacts
+
         combined_facts = ExampleReadmeFacts(family=family, generated_at="", source_artifact="multi-package")
         for ex in examples:
             ex_name = ex.get("name", "") or ex.get("scenario_id", "")
@@ -435,9 +429,7 @@ def build_readme_context(
             input_fmt = _infer_input_format(name, family, default_ext)
             api_class = _infer_api_class(name)
             if package_path is not None:
-                manifest_path = (
-                    Path(package_path) / "examples" / family / "lowcode" / name / "example.manifest.json"
-                )
+                manifest_path = Path(package_path) / "examples" / family / "lowcode" / name / "example.manifest.json"
                 sym = read_manifest_api_symbol(manifest_path)
                 if sym:
                     api_class = sym
@@ -447,25 +439,28 @@ def build_readme_context(
 
         op_kind = _classify_op_kind_from_name(name)
         in_disp, out_disp = _compute_display_fields(
-            op_kind, input_fmt, output_format,
+            op_kind,
+            input_fmt,
+            output_format,
         )
-        example_entries.append(ExampleEntry(
-            name=name,
-            api_class=api_class,
-            input_format=input_fmt,
-            output_format=output_format,
-            source_snippet=source_snippet,
-            source_file_path=source_file_path,
-            snippet_sha256=snippet_sha256,
-            operation_kind=op_kind,
-            input_format_display=in_disp,
-            output_format_display=out_disp,
-        ))
+        example_entries.append(
+            ExampleEntry(
+                name=name,
+                api_class=api_class,
+                input_format=input_fmt,
+                output_format=output_format,
+                source_snippet=source_snippet,
+                source_file_path=source_file_path,
+                snippet_sha256=snippet_sha256,
+                operation_kind=op_kind,
+                input_format_display=in_disp,
+                output_format_display=out_disp,
+            )
+        )
 
     if not example_entries:
         raise ValueError(
-            f"No examples provided for family '{family}'. "
-            "At least one example is required to render a README."
+            f"No examples provided for family '{family}'. " "At least one example is required to render a README."
         )
 
     # Build typical_outputs from actual example output formats

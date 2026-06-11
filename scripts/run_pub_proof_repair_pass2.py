@@ -3,7 +3,14 @@ Master sprint script for lowcode-pub-proof-repair-pass2-20260601.
 Fixes: sidecar mismatch, V03 command ledger, package completeness (README+expected-output),
 validator truth, and final-clean-proof consistency.
 """
-import hashlib, json, os, shutil, subprocess, sys, time, zipfile
+import hashlib
+import json
+import os
+import shutil
+import subprocess
+import sys
+import time
+import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 

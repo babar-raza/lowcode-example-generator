@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class GeneratedFixture:
     """Record of a generated fixture file."""
+
     path: str
     format: str
     created_by: str
@@ -29,6 +30,7 @@ class GeneratedFixture:
 # ---------------------------------------------------------------------------
 # Format generators (adapted from example-reviewer test_data_generator.py)
 # ---------------------------------------------------------------------------
+
 
 def generate_xlsx(dest: Path) -> bool:
     """Generate a minimal valid .xlsx file (OOXML via stdlib zipfile)."""
@@ -43,21 +45,21 @@ def generate_xlsx(dest: Path) -> bool:
         'ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>'
         '<Override PartName="/xl/sharedStrings.xml" '
         'ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"/>'
-        '</Types>'
+        "</Types>"
     )
     rels = (
         '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
         '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
         '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" '
         'Target="xl/workbook.xml"/>'
-        '</Relationships>'
+        "</Relationships>"
     )
     workbook = (
         '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
         '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" '
         'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
         '<sheets><sheet name="Data" sheetId="1" r:id="rId1"/></sheets>'
-        '</workbook>'
+        "</workbook>"
     )
     xl_rels = (
         '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
@@ -68,38 +70,38 @@ def generate_xlsx(dest: Path) -> bool:
         '<Relationship Id="rId2" '
         'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings" '
         'Target="sharedStrings.xml"/>'
-        '</Relationships>'
+        "</Relationships>"
     )
     shared_strings = (
         '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
         '<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="5" uniqueCount="5">'
-        '<si><t>Name</t></si>'
-        '<si><t>Value</t></si>'
-        '<si><t>Aspose</t></si>'
-        '<si><t>LowCode</t></si>'
-        '<si><t>Fixture</t></si>'
-        '</sst>'
+        "<si><t>Name</t></si>"
+        "<si><t>Value</t></si>"
+        "<si><t>Aspose</t></si>"
+        "<si><t>LowCode</t></si>"
+        "<si><t>Fixture</t></si>"
+        "</sst>"
     )
     sheet1 = (
         '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
         '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
-        '<sheetData>'
+        "<sheetData>"
         '<row r="1"><c r="A1" t="s"><v>0</v></c><c r="B1" t="s"><v>1</v></c></row>'
         '<row r="2"><c r="A2" t="s"><v>2</v></c><c r="B2"><v>10</v></c></row>'
         '<row r="3"><c r="A3" t="s"><v>3</v></c><c r="B3"><v>20</v></c></row>'
         '<row r="4"><c r="A4" t="s"><v>4</v></c><c r="B4"><v>30</v></c></row>'
-        '</sheetData>'
-        '</worksheet>'
+        "</sheetData>"
+        "</worksheet>"
     )
 
     dest.parent.mkdir(parents=True, exist_ok=True)
-    with zipfile.ZipFile(dest, 'w', compression=zipfile.ZIP_STORED) as zf:
-        zf.writestr('[Content_Types].xml', content_types)
-        zf.writestr('_rels/.rels', rels)
-        zf.writestr('xl/workbook.xml', workbook)
-        zf.writestr('xl/_rels/workbook.xml.rels', xl_rels)
-        zf.writestr('xl/sharedStrings.xml', shared_strings)
-        zf.writestr('xl/worksheets/sheet1.xml', sheet1)
+    with zipfile.ZipFile(dest, "w", compression=zipfile.ZIP_STORED) as zf:
+        zf.writestr("[Content_Types].xml", content_types)
+        zf.writestr("_rels/.rels", rels)
+        zf.writestr("xl/workbook.xml", workbook)
+        zf.writestr("xl/_rels/workbook.xml.rels", xl_rels)
+        zf.writestr("xl/sharedStrings.xml", shared_strings)
+        zf.writestr("xl/worksheets/sheet1.xml", sheet1)
     return True
 
 
@@ -113,12 +115,7 @@ def generate_csv(dest: Path) -> bool:
 
 def generate_txt(dest: Path) -> bool:
     """Generate a text file with deterministic known values."""
-    content = (
-        "Name\tValue\tCategory\n"
-        "Aspose\t10\tLowCode\n"
-        "Fixture\t20\tData\n"
-        "Sample\t30\tTest\n"
-    )
+    content = "Name\tValue\tCategory\n" "Aspose\t10\tLowCode\n" "Fixture\t20\tData\n" "Sample\t30\tTest\n"
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(content, encoding="utf-8")
     return True
@@ -145,30 +142,30 @@ def generate_docx(dest: Path) -> bool:
         '<Default Extension="xml" ContentType="application/xml"/>'
         '<Override PartName="/word/document.xml" '
         'ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>'
-        '</Types>'
+        "</Types>"
     )
     rels = (
         '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
         '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
         '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" '
         'Target="word/document.xml"/>'
-        '</Relationships>'
+        "</Relationships>"
     )
     document = (
         '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
         '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">'
-        '<w:body>'
-        '<w:p><w:r><w:t>Aspose LowCode Fixture Test Document</w:t></w:r></w:p>'
-        '<w:p><w:r><w:t>This is a programmatically generated DOCX for fixture validation.</w:t></w:r></w:p>'
-        '</w:body>'
-        '</w:document>'
+        "<w:body>"
+        "<w:p><w:r><w:t>Aspose LowCode Fixture Test Document</w:t></w:r></w:p>"
+        "<w:p><w:r><w:t>This is a programmatically generated DOCX for fixture validation.</w:t></w:r></w:p>"
+        "</w:body>"
+        "</w:document>"
     )
 
     dest.parent.mkdir(parents=True, exist_ok=True)
-    with zipfile.ZipFile(dest, 'w', compression=zipfile.ZIP_STORED) as zf:
-        zf.writestr('[Content_Types].xml', content_types)
-        zf.writestr('_rels/.rels', rels)
-        zf.writestr('word/document.xml', document)
+    with zipfile.ZipFile(dest, "w", compression=zipfile.ZIP_STORED) as zf:
+        zf.writestr("[Content_Types].xml", content_types)
+        zf.writestr("_rels/.rels", rels)
+        zf.writestr("word/document.xml", document)
     return True
 
 

@@ -8,6 +8,7 @@ Regression fixtures derived from Wave 14 evidence integrity defects:
   W14-CONTRA-04: IV re-run after bundle finalization — bundle captures stale IV_FAIL
   W14-CONTRA-05: Adversarial review did not check bundled iv-results.json vs closeout
 """
+
 import pytest
 
 from src.plugin_examples.fixture_factory.closeout_vs_bundle_validators import (
@@ -30,6 +31,7 @@ W14_ENTRIES = 51
 # ─────────────────────────────────────────────────────────────────
 # CVB-01: Bundled IV verdict must match closeout IV verdict
 # ─────────────────────────────────────────────────────────────────
+
 
 class TestCVB01:
     def test_pass_when_both_iv_pass(self):
@@ -72,6 +74,7 @@ class TestCVB01:
 # CVB-02: Bundle SHA-256 must match closeout claim
 # ─────────────────────────────────────────────────────────────────
 
+
 class TestCVB02:
     def test_pass_when_sha_matches(self):
         r = cvb_02_bundle_sha256_matches_closeout(W14_ACTUAL_SHA, W14_ACTUAL_SHA)
@@ -104,6 +107,7 @@ class TestCVB02:
 # ─────────────────────────────────────────────────────────────────
 # CVB-03: Bundle size must match closeout claim
 # ─────────────────────────────────────────────────────────────────
+
 
 class TestCVB03:
     def test_pass_when_size_matches(self):
@@ -142,6 +146,7 @@ class TestCVB03:
 # CVB-04: Bundle entry count must match closeout claim
 # ─────────────────────────────────────────────────────────────────
 
+
 class TestCVB04:
     def test_pass_when_entries_match(self):
         r = cvb_04_bundle_entry_count_matches_closeout(W14_ENTRIES, W14_ENTRIES)
@@ -171,24 +176,33 @@ class TestCVB04:
 # CVB-05: Sidecar SHA must match bundle SHA
 # ─────────────────────────────────────────────────────────────────
 
+
 class TestCVB05:
     def test_pass_when_no_sidecar_and_not_referenced(self):
-        r = cvb_05_sidecar_sha_matches_bundle(None, W14_ACTUAL_SHA, sidecar_present=False, closeout_references_sidecar=False)
+        r = cvb_05_sidecar_sha_matches_bundle(
+            None, W14_ACTUAL_SHA, sidecar_present=False, closeout_references_sidecar=False
+        )
         assert r["status"] == "PASS"
 
     def test_fail_when_closeout_references_sidecar_but_not_present(self):
-        r = cvb_05_sidecar_sha_matches_bundle(None, W14_ACTUAL_SHA, sidecar_present=False, closeout_references_sidecar=True)
+        r = cvb_05_sidecar_sha_matches_bundle(
+            None, W14_ACTUAL_SHA, sidecar_present=False, closeout_references_sidecar=True
+        )
         assert r["status"] == "FAIL"
         assert "sidecar" in r["message"].lower()
         assert "no sidecar" in r["message"].lower()
 
     def test_pass_when_sidecar_sha_matches_bundle(self):
-        r = cvb_05_sidecar_sha_matches_bundle(W14_ACTUAL_SHA, W14_ACTUAL_SHA, sidecar_present=True, closeout_references_sidecar=True)
+        r = cvb_05_sidecar_sha_matches_bundle(
+            W14_ACTUAL_SHA, W14_ACTUAL_SHA, sidecar_present=True, closeout_references_sidecar=True
+        )
         assert r["status"] == "PASS"
 
     def test_fail_when_sidecar_sha_stale(self):
         """Sidecar records stale SHA from prior bundle build."""
-        r = cvb_05_sidecar_sha_matches_bundle(W14_STALE_SHA, W14_ACTUAL_SHA, sidecar_present=True, closeout_references_sidecar=True)
+        r = cvb_05_sidecar_sha_matches_bundle(
+            W14_STALE_SHA, W14_ACTUAL_SHA, sidecar_present=True, closeout_references_sidecar=True
+        )
         assert r["status"] == "FAIL"
         assert "SIDECAR SHA MISMATCH" in r["message"]
         assert W14_STALE_SHA[:16] in r["message"]
@@ -202,6 +216,7 @@ class TestCVB05:
 # ─────────────────────────────────────────────────────────────────
 # run_all_cvb_validators — aggregate runner
 # ─────────────────────────────────────────────────────────────────
+
 
 class TestRunAllCVBValidators:
     def _clean_kwargs(self):

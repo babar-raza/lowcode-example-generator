@@ -39,10 +39,14 @@ from plugin_examples.scenario_planner.planner import plan_scenarios, Scenario
 
 def _make_proof(tmp_path: Path, eligible: bool = True) -> str:
     proof_path = tmp_path / "proof.json"
-    proof_path.write_text(json.dumps({
-        "eligibility_status": "eligible" if eligible else "not_eligible",
-        "eligibility_reason": "test",
-    }))
+    proof_path.write_text(
+        json.dumps(
+            {
+                "eligibility_status": "eligible" if eligible else "not_eligible",
+                "eligibility_reason": "test",
+            }
+        )
+    )
     return str(proof_path)
 
 
@@ -53,11 +57,16 @@ def _make_workflow_root_type(name="SpreadsheetConverter", full_name=None):
         "kind": "class",
         "is_obsolete": False,
         "methods": [
-            {"name": "Process", "return_type": "void", "is_static": True,
-             "is_obsolete": False, "parameters": [
-                 {"name": "loadOptions", "type": "Aspose.Cells.LowCode.LowCodeLoadOptions"},
-                 {"name": "saveOptions", "type": "Aspose.Cells.LowCode.LowCodeSaveOptions"},
-             ]},
+            {
+                "name": "Process",
+                "return_type": "void",
+                "is_static": True,
+                "is_obsolete": False,
+                "parameters": [
+                    {"name": "loadOptions", "type": "Aspose.Cells.LowCode.LowCodeLoadOptions"},
+                    {"name": "saveOptions", "type": "Aspose.Cells.LowCode.LowCodeSaveOptions"},
+                ],
+            },
         ],
         "properties": [],
         "constructors": [],
@@ -71,11 +80,15 @@ def _make_provider_type(name="LowCodeSaveOptionsProviderOfAssembling", full_name
         "kind": "class",
         "is_obsolete": False,
         "methods": [
-            {"name": "GetSaveOptions", "return_type": "LowCodeSaveOptions",
-             "is_static": False, "is_obsolete": False,
-             "parameters": [
-                 {"name": "splitPartInfo", "type": "Aspose.Cells.LowCode.SplitPartInfo"},
-             ]},
+            {
+                "name": "GetSaveOptions",
+                "return_type": "LowCodeSaveOptions",
+                "is_static": False,
+                "is_obsolete": False,
+                "parameters": [
+                    {"name": "splitPartInfo", "type": "Aspose.Cells.LowCode.SplitPartInfo"},
+                ],
+            },
         ],
         "properties": [
             {"name": "BuildPathWithSheetAlways", "type": "System.Boolean"},
@@ -103,10 +116,12 @@ def _make_catalog_with_types(types):
     return {
         "assembly_name": "Aspose.Cells",
         "assembly_version": "25.4.0",
-        "namespaces": [{
-            "namespace": "Aspose.Cells.LowCode",
-            "types": types,
-        }],
+        "namespaces": [
+            {
+                "namespace": "Aspose.Cells.LowCode",
+                "types": types,
+            }
+        ],
     }
 
 
@@ -126,19 +141,28 @@ class TestTypeClassifier:
         assert role.role == OPTIONS
 
     def test_abstract_classified(self):
-        role = classify_type({
-            "name": "AbstractLowCodeLoadOptionsProvider",
-            "full_name": "Aspose.Cells.LowCode.AbstractLowCodeLoadOptionsProvider",
-            "kind": "abstract_class", "is_obsolete": False,
-            "methods": [], "properties": [], "constructors": [],
-        })
+        role = classify_type(
+            {
+                "name": "AbstractLowCodeLoadOptionsProvider",
+                "full_name": "Aspose.Cells.LowCode.AbstractLowCodeLoadOptionsProvider",
+                "kind": "abstract_class",
+                "is_obsolete": False,
+                "methods": [],
+                "properties": [],
+                "constructors": [],
+            }
+        )
         assert role.role == ABSTRACT_BASE
 
     def test_enum_classified(self):
-        role = classify_type({
-            "name": "SaveFormat", "full_name": "Aspose.Cells.LowCode.SaveFormat",
-            "kind": "enum", "is_obsolete": False,
-        })
+        role = classify_type(
+            {
+                "name": "SaveFormat",
+                "full_name": "Aspose.Cells.LowCode.SaveFormat",
+                "kind": "enum",
+                "is_obsolete": False,
+            }
+        )
         assert role.role == ENUM
 
     def test_classify_catalog_returns_all(self):
@@ -196,10 +220,14 @@ class TestEntrypointScorer:
         """OPERATION_FACADE with 0 reflected methods but constructors must be runnable.
         Handles TextExtractor pattern where Process() is inherited from IPlugin."""
         from plugin_examples.scenario_planner.type_classifier import TypeRole, OPERATION_FACADE
+
         t = {
-            "name": "TextExtractor", "full_name": "Aspose.Pdf.LowCode.TextExtractor",
-            "kind": "class", "is_obsolete": False,
-            "methods": [], "properties": [],
+            "name": "TextExtractor",
+            "full_name": "Aspose.Pdf.LowCode.TextExtractor",
+            "kind": "class",
+            "is_obsolete": False,
+            "methods": [],
+            "properties": [],
             "constructors": [{}],
         }
         # Manually create an OPERATION_FACADE role (as type_classifier would return)
@@ -223,10 +251,14 @@ class TestEntrypointScorer:
     def test_operation_facade_no_methods_no_ctor_not_runnable(self):
         """OPERATION_FACADE with 0 methods AND 0 constructors is NOT runnable."""
         from plugin_examples.scenario_planner.type_classifier import TypeRole, OPERATION_FACADE
+
         t = {
-            "name": "SomeFacade", "full_name": "Aspose.Pdf.LowCode.SomeFacade",
-            "kind": "class", "is_obsolete": False,
-            "methods": [], "properties": [],
+            "name": "SomeFacade",
+            "full_name": "Aspose.Pdf.LowCode.SomeFacade",
+            "kind": "class",
+            "is_obsolete": False,
+            "methods": [],
+            "properties": [],
             "constructors": [],
         }
         role = TypeRole(
@@ -246,10 +278,12 @@ class TestStricterScenarioReadiness:
     def test_provider_type_blocked_not_ready(self, tmp_path):
         """Provider/callback types must NOT be standalone scenario roots."""
         proof = _make_proof(tmp_path)
-        catalog = _make_catalog_with_types([
-            _make_workflow_root_type(),
-            _make_provider_type(),
-        ])
+        catalog = _make_catalog_with_types(
+            [
+                _make_workflow_root_type(),
+                _make_provider_type(),
+            ]
+        )
         result = plan_scenarios(
             family="cells",
             catalog=catalog,
@@ -290,18 +324,24 @@ class TestStricterScenarioReadiness:
     def test_only_standalone_roles_become_ready(self, tmp_path):
         """No non-standalone role should ever appear in ready scenarios."""
         proof = _make_proof(tmp_path)
-        catalog = _make_catalog_with_types([
-            _make_workflow_root_type(),
-            _make_provider_type(),
-            _make_options_type(),
-            {
-                "name": "AbstractBase", "full_name": "Aspose.Cells.LowCode.AbstractBase",
-                "kind": "abstract_class", "is_obsolete": False,
-                "methods": [{"name": "M", "return_type": "void", "is_static": False,
-                             "is_obsolete": False, "parameters": []}],
-                "properties": [], "constructors": [],
-            },
-        ])
+        catalog = _make_catalog_with_types(
+            [
+                _make_workflow_root_type(),
+                _make_provider_type(),
+                _make_options_type(),
+                {
+                    "name": "AbstractBase",
+                    "full_name": "Aspose.Cells.LowCode.AbstractBase",
+                    "kind": "abstract_class",
+                    "is_obsolete": False,
+                    "methods": [
+                        {"name": "M", "return_type": "void", "is_static": False, "is_obsolete": False, "parameters": []}
+                    ],
+                    "properties": [],
+                    "constructors": [],
+                },
+            ]
+        )
         result = plan_scenarios(
             family="cells",
             catalog=catalog,
@@ -310,9 +350,7 @@ class TestStricterScenarioReadiness:
         )
         for s in result.ready_scenarios:
             role = classify_type(_find_type_in_catalog(catalog, s.target_type))
-            assert role.role in STANDALONE_ROLES, (
-                f"Ready scenario {s.scenario_id} has non-standalone role {role.role}"
-            )
+            assert role.role in STANDALONE_ROLES, f"Ready scenario {s.scenario_id} has non-standalone role {role.role}"
 
 
 class TestRuntimeFailureFeedback:
@@ -320,7 +358,8 @@ class TestRuntimeFailureFeedback:
 
     def test_nullref_classified_as_context_required(self):
         result = classify_runtime_failure(
-            scenario_id="test-1", exit_code=1,
+            scenario_id="test-1",
+            exit_code=1,
             stderr="Unhandled exception. System.NullReferenceException: Object reference not set",
         )
         assert result.classification == "blocked_runtime_context_required"
@@ -328,7 +367,8 @@ class TestRuntimeFailureFeedback:
 
     def test_file_not_found_classified(self):
         result = classify_runtime_failure(
-            scenario_id="test-2", exit_code=1,
+            scenario_id="test-2",
+            exit_code=1,
             stderr="System.IO.FileNotFoundException: Could not find file 'input.xlsx'",
         )
         assert result.classification == "blocked_missing_fixture"
@@ -336,14 +376,16 @@ class TestRuntimeFailureFeedback:
 
     def test_unknown_failure_classified(self):
         result = classify_runtime_failure(
-            scenario_id="test-3", exit_code=42,
+            scenario_id="test-3",
+            exit_code=42,
             stderr="Something unexpected happened",
         )
         assert result.classification == "unknown_runtime_failure"
 
     def test_argument_null_classified(self):
         result = classify_runtime_failure(
-            scenario_id="test-4", exit_code=1,
+            scenario_id="test-4",
+            exit_code=1,
             stderr="System.ArgumentNullException: Value cannot be null. (Parameter 'path')",
         )
         assert result.classification == "blocked_null_argument"
@@ -366,6 +408,7 @@ class TestEvidenceFiles:
 
     def test_type_classification_evidence(self, tmp_path):
         from plugin_examples.scenario_planner.type_classifier import write_type_role_classification
+
         roles = classify_catalog(
             _make_catalog_with_types([_make_workflow_root_type(), _make_provider_type()]),
             ["Aspose.Cells.LowCode"],
@@ -378,6 +421,7 @@ class TestEvidenceFiles:
 
     def test_entrypoint_scores_evidence(self, tmp_path):
         from plugin_examples.scenario_planner.entrypoint_scorer import write_entrypoint_scores
+
         t = _make_workflow_root_type()
         role = classify_type(t)
         scores = [score_entrypoint(t, role, {})]
@@ -390,6 +434,7 @@ class TestEvidenceFiles:
         from plugin_examples.scenario_planner.runtime_feedback import (
             write_runtime_failure_classifications,
         )
+
         classifications = [
             classify_runtime_failure("s1", 1, stderr="System.NullReferenceException: test"),
         ]
@@ -414,37 +459,44 @@ class TestPdfTypeClassifierFixes:
     def test_optimizer_classified_as_operation_facade(self):
         """Optimizer must be OPERATION_FACADE — it was previously classified as utility."""
         t = {
-            "name": "Optimizer", "full_name": "Aspose.Pdf.LowCode.Optimizer",
-            "kind": "class", "is_obsolete": False,
+            "name": "Optimizer",
+            "full_name": "Aspose.Pdf.LowCode.Optimizer",
+            "kind": "class",
+            "is_obsolete": False,
             "methods": [{"name": "Process", "is_static": False, "is_obsolete": False, "parameters": []}],
-            "properties": [], "constructors": [{}],
+            "properties": [],
+            "constructors": [{}],
         }
         role = classify_type(t)
-        assert role.role == OPERATION_FACADE, (
-            f"Optimizer must be OPERATION_FACADE (was {role.role}): {role.reason}"
-        )
+        assert role.role == OPERATION_FACADE, f"Optimizer must be OPERATION_FACADE (was {role.role}): {role.reason}"
 
     def test_textextractor_with_zero_reflected_methods_is_operation_facade(self):
         """TextExtractor has 0 reflected methods (Process is inherited from IPlugin base).
         Must be classified as OPERATION_FACADE, not unknown."""
         t = {
-            "name": "TextExtractor", "full_name": "Aspose.Pdf.LowCode.TextExtractor",
-            "kind": "class", "is_obsolete": False,
-            "methods": [], "properties": [],
+            "name": "TextExtractor",
+            "full_name": "Aspose.Pdf.LowCode.TextExtractor",
+            "kind": "class",
+            "is_obsolete": False,
+            "methods": [],
+            "properties": [],
             "constructors": [{}],  # has a default constructor
         }
         role = classify_type(t)
-        assert role.role == OPERATION_FACADE, (
-            f"TextExtractor with constructors+workflow-verb must be OPERATION_FACADE (was {role.role})"
-        )
+        assert (
+            role.role == OPERATION_FACADE
+        ), f"TextExtractor with constructors+workflow-verb must be OPERATION_FACADE (was {role.role})"
         assert role.confidence >= 0.6
 
     def test_unknown_type_with_zero_methods_no_ctor_stays_unknown(self):
         """Types with no methods AND no constructors stay unknown."""
         t = {
-            "name": "SomeHelper", "full_name": "Aspose.Pdf.LowCode.SomeHelper",
-            "kind": "class", "is_obsolete": False,
-            "methods": [], "properties": [],
+            "name": "SomeHelper",
+            "full_name": "Aspose.Pdf.LowCode.SomeHelper",
+            "kind": "class",
+            "is_obsolete": False,
+            "methods": [],
+            "properties": [],
             "constructors": [],
         }
         role = classify_type(t)
@@ -453,9 +505,12 @@ class TestPdfTypeClassifierFixes:
     def test_non_workflow_verb_with_ctor_only_not_operation_facade(self):
         """A type with constructors but no workflow verb stays utility/unknown, not operation_facade."""
         t = {
-            "name": "ProcessResult", "full_name": "Aspose.Pdf.LowCode.ProcessResult",
-            "kind": "class", "is_obsolete": False,
-            "methods": [], "properties": [],
+            "name": "ProcessResult",
+            "full_name": "Aspose.Pdf.LowCode.ProcessResult",
+            "kind": "class",
+            "is_obsolete": False,
+            "methods": [],
+            "properties": [],
             "constructors": [{}],
         }
         role = classify_type(t)

@@ -11,12 +11,7 @@ import jsonschema
 
 logger = logging.getLogger(__name__)
 
-_SCHEMA_PATH = (
-    Path(__file__).resolve().parents[3]
-    / "pipeline"
-    / "schemas"
-    / "api-catalog.schema.json"
-)
+_SCHEMA_PATH = Path(__file__).resolve().parents[3] / "pipeline" / "schemas" / "api-catalog.schema.json"
 
 
 @lru_cache(maxsize=1)
@@ -52,9 +47,7 @@ def validate_catalog(
         error_messages.append(f"{path}: {error.message}")
 
     if error_messages:
-        logger.warning(
-            "Catalog validation: %d error(s) found", len(error_messages)
-        )
+        logger.warning("Catalog validation: %d error(s) found", len(error_messages))
     else:
         logger.info("Catalog validation: passed")
 

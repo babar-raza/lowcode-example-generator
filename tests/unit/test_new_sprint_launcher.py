@@ -6,6 +6,7 @@ Verifies:
 - With --force, overwrites existing file
 - Generated script has correct sprint/date/lanes substituted
 """
+
 from __future__ import annotations
 
 import sys
@@ -18,6 +19,7 @@ def test_generates_coordinator_script(tmp_path, monkeypatch):
     """new_sprint.py creates the coordinator script at the expected path."""
     # Override scripts dir to use tmp_path so we don't pollute the real scripts/
     from scripts import new_sprint
+
     scripts_dir_orig = new_sprint._SCRIPTS_DIR
     monkeypatch.setattr(new_sprint, "_SCRIPTS_DIR", tmp_path)
 
@@ -31,6 +33,7 @@ def test_generates_coordinator_script(tmp_path, monkeypatch):
 def test_no_overwrite_without_force(tmp_path, monkeypatch):
     """Without --force, new_sprint.py returns 1 and does not overwrite."""
     from scripts import new_sprint
+
     monkeypatch.setattr(new_sprint, "_SCRIPTS_DIR", tmp_path)
 
     # First call — create
@@ -47,6 +50,7 @@ def test_no_overwrite_without_force(tmp_path, monkeypatch):
 def test_force_flag_overwrites(tmp_path, monkeypatch):
     """With --force, new_sprint.py overwrites existing file."""
     from scripts import new_sprint
+
     monkeypatch.setattr(new_sprint, "_SCRIPTS_DIR", tmp_path)
 
     new_sprint.main(["--sprint", "wave99", "--date", "20261231", "--lanes", "A"])
@@ -61,6 +65,7 @@ def test_force_flag_overwrites(tmp_path, monkeypatch):
 def test_substitutions_in_generated_script(tmp_path, monkeypatch):
     """Sprint, date, and lanes must be substituted in generated script."""
     from scripts import new_sprint
+
     monkeypatch.setattr(new_sprint, "_SCRIPTS_DIR", tmp_path)
 
     new_sprint.main(["--sprint", "wave42", "--date", "20270101", "--lanes", "A,B,C"])

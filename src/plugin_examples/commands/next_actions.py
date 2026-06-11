@@ -11,15 +11,21 @@ def add_parser(subparsers):
         help="Compute ranked next actions from current pipeline state",
     )
     parser.add_argument(
-        "--output", metavar="PATH", default=None,
+        "--output",
+        metavar="PATH",
+        default=None,
         help="Write action board JSON to this path",
     )
     parser.add_argument(
-        "--markdown", metavar="PATH", default=None,
+        "--markdown",
+        metavar="PATH",
+        default=None,
         help="Write action board markdown to this path",
     )
     parser.add_argument(
-        "--json", dest="json_output", action="store_true",
+        "--json",
+        dest="json_output",
+        action="store_true",
         help="Print action board as JSON to stdout",
     )
     parser.set_defaults(func=handle)

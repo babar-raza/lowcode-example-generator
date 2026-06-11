@@ -112,9 +112,7 @@ class TestRunTargetRepoHealthCheck:
         assert report.families[0].verification_method == "GH_CLI"
 
     def test_unknown_family_skipped(self, tmp_path):
-        report = run_target_repo_health_check(
-            families=["nonexistent_family"], repo_root=tmp_path
-        )
+        report = run_target_repo_health_check(families=["nonexistent_family"], repo_root=tmp_path)
         assert len(report.families) == 0
 
     def test_all_families_checked_by_default(self, tmp_path):
@@ -142,9 +140,7 @@ class TestRunTargetRepoHealthCheck:
         mock_result.stdout = json.dumps({"name": "repo"})
 
         with patch("subprocess.run", return_value=mock_result):
-            report = run_target_repo_health_check(
-                families=["cells", "words"], repo_root=tmp_path
-            )
+            report = run_target_repo_health_check(families=["cells", "words"], repo_root=tmp_path)
 
         assert report.overall_verdict == "ALL_VERIFIED"
 
@@ -154,9 +150,7 @@ class TestRunTargetRepoHealthCheck:
         # No evidence for words
 
         with patch("subprocess.run", side_effect=FileNotFoundError("gh not found")):
-            report = run_target_repo_health_check(
-                families=["cells", "words"], repo_root=tmp_path
-            )
+            report = run_target_repo_health_check(families=["cells", "words"], repo_root=tmp_path)
 
         assert report.overall_verdict == "PARTIAL_VERIFICATION"
         assert report.inaccessible_count >= 1

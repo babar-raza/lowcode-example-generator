@@ -14,6 +14,7 @@ Wave 13 defects that motivated this module:
   W13-CONTRA-03: Adversarial review was PRE_CLOSEOUT only; final review not written
   W13-CONTRA-04: Taskcard W13-LH-09 claimed "IV PASS" while bundled IV showed IV_FAIL
 """
+
 from __future__ import annotations
 from typing import Any
 
@@ -82,10 +83,7 @@ def evc_02_bundle_must_contain_final_closeout(
         }
     closeout_key = "final/sprint-closeout.json"
     # Accept both bare path and sprint-prefixed path
-    found = any(
-        closeout_key in entry or entry.endswith("final/sprint-closeout.json")
-        for entry in bundle_entries
-    )
+    found = any(closeout_key in entry or entry.endswith("final/sprint-closeout.json") for entry in bundle_entries)
     if found:
         return {
             "rule": "EVC-02",
@@ -368,6 +366,7 @@ def evc_08_sprint_verdict_consistent_across_artifacts(
 # Aggregate runner
 # ---------------------------------------------------------------------------
 
+
 def run_all_evc_validators(
     bundled_iv_verdict: str | None,
     bundle_entries: list[str] | None,
@@ -386,24 +385,21 @@ def run_all_evc_validators(
 ) -> dict[str, Any]:
     """Run all EVC-01..EVC-08 validators and return aggregate result."""
     results = [
-        evc_01_bundled_iv_must_be_pass_or_have_later_pass(
-            bundled_iv_verdict, has_later_iv_pass, later_iv_pass_source
-        ),
+        evc_01_bundled_iv_must_be_pass_or_have_later_pass(bundled_iv_verdict, has_later_iv_pass, later_iv_pass_source),
         evc_02_bundle_must_contain_final_closeout(
             bundle_entries, sprint=sprint_verdict, has_external_proof_manifest=has_external_proof_manifest
         ),
         evc_03_adversarial_review_must_not_be_pre_closeout_only(
-            adversarial_verdict, sprint_verdict=sprint_verdict,
-            has_final_adversarial_review=has_final_adversarial_review
+            adversarial_verdict,
+            sprint_verdict=sprint_verdict,
+            has_final_adversarial_review=has_final_adversarial_review,
         ),
         evc_04_iv_verdict_agrees_with_sprint_verdict(iv_verdict, sprint_verdict=sprint_verdict),
         evc_05_pre_closeout_not_accepted_as_final(
             adversarial_verdict, has_final_adversarial_review=has_final_adversarial_review
         ),
         evc_06_sidecar_path_referenced_must_be_verifiable(closeout, sidecar_verified=sidecar_verified),
-        evc_07_bundle_entries_match_closeout_count(
-            bundle_entry_count_actual, bundle_entry_count_closeout
-        ),
+        evc_07_bundle_entries_match_closeout_count(bundle_entry_count_actual, bundle_entry_count_closeout),
         evc_08_sprint_verdict_consistent_across_artifacts(
             closeout_verdict=sprint_verdict,
             lane_ledger_verdict=lane_ledger_verdict,

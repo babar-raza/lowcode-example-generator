@@ -76,12 +76,14 @@ class TestResolveLatestStable:
 
         resp_versions = MagicMock()
         resp_versions.status_code = 200
-        resp_versions.json.return_value = _mock_versions([
-            "1.0.0",
-            "2.0.0-beta1",
-            "2.0.0",
-            "3.0.0-rc.1",
-        ])
+        resp_versions.json.return_value = _mock_versions(
+            [
+                "1.0.0",
+                "2.0.0-beta1",
+                "2.0.0",
+                "3.0.0-rc.1",
+            ]
+        )
         resp_versions.raise_for_status = MagicMock()
 
         mock_get.side_effect = [resp_index, resp_versions]
@@ -98,11 +100,13 @@ class TestResolveLatestStable:
 
         resp_versions = MagicMock()
         resp_versions.status_code = 200
-        resp_versions.json.return_value = _mock_versions([
-            "1.0.0",
-            "2.0.0-beta1",
-            "3.0.0-rc.1",
-        ])
+        resp_versions.json.return_value = _mock_versions(
+            [
+                "1.0.0",
+                "2.0.0-beta1",
+                "3.0.0-rc.1",
+            ]
+        )
         resp_versions.raise_for_status = MagicMock()
 
         mock_get.side_effect = [resp_index, resp_versions]
@@ -146,9 +150,8 @@ class TestResolveLatestStable:
         resp_versions.raise_for_status.side_effect = Exception("404")
 
         import requests as req
-        resp_versions.raise_for_status.side_effect = req.HTTPError(
-            response=resp_versions
-        )
+
+        resp_versions.raise_for_status.side_effect = req.HTTPError(response=resp_versions)
 
         mock_get.side_effect = [resp_index, resp_versions]
 

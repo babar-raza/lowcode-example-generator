@@ -71,15 +71,11 @@ _ACTIVE_TYPES = [
     _ACTIVE_TYPES,
     ids=[f"{f}:{t}" for f, t, *_ in _ACTIVE_TYPES],
 )
-def test_output_format_not_dot_out(
-    family, type_name, family_default, expected_input, expected_output
-):
+def test_output_format_not_dot_out(family, type_name, family_default, expected_input, expected_output):
     """No active type should fall through to .out default when called with
     the correct family default (which is what happens in production)."""
     result = _infer_output_format(type_name, family_default=family_default, family=family)
-    assert result != ".out", (
-        f"{family}:{type_name} fell through to .out — missing planner map entry"
-    )
+    assert result != ".out", f"{family}:{type_name} fell through to .out — missing planner map entry"
 
 
 @pytest.mark.parametrize(
@@ -87,14 +83,10 @@ def test_output_format_not_dot_out(
     _ACTIVE_TYPES,
     ids=[f"{f}:{t}" for f, t, *_ in _ACTIVE_TYPES],
 )
-def test_output_format_correct(
-    family, type_name, family_default, expected_input, expected_output
-):
+def test_output_format_correct(family, type_name, family_default, expected_input, expected_output):
     """Output format matches expected value from the matrix."""
     result = _infer_output_format(type_name, family_default=family_default, family=family)
-    assert result == expected_output, (
-        f"{family}:{type_name}: expected output '{expected_output}', got '{result}'"
-    )
+    assert result == expected_output, f"{family}:{type_name}: expected output '{expected_output}', got '{result}'"
 
 
 @pytest.mark.parametrize(
@@ -102,14 +94,10 @@ def test_output_format_correct(
     _ACTIVE_TYPES,
     ids=[f"{f}:{t}" for f, t, *_ in _ACTIVE_TYPES],
 )
-def test_input_format_correct(
-    family, type_name, family_default, expected_input, expected_output
-):
+def test_input_format_correct(family, type_name, family_default, expected_input, expected_output):
     """Input format matches expected value from the matrix."""
     result = _infer_input_format(type_name, family_default=family_default, family=family)
-    assert result == expected_input, (
-        f"{family}:{type_name}: expected input '{expected_input}', got '{result}'"
-    )
+    assert result == expected_input, f"{family}:{type_name}: expected input '{expected_input}', got '{result}'"
 
 
 @pytest.mark.parametrize(
@@ -124,13 +112,10 @@ def test_output_format_not_dot_out_with_dot_out_default(
     family_default is .out. Extractors (empty output) are excluded."""
     result = _infer_output_format(type_name, family_default=".out", family=family)
     assert result != ".out", (
-        f"{family}:{type_name} fell through to .out with .out default — "
-        f"needs explicit planner map entry"
+        f"{family}:{type_name} fell through to .out with .out default — " f"needs explicit planner map entry"
     )
 
 
 def test_active_type_count():
     """Ensure the test covers exactly 42 active types."""
-    assert len(_ACTIVE_TYPES) == 42, (
-        f"Expected 42 active types, got {len(_ACTIVE_TYPES)}"
-    )
+    assert len(_ACTIVE_TYPES) == 42, f"Expected 42 active types, got {len(_ACTIVE_TYPES)}"

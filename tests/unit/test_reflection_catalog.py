@@ -316,10 +316,12 @@ class TestNormalize:
 
     def test_namespace_filter(self):
         raw = _make_valid_catalog()
-        raw["namespaces"].append({
-            "namespace": "OtherNamespace",
-            "types": [],
-        })
+        raw["namespaces"].append(
+            {
+                "namespace": "OtherNamespace",
+                "types": [],
+            }
+        )
         result = _normalize(raw, namespace_filter=["TestNamespace"])
         assert len(result["namespaces"]) == 1
         assert result["namespaces"][0]["namespace"] == "TestNamespace"
@@ -331,10 +333,12 @@ class TestNormalize:
 
     def test_no_filter_keeps_all(self):
         raw = _make_valid_catalog()
-        raw["namespaces"].append({
-            "namespace": "Other",
-            "types": [],
-        })
+        raw["namespaces"].append(
+            {
+                "namespace": "Other",
+                "types": [],
+            }
+        )
         result = _normalize(raw)
         assert len(result["namespaces"]) == 2
 

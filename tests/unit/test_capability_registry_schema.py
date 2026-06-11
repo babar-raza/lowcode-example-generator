@@ -8,12 +8,7 @@ from pathlib import Path
 import jsonschema
 import pytest
 
-REGISTRY_SCHEMA_PATH = (
-    Path(__file__).resolve().parents[2]
-    / "pipeline"
-    / "plugin-capability-registry"
-    / "schema.json"
-)
+REGISTRY_SCHEMA_PATH = Path(__file__).resolve().parents[2] / "pipeline" / "plugin-capability-registry" / "schema.json"
 
 
 def _load_schema() -> dict:

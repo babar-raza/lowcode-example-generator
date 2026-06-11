@@ -18,6 +18,7 @@ class TestPopulatorUsesContract:
 
     def test_cells_spreadsheet_converter_csv_not_xlsx(self):
         from plugin_examples.format_capability.populator import populate_manifest
+
         m = populate_manifest("cells")
         sc = m.types.get("SpreadsheetConverter")
         assert sc is not None, "SpreadsheetConverter missing from cells manifest"
@@ -28,6 +29,7 @@ class TestPopulatorUsesContract:
 
     def test_pdf_form_exporter_json_not_xml(self):
         from plugin_examples.format_capability.populator import populate_manifest
+
         m = populate_manifest("pdf")
         fe = m.types.get("FormExporter")
         assert fe is not None, "FormExporter missing from pdf manifest"
@@ -38,15 +40,17 @@ class TestPopulatorUsesContract:
 
     def test_no_dot_out_in_any_family(self):
         from plugin_examples.format_capability.populator import populate_manifest
+
         for family in ("cells", "words", "pdf", "diagram", "email", "slides"):
             m = populate_manifest(family)
             for type_name, cap in m.types.items():
-                assert cap.primary_output_format != ".out", (
-                    f"{family}:{type_name} primary_output_format is .out — contract not consumed"
-                )
+                assert (
+                    cap.primary_output_format != ".out"
+                ), f"{family}:{type_name} primary_output_format is .out — contract not consumed"
 
     def test_all_six_families_populate(self):
         from plugin_examples.format_capability.populator import populate_manifest
+
         totals = 0
         for family in ("cells", "words", "pdf", "diagram", "email", "slides"):
             m = populate_manifest(family)
@@ -56,9 +60,8 @@ class TestPopulatorUsesContract:
 
     def test_operation_kind_not_unknown_for_all_active(self):
         from plugin_examples.format_capability.populator import populate_manifest
+
         for family in ("cells", "words", "pdf", "diagram", "email", "slides"):
             m = populate_manifest(family)
             for type_name, cap in m.types.items():
-                assert cap.operation_kind != "unknown", (
-                    f"{family}:{type_name} has operation_kind=unknown"
-                )
+                assert cap.operation_kind != "unknown", f"{family}:{type_name} has operation_kind=unknown"

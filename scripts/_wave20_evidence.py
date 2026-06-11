@@ -1,7 +1,11 @@
 """Wave 20 ultra-wide evidence generation script.
 Generates all Lane evidence artifacts for the W20 sprint.
 """
-import json, os, hashlib, subprocess, datetime
+import json
+import os
+import hashlib
+import subprocess
+import datetime
 from pathlib import Path
 
 REPO = Path("c:/Users/prora/OneDrive/Documents/GitHub/lowcode-example-generator-gitlab")

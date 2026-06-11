@@ -35,9 +35,7 @@ class TestExtractAllExtensions:
             'options.AddInput(new FileDataSource("input1.pdf"));\n'
             'options.AddInput(new FileDataSource("input2.pdf"));\n'
         )
-        result = _extract_all_extensions(
-            [_INPUT_PATTERN] + _INPUT_EXTENDED_PATTERNS, source
-        )
+        result = _extract_all_extensions([_INPUT_PATTERN] + _INPUT_EXTENDED_PATTERNS, source)
         # "pdf" appears multiple times but should be deduplicated
         assert result == ["pdf"]
 
@@ -46,9 +44,7 @@ class TestExtractAllExtensions:
             'options.AddInput(new FileDataSource("input.xlsx"));\n'
             'options.AddInput(new FileDataSource("input1.xlsx"));\n'
         )
-        result = _extract_all_extensions(
-            [_INPUT_PATTERN] + _INPUT_EXTENDED_PATTERNS, source
-        )
+        result = _extract_all_extensions([_INPUT_PATTERN] + _INPUT_EXTENDED_PATTERNS, source)
         assert "xlsx" in result
 
     def test_no_matches(self):
@@ -57,25 +53,14 @@ class TestExtractAllExtensions:
         assert result == []
 
     def test_extended_patterns(self):
-        source = (
-            'File.WriteAllText("result.json", data);\n'
-            'options.AddOutput(new FileDataSource("output.pdf"));\n'
-        )
-        result = _extract_all_extensions(
-            [_OUTPUT_PATTERN] + _OUTPUT_EXTENDED_PATTERNS, source
-        )
+        source = 'File.WriteAllText("result.json", data);\n' 'options.AddOutput(new FileDataSource("output.pdf"));\n'
+        result = _extract_all_extensions([_OUTPUT_PATTERN] + _OUTPUT_EXTENDED_PATTERNS, source)
         assert "pdf" in result
         assert "json" in result
 
     def test_deduplication_order_preserved(self):
-        source = (
-            '"output.pdf"\n'
-            '"result.pdf"\n'
-            '"output.docx"\n'
-        )
-        result = _extract_all_extensions(
-            [_OUTPUT_PATTERN] + _OUTPUT_EXTENDED_PATTERNS, source
-        )
+        source = '"output.pdf"\n' '"result.pdf"\n' '"output.docx"\n'
+        result = _extract_all_extensions([_OUTPUT_PATTERN] + _OUTPUT_EXTENDED_PATTERNS, source)
         assert result == ["pdf", "docx"]
 
 

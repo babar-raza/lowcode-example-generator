@@ -23,17 +23,19 @@ logger = logging.getLogger(__name__)
 @dataclass
 class InventoryEntry:
     """A single example discovered from any source."""
+
     name: str
-    source_package: str          # e.g. "pdf-controlled-pilot-pr5"
-    source_type: str             # "pr_package" | "post_merge" | "repo_actual"
+    source_package: str  # e.g. "pdf-controlled-pilot-pr5"
+    source_type: str  # "pr_package" | "post_merge" | "repo_actual"
     output_format: str = ""
     has_program_cs: bool = False
-    package_path: str = ""       # absolute path string to the containing package
+    package_path: str = ""  # absolute path string to the containing package
 
 
 @dataclass
 class InventoryAuditTrail:
     """Records what was scanned and how conflicts were resolved."""
+
     family: str
     inventory_mode: str
     sources_scanned: list[dict] = field(default_factory=list)
@@ -53,13 +55,15 @@ def _scan_package_examples(
     for d in sorted(examples_root.iterdir()):
         if d.is_dir():
             has_cs = (d / "Program.cs").exists()
-            entries.append(InventoryEntry(
-                name=d.name,
-                source_package=package_path.name,
-                source_type="pr_package",
-                has_program_cs=has_cs,
-                package_path=str(package_path),
-            ))
+            entries.append(
+                InventoryEntry(
+                    name=d.name,
+                    source_package=package_path.name,
+                    source_type="pr_package",
+                    has_program_cs=has_cs,
+                    package_path=str(package_path),
+                )
+            )
     return entries
 
 
@@ -77,12 +81,14 @@ def _load_post_merge_examples(
         for ex in data.get("examples", []):
             name = ex.get("name", "")
             if name:
-                entries.append(InventoryEntry(
-                    name=name,
-                    source_package="post-merge",
-                    source_type="post_merge",
-                    output_format=ex.get("output_format", ""),
-                ))
+                entries.append(
+                    InventoryEntry(
+                        name=name,
+                        source_package="post-merge",
+                        source_type="post_merge",
+                        output_format=ex.get("output_format", ""),
+                    )
+                )
     except (OSError, json.JSONDecodeError) as e:
         logger.warning("Failed to read post-merge JSON for %s: %s", family, e)
     return entries
@@ -131,20 +137,24 @@ def discover_family_inventory(
                 source_package="repo_actual",
                 source_type="repo_actual",
             )
-        trail.sources_scanned.append({
-            "source_type": "repo_actual_explicit",
-            "entry_count": len(repo_actual_examples),
-        })
+        trail.sources_scanned.append(
+            {
+                "source_type": "repo_actual_explicit",
+                "entry_count": len(repo_actual_examples),
+            }
+        )
     else:
         # Fallback to post-merge evidence
         pm_entries = _load_post_merge_examples(family, verification_dir)
         for e in pm_entries:
             base_entries[e.name] = e
-        trail.sources_scanned.append({
-            "source_type": "post_merge_json",
-            "path": str(verification_dir / "latest" / f"{family}-post-merge-clean-checkout-validation.json"),
-            "entry_count": len(pm_entries),
-        })
+        trail.sources_scanned.append(
+            {
+                "source_type": "post_merge_json",
+                "path": str(verification_dir / "latest" / f"{family}-post-merge-clean-checkout-validation.json"),
+                "entry_count": len(pm_entries),
+            }
+        )
 
     # --- 2. Overlay based on mode ---
     if inventory_mode == "repo_actual":
@@ -155,64 +165,70 @@ def discover_family_inventory(
             for pkg_dir in sorted(pr_dir.iterdir()):
                 if pkg_dir.is_dir() and pkg_dir.name.startswith(f"{family}-"):
                     pkg_entries = _scan_package_examples(family, pkg_dir)
-                    trail.sources_scanned.append({
-                        "source_type": "pr_package",
-                        "path": str(pkg_dir),
-                        "entry_count": len(pkg_entries),
-                    })
+                    trail.sources_scanned.append(
+                        {
+                            "source_type": "pr_package",
+                            "path": str(pkg_dir),
+                            "entry_count": len(pkg_entries),
+                        }
+                    )
                     # Only add to base if not already present (post-merge wins)
                     for e in pkg_entries:
                         if e.name not in base_entries:
                             base_entries[e.name] = e
-                            trail.dedup_log.append(
-                                f"{e.name}: added from {pkg_dir.name} (not in repo_actual base)"
-                            )
+                            trail.dedup_log.append(f"{e.name}: added from {pkg_dir.name} (not in repo_actual base)")
                         else:
                             # Preserve package_path for fact extraction
                             existing = base_entries[e.name]
                             if not existing.package_path and e.package_path:
                                 existing.package_path = e.package_path
                                 existing.has_program_cs = e.has_program_cs
-                                trail.dedup_log.append(
-                                    f"{e.name}: package_path enriched from {pkg_dir.name}"
-                                )
+                                trail.dedup_log.append(f"{e.name}: package_path enriched from {pkg_dir.name}")
 
     elif inventory_mode == "current_package_overlay":
         if current_package_path is None:
             raise ValueError("current_package_path required for current_package_overlay mode")
         pkg_entries = _scan_package_examples(family, current_package_path)
-        trail.sources_scanned.append({
-            "source_type": "current_package",
-            "path": str(current_package_path),
-            "entry_count": len(pkg_entries),
-        })
+        trail.sources_scanned.append(
+            {
+                "source_type": "current_package",
+                "path": str(current_package_path),
+                "entry_count": len(pkg_entries),
+            }
+        )
         for e in pkg_entries:
             if e.name in base_entries:
-                trail.conflicts.append({
-                    "example": e.name,
-                    "existing_source": base_entries[e.name].source_type,
-                    "new_source": "current_package",
-                    "resolution": "current_package wins (fresher)",
-                })
+                trail.conflicts.append(
+                    {
+                        "example": e.name,
+                        "existing_source": base_entries[e.name].source_type,
+                        "new_source": "current_package",
+                        "resolution": "current_package wins (fresher)",
+                    }
+                )
             base_entries[e.name] = e
 
     elif inventory_mode == "batch_overlay":
         paths = batch_package_paths or []
         for pkg_path in paths:
             pkg_entries = _scan_package_examples(family, pkg_path)
-            trail.sources_scanned.append({
-                "source_type": "batch_package",
-                "path": str(pkg_path),
-                "entry_count": len(pkg_entries),
-            })
+            trail.sources_scanned.append(
+                {
+                    "source_type": "batch_package",
+                    "path": str(pkg_path),
+                    "entry_count": len(pkg_entries),
+                }
+            )
             for e in pkg_entries:
                 if e.name in base_entries and base_entries[e.name].source_type != "pr_package":
-                    trail.conflicts.append({
-                        "example": e.name,
-                        "existing_source": base_entries[e.name].source_type,
-                        "new_source": f"batch:{pkg_path.name}",
-                        "resolution": "batch package wins",
-                    })
+                    trail.conflicts.append(
+                        {
+                            "example": e.name,
+                            "existing_source": base_entries[e.name].source_type,
+                            "new_source": f"batch:{pkg_path.name}",
+                            "resolution": "batch package wins",
+                        }
+                    )
                 base_entries[e.name] = e
 
     result = sorted(base_entries.values(), key=lambda e: e.name)
@@ -223,10 +239,7 @@ def build_cumulative_examples_meta(
     entries: list[InventoryEntry],
 ) -> list[dict]:
     """Convert inventory entries to the format expected by build_readme_context()."""
-    return [
-        {"name": e.name, "output_format": e.output_format}
-        for e in entries
-    ]
+    return [{"name": e.name, "output_format": e.output_format} for e in entries]
 
 
 def build_package_path_map(
@@ -245,7 +258,10 @@ def inventory_to_json(
     trail: InventoryAuditTrail,
 ) -> str:
     """Serialize inventory and audit trail to JSON."""
-    return json.dumps({
-        "inventory": [asdict(e) for e in entries],
-        "audit_trail": asdict(trail),
-    }, indent=2)
+    return json.dumps(
+        {
+            "inventory": [asdict(e) for e in entries],
+            "audit_trail": asdict(trail),
+        },
+        indent=2,
+    )

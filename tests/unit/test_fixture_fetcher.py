@@ -1,4 +1,5 @@
 """Tests for the production-safe fixture fetcher — Wave 25 Lane B."""
+
 from __future__ import annotations
 
 import json
@@ -30,6 +31,7 @@ _GOOD_REPO_CONFIG = {
 
 # ── No-token fallback ─────────────────────────────────────────────────────────
 
+
 def test_no_github_token_falls_back_to_synthetic(tmp_path, monkeypatch):
     monkeypatch.delenv("GITHUB_TOKEN", raising=False)
     monkeypatch.delenv("GH_TOKEN", raising=False)
@@ -48,6 +50,7 @@ def test_no_github_token_blocks_when_synthetic_not_allowed(tmp_path, monkeypatch
 
 # ── Empty / missing repo config ───────────────────────────────────────────────
 
+
 def test_missing_owner_falls_back_to_synthetic(tmp_path):
     result = fetch_fixtures("cad", {}, [".dwg"], tmp_path, cache_root=tmp_path / "cache")
     assert result.strategy == "synthetic_fallback"
@@ -60,16 +63,22 @@ def test_missing_repo_falls_back_to_synthetic(tmp_path):
 
 # ── Dry-run mode ──────────────────────────────────────────────────────────────
 
+
 def test_dry_run_returns_without_download(tmp_path):
     result = fetch_fixtures(
-        "cad", _GOOD_REPO_CONFIG, [".dwg"], tmp_path,
-        cache_root=tmp_path / "cache", dry_run=True,
+        "cad",
+        _GOOD_REPO_CONFIG,
+        [".dwg"],
+        tmp_path,
+        cache_root=tmp_path / "cache",
+        dry_run=True,
     )
     assert result.strategy == "dry_run_validated"
     assert result.fetched == []
 
 
 # ── Extension filter ──────────────────────────────────────────────────────────
+
 
 def test_extension_allowlist_applied(tmp_path, monkeypatch):
     """Files outside the allowlist should not appear in fetched list."""
@@ -82,15 +91,22 @@ def test_extension_allowlist_applied(tmp_path, monkeypatch):
     # Write a fake cached listing with mixed extensions
     safe_path = "Examples_Data"
     cache_file = listing_cache / f"{safe_path}.json"
-    cache_file.write_text(json.dumps([
-        {"path": "Examples/Data/test.dwg", "sha": "abc", "size": 100},
-        {"path": "Examples/Data/test.exe", "sha": "def", "size": 200},  # not in allowlist
-        {"path": "Examples/Data/test.dxf", "sha": "ghi", "size": 150},
-    ]), encoding="utf-8")
+    cache_file.write_text(
+        json.dumps(
+            [
+                {"path": "Examples/Data/test.dwg", "sha": "abc", "size": 100},
+                {"path": "Examples/Data/test.exe", "sha": "def", "size": 200},  # not in allowlist
+                {"path": "Examples/Data/test.dxf", "sha": "ghi", "size": 150},
+            ]
+        ),
+        encoding="utf-8",
+    )
 
     # Force cache to appear fresh (mtime is now, TTL is 24h)
     allowed = frozenset({".dwg", ".dxf"})
-    files = _list_github_files("owner", "repo", "master", "Examples/Data", allowed, 1_000_000, listing_cache, "fake_token")
+    files = _list_github_files(
+        "owner", "repo", "master", "Examples/Data", allowed, 1_000_000, listing_cache, "fake_token"
+    )
     assert len(files) == 2
     paths = {f["path"] for f in files}
     assert "Examples/Data/test.exe" not in paths
@@ -100,6 +116,7 @@ def test_extension_allowlist_applied(tmp_path, monkeypatch):
 
 # ── Size limits ───────────────────────────────────────────────────────────────
 
+
 def test_file_size_limit_filters_large_files(tmp_path, monkeypatch):
     from plugin_examples.fixture_registry.fixture_fetcher import _list_github_files
 
@@ -108,10 +125,15 @@ def test_file_size_limit_filters_large_files(tmp_path, monkeypatch):
 
     safe_path = "Examples_Data"
     cache_file = listing_cache / f"{safe_path}.json"
-    cache_file.write_text(json.dumps([
-        {"path": "Examples/Data/small.dwg", "sha": "abc", "size": 100},
-        {"path": "Examples/Data/large.dwg", "sha": "def", "size": 10 * 1024 * 1024},  # 10 MB
-    ]), encoding="utf-8")
+    cache_file.write_text(
+        json.dumps(
+            [
+                {"path": "Examples/Data/small.dwg", "sha": "abc", "size": 100},
+                {"path": "Examples/Data/large.dwg", "sha": "def", "size": 10 * 1024 * 1024},  # 10 MB
+            ]
+        ),
+        encoding="utf-8",
+    )
 
     max_size = 5 * 1024 * 1024  # 5 MB limit
     files = _list_github_files("o", "r", "master", "Examples/Data", frozenset({".dwg"}), max_size, listing_cache, "tok")
@@ -120,6 +142,7 @@ def test_file_size_limit_filters_large_files(tmp_path, monkeypatch):
 
 
 # ── Cache hit / miss ──────────────────────────────────────────────────────────
+
 
 def test_cache_hit_skips_download(tmp_path):
     """If a cached file exists with matching SHA, no download should occur."""
@@ -131,6 +154,7 @@ def test_cache_hit_skips_download(tmp_path):
     # Write a fake cached file
     fake_content = b"fake dwg content"
     import hashlib
+
     sha = hashlib.sha256(fake_content).hexdigest()
     (cache_dir / "test.dwg").write_bytes(fake_content)
     manifest = {"test.dwg": {"file_sha256": sha, "source_path": "Examples/Data/test.dwg"}}
@@ -142,10 +166,14 @@ def test_cache_hit_skips_download(tmp_path):
 
     fake_listing = [{"path": "Examples/Data/test.dwg", "sha": "abc", "size": len(fake_content)}]
     import os
+
     with patch.dict(os.environ, {"GITHUB_TOKEN": "fake_token"}):
         with patch.object(ff, "_list_github_files", return_value=fake_listing):
             result = fetch_fixtures(
-                "cad", _GOOD_REPO_CONFIG, [".dwg"], dest_dir,
+                "cad",
+                _GOOD_REPO_CONFIG,
+                [".dwg"],
+                dest_dir,
                 cache_root=tmp_path / "cache",
             )
 
@@ -158,6 +186,7 @@ def test_cache_hit_skips_download(tmp_path):
 
 # ── Synthetic fallback ────────────────────────────────────────────────────────
 
+
 def test_synthetic_fallback_returns_correct_strategy():
     result = _synthetic_fallback("cad")
     assert result.strategy == "synthetic_fallback"
@@ -167,12 +196,14 @@ def test_synthetic_fallback_returns_correct_strategy():
 
 # ── Default extension allowlist ───────────────────────────────────────────────
 
+
 def test_default_extension_allowlist_covers_common_types():
     for ext in [".xlsx", ".docx", ".pdf", ".dwg", ".dxf", ".svg", ".ttf", ".png"]:
         assert ext in _DEFAULT_EXTENSION_ALLOWLIST, f"{ext} missing from default allowlist"
 
 
 # ── check_fixture_availability backward compat ───────────────────────────────
+
 
 def test_check_fixture_availability_backward_compat():
     from plugin_examples.fixture_registry.fixture_fetcher import check_fixture_availability

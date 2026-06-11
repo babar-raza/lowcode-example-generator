@@ -12,7 +12,6 @@ from plugin_examples.evidence_validator.models import RuleResult
 logger = logging.getLogger(__name__)
 
 
-
 class Sprint68to69Rules:
     """Rule mixin for evidence validation."""
 
@@ -29,20 +28,21 @@ class Sprint68to69Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="PDF root README must have >=19 example rows",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="root-readme/per-family/pdf-root-readme.md not found",
             )
         content = pdf_readme.read_text(encoding="utf-8", errors="replace")
         # Count rows in the examples table: lines with pipe-delimited content containing
         # the dotnet run command pattern (header row excluded)
-        run_rows = [ln for ln in content.splitlines()
-                    if "dotnet run" in ln and ln.strip().startswith("|")]
+        run_rows = [ln for ln in content.splitlines() if "dotnet run" in ln and ln.strip().startswith("|")]
         count = len(run_rows)
         if count < 19:
             return RuleResult(
                 rule_id=rule_id,
                 description="PDF root README must have >=19 example rows",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"PDF root README has only {count} example rows (need >=19). "
                     "Sprint 67 defect S67-D1: table was truncated at 3 rows."
@@ -51,7 +51,8 @@ class Sprint68to69Rules:
         return RuleResult(
             rule_id=rule_id,
             description="PDF root README must have >=19 example rows",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"PDF root README has {count} example rows (>= 19)",
         )
 
@@ -75,19 +76,22 @@ class Sprint68to69Rules:
                     return RuleResult(
                         rule_id=rule_id,
                         description="Splitter cardinality reconciliation document must be complete",
-                        severity="FAILURE", passed=False,
+                        severity="FAILURE",
+                        passed=False,
                         failure_detail=f"{candidate.name} contains IN_PROGRESS",
                     )
                 return RuleResult(
                     rule_id=rule_id,
                     description="Splitter cardinality reconciliation document must be complete",
-                    severity="FAILURE", passed=True,
+                    severity="FAILURE",
+                    passed=True,
                     evidence=f"Splitter cardinality reconciliation present: {candidate}",
                 )
         return RuleResult(
             rule_id=rule_id,
             description="Splitter cardinality reconciliation document must be complete",
-            severity="FAILURE", passed=False,
+            severity="FAILURE",
+            passed=False,
             failure_detail=(
                 "No splitter-resolution.md found in legacy-reconciliation/ or "
                 "legacy-plan-reconciliation/. Sprint 67 defect S67-D2."
@@ -108,7 +112,8 @@ class Sprint68to69Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Sprint content audit must have no stale PDF 26.4.0 version records",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="destination/ directory not found",
             )
         # Look for sprint-specific audit (e.g., content-audit-sprint68.json)
@@ -121,7 +126,8 @@ class Sprint68to69Rules:
                 return RuleResult(
                     rule_id=rule_id,
                     description="Sprint content audit must have no stale PDF 26.4.0 version records",
-                    severity="FAILURE", passed=False,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail=f"No content-audit-{sprint_id}.json found in destination/",
                 )
             audit_path = sorted(candidates)[-1]
@@ -131,7 +137,8 @@ class Sprint68to69Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Sprint content audit must have no stale PDF 26.4.0 version records",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=str(exc),
             )
         stale_records = [
@@ -143,7 +150,8 @@ class Sprint68to69Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Sprint content audit must have no stale PDF 26.4.0 version records",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"Found {len(stale_records)} PDF records with stale version 26.4.0: "
                     f"{stale_records[:5]}. Sprint 67 defect S67-D3."
@@ -152,7 +160,8 @@ class Sprint68to69Rules:
         return RuleResult(
             rule_id=rule_id,
             description="Sprint content audit must have no stale PDF 26.4.0 version records",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"No stale PDF 26.4.0 records in {audit_path.name}",
         )
 
@@ -169,7 +178,8 @@ class Sprint68to69Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="version/pdf-version-proof-chain.md must be present",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="version/pdf-version-proof-chain.md not found. Sprint 67 defect S67-D4.",
             )
         content = proof_path.read_text(encoding="utf-8", errors="replace")
@@ -177,13 +187,15 @@ class Sprint68to69Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="version/pdf-version-proof-chain.md must be present",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="pdf-version-proof-chain.md contains IN_PROGRESS",
             )
         return RuleResult(
             rule_id=rule_id,
             description="version/pdf-version-proof-chain.md must be present",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="version/pdf-version-proof-chain.md is present and complete",
         )
 
@@ -203,17 +215,20 @@ class Sprint68to69Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Words root README must have cardinality markers for multi-I/O types",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="root-readme/per-family/words-root-readme.md not found",
             )
         content = words_readme.read_text(encoding="utf-8", errors="replace")
-        has_multi_marker = ("×N" in content or "2×" in content or "(xN)" in content
-                            or "(×N)" in content or "xN" in content)
+        has_multi_marker = (
+            "×N" in content or "2×" in content or "(xN)" in content or "(×N)" in content or "xN" in content
+        )
         if not has_multi_marker:
             return RuleResult(
                 rule_id=rule_id,
                 description="Words root README must have cardinality markers for multi-I/O types",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "words-root-readme.md has no ×N or 2× cardinality markers. "
                     "Words Merger (N→1), Splitter (1→N), and Comparer (2→1) require annotations. "
@@ -223,7 +238,8 @@ class Sprint68to69Rules:
         return RuleResult(
             rule_id=rule_id,
             description="Words root README must have cardinality markers for multi-I/O types",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="words-root-readme.md contains multi-cardinality markers (×N or 2×)",
         )
 
@@ -238,6 +254,7 @@ class Sprint68to69Rules:
         but Directory.Packages.props said 26.5.0.
         """
         import re as _re
+
         rule_id = "handoff_index_version_matches_dpp"
         families = ["cells", "words", "pdf", "diagram", "email", "slides"]
         mismatches = []
@@ -260,13 +277,15 @@ class Sprint68to69Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Handoff-index nuget_version must match Directory.Packages.props for all families",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Version mismatches: {'; '.join(mismatches)}",
             )
         return RuleResult(
             rule_id=rule_id,
             description="Handoff-index nuget_version must match Directory.Packages.props for all families",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="All family handoff-index versions match Directory.Packages.props",
         )
 
@@ -282,7 +301,8 @@ class Sprint68to69Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="destination/content-audit-final.json must exist as the one canonical audit",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="destination/content-audit-final.json not found",
             )
         content = final_path.read_text(encoding="utf-8", errors="replace")
@@ -294,6 +314,7 @@ class Sprint68to69Rules:
                 continue
             # Check for stale sprint in path-like fields (handoff_path, local_package_path)
             import re as _re
+
             stale_in_paths = _re.findall(
                 rf'"(?:handoff_path|local_package_path|programcs_path|readme_path)"\s*:\s*"[^"]*{stale}[^"]*"',
                 content,
@@ -302,13 +323,15 @@ class Sprint68to69Rules:
                 return RuleResult(
                     rule_id=rule_id,
                     description="destination/content-audit-final.json must not contain stale sprint paths",
-                    severity="FAILURE", passed=False,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail=f"Stale {stale} paths found in content-audit-final.json: {stale_in_paths[:2]}",
                 )
         return RuleResult(
             rule_id=rule_id,
             description="destination/content-audit-final.json must exist with no stale sprint paths",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="content-audit-final.json exists and contains no stale sprint paths",
         )
 
@@ -323,7 +346,8 @@ class Sprint68to69Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="publication-truth-matrix-final.json must exist without stale sprint paths",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="publication/publication-truth-matrix-final.json not found",
             )
         content = ptm_path.read_text(encoding="utf-8", errors="replace")
@@ -333,6 +357,7 @@ class Sprint68to69Rules:
             if stale in sprint_id:
                 continue
             import re as _re
+
             stale_in_paths = _re.findall(
                 rf'"(?:handoff_package_path|dry_run_package_path|handoff_path)"\s*:\s*"[^"]*{stale}[^"]*"',
                 content,
@@ -341,13 +366,15 @@ class Sprint68to69Rules:
                 return RuleResult(
                     rule_id=rule_id,
                     description="publication-truth-matrix-final.json must not contain stale sprint paths",
-                    severity="FAILURE", passed=False,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail=f"Stale {stale} path refs in publication-truth-matrix-final.json: {stale_in_paths[:2]}",
                 )
         return RuleResult(
             rule_id=rule_id,
             description="publication-truth-matrix-final.json must exist without stale sprint paths",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="publication-truth-matrix-final.json contains no stale sprint paths",
         )
 
@@ -363,7 +390,8 @@ class Sprint68to69Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="publication-truth-matrix-final.json must not mix README I/O states",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="publication/publication-truth-matrix-final.json not found",
             )
         try:
@@ -383,20 +411,23 @@ class Sprint68to69Rules:
                 return RuleResult(
                     rule_id=rule_id,
                     description="No record may have readme_io_post_merge_verified=true while remote README lacks I/O docs",
-                    severity="FAILURE", passed=False,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail=f"Mixed state in {len(mixed)} records: {mixed[:3]}",
                 )
         except Exception as exc:
             return RuleResult(
                 rule_id=rule_id,
                 description="publication-truth-matrix-final.json must not mix README I/O states",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Cannot read publication-truth-matrix-final.json: {exc}",
             )
         return RuleResult(
             rule_id=rule_id,
             description="publication-truth-matrix-final.json must not mix README I/O states",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="No mixed readme_io_post_merge_verified / remote_example_readme_has_io_docs state",
         )
 
@@ -424,13 +455,15 @@ class Sprint68to69Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="All 6 family handoff-indexes must include root_readme field",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Missing root_readme: {'; '.join(missing)}",
             )
         return RuleResult(
             rule_id=rule_id,
             description="All 6 family handoff-indexes must include root_readme field",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="All 6 family handoff-index.json files have root_readme field",
         )
 
@@ -441,12 +474,8 @@ class Sprint68to69Rules:
         with no consolidated authority report.
         """
         rule_id = "exact_legacy_reconciliation_present"
-        final_path = (
-            self.bundle_dir / "legacy-reconciliation" / "exact-legacy-plan-reconciliation-final.md"
-        )
-        items_path = (
-            self.bundle_dir / "legacy-reconciliation" / "exact-items-final.json"
-        )
+        final_path = self.bundle_dir / "legacy-reconciliation" / "exact-legacy-plan-reconciliation-final.md"
+        items_path = self.bundle_dir / "legacy-reconciliation" / "exact-items-final.json"
         missing = []
         if not final_path.exists():
             missing.append("legacy-reconciliation/exact-legacy-plan-reconciliation-final.md")
@@ -456,13 +485,15 @@ class Sprint68to69Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Consolidated exact legacy reconciliation must exist",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Missing: {'; '.join(missing)}",
             )
         return RuleResult(
             rule_id=rule_id,
             description="Consolidated exact legacy reconciliation must exist",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="exact-legacy-plan-reconciliation-final.md and exact-items-final.json present",
         )
 
@@ -477,7 +508,8 @@ class Sprint68to69Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="final-verdict.md must use an allowed precise verdict",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="final-verdict.md not found",
             )
         content = verdict_path.read_text(encoding="utf-8", errors="replace")
@@ -521,14 +553,15 @@ class Sprint68to69Rules:
         ]
         # Check for generic SPRINT##_COMPLETE pattern
         import re as _re
+
         if _re.search(r"SPRINT\d+_COMPLETE", content):
             return RuleResult(
                 rule_id=rule_id,
                 description="final-verdict.md must not use generic SPRINT##_COMPLETE",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
-                    "final-verdict.md contains SPRINT##_COMPLETE which is overbroad. "
-                    f"Use one of: {allowed_verdicts}"
+                    "final-verdict.md contains SPRINT##_COMPLETE which is overbroad. " f"Use one of: {allowed_verdicts}"
                 ),
             )
         has_allowed = any(v in content for v in allowed_verdicts)
@@ -536,16 +569,17 @@ class Sprint68to69Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="final-verdict.md must contain an allowed precise verdict",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
-                    f"final-verdict.md contains no allowed verdict. "
-                    f"Expected one of: {allowed_verdicts}"
+                    f"final-verdict.md contains no allowed verdict. " f"Expected one of: {allowed_verdicts}"
                 ),
             )
         return RuleResult(
             rule_id=rule_id,
             description="final-verdict.md must use an allowed precise verdict",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="final-verdict.md contains an allowed precise verdict",
         )
 
@@ -562,7 +596,8 @@ class Sprint68to69Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="final-verdict.md must not claim complete while publication is blocked",
-                severity="FAILURE", passed=True,  # can't check without both files
+                severity="FAILURE",
+                passed=True,  # can't check without both files
                 evidence="Skipped: one or both files missing",
             )
         verdict_content = verdict_path.read_text(encoding="utf-8", errors="replace")
@@ -576,7 +611,8 @@ class Sprint68to69Rules:
                     return RuleResult(
                         rule_id=rule_id,
                         description="Cannot claim PUBLISHED_AND_POST_MERGE_VERIFIED while approval_blocked=true",
-                        severity="FAILURE", passed=False,
+                        severity="FAILURE",
+                        passed=False,
                         failure_detail=(
                             f"Verdict claims PUBLISHED but {len(blocked)}/42 records have approval_blocked=true"
                         ),
@@ -586,7 +622,8 @@ class Sprint68to69Rules:
         return RuleResult(
             rule_id=rule_id,
             description="final-verdict.md must not claim complete while publication is blocked",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="Verdict does not overclaim publication while blocked",
         )
 
@@ -602,7 +639,8 @@ class Sprint68to69Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="handoff/publication-handoff-index.json must exist with root_readme entries",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="handoff/publication-handoff-index.json not found",
             )
         try:
@@ -613,20 +651,23 @@ class Sprint68to69Rules:
                 return RuleResult(
                     rule_id=rule_id,
                     description="publication-handoff-index.json must have root_readme_sha256 for each family",
-                    severity="FAILURE", passed=False,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail=f"Missing root_readme_sha256 for: {missing_rr}",
                 )
         except Exception as exc:
             return RuleResult(
                 rule_id=rule_id,
                 description="handoff/publication-handoff-index.json must exist with root_readme entries",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Cannot read publication-handoff-index.json: {exc}",
             )
         return RuleResult(
             rule_id=rule_id,
             description="publication-handoff-index.json must have root_readme_sha256 for each family",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="All 6 family entries in publication-handoff-index.json have root_readme_sha256",
         )
 
@@ -642,7 +683,8 @@ class Sprint68to69Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="version/version-consistency-final.json must exist showing all_consistent=true",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="version/version-consistency-final.json not found",
             )
         try:
@@ -652,20 +694,23 @@ class Sprint68to69Rules:
                 return RuleResult(
                     rule_id=rule_id,
                     description="version/version-consistency-final.json must show all_consistent=true",
-                    severity="FAILURE", passed=False,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail=f"version-consistency-final.json: all_consistent=false, mismatches={mismatches}",
                 )
         except Exception as exc:
             return RuleResult(
                 rule_id=rule_id,
                 description="version/version-consistency-final.json must exist and be valid",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Cannot read version-consistency-final.json: {exc}",
             )
         return RuleResult(
             rule_id=rule_id,
             description="version/version-consistency-final.json must exist showing all_consistent=true",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="version-consistency-final.json: all_consistent=true, 0 mismatches",
         )
 

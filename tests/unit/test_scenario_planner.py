@@ -33,8 +33,13 @@ def _make_catalog() -> dict:
                         "kind": "class",
                         "is_obsolete": False,
                         "methods": [
-                            {"name": "Process", "return_type": "void", "is_static": True,
-                             "is_obsolete": False, "parameters": []},
+                            {
+                                "name": "Process",
+                                "return_type": "void",
+                                "is_static": True,
+                                "is_obsolete": False,
+                                "parameters": [],
+                            },
                         ],
                         "properties": [],
                         "constructors": [],
@@ -45,10 +50,20 @@ def _make_catalog() -> dict:
                         "kind": "class",
                         "is_obsolete": False,
                         "methods": [
-                            {"name": "Convert", "return_type": "void", "is_static": True,
-                             "is_obsolete": False, "parameters": []},
-                            {"name": "ConvertAsync", "return_type": "Task", "is_static": True,
-                             "is_obsolete": False, "parameters": []},
+                            {
+                                "name": "Convert",
+                                "return_type": "void",
+                                "is_static": True,
+                                "is_obsolete": False,
+                                "parameters": [],
+                            },
+                            {
+                                "name": "ConvertAsync",
+                                "return_type": "Task",
+                                "is_static": True,
+                                "is_obsolete": False,
+                                "parameters": [],
+                            },
                         ],
                         "properties": [],
                         "constructors": [],
@@ -59,8 +74,13 @@ def _make_catalog() -> dict:
                         "kind": "class",
                         "is_obsolete": False,
                         "methods": [
-                            {"name": "Process", "return_type": "void", "is_static": True,
-                             "is_obsolete": False, "parameters": []},
+                            {
+                                "name": "Process",
+                                "return_type": "void",
+                                "is_static": True,
+                                "is_obsolete": False,
+                                "parameters": [],
+                            },
                         ],
                         "properties": [],
                         "constructors": [],
@@ -71,8 +91,13 @@ def _make_catalog() -> dict:
                         "kind": "class",
                         "is_obsolete": True,
                         "methods": [
-                            {"name": "DoStuff", "return_type": "void", "is_static": True,
-                             "is_obsolete": True, "parameters": []},
+                            {
+                                "name": "DoStuff",
+                                "return_type": "void",
+                                "is_static": True,
+                                "is_obsolete": True,
+                                "parameters": [],
+                            },
                         ],
                         "properties": [],
                         "constructors": [],
@@ -106,10 +131,14 @@ def _make_catalog() -> dict:
 def _make_proof(tmp_path: Path, eligible: bool = True) -> str:
     """Write a proof file and return its path."""
     proof_path = tmp_path / "proof.json"
-    proof_path.write_text(json.dumps({
-        "eligibility_status": "eligible" if eligible else "not_eligible",
-        "eligibility_reason": "test",
-    }))
+    proof_path.write_text(
+        json.dumps(
+            {
+                "eligibility_status": "eligible" if eligible else "not_eligible",
+                "eligibility_reason": "test",
+            }
+        )
+    )
     return str(proof_path)
 
 
@@ -167,10 +196,7 @@ class TestScenarioPlanner:
             plugin_namespaces=["Aspose.Cells.LowCode"],
             source_of_truth_proof_path=proof,
         )
-        enum_scenarios = [
-            s for s in result.blocked_scenarios
-            if s.target_type == "Aspose.Cells.LowCode.SaveFormat"
-        ]
+        enum_scenarios = [s for s in result.blocked_scenarios if s.target_type == "Aspose.Cells.LowCode.SaveFormat"]
         assert len(enum_scenarios) == 1
         assert enum_scenarios[0].status == "blocked_enum_not_runnable"
 
@@ -196,10 +222,7 @@ class TestScenarioPlanner:
             source_of_truth_proof_path=proof,
             allowed_types=["PdfConverter"],
         )
-        enum_scenarios = [
-            s for s in result.blocked_scenarios
-            if s.target_type == "Aspose.Cells.LowCode.SaveFormat"
-        ]
+        enum_scenarios = [s for s in result.blocked_scenarios if s.target_type == "Aspose.Cells.LowCode.SaveFormat"]
         assert len(enum_scenarios) == 1
         assert enum_scenarios[0].status == "blocked_enum_not_runnable"
 
@@ -218,14 +241,30 @@ class TestScenarioPlanner:
     def test_only_plugin_namespaces_planned(self, tmp_path):
         proof = _make_proof(tmp_path)
         catalog = _make_catalog()
-        catalog["namespaces"].append({
-            "namespace": "Aspose.Cells",
-            "types": [{"name": "Workbook", "full_name": "Aspose.Cells.Workbook",
-                        "kind": "class", "is_obsolete": False,
-                        "methods": [{"name": "Save", "return_type": "void",
-                                     "is_static": False, "is_obsolete": False, "parameters": []}],
-                        "properties": [], "constructors": []}],
-        })
+        catalog["namespaces"].append(
+            {
+                "namespace": "Aspose.Cells",
+                "types": [
+                    {
+                        "name": "Workbook",
+                        "full_name": "Aspose.Cells.Workbook",
+                        "kind": "class",
+                        "is_obsolete": False,
+                        "methods": [
+                            {
+                                "name": "Save",
+                                "return_type": "void",
+                                "is_static": False,
+                                "is_obsolete": False,
+                                "parameters": [],
+                            }
+                        ],
+                        "properties": [],
+                        "constructors": [],
+                    }
+                ],
+            }
+        )
         result = plan_scenarios(
             family="cells",
             catalog=catalog,
@@ -266,14 +305,25 @@ class TestScenarioPlanner:
     def test_abstract_class_blocked(self, tmp_path):
         proof = _make_proof(tmp_path)
         catalog = _make_catalog()
-        catalog["namespaces"][0]["types"].append({
-            "name": "AbstractLowCodeLoadOptionsProvider",
-            "full_name": "Aspose.Cells.LowCode.AbstractLowCodeLoadOptionsProvider",
-            "kind": "abstract_class", "is_obsolete": False,
-            "methods": [{"name": "MoveNext", "return_type": "bool",
-                         "is_static": False, "is_obsolete": False, "parameters": []}],
-            "properties": [], "constructors": [],
-        })
+        catalog["namespaces"][0]["types"].append(
+            {
+                "name": "AbstractLowCodeLoadOptionsProvider",
+                "full_name": "Aspose.Cells.LowCode.AbstractLowCodeLoadOptionsProvider",
+                "kind": "abstract_class",
+                "is_obsolete": False,
+                "methods": [
+                    {
+                        "name": "MoveNext",
+                        "return_type": "bool",
+                        "is_static": False,
+                        "is_obsolete": False,
+                        "parameters": [],
+                    }
+                ],
+                "properties": [],
+                "constructors": [],
+            }
+        )
         result = plan_scenarios(
             family="cells",
             catalog=catalog,
@@ -302,8 +352,9 @@ class TestScenarioCatalogWriter:
         result = PlanningResult(
             family="cells",
             ready_scenarios=[
-                Scenario(scenario_id="cells-test", title="Test", target_type="T",
-                         target_namespace="NS", status="ready"),
+                Scenario(
+                    scenario_id="cells-test", title="Test", target_type="T", target_namespace="NS", status="ready"
+                ),
             ],
         )
         path = write_scenario_catalog(result, tmp_path / "workspace" / "manifests")
@@ -317,9 +368,14 @@ class TestScenarioCatalogWriter:
         result = PlanningResult(
             family="cells",
             blocked_scenarios=[
-                Scenario(scenario_id="cells-blocked", title="Blocked", target_type="T",
-                         target_namespace="NS", status="blocked_obsolete",
-                         blocked_reason="Obsolete"),
+                Scenario(
+                    scenario_id="cells-blocked",
+                    title="Blocked",
+                    target_type="T",
+                    target_namespace="NS",
+                    status="blocked_obsolete",
+                    blocked_reason="Obsolete",
+                ),
             ],
         )
         path = write_blocked_scenarios(result, tmp_path / "workspace" / "verification")
@@ -357,19 +413,30 @@ class TestFixtureExtension:
         words_catalog = {
             "assembly_name": "Aspose.Words",
             "assembly_version": "26.4.0",
-            "namespaces": [{
-                "namespace": "Aspose.Words.LowCode",
-                "types": [{
-                    "name": "Converter",
-                    "full_name": "Aspose.Words.LowCode.Converter",
-                    "kind": "class",
-                    "is_obsolete": False,
-                    "methods": [{"name": "Convert", "return_type": "void", "is_static": True,
-                                  "is_obsolete": False, "parameters": []}],
-                    "properties": [],
-                    "constructors": [],
-                }],
-            }],
+            "namespaces": [
+                {
+                    "namespace": "Aspose.Words.LowCode",
+                    "types": [
+                        {
+                            "name": "Converter",
+                            "full_name": "Aspose.Words.LowCode.Converter",
+                            "kind": "class",
+                            "is_obsolete": False,
+                            "methods": [
+                                {
+                                    "name": "Convert",
+                                    "return_type": "void",
+                                    "is_static": True,
+                                    "is_obsolete": False,
+                                    "parameters": [],
+                                }
+                            ],
+                            "properties": [],
+                            "constructors": [],
+                        }
+                    ],
+                }
+            ],
         }
         result = plan_scenarios(
             family="words",
@@ -387,19 +454,30 @@ class TestFixtureExtension:
         pdf_catalog = {
             "assembly_name": "Aspose.PDF",
             "assembly_version": "26.5.0",
-            "namespaces": [{
-                "namespace": "Aspose.Pdf.LowCode",
-                "types": [{
-                    "name": "Optimizer",
-                    "full_name": "Aspose.Pdf.LowCode.Optimizer",
-                    "kind": "class",
-                    "is_obsolete": False,
-                    "methods": [{"name": "Process", "return_type": "void", "is_static": False,
-                                  "is_obsolete": False, "parameters": []}],
-                    "properties": [],
-                    "constructors": [],
-                }],
-            }],
+            "namespaces": [
+                {
+                    "namespace": "Aspose.Pdf.LowCode",
+                    "types": [
+                        {
+                            "name": "Optimizer",
+                            "full_name": "Aspose.Pdf.LowCode.Optimizer",
+                            "kind": "class",
+                            "is_obsolete": False,
+                            "methods": [
+                                {
+                                    "name": "Process",
+                                    "return_type": "void",
+                                    "is_static": False,
+                                    "is_obsolete": False,
+                                    "parameters": [],
+                                }
+                            ],
+                            "properties": [],
+                            "constructors": [],
+                        }
+                    ],
+                }
+            ],
         }
         result = plan_scenarios(
             family="pdf",

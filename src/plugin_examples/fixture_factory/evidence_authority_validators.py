@@ -22,8 +22,13 @@ from typing import Any
 
 
 REQUIRED_ATTESTATION_FIELDS = [
-    "path", "sha256", "size_bytes", "entry_count",
-    "feat_commit", "sidecar_path", "protocol_version",
+    "path",
+    "sha256",
+    "size_bytes",
+    "entry_count",
+    "feat_commit",
+    "sidecar_path",
+    "protocol_version",
 ]
 
 
@@ -35,9 +40,7 @@ class EAVResult:
     detail: dict[str, Any] = field(default_factory=dict)
 
 
-def eav_01_iv_not_final_pass_with_pending_taskcards(
-    iv_results: dict, taskcards: dict
-) -> EAVResult:
+def eav_01_iv_not_final_pass_with_pending_taskcards(iv_results: dict, taskcards: dict) -> EAVResult:
     """IV cannot be final PASS while any current sprint taskcard is PENDING."""
     iv_verdict = iv_results.get("verdict", "")
     is_final = iv_results.get("is_final", True)  # default: assume final unless marked PARTIAL
@@ -50,16 +53,17 @@ def eav_01_iv_not_final_pass_with_pending_taskcards(
 
     pending = [t["id"] for t in taskcards.get("taskcards", []) if t.get("status") == "PENDING"]
     if pending:
-        return EAVResult("EAV-01", False,
+        return EAVResult(
+            "EAV-01",
+            False,
             f"IV claims IV_PASS but {len(pending)} taskcards are PENDING: {pending}",
-            {"pending_taskcards": pending, "iv_verdict": iv_verdict})
+            {"pending_taskcards": pending, "iv_verdict": iv_verdict},
+        )
 
     return EAVResult("EAV-01", True, f"IV_PASS with 0 PENDING taskcards — OK")
 
 
-def eav_02_ar_not_final_pass_with_pending_taskcards(
-    ar_results: dict, taskcards: dict
-) -> EAVResult:
+def eav_02_ar_not_final_pass_with_pending_taskcards(ar_results: dict, taskcards: dict) -> EAVResult:
     """Adversarial review cannot be final PASS while taskcards are PENDING."""
     ar_verdict = ar_results.get("verdict", "")
     review_type = ar_results.get("review_type", "FINAL")
@@ -72,16 +76,17 @@ def eav_02_ar_not_final_pass_with_pending_taskcards(
 
     pending = [t["id"] for t in taskcards.get("taskcards", []) if t.get("status") == "PENDING"]
     if pending:
-        return EAVResult("EAV-02", False,
+        return EAVResult(
+            "EAV-02",
+            False,
             f"Adversarial review FINAL PASS but {len(pending)} taskcards PENDING: {pending}",
-            {"pending_taskcards": pending})
+            {"pending_taskcards": pending},
+        )
 
     return EAVResult("EAV-02", True, "Adversarial review FINAL PASS with 0 PENDING taskcards — OK")
 
 
-def eav_03_external_sidecar_exists_and_valid(
-    sidecar_path: str, bundle_path: str
-) -> EAVResult:
+def eav_03_external_sidecar_exists_and_valid(sidecar_path: str, bundle_path: str) -> EAVResult:
     """External .sha256 sidecar must exist and match bundle SHA."""
     if not os.path.exists(sidecar_path):
         return EAVResult("EAV-03", False, f"External sidecar missing: {sidecar_path}")
@@ -104,9 +109,12 @@ def eav_03_external_sidecar_exists_and_valid(
     actual_sha = sha256.hexdigest()
 
     if sidecar_sha != actual_sha:
-        return EAVResult("EAV-03", False,
+        return EAVResult(
+            "EAV-03",
+            False,
             f"Sidecar SHA mismatch: sidecar={sidecar_sha[:16]}..., bundle={actual_sha[:16]}...",
-            {"sidecar_sha": sidecar_sha, "bundle_sha": actual_sha})
+            {"sidecar_sha": sidecar_sha, "bundle_sha": actual_sha},
+        )
 
     return EAVResult("EAV-03", True, f"Sidecar matches bundle: {actual_sha[:16]}...")
 
@@ -126,17 +134,22 @@ def eav_04_external_attestation_exists_and_complete(
 
     missing = [field for field in REQUIRED_ATTESTATION_FIELDS if field not in attestation]
     if missing:
-        return EAVResult("EAV-04", False,
+        return EAVResult(
+            "EAV-04",
+            False,
             f"Attestation missing required fields: {missing}",
-            {"missing_fields": missing, "present_fields": list(attestation.keys())})
+            {"missing_fields": missing, "present_fields": list(attestation.keys())},
+        )
 
     protocol = attestation.get("protocol_version", "")
     if protocol != "v2":
-        return EAVResult("EAV-04", False,
-            f"Attestation protocol_version={protocol!r} (expected 'v2')")
+        return EAVResult("EAV-04", False, f"Attestation protocol_version={protocol!r} (expected 'v2')")
 
-    return EAVResult("EAV-04", True,
-        f"Attestation complete with all {len(REQUIRED_ATTESTATION_FIELDS)} required fields, protocol_version=v2")
+    return EAVResult(
+        "EAV-04",
+        True,
+        f"Attestation complete with all {len(REQUIRED_ATTESTATION_FIELDS)} required fields, protocol_version=v2",
+    )
 
 
 def eav_05_prebundle_closeout_not_claiming_final_authority(
@@ -163,17 +176,18 @@ def eav_05_prebundle_closeout_not_claiming_final_authority(
             if closeout_type == "FINAL" or (verdict == "SPRINT_COMPLETE" and "sha256" in content):
                 sha_in_closeout = content.get("evidence_bundle", {}).get("sha256") or content.get("sha256")
                 if sha_in_closeout:
-                    return EAVResult("EAV-05", False,
+                    return EAVResult(
+                        "EAV-05",
+                        False,
                         f"Inside-bundle closeout {entry!r} claims final SHA authority: {sha_in_closeout[:16]}... "
                         f"This is the ZIP-contains-own-SHA flaw. Must be labeled PRE_BUNDLE_CLOSEOUT.",
-                        {"entry": entry, "sha_in_closeout": sha_in_closeout, "closeout_type": closeout_type})
+                        {"entry": entry, "sha_in_closeout": sha_in_closeout, "closeout_type": closeout_type},
+                    )
 
     return EAVResult("EAV-05", True, "Inside-bundle closeout(s) do not claim final SHA authority — OK")
 
 
-def eav_06_bundle_entry_count_matches_attestation(
-    bundle_path: str, attestation_path: str
-) -> EAVResult:
+def eav_06_bundle_entry_count_matches_attestation(bundle_path: str, attestation_path: str) -> EAVResult:
     """Bundle entry count in attestation must match actual ZIP entry count."""
     if not os.path.exists(bundle_path):
         return EAVResult("EAV-06", False, f"Bundle missing: {bundle_path}")
@@ -191,9 +205,12 @@ def eav_06_bundle_entry_count_matches_attestation(
         return EAVResult("EAV-06", False, "Attestation missing entry_count field")
 
     if actual_entries != claimed_entries:
-        return EAVResult("EAV-06", False,
+        return EAVResult(
+            "EAV-06",
+            False,
             f"Entry count mismatch: bundle={actual_entries}, attestation={claimed_entries}",
-            {"bundle_entries": actual_entries, "attestation_entries": claimed_entries})
+            {"bundle_entries": actual_entries, "attestation_entries": claimed_entries},
+        )
 
     return EAVResult("EAV-06", True, f"Entry count matches: {actual_entries} entries")
 

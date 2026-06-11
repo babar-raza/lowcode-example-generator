@@ -12,7 +12,6 @@ from plugin_examples.evidence_validator.models import RuleResult
 logger = logging.getLogger(__name__)
 
 
-
 class Sprint70to71Rules:
     """Rule mixin for evidence validation."""
 
@@ -45,13 +44,15 @@ class Sprint70to71Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Handoff-index root_readme.source_path must be inside current sprint handoff folder",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Stale root README source paths: {'; '.join(stale_paths)}",
             )
         return RuleResult(
             rule_id=rule_id,
             description="Handoff-index root_readme.source_path must be inside current sprint handoff folder",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"All 6 family handoff-index root_readme.source_path values are inside reports/{sprint_id}/handoff/",
         )
 
@@ -82,13 +83,15 @@ class Sprint70to71Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Root README file must physically exist at source_path for all families",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Missing root README files: {'; '.join(missing)}",
             )
         return RuleResult(
             rule_id=rule_id,
             description="Root README file must physically exist at source_path for all families",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="All 6 family root README files are physically present at their source_path",
         )
 
@@ -99,6 +102,7 @@ class Sprint70to71Rules:
         """
         rule_id = "handoff_root_readme_hash_matches"
         import hashlib as _hashlib
+
         families = ["cells", "words", "pdf", "diagram", "email", "slides"]
         mismatches = []
         for family in families:
@@ -118,22 +122,22 @@ class Sprint70to71Rules:
                     continue
                 h = _hashlib.sha256(file_path.read_bytes()).hexdigest()
                 if h != stored_hash:
-                    mismatches.append(
-                        f"{family}: stored={stored_hash[:16]}… actual={h[:16]}… for {src!r}"
-                    )
+                    mismatches.append(f"{family}: stored={stored_hash[:16]}… actual={h[:16]}… for {src!r}")
             except Exception as exc:
                 mismatches.append(f"{family}: read error {exc}")
         if mismatches:
             return RuleResult(
                 rule_id=rule_id,
                 description="root_readme.sha256 in handoff-index must match physical file",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Hash mismatches: {'; '.join(mismatches)}",
             )
         return RuleResult(
             rule_id=rule_id,
             description="root_readme.sha256 in handoff-index must match physical file",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="All 6 family root README sha256 hashes match their physical files",
         )
 
@@ -144,12 +148,14 @@ class Sprint70to71Rules:
         """
         rule_id = "publication_handoff_root_readme_hash_matches"
         import hashlib as _hashlib
+
         phi_path = self.bundle_dir / "handoff" / "publication-handoff-index.json"
         if not phi_path.exists():
             return RuleResult(
                 rule_id=rule_id,
                 description="publication-handoff-index.json must exist with correct root README hashes",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="handoff/publication-handoff-index.json not found",
             )
         try:
@@ -158,7 +164,8 @@ class Sprint70to71Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="publication-handoff-index.json must be valid JSON with root README hashes",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Cannot parse publication-handoff-index.json: {exc}",
             )
         families_data = phi.get("families", [])
@@ -166,7 +173,8 @@ class Sprint70to71Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="publication-handoff-index.json families must be a list",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="families field is not a list",
             )
         mismatches = []
@@ -182,20 +190,20 @@ class Sprint70to71Rules:
                 continue
             actual = _hashlib.sha256(file_path.read_bytes()).hexdigest()
             if actual != stored_hash:
-                mismatches.append(
-                    f"{family}: phi_hash={stored_hash[:16]}… actual={actual[:16]}…"
-                )
+                mismatches.append(f"{family}: phi_hash={stored_hash[:16]}… actual={actual[:16]}…")
         if mismatches:
             return RuleResult(
                 rule_id=rule_id,
                 description="publication-handoff-index root_readme_sha256 must match physical files",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Hash mismatches: {'; '.join(mismatches)}",
             )
         return RuleResult(
             rule_id=rule_id,
             description="publication-handoff-index root_readme_sha256 must match physical files",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="All family root_readme_sha256 in publication-handoff-index match physical files",
         )
 
@@ -222,7 +230,8 @@ class Sprint70to71Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="exact-legacy-plan-reconciliation-final.md must exist as current authority",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="legacy-reconciliation/exact-legacy-plan-reconciliation-final.md not found",
             )
 
@@ -232,7 +241,8 @@ class Sprint70to71Rules:
                 return RuleResult(
                     rule_id=rule_id,
                     description="Old legacy-plan-reconciliation/reconciliation-index.md must be marked superseded",
-                    severity="FAILURE", passed=False,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail=(
                         "legacy-plan-reconciliation/reconciliation-index.md exists without superseded marker. "
                         "Create history/legacy-plan-reconciliation-superseded.md or legacy-reconciliation/README.md"
@@ -242,7 +252,8 @@ class Sprint70to71Rules:
         return RuleResult(
             rule_id=rule_id,
             description="Old legacy reconciliation index must be superseded by current authority",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="Final authority exists; old simplified index is either absent or marked superseded",
         )
 
@@ -263,7 +274,8 @@ class Sprint70to71Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="destination/content-audit-final.json must exist with no stale sprint paths",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="destination/content-audit-final.json not found",
             )
         try:
@@ -273,20 +285,23 @@ class Sprint70to71Rules:
                 return RuleResult(
                     rule_id=rule_id,
                     description="destination/content-audit-final.json must have no stale sprint paths",
-                    severity="FAILURE", passed=False,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail=f"Stale sprint paths found in content-audit-final.json: {stale}",
                 )
         except (OSError, ValueError) as e:
             return RuleResult(
                 rule_id=rule_id,
                 description="destination/content-audit-final.json must be readable",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=str(e),
             )
         return RuleResult(
             rule_id=rule_id,
             description="destination/content-audit-final.json contains no stale sprint paths",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="destination/content-audit-final.json scanned — no stale sprint paths found",
         )
 
@@ -302,7 +317,8 @@ class Sprint70to71Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="publication/publication-truth-matrix-final.json must exist with no stale sprint paths",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="publication/publication-truth-matrix-final.json not found",
             )
         try:
@@ -312,20 +328,23 @@ class Sprint70to71Rules:
                 return RuleResult(
                     rule_id=rule_id,
                     description="publication/publication-truth-matrix-final.json must have no stale sprint paths",
-                    severity="FAILURE", passed=False,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail=f"Stale sprint paths found in publication-truth-matrix-final.json: {stale}",
                 )
         except (OSError, ValueError) as e:
             return RuleResult(
                 rule_id=rule_id,
                 description="publication/publication-truth-matrix-final.json must be readable",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=str(e),
             )
         return RuleResult(
             rule_id=rule_id,
             description="publication/publication-truth-matrix-final.json contains no stale sprint paths",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="publication/publication-truth-matrix-final.json scanned — no stale sprint paths found",
         )
 
@@ -337,7 +356,8 @@ class Sprint70to71Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="handoff/per-family/ must exist",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="handoff/per-family/ not found",
             )
         stale_found = {}
@@ -354,13 +374,15 @@ class Sprint70to71Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="All handoff-index.json files must have no stale sprint paths",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Stale paths in handoff indexes: {stale_found}",
             )
         return RuleResult(
             rule_id=rule_id,
             description="All handoff-index.json files contain no stale sprint paths",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="All per-family handoff-index.json files scanned — no stale sprint paths found",
         )
 
@@ -372,7 +394,8 @@ class Sprint70to71Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="remote/remote-vs-handoff-final.json must exist with no stale sprint paths",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="remote/remote-vs-handoff-final.json not found",
             )
         try:
@@ -382,20 +405,23 @@ class Sprint70to71Rules:
                 return RuleResult(
                     rule_id=rule_id,
                     description="remote/remote-vs-handoff-final.json must have no stale sprint paths",
-                    severity="FAILURE", passed=False,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail=f"Stale sprint paths found in remote-vs-handoff-final.json: {stale}",
                 )
         except (OSError, ValueError) as e:
             return RuleResult(
                 rule_id=rule_id,
                 description="remote/remote-vs-handoff-final.json must be readable",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=str(e),
             )
         return RuleResult(
             rule_id=rule_id,
             description="remote/remote-vs-handoff-final.json contains no stale sprint paths",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="remote/remote-vs-handoff-final.json scanned — no stale sprint paths found",
         )
 
@@ -412,7 +438,8 @@ class Sprint70to71Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="destination/content-audit-final.json must exist",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="destination/content-audit-final.json not found",
             )
         try:
@@ -429,20 +456,23 @@ class Sprint70to71Rules:
                 return RuleResult(
                     rule_id=rule_id,
                     description="All handoff_path references in content-audit-final.json must exist",
-                    severity="FAILURE", passed=False,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail=f"{len(missing)} handoff_path(s) not found: {missing[:3]}{'...' if len(missing) > 3 else ''}",
                 )
         except (OSError, ValueError) as e:
             return RuleResult(
                 rule_id=rule_id,
                 description="content-audit-final.json must be parseable",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=str(e),
             )
         return RuleResult(
             rule_id=rule_id,
             description="All handoff_path references in content-audit-final.json exist physically",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"All {len(records)} handoff_path(s) verified to exist",
         )
 
@@ -454,7 +484,8 @@ class Sprint70to71Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="publication/publication-truth-matrix-final.json must exist",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="publication/publication-truth-matrix-final.json not found",
             )
         try:
@@ -471,20 +502,23 @@ class Sprint70to71Rules:
                 return RuleResult(
                     rule_id=rule_id,
                     description="All handoff_package_path references in publication-truth-matrix-final.json must exist",
-                    severity="FAILURE", passed=False,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail=f"{len(missing)} handoff_package_path(s) not found: {missing[:3]}{'...' if len(missing) > 3 else ''}",
                 )
         except (OSError, ValueError) as e:
             return RuleResult(
                 rule_id=rule_id,
                 description="publication-truth-matrix-final.json must be parseable",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=str(e),
             )
         return RuleResult(
             rule_id=rule_id,
             description="All handoff_package_path references in publication-truth-matrix-final.json exist physically",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"All {len(records)} handoff_package_path(s) verified to exist",
         )
 

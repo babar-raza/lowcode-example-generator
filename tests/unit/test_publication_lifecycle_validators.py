@@ -1,4 +1,5 @@
 """Tests for PLV-01..15 publication lifecycle validators (Wave 22)."""
+
 from __future__ import annotations
 
 import json
@@ -123,9 +124,7 @@ class TestPlv05ReadmeQuality:
 
     def test_passes_for_quality_readme(self, tmp_path):
         content = (
-            "# family/slug\n\n## Purpose\nDoes X.\n\n"
-            "## Prerequisites\n.NET 8\n\n"
-            "## Expected Output\nPNG file.\n"
+            "# family/slug\n\n## Purpose\nDoes X.\n\n" "## Prerequisites\n.NET 8\n\n" "## Expected Output\nPNG file.\n"
         )
         (tmp_path / "README.md").write_text(content, encoding="utf-8")
         r = PlvResult()
@@ -359,17 +358,21 @@ class TestRunAllPlvChecks:
             repo_root=repo,
             family="barcode",
             slugs=["1d-barcode-reader"],
-            registry_entries=[{
-                "registry_status": "PR_CREATED",
-                "slug": "1d-barcode-reader",
-                "pr_url": "https://github.com/x/y/pull/1",
-            }],
-            branch_cleanup_records=[{
-                "branch": "plugins/wave22/barcode",
-                "deleted": False,
-                "merged": False,
-                "retention_reason": "",
-            }],
+            registry_entries=[
+                {
+                    "registry_status": "PR_CREATED",
+                    "slug": "1d-barcode-reader",
+                    "pr_url": "https://github.com/x/y/pull/1",
+                }
+            ],
+            branch_cleanup_records=[
+                {
+                    "branch": "plugins/wave22/barcode",
+                    "deleted": False,
+                    "merged": False,
+                    "retention_reason": "",
+                }
+            ],
             bundle_path=str(bundle),
             sha_file=str(sidecar),
             attestation_file=str(attest),

@@ -28,19 +28,46 @@ _FAMILY_DEFAULTS: dict[str, str] = {
 # Active types per family
 _ACTIVE_TYPES: dict[str, list[str]] = {
     "cells": [
-        "SpreadsheetConverter", "JsonConverter", "HtmlConverter", "TextConverter",
-        "ImageConverter", "SpreadsheetMerger", "SpreadsheetSplitter",
-        "SpreadsheetLocker", "PdfConverter",
+        "SpreadsheetConverter",
+        "JsonConverter",
+        "HtmlConverter",
+        "TextConverter",
+        "ImageConverter",
+        "SpreadsheetMerger",
+        "SpreadsheetSplitter",
+        "SpreadsheetLocker",
+        "PdfConverter",
     ],
     "words": [
-        "Converter", "Merger", "Splitter", "Comparer",
-        "MailMerger", "ReportBuilder", "Watermarker", "Replacer",
+        "Converter",
+        "Merger",
+        "Splitter",
+        "Comparer",
+        "MailMerger",
+        "ReportBuilder",
+        "Watermarker",
+        "Replacer",
     ],
     "pdf": [
-        "DocConverter", "XlsConverter", "Html", "Jpeg", "Png", "Tiff",
-        "TextExtractor", "Merger", "Splitter", "Optimizer", "PdfAConverter",
-        "TocGenerator", "TableGenerator", "ImageExtractor", "Security",
-        "FormFlattener", "FormEditor", "FormExporter", "Signature",
+        "DocConverter",
+        "XlsConverter",
+        "Html",
+        "Jpeg",
+        "Png",
+        "Tiff",
+        "TextExtractor",
+        "Merger",
+        "Splitter",
+        "Optimizer",
+        "PdfAConverter",
+        "TocGenerator",
+        "TableGenerator",
+        "ImageExtractor",
+        "Security",
+        "FormFlattener",
+        "FormEditor",
+        "FormExporter",
+        "Signature",
     ],
     "diagram": ["DiagramConverter", "PdfConverter"],
     "email": ["Converter"],
@@ -49,10 +76,24 @@ _ACTIVE_TYPES: dict[str, list[str]] = {
 
 # Types that use template_first
 _TEMPLATE_FIRST_TYPES: set[str] = {
-    "DocConverter", "XlsConverter", "Html", "Jpeg", "Png", "Tiff",
-    "Merger", "Splitter", "Optimizer", "PdfAConverter",
-    "TocGenerator", "TableGenerator", "ImageExtractor", "Security",
-    "FormFlattener", "FormEditor", "FormExporter", "Signature",
+    "DocConverter",
+    "XlsConverter",
+    "Html",
+    "Jpeg",
+    "Png",
+    "Tiff",
+    "Merger",
+    "Splitter",
+    "Optimizer",
+    "PdfAConverter",
+    "TocGenerator",
+    "TableGenerator",
+    "ImageExtractor",
+    "Security",
+    "FormFlattener",
+    "FormEditor",
+    "FormExporter",
+    "Signature",
 }
 
 
@@ -97,6 +138,7 @@ def populate_manifest(family: str) -> FormatCapabilityManifest:
         # Try FormatContract first for all fields
         try:
             from plugin_examples.format_authority.store import get_contract
+
             fc = get_contract(family, type_name)
             op_kind = fc.operation_kind
             input_fmt = fc.input_format
@@ -113,9 +155,7 @@ def populate_manifest(family: str) -> FormatCapabilityManifest:
             out_kind = _infer_output_kind(op_kind)
             confidence = "inferred"
 
-        is_template_first = (
-            family == "pdf" and type_name in _TEMPLATE_FIRST_TYPES
-        )
+        is_template_first = family == "pdf" and type_name in _TEMPLATE_FIRST_TYPES
 
         types[type_name] = TypeFormatCapability(
             family=family,

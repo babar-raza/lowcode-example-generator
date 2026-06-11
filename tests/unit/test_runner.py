@@ -31,6 +31,7 @@ from plugin_examples.runner import (
 # Helpers — minimal fakes for dataclasses used by the runner
 # ---------------------------------------------------------------------------
 
+
 def _make_ctx(tmp_path: Path, **overrides) -> PipelineContext:
     """Create a PipelineContext with sensible defaults for testing."""
     run_dir = tmp_path / "workspace" / "runs" / "test-run"
@@ -138,10 +139,20 @@ class TestScenarioToDict:
         s = FakeScenario()
         d = scenario_to_dict(s)
         expected_keys = {
-            "scenario_id", "title", "target_type", "target_namespace",
-            "target_methods", "required_symbols", "required_fixtures",
-            "output_plan", "validation_plan", "status", "blocked_reason",
-            "input_strategy", "input_files", "required_input_format",
+            "scenario_id",
+            "title",
+            "target_type",
+            "target_namespace",
+            "target_methods",
+            "required_symbols",
+            "required_fixtures",
+            "output_plan",
+            "validation_plan",
+            "status",
+            "blocked_reason",
+            "input_strategy",
+            "input_files",
+            "required_input_format",
         }
         assert set(d.keys()) == expected_keys
 
@@ -216,9 +227,7 @@ class TestLLMWrapperBridgesSignature:
 
         result = llm_fn("prompt text", "system prompt text")
         assert result == "generated code"
-        mock_router.generate.assert_called_once_with(
-            "prompt text", system_prompt="system prompt text"
-        )
+        mock_router.generate.assert_called_once_with("prompt text", system_prompt="system prompt text")
 
 
 # ---------------------------------------------------------------------------
@@ -239,9 +248,11 @@ class TestRunStage:
     def test_failure(self, tmp_path):
         ctx = _make_ctx(tmp_path)
         fn = lambda c: (_ for _ in ()).throw(RuntimeError("boom"))
+
         # Use a proper function that raises
         def failing_fn(c):
             raise RuntimeError("boom")
+
         result = _run_stage("test_stage", 1, failing_fn, ctx)
         assert result.status == "failed"
         assert "boom" in result.error
@@ -267,6 +278,7 @@ class TestHardStopOnNugetFailure:
     def test_nuget_failure_is_hard_stop(self, tmp_path):
         def fail_fn(ctx):
             raise ConnectionError("NuGet unavailable")
+
         result = _run_stage("nuget_fetch", 2, fail_fn, _make_ctx(tmp_path))
         assert result.status == "failed"
         assert "NuGet unavailable" in result.error
@@ -276,6 +288,7 @@ class TestHardStopOnExtractionFailure:
     def test_extraction_failure_is_hard_stop(self, tmp_path):
         def fail_fn(ctx):
             raise FileNotFoundError("DLL not found in nupkg")
+
         result = _run_stage("extraction", 4, fail_fn, _make_ctx(tmp_path))
         assert result.status == "failed"
         assert "DLL not found" in result.error
@@ -285,6 +298,7 @@ class TestHardStopOnReflectionFailure:
     def test_reflection_failure_is_hard_stop(self, tmp_path):
         def fail_fn(ctx):
             raise RuntimeError("DllReflector crashed")
+
         result = _run_stage("reflection", 5, fail_fn, _make_ctx(tmp_path))
         assert result.status == "failed"
         assert "DllReflector crashed" in result.error
@@ -294,6 +308,7 @@ class TestHardStopOnSotIneligible:
     def test_sot_ineligible_is_hard_stop(self, tmp_path):
         def fail_fn(ctx):
             raise RuntimeError("Not eligible: no matched namespaces")
+
         result = _run_stage("plugin_detection", 6, fail_fn, _make_ctx(tmp_path))
         assert result.status == "failed"
 
@@ -307,8 +322,7 @@ class TestDegradedLLMUnavailable:
     def test_llm_failure_without_require_is_degraded(self, tmp_path):
         """LLM failure should degrade (not hard stop) when require_llm=False."""
         stages = [
-            StageResult(name="llm_preflight", order=13, status="failed",
-                       error="No provider"),
+            StageResult(name="llm_preflight", order=13, status="failed", error="No provider"),
         ]
         # The runner converts failed -> degraded for llm_preflight when not required
         ctx = _make_ctx(tmp_path, require_llm=False)
@@ -323,8 +337,7 @@ class TestConditionalHardStopRequireLLM:
     def test_llm_failure_with_require_is_hard_stop(self, tmp_path):
         """LLM failure should remain 'failed' when require_llm=True."""
         ctx = _make_ctx(tmp_path, require_llm=True)
-        result = StageResult(name="llm_preflight", order=13, status="failed",
-                            error="No provider")
+        result = StageResult(name="llm_preflight", order=13, status="failed", error="No provider")
         # With require_llm=True, runner does NOT downgrade to degraded
         if result.status == "failed" and result.name == "llm_preflight" and not ctx.require_llm:
             result.status = "degraded"
@@ -334,8 +347,7 @@ class TestConditionalHardStopRequireLLM:
 class TestDegradedReviewerUnavailable:
     def test_reviewer_failure_without_require_is_degraded(self, tmp_path):
         ctx = _make_ctx(tmp_path, require_reviewer=False)
-        result = StageResult(name="reviewer", order=16, status="failed",
-                            error="Not installed")
+        result = StageResult(name="reviewer", order=16, status="failed", error="Not installed")
         if result.status == "failed" and not ctx.require_reviewer:
             result.status = "degraded"
         assert result.status == "degraded"
@@ -344,8 +356,7 @@ class TestDegradedReviewerUnavailable:
 class TestConditionalHardStopRequireValidation:
     def test_validation_failure_with_require_is_hard_stop(self, tmp_path):
         ctx = _make_ctx(tmp_path, require_validation=True)
-        result = StageResult(name="validation", order=15, status="failed",
-                            error="Build failed")
+        result = StageResult(name="validation", order=15, status="failed", error="Build failed")
         if result.status == "failed" and result.name == "validation" and not ctx.require_validation:
             result.status = "degraded"
         assert result.status == "failed"
@@ -354,8 +365,7 @@ class TestConditionalHardStopRequireValidation:
 class TestConditionalHardStopRequireReviewer:
     def test_reviewer_failure_with_require_is_hard_stop(self, tmp_path):
         ctx = _make_ctx(tmp_path, require_reviewer=True)
-        result = StageResult(name="reviewer", order=16, status="failed",
-                            error="Not installed")
+        result = StageResult(name="reviewer", order=16, status="failed", error="Not installed")
         if result.status == "failed" and result.name == "reviewer" and not ctx.require_reviewer:
             result.status = "degraded"
         assert result.status == "failed"
@@ -364,10 +374,10 @@ class TestConditionalHardStopRequireReviewer:
 class TestSoftStageContinuesOnError:
     def test_api_delta_failure_degrades(self, tmp_path):
         """Non-hard-stop stages degrade instead of stopping the pipeline."""
-        result = StageResult(name="api_delta", order=8, status="failed",
-                            error="Unexpected")
+        result = StageResult(name="api_delta", order=8, status="failed", error="Unexpected")
         # api_delta is NOT in HARD_STOP_STAGES, so runner degrades it
         from plugin_examples.runner import HARD_STOP_STAGES
+
         assert "api_delta" not in HARD_STOP_STAGES
         if result.status == "failed" and result.name not in HARD_STOP_STAGES:
             result.status = "degraded"
@@ -395,11 +405,22 @@ class TestDetermineVerdict:
     def _make_stages(self, overrides: dict | None = None) -> list[StageResult]:
         """Create a default list of successful stages."""
         names = [
-            "load_config", "nuget_fetch", "dependency_resolution",
-            "extraction", "reflection", "plugin_detection",
-            "api_delta", "impact_mapping", "fixture_registry",
-            "example_mining", "scenario_planning", "llm_preflight",
-            "generation", "validation", "reviewer", "publisher",
+            "load_config",
+            "nuget_fetch",
+            "dependency_resolution",
+            "extraction",
+            "reflection",
+            "plugin_detection",
+            "api_delta",
+            "impact_mapping",
+            "fixture_registry",
+            "example_mining",
+            "scenario_planning",
+            "llm_preflight",
+            "generation",
+            "validation",
+            "reviewer",
+            "publisher",
         ]
         stages = []
         for i, name in enumerate(names):
@@ -420,39 +441,47 @@ class TestDetermineVerdict:
 
     def test_blocked_no_generation(self, tmp_path):
         ctx = _make_ctx(tmp_path)
-        stages = self._make_stages({
-            "scenario_planning": {"artifacts": {"ready_count": 5, "blocked_count": 0}},
-            "generation": {"status": "success", "artifacts": {"examples_generated": 0}},
-        })
+        stages = self._make_stages(
+            {
+                "scenario_planning": {"artifacts": {"ready_count": 5, "blocked_count": 0}},
+                "generation": {"status": "success", "artifacts": {"examples_generated": 0}},
+            }
+        )
         assert _determine_verdict(stages, ctx) == "BLOCKED_GENERATION"
 
     def test_data_flow_prototype_template_mode(self, tmp_path):
         ctx = _make_ctx(tmp_path, template_mode=True)
-        stages = self._make_stages({
-            "scenario_planning": {"artifacts": {"ready_count": 3, "blocked_count": 0}},
-            "generation": {"artifacts": {"examples_generated": 3, "generation_mode": "template"}},
-            "validation": {"artifacts": {"passed": 0, "failed": 3, "total": 3}},
-        })
+        stages = self._make_stages(
+            {
+                "scenario_planning": {"artifacts": {"ready_count": 3, "blocked_count": 0}},
+                "generation": {"artifacts": {"examples_generated": 3, "generation_mode": "template"}},
+                "validation": {"artifacts": {"passed": 0, "failed": 3, "total": 3}},
+            }
+        )
         verdict = _determine_verdict(stages, ctx)
         assert verdict == "DATA_FLOW_PROTOTYPE_ONLY"
 
     def test_data_flow_prototype_skip_run(self, tmp_path):
         ctx = _make_ctx(tmp_path, template_mode=False, skip_run=True)
-        stages = self._make_stages({
-            "scenario_planning": {"artifacts": {"ready_count": 3, "blocked_count": 0}},
-            "generation": {"artifacts": {"examples_generated": 3, "generation_mode": "llm"}},
-            "validation": {"artifacts": {"passed": 3, "failed": 0, "total": 3}},
-        })
+        stages = self._make_stages(
+            {
+                "scenario_planning": {"artifacts": {"ready_count": 3, "blocked_count": 0}},
+                "generation": {"artifacts": {"examples_generated": 3, "generation_mode": "llm"}},
+                "validation": {"artifacts": {"passed": 3, "failed": 0, "total": 3}},
+            }
+        )
         verdict = _determine_verdict(stages, ctx)
         assert verdict == "DATA_FLOW_PROTOTYPE_ONLY"
 
     def test_blocked_build_failed_llm(self, tmp_path):
         ctx = _make_ctx(tmp_path, template_mode=False, skip_run=False)
-        stages = self._make_stages({
-            "scenario_planning": {"artifacts": {"ready_count": 3, "blocked_count": 0}},
-            "generation": {"artifacts": {"examples_generated": 3, "generation_mode": "llm"}},
-            "validation": {"artifacts": {"passed": 0, "failed": 3, "total": 3}},
-        })
+        stages = self._make_stages(
+            {
+                "scenario_planning": {"artifacts": {"ready_count": 3, "blocked_count": 0}},
+                "generation": {"artifacts": {"examples_generated": 3, "generation_mode": "llm"}},
+                "validation": {"artifacts": {"passed": 0, "failed": 3, "total": 3}},
+            }
+        )
         verdict = _determine_verdict(stages, ctx)
         assert verdict == "BLOCKED_BUILD_FAILED"
 
@@ -467,16 +496,30 @@ class TestBuildReport:
         ctx = _make_ctx(tmp_path)
         stages = [
             StageResult(name=n, order=i + 1, status="success", artifacts={})
-            for i, n in enumerate([
-                "load_config", "nuget_fetch", "dependency_resolution",
-                "extraction", "reflection", "plugin_detection",
-                "api_delta", "impact_mapping", "fixture_registry",
-                "example_mining", "scenario_planning", "llm_preflight",
-                "generation", "validation", "reviewer", "publisher",
-            ])
+            for i, n in enumerate(
+                [
+                    "load_config",
+                    "nuget_fetch",
+                    "dependency_resolution",
+                    "extraction",
+                    "reflection",
+                    "plugin_detection",
+                    "api_delta",
+                    "impact_mapping",
+                    "fixture_registry",
+                    "example_mining",
+                    "scenario_planning",
+                    "llm_preflight",
+                    "generation",
+                    "validation",
+                    "reviewer",
+                    "publisher",
+                ]
+            )
         ]
         report = _build_report(
-            ctx, stages,
+            ctx,
+            stages,
             before={"manifests_files": [], "verification_files": []},
             after={"manifests_files": [], "verification_files": [], "run_evidence_files": []},
             start_time="2026-04-28T00:00:00Z",
@@ -485,8 +528,7 @@ class TestBuildReport:
             command="test command",
         )
         # Required top-level keys
-        for key in ("meta", "before", "after", "comparison", "stages",
-                     "gate_summary", "environment", "verdict"):
+        for key in ("meta", "before", "after", "comparison", "stages", "gate_summary", "environment", "verdict"):
             assert key in report, f"Missing key: {key}"
 
         # Meta
@@ -513,12 +555,10 @@ class TestBuildReport:
     def test_report_serializable(self, tmp_path):
         """Report must be JSON-serializable."""
         ctx = _make_ctx(tmp_path)
-        stages = [
-            StageResult(name="load_config", order=1, status="success",
-                       artifacts={"family": "cells"})
-        ]
+        stages = [StageResult(name="load_config", order=1, status="success", artifacts={"family": "cells"})]
         report = _build_report(
-            ctx, stages,
+            ctx,
+            stages,
             before={"manifests_files": [], "verification_files": []},
             after={"manifests_files": [], "verification_files": [], "run_evidence_files": []},
             start_time="2026-04-28T00:00:00Z",
@@ -571,12 +611,10 @@ class TestCleanRunDirSafety:
 class TestNoOldRootPaths:
     def test_runner_does_not_create_old_root_paths(self, tmp_path):
         """Runner must never create bare configs/, schemas/, etc. at repo root."""
-        forbidden = ["configs", "schemas", "prompts", "runs",
-                     "manifests", "verification"]
+        forbidden = ["configs", "schemas", "prompts", "runs", "manifests", "verification"]
         # After a potential run, check no forbidden dirs at root
         for name in forbidden:
-            assert not (tmp_path / name).exists(), \
-                f"Forbidden old-root path found: {name}/"
+            assert not (tmp_path / name).exists(), f"Forbidden old-root path found: {name}/"
 
 
 # ---------------------------------------------------------------------------
@@ -589,12 +627,12 @@ class TestMainWiring:
         """__main__.py run command should call runner.run_pipeline."""
         with patch("plugin_examples.runner.run_pipeline") as mock_rp:
             mock_rp.return_value = {
-                "gate_summary": {"passed": 10, "degraded": 0, "failed": 0,
-                                  "hard_stopped": False},
+                "gate_summary": {"passed": 10, "degraded": 0, "failed": 0, "hard_stopped": False},
                 "verdict": "DATA_FLOW_PROTOTYPE_ONLY",
             }
             from plugin_examples.__main__ import main
             import sys
+
             with patch.object(sys, "argv", ["plugin-examples", "run", "--family", "cells"]):
                 exit_code = main()
             assert exit_code == 0
@@ -614,48 +652,67 @@ class TestRunPipelineMocked:
     def _mock_all_stages(self):
         """Return a dict of patches for all stage functions."""
         return {
-            "load_config": patch("plugin_examples.runner._stage_load_config",
-                                return_value={"family": "cells", "package_id": "Aspose.Cells"}),
-            "nuget_fetch": patch("plugin_examples.runner._stage_nuget_fetch",
-                                return_value={"version": "25.4.0", "sha256": "abc123",
-                                              "cached_path": "/tmp/pkg.nupkg"}),
-            "dep_res": patch("plugin_examples.runner._stage_dependency_resolution",
-                            return_value={"dependency_count": 3}),
-            "extraction": patch("plugin_examples.runner._stage_extraction",
-                               return_value={"selected_framework": "netstandard2.0",
-                                             "dll_path": "/tmp/Aspose.Cells.dll",
-                                             "xml_path": None}),
-            "reflection": patch("plugin_examples.runner._stage_reflection",
-                               return_value={"catalog_path": "/tmp/catalog.json",
-                                             "namespace_count": 1}),
-            "detection": patch("plugin_examples.runner._stage_plugin_detection",
-                              return_value={"eligible": True,
-                                            "matched_namespaces": ["Aspose.Cells.LowCode"],
-                                            "plugin_type_count": 5,
-                                            "plugin_method_count": 20}),
-            "delta": patch("plugin_examples.runner._stage_api_delta",
-                          return_value={"initial_run": True, "total_changes": 5}),
-            "impact": patch("plugin_examples.runner._stage_impact_mapping",
-                           return_value={"new_api_needed": 0}),
-            "fixtures": patch("plugin_examples.runner._stage_fixture_registry",
-                             return_value={"fixture_count": 0}),
-            "mining": patch("plugin_examples.runner._stage_example_mining",
-                           return_value={"mined_total": 0, "stale_count": 0}),
-            "planning": patch("plugin_examples.runner._stage_scenario_planning",
-                             return_value={"ready_count": 2, "blocked_count": 1}),
-            "llm": patch("plugin_examples.runner._stage_llm_preflight",
-                        return_value={"selected_provider": None, "llm_available": False}),
-            "generation": patch("plugin_examples.runner._stage_generation",
-                               return_value={"examples_generated": 2,
-                                             "generation_mode": "template"}),
-            "validation": patch("plugin_examples.runner._stage_validation",
-                               return_value={"total": 2, "passed": 0, "failed": 2}),
-            "reviewer": patch("plugin_examples.runner._stage_reviewer",
-                             return_value={"available": False, "passed": False}),
-            "publisher": patch("plugin_examples.runner._stage_publisher",
-                              return_value={"status": "dry_run",
-                                            "evidence_verified": True,
-                                            "files_included": 2}),
+            "load_config": patch(
+                "plugin_examples.runner._stage_load_config",
+                return_value={"family": "cells", "package_id": "Aspose.Cells"},
+            ),
+            "nuget_fetch": patch(
+                "plugin_examples.runner._stage_nuget_fetch",
+                return_value={"version": "25.4.0", "sha256": "abc123", "cached_path": "/tmp/pkg.nupkg"},
+            ),
+            "dep_res": patch(
+                "plugin_examples.runner._stage_dependency_resolution", return_value={"dependency_count": 3}
+            ),
+            "extraction": patch(
+                "plugin_examples.runner._stage_extraction",
+                return_value={
+                    "selected_framework": "netstandard2.0",
+                    "dll_path": "/tmp/Aspose.Cells.dll",
+                    "xml_path": None,
+                },
+            ),
+            "reflection": patch(
+                "plugin_examples.runner._stage_reflection",
+                return_value={"catalog_path": "/tmp/catalog.json", "namespace_count": 1},
+            ),
+            "detection": patch(
+                "plugin_examples.runner._stage_plugin_detection",
+                return_value={
+                    "eligible": True,
+                    "matched_namespaces": ["Aspose.Cells.LowCode"],
+                    "plugin_type_count": 5,
+                    "plugin_method_count": 20,
+                },
+            ),
+            "delta": patch(
+                "plugin_examples.runner._stage_api_delta", return_value={"initial_run": True, "total_changes": 5}
+            ),
+            "impact": patch("plugin_examples.runner._stage_impact_mapping", return_value={"new_api_needed": 0}),
+            "fixtures": patch("plugin_examples.runner._stage_fixture_registry", return_value={"fixture_count": 0}),
+            "mining": patch(
+                "plugin_examples.runner._stage_example_mining", return_value={"mined_total": 0, "stale_count": 0}
+            ),
+            "planning": patch(
+                "plugin_examples.runner._stage_scenario_planning", return_value={"ready_count": 2, "blocked_count": 1}
+            ),
+            "llm": patch(
+                "plugin_examples.runner._stage_llm_preflight",
+                return_value={"selected_provider": None, "llm_available": False},
+            ),
+            "generation": patch(
+                "plugin_examples.runner._stage_generation",
+                return_value={"examples_generated": 2, "generation_mode": "template"},
+            ),
+            "validation": patch(
+                "plugin_examples.runner._stage_validation", return_value={"total": 2, "passed": 0, "failed": 2}
+            ),
+            "reviewer": patch(
+                "plugin_examples.runner._stage_reviewer", return_value={"available": False, "passed": False}
+            ),
+            "publisher": patch(
+                "plugin_examples.runner._stage_publisher",
+                return_value={"status": "dry_run", "evidence_verified": True, "files_included": 2},
+            ),
         }
 
     def test_full_pipeline_mocked(self, tmp_path):
@@ -740,8 +797,9 @@ class TestRunPipelineMocked:
             # Stages beyond tier 1 (order > 6) should be skipped
             for stage in report["stages"]:
                 if stage["order"] > 6:
-                    assert stage["status"] == "skipped", \
-                        f"Stage {stage['name']} (order {stage['order']}) should be skipped at tier 1"
+                    assert (
+                        stage["status"] == "skipped"
+                    ), f"Stage {stage['name']} (order {stage['order']}) should be skipped at tier 1"
 
         finally:
             for p in patches.values():
@@ -758,6 +816,7 @@ class TestGenerationFramework:
         """Runner must pass net8.0 to generate_project, not extraction framework."""
         import inspect
         from plugin_examples.runner import _stage_generation
+
         source = inspect.getsource(_stage_generation)
         # Must NOT reference selected_framework for generate_project
         assert 'target_framework="net8.0"' in source or "net8.0" in source
@@ -778,6 +837,7 @@ class TestDiscoveryOnlySafetyGuard:
     @patch("plugin_examples.family_config.load_family_config")
     def test_run_blocks_discovery_only_family(self, mock_load, tmp_path):
         from plugin_examples.runner import _stage_load_config
+
         mock_load.return_value = self._make_mock_config("discovery_only")
         ctx = _make_ctx(tmp_path, family="words")
         result = _run_stage("load_config", 1, _stage_load_config, ctx)
@@ -787,6 +847,7 @@ class TestDiscoveryOnlySafetyGuard:
     @patch("plugin_examples.family_config.load_family_config")
     def test_discovery_only_not_suppressed_by_allow_experimental(self, mock_load, tmp_path):
         from plugin_examples.runner import _stage_load_config
+
         mock_load.return_value = self._make_mock_config("discovery_only")
         ctx = _make_ctx(tmp_path, family="words")
         ctx._allow_experimental = True
@@ -797,6 +858,7 @@ class TestDiscoveryOnlySafetyGuard:
     @patch("plugin_examples.family_config.load_family_config")
     def test_run_allows_active_family(self, mock_load, tmp_path):
         from plugin_examples.runner import _stage_load_config
+
         mock_load.return_value = self._make_mock_config("active", family="cells")
         ctx = _make_ctx(tmp_path, family="cells")
         result = _run_stage("load_config", 1, _stage_load_config, ctx)
@@ -805,6 +867,7 @@ class TestDiscoveryOnlySafetyGuard:
     @patch("plugin_examples.family_config.load_family_config")
     def test_experimental_blocked_without_flag(self, mock_load, tmp_path):
         from plugin_examples.runner import _stage_load_config
+
         mock_load.return_value = self._make_mock_config("experimental")
         ctx = _make_ctx(tmp_path, family="words")
         result = _run_stage("load_config", 1, _stage_load_config, ctx)
@@ -814,6 +877,7 @@ class TestDiscoveryOnlySafetyGuard:
     @patch("plugin_examples.family_config.load_family_config")
     def test_experimental_allowed_with_flag(self, mock_load, tmp_path):
         from plugin_examples.runner import _stage_load_config
+
         mock_load.return_value = self._make_mock_config("experimental")
         ctx = _make_ctx(tmp_path, family="words")
         ctx._allow_experimental = True
@@ -829,17 +893,16 @@ class TestDiscoveryOnlySafetyGuard:
         Only experimental families (without --allow-experimental) get that status.
         """
         from plugin_examples.discovery_sweep import _discover_family
+
         mock_load.return_value = self._make_mock_config("discovery_only", family="words")
         # Raise at fetch so we don't need the full pipeline — we only need to prove
         # the guard does NOT return experimental_skipped for discovery_only.
         mock_fetch.side_effect = RuntimeError("blocked at fetch (test sentinel)")
 
-        result = _discover_family("words", tmp_path, allow_experimental=False,
-                                  verification_dir=tmp_path)
+        result = _discover_family("words", tmp_path, allow_experimental=False, verification_dir=tmp_path)
         # discovery_only must NOT be treated as experimental_skipped
         assert result["status"] != "experimental_skipped", (
-            "discovery_only families must be allowed in discover-lowcode, "
-            f"got status: {result['status']}"
+            "discovery_only families must be allowed in discover-lowcode, " f"got status: {result['status']}"
         )
         # Must also not be silently disabled
         assert result["status"] != "disabled"
@@ -853,6 +916,7 @@ class TestDiscoveryOnlySafetyGuard:
         LLM preflight at stage 12.
         """
         from plugin_examples.runner import _stage_load_config
+
         mock_load.return_value = self._make_mock_config("discovery_only")
         ctx = _make_ctx(tmp_path, family="words")
         result = _run_stage("load_config", 1, _stage_load_config, ctx)
@@ -869,6 +933,7 @@ class TestDiscoveryOnlySafetyGuard:
         The stage-1 guard provably prevents example generation from executing.
         """
         from plugin_examples.runner import _stage_load_config
+
         mock_load.return_value = self._make_mock_config("discovery_only")
         ctx = _make_ctx(tmp_path, family="words")
         result = _run_stage("load_config", 1, _stage_load_config, ctx)
@@ -885,6 +950,7 @@ class TestDiscoveryOnlySafetyGuard:
         The stage-1 guard provably prevents the publisher from executing.
         """
         from plugin_examples.runner import _stage_load_config
+
         mock_load.return_value = self._make_mock_config("discovery_only")
         ctx = _make_ctx(tmp_path, family="words")
         result = _run_stage("load_config", 1, _stage_load_config, ctx)
@@ -900,13 +966,26 @@ class TestTemplateModeVerdict:
         """Template mode must NOT produce FULL E2E PASSED verdict."""
         ctx = _make_ctx(tmp_path, template_mode=True)
         stages = []
-        for i, name in enumerate([
-            "load_config", "nuget_fetch", "dependency_resolution",
-            "extraction", "reflection", "plugin_detection",
-            "api_delta", "impact_mapping", "fixture_registry",
-            "example_mining", "scenario_planning", "llm_preflight",
-            "generation", "validation", "reviewer", "publisher",
-        ]):
+        for i, name in enumerate(
+            [
+                "load_config",
+                "nuget_fetch",
+                "dependency_resolution",
+                "extraction",
+                "reflection",
+                "plugin_detection",
+                "api_delta",
+                "impact_mapping",
+                "fixture_registry",
+                "example_mining",
+                "scenario_planning",
+                "llm_preflight",
+                "generation",
+                "validation",
+                "reviewer",
+                "publisher",
+            ]
+        ):
             s = StageResult(name=name, order=i + 1, status="success")
             stages.append(s)
         # Template mode generation with validation passing
@@ -981,9 +1060,7 @@ class TestVersionDriftPreflight:
         """Denominator missing source_version key → no drift (graceful)."""
         denom_dir = tmp_path / "pipeline" / "configs" / "denominators"
         denom_dir.mkdir(parents=True, exist_ok=True)
-        (denom_dir / "cells.json").write_text(
-            json.dumps({"workflow_root_types": 9}), encoding="utf-8"
-        )
+        (denom_dir / "cells.json").write_text(json.dumps({"workflow_root_types": 9}), encoding="utf-8")
         ctx = _make_ctx(tmp_path, family="cells")
         ctx.download_manifest = {"version": "26.5.0", "sha256": "abc", "cached_path": "x"}
         result = _stage_version_drift_preflight(ctx)
@@ -993,14 +1070,11 @@ class TestVersionDriftPreflight:
     def test_stage_in_definitions_after_nuget_fetch(self):
         """version_drift_preflight must appear after nuget_fetch in STAGE_DEFINITIONS."""
         from plugin_examples.runner import STAGE_DEFINITIONS
+
         names = [s[0] for s in STAGE_DEFINITIONS]
         assert "version_drift_preflight" in names
         nuget_idx = names.index("nuget_fetch")
         drift_idx = names.index("version_drift_preflight")
-        assert drift_idx > nuget_idx, (
-            "version_drift_preflight must appear after nuget_fetch in STAGE_DEFINITIONS"
-        )
+        assert drift_idx > nuget_idx, "version_drift_preflight must appear after nuget_fetch in STAGE_DEFINITIONS"
         dep_idx = names.index("dependency_resolution")
-        assert drift_idx < dep_idx, (
-            "version_drift_preflight must appear before dependency_resolution"
-        )
+        assert drift_idx < dep_idx, "version_drift_preflight must appear before dependency_resolution"

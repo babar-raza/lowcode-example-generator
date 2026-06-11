@@ -1,5 +1,6 @@
 """Run ECC for Healing Sprint 1B."""
-import sys, json
+import sys
+import json
 from datetime import datetime, timezone
 from pathlib import Path
 

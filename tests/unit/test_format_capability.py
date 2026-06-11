@@ -21,6 +21,7 @@ from plugin_examples.format_capability.serializer import (
 
 # --- Classifier tests ---
 
+
 class TestClassifyOperationKind:
     def test_converter(self):
         assert classify_operation_kind("DocConverter") == "converter"
@@ -94,6 +95,7 @@ class TestClassifyOperationKind:
 
 # --- Populator tests ---
 
+
 class TestPopulateManifest:
     @pytest.mark.parametrize("family", list(_ACTIVE_TYPES.keys()))
     def test_populate_all_families(self, family):
@@ -144,9 +146,7 @@ class TestPopulateManifest:
         for family in _ACTIVE_TYPES:
             m = populate_manifest(family)
             for type_name, cap in m.types.items():
-                assert cap.primary_output_format != ".out", (
-                    f"{family}:{type_name} has .out output"
-                )
+                assert cap.primary_output_format != ".out", f"{family}:{type_name} has .out output"
 
     def test_total_type_count(self):
         total = sum(len(types) for types in _ACTIVE_TYPES.values())
@@ -154,6 +154,7 @@ class TestPopulateManifest:
 
 
 # --- Validator tests ---
+
 
 class TestValidateManifest:
     def test_valid_manifest(self):
@@ -165,38 +166,52 @@ class TestValidateManifest:
     def test_all_families_valid(self, family):
         m = populate_manifest(family)
         result = validate_manifest(m)
-        assert result.valid, (
-            f"{family} validation failed: "
-            + "; ".join(f"{i.type_name}: {i.message}" for i in result.issues if i.severity == "error")
+        assert result.valid, f"{family} validation failed: " + "; ".join(
+            f"{i.type_name}: {i.message}" for i in result.issues if i.severity == "error"
         )
 
     def test_dot_out_detected(self):
-        m = FormatCapabilityManifest(family="test", types={
-            "Bad": TypeFormatCapability(
-                family="test", type_name="Bad", operation_kind="converter",
-                input_format=".pdf", input_cardinality="single",
-                primary_output_format=".out", output_cardinality="single",
-                output_kind="file",
-            ),
-        })
+        m = FormatCapabilityManifest(
+            family="test",
+            types={
+                "Bad": TypeFormatCapability(
+                    family="test",
+                    type_name="Bad",
+                    operation_kind="converter",
+                    input_format=".pdf",
+                    input_cardinality="single",
+                    primary_output_format=".out",
+                    output_cardinality="single",
+                    output_kind="file",
+                ),
+            },
+        )
         result = validate_manifest(m)
         assert not result.valid
         assert any(".out" in i.message for i in result.issues)
 
     def test_missing_input_format_detected(self):
-        m = FormatCapabilityManifest(family="test", types={
-            "Bad": TypeFormatCapability(
-                family="test", type_name="Bad", operation_kind="converter",
-                input_format="", input_cardinality="single",
-                primary_output_format=".pdf", output_cardinality="single",
-                output_kind="file",
-            ),
-        })
+        m = FormatCapabilityManifest(
+            family="test",
+            types={
+                "Bad": TypeFormatCapability(
+                    family="test",
+                    type_name="Bad",
+                    operation_kind="converter",
+                    input_format="",
+                    input_cardinality="single",
+                    primary_output_format=".pdf",
+                    output_cardinality="single",
+                    output_kind="file",
+                ),
+            },
+        )
         result = validate_manifest(m)
         assert not result.valid
 
 
 # --- Serializer tests ---
+
 
 class TestSerializer:
     def test_round_trip(self):

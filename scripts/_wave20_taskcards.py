@@ -1,5 +1,6 @@
 """Wave 20 ultra-wide sprint taskcards."""
-import json, os
+import json
+import os
 
 SPRINT = "lowcode-plugin-canonical-package-wave20-20260607"
 SPRINT_ID = "LOWCODE-PLUGIN-CANONICAL-PACKAGE-WAVE20-ULTRA-WIDE-FINISH-LINE-PUBLICATION-CI-DOCS-VALIDATION-RELEASE-MEGA-TRAIN-001"

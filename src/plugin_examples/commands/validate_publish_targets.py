@@ -15,11 +15,15 @@ def add_parser(subparsers):
         help="Check publish readiness for family configs",
     )
     parser.add_argument(
-        "--families", nargs="+", metavar="FAMILY", default=["cells", "words", "pdf"],
+        "--families",
+        nargs="+",
+        metavar="FAMILY",
+        default=["cells", "words", "pdf"],
         help="Families to validate (default: cells words pdf)",
     )
     parser.add_argument(
-        "--promote-latest", action="store_true",
+        "--promote-latest",
+        action="store_true",
         help="Write report to workspace/verification/latest/ (always on)",
     )
 
@@ -39,7 +43,9 @@ def handle(args) -> int:
 
     repo_root = _Path(__file__).resolve().parents[3]
     msession, mcollector = _create_metrics_session(
-        args, command="validate-publish-targets", repo_root=repo_root,
+        args,
+        command="validate-publish-targets",
+        repo_root=repo_root,
     )
     config_dir = repo_root / "pipeline" / "configs" / "families"
     verification_dir = repo_root / "workspace" / "verification"
@@ -73,4 +79,3 @@ def handle(args) -> int:
         items_failed=result["total_families"] - result["publish_ready_count"],
     )
     return 0 if result["publish_ready_count"] > 0 else 1
-

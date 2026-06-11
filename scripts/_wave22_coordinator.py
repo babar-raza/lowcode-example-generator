@@ -384,7 +384,7 @@ def lane_c_nlc_pr_audit():
 
         # Check per-example README quality
         example_slugs = [p.split("/")[3] for p in tree_paths
-                         if p.startswith(f"examples/{family}/") and p.count("/") == 3 and not "." in p.split("/")[3]]
+                         if p.startswith(f"examples/{family}/") and p.count("/") == 3 and "." not in p.split("/")[3]]
         example_slugs = list(dict.fromkeys(example_slugs))  # dedupe
 
         for slug in example_slugs:

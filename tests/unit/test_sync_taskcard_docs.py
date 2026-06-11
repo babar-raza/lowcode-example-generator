@@ -13,16 +13,31 @@ _SAMPLE_MATRIX = {
     "matrix_date": "2026-05-04",
     "sprint": "Test Sprint",
     "taskcards": [
-        {"id": "followup-words-split-criteria-enumeration", "status": "OPEN",
-         "title": "SplitCriteria enum", "blocking": "WORDS-005"},
-        {"id": "followup-words-pair-fixture-strategy", "status": "OPEN",
-         "title": "Paired fixture strategy", "blocking": "WORDS-006/007"},
-        {"id": "followup-fixture-token-ci", "status": "OPEN",
-         "title": "CI token docs", "blocking": "CI integration"},
-        {"id": "followup-pdf-reflection-dedup", "status": "CLOSED",
-         "title": "PDF DllReflector dedup", "closed_in": "PDF Assembly Deduplication Sprint"},
-        {"id": "followup-words-options-aware-review", "status": "CLOSED",
-         "title": "Words options-aware review", "closed_in": "Words Readiness Review Sprint"},
+        {
+            "id": "followup-words-split-criteria-enumeration",
+            "status": "OPEN",
+            "title": "SplitCriteria enum",
+            "blocking": "WORDS-005",
+        },
+        {
+            "id": "followup-words-pair-fixture-strategy",
+            "status": "OPEN",
+            "title": "Paired fixture strategy",
+            "blocking": "WORDS-006/007",
+        },
+        {"id": "followup-fixture-token-ci", "status": "OPEN", "title": "CI token docs", "blocking": "CI integration"},
+        {
+            "id": "followup-pdf-reflection-dedup",
+            "status": "CLOSED",
+            "title": "PDF DllReflector dedup",
+            "closed_in": "PDF Assembly Deduplication Sprint",
+        },
+        {
+            "id": "followup-words-options-aware-review",
+            "status": "CLOSED",
+            "title": "Words options-aware review",
+            "closed_in": "Words Readiness Review Sprint",
+        },
     ],
 }
 
@@ -37,9 +52,7 @@ def _run_sync_command(matrix: dict | None = None, *, extra_args: list[str] | Non
         latest = tmp_path / "workspace" / "verification" / "latest"
         latest.mkdir(parents=True)
         matrix_data = matrix if matrix is not None else _SAMPLE_MATRIX
-        (latest / "open-taskcard-closure-matrix.json").write_text(
-            json.dumps(matrix_data), encoding="utf-8"
-        )
+        (latest / "open-taskcard-closure-matrix.json").write_text(json.dumps(matrix_data), encoding="utf-8")
         # Create docs/development/ target
         docs_dir = tmp_path / "docs" / "development"
         docs_dir.mkdir(parents=True)
@@ -52,7 +65,9 @@ def _run_sync_command(matrix: dict | None = None, *, extra_args: list[str] | Non
             cmd.extend(extra_args)
         result = subprocess.run(
             cmd,
-            capture_output=True, text=True, timeout=30,
+            capture_output=True,
+            text=True,
+            timeout=30,
             env={**__import__("os").environ, "PYTHONPATH": "src"},
             cwd=str(_REPO_ROOT),
         )
@@ -118,9 +133,7 @@ class TestSyncTaskcardDocs:
         parts = content.split("## Closed Taskcards")
         open_section = parts[0] if len(parts) > 1 else content
         for tc_id in closed_ids:
-            assert tc_id not in open_section, (
-                f"Closed taskcard '{tc_id}' appeared in Open Taskcards section"
-            )
+            assert tc_id not in open_section, f"Closed taskcard '{tc_id}' appeared in Open Taskcards section"
 
     def test_cli_exits_0_with_promote_latest_flag(self):
         """sync-taskcard-docs --promote-latest exits 0."""
@@ -131,14 +144,12 @@ class TestSyncTaskcardDocs:
         """CLI stdout must mention open and closed counts."""
         rc, stdout, stderr, md_path = _run_sync_command()
         assert rc == 0
-        assert "open" in stdout.lower() or "closed" in stdout.lower(), (
-            f"stdout did not mention open/closed counts: {stdout}"
-        )
+        assert (
+            "open" in stdout.lower() or "closed" in stdout.lower()
+        ), f"stdout did not mention open/closed counts: {stdout}"
 
     def test_cli_stdout_mentions_output_path(self):
         """CLI stdout must mention the output file path."""
         rc, stdout, stderr, md_path = _run_sync_command()
         assert rc == 0
-        assert "open-taskcard-closure-matrix.md" in stdout, (
-            f"stdout did not mention output file: {stdout}"
-        )
+        assert "open-taskcard-closure-matrix.md" in stdout, f"stdout did not mention output file: {stdout}"

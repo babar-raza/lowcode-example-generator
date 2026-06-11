@@ -1,4 +1,5 @@
 """Unit tests for closeout consistency validators."""
+
 import json
 import tempfile
 from pathlib import Path
@@ -34,9 +35,7 @@ class TestBuildResultsNoStaleErrors:
         assert check_build_results_no_stale_errors(f) == []
 
     def test_pass_with_stale_build_failed_snippet(self, tmpdir):
-        data = {"results": [
-            {"key": "a/b", "verdict": "PASS", "error_snippet": "Build FAILED.\n1 Error(s)"}
-        ]}
+        data = {"results": [{"key": "a/b", "verdict": "PASS", "error_snippet": "Build FAILED.\n1 Error(s)"}]}
         f = tmpdir / "results.json"
         f.write_text(json.dumps(data))
         violations = check_build_results_no_stale_errors(f)
@@ -86,7 +85,7 @@ class TestCumulativeLedgerCount:
             "packages_by_wave": {
                 "wave-1": ["a/b", "c/d"],
                 "wave-2": ["e/f", "g/h", "i/j"],
-            }
+            },
         }
         f = tmpdir / "ledger.json"
         f.write_text(json.dumps(ledger))
@@ -94,10 +93,7 @@ class TestCumulativeLedgerCount:
         assert violations == []
 
     def test_count_mismatch(self, tmpdir):
-        ledger = {
-            "total_dryrun_packages": 10,
-            "packages_by_wave": {"wave-1": ["a/b", "c/d"]}
-        }
+        ledger = {"total_dryrun_packages": 10, "packages_by_wave": {"wave-1": ["a/b", "c/d"]}}
         f = tmpdir / "ledger.json"
         f.write_text(json.dumps(ledger))
         violations = check_cumulative_ledger_count(f, expected_transformed=2)

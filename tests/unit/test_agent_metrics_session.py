@@ -37,9 +37,13 @@ class TestSessionLifecycle:
         from plugin_examples.metrics.models import MetricsCollector
 
         session = MetricsSession(
-            command="run", family="cells", config=_config,
-            collector=MetricsCollector(), evidence_dir=tmp_path,
-            repo_root=tmp_path, run_id="test-session-1",
+            command="run",
+            family="cells",
+            config=_config,
+            collector=MetricsCollector(),
+            evidence_dir=tmp_path,
+            repo_root=tmp_path,
+            run_id="test-session-1",
         )
         session.start()
         assert session.active is True
@@ -49,9 +53,13 @@ class TestSessionLifecycle:
         from plugin_examples.metrics.models import MetricsCollector
 
         session = MetricsSession(
-            command="status", family="", config=_config,
-            collector=MetricsCollector(), evidence_dir=tmp_path,
-            repo_root=tmp_path, run_id="test-status-1",
+            command="status",
+            family="",
+            config=_config,
+            collector=MetricsCollector(),
+            evidence_dir=tmp_path,
+            repo_root=tmp_path,
+            run_id="test-status-1",
         )
         session.start()
         assert session.active is False
@@ -60,8 +68,11 @@ class TestSessionLifecycle:
         from plugin_examples.metrics.session import MetricsSession
 
         session = MetricsSession(
-            command="status", family="", config=_config,
-            evidence_dir=tmp_path, repo_root=tmp_path,
+            command="status",
+            family="",
+            config=_config,
+            evidence_dir=tmp_path,
+            repo_root=tmp_path,
         )
         result = session.finalize()
         assert result["metrics_enabled"] is False
@@ -71,31 +82,27 @@ class TestCountSourcePolicy:
     def test_run_command_external_allowed(self, _config, tmp_path):
         from plugin_examples.metrics.session import MetricsSession
 
-        session = MetricsSession(command="run", config=_config,
-                                  evidence_dir=tmp_path, repo_root=tmp_path)
+        session = MetricsSession(command="run", config=_config, evidence_dir=tmp_path, repo_root=tmp_path)
         assert session.external_post_allowed is True
         assert session.count_source_policy == "SUPPORTED_EXTERNAL_METRICS"
 
     def test_discover_command_local_only(self, _config, tmp_path):
         from plugin_examples.metrics.session import MetricsSession
 
-        session = MetricsSession(command="discover-lowcode", config=_config,
-                                  evidence_dir=tmp_path, repo_root=tmp_path)
+        session = MetricsSession(command="discover-lowcode", config=_config, evidence_dir=tmp_path, repo_root=tmp_path)
         assert session.external_post_allowed is False
         assert session.count_source_policy == "LOCAL_ONLY_LLM_METRICS"
 
     def test_status_command_excluded(self, _config, tmp_path):
         from plugin_examples.metrics.session import MetricsSession
 
-        session = MetricsSession(command="status", config=_config,
-                                  evidence_dir=tmp_path, repo_root=tmp_path)
+        session = MetricsSession(command="status", config=_config, evidence_dir=tmp_path, repo_root=tmp_path)
         assert session.count_source_policy == "EXCLUDED_INFO_ONLY"
 
     def test_check_command_excluded(self, _config, tmp_path):
         from plugin_examples.metrics.session import MetricsSession
 
-        session = MetricsSession(command="check", config=_config,
-                                  evidence_dir=tmp_path, repo_root=tmp_path)
+        session = MetricsSession(command="check", config=_config, evidence_dir=tmp_path, repo_root=tmp_path)
         assert session.count_source_policy == "EXCLUDED_INFO_ONLY"
 
 
@@ -109,10 +116,15 @@ class TestLocalOnlyBlocking:
         collector.record_call(provider="llm_professionalize", total_tokens=100)
 
         session = MetricsSession(
-            command="discover-lowcode", family="cells", config=_config,
-            collector=collector, evidence_dir=tmp_path,
-            repo_root=tmp_path, run_id="test-discover-1",
-            post=True, dry_run=False,
+            command="discover-lowcode",
+            family="cells",
+            config=_config,
+            collector=collector,
+            evidence_dir=tmp_path,
+            repo_root=tmp_path,
+            run_id="test-discover-1",
+            post=True,
+            dry_run=False,
         )
         session.start()
 
@@ -135,13 +147,16 @@ class TestLocalOnlyBlocking:
         from plugin_examples.metrics.models import MetricsCollector
 
         collector = MetricsCollector()
-        collector.record_call(provider="llm_professionalize", total_tokens=500,
-                              token_usage_available=True)
+        collector.record_call(provider="llm_professionalize", total_tokens=500, token_usage_available=True)
 
         session = MetricsSession(
-            command="discover-lowcode", family="cells", config=_config,
-            collector=collector, evidence_dir=tmp_path,
-            repo_root=tmp_path, run_id="test-local-llm-1",
+            command="discover-lowcode",
+            family="cells",
+            config=_config,
+            collector=collector,
+            evidence_dir=tmp_path,
+            repo_root=tmp_path,
+            run_id="test-local-llm-1",
         )
         session.start()
         result = session.finalize(items_discovered=1)
@@ -156,10 +171,16 @@ class TestLocalOnlyBlocking:
         from plugin_examples.metrics.models import MetricsCollector
 
         session = MetricsSession(
-            command="discover-lowcode", family="cells", config=_config,
-            collector=MetricsCollector(), evidence_dir=tmp_path,
-            repo_root=tmp_path, run_id="test-bypass-1",
-            post=True, dry_run=False, job_type_override="Test",
+            command="discover-lowcode",
+            family="cells",
+            config=_config,
+            collector=MetricsCollector(),
+            evidence_dir=tmp_path,
+            repo_root=tmp_path,
+            run_id="test-bypass-1",
+            post=True,
+            dry_run=False,
+            job_type_override="Test",
         )
         session.start()
 
@@ -179,9 +200,13 @@ class TestEvidenceWriting:
         collector.record_call(provider="llm_professionalize", total_tokens=200)
 
         session = MetricsSession(
-            command="run", family="cells", config=_config,
-            collector=collector, evidence_dir=tmp_path,
-            repo_root=tmp_path, run_id="test-ev-1",
+            command="run",
+            family="cells",
+            config=_config,
+            collector=collector,
+            evidence_dir=tmp_path,
+            repo_root=tmp_path,
+            run_id="test-ev-1",
         )
         session.start()
         result = session.finalize(items_discovered=5, items_succeeded=3, items_failed=2)
@@ -198,9 +223,13 @@ class TestEvidenceWriting:
         from plugin_examples.metrics.models import MetricsCollector
 
         session = MetricsSession(
-            command="discover-lowcode", family="cells", config=_config,
-            collector=MetricsCollector(), evidence_dir=tmp_path,
-            repo_root=tmp_path, run_id="test-policy-1",
+            command="discover-lowcode",
+            family="cells",
+            config=_config,
+            collector=MetricsCollector(),
+            evidence_dir=tmp_path,
+            repo_root=tmp_path,
+            run_id="test-policy-1",
         )
         session.start()
         session.finalize()
@@ -229,8 +258,12 @@ class TestAgentName:
         from plugin_examples.metrics.payload_builder import build_payload
 
         payload = build_payload(
-            _config, command="run", family="cells", run_id="myrun",
-            test_mode=True, job_type_override="Test",
+            _config,
+            command="run",
+            family="cells",
+            run_id="myrun",
+            test_mode=True,
+            job_type_override="Test",
         )
         assert payload["agent_name"] == "test-Lowcode Example Generator"
 
@@ -280,9 +313,13 @@ class TestAutomaticLLMCapture:
         collector.record_call(provider="llm_professionalize", total_tokens=300)
 
         session = MetricsSession(
-            command="discover-lowcode", family="cells", config=_config,
-            collector=collector, evidence_dir=tmp_path,
-            repo_root=tmp_path, run_id="test-nonrun-llm-1",
+            command="discover-lowcode",
+            family="cells",
+            config=_config,
+            collector=collector,
+            evidence_dir=tmp_path,
+            repo_root=tmp_path,
+            run_id="test-nonrun-llm-1",
         )
         session.start()
         result = session.finalize(items_discovered=1)
@@ -311,10 +348,15 @@ class TestSafetyGates:
         from plugin_examples.metrics.models import MetricsCollector
 
         session = MetricsSession(
-            command="run", family="cells", config=_config,
-            collector=MetricsCollector(), evidence_dir=tmp_path,
-            repo_root=tmp_path, run_id="test-dry-1",
-            dry_run=True, post=False,
+            command="run",
+            family="cells",
+            config=_config,
+            collector=MetricsCollector(),
+            evidence_dir=tmp_path,
+            repo_root=tmp_path,
+            run_id="test-dry-1",
+            dry_run=True,
+            post=False,
         )
         session.start()
 
@@ -330,10 +372,16 @@ class TestSafetyGates:
         from plugin_examples.metrics.models import MetricsCollector
 
         session = MetricsSession(
-            command="run", family="cells", config=_config,
-            collector=MetricsCollector(), evidence_dir=tmp_path,
-            repo_root=tmp_path, run_id="test-force-prod-1",
-            dry_run=False, post=True, force_repost=True,
+            command="run",
+            family="cells",
+            config=_config,
+            collector=MetricsCollector(),
+            evidence_dir=tmp_path,
+            repo_root=tmp_path,
+            run_id="test-force-prod-1",
+            dry_run=False,
+            post=True,
+            force_repost=True,
             # No job_type_override → production job_type
         )
         session.start()

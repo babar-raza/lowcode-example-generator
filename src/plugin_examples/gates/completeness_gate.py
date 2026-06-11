@@ -26,6 +26,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class CompletenessResult:
     """Result of the completeness gate check."""
+
     family: str
     status: str  # "pass", "warn", "fail", "skip"
     denominator_basis: str
@@ -168,13 +169,8 @@ def check_completeness(
     if violations:
         # Determine severity: shortfall and overcount are hard failures in live mode;
         # unknown-only is always a warning (may be non-runnable helper types)
-        has_hard_violation = any(
-            "shortfall" in v or "overcount" in v for v in violations
-        )
-        msg = (
-            f"Family '{family}' completeness check FAILED ({basis}): "
-            + "; ".join(violations)
-        )
+        has_hard_violation = any("shortfall" in v or "overcount" in v for v in violations)
+        msg = f"Family '{family}' completeness check FAILED ({basis}): " + "; ".join(violations)
         if has_hard_violation and not dry_run:
             logger.error("%s", msg)
             raise CompletenessViolationError(msg)
@@ -195,10 +191,7 @@ def check_completeness(
             full_wrt_count=full_wrt,
         )
 
-    msg = (
-        f"Family '{family}' completeness check PASS ({basis}): "
-        f"{accounted} accounted >= {expected} expected."
-    )
+    msg = f"Family '{family}' completeness check PASS ({basis}): " f"{accounted} accounted >= {expected} expected."
     logger.info("%s", msg)
     return CompletenessResult(
         family=family,
@@ -294,14 +287,16 @@ def write_denominator_ledger(
         else:
             pilot_scope = "not_applicable"
 
-        entries.append({
-            "type_name": type_name,
-            "full_name": full_name,
-            "namespace": namespace,
-            "role": role.role,
-            "lifecycle_state": lifecycle_state,
-            "pilot_scope": pilot_scope,
-        })
+        entries.append(
+            {
+                "type_name": type_name,
+                "full_name": full_name,
+                "namespace": namespace,
+                "role": role.role,
+                "lifecycle_state": lifecycle_state,
+                "pilot_scope": pilot_scope,
+            }
+        )
 
     families_dir = evidence_dir / "latest" / "families" / family
     families_dir.mkdir(parents=True, exist_ok=True)

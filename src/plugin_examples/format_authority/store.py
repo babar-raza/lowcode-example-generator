@@ -134,7 +134,9 @@ def load_contracts_from_json(path: str | Path | None = None) -> int:
                 if errors:
                     logger.warning(
                         "Skipping invalid contract %s/%s: %s",
-                        entry.get("family"), entry.get("type_name"), errors,
+                        entry.get("family"),
+                        entry.get("type_name"),
+                        errors,
                     )
                     continue
                 _store[(contract.family, contract.type_name)] = contract
@@ -148,7 +150,9 @@ def load_contracts_from_json(path: str | Path | None = None) -> int:
             if errors:
                 logger.warning(
                     "Skipping invalid contract %s/%s: %s",
-                    entry.get("family"), entry.get("type_name"), errors,
+                    entry.get("family"),
+                    entry.get("type_name"),
+                    errors,
                 )
                 continue
             _store[(contract.family, contract.type_name)] = contract

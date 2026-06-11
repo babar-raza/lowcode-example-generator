@@ -3,7 +3,15 @@ Broad final mega-sprint: lowcode-final-megasprint-20260601
 Definitively fixes artifact self-consistency, sidecar, IV, command ledger.
 Proceeds through proof, package, publication, and work-ahead lanes.
 """
-import hashlib, json, os, re, shutil, subprocess, sys, time, zipfile
+import hashlib
+import json
+import os
+import re
+import shutil
+import subprocess
+import sys
+import time
+import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 

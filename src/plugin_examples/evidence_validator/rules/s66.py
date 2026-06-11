@@ -12,7 +12,6 @@ from plugin_examples.evidence_validator.models import RuleResult
 logger = logging.getLogger(__name__)
 
 
-
 class RemoteProofRules:
     """Rule mixin for evidence validation."""
 
@@ -34,7 +33,8 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Remote proof must not overclaim PR coverage",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="remote/remote-pr-proof-index.json not found. Sprint 65 had only publication/remote-proof-index.json which overclaimed PR coverage.",
             )
 
@@ -44,7 +44,8 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Remote proof must not overclaim PR coverage",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Cannot read remote-pr-proof-index.json: {exc}",
             )
 
@@ -66,14 +67,16 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Remote proof must not overclaim PR coverage",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"PR coverage inconsistency: {issues[:3]}",
             )
 
         return RuleResult(
             rule_id=rule_id,
             description="Remote proof must not overclaim PR coverage",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"remote-pr-proof-index.json present with per-example coverage for {len(families)} families",
         )
 
@@ -92,7 +95,8 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Remote proof must include per-example content hashes",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="remote/remote-example-inventory.json not found. Only PR-number proof is insufficient.",
             )
 
@@ -102,14 +106,14 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Remote proof must include per-example content hashes",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Cannot read remote-example-inventory.json: {exc}",
             )
 
         records = data.get("records", [])
         missing_hashes = [
-            r.get("scenario_id", "?") for r in records
-            if not r.get("readme_content_sha256") and not r.get("readme_sha")
+            r.get("scenario_id", "?") for r in records if not r.get("readme_content_sha256") and not r.get("readme_sha")
         ]
         total = len(records)
 
@@ -117,7 +121,8 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Remote proof must include per-example content hashes",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Only {total} remote inventory records (expected 42)",
             )
 
@@ -125,14 +130,16 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Remote proof must include per-example content hashes",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"{len(missing_hashes)}/{total} records missing readme SHA: {missing_hashes[:5]}",
             )
 
         return RuleResult(
             rule_id=rule_id,
             description="Remote proof must include per-example content hashes",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"{total} remote inventory records with content SHAs",
         )
 
@@ -150,7 +157,8 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Remote README I/O audit must be based on fetched content",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="remote/remote-readme-io-audit.json not found. Remote README I/O status was not independently verified.",
             )
 
@@ -160,7 +168,8 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Remote README I/O audit must be based on fetched content",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Cannot read remote-readme-io-audit.json: {exc}",
             )
 
@@ -172,7 +181,8 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Remote README I/O audit must be based on fetched content",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Only {total} records in remote README I/O audit (expected 42)",
             )
 
@@ -180,14 +190,16 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Remote README I/O audit must be based on fetched content",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"{len(missing_io_status)} records missing has_io_section field",
             )
 
         return RuleResult(
             rule_id=rule_id,
             description="Remote README I/O audit must be based on fetched content",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"{total} remote README I/O audit records with has_io_section field",
         )
 
@@ -204,7 +216,8 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="handoff/per-family/ must not be empty",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="handoff/per-family/ directory does not exist",
             )
 
@@ -221,22 +234,21 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="handoff/per-family/ must not be empty",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "handoff/per-family/ exists but contains no Program.cs files in any family. "
                     "Sprint 65 had this defect — verdict claimed HANDOFF_READY with empty per-family/."
                 ),
             )
 
-        total_programs = sum(
-            len(list((handoff_dir / f).rglob("Program.cs")))
-            for f in families_with_artifacts
-        )
+        total_programs = sum(len(list((handoff_dir / f).rglob("Program.cs"))) for f in families_with_artifacts)
 
         return RuleResult(
             rule_id=rule_id,
             description="handoff/per-family/ must not be empty",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"{len(families_with_artifacts)} families with artifacts, {total_programs} Program.cs files",
         )
 
@@ -253,7 +265,8 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Content audit output_kind must not be blank for any record",
-                severity="WARNING", passed=True,
+                severity="WARNING",
+                passed=True,
                 evidence="destination/content-audit-final.json not found (older sprint format)",
             )
 
@@ -263,7 +276,8 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Content audit output_kind must not be blank for any record",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Cannot read content-audit-final.json: {exc}",
             )
 
@@ -274,7 +288,8 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Content audit output_kind must not be blank for any record",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"{len(blank_output_kind)} records have blank output_kind: {blank_output_kind}. "
                     "Sprint 65 defect S65-D4."
@@ -284,7 +299,8 @@ class RemoteProofRules:
         return RuleResult(
             rule_id=rule_id,
             description="Content audit output_kind must not be blank for any record",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"All {len(records)} records have output_kind present",
         )
 
@@ -313,7 +329,8 @@ class RemoteProofRules:
                             return RuleResult(
                                 rule_id=rule_id,
                                 description="Publication state must use separate fields",
-                                severity="FAILURE", passed=False,
+                                severity="FAILURE",
+                                passed=False,
                                 failure_detail=(
                                     "publication/remote-proof-index.json lacks separate "
                                     "remote_example_present and approval_blocked fields. "
@@ -325,7 +342,8 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Publication state must use separate fields",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "publication/publication-truth-matrix-final.json not found. "
                     "Sprint 66 requires separate per-example publication state fields."
@@ -338,7 +356,8 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Publication state must use separate fields",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Cannot read publication-truth-matrix-final.json: {exc}",
             )
 
@@ -351,33 +370,39 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Publication state must use separate fields",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="publication-truth-matrix-final.json has no records",
             )
 
         first = records[0]
         # Sprint 82+ flat-array format uses remote_readme_io_classification instead of
         # remote_readme_has_io_docs. Accept either field to satisfy the separation requirement.
-        io_field_present = (
-            "remote_readme_has_io_docs" in first
-            or "remote_readme_io_classification" in first
-        )
+        io_field_present = "remote_readme_has_io_docs" in first or "remote_readme_io_classification" in first
         required_fields = ["remote_example_present", "approval_blocked"]
         missing = [f for f in required_fields if f not in first]
         if missing or not io_field_present:
-            all_missing = missing + ([] if io_field_present else ["remote_readme_has_io_docs/remote_readme_io_classification"])
+            all_missing = missing + (
+                [] if io_field_present else ["remote_readme_has_io_docs/remote_readme_io_classification"]
+            )
             return RuleResult(
                 rule_id=rule_id,
                 description="Publication state must use separate fields",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"publication-truth-matrix-final.json records missing fields: {all_missing}",
             )
 
-        io_field = "remote_readme_io_classification" if "remote_readme_io_classification" in first else "remote_readme_has_io_docs"
+        io_field = (
+            "remote_readme_io_classification"
+            if "remote_readme_io_classification" in first
+            else "remote_readme_has_io_docs"
+        )
         return RuleResult(
             rule_id=rule_id,
             description="Publication state must use separate fields",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"{len(records)} records with separate state fields (remote_example_present, approval_blocked, {io_field})",
         )
 
@@ -397,7 +422,8 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Remote proof must not rely solely on workspace/ files",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="remote/remote-pr-proof-index.json and remote/remote-example-inventory.json present in bundle",
             )
 
@@ -410,7 +436,8 @@ class RemoteProofRules:
                     return RuleResult(
                         rule_id=rule_id,
                         description="Remote proof must not rely solely on workspace/ files",
-                        severity="FAILURE", passed=False,
+                        severity="FAILURE",
+                        passed=False,
                         failure_detail=(
                             "publication/remote-proof-index.json references workspace/verification/latest/ "
                             "which are gitignored workspace files not in the bundle. "
@@ -424,14 +451,16 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Remote proof must not rely solely on workspace/ files",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="Neither remote/remote-pr-proof-index.json nor bundled remote proof found",
             )
 
         return RuleResult(
             rule_id=rule_id,
             description="Remote proof must not rely solely on workspace/ files",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="Remote proof present in bundle (not workspace-only)",
         )
 
@@ -447,7 +476,8 @@ class RemoteProofRules:
 
         root_exists = root_readme_dir.exists() and any(root_readme_dir.iterdir())
         handoff_exists = handoff_dir.exists() and any(
-            (handoff_dir / f).rglob("Program.cs") for f in ["cells", "words", "pdf", "diagram", "email", "slides"]
+            (handoff_dir / f).rglob("Program.cs")
+            for f in ["cells", "words", "pdf", "diagram", "email", "slides"]
             if (handoff_dir / f).exists()
         )
 
@@ -455,7 +485,8 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Root README artifact presence requires package artifacts",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "root-readme/per-family/ exists with family files but "
                     "handoff/per-family/ has no Program.cs artifacts. "
@@ -466,7 +497,8 @@ class RemoteProofRules:
         return RuleResult(
             rule_id=rule_id,
             description="Root README artifact presence requires package artifacts",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"root_readme_present={root_exists}, handoff_present={handoff_exists}",
         )
 
@@ -495,7 +527,8 @@ class RemoteProofRules:
                         return RuleResult(
                             rule_id=rule_id,
                             description="Final verdict must not overclaim remote README I/O",
-                            severity="FAILURE", passed=False,
+                            severity="FAILURE",
+                            passed=False,
                             failure_detail=(
                                 f"Verdict contains '{pattern}' but no remote README audit exists. "
                                 "Cannot verify remote README I/O state without remote audit."
@@ -504,7 +537,8 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Final verdict must not overclaim remote README I/O",
-                severity="WARNING", passed=True,
+                severity="WARNING",
+                passed=True,
                 evidence="No remote README audit; no overclaim detected in verdict",
             )
 
@@ -514,7 +548,8 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Final verdict must not overclaim remote README I/O",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Cannot read remote-readme-io-audit.json: {exc}",
             )
 
@@ -526,7 +561,8 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Final verdict must not overclaim remote README I/O",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="final-verdict.md not found",
             )
 
@@ -538,7 +574,8 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Final verdict must not overclaim remote README I/O",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"remote-readme-io-audit.json shows io_doc_count=0/{total} but "
                     f"final-verdict.md contains: {overclaims}"
@@ -548,7 +585,8 @@ class RemoteProofRules:
         return RuleResult(
             rule_id=rule_id,
             description="Final verdict must not overclaim remote README I/O",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"remote io_doc_count={io_count}/{total}; no overclaim in verdict",
         )
 
@@ -566,7 +604,8 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="All handoff READMEs must have I/O section",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="handoff/per-family/ directory not found",
             )
 
@@ -574,15 +613,13 @@ class RemoteProofRules:
         # Skip family-level root READMEs at per-family/{family}/README.md —
         # those are root family READMEs (Sprint 70) with different format.
         # Only check example-level READMEs (depth >= 2 from per-family/).
-        readme_files = [
-            r for r in all_readme_files
-            if r.parent.parent != handoff_dir
-        ]
+        readme_files = [r for r in all_readme_files if r.parent.parent != handoff_dir]
         if not readme_files:
             return RuleResult(
                 rule_id=rule_id,
                 description="All handoff READMEs must have I/O section",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="No example README.md files found in handoff/per-family/",
             )
 
@@ -604,14 +641,16 @@ class RemoteProofRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="All handoff READMEs must have I/O section",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"{len(missing_io)}/{len(readme_files)} handoff READMEs missing I/O section: {missing_io[:3]}",
             )
 
         return RuleResult(
             rule_id=rule_id,
             description="All handoff READMEs must have I/O section",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"All {len(readme_files)} handoff README.md files have '## Input and Output' section",
         )
 

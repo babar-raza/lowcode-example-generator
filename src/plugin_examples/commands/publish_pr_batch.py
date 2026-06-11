@@ -13,19 +13,25 @@ def add_parser(subparsers):
     parser.add_argument("--family", required=True, help="Family name (e.g., pdf)")
     batch_publish_mode = parser.add_mutually_exclusive_group()
     batch_publish_mode.add_argument(
-        "--publish", action="store_true",
+        "--publish",
+        action="store_true",
         help="Perform live PR creation (requires APPROVE_LIVE_PR gate)",
     )
     batch_publish_mode.add_argument(
-        "--dry-run", action="store_true", default=True,
+        "--dry-run",
+        action="store_true",
+        default=True,
         help="Simulate publication without creating live PRs (default)",
     )
     parser.add_argument(
-        "--approval-token", metavar="TOKEN",
+        "--approval-token",
+        metavar="TOKEN",
         help="Approval token (must be APPROVE_LIVE_PR for live mode)",
     )
     parser.add_argument(
-        "--promote-latest", action="store_true", default=True,
+        "--promote-latest",
+        action="store_true",
+        default=True,
         help="Promote results to verification/latest/ (default: True)",
     )
     parser.set_defaults(func=handle)

@@ -1,7 +1,9 @@
 """Build Sprint 65 final destination content audit with all required fields.
 Fixes Sprint 64 defects S64-D2 (count contradiction) and S64-D3 (missing fields).
 """
-import json, hashlib, re
+import json
+import hashlib
+import re
 from pathlib import Path
 
 # ---- Load source data ----

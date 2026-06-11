@@ -15,6 +15,7 @@ def main() -> int:
     subparsers = parser.add_subparsers(dest="command")
 
     from plugin_examples.commands import register_all
+
     register_all(subparsers)
 
     args = parser.parse_args()

@@ -5,10 +5,23 @@ from __future__ import annotations
 from typing import Any
 
 REQUIRED_FIELDS = [
-    "timestamp", "agent_name", "agent_owner", "job_type", "run_id",
-    "status", "product", "platform", "website", "website_section",
-    "item_name", "items_discovered", "items_failed", "items_succeeded",
-    "run_duration_ms", "token_usage", "api_calls_count",
+    "timestamp",
+    "agent_name",
+    "agent_owner",
+    "job_type",
+    "run_id",
+    "status",
+    "product",
+    "platform",
+    "website",
+    "website_section",
+    "item_name",
+    "items_discovered",
+    "items_failed",
+    "items_succeeded",
+    "run_duration_ms",
+    "token_usage",
+    "api_calls_count",
 ]
 
 
@@ -31,8 +44,17 @@ def validate_payload(payload: dict, config: Any) -> dict:
             errors.append(f"field '{f}' is None")
 
     # String fields must be non-empty
-    for f in ["timestamp", "agent_name", "agent_owner", "run_id",
-              "product", "platform", "website", "website_section", "item_name"]:
+    for f in [
+        "timestamp",
+        "agent_name",
+        "agent_owner",
+        "run_id",
+        "product",
+        "platform",
+        "website",
+        "website_section",
+        "item_name",
+    ]:
         val = payload.get(f, "")
         if isinstance(val, str) and not val:
             errors.append(f"field '{f}' is empty")
@@ -50,13 +72,17 @@ def validate_payload(payload: dict, config: Any) -> dict:
     # Website from config (config-driven validation)
     website = payload.get("website", "")
     if website and website != config.website:
-        warnings.append(
-            f"website '{website}' differs from config website '{config.website}'"
-        )
+        warnings.append(f"website '{website}' differs from config website '{config.website}'")
 
     # Numeric fields must be non-negative integers
-    for f in ["items_discovered", "items_succeeded", "items_failed",
-              "run_duration_ms", "token_usage", "api_calls_count"]:
+    for f in [
+        "items_discovered",
+        "items_succeeded",
+        "items_failed",
+        "run_duration_ms",
+        "token_usage",
+        "api_calls_count",
+    ]:
         val = payload.get(f)
         if val is not None:
             if not isinstance(val, int) or val < 0:

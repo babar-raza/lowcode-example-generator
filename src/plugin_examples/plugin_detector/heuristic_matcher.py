@@ -92,10 +92,26 @@ _VERB_TYPE_HINTS: dict[str, list[str]] = {
 
 # Method name patterns considered as primary "operation" methods
 _OPERATION_METHODS: set[str] = {
-    "Generate", "Save", "Convert", "Process", "Execute",
-    "Read", "Write", "Export", "Import", "Load", "Create",
-    "Merge", "Split", "Compress", "Extract", "Recognize",
-    "Render", "Sign", "Watermark", "Protect",
+    "Generate",
+    "Save",
+    "Convert",
+    "Process",
+    "Execute",
+    "Read",
+    "Write",
+    "Export",
+    "Import",
+    "Load",
+    "Create",
+    "Merge",
+    "Split",
+    "Compress",
+    "Extract",
+    "Recognize",
+    "Render",
+    "Sign",
+    "Watermark",
+    "Protect",
 }
 
 
@@ -127,9 +143,7 @@ class HeuristicMatcher:
                 continue
 
             # PR-01: type name must match a hint (case-insensitive fragment match)
-            name_matches = any(
-                hint.lower() in type_info.name.lower() for hint in type_hints
-            )
+            name_matches = any(hint.lower() in type_info.name.lower() for hint in type_hints)
             if not name_matches:
                 continue
 

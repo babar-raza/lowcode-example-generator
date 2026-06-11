@@ -4,7 +4,9 @@ MANDATORY FINAL ARTIFACT CONVENTION:
 - All commits happen first. ZIP is built last. No commit after ZIP build.
 - artifact_build_head_sha = git rev-parse HEAD at build time = final_commit_sha
 """
-import json, subprocess, zipfile
+import json
+import subprocess
+import zipfile
 from pathlib import Path
 
 repo_root = Path(__file__).resolve().parents[1]

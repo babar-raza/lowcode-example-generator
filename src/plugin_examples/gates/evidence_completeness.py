@@ -22,44 +22,49 @@ logger = logging.getLogger(__name__)
 # Mirrors FAMILY_SCOPED_EVIDENCE_FILES in evidence_layout.py.
 # ---------------------------------------------------------------------------
 
-EXPECTED_FAMILY_EVIDENCE_FILES: frozenset[str] = frozenset({
-    "aggregate-gate-results.json",
-    "api-consumer-relationships.json",
-    "api-delta-report.json",
-    "blocked-scenarios.json",
-    "example-gate-results.json",
-    "example-impact-report.json",
-    "example-reviewer-results.json",
-    "fixture-strategy-plan.json",
-    "gate-results.json",
-    "generated-fixtures.json",
-    "llm-fewshot-patterns.json",
-    "llm-preflight.json",
-    "plugin-type-role-classification.json",
-    "publishing-report.json",
-    "repair-attempts.json",
-    "reviewer-preflight.json",
-    "runnable-entrypoint-scores.json",
-    "scenario-feedback-updates.json",
-    "scenario-input-format-map.json",
-    "stale-existing-examples.json",
-    "validation-results.json",
-    "pr-candidate-manifest.json",
-})
+EXPECTED_FAMILY_EVIDENCE_FILES: frozenset[str] = frozenset(
+    {
+        "aggregate-gate-results.json",
+        "api-consumer-relationships.json",
+        "api-delta-report.json",
+        "blocked-scenarios.json",
+        "example-gate-results.json",
+        "example-impact-report.json",
+        "example-reviewer-results.json",
+        "fixture-strategy-plan.json",
+        "gate-results.json",
+        "generated-fixtures.json",
+        "llm-fewshot-patterns.json",
+        "llm-preflight.json",
+        "plugin-type-role-classification.json",
+        "publishing-report.json",
+        "repair-attempts.json",
+        "reviewer-preflight.json",
+        "runnable-entrypoint-scores.json",
+        "scenario-feedback-updates.json",
+        "scenario-input-format-map.json",
+        "stale-existing-examples.json",
+        "validation-results.json",
+        "pr-candidate-manifest.json",
+    }
+)
 
 # Files that are always expected regardless of run configuration.
-ALWAYS_EXPECTED: frozenset[str] = frozenset({
-    "aggregate-gate-results.json",
-    "blocked-scenarios.json",
-    "fixture-strategy-plan.json",
-    "publishing-report.json",
-    "validation-results.json",
-})
+ALWAYS_EXPECTED: frozenset[str] = frozenset(
+    {
+        "aggregate-gate-results.json",
+        "blocked-scenarios.json",
+        "fixture-strategy-plan.json",
+        "publishing-report.json",
+        "validation-results.json",
+    }
+)
 
 
 @dataclass
 class CompletionResult:
     """Result of an evidence completeness check."""
+
     family: str
     run_id: str
     checked_at: str
@@ -71,7 +76,7 @@ class CompletionResult:
     found_files: list[str] = field(default_factory=list)
     completeness_pct: float = 0.0
     status: str = "UNKNOWN"  # COMPLETE | INCOMPLETE | ERROR
-    mode: str = "WARNING"    # WARNING | BLOCKING
+    mode: str = "WARNING"  # WARNING | BLOCKING
 
     def to_dict(self) -> dict:
         return {
@@ -170,8 +175,7 @@ def check_completeness(
 
     if total_missing > 0:
         logger.warning(
-            "Evidence completeness: %s/%s files present for family=%s run_id=%s (%.1f%%). "
-            "Missing: %s",
+            "Evidence completeness: %s/%s files present for family=%s run_id=%s (%.1f%%). " "Missing: %s",
             total_found,
             total_expected,
             family,

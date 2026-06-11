@@ -21,17 +21,13 @@ class HallucinationValidator:
     Never mutates the input suggestion.
     """
 
-    def validate(
-        self, suggestion: AiSuggestion, catalog: ReflectionCatalog
-    ) -> AiSuggestion:
+    def validate(self, suggestion: AiSuggestion, catalog: ReflectionCatalog) -> AiSuggestion:
         """Check type and method presence in catalog.
 
         Returns a new AiSuggestion with status=REFLECTION_CONFIRMED or
         status=REJECTED_BY_VALIDATOR with rejection_reason populated.
         """
-        type_info = next(
-            (t for t in catalog.types if t.name == suggestion.type_name), None
-        )
+        type_info = next((t for t in catalog.types if t.name == suggestion.type_name), None)
 
         if type_info is None:
             return AiSuggestion(
@@ -44,9 +40,7 @@ class HallucinationValidator:
                 rationale=suggestion.rationale,
             )
 
-        method_found = any(
-            m.name == suggestion.method_name for m in type_info.methods
-        )
+        method_found = any(m.name == suggestion.method_name for m in type_info.methods)
         if not method_found:
             return AiSuggestion(
                 type_name=suggestion.type_name,

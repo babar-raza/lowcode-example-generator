@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class MinedExample:
     """An existing example discovered from source repos."""
+
     example_id: str
     source_path: str
     provenance: str
@@ -27,6 +28,7 @@ class MinedExample:
 @dataclass
 class MiningResult:
     """Result of example mining."""
+
     family: str
     examples: list[MinedExample] = field(default_factory=list)
     stale_examples: list[MinedExample] = field(default_factory=list)
@@ -109,7 +111,10 @@ def mine_examples(
 
 
 def _fetch_github_cs_files(
-    owner: str, repo: str, branch: str, paths: list[str],
+    owner: str,
+    repo: str,
+    branch: str,
+    paths: list[str],
 ) -> list[dict] | None:
     """Fetch .cs file listings from GitHub. Returns None on failure."""
     try:
@@ -156,11 +161,11 @@ def extract_symbols_from_code(code: str) -> list[str]:
     symbols = set()
 
     # Match qualified type names (Aspose.Cells.LowCode.SpreadsheetLocker)
-    qualified = re.findall(r'\b(Aspose\.\w+(?:\.\w+)*)\b', code)
+    qualified = re.findall(r"\b(Aspose\.\w+(?:\.\w+)*)\b", code)
     symbols.update(qualified)
 
     # Match new ClassName() instantiations
-    new_instances = re.findall(r'\bnew\s+(\w+(?:\.\w+)*)\s*\(', code)
+    new_instances = re.findall(r"\bnew\s+(\w+(?:\.\w+)*)\s*\(", code)
     symbols.update(new_instances)
 
     return sorted(symbols)

@@ -76,14 +76,16 @@ EXECUTION_STATES = (
 )
 
 # Action IDs that are recurring read-only checks (never produce state changes).
-RECURRING_CHECK_IDS = frozenset({
-    "PORTFOLIO_CONSERVATION_CHECK",
-    "VERSION_DRIFT_CHECK",
-    "FORMIMPORTER_RETEST",
-    "OCR_DEPENDENCY_RECHECK",
-    "PSD_DEPENDENCY_RECHECK",
-    "PERMANENTLY_BLOCKED_WATCH",
-})
+RECURRING_CHECK_IDS = frozenset(
+    {
+        "PORTFOLIO_CONSERVATION_CHECK",
+        "VERSION_DRIFT_CHECK",
+        "FORMIMPORTER_RETEST",
+        "OCR_DEPENDENCY_RECHECK",
+        "PSD_DEPENDENCY_RECHECK",
+        "PERMANENTLY_BLOCKED_WATCH",
+    }
+)
 
 
 @dataclass
@@ -187,6 +189,7 @@ class ActionBoard:
 # State readers
 # ---------------------------------------------------------------------------
 
+
 def _load_json(path: Path) -> dict | None:
     if path.exists():
         return json.loads(path.read_text(encoding="utf-8"))
@@ -218,6 +221,7 @@ def _count_contracts(repo_root: Path) -> dict[str, int]:
 @dataclass
 class DirtyState:
     """Categorized dirty file state from git status."""
+
     source: list[str] = field(default_factory=list)
     config: list[str] = field(default_factory=list)
     test: list[str] = field(default_factory=list)
@@ -232,9 +236,15 @@ class DirtyState:
 
     @property
     def total_count(self) -> int:
-        return (len(self.source) + len(self.config) + len(self.test)
-                + len(self.evidence) + len(self.artifact)
-                + len(self.package_artifact) + len(self.unknown))
+        return (
+            len(self.source)
+            + len(self.config)
+            + len(self.test)
+            + len(self.evidence)
+            + len(self.artifact)
+            + len(self.package_artifact)
+            + len(self.unknown)
+        )
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -320,7 +330,10 @@ def _check_dirty_state(repo_root: Path) -> DirtyState:
     try:
         result = subprocess.run(
             ["git", "status", "--porcelain"],
-            cwd=str(repo_root), capture_output=True, text=True, timeout=10,
+            cwd=str(repo_root),
+            capture_output=True,
+            text=True,
+            timeout=10,
         )
         for line in result.stdout.strip().splitlines():
             path = _parse_porcelain_path(line)
@@ -338,7 +351,10 @@ def _get_head_sha(repo_root: Path) -> str:
     try:
         result = subprocess.run(
             ["git", "rev-parse", "--short", "HEAD"],
-            cwd=str(repo_root), capture_output=True, text=True, timeout=10,
+            cwd=str(repo_root),
+            capture_output=True,
+            text=True,
+            timeout=10,
         )
         return result.stdout.strip()
     except (subprocess.SubprocessError, FileNotFoundError):
@@ -354,20 +370,23 @@ def _check_gate(env_var: str, expected_value: str) -> bool:
 # Action generators
 # ---------------------------------------------------------------------------
 
+
 def _gen_dirty_state_actions(dirty: DirtyState) -> list[Action]:
     if dirty.actionable_count == 0:
         return []
-    return [Action(
-        id="CLOSE_DIRTY_STATE",
-        family="cross-family",
-        type="CLOSE_PREVIOUS_SPRINT",
-        current_state=f"{dirty.actionable_count} dirty ({dirty.summary()})",
-        desired_state="committed or classified",
-        impact=100,
-        safe_to_execute_now=True,
-        reason="Dirty source/config/test files must be resolved before any new work",
-        evidence_required=["commit_sha", "git_status"],
-    )]
+    return [
+        Action(
+            id="CLOSE_DIRTY_STATE",
+            family="cross-family",
+            type="CLOSE_PREVIOUS_SPRINT",
+            current_state=f"{dirty.actionable_count} dirty ({dirty.summary()})",
+            desired_state="committed or classified",
+            impact=100,
+            safe_to_execute_now=True,
+            reason="Dirty source/config/test files must be resolved before any new work",
+            evidence_required=["commit_sha", "git_status"],
+        )
+    ]
 
 
 def _gen_merge_actions(denoms: dict[str, dict]) -> list[Action]:
@@ -375,25 +394,25 @@ def _gen_merge_actions(denoms: dict[str, dict]) -> list[Action]:
     pdf = denoms.get("pdf", {})
     pr_ready = pdf.get("pr_dry_run_ready_count", 0)
     if pr_ready > 0:
-        gate_present = _check_gate(
-            "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL", "APPROVE_MERGE_PR"
+        gate_present = _check_gate("PLUGIN_EXAMPLES_MERGE_PR_APPROVAL", "APPROVE_MERGE_PR")
+        actions.append(
+            Action(
+                id="PDF_MERGE_PRS",
+                family="pdf",
+                type="MERGE_READY_PR",
+                current_state=f"{pr_ready} examples PR_DRY_RUN_READY",
+                desired_state=f"{pdf.get('published_count', 0) + pr_ready} PDF examples published",
+                approval_required="PLUGIN_EXAMPLES_MERGE_PR_APPROVAL=APPROVE_MERGE_PR",
+                gate_present=gate_present,
+                risk="medium",
+                impact=95,
+                safe_to_execute_now=gate_present,
+                blocker=None if gate_present else "merge approval gate absent",
+                reason="Highest-impact publication action" if gate_present else "Blocked by absent approval gate",
+                evidence_required=["pr_status", "merge_report"],
+                tests_required=["scenario_contracts", "release_status"],
+            )
         )
-        actions.append(Action(
-            id="PDF_MERGE_PRS",
-            family="pdf",
-            type="MERGE_READY_PR",
-            current_state=f"{pr_ready} examples PR_DRY_RUN_READY",
-            desired_state=f"{pdf.get('published_count', 0) + pr_ready} PDF examples published",
-            approval_required="PLUGIN_EXAMPLES_MERGE_PR_APPROVAL=APPROVE_MERGE_PR",
-            gate_present=gate_present,
-            risk="medium",
-            impact=95,
-            safe_to_execute_now=gate_present,
-            blocker=None if gate_present else "merge approval gate absent",
-            reason="Highest-impact publication action" if gate_present else "Blocked by absent approval gate",
-            evidence_required=["pr_status", "merge_report"],
-            tests_required=["scenario_contracts", "release_status"],
-        ))
     return actions
 
 
@@ -403,26 +422,26 @@ def _gen_conflict_recovery_actions(denoms: dict[str, dict]) -> list[Action]:
     pr_ready = pdf.get("pr_dry_run_ready_count", 0)
     if pr_ready <= 0:
         return []
-    publish_gate = _check_gate(
-        "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL", "APPROVE_LIVE_PR"
-    )
-    return [Action(
-        id="PDF_PR_CONFLICT_RECOVERY",
-        family="pdf",
-        type="PDF_PR_CONFLICT_RECOVERY",
-        current_state=f"{pr_ready} PR-ready examples, PRs likely CONFLICTING",
-        desired_state="PRs rebased or recreated with clean merge state",
-        approval_required="PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR",
-        gate_present=publish_gate,
-        risk="medium",
-        impact=92,
-        safe_to_execute_now=publish_gate,
-        blocker=None if publish_gate else "live publish approval gate absent",
-        reason="Conflict recovery must precede merge" if publish_gate else "Blocked by absent publish gate",
-        evidence_required=["pr_conflict_analysis", "pr_recreate_report"],
-        tests_required=["scenario_contracts"],
-        taskcard_id="TC-PDF-PR-CONFLICT-RESOLUTION",
-    )]
+    publish_gate = _check_gate("PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL", "APPROVE_LIVE_PR")
+    return [
+        Action(
+            id="PDF_PR_CONFLICT_RECOVERY",
+            family="pdf",
+            type="PDF_PR_CONFLICT_RECOVERY",
+            current_state=f"{pr_ready} PR-ready examples, PRs likely CONFLICTING",
+            desired_state="PRs rebased or recreated with clean merge state",
+            approval_required="PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR",
+            gate_present=publish_gate,
+            risk="medium",
+            impact=92,
+            safe_to_execute_now=publish_gate,
+            blocker=None if publish_gate else "live publish approval gate absent",
+            reason="Conflict recovery must precede merge" if publish_gate else "Blocked by absent publish gate",
+            evidence_required=["pr_conflict_analysis", "pr_recreate_report"],
+            tests_required=["scenario_contracts"],
+            taskcard_id="TC-PDF-PR-CONFLICT-RESOLUTION",
+        )
+    ]
 
 
 def _gen_conservation_actions(denoms: dict[str, dict], contract_counts: dict[str, int]) -> list[Action]:
@@ -432,18 +451,20 @@ def _gen_conservation_actions(denoms: dict[str, dict], contract_counts: dict[str
         pilot = d.get("allowed_pilot_count") or d.get("runnable_scenarios", 0)
         contracts = contract_counts.get(family, 0)
         if contracts < pilot:
-            actions.append(Action(
-                id=f"CONTRACT_BACKFILL_{family.upper()}",
-                family=family,
-                type="CONTRACT_BACKFILL",
-                current_state=f"{contracts} contracts, {pilot} pilot-allowed",
-                desired_state=f"{pilot} contracts",
-                impact=70,
-                safe_to_execute_now=True,
-                reason=f"{family} has contract deficit: {contracts} < {pilot}",
-                evidence_required=["contract_files"],
-                tests_required=["scenario_contracts"],
-            ))
+            actions.append(
+                Action(
+                    id=f"CONTRACT_BACKFILL_{family.upper()}",
+                    family=family,
+                    type="CONTRACT_BACKFILL",
+                    current_state=f"{contracts} contracts, {pilot} pilot-allowed",
+                    desired_state=f"{pilot} contracts",
+                    impact=70,
+                    safe_to_execute_now=True,
+                    reason=f"{family} has contract deficit: {contracts} < {pilot}",
+                    evidence_required=["contract_files"],
+                    tests_required=["scenario_contracts"],
+                )
+            )
     return actions
 
 
@@ -452,97 +473,109 @@ def _gen_blocker_actions(denoms: dict[str, dict]) -> list[Action]:
     # FormImporter
     pdf = denoms.get("pdf", {})
     pdf_version = pdf.get("source_version", "")
-    actions.append(Action(
-        id="FORMIMPORTER_RETEST",
-        family="pdf",
-        type="BLOCKER_RETEST",
-        current_state=f"blocked by Aspose.PDF {pdf_version} bug",
-        desired_state="retest if newer version available",
-        blocker=f"requires Aspose.PDF > {pdf_version}",
-        impact=40,
-        safe_to_execute_now=True,
-        reason="Check-only — verify whether newer Aspose.PDF is available",
-        taskcard_id="TC-PDF-FORMIMPORTER-RETEST",
-    ))
+    actions.append(
+        Action(
+            id="FORMIMPORTER_RETEST",
+            family="pdf",
+            type="BLOCKER_RETEST",
+            current_state=f"blocked by Aspose.PDF {pdf_version} bug",
+            desired_state="retest if newer version available",
+            blocker=f"requires Aspose.PDF > {pdf_version}",
+            impact=40,
+            safe_to_execute_now=True,
+            reason="Check-only — verify whether newer Aspose.PDF is available",
+            taskcard_id="TC-PDF-FORMIMPORTER-RETEST",
+        )
+    )
 
     # OCR
-    actions.append(Action(
-        id="OCR_DEPENDENCY_RECHECK",
-        family="ocr",
-        type="BLOCKER_RETEST",
-        current_state="DEPENDENCY_BLOCKED — Aspose.AI.LLM not on NuGet",
-        desired_state="recheck availability",
-        blocker="internal Aspose assembly",
-        impact=30,
-        safe_to_execute_now=True,
-        reason="Periodic recheck is safe",
-        taskcard_id="TC-OCR-REFLECTION",
-    ))
+    actions.append(
+        Action(
+            id="OCR_DEPENDENCY_RECHECK",
+            family="ocr",
+            type="BLOCKER_RETEST",
+            current_state="DEPENDENCY_BLOCKED — Aspose.AI.LLM not on NuGet",
+            desired_state="recheck availability",
+            blocker="internal Aspose assembly",
+            impact=30,
+            safe_to_execute_now=True,
+            reason="Periodic recheck is safe",
+            taskcard_id="TC-OCR-REFLECTION",
+        )
+    )
 
     # PSD
-    actions.append(Action(
-        id="PSD_DEPENDENCY_RECHECK",
-        family="psd",
-        type="BLOCKER_RETEST",
-        current_state="DEPENDENCY_BLOCKED — Aspose.JavaAttributes not on NuGet",
-        desired_state="recheck availability",
-        blocker="internal Aspose assembly",
-        impact=30,
-        safe_to_execute_now=True,
-        reason="Periodic recheck is safe",
-        taskcard_id="TC-PSD-REFLECTION",
-    ))
+    actions.append(
+        Action(
+            id="PSD_DEPENDENCY_RECHECK",
+            family="psd",
+            type="BLOCKER_RETEST",
+            current_state="DEPENDENCY_BLOCKED — Aspose.JavaAttributes not on NuGet",
+            desired_state="recheck availability",
+            blocker="internal Aspose assembly",
+            impact=30,
+            safe_to_execute_now=True,
+            reason="Periodic recheck is safe",
+            taskcard_id="TC-PSD-REFLECTION",
+        )
+    )
 
     # Permanently blocked
-    actions.append(Action(
-        id="PERMANENTLY_BLOCKED_WATCH",
-        family="cross-family",
-        type="BLOCKER_RETEST",
-        current_state=f"{len(PERMANENTLY_BLOCKED)} permanently blocked roots",
-        desired_state="confirm no new evidence invalidates blocks",
-        impact=20,
-        safe_to_execute_now=True,
-        reason="Preserve and verify permanent block state",
-    ))
+    actions.append(
+        Action(
+            id="PERMANENTLY_BLOCKED_WATCH",
+            family="cross-family",
+            type="BLOCKER_RETEST",
+            current_state=f"{len(PERMANENTLY_BLOCKED)} permanently blocked roots",
+            desired_state="confirm no new evidence invalidates blocks",
+            impact=20,
+            safe_to_execute_now=True,
+            reason="Preserve and verify permanent block state",
+        )
+    )
 
     return actions
 
 
 def _gen_version_drift_actions(denoms: dict[str, dict]) -> list[Action]:
-    return [Action(
-        id="VERSION_DRIFT_CHECK",
-        family="cross-family",
-        type="VERSION_DRIFT_RERUN",
-        current_state="last checked versions: " + ", ".join(
-            f"{f}={denoms.get(f, {}).get('source_version', '?')}" for f in ACTIVE_FAMILIES
-        ),
-        desired_state="drift status verified",
-        impact=60,
-        safe_to_execute_now=True,
-        reason="Version drift check is safe read-only operation",
-        evidence_required=["version-drift-raw"],
-        tests_required=["test_version_drift_checker"],
-    )]
+    return [
+        Action(
+            id="VERSION_DRIFT_CHECK",
+            family="cross-family",
+            type="VERSION_DRIFT_RERUN",
+            current_state="last checked versions: "
+            + ", ".join(f"{f}={denoms.get(f, {}).get('source_version', '?')}" for f in ACTIVE_FAMILIES),
+            desired_state="drift status verified",
+            impact=60,
+            safe_to_execute_now=True,
+            reason="Version drift check is safe read-only operation",
+            evidence_required=["version-drift-raw"],
+            tests_required=["test_version_drift_checker"],
+        )
+    ]
 
 
 def _gen_portfolio_check_actions() -> list[Action]:
-    return [Action(
-        id="PORTFOLIO_CONSERVATION_CHECK",
-        family="cross-family",
-        type="DENOMINATOR_RECONCILIATION",
-        current_state="needs re-verification",
-        desired_state="all conservation equations pass",
-        impact=75,
-        safe_to_execute_now=True,
-        reason="Conservation equations must be re-verified after any commit",
-        evidence_required=["conservation-check-report"],
-        tests_required=["scenario_contracts"],
-    )]
+    return [
+        Action(
+            id="PORTFOLIO_CONSERVATION_CHECK",
+            family="cross-family",
+            type="DENOMINATOR_RECONCILIATION",
+            current_state="needs re-verification",
+            desired_state="all conservation equations pass",
+            impact=75,
+            safe_to_execute_now=True,
+            reason="Conservation equations must be re-verified after any commit",
+            evidence_required=["conservation-check-report"],
+            tests_required=["scenario_contracts"],
+        )
+    ]
 
 
 # ---------------------------------------------------------------------------
 # Main entry point
 # ---------------------------------------------------------------------------
+
 
 def compute_action_board(repo_root: Path) -> ActionBoard:
     """Compute a ranked action board from current repo state."""
@@ -603,10 +636,12 @@ def compute_action_board(repo_root: Path) -> ActionBoard:
 def render_markdown(board: ActionBoard) -> str:
     """Render the action board as human-readable markdown."""
     lines = [
-        "# Next Actions", "",
+        "# Next Actions",
+        "",
         f"Generated: {board.generated_at}",
         f"HEAD: {board.generated_from_head}",
-        f"Dirty: {board.git_dirty_summary}", "",
+        f"Dirty: {board.git_dirty_summary}",
+        "",
     ]
     lines.append("| Rank | ID | Family | Type | Impact | Safe | Blocker |")
     lines.append("|------|----|--------|------|--------|------|---------|")

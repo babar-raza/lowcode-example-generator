@@ -287,6 +287,7 @@ class TestSlidesConvertFix:
         code = self._get_code()
         # Check that Convert.ToPdf is always preceded by the full namespace
         import re
+
         bare_calls = re.findall(r"(?<!Aspose\.Slides\.LowCode\.)Convert\.ToPdf\(", code)
         assert not bare_calls, f"Found bare Convert.ToPdf calls: {bare_calls}"
 

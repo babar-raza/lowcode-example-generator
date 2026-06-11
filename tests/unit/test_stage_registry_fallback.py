@@ -5,6 +5,7 @@ Verifies:
 - Invalid YAML falls back to hardcoded list without crashing
 - Missing file falls back to hardcoded list without crashing
 """
+
 from __future__ import annotations
 
 import tempfile
@@ -19,6 +20,7 @@ def _load_stage_registry(yaml_path: Path) -> list[dict] | None:
         return None
     try:
         import yaml
+
         data = yaml.safe_load(yaml_path.read_text(encoding="utf-8"))
         if isinstance(data, dict) and "stages" in data:
             return data["stages"]

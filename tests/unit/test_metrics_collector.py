@@ -37,9 +37,18 @@ class TestLLMCallRecord:
 
     def test_error_category_default(self):
         r = LLMCallRecord(
-            call_index=1, timestamp="", stage="", provider="", model="",
-            success=False, http_status=500, prompt_tokens=0, completion_tokens=0,
-            total_tokens=0, token_usage_available=False, duration_ms=0.0,
+            call_index=1,
+            timestamp="",
+            stage="",
+            provider="",
+            model="",
+            success=False,
+            http_status=500,
+            prompt_tokens=0,
+            completion_tokens=0,
+            total_tokens=0,
+            token_usage_available=False,
+            duration_ms=0.0,
             error_category="timeout",
         )
         assert r.error_category == "timeout"

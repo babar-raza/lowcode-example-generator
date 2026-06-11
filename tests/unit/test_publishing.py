@@ -41,8 +41,7 @@ def _setup_full_evidence(latest: Path) -> None:
     (latest / "validation-results.json").write_text("{}")
     (latest / "example-reviewer-results.json").write_text("{}")
     (latest / "scenario-catalog.json").write_text("{}")
-    gate = {"verdict": "PR_READY", "publishable": True,
-            "all_required_passed": True, "blocking_gates": []}
+    gate = {"verdict": "PR_READY", "publishable": True, "all_required_passed": True, "blocking_gates": []}
     (latest / "gate-results.json").write_text(json.dumps(gate))
 
 
@@ -307,18 +306,21 @@ class TestComputePRScopeType:
 
     def test_family_complete_when_all_published(self):
         from plugin_examples.publisher.pr_builder import compute_pr_scope_type, PR_SCOPE_FAMILY_COMPLETE
+
         denominator = {"workflow_root_types": 4, "allowed_pilot_count": None}
         result = compute_pr_scope_type("cells", denominator, 4)
         assert result == PR_SCOPE_FAMILY_COMPLETE
 
     def test_pilot_complete_when_pilot_published(self):
         from plugin_examples.publisher.pr_builder import compute_pr_scope_type
+
         denominator = {"workflow_root_types": 25, "allowed_pilot_count": 4}
         result = compute_pr_scope_type("words", denominator, 4)
         assert result == "PILOT_COMPLETE"
 
     def test_partial_canary_when_not_all_published(self):
         from plugin_examples.publisher.pr_builder import compute_pr_scope_type, PR_SCOPE_PARTIAL_CANARY
+
         denominator = {"workflow_root_types": 25, "allowed_pilot_count": 4}
         result = compute_pr_scope_type("words", denominator, 2)
         assert result == PR_SCOPE_PARTIAL_CANARY
@@ -326,6 +328,7 @@ class TestComputePRScopeType:
     def test_words_guard_null_workflow_root_count_prevents_family_complete(self):
         """Words guard: FAMILY_COMPLETE cannot be returned when workflow_root_types is null."""
         from plugin_examples.publisher.pr_builder import compute_pr_scope_type, PR_SCOPE_FAMILY_COMPLETE
+
         denominator = {"workflow_root_types": None, "allowed_pilot_count": 4}
         result = compute_pr_scope_type("words", denominator, 4)
         assert result != PR_SCOPE_FAMILY_COMPLETE
@@ -333,6 +336,7 @@ class TestComputePRScopeType:
 
     def test_partial_canary_when_zero_published(self):
         from plugin_examples.publisher.pr_builder import compute_pr_scope_type, PR_SCOPE_PARTIAL_CANARY
+
         denominator = {"workflow_root_types": 5, "allowed_pilot_count": 2}
         result = compute_pr_scope_type("diagram", denominator, 0)
         assert result == PR_SCOPE_PARTIAL_CANARY
@@ -340,6 +344,7 @@ class TestComputePRScopeType:
     def test_family_complete_requires_nonzero_denominator(self):
         """No denominator → PARTIAL_CANARY fallback."""
         from plugin_examples.publisher.pr_builder import compute_pr_scope_type, PR_SCOPE_PARTIAL_CANARY
+
         result = compute_pr_scope_type("cells", {}, 3)
         assert result == PR_SCOPE_PARTIAL_CANARY
 
@@ -349,25 +354,32 @@ class TestComputePRScopeType:
 
 class TestPackageWatcher:
     def test_disabled_family_skipped(self, tmp_path):
-        families = [{"family": "words", "enabled": False, "status": "disabled",
-                      "nuget": {"package_id": "Aspose.Words"}}]
+        families = [
+            {"family": "words", "enabled": False, "status": "disabled", "nuget": {"package_id": "Aspose.Words"}}
+        ]
         results = check_for_updates(families, tmp_path)
         assert len(results) == 1
         assert results[0].skipped
         assert results[0].skip_reason == "Family is disabled"
 
     def test_enabled_family_checked(self, tmp_path):
-        families = [{"family": "cells", "enabled": True, "status": "active",
-                      "nuget": {"package_id": "Aspose.Cells"}}]
+        families = [{"family": "cells", "enabled": True, "status": "active", "nuget": {"package_id": "Aspose.Cells"}}]
         results = check_for_updates(families, tmp_path)
         assert len(results) == 1
         assert not results[0].skipped
 
     def test_write_monthly_report(self, tmp_path):
         from plugin_examples.package_watcher.watcher import UpdateCheck
-        results = [UpdateCheck(family="cells", package_id="Aspose.Cells",
-                               current_version="25.3.0", latest_version="25.4.0",
-                               has_update=True)]
+
+        results = [
+            UpdateCheck(
+                family="cells",
+                package_id="Aspose.Cells",
+                current_version="25.3.0",
+                latest_version="25.4.0",
+                has_update=True,
+            )
+        ]
         path = write_monthly_report(results, tmp_path / "workspace" / "verification")
         assert path.exists()
         with open(path) as f:
@@ -386,6 +398,7 @@ class TestPackageWatcher:
 def _make_family_config(family: str, owner: str, repo: str, central_repo_allowed: bool = False):
     """Build a minimal mock family_config with github.published_plugin_examples_repo."""
     from types import SimpleNamespace
+
     pub_repo = SimpleNamespace(owner=owner, repo=repo, branch="main")
     github_cfg = SimpleNamespace(
         published_plugin_examples_repo=pub_repo,
@@ -452,9 +465,7 @@ class TestFamilySpecificPublisherTarget:
         latest = tmp_path / "verification" / "latest"
         self._setup_evidence(latest, "cells")
         verdict = _make_passing_verdict()
-        family_cfg = _make_family_config(
-            "cells", "aspose", "aspose-plugins-examples-dotnet", central_repo_allowed=True
-        )
+        family_cfg = _make_family_config("cells", "aspose", "aspose-plugins-examples-dotnet", central_repo_allowed=True)
 
         result = publish_examples(
             family="cells",
@@ -479,9 +490,7 @@ class TestFamilySpecificPublisherTarget:
         latest = tmp_path / "verification" / "latest"
         self._setup_evidence(latest, "cells")
         verdict = _make_passing_verdict()
-        family_cfg = _make_family_config(
-            "cells", "aspose-cells", "aspose-cells-examples", central_repo_allowed=False
-        )
+        family_cfg = _make_family_config("cells", "aspose-cells", "aspose-cells-examples", central_repo_allowed=False)
 
         result = publish_examples(
             family="cells",
@@ -575,9 +584,7 @@ class TestFamilySpecificPublisherTarget:
         latest = tmp_path / "verification" / "latest"
         self._setup_evidence(latest, "pdf")
         verdict = _make_passing_verdict()
-        family_cfg = _make_family_config(
-            "pdf", "aspose", "aspose-plugins-examples-dotnet", central_repo_allowed=False
-        )
+        family_cfg = _make_family_config("pdf", "aspose", "aspose-plugins-examples-dotnet", central_repo_allowed=False)
 
         result = publish_examples(
             family="pdf",
@@ -619,6 +626,7 @@ class TestPublishReadinessValidator:
 
     def test_discovery_only_family_blocked_as_not_active(self):
         from types import SimpleNamespace
+
         cfg = SimpleNamespace(status="discovery_only", github=None)
         record = check_family_publish_readiness("pdf", cfg)
         assert record["publish_ready"] is False
@@ -628,6 +636,7 @@ class TestPublishReadinessValidator:
         """aspose/aspose-plugins-examples-dotnet is the known placeholder — blocked_missing_family_publish_target."""
         cfg = _make_family_config("cells", "aspose", "aspose-plugins-examples-dotnet")
         from types import SimpleNamespace
+
         full_cfg = SimpleNamespace(status="active", github=cfg.github)
         record = check_family_publish_readiness("cells", full_cfg)
         assert record["publish_ready"] is False
@@ -636,6 +645,7 @@ class TestPublishReadinessValidator:
     def test_other_central_repo_blocked_as_not_allowed(self):
         """A non-placeholder central repo gets blocked_central_repo_target_not_allowed."""
         from types import SimpleNamespace
+
         pub_repo = SimpleNamespace(owner="shared-org", repo="shared-examples", branch="main")
         github_cfg = SimpleNamespace(
             published_plugin_examples_repo=pub_repo,
@@ -649,6 +659,7 @@ class TestPublishReadinessValidator:
     def test_family_specific_repo_is_ready(self):
         """A family-specific target (org contains family name) is publish_ready=True."""
         from types import SimpleNamespace
+
         pub_repo = SimpleNamespace(owner="aspose-cells", repo="aspose-cells-lowcode-examples", branch="main")
         github_cfg = SimpleNamespace(
             published_plugin_examples_repo=pub_repo,
@@ -664,6 +675,7 @@ class TestPublishReadinessValidator:
         """check_publish_readiness returns correct counts for 3 families."""
         # Cells and Words: blocked (central placeholder); PDF: blocked (discovery_only)
         from types import SimpleNamespace
+
         def _central_cfg(family):
             return _make_family_config(family, "aspose", "aspose-plugins-examples-dotnet")
 
@@ -671,11 +683,13 @@ class TestPublishReadinessValidator:
         words_full = SimpleNamespace(status="active", github=_central_cfg("words").github)
         pdf_full = SimpleNamespace(status="discovery_only", github=None)
 
-        result = check_publish_readiness([
-            ("cells", cells_full, "cells.yml"),
-            ("words", words_full, "words.yml"),
-            ("pdf", pdf_full, "pdf.yml"),
-        ])
+        result = check_publish_readiness(
+            [
+                ("cells", cells_full, "cells.yml"),
+                ("words", words_full, "words.yml"),
+                ("pdf", pdf_full, "pdf.yml"),
+            ]
+        )
         assert result["total_families"] == 3
         assert result["publish_ready_count"] == 0
         assert result["blocked_count"] == 3
@@ -684,12 +698,16 @@ class TestPublishReadinessValidator:
     def test_write_publish_readiness_report_creates_file(self, tmp_path):
         """write_publish_readiness_report writes family-publish-readiness.json."""
         from types import SimpleNamespace
-        cfg = SimpleNamespace(status="active", github=_make_family_config("cells", "aspose", "aspose-plugins-examples-dotnet").github)
+
+        cfg = SimpleNamespace(
+            status="active", github=_make_family_config("cells", "aspose", "aspose-plugins-examples-dotnet").github
+        )
         result = check_publish_readiness([("cells", cfg, "cells.yml")])
         path = write_publish_readiness_report(result, tmp_path / "verification")
         assert path.exists()
         assert path.name == "family-publish-readiness.json"
         import json as _json
+
         data = _json.loads(path.read_text())
         assert "families" in data
         assert len(data["families"]) == 1
@@ -705,6 +723,7 @@ class TestPublishReadinessValidator:
             "words", "aspose", "aspose-plugins-examples-dotnet", central_repo_allowed=False
         )
         from types import SimpleNamespace
+
         full_cfg = SimpleNamespace(status="active", github=family_cfg.github)
 
         result = publish_examples(
@@ -737,7 +756,10 @@ class TestLivePublishApprovalGate:
     def test_family_publish_readiness_marks_cells_ready_when_repo_configured(self):
         """cells with aspose-cells-net target returns publish_ready=True from validator."""
         from types import SimpleNamespace
-        pub_repo = SimpleNamespace(owner="aspose-cells-net", repo="Aspose.Cells.LowCode-for-.NET-Examples", branch="main")
+
+        pub_repo = SimpleNamespace(
+            owner="aspose-cells-net", repo="Aspose.Cells.LowCode-for-.NET-Examples", branch="main"
+        )
         github_cfg = SimpleNamespace(published_plugin_examples_repo=pub_repo, central_repo_allowed=False)
         cfg = SimpleNamespace(status="active", github=github_cfg)
         record = check_family_publish_readiness("cells", cfg)
@@ -748,7 +770,10 @@ class TestLivePublishApprovalGate:
     def test_family_publish_readiness_marks_words_ready_when_repo_configured(self):
         """words with aspose-words-net target returns publish_ready=True from validator."""
         from types import SimpleNamespace
-        pub_repo = SimpleNamespace(owner="aspose-words-net", repo="Aspose.Words.LowCode-for-.NET-Examples", branch="main")
+
+        pub_repo = SimpleNamespace(
+            owner="aspose-words-net", repo="Aspose.Words.LowCode-for-.NET-Examples", branch="main"
+        )
         github_cfg = SimpleNamespace(published_plugin_examples_repo=pub_repo, central_repo_allowed=False)
         cfg = SimpleNamespace(status="active", github=github_cfg)
         record = check_family_publish_readiness("words", cfg)
@@ -758,6 +783,7 @@ class TestLivePublishApprovalGate:
     def test_family_publish_readiness_keeps_pdf_blocked(self):
         """PDF with discovery_only status is always blocked regardless of repo."""
         from types import SimpleNamespace
+
         pub_repo = SimpleNamespace(owner="aspose-pdf-net", repo="Aspose.PDF.LowCode-for-.NET-Examples", branch="main")
         github_cfg = SimpleNamespace(published_plugin_examples_repo=pub_repo, central_repo_allowed=False)
         cfg = SimpleNamespace(status="discovery_only", github=github_cfg)
@@ -771,7 +797,10 @@ class TestLivePublishApprovalGate:
         self._setup_evidence(latest, "cells")
         verdict = _make_passing_verdict()
         from types import SimpleNamespace
-        pub_repo = SimpleNamespace(owner="aspose-cells-net", repo="Aspose.Cells.LowCode-for-.NET-Examples", branch="main")
+
+        pub_repo = SimpleNamespace(
+            owner="aspose-cells-net", repo="Aspose.Cells.LowCode-for-.NET-Examples", branch="main"
+        )
         github_cfg = SimpleNamespace(published_plugin_examples_repo=pub_repo, central_repo_allowed=False)
         family_cfg = SimpleNamespace(status="active", github=github_cfg)
 
@@ -795,6 +824,7 @@ class TestRepoAccessResolver:
     def test_publish_readiness_separates_config_ready_from_repo_access_ready(self):
         """config_ready=True does not imply repo_access_ready=True."""
         from types import SimpleNamespace
+
         pub_repo = SimpleNamespace(
             owner="aspose-cells-net",
             repo="Aspose.Cells.LowCode-for-.NET-Examples",
@@ -901,12 +931,15 @@ class TestRepoAccessResolver:
 
         with tempfile.TemporaryDirectory() as tmpdir:
             vdir = Path(tmpdir) / "verification"
-            with patch(
-                "plugin_examples.publisher.repo_access_resolver._github_get",
-                side_effect=mock_get,
-            ), patch(
-                "plugin_examples.publisher.repo_access_resolver._get_headers",
-                return_value={"Authorization": "token test_token"},
+            with (
+                patch(
+                    "plugin_examples.publisher.repo_access_resolver._github_get",
+                    side_effect=mock_get,
+                ),
+                patch(
+                    "plugin_examples.publisher.repo_access_resolver._get_headers",
+                    return_value={"Authorization": "token test_token"},
+                ),
             ):
                 result = resolve_repo_access([("cells", cfg, "cells.yml")], vdir, promote_latest=True)
 
@@ -953,6 +986,7 @@ class TestRepoAccessResolver:
             check_repo_access,
             TOKEN_MISSING,
         )
+
         result = check_repo_access(
             "aspose-cells-net",
             "Aspose.Cells.LowCode-for-.NET-Examples",
@@ -969,18 +1003,19 @@ class TestRepoAccessResolverAuthHeader:
     def test_get_headers_uses_bearer_format(self, monkeypatch):
         """_get_headers() must return Authorization: Bearer <token>, not 'token <token>'."""
         from plugin_examples.publisher.repo_access_resolver import _get_headers
+
         monkeypatch.setenv("GITHUB_TOKEN", "ghp_test_token_value")
         headers = _get_headers()
         assert headers is not None
         auth = headers.get("Authorization", "")
         assert auth.startswith("Bearer "), (
-            f"Expected 'Bearer ...' but got: {auth!r}. "
-            "Use 'Bearer' format for GitHub API auth, not 'token'."
+            f"Expected 'Bearer ...' but got: {auth!r}. " "Use 'Bearer' format for GitHub API auth, not 'token'."
         )
 
     def test_get_headers_does_not_serialize_token_value(self, monkeypatch):
         """_get_headers() Authorization header must not expose token value in repr/str."""
         from plugin_examples.publisher.repo_access_resolver import _get_headers
+
         monkeypatch.setenv("GITHUB_TOKEN", "secret_token_abc")
         headers = _get_headers()
         assert headers is not None
@@ -989,16 +1024,13 @@ class TestRepoAccessResolverAuthHeader:
         auth_value = headers["Authorization"]
         # Verify token is embedded (so we know the header is correct), but
         # ensure no other key in the dict exposes the token value.
-        assert "secret_token_abc" not in str(list(headers.keys())), (
-            "Token value must not appear in header key names"
-        )
-        assert auth_value == "Bearer secret_token_abc", (
-            f"Authorization header value incorrect: {auth_value!r}"
-        )
+        assert "secret_token_abc" not in str(list(headers.keys())), "Token value must not appear in header key names"
+        assert auth_value == "Bearer secret_token_abc", f"Authorization header value incorrect: {auth_value!r}"
 
     def test_get_headers_returns_none_when_token_absent(self, monkeypatch):
         """_get_headers() must return None when GITHUB_TOKEN is not set."""
         from plugin_examples.publisher.repo_access_resolver import _get_headers
+
         monkeypatch.delenv("GITHUB_TOKEN", raising=False)
         headers = _get_headers()
         assert headers is None
@@ -1019,6 +1051,7 @@ class TestVerifyEvidenceFamilyScopedPath:
     def test_verify_evidence_accepts_family_scoped_validation_results(self, tmp_path):
         """_verify_evidence must accept validation-results.json in families/{family}/ path."""
         from plugin_examples.publisher.publisher import _verify_evidence
+
         verification_dir = tmp_path / "workspace" / "verification"
         latest = verification_dir / "latest"
         latest.mkdir(parents=True)
@@ -1038,6 +1071,7 @@ class TestVerifyEvidenceFamilyScopedPath:
     def test_verify_evidence_falls_back_to_top_level_when_family_scoped_absent(self, tmp_path):
         """_verify_evidence must fall back to top-level legacy path for older promotions."""
         from plugin_examples.publisher.publisher import _verify_evidence
+
         verification_dir = tmp_path / "workspace" / "verification"
         latest = verification_dir / "latest"
         latest.mkdir(parents=True)
@@ -1051,6 +1085,7 @@ class TestVerifyEvidenceFamilyScopedPath:
     def test_verify_evidence_prefers_family_scoped_over_stale_top_level(self, tmp_path):
         """When both family-scoped and top-level exist, family-scoped must win (no contamination)."""
         from plugin_examples.publisher.publisher import _verify_evidence
+
         verification_dir = tmp_path / "workspace" / "verification"
         latest = verification_dir / "latest"
         latest.mkdir(parents=True)
@@ -1064,7 +1099,7 @@ class TestVerifyEvidenceFamilyScopedPath:
         (family_dir / "validation-results.json").write_text('{"family":"cells"}', encoding="utf-8")
         (family_dir / "gate-results.json").write_text(
             json.dumps({"verdict": "PR_DRY_RUN_READY", "publishable": True, "all_required_passed": True}),
-            encoding="utf-8"
+            encoding="utf-8",
         )
 
         result = _verify_evidence(verification_dir, "cells")
@@ -1080,6 +1115,7 @@ class TestPdfPublishReadiness:
 
     def _make_pdf_config(self, owner: str, repo: str, status: str = "discovery_only"):
         from types import SimpleNamespace
+
         pub_repo = SimpleNamespace(owner=owner, repo=repo, branch="main")
         github_cfg = SimpleNamespace(published_plugin_examples_repo=pub_repo, central_repo_allowed=False)
         return SimpleNamespace(status=status, github=github_cfg)
@@ -1125,14 +1161,10 @@ class TestPublishPrRepoAccessResolutionFallback:
         latest = tmp_path / "latest"
         latest.mkdir()
         # Readiness file has repo_access_ready=False (stale)
-        readiness = {
-            "families": [{"family": "pdf", "repo_access_ready": False, "pr_permission_ready": False}]
-        }
+        readiness = {"families": [{"family": "pdf", "repo_access_ready": False, "pr_permission_ready": False}]}
         (latest / "family-publish-readiness.json").write_text(json.dumps(readiness))
         # Resolver file is authoritative with True
-        resolver = {
-            "families": [{"family": "pdf", "repo_access_ready": True, "pr_permission_ready": True}]
-        }
+        resolver = {"families": [{"family": "pdf", "repo_access_ready": True, "pr_permission_ready": True}]}
         (latest / "family-repo-access-resolution.json").write_text(json.dumps(resolver))
 
         # Simulate the fallback logic from __main__.py
@@ -1157,13 +1189,9 @@ class TestPublishPrRepoAccessResolutionFallback:
         """Fallback does not set True when resolver also says False."""
         latest = tmp_path / "latest"
         latest.mkdir()
-        readiness = {
-            "families": [{"family": "pdf", "repo_access_ready": False, "pr_permission_ready": False}]
-        }
+        readiness = {"families": [{"family": "pdf", "repo_access_ready": False, "pr_permission_ready": False}]}
         (latest / "family-publish-readiness.json").write_text(json.dumps(readiness))
-        resolver = {
-            "families": [{"family": "pdf", "repo_access_ready": False, "pr_permission_ready": False}]
-        }
+        resolver = {"families": [{"family": "pdf", "repo_access_ready": False, "pr_permission_ready": False}]}
         (latest / "family-repo-access-resolution.json").write_text(json.dumps(resolver))
 
         repo_access_ready = False
@@ -1187,14 +1215,10 @@ class TestPublishPrRepoAccessResolutionFallback:
         """When readiness already has True, fallback is never reached."""
         latest = tmp_path / "latest"
         latest.mkdir()
-        readiness = {
-            "families": [{"family": "pdf", "repo_access_ready": True, "pr_permission_ready": True}]
-        }
+        readiness = {"families": [{"family": "pdf", "repo_access_ready": True, "pr_permission_ready": True}]}
         (latest / "family-publish-readiness.json").write_text(json.dumps(readiness))
         # Resolver says False — should NOT override the already-True values
-        resolver = {
-            "families": [{"family": "pdf", "repo_access_ready": False, "pr_permission_ready": False}]
-        }
+        resolver = {"families": [{"family": "pdf", "repo_access_ready": False, "pr_permission_ready": False}]}
         (latest / "family-repo-access-resolution.json").write_text(json.dumps(resolver))
 
         repo_access_ready = False
@@ -1219,14 +1243,10 @@ class TestPublishPrRepoAccessResolutionFallback:
         """Fallback only applies to the matching family, not others."""
         latest = tmp_path / "latest"
         latest.mkdir()
-        readiness = {
-            "families": [{"family": "pdf", "repo_access_ready": False, "pr_permission_ready": False}]
-        }
+        readiness = {"families": [{"family": "pdf", "repo_access_ready": False, "pr_permission_ready": False}]}
         (latest / "family-publish-readiness.json").write_text(json.dumps(readiness))
         # Resolver has cells=True but NOT pdf
-        resolver = {
-            "families": [{"family": "cells", "repo_access_ready": True, "pr_permission_ready": True}]
-        }
+        resolver = {"families": [{"family": "cells", "repo_access_ready": True, "pr_permission_ready": True}]}
         (latest / "family-repo-access-resolution.json").write_text(json.dumps(resolver))
 
         repo_access_ready = False

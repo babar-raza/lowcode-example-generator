@@ -1,10 +1,9 @@
 """Tests for LowCode Completeness Validators (LCV-01..LCV-15)."""
+
 import json
 import pytest
 from pathlib import Path
-from src.plugin_examples.fixture_factory.lowcode_completeness_validators import (
-    run_all_lcv_checks, LcvResult
-)
+from src.plugin_examples.fixture_factory.lowcode_completeness_validators import run_all_lcv_checks, LcvResult
 
 
 def complete_closeout(**overrides):
@@ -16,14 +15,16 @@ def complete_closeout(**overrides):
         "evidence_bundle": {
             "sha256": "abc123",
             "external_sidecar": ".local/evidence-bundles/test.sha256",
-            "protocol_note": "SHA is authoritative in external sidecar only (v2 protocol)"
+            "protocol_note": "SHA is authoritative in external sidecar only (v2 protocol)",
         },
         "iv_verdict": "IV_PASS",
         "adversarial_review_verdict": "ADVERSARIAL_REVIEW_PASS",
         "prs_created": 3,
-        "pr_urls": ["https://github.com/org/repo/pull/1",
-                    "https://github.com/org/repo2/pull/1",
-                    "https://github.com/org/repo3/pull/1"],
+        "pr_urls": [
+            "https://github.com/org/repo/pull/1",
+            "https://github.com/org/repo2/pull/1",
+            "https://github.com/org/repo3/pull/1",
+        ],
         "pclc_total": 38,
         "published": 0,
     }

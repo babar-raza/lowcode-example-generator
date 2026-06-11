@@ -35,9 +35,7 @@ def _find_nuspec(nupkg_path: Path) -> str:
     with zipfile.ZipFile(nupkg_path) as zf:
         nuspec_names = [n for n in zf.namelist() if n.endswith(".nuspec")]
         if not nuspec_names:
-            raise NuGetFetchError(
-                f"No .nuspec found inside {nupkg_path}"
-            )
+            raise NuGetFetchError(f"No .nuspec found inside {nupkg_path}")
         return zf.read(nuspec_names[0]).decode("utf-8-sig")
 
 
@@ -122,9 +120,7 @@ def _match_framework_group(
         return _deps_from_group(no_tfm_group, prefix)
 
     # No match at all — return empty
-    logger.warning(
-        "No matching dependency group for frameworks: %s", target_frameworks
-    )
+    logger.warning("No matching dependency group for frameworks: %s", target_frameworks)
     return []
 
 
@@ -171,20 +167,24 @@ def _collect_all_tfm_deps(nuspec_xml: str) -> list[dict]:
                     dep_id = dep.get("id")
                     if dep_id and dep_id.lower() not in seen_ids:
                         seen_ids.add(dep_id.lower())
-                        result.append({
-                            "id": dep_id,
-                            "version": _clean_version(dep.get("version", "")),
-                        })
+                        result.append(
+                            {
+                                "id": dep_id,
+                                "version": _clean_version(dep.get("version", "")),
+                            }
+                        )
         else:
             # Flat dependency list (no groups) — same as _parse_dependencies fallback
             for dep in deps_elem.findall(f"{prefix}dependency"):
                 dep_id = dep.get("id")
                 if dep_id and dep_id.lower() not in seen_ids:
                     seen_ids.add(dep_id.lower())
-                    result.append({
-                        "id": dep_id,
-                        "version": _clean_version(dep.get("version", "")),
-                    })
+                    result.append(
+                        {
+                            "id": dep_id,
+                            "version": _clean_version(dep.get("version", "")),
+                        }
+                    )
 
         return result
 
@@ -270,16 +270,18 @@ def resolve_dependencies(
                     dep_version,
                     e,
                 )
-                all_deps.append({
-                    "package_id": dep_id,
-                    "version": dep_version,
-                    "sha256": "",
-                    "source_url": "",
-                    "cached_path": "",
-                    "depth": _current_depth,
-                    "status": "failed",
-                    "error": str(e),
-                })
+                all_deps.append(
+                    {
+                        "package_id": dep_id,
+                        "version": dep_version,
+                        "sha256": "",
+                        "source_url": "",
+                        "cached_path": "",
+                        "depth": _current_depth,
+                        "status": "failed",
+                        "error": str(e),
+                    }
+                )
                 continue
 
         record = {
@@ -330,6 +332,7 @@ def update_package_lock(
 
     if lock_path.exists():
         import json
+
         with open(lock_path) as f:
             lock = json.load(f)
     else:

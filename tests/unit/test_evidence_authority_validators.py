@@ -28,11 +28,12 @@ from src.plugin_examples.fixture_factory.evidence_authority_validators import (
 # Fixtures
 # ============================================================
 
+
 def make_taskcards(complete_ids=None, pending_ids=None):
     taskcards = []
-    for tid in (complete_ids or []):
+    for tid in complete_ids or []:
         taskcards.append({"id": tid, "status": "COMPLETE", "evidence": "done"})
-    for tid in (pending_ids or []):
+    for tid in pending_ids or []:
         taskcards.append({"id": tid, "status": "PENDING", "evidence": ""})
     return {"taskcards": taskcards}
 
@@ -74,8 +75,7 @@ def write_sidecar(tmp_dir, bundle_path: str) -> str:
     return sidecar_path
 
 
-def write_attestation(tmp_dir, bundle_path: str, sidecar_path: str,
-                       entry_count: int = 1, protocol: str = "v2") -> str:
+def write_attestation(tmp_dir, bundle_path: str, sidecar_path: str, entry_count: int = 1, protocol: str = "v2") -> str:
     sha256 = hashlib.sha256()
     with open(bundle_path, "rb") as f:
         for chunk in iter(lambda: f.read(65536), b""):
@@ -101,6 +101,7 @@ def write_attestation(tmp_dir, bundle_path: str, sidecar_path: str,
 # EAV-01
 # ============================================================
 
+
 class TestEAV01:
     def test_pass_iv_pass_no_pending(self):
         result = eav_01_iv_not_final_pass_with_pending_taskcards(
@@ -114,7 +115,7 @@ class TestEAV01:
         iv = make_iv("IV_PASS")
         tc = make_taskcards(
             complete_ids=["W15-L0-01", "W15-LI-01", "W15-LI-02", "W15-LI-03"],
-            pending_ids=["W15-LI-04", "W15-LI-05", "W15-LI-06", "W15-LI-07", "W15-LI-08", "W15-LI-09"]
+            pending_ids=["W15-LI-04", "W15-LI-05", "W15-LI-06", "W15-LI-07", "W15-LI-08", "W15-LI-09"],
         )
         result = eav_01_iv_not_final_pass_with_pending_taskcards(iv, tc)
         assert not result.passed
@@ -139,11 +140,10 @@ class TestEAV01:
 # EAV-02
 # ============================================================
 
+
 class TestEAV02:
     def test_pass_ar_pass_no_pending(self):
-        result = eav_02_ar_not_final_pass_with_pending_taskcards(
-            make_ar(), make_taskcards(complete_ids=["TC-01"])
-        )
+        result = eav_02_ar_not_final_pass_with_pending_taskcards(make_ar(), make_taskcards(complete_ids=["TC-01"]))
         assert result.passed
 
     def test_fail_ar_final_pass_with_pending(self):
@@ -165,6 +165,7 @@ class TestEAV02:
 # EAV-03
 # ============================================================
 
+
 class TestEAV03:
     def test_pass_sidecar_matches_bundle(self, tmp_path):
         bundle_path = write_bundle(str(tmp_path), {"file.txt": "hello"})
@@ -174,9 +175,7 @@ class TestEAV03:
 
     def test_fail_sidecar_missing(self, tmp_path):
         bundle_path = write_bundle(str(tmp_path), {"file.txt": "hello"})
-        result = eav_03_external_sidecar_exists_and_valid(
-            str(tmp_path / "nonexistent.sha256"), bundle_path
-        )
+        result = eav_03_external_sidecar_exists_and_valid(str(tmp_path / "nonexistent.sha256"), bundle_path)
         assert not result.passed
 
     def test_fail_sidecar_sha_mismatch(self, tmp_path):
@@ -193,15 +192,14 @@ class TestEAV03:
         sidecar_path = str(tmp_path / "bundle.sha256")
         with open(sidecar_path, "w") as f:
             f.write("abc123  bundle.zip\n")
-        result = eav_03_external_sidecar_exists_and_valid(
-            sidecar_path, str(tmp_path / "nonexistent.zip")
-        )
+        result = eav_03_external_sidecar_exists_and_valid(sidecar_path, str(tmp_path / "nonexistent.zip"))
         assert not result.passed
 
 
 # ============================================================
 # EAV-04
 # ============================================================
+
 
 class TestEAV04:
     def test_pass_complete_attestation(self, tmp_path):
@@ -212,9 +210,7 @@ class TestEAV04:
         assert result.passed
 
     def test_fail_attestation_missing(self, tmp_path):
-        result = eav_04_external_attestation_exists_and_complete(
-            str(tmp_path / "nonexistent.json")
-        )
+        result = eav_04_external_attestation_exists_and_complete(str(tmp_path / "nonexistent.json"))
         assert not result.passed
 
     def test_fail_missing_fields(self, tmp_path):
@@ -228,8 +224,7 @@ class TestEAV04:
     def test_fail_wrong_protocol_version(self, tmp_path):
         bundle_path = write_bundle(str(tmp_path), {"f.txt": "x"})
         sidecar_path = write_sidecar(str(tmp_path), bundle_path)
-        att_path = write_attestation(str(tmp_path), bundle_path, sidecar_path,
-                                     entry_count=1, protocol="v1.1")
+        att_path = write_attestation(str(tmp_path), bundle_path, sidecar_path, entry_count=1, protocol="v1.1")
         result = eav_04_external_attestation_exists_and_complete(att_path)
         assert not result.passed
         assert "v1.1" in result.message
@@ -239,6 +234,7 @@ class TestEAV04:
 # EAV-05
 # ============================================================
 
+
 class TestEAV05:
     def test_pass_no_closeout_in_bundle(self, tmp_path):
         bundle_path = write_bundle(str(tmp_path), {"evidence.txt": "data"})
@@ -247,40 +243,37 @@ class TestEAV05:
 
     def test_pass_prebundle_closeout_labeled_correctly(self, tmp_path):
         pre_closeout = json.dumps({"closeout_type": "PRE_BUNDLE_CLOSEOUT", "verdict": "SPRINT_IN_PROGRESS"})
-        bundle_path = write_bundle(str(tmp_path), {
-            "sprint/final/sprint-closeout.json": pre_closeout
-        })
+        bundle_path = write_bundle(str(tmp_path), {"sprint/final/sprint-closeout.json": pre_closeout})
         result = eav_05_prebundle_closeout_not_claiming_final_authority(bundle_path)
         assert result.passed
 
     def test_fail_wave14_pattern_zip_contains_own_sha(self, tmp_path):
         """Regression: Wave 14 had closeout with final SHA inside the bundle."""
         # Wave 14 constants from regression fixtures
-        closeout_with_sha = json.dumps({
-            "closeout_type": "FINAL",
-            "verdict": "SPRINT_COMPLETE",
-            "evidence_bundle": {
-                "sha256": "0cfddd35f4a013eff83e2d28266e90fe6c35f7e1a37ff82af7c78fe026fc4de4",
-                "size_bytes": 747902
+        closeout_with_sha = json.dumps(
+            {
+                "closeout_type": "FINAL",
+                "verdict": "SPRINT_COMPLETE",
+                "evidence_bundle": {
+                    "sha256": "0cfddd35f4a013eff83e2d28266e90fe6c35f7e1a37ff82af7c78fe026fc4de4",
+                    "size_bytes": 747902,
+                },
             }
-        })
-        bundle_path = write_bundle(str(tmp_path), {
-            "sprint/final/sprint-closeout.json": closeout_with_sha
-        })
+        )
+        bundle_path = write_bundle(str(tmp_path), {"sprint/final/sprint-closeout.json": closeout_with_sha})
         result = eav_05_prebundle_closeout_not_claiming_final_authority(bundle_path)
         assert not result.passed
         assert "final sha authority" in result.message.lower()
 
     def test_fail_bundle_missing(self, tmp_path):
-        result = eav_05_prebundle_closeout_not_claiming_final_authority(
-            str(tmp_path / "nonexistent.zip")
-        )
+        result = eav_05_prebundle_closeout_not_claiming_final_authority(str(tmp_path / "nonexistent.zip"))
         assert not result.passed
 
 
 # ============================================================
 # EAV-06
 # ============================================================
+
 
 class TestEAV06:
     def test_pass_count_matches(self, tmp_path):
@@ -314,14 +307,18 @@ class TestEAV06:
 # run_all_eav integration
 # ============================================================
 
+
 class TestRunAllEAV:
     def test_all_pass_correct_scenario(self, tmp_path):
         # Build bundle with pre-bundle closeout (no final SHA)
         pre_closeout = json.dumps({"closeout_type": "PRE_BUNDLE_CLOSEOUT", "verdict": "SPRINT_IN_PROGRESS"})
-        bundle_path = write_bundle(str(tmp_path), {
-            "sprint/evidence.txt": "data",
-            "sprint/final/pre-bundle-closeout.json": pre_closeout,
-        })
+        bundle_path = write_bundle(
+            str(tmp_path),
+            {
+                "sprint/evidence.txt": "data",
+                "sprint/final/pre-bundle-closeout.json": pre_closeout,
+            },
+        )
         sidecar_path = write_sidecar(str(tmp_path), bundle_path)
         att_path = write_attestation(str(tmp_path), bundle_path, sidecar_path, entry_count=2)
 
@@ -342,7 +339,7 @@ class TestRunAllEAV:
         # Wave 15 exact defect state
         tc = make_taskcards(
             complete_ids=[f"W15-L{i}-01" for i in range(9)],
-            pending_ids=["W15-LI-04", "W15-LI-05", "W15-LI-06", "W15-LI-07", "W15-LI-08", "W15-LI-09"]
+            pending_ids=["W15-LI-04", "W15-LI-05", "W15-LI-06", "W15-LI-07", "W15-LI-08", "W15-LI-09"],
         )
         iv = make_iv("IV_PASS", is_final=True)  # Final IV with pending taskcards
         ar = make_ar("ADVERSARIAL_REVIEW_PASS", "FINAL")  # Final AR with pending taskcards

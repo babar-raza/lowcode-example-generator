@@ -46,10 +46,12 @@ class TestRetryableClassification:
 
     def _get_classifier(self):
         from plugin_examples.runner import _is_reviewer_failure_retryable
+
         return _is_reviewer_failure_retryable
 
     def _make_result(self, available=True, passed=False, error=None, details=None):
         from plugin_examples.verifier_bridge.bridge import ReviewerResult
+
         return ReviewerResult(available=available, passed=passed, error=error, details=details)
 
     def test_compilation_error_is_retryable(self):
@@ -91,6 +93,7 @@ class TestLifecycleReviewerRepair:
 
     def test_mark_reviewer_repaired_sets_fields(self):
         from plugin_examples.gates.example_lifecycle import ExampleLifecycleRecord
+
         rec = ExampleLifecycleRecord(scenario_id="test-1", family="cells", run_id="r1")
         rec.mark_reviewer_repaired(attempts=2)
         assert rec.reviewer_status == "repaired"
@@ -100,6 +103,7 @@ class TestLifecycleReviewerRepair:
 
     def test_mark_reviewer_failed_then_backlogged(self):
         from plugin_examples.gates.example_lifecycle import ExampleLifecycleRecord
+
         rec = ExampleLifecycleRecord(scenario_id="test-2", family="cells", run_id="r1")
         rec.mark_reviewer_failed("compilation error")
         assert rec.pr_candidate is False
@@ -113,6 +117,7 @@ class TestLifecycleReviewerRepair:
 
     def test_reviewer_repaired_in_lifecycle_stages(self):
         from plugin_examples.gates.example_lifecycle import LIFECYCLE_STAGES
+
         assert "reviewer_repaired" in LIFECYCLE_STAGES
 
 
@@ -121,12 +126,15 @@ class TestReviewerRepairConstants:
 
     def test_max_attempts_is_positive(self):
         from plugin_examples.runner import _REVIEWER_MAX_REPAIR_ATTEMPTS
+
         assert _REVIEWER_MAX_REPAIR_ATTEMPTS > 0
 
     def test_max_attempts_is_bounded(self):
         from plugin_examples.runner import _REVIEWER_MAX_REPAIR_ATTEMPTS
+
         assert _REVIEWER_MAX_REPAIR_ATTEMPTS <= 5
 
     def test_retryable_keywords_are_nonempty(self):
         from plugin_examples.runner import _REVIEWER_RETRYABLE_KEYWORDS
+
         assert len(_REVIEWER_RETRYABLE_KEYWORDS) > 0

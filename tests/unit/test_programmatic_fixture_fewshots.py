@@ -16,6 +16,7 @@ from plugin_examples.generator.packet_builder import (
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _make_diagram_catalog(type_name: str = "PdfConverter", full_name: str = "Aspose.Diagram.LowCode.PdfConverter"):
     return {
         "assembly_name": "Aspose.Diagram",
@@ -127,6 +128,7 @@ def _make_cells_scenario():
 # Tests: Guidance registry
 # ---------------------------------------------------------------------------
 
+
 class TestProgrammaticFixtureGuidanceRegistry:
     def test_diagram_entry_exists(self):
         assert "diagram" in _PROGRAMMATIC_FIXTURE_GUIDANCE
@@ -170,24 +172,31 @@ class TestProgrammaticFixtureGuidanceRegistry:
 # Tests: _build_programmatic_fixture_guidance function
 # ---------------------------------------------------------------------------
 
+
 class TestBuildProgrammaticFixtureGuidance:
     def test_returns_empty_for_non_programmatic_input(self):
         constraints, appendix = _build_programmatic_fixture_guidance(
-            "diagram", "pdfconverter", "generated_fixture_file",
+            "diagram",
+            "pdfconverter",
+            "generated_fixture_file",
         )
         assert constraints == []
         assert appendix == ""
 
     def test_returns_empty_for_unknown_family(self):
         constraints, appendix = _build_programmatic_fixture_guidance(
-            "unknown_family", "something", "programmatic_input",
+            "unknown_family",
+            "something",
+            "programmatic_input",
         )
         assert constraints == []
         assert appendix == ""
 
     def test_returns_constraints_for_diagram(self):
         constraints, appendix = _build_programmatic_fixture_guidance(
-            "diagram", "pdfconverter", "programmatic_input",
+            "diagram",
+            "pdfconverter",
+            "programmatic_input",
         )
         assert len(constraints) > 0
         texts = " ".join(constraints)
@@ -196,21 +205,27 @@ class TestBuildProgrammaticFixtureGuidance:
 
     def test_returns_fixture_code_appendix_for_diagram(self):
         constraints, appendix = _build_programmatic_fixture_guidance(
-            "diagram", "pdfconverter", "programmatic_input",
+            "diagram",
+            "pdfconverter",
+            "programmatic_input",
         )
         assert "Aspose.Diagram.Diagram()" in appendix
         assert "REFERENCE PATTERN" in appendix
 
     def test_includes_operation_example_for_pdfconverter(self):
         _, appendix = _build_programmatic_fixture_guidance(
-            "diagram", "pdfconverter", "programmatic_input",
+            "diagram",
+            "pdfconverter",
+            "programmatic_input",
         )
         assert "PdfConverter.Process" in appendix
         assert "LOWCODE OPERATION" in appendix
 
     def test_includes_operation_example_for_diagramconverter(self):
         _, appendix = _build_programmatic_fixture_guidance(
-            "diagram", "diagramconverter", "programmatic_input",
+            "diagram",
+            "diagramconverter",
+            "programmatic_input",
         )
         assert "DiagramConverter.Process" in appendix
         assert "Visio format" in appendix
@@ -219,6 +234,7 @@ class TestBuildProgrammaticFixtureGuidance:
 # ---------------------------------------------------------------------------
 # Tests: build_packet integration for Diagram
 # ---------------------------------------------------------------------------
+
 
 class TestDiagramPacketIntegration:
     def test_diagram_packet_includes_vsdx_fixture_guidance(self):
@@ -292,6 +308,7 @@ class TestDiagramPacketIntegration:
 # ---------------------------------------------------------------------------
 # Tests: Non-Diagram families do NOT receive Diagram guidance
 # ---------------------------------------------------------------------------
+
 
 class TestNonDiagramFamiliesExcluded:
     def test_cells_packet_no_diagram_guidance(self):

@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class DotnetResult:
     """Result of a single dotnet operation."""
+
     operation: str  # restore, build, run
     success: bool
     exit_code: int = 0
@@ -25,6 +26,7 @@ class DotnetResult:
 @dataclass
 class ValidationResult:
     """Full validation result for a generated example."""
+
     scenario_id: str
     restore: DotnetResult | None = None
     build: DotnetResult | None = None
@@ -121,6 +123,7 @@ def _run_dotnet(
         cmd.extend(extra_args)
 
     import time
+
     start = time.time()
 
     try:

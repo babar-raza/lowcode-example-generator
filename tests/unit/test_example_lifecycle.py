@@ -20,18 +20,14 @@ class TestExampleLifecycleRecord:
     """Test ExampleLifecycleRecord state transitions."""
 
     def test_initial_state_is_planned(self):
-        rec = ExampleLifecycleRecord(
-            scenario_id="pdf-merger", family="pdf", run_id="run-001"
-        )
+        rec = ExampleLifecycleRecord(scenario_id="pdf-merger", family="pdf", run_id="run-001")
         assert rec.current_stage == "planned"
         assert rec.final_verdict == "PENDING"
         assert rec.pr_candidate is False
         assert rec.backlogged is False
 
     def test_mark_generation_failed_sets_stage_and_verdict(self):
-        rec = ExampleLifecycleRecord(
-            scenario_id="pdf-merger", family="pdf", run_id="run-001"
-        )
+        rec = ExampleLifecycleRecord(scenario_id="pdf-merger", family="pdf", run_id="run-001")
         rec.mark_generation_failed("LLM returned empty code")
         assert rec.current_stage == "generation_failed"
         assert rec.generation_status == "failed"
@@ -40,9 +36,7 @@ class TestExampleLifecycleRecord:
         assert rec.pr_candidate is False
 
     def test_full_success_lifecycle(self):
-        rec = ExampleLifecycleRecord(
-            scenario_id="pdf-merger", family="pdf", run_id="run-001"
-        )
+        rec = ExampleLifecycleRecord(scenario_id="pdf-merger", family="pdf", run_id="run-001")
         rec.mark_generated()
         rec.mark_build_passed()
         rec.mark_run_passed()
@@ -52,9 +46,7 @@ class TestExampleLifecycleRecord:
         assert rec.final_verdict == "EXAMPLE_READY_FOR_PR_DRY_RUN"
 
     def test_build_failure_triggers_backlog(self):
-        rec = ExampleLifecycleRecord(
-            scenario_id="pdf-merger", family="pdf", run_id="run-001"
-        )
+        rec = ExampleLifecycleRecord(scenario_id="pdf-merger", family="pdf", run_id="run-001")
         rec.mark_generated()
         rec.mark_build_failed("CS0246: type not found")
         rec.mark_backlogged(
@@ -68,9 +60,7 @@ class TestExampleLifecycleRecord:
         assert rec.pr_candidate is False
 
     def test_reviewer_failure_updates_lifecycle(self):
-        rec = ExampleLifecycleRecord(
-            scenario_id="pdf-merger", family="pdf", run_id="run-001"
-        )
+        rec = ExampleLifecycleRecord(scenario_id="pdf-merger", family="pdf", run_id="run-001")
         rec.mark_generated()
         rec.mark_build_passed()
         rec.mark_run_passed()
@@ -252,11 +242,18 @@ class TestRunnerLifecycleIntegration:
         """Verify the lifecycle registry field exists on PipelineContext."""
         from plugin_examples.runner import PipelineContext
         from pathlib import Path as P
+
         ctx = PipelineContext(
-            family="pdf", run_id="test", dry_run=True,
-            skip_run=False, template_mode=True,
-            require_llm=False, require_validation=False,
-            require_reviewer=False, repo_root=P("."),
-            run_dir=P("."), evidence_dir=P("."),
+            family="pdf",
+            run_id="test",
+            dry_run=True,
+            skip_run=False,
+            template_mode=True,
+            require_llm=False,
+            require_validation=False,
+            require_reviewer=False,
+            repo_root=P("."),
+            run_dir=P("."),
+            evidence_dir=P("."),
         )
         assert ctx.lifecycle_registry is None  # Initialized lazily in _stage_generation

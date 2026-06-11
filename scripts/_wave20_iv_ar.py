@@ -1,5 +1,7 @@
 """Wave 20 IV, adversarial review, validator report, pre-bundle closeout."""
-import json, subprocess, datetime
+import json
+import subprocess
+import datetime
 from pathlib import Path
 
 SPRINT = "lowcode-plugin-canonical-package-wave20-20260607"

@@ -23,23 +23,23 @@ def _make_contract(**overrides):
 
 
 def test_valid_code_passes():
-    code = '''
+    code = """
 using System;
 Console.WriteLine("Example: cells-spreadsheet-converter");
 var inputPath = "input.xlsx";
 var outputPath = "output.csv";
 SpreadsheetConverter.Process(inputPath, outputPath);
-'''
+"""
     contract = _make_contract()
     result = validate_code_against_contract(code, contract)
     assert result.valid
 
 
 def test_wrong_output_extension_fails():
-    code = '''
+    code = """
 var outputPath = "output.xlsx";
 SpreadsheetConverter.Process("input.xlsx", outputPath);
-'''
+"""
     contract = _make_contract(canonical_output_format=".csv")
     result = validate_code_against_contract(code, contract)
     assert not result.valid
@@ -48,9 +48,9 @@ SpreadsheetConverter.Process("input.xlsx", outputPath);
 
 
 def test_dot_out_fails():
-    code = '''
+    code = """
 var outputPath = "output.out";
-'''
+"""
     contract = _make_contract()
     result = validate_code_against_contract(code, contract)
     assert not result.valid
@@ -59,40 +59,46 @@ var outputPath = "output.out";
 
 
 def test_stdout_type_no_add_output():
-    code = '''
+    code = """
 var options = new TextExtractorOptions();
 options.AddInput(new FileDataSource("input.pdf"));
 var result = new TextExtractor().Process(options);
-'''
+"""
     contract = _make_contract(
-        family="pdf", type_name="TextExtractor",
-        operation_kind="extractor", input_format=".pdf",
-        canonical_output_format="", output_kind="stdout",
+        family="pdf",
+        type_name="TextExtractor",
+        operation_kind="extractor",
+        input_format=".pdf",
+        canonical_output_format="",
+        output_kind="stdout",
     )
     result = validate_code_against_contract(code, contract)
     assert result.valid
 
 
 def test_stdout_type_with_add_output_fails():
-    code = '''
+    code = """
 var options = new TextExtractorOptions();
 options.AddInput(new FileDataSource("input.pdf"));
 options.AddOutput(new FileDataSource("output.pdf"));
 var result = new TextExtractor().Process(options);
-'''
+"""
     contract = _make_contract(
-        family="pdf", type_name="TextExtractor",
-        operation_kind="extractor", input_format=".pdf",
-        canonical_output_format="", output_kind="stdout",
+        family="pdf",
+        type_name="TextExtractor",
+        operation_kind="extractor",
+        input_format=".pdf",
+        canonical_output_format="",
+        output_kind="stdout",
     )
     result = validate_code_against_contract(code, contract)
     assert not result.valid
 
 
 def test_same_format_converter_guard():
-    code = '''
+    code = """
 SpreadsheetConverter.Process("input.xlsx", "output.xlsx");
-'''
+"""
     contract = _make_contract(
         canonical_output_format=".xlsx",
         input_format=".xlsx",
@@ -105,20 +111,20 @@ SpreadsheetConverter.Process("input.xlsx", "output.xlsx");
 
 
 def test_correct_input_extension():
-    code = '''
+    code = """
 var inputPath = "input.xlsx";
 var outputPath = "output.csv";
-'''
+"""
     contract = _make_contract(input_format=".xlsx", canonical_output_format=".csv")
     result = validate_code_against_contract(code, contract)
     assert result.valid
 
 
 def test_wrong_input_extension():
-    code = '''
+    code = """
 var inputPath = "input.pdf";
 var outputPath = "output.csv";
-'''
+"""
     contract = _make_contract(input_format=".xlsx", canonical_output_format=".csv")
     result = validate_code_against_contract(code, contract)
     assert not result.valid
@@ -128,9 +134,12 @@ def test_collection_output_kind_passes():
     """collection output_kind with canonical extension present passes."""
     code = 'File.Copy(src, "output.png");'
     contract = _make_contract(
-        family="pdf", type_name="ImageExtractor",
-        operation_kind="extractor", input_format=".pdf",
-        canonical_output_format=".png", output_kind="collection",
+        family="pdf",
+        type_name="ImageExtractor",
+        operation_kind="extractor",
+        input_format=".pdf",
+        canonical_output_format=".png",
+        output_kind="collection",
         output_cardinality="multi",
     )
     result = validate_code_against_contract(code, contract)
@@ -141,7 +150,7 @@ def test_collection_output_kind_passes():
 
 def test_none_output_kind_no_output_file_passes():
     """output_kind=none with no output.* in code passes."""
-    code = 'var doc = new Document(); doc.ProcessInPlace();'
+    code = "var doc = new Document(); doc.ProcessInPlace();"
     contract = _make_contract(canonical_output_format="", output_kind="none")
     result = validate_code_against_contract(code, contract)
     check = next(c for c in result.checks if c["check"] == "none_output_guard")
@@ -161,8 +170,11 @@ def test_transform_operation_no_same_format_guard():
     """Transforms with same input/output don't trigger same_format_converter_guard."""
     code = 'Optimizer.Process("input.pdf", "output.pdf");'
     contract = _make_contract(
-        type_name="Optimizer", operation_kind="transform",
-        input_format=".pdf", canonical_output_format=".pdf", output_kind="file",
+        type_name="Optimizer",
+        operation_kind="transform",
+        input_format=".pdf",
+        canonical_output_format=".pdf",
+        output_kind="file",
     )
     result = validate_code_against_contract(code, contract)
     guard = next((c for c in result.checks if c["check"] == "same_format_converter_guard"), None)

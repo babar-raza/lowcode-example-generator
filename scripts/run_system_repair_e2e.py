@@ -3,7 +3,12 @@ Comprehensive E2E runner for lowcode-system-repair-20260601 sprint.
 Runs restore/build/run for every example in all pr-dry-run packages.
 Captures per-example logs to reports directory.
 """
-import json, os, subprocess, sys, time, hashlib
+import json
+import os
+import subprocess
+import sys
+import time
+import hashlib
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent

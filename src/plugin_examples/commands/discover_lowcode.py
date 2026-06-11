@@ -10,21 +10,14 @@ from plugin_examples.commands._metrics import _add_metrics_flags, _create_metric
 def add_parser(subparsers):
     """Register the discover-lowcode subcommand."""
     # Discover-LowCode command
-    parser = subparsers.add_parser("discover-lowcode",
-                                             help="Discovery-only sweep for all families")
-    parser.add_argument("--all-families", action="store_true",
-                                  help="Discover all enabled families")
+    parser = subparsers.add_parser("discover-lowcode", help="Discovery-only sweep for all families")
+    parser.add_argument("--all-families", action="store_true", help="Discover all enabled families")
     parser.add_argument("--family", help="Specific family to discover (single)")
-    parser.add_argument("--families", nargs="+", metavar="FAMILY",
-                                  help="Specific families to discover (list)")
-    parser.add_argument("--dry-run", action="store_true", default=True,
-                                  help="Dry-run mode (default)")
-    parser.add_argument("--promote-latest", action="store_true",
-                                  help="Copy evidence to workspace/verification/latest/")
-    parser.add_argument("--allow-experimental", action="store_true",
-                                  help="Include experimental families")
-    parser.add_argument("--rank", action="store_true",
-                                  help="Compute and write generation readiness ranking")
+    parser.add_argument("--families", nargs="+", metavar="FAMILY", help="Specific families to discover (list)")
+    parser.add_argument("--dry-run", action="store_true", default=True, help="Dry-run mode (default)")
+    parser.add_argument("--promote-latest", action="store_true", help="Copy evidence to workspace/verification/latest/")
+    parser.add_argument("--allow-experimental", action="store_true", help="Include experimental families")
+    parser.add_argument("--rank", action="store_true", help="Compute and write generation readiness ranking")
     _add_metrics_flags(parser)
     parser.set_defaults(func=handle)
     return parser
@@ -45,7 +38,8 @@ def handle(args) -> int:
     repo_root = _Path(__file__).resolve().parents[3]
 
     msession, mcollector = _create_metrics_session(
-        args, command="discover-lowcode",
+        args,
+        command="discover-lowcode",
         family=",".join(families) if families else "all",
         repo_root=repo_root,
     )
@@ -67,9 +61,9 @@ def handle(args) -> int:
     # Compute and write generation readiness ranking
     if getattr(args, "rank", False) or True:  # always compute ranking after discovery
         import json as _json
+
         ranking_new = compute_generation_readiness(result.get("families", []), repo_root)
-        ranking_path = (repo_root / "workspace" / "verification" / "latest"
-                       / "family-generation-readiness-rank.json")
+        ranking_path = repo_root / "workspace" / "verification" / "latest" / "family-generation-readiness-rank.json"
         ranking_path.parent.mkdir(parents=True, exist_ok=True)
 
         # Merge with existing entries to preserve families not in this run.
@@ -93,9 +87,7 @@ def handle(args) -> int:
 
         merged = list(existing_by_family.values())
         ranking_path.write_text(_json.dumps(merged, indent=2), encoding="utf-8")
-        logging.getLogger(__name__).info(
-            "Generation readiness ranking written (scope=%s): %s", _scope, ranking_path
-        )
+        logging.getLogger(__name__).info("Generation readiness ranking written (scope=%s): %s", _scope, ranking_path)
         print(f"  readiness ranking: {len(merged)} families (scope={_scope})")
 
     _finalize_metrics_session(
@@ -105,4 +97,3 @@ def handle(args) -> int:
         items_failed=total - eligible,
     )
     return 0
-

@@ -30,6 +30,7 @@ _REPO_LOCAL_MANIFEST = _REPO_ROOT / "pipeline" / "format-authority" / "manifest.
 @dataclass
 class PublicationGateResult:
     """Result of publication gate evaluation for a single example."""
+
     scenario_id: str
     family: str
     type_name: str
@@ -43,6 +44,7 @@ class PublicationGateResult:
 @dataclass
 class BatchPublicationGateResult:
     """Result of publication gate evaluation for a batch of examples."""
+
     results: list[PublicationGateResult] = field(default_factory=list)
     all_passed: bool = False
     blocked_count: int = 0
@@ -115,11 +117,7 @@ def evaluate_publication_gate(
     else:
         result.reasons.append("Manifest not found — cannot verify contract snapshot")
 
-    result.passed = (
-        result.contract_exists
-        and result.code_validates
-        and result.manifest_has_contract
-    )
+    result.passed = result.contract_exists and result.code_validates and result.manifest_has_contract
 
     if result.passed:
         logger.info("Publication gate PASSED: %s", scenario_id)
@@ -180,6 +178,7 @@ UNFREEZE_CRITERIA = [
 @dataclass
 class UnfreezeCheckResult:
     """Result of publication unfreeze criteria check."""
+
     criteria: list[dict] = field(default_factory=list)
     all_met: bool = False
     recommendation: str = "PUBLICATION_FROZEN"
@@ -204,50 +203,58 @@ def check_unfreeze_criteria() -> UnfreezeCheckResult:
             except (MissingFormatContractError, KeyError):
                 missing.append(f"{family}:{type_name}")
 
-    result.criteria.append({
-        "criterion": UNFREEZE_CRITERIA[0],
-        "met": len(missing) == 0,
-        "detail": f"{42 - len(missing)}/42 covered" + (f", missing: {missing}" if missing else ""),
-    })
+    result.criteria.append(
+        {
+            "criterion": UNFREEZE_CRITERIA[0],
+            "met": len(missing) == 0,
+            "detail": f"{42 - len(missing)}/42 covered" + (f", missing: {missing}" if missing else ""),
+        }
+    )
 
     # Criterion 2: Components consume contract (structural check — just verify imports work)
     component_checks = []
     try:
         from plugin_examples.scenario_planner.planner import _infer_output_format
+
         component_checks.append("planner")
     except ImportError:
         pass
     try:
         from plugin_examples.generator.code_generator import _infer_output_extension
+
         component_checks.append("codegen")
     except ImportError:
         pass
     try:
         from plugin_examples.format_capability.populator import populate_manifest
+
         component_checks.append("populator")
     except ImportError:
         pass
 
-    result.criteria.append({
-        "criterion": UNFREEZE_CRITERIA[1],
-        "met": len(component_checks) >= 3,
-        "detail": f"Components importable: {component_checks}",
-    })
+    result.criteria.append(
+        {
+            "criterion": UNFREEZE_CRITERIA[1],
+            "met": len(component_checks) >= 3,
+            "detail": f"Components importable: {component_checks}",
+        }
+    )
 
     # Criteria 3-7 require test runs / external checks — record as "requires_verification"
     for crit in UNFREEZE_CRITERIA[2:]:
-        result.criteria.append({
-            "criterion": crit,
-            "met": None,
-            "detail": "Requires test execution to verify",
-        })
+        result.criteria.append(
+            {
+                "criterion": crit,
+                "met": None,
+                "detail": "Requires test execution to verify",
+            }
+        )
 
     met_count = sum(1 for c in result.criteria if c["met"] is True)
     total = len(result.criteria)
     result.all_met = all(c["met"] is True for c in result.criteria)
     result.recommendation = (
-        "PUBLICATION_UNFROZEN" if result.all_met
-        else f"PUBLICATION_FROZEN ({met_count}/{total} criteria verifiable)"
+        "PUBLICATION_UNFROZEN" if result.all_met else f"PUBLICATION_FROZEN ({met_count}/{total} criteria verifiable)"
     )
 
     return result

@@ -38,30 +38,24 @@ class TestHealingIntelligenceImportInRunner:
     def test_runner_uses_steering_constraints(self):
         """_stage_generation must call get_steering_constraints."""
         source = _RUNNER_PATH.read_text(encoding="utf-8")
-        assert "get_steering_constraints" in source, (
-            "runner.py does not use steering constraints from healing intelligence"
-        )
+        assert (
+            "get_steering_constraints" in source
+        ), "runner.py does not use steering constraints from healing intelligence"
 
     def test_runner_uses_failure_patterns_in_validation(self):
         """_stage_validation must use failure patterns for known-failure detection."""
         source = _RUNNER_PATH.read_text(encoding="utf-8")
-        assert "get_failures_for_type" in source, (
-            "runner.py does not use failure patterns from healing intelligence"
-        )
+        assert "get_failures_for_type" in source, "runner.py does not use failure patterns from healing intelligence"
 
     def test_runner_uses_repair_patterns_in_validation(self):
         """_stage_validation must use repair patterns for repair hints."""
         source = _RUNNER_PATH.read_text(encoding="utf-8")
-        assert "get_repair_for_failure" in source, (
-            "runner.py does not use repair patterns from healing intelligence"
-        )
+        assert "get_repair_for_failure" in source, "runner.py does not use repair patterns from healing intelligence"
 
     def test_runner_writes_healing_evidence(self):
         """_stage_generation must write healing-intelligence-usage.json evidence."""
         source = _RUNNER_PATH.read_text(encoding="utf-8")
-        assert "healing-intelligence-usage.json" in source, (
-            "runner.py does not write healing intelligence evidence"
-        )
+        assert "healing-intelligence-usage.json" in source, "runner.py does not write healing intelligence evidence"
 
 
 class TestPipelineContextHasHealingIntelligence:
@@ -96,8 +90,10 @@ class TestHealingIntelligenceConstraintMerge:
         assert loader.is_loaded() is True  # loaded successfully despite missing files
         assert loader.get_failure_patterns() == []
         assert loader.get_steering_constraints("any", "Any") == {
-            "required": [], "forbidden": [],
-            "global_required": [], "global_forbidden": [],
+            "required": [],
+            "forbidden": [],
+            "global_required": [],
+            "global_forbidden": [],
         }
 
     def test_known_failure_detection_returns_empty_for_unknown(self):
@@ -115,9 +111,9 @@ class TestHealingIntelligenceRepairHintInjection:
     def test_repair_prompt_includes_known_repair_strategy_placeholder(self):
         """The runner repair prompt must include HI repair hints."""
         source = _RUNNER_PATH.read_text(encoding="utf-8")
-        assert "KNOWN REPAIR STRATEGY" in source, (
-            "runner.py does not inject healing intelligence repair hints into repair prompts"
-        )
+        assert (
+            "KNOWN REPAIR STRATEGY" in source
+        ), "runner.py does not inject healing intelligence repair hints into repair prompts"
 
     def test_hi_repair_hints_dict_populated_from_loader(self):
         """hi_repair_hints dict must be populated from loader's get_repair_for_failure."""

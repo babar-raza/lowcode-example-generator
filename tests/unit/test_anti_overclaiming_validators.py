@@ -1,4 +1,5 @@
 """Tests for anti-overclaiming validator rules (Wave 6)."""
+
 import json
 import tempfile
 from pathlib import Path
@@ -36,21 +37,34 @@ def _make_clean_package(tmp_path: Path, key: str = "test/pkg") -> Path:
     (pkg_dir / "run.log").write_text("Build succeeded.\nPDF saved: output/output.pdf (230 bytes)\n")
     (pkg_dir / "restore.log").write_text("Restore succeeded.\n")
     (pkg_dir / "build.log").write_text("Build succeeded.\n1 Warning(s)\n0 Error(s)\n")
-    (pkg_dir / "Program.cs").write_text("// test/pkg\nConsole.WriteLine(\"hi\");\n")
+    (pkg_dir / "Program.cs").write_text('// test/pkg\nConsole.WriteLine("hi");\n')
     (pkg_dir / "README.md").write_text("# test/pkg\n")
-    (pkg_dir / "output-validation.json").write_text(json.dumps({
-        "package_key": key, "verdict": "PASS",
-        "output_files": [{"path": "output/output.pdf", "size": 230}]
-    }))
-    (pkg_dir / "source-provenance.json").write_text(json.dumps({
-        "family": "test", "plugin_slug": "pkg",
-        "nuget_package": "Aspose.Test", "nuget_version": "1.0.0",
-        "canonical_url": "https://products.aspose.net/test/pkg/"
-    }))
-    (pkg_dir / "package-manifest.json").write_text(json.dumps({
-        "package_key": key, "nuget_package": "Aspose.Test", "nuget_version": "1.0.0",
-        "canonical_url": "https://products.aspose.net/test/pkg/"
-    }))
+    (pkg_dir / "output-validation.json").write_text(
+        json.dumps(
+            {"package_key": key, "verdict": "PASS", "output_files": [{"path": "output/output.pdf", "size": 230}]}
+        )
+    )
+    (pkg_dir / "source-provenance.json").write_text(
+        json.dumps(
+            {
+                "family": "test",
+                "plugin_slug": "pkg",
+                "nuget_package": "Aspose.Test",
+                "nuget_version": "1.0.0",
+                "canonical_url": "https://products.aspose.net/test/pkg/",
+            }
+        )
+    )
+    (pkg_dir / "package-manifest.json").write_text(
+        json.dumps(
+            {
+                "package_key": key,
+                "nuget_package": "Aspose.Test",
+                "nuget_version": "1.0.0",
+                "canonical_url": "https://products.aspose.net/test/pkg/",
+            }
+        )
+    )
     return pkg_dir
 
 
@@ -80,23 +94,26 @@ class TestAoc02NoZeroByteOutput:
         out = pkg / "output"
         out.mkdir()
         (out / "result.pdf").write_bytes(b"")
-        (pkg / "output-validation.json").write_text(json.dumps({
-            "verdict": "PASS",
-            "output_files": [{"path": "output/result.pdf", "size": 0}]
-        }))
+        (pkg / "output-validation.json").write_text(
+            json.dumps({"verdict": "PASS", "output_files": [{"path": "output/result.pdf", "size": 0}]})
+        )
         violations = aoc_02_no_zero_byte_primary_output(pkg, "t/p")
         assert any(v.rule_id == "AOC-02" for v in violations)
 
     def test_no_violation_for_intermediate_files(self, tmp_path):
         pkg = tmp_path / "pkg"
         pkg.mkdir()
-        (pkg / "output-validation.json").write_text(json.dumps({
-            "verdict": "PASS",
-            "output_files": [
-                {"path": "output/fixture.psd", "size": 0},
-                {"path": "output/output.jpg", "size": 5000},
-            ]
-        }))
+        (pkg / "output-validation.json").write_text(
+            json.dumps(
+                {
+                    "verdict": "PASS",
+                    "output_files": [
+                        {"path": "output/fixture.psd", "size": 0},
+                        {"path": "output/output.jpg", "size": 5000},
+                    ],
+                }
+            )
+        )
         violations = aoc_02_no_zero_byte_primary_output(pkg, "t/p")
         assert violations == []
 
@@ -109,10 +126,9 @@ class TestAoc03VerdictMatchesOutput:
     def test_violation_when_pass_claimed_but_no_output(self, tmp_path):
         pkg = tmp_path / "pkg"
         pkg.mkdir()
-        (pkg / "output-validation.json").write_text(json.dumps({
-            "verdict": "PASS",
-            "output_files": [{"path": "output/out.pdf", "size": 5}]
-        }))
+        (pkg / "output-validation.json").write_text(
+            json.dumps({"verdict": "PASS", "output_files": [{"path": "output/out.pdf", "size": 5}]})
+        )
         v = aoc_03_output_validation_verdict_matches_run(pkg, "t/p")
         assert v is not None
         assert v.rule_id == "AOC-03"
@@ -120,10 +136,7 @@ class TestAoc03VerdictMatchesOutput:
     def test_no_violation_when_fail_and_no_output(self, tmp_path):
         pkg = tmp_path / "pkg"
         pkg.mkdir()
-        (pkg / "output-validation.json").write_text(json.dumps({
-            "verdict": "FAIL",
-            "output_files": []
-        }))
+        (pkg / "output-validation.json").write_text(json.dumps({"verdict": "FAIL", "output_files": []}))
         v = aoc_03_output_validation_verdict_matches_run(pkg, "t/p")
         assert v is None
 
@@ -154,8 +167,7 @@ class TestAoc05NoStaleError:
         pkg = tmp_path / "pkg"
         pkg.mkdir()
         (pkg / "output-validation.json").write_text(json.dumps({"verdict": "PASS"}))
-        (pkg / "build.log").write_text(
-            "Program.cs(5,1): error CS0103: name not found\nBuild FAILED\n1 Error(s)")
+        (pkg / "build.log").write_text("Program.cs(5,1): error CS0103: name not found\nBuild FAILED\n1 Error(s)")
         v = aoc_05_no_stale_error_snippet_on_pass(pkg, "t/p")
         assert v is not None
         assert v.rule_id == "AOC-05"
@@ -198,8 +210,7 @@ class TestAoc07NoDoubleBrace:
     def test_violation_when_double_brace_in_provenance(self, tmp_path):
         pkg = tmp_path / "pkg"
         pkg.mkdir()
-        (pkg / "source-provenance.json").write_text(
-            '{{"family": "test", "plugin_slug": "pkg"}}')
+        (pkg / "source-provenance.json").write_text('{{"family": "test", "plugin_slug": "pkg"}}')
         violations = aoc_07_no_double_brace_in_json(pkg, "t/p")
         assert any(v.rule_id == "AOC-07" for v in violations)
 
@@ -212,9 +223,9 @@ class TestAoc08CanonicalUrl:
     def test_violation_when_url_empty(self, tmp_path):
         pkg = tmp_path / "pkg"
         pkg.mkdir()
-        (pkg / "source-provenance.json").write_text(json.dumps({
-            "family": "t", "plugin_slug": "p", "nuget_package": "A", "canonical_url": ""
-        }))
+        (pkg / "source-provenance.json").write_text(
+            json.dumps({"family": "t", "plugin_slug": "p", "nuget_package": "A", "canonical_url": ""})
+        )
         v = aoc_08_canonical_url_not_placeholder(pkg, "t/p")
         assert v is not None
         assert v.rule_id == "AOC-08"
@@ -228,13 +239,20 @@ class TestAoc09ManifestConsistent:
     def test_violation_when_version_mismatch(self, tmp_path):
         pkg = tmp_path / "pkg"
         pkg.mkdir()
-        (pkg / "source-provenance.json").write_text(json.dumps({
-            "nuget_package": "Aspose.Test", "nuget_version": "1.0.0",
-            "family": "t", "plugin_slug": "p", "canonical_url": "https://example.com"
-        }))
-        (pkg / "package-manifest.json").write_text(json.dumps({
-            "nuget_package": "Aspose.Test", "nuget_version": "2.0.0"
-        }))
+        (pkg / "source-provenance.json").write_text(
+            json.dumps(
+                {
+                    "nuget_package": "Aspose.Test",
+                    "nuget_version": "1.0.0",
+                    "family": "t",
+                    "plugin_slug": "p",
+                    "canonical_url": "https://example.com",
+                }
+            )
+        )
+        (pkg / "package-manifest.json").write_text(
+            json.dumps({"nuget_package": "Aspose.Test", "nuget_version": "2.0.0"})
+        )
         violations = aoc_09_package_manifest_consistent(pkg, "t/p")
         assert any(v.rule_id == "AOC-09" for v in violations)
 
@@ -269,8 +287,7 @@ class TestAoc12NoExceptionOnPass:
         pkg = tmp_path / "pkg"
         pkg.mkdir()
         (pkg / "output-validation.json").write_text(json.dumps({"verdict": "PASS"}))
-        (pkg / "run.log").write_text(
-            "Unhandled exception. System.InvalidOperationException: test\n")
+        (pkg / "run.log").write_text("Unhandled exception. System.InvalidOperationException: test\n")
         v = aoc_12_no_exception_in_pass_run(pkg, "t/p")
         assert v is not None
         assert v.rule_id == "AOC-12"

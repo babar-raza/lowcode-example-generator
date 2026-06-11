@@ -17,6 +17,7 @@ Root cause: bundle was frozen before Lane I taskcards closed and final IV ran.
 Prevention: final IV must pass, then bundle built (capturing IV_PASS), then closeout written
 with SHA/size/entries from the frozen bundle. Never rebuild closeout after bundle is frozen.
 """
+
 from __future__ import annotations
 from typing import Any
 
@@ -236,6 +237,7 @@ def cvb_05_sidecar_sha_matches_bundle(
 # Aggregate runner
 # ---------------------------------------------------------------------------
 
+
 def run_all_cvb_validators(
     bundled_iv_verdict: str | None,
     closeout_iv_verdict: str | None,
@@ -259,7 +261,8 @@ def run_all_cvb_validators(
         cvb_03_bundle_size_matches_closeout(bundle_size_actual, closeout_size_claimed),
         cvb_04_bundle_entry_count_matches_closeout(bundle_entries_actual, closeout_entries_claimed),
         cvb_05_sidecar_sha_matches_bundle(
-            sidecar_sha256, bundle_sha256_actual,
+            sidecar_sha256,
+            bundle_sha256_actual,
             sidecar_present=sidecar_present,
             closeout_references_sidecar=closeout_references_sidecar,
         ),

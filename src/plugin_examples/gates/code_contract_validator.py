@@ -55,21 +55,19 @@ def validate_code_against_contract(
             expected_ext = canonical_output.lstrip(".")
             found_correct = any(ext == expected_ext for ext in output_matches)
             if found_correct:
-                result.add_check("output_extension_match", True,
-                                 f"Found output.{expected_ext} matching contract")
+                result.add_check("output_extension_match", True, f"Found output.{expected_ext} matching contract")
             else:
-                result.add_check("output_extension_match", False,
-                                 f"Expected output.{expected_ext}, found output.{output_matches[0]}")
+                result.add_check(
+                    "output_extension_match", False, f"Expected output.{expected_ext}, found output.{output_matches[0]}"
+                )
         else:
             # Some types don't have explicit output.ext (e.g., directory output)
-            result.add_check("output_extension_match", True,
-                             "No explicit output filename pattern found — skipped")
+            result.add_check("output_extension_match", True, "No explicit output filename pattern found — skipped")
 
     elif output_kind == "stdout":
         # stdout types should NOT have AddOutput or output file creation
         if "AddOutput" in code:
-            result.add_check("stdout_no_output", False,
-                             "stdout type should not call AddOutput()")
+            result.add_check("stdout_no_output", False, "stdout type should not call AddOutput()")
         else:
             result.add_check("stdout_no_output", True)
 
@@ -86,20 +84,21 @@ def validate_code_against_contract(
                 result.add_check(
                     "collection_extension_match",
                     found_correct,
-                    f"Expected canonical extension .{expected_ext} in multi-file output" if not found_correct
+                    f"Expected canonical extension .{expected_ext} in multi-file output"
+                    if not found_correct
                     else f"Found .{expected_ext} in multi-file output",
                 )
             else:
-                result.add_check("collection_extension_match", True,
-                                 "No explicit output filename in collection type — skipped")
+                result.add_check(
+                    "collection_extension_match", True, "No explicit output filename in collection type — skipped"
+                )
         else:
             result.add_check("collection_extension_match", True, "No canonical output for collection — skipped")
 
     elif output_kind == "none":
         # No output at all — code should not create any output file
         if _OUTPUT_PATTERN.search(code):
-            result.add_check("none_output_guard", False,
-                             "output_kind=none but code contains output.* filename pattern")
+            result.add_check("none_output_guard", False, "output_kind=none but code contains output.* filename pattern")
         else:
             result.add_check("none_output_guard", True)
 
@@ -110,22 +109,24 @@ def validate_code_against_contract(
             expected_in_ext = expected_input.lstrip(".")
             found_correct = any(ext == expected_in_ext for ext in input_matches)
             if found_correct:
-                result.add_check("input_extension_match", True,
-                                 f"Found input.{expected_in_ext} matching contract")
+                result.add_check("input_extension_match", True, f"Found input.{expected_in_ext} matching contract")
             else:
-                result.add_check("input_extension_match", False,
-                                 f"Expected input.{expected_in_ext}, found input.{input_matches[0]}")
+                result.add_check(
+                    "input_extension_match", False, f"Expected input.{expected_in_ext}, found input.{input_matches[0]}"
+                )
         else:
-            result.add_check("input_extension_match", True,
-                             "No explicit input filename pattern — skipped")
+            result.add_check("input_extension_match", True, "No explicit input filename pattern — skipped")
 
     # Check 4: Same-format converter guard
     op_kind = contract.get("operation_kind", "")
     if op_kind == "converter" and canonical_output and expected_input:
         if canonical_output == expected_input:
             # Same-format converter is suspicious — check contract explicitly allows it
-            result.add_check("same_format_converter_guard", False,
-                             f"Converter has same input ({expected_input}) and output ({canonical_output}) — contract mismatch")
+            result.add_check(
+                "same_format_converter_guard",
+                False,
+                f"Converter has same input ({expected_input}) and output ({canonical_output}) — contract mismatch",
+            )
         else:
             result.add_check("same_format_converter_guard", True)
 

@@ -1,0 +1,66 @@
+{
+  "$schema": "../schemas/operation-kind-matrix.schema.json",
+  "version": "1.0.0",
+  "operation_kinds": {
+    "converter": {
+      "description": "Transforms input from one format to another",
+      "input_cardinality": "single",
+      "output_cardinality": "single"
+    },
+    "merger": {
+      "description": "Combines multiple inputs into a single output",
+      "input_cardinality": "multiple",
+      "output_cardinality": "single"
+    },
+    "splitter": {
+      "description": "Splits a single input into multiple outputs",
+      "input_cardinality": "single",
+      "output_cardinality": "multiple"
+    },
+    "extractor": {
+      "description": "Extracts specific content from an input",
+      "input_cardinality": "single",
+      "output_cardinality": "single"
+    },
+    "generator": {
+      "description": "Creates output without requiring a document input",
+      "input_cardinality": "none",
+      "output_cardinality": "single"
+    },
+    "editor": {
+      "description": "Modifies content in-place within a document",
+      "input_cardinality": "single",
+      "output_cardinality": "single"
+    },
+    "optimizer": {
+      "description": "Reduces size or improves quality of input",
+      "input_cardinality": "single",
+      "output_cardinality": "single"
+    },
+    "reader": {
+      "description": "Reads and parses structured data from input",
+      "input_cardinality": "single",
+      "output_cardinality": "none"
+    },
+    "writer": {
+      "description": "Writes structured data to output format",
+      "input_cardinality": "none",
+      "output_cardinality": "single"
+    },
+    "compressor": {
+      "description": "Compresses or archives input files",
+      "input_cardinality": "single",
+      "output_cardinality": "single"
+    },
+    "recognizer": {
+      "description": "Recognizes patterns or content in input",
+      "input_cardinality": "single",
+      "output_cardinality": "single"
+    },
+    "renderer": {
+      "description": "Renders visual output from structured input",
+      "input_cardinality": "single",
+      "output_cardinality": "single"
+    }
+  }
+}

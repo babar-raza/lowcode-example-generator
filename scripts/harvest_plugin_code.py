@@ -3,7 +3,11 @@
 For each plugin page URL, finds the best matching C# example from the
 official Aspose GitHub repository and fetches the raw source code.
 """
-import json, re, hashlib, time, urllib.request
+import json
+import re
+import hashlib
+import time
+import urllib.request
 from pathlib import Path
 
 HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}

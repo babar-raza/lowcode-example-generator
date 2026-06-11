@@ -24,9 +24,7 @@ class TestMonthlyRunbook:
             "monthly-maintenance-runbook.json references $GH_TOKEN. "
             "All GitHub token references must use $GITHUB_TOKEN (token policy sprint closure)."
         )
-        assert "GITHUB_TOKEN" in runbook_text, (
-            "Runbook must reference GITHUB_TOKEN for GitHub operations."
-        )
+        assert "GITHUB_TOKEN" in runbook_text, "Runbook must reference GITHUB_TOKEN for GitHub operations."
 
     def test_monthly_runbook_pdf_blocked_until_is_not_stale(self):
         """pdf_blocked_until must not reference the now-CLOSED followup-pdf-reflection-dedup taskcard."""
@@ -60,9 +58,9 @@ class TestMonthlyRunbook:
         """Runbook must document that APPROVE_MERGE_PR is separate from APPROVE_LIVE_PR."""
         runbook = self._load_runbook()
         rules = runbook.get("immutable_rules", {})
-        assert rules.get("merge_approval_separate_from_live_pr") is True, (
-            "immutable_rules.merge_approval_separate_from_live_pr must be true"
-        )
+        assert (
+            rules.get("merge_approval_separate_from_live_pr") is True
+        ), "immutable_rules.merge_approval_separate_from_live_pr must be true"
 
 
 class TestCIEnvDocs:
@@ -94,6 +92,6 @@ class TestCIEnvDocs:
         assert "APPROVE_MERGE_PR" in content, "CI docs must mention APPROVE_MERGE_PR"
         # Must have some indication these are human tokens not stored in CI
         human_indicators = ["human", "operator", "interactively", "must NOT"]
-        assert any(ind in content for ind in human_indicators), (
-            "CI docs must indicate that approval tokens require human operator input, not CI secret storage"
-        )
+        assert any(
+            ind in content for ind in human_indicators
+        ), "CI docs must indicate that approval tokens require human operator input, not CI secret storage"

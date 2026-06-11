@@ -1,5 +1,6 @@
 """Lane 1: Prior bundle audit — reclassify previous sprint, record contradictions."""
-import json, pathlib
+import json
+import pathlib
 
 REPO_ROOT = pathlib.Path(__file__).parent.parent
 SPRINT_ID = "full-system-qualification-repair-20260529"

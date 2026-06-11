@@ -4,6 +4,7 @@ Verifies that sprint67 content-audit records have correct operation_kind,
 that API type names are consistent with operation_kind, and that records
 for multi-cardinality types have appropriate cardinality markers.
 """
+
 import json
 from pathlib import Path
 import pytest
@@ -11,10 +12,7 @@ import pytest
 REPO = Path(__file__).resolve().parents[2]
 AUDIT_PATH = REPO / "reports/sprint67/destination/content-audit-sprint67.json"
 
-VALID_OPERATION_KINDS = {
-    "converter", "transform", "merger", "splitter",
-    "extractor", "exporter", "processor"
-}
+VALID_OPERATION_KINDS = {"converter", "transform", "merger", "splitter", "extractor", "exporter", "processor"}
 
 # Expected operation_kind per API type (selected known cases)
 EXPECTED_OP_KINDS = {
@@ -92,27 +90,22 @@ class TestContentAuditOperationSemantics:
                 actual = rec.get("operation_kind", "")
                 if actual != expected:
                     violations.append(
-                        f"{rec['scenario_id']}: api_type={api_type!r} "
-                        f"expected={expected!r} actual={actual!r}"
+                        f"{rec['scenario_id']}: api_type={api_type!r} " f"expected={expected!r} actual={actual!r}"
                     )
         assert not violations, f"operation_kind mismatches:\n" + "\n".join(violations)
 
     def test_pdf_records_have_26_5_version(self):
         """After S66-D2 resolution, all PDF records must use 26.5.0."""
         records = load_audit()
-        pdf_old = [
-            r["scenario_id"] for r in records
-            if r["family"] == "pdf" and r.get("package_version") == "26.4.0"
-        ]
-        assert not pdf_old, (
-            f"PDF records still have old version 26.4.0: {pdf_old}"
-        )
+        pdf_old = [r["scenario_id"] for r in records if r["family"] == "pdf" and r.get("package_version") == "26.4.0"]
+        assert not pdf_old, f"PDF records still have old version 26.4.0: {pdf_old}"
 
     def test_no_sprint64_paths_in_handoff_path(self):
         """S66-D3 fix: handoff_path must not reference sprint64."""
         records = load_audit()
         stale = [
-            r["scenario_id"] for r in records
+            r["scenario_id"]
+            for r in records
             if "sprint64" in r.get("handoff_path", "") or "sprint66" in r.get("handoff_path", "")
         ]
         assert not stale, f"Records with stale handoff_path refs: {stale}"
@@ -121,7 +114,8 @@ class TestContentAuditOperationSemantics:
         """S66-D3 fix: local_package_path must not reference sprint64."""
         records = load_audit()
         stale = [
-            r["scenario_id"] for r in records
+            r["scenario_id"]
+            for r in records
             if "sprint64" in r.get("local_package_path", "") or "sprint66" in r.get("local_package_path", "")
         ]
         assert not stale, f"Records with stale local_package_path refs: {stale}"
@@ -132,7 +126,8 @@ class TestContentAuditOperationSemantics:
         violations = [
             (r["scenario_id"], r.get("operation_kind"))
             for r in records
-            if "-merger" in r["scenario_id"] and r.get("operation_kind") != "merger"
+            if "-merger" in r["scenario_id"]
+            and r.get("operation_kind") != "merger"
             and "mail-merger" not in r["scenario_id"]
         ]
         assert not violations, f"Merger scenarios with wrong operation_kind: {violations}"

@@ -14,6 +14,7 @@ class TestManifestContractFields:
         """Manifest should contain contract_* fields when FormatContract is found."""
         from plugin_examples.generator.project_generator import generate_project, GeneratedExample
         from plugin_examples.format_authority.store import get_contract, reset_store
+
         reset_store()
         fc = get_contract("cells", "SpreadsheetConverter")
 
@@ -45,6 +46,7 @@ class TestManifestContractFields:
         """expected-output.json should contain expected_output_extension from contract."""
         from plugin_examples.generator.project_generator import generate_project, GeneratedExample
         from plugin_examples.format_authority.store import get_contract, reset_store
+
         reset_store()
         fc = get_contract("cells", "SpreadsheetConverter")
 
@@ -73,6 +75,7 @@ class TestManifestContractFields:
         """Manifest written without any contract should not have .out in output_format."""
         from plugin_examples.generator.project_generator import generate_project, GeneratedExample
         from plugin_examples.format_authority.store import reset_store
+
         reset_store()
 
         example = GeneratedExample(
@@ -92,6 +95,4 @@ class TestManifestContractFields:
         manifest = json.loads(manifest_path.read_text())
         # output_format may be empty or inferred, but must not be the stale .out fallback
         output_fmt = manifest.get("output_format", "")
-        assert output_fmt != ".out", (
-            f"Manifest output_format is '{output_fmt}' — stale .out from legacy map is leaking"
-        )
+        assert output_fmt != ".out", f"Manifest output_format is '{output_fmt}' — stale .out from legacy map is leaking"

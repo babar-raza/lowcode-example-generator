@@ -30,23 +30,48 @@ logger = logging.getLogger(__name__)
 # Each entry: list of table IDs that can be referenced (None = unused tag slot),
 # and the number of bits used for the tag.
 _CODED_INDEX_DEFS: dict[str, tuple[list[int | None], int]] = {
-    "TypeDefOrRef":      ([0x02, 0x01, 0x1B], 2),
-    "HasConstant":       ([0x04, 0x08, 0x17], 2),
+    "TypeDefOrRef": ([0x02, 0x01, 0x1B], 2),
+    "HasConstant": ([0x04, 0x08, 0x17], 2),
     "HasCustomAttribute": (
-        [0x06, 0x04, 0x01, 0x02, 0x08, 0x0A, 0x0C,
-         0x14, 0x17, 0x0E, 0x15, 0x12, 0x1C, 0x11,
-         0x00, 0x20, 0x21, 0x22, 0x23, 0x26, 0x27,
-         0x28, 0x2A, 0x2B, 0x2C], 5),
-    "HasFieldMarshal":   ([0x04, 0x08], 1),
-    "HasDeclSecurity":   ([0x02, 0x06, 0x20], 2),
-    "MemberRefParent":   ([0x02, 0x01, 0x1A, 0x06, 0x1B], 3),
-    "HasSemantics":      ([0x14, 0x17], 1),
-    "MethodDefOrRef":    ([0x06, 0x0A], 1),
-    "MemberForwarded":   ([0x04, 0x06], 1),
-    "Implementation":    ([0x26, 0x23, 0x27], 2),
+        [
+            0x06,
+            0x04,
+            0x01,
+            0x02,
+            0x08,
+            0x0A,
+            0x0C,
+            0x14,
+            0x17,
+            0x0E,
+            0x15,
+            0x12,
+            0x1C,
+            0x11,
+            0x00,
+            0x20,
+            0x21,
+            0x22,
+            0x23,
+            0x26,
+            0x27,
+            0x28,
+            0x2A,
+            0x2B,
+            0x2C,
+        ],
+        5,
+    ),
+    "HasFieldMarshal": ([0x04, 0x08], 1),
+    "HasDeclSecurity": ([0x02, 0x06, 0x20], 2),
+    "MemberRefParent": ([0x02, 0x01, 0x1A, 0x06, 0x1B], 3),
+    "HasSemantics": ([0x14, 0x17], 1),
+    "MethodDefOrRef": ([0x06, 0x0A], 1),
+    "MemberForwarded": ([0x04, 0x06], 1),
+    "Implementation": ([0x26, 0x23, 0x27], 2),
     "CustomAttributeType": ([None, None, 0x06, 0x0A, None], 3),
-    "ResolutionScope":   ([0x00, 0x1A, 0x23, 0x01], 2),
-    "TypeOrMethodDef":   ([0x02, 0x06], 1),
+    "ResolutionScope": ([0x00, 0x1A, 0x23, 0x01], 2),
+    "TypeOrMethodDef": ([0x02, 0x06], 1),
 }
 
 # Table schemas: table_id → list of column descriptors.
@@ -58,57 +83,55 @@ _CODED_INDEX_DEFS: dict[str, tuple[list[int | None], int]] = {
 #   ('table', T)       — simple index into table T
 #   ('coded', name)    — coded index named 'name' (see _CODED_INDEX_DEFS)
 _TABLE_SCHEMAS: dict[int, list] = {
-    0x00: [('fixed', 2), ('str',), ('guid',), ('guid',), ('guid',)],
-    0x01: [('coded', 'ResolutionScope'), ('str',), ('str',)],
-    0x02: [('fixed', 4), ('str',), ('str',), ('coded', 'TypeDefOrRef'),
-           ('table', 0x04), ('table', 0x06)],
-    0x03: [('table', 0x04)],
-    0x04: [('fixed', 2), ('str',), ('blob',)],
-    0x05: [('table', 0x06)],
-    0x06: [('fixed', 4), ('fixed', 2), ('fixed', 2), ('str',), ('blob',),
-           ('table', 0x08)],
-    0x07: [('table', 0x08)],
-    0x08: [('fixed', 2), ('fixed', 2), ('str',)],
-    0x09: [('table', 0x02), ('coded', 'TypeDefOrRef')],
-    0x0A: [('coded', 'MemberRefParent'), ('str',), ('blob',)],
-    0x0B: [('fixed', 1), ('fixed', 1), ('coded', 'HasConstant'), ('blob',)],
-    0x0C: [('coded', 'HasCustomAttribute'), ('coded', 'CustomAttributeType'),
-           ('blob',)],
-    0x0D: [('coded', 'HasFieldMarshal'), ('blob',)],
-    0x0E: [('fixed', 2), ('coded', 'HasDeclSecurity'), ('blob',)],
-    0x0F: [('fixed', 2), ('fixed', 4), ('table', 0x02)],
-    0x10: [('fixed', 4), ('table', 0x04)],
-    0x11: [('blob',)],
-    0x12: [('table', 0x02), ('table', 0x14)],
-    0x13: [('table', 0x14)],
-    0x14: [('fixed', 2), ('str',), ('coded', 'TypeDefOrRef')],
-    0x15: [('table', 0x02), ('table', 0x17)],
-    0x16: [('table', 0x17)],
-    0x17: [('fixed', 2), ('str',), ('blob',)],
-    0x18: [('fixed', 2), ('table', 0x06), ('coded', 'HasSemantics')],
-    0x19: [('table', 0x02), ('coded', 'MethodDefOrRef'),
-           ('coded', 'MethodDefOrRef')],
-    0x1A: [('str',)],
-    0x1B: [('blob',)],
-    0x1C: [('fixed', 2), ('coded', 'MemberForwarded'), ('str',),
-           ('table', 0x1A)],
-    0x1D: [('fixed', 4), ('table', 0x04)],
+    0x00: [("fixed", 2), ("str",), ("guid",), ("guid",), ("guid",)],
+    0x01: [("coded", "ResolutionScope"), ("str",), ("str",)],
+    0x02: [("fixed", 4), ("str",), ("str",), ("coded", "TypeDefOrRef"), ("table", 0x04), ("table", 0x06)],
+    0x03: [("table", 0x04)],
+    0x04: [("fixed", 2), ("str",), ("blob",)],
+    0x05: [("table", 0x06)],
+    0x06: [("fixed", 4), ("fixed", 2), ("fixed", 2), ("str",), ("blob",), ("table", 0x08)],
+    0x07: [("table", 0x08)],
+    0x08: [("fixed", 2), ("fixed", 2), ("str",)],
+    0x09: [("table", 0x02), ("coded", "TypeDefOrRef")],
+    0x0A: [("coded", "MemberRefParent"), ("str",), ("blob",)],
+    0x0B: [("fixed", 1), ("fixed", 1), ("coded", "HasConstant"), ("blob",)],
+    0x0C: [("coded", "HasCustomAttribute"), ("coded", "CustomAttributeType"), ("blob",)],
+    0x0D: [("coded", "HasFieldMarshal"), ("blob",)],
+    0x0E: [("fixed", 2), ("coded", "HasDeclSecurity"), ("blob",)],
+    0x0F: [("fixed", 2), ("fixed", 4), ("table", 0x02)],
+    0x10: [("fixed", 4), ("table", 0x04)],
+    0x11: [("blob",)],
+    0x12: [("table", 0x02), ("table", 0x14)],
+    0x13: [("table", 0x14)],
+    0x14: [("fixed", 2), ("str",), ("coded", "TypeDefOrRef")],
+    0x15: [("table", 0x02), ("table", 0x17)],
+    0x16: [("table", 0x17)],
+    0x17: [("fixed", 2), ("str",), ("blob",)],
+    0x18: [("fixed", 2), ("table", 0x06), ("coded", "HasSemantics")],
+    0x19: [("table", 0x02), ("coded", "MethodDefOrRef"), ("coded", "MethodDefOrRef")],
+    0x1A: [("str",)],
+    0x1B: [("blob",)],
+    0x1C: [("fixed", 2), ("coded", "MemberForwarded"), ("str",), ("table", 0x1A)],
+    0x1D: [("fixed", 4), ("table", 0x04)],
     # Assembly table (target of this parser)
-    0x20: [('fixed', 4),          # HashAlgId
-           ('fixed', 2),          # MajorVersion
-           ('fixed', 2),          # MinorVersion
-           ('fixed', 2),          # BuildNumber
-           ('fixed', 2),          # RevisionNumber
-           ('fixed', 4),          # Flags
-           ('blob',),             # PublicKey
-           ('str',),              # Name
-           ('str',)],             # Culture
+    0x20: [
+        ("fixed", 4),  # HashAlgId
+        ("fixed", 2),  # MajorVersion
+        ("fixed", 2),  # MinorVersion
+        ("fixed", 2),  # BuildNumber
+        ("fixed", 2),  # RevisionNumber
+        ("fixed", 4),  # Flags
+        ("blob",),  # PublicKey
+        ("str",),  # Name
+        ("str",),
+    ],  # Culture
 }
 
 
 @dataclass
 class AssemblyIdentity:
     """Identity of a .NET assembly."""
+
     name: str
     version: str = ""
     culture: str = "neutral"
@@ -120,6 +143,7 @@ class AssemblyIdentity:
 @dataclass
 class DeduplicationResult:
     """Result of deduplicating a list of assembly paths."""
+
     kept: list[Path] = field(default_factory=list)
     excluded: list[dict] = field(default_factory=list)
     conflicts: list[dict] = field(default_factory=list)
@@ -146,9 +170,7 @@ def read_assembly_identity(path: Path | str) -> AssemblyIdentity:
         identity.read_from_pe = True
         return identity
     except Exception as exc:
-        logger.debug(
-            "PE parse failed for %s (%s), falling back to filename", path.name, exc
-        )
+        logger.debug("PE parse failed for %s (%s), falling back to filename", path.name, exc)
         return AssemblyIdentity(name=path.stem, source_path=str(path))
 
 
@@ -195,22 +217,27 @@ def deduplicate_assemblies(
                 }
                 result.conflicts.append(conflict_note)
 
-            result.excluded.append({
-                "assembly_name": identity.name,
-                "excluded_path": str(p),
-                "kept_path": str(first),
-                "same_file": first.resolve() == p.resolve(),
-                "reason": "duplicate_assembly_name",
-            })
+            result.excluded.append(
+                {
+                    "assembly_name": identity.name,
+                    "excluded_path": str(p),
+                    "kept_path": str(first),
+                    "same_file": first.resolve() == p.resolve(),
+                    "reason": "duplicate_assembly_name",
+                }
+            )
             logger.debug(
                 "Excluded duplicate assembly '%s': %s (kept: %s)",
-                identity.name, p.name, first.name,
+                identity.name,
+                p.name,
+                first.name,
             )
 
     return result
 
 
 # ── PE parser internals ──────────────────────────────────────────────────────
+
 
 def _parse_cli_assembly_identity(data: bytes, path: str) -> AssemblyIdentity:
     """Parse a .NET PE file and return the Assembly table identity."""
@@ -228,9 +255,9 @@ def _parse_cli_assembly_identity(data: bytes, path: str) -> AssemblyIdentity:
     # Optional header
     opt_off = pe_off + 24
     magic = struct.unpack_from("<H", data, opt_off)[0]
-    if magic == 0x10B:      # PE32
+    if magic == 0x10B:  # PE32
         dd_off = opt_off + 96
-    elif magic == 0x20B:    # PE32+
+    elif magic == 0x20B:  # PE32+
         dd_off = opt_off + 112
     else:
         raise ValueError(f"Unknown PE magic: {magic:#x}")
@@ -251,8 +278,8 @@ def _parse_cli_assembly_identity(data: bytes, path: str) -> AssemblyIdentity:
         s = sections_off + i * 40
         virt_size = struct.unpack_from("<I", data, s + 8)[0]
         virt_addr = struct.unpack_from("<I", data, s + 12)[0]
-        raw_size  = struct.unpack_from("<I", data, s + 16)[0]
-        raw_off   = struct.unpack_from("<I", data, s + 20)[0]
+        raw_size = struct.unpack_from("<I", data, s + 16)[0]
+        raw_off = struct.unpack_from("<I", data, s + 20)[0]
         raw_sections.append((virt_addr, max(virt_size, raw_size), raw_off))
 
     def rva_to_off(rva: int) -> int:
@@ -281,7 +308,7 @@ def _parse_cli_assembly_identity(data: bytes, path: str) -> AssemblyIdentity:
     stream_map: dict[str, tuple[int, int]] = {}
     for _ in range(num_streams):
         rel_off = struct.unpack_from("<I", data, sh_off)[0]
-        size    = struct.unpack_from("<I", data, sh_off + 4)[0]
+        size = struct.unpack_from("<I", data, sh_off + 4)[0]
         name_start = sh_off + 8
         null_idx = data.index(b"\x00", name_start)
         sname = data[name_start:null_idx].decode("ascii")
@@ -301,7 +328,7 @@ def _parse_cli_assembly_identity(data: bytes, path: str) -> AssemblyIdentity:
     heap_sizes = data[tables_off + 6]
     valid_mask = struct.unpack_from("<Q", data, tables_off + 8)[0]
 
-    str_idx  = 4 if (heap_sizes & 0x01) else 2
+    str_idx = 4 if (heap_sizes & 0x01) else 2
     guid_idx = 4 if (heap_sizes & 0x02) else 2
     blob_idx = 4 if (heap_sizes & 0x04) else 2
 
@@ -366,19 +393,27 @@ def _parse_cli_assembly_identity(data: bytes, path: str) -> AssemblyIdentity:
     if row_counts.get(0x20, 0) == 0:
         raise ValueError("No Assembly table in metadata")
 
-    hash_alg = struct.unpack_from("<I", data, off)[0]; off += 4
-    major    = struct.unpack_from("<H", data, off)[0];  off += 2
-    minor    = struct.unpack_from("<H", data, off)[0];  off += 2
-    build    = struct.unpack_from("<H", data, off)[0];  off += 2
-    rev      = struct.unpack_from("<H", data, off)[0];  off += 2
-    flags    = struct.unpack_from("<I", data, off)[0];  off += 4
+    hash_alg = struct.unpack_from("<I", data, off)[0]
+    off += 4
+    major = struct.unpack_from("<H", data, off)[0]
+    off += 2
+    minor = struct.unpack_from("<H", data, off)[0]
+    off += 2
+    build = struct.unpack_from("<H", data, off)[0]
+    off += 2
+    rev = struct.unpack_from("<H", data, off)[0]
+    off += 2
+    flags = struct.unpack_from("<I", data, off)[0]
+    off += 4
     off += blob_idx  # skip PublicKey blob index
 
     if str_idx == 2:
-        name_si = struct.unpack_from("<H", data, off)[0]; off += 2
+        name_si = struct.unpack_from("<H", data, off)[0]
+        off += 2
         culture_si = struct.unpack_from("<H", data, off)[0]
     else:
-        name_si = struct.unpack_from("<I", data, off)[0]; off += 4
+        name_si = struct.unpack_from("<I", data, off)[0]
+        off += 4
         culture_si = struct.unpack_from("<I", data, off)[0]
 
     # Read name from #Strings heap

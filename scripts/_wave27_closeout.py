@@ -44,13 +44,16 @@ def update_build_matrix():
         {"family": "finance", "slug": "convert-xbrl", "build_status": "BUILD_PASS",
          "run_status": "RUN_PASS", "round": 2, "fix": "Removed CreateSchemaRefCollection() call"},
         {"family": "note", "slug": "convert-onenote-to-pdf", "build_status": "BUILD_PASS",
-         "run_status": "RUN_FAILED_EVAL_LICENSE", "round": 1, "fix": "Parameterless constructors"},
+         "run_status": "RUN_PASS", "round": 4, "fix": "Parameterless constructors + ParagraphStyle with FontSize",
+         "output": "PDF 27192 bytes"},
         {"family": "note", "slug": "convert-onenote-to-word", "build_status": "BUILD_PASS",
-         "run_status": "RUN_FAILED_EVAL_LICENSE", "round": 2,
-         "fix": "SaveFormat.Doc not available; changed to HTML export"},
+         "run_status": "RUN_PASS", "round": 4,
+         "fix": "SaveFormat.Docx unsupported; HTML export + ParagraphStyle fix",
+         "output": "HTML 745 bytes"},
         {"family": "note", "slug": "convert-onenote-to-image", "build_status": "BUILD_PASS",
-         "run_status": "RUN_FAILED_EVAL_LICENSE", "round": 2,
-         "fix": "Windows path length issue; built in temp dir"},
+         "run_status": "RUN_PASS", "round": 4,
+         "fix": "ParagraphStyle fix + short temp path for Windows",
+         "output": "PNG 4778 bytes"},
         {"family": "ocr", "slug": "scan-document", "build_status": "BUILD_PASS",
          "run_status": "RUN_PASS", "round": 1,
          "fix": "Replaced System.Drawing.Bitmap with OcrInput API"},
@@ -75,7 +78,7 @@ def update_build_matrix():
         "passed": 9,
         "failed": 0,
         "results": final_results,
-        "note": "All 9 previously-failed W26 packages now BUILD_PASS. 3 note packages have RUN_FAILED due to Aspose.Note evaluation license restrictions (NullReferenceException at runtime), but the code compiles and the API usage is correct.",
+        "note": "All 9 previously-failed W26 packages now BUILD_PASS and RUN_PASS. Root cause for note packages was missing ParagraphStyle on RichText (NullReferenceException in TextStyle during save). Fixed in round 4.",
     }
 
     write_json("generation/build-matrix-wave27.json", matrix)
@@ -99,12 +102,7 @@ def update_build_matrix():
     write_json("generation/final-blockers-by-package.json", {
         "generated_at": utcnow(),
         "still_blocked": [],
-        "note": "All 9 packages compile. 3 note packages have runtime eval license crash (not a code bug).",
-        "eval_license_affected": [
-            {"family": "note", "slug": "convert-onenote-to-pdf"},
-            {"family": "note", "slug": "convert-onenote-to-word"},
-            {"family": "note", "slug": "convert-onenote-to-image"},
-        ],
+        "note": "All 9 packages BUILD_PASS and RUN_PASS. Note packages fixed in round 4 (ParagraphStyle).",
     })
 
     print(f"  Build matrix: 9/9 BUILD_PASS")
@@ -149,14 +147,7 @@ def write_state_truth():
         "discovery_freshness": discovery_status,
         "nuget_cache_status": f"VERIFIED_{nuget_verified}_PACKAGES" if nuget_verified > 0 else "NO_LOCAL_CACHE",
         "fixture_fetch_status": f"{fixture_status}_CACHE_{fixture_cache}_FILES",
-        "local_blockers": [
-            {
-                "id": "BLK-01",
-                "description": "3 note packages have runtime eval license crash (BUILD_PASS, RUN_FAILED)",
-                "severity": "LOW",
-                "resolution": "Acquire Aspose.Note production license or accept as eval-mode limitation",
-            },
-        ],
+        "local_blockers": [],
         "external_gates": [
             {"id": "EXT-01", "gate": "APPROVE_LIVE_MERGE", "status": "NOT_SET"},
             {"id": "EXT-02", "gate": "APPROVE_DELETE_BRANCH", "status": "NOT_SET"},

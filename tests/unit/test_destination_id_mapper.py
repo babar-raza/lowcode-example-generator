@@ -77,14 +77,16 @@ class TestDiagramFamilyNoPrefixAdded(unittest.TestCase):
     def test_diagram_no_double_prefix_for_diagram_converter(self):
         """Sprint 59 bug: do NOT produce diagram-diagram-diagram-converter."""
         sid = self.mapper.dir_name_to_scenario_id("diagram", "diagram-diagram-converter")
-        self.assertNotIn("diagram-diagram-diagram", sid,
-                         "Triple-prefix scenario_id must not be produced")
+        self.assertNotIn("diagram-diagram-diagram", sid, "Triple-prefix scenario_id must not be produced")
 
     def test_diagram_no_double_prefix_for_pdf_converter(self):
         """Sprint 59 bug: do NOT produce diagram-diagram-pdf-converter."""
         sid = self.mapper.dir_name_to_scenario_id("diagram", "diagram-pdf-converter")
-        self.assertNotEqual(sid, "diagram-diagram-pdf-converter",
-                            "Double-prefix scenario_id must not be produced for diagram-pdf-converter")
+        self.assertNotEqual(
+            sid,
+            "diagram-diagram-pdf-converter",
+            "Double-prefix scenario_id must not be produced for diagram-pdf-converter",
+        )
         self.assertEqual(sid, "diagram-pdf-converter")
 
 
@@ -97,8 +99,7 @@ class TestPdfAConverterAlias(unittest.TestCase):
     def test_pdfa_converter_alias(self):
         """pdfa-converter dir → canonical pdf-pdf-aconverter, not pdf-pdfa-converter."""
         sid = self.mapper.dir_name_to_scenario_id("pdf", "pdfa-converter")
-        self.assertEqual(sid, "pdf-pdf-aconverter",
-                         "pdfa-converter must resolve to canonical pdf-pdf-aconverter")
+        self.assertEqual(sid, "pdf-pdf-aconverter", "pdfa-converter must resolve to canonical pdf-pdf-aconverter")
 
     def test_pdfa_alias_not_pdfa_converter(self):
         """pdf-pdfa-converter is the wrong ID — must not be returned for pdfa-converter dir."""
@@ -139,22 +140,18 @@ class TestDoubleFamilyPrefixDetection(unittest.TestCase):
 
     def test_double_family_prefix_detection_diagram(self):
         """diagram-diagram-diagram-converter is triple-prefix (family applied twice)."""
-        self.assertTrue(
-            self.mapper.is_double_family_prefix("diagram", "diagram-diagram-diagram-converter")
-        )
+        self.assertTrue(self.mapper.is_double_family_prefix("diagram", "diagram-diagram-diagram-converter"))
 
     def test_double_family_prefix_not_triggered_for_standard(self):
         """diagram-diagram-converter is the canonical id — NOT a double-prefix error."""
         self.assertFalse(
             self.mapper.is_double_family_prefix("diagram", "diagram-diagram-converter"),
-            "diagram-diagram-converter is canonical; only triple+ counts as double-prefix bug"
+            "diagram-diagram-converter is canonical; only triple+ counts as double-prefix bug",
         )
 
     def test_double_prefix_not_triggered_for_cells(self):
         """cells-html-converter has no double prefix."""
-        self.assertFalse(
-            self.mapper.is_double_family_prefix("cells", "cells-html-converter")
-        )
+        self.assertFalse(self.mapper.is_double_family_prefix("cells", "cells-html-converter"))
 
 
 class TestRoundTripMappings(unittest.TestCase):
@@ -210,8 +207,9 @@ class TestPresentNoAuthorityMustNotOccur(unittest.TestCase):
     def test_diagram_diagram_converter_maps_to_canonical(self):
         """diagram-diagram-converter dir → diagram-diagram-converter (matches lifecycle record)."""
         sid = self.mapper.dir_name_to_scenario_id("diagram", "diagram-diagram-converter")
-        self.assertEqual(sid, "diagram-diagram-converter",
-                         "Must match lifecycle canonical id to avoid PRESENT_NO_AUTHORITY")
+        self.assertEqual(
+            sid, "diagram-diagram-converter", "Must match lifecycle canonical id to avoid PRESENT_NO_AUTHORITY"
+        )
 
     def test_diagram_pdf_converter_maps_to_canonical(self):
         """diagram-pdf-converter dir → diagram-pdf-converter."""

@@ -1,0 +1,23 @@
+# Code ownership for lowcode-example-generator-gitlab
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner for all files
+* @sialkot/cantt-smallize
+
+# Pipeline source code
+/src/plugin_examples/ @sialkot/cantt-smallize
+
+# Tests
+/tests/ @sialkot/cantt-smallize
+
+# CI/CD workflows
+/.github/workflows/ @sialkot/cantt-smallize
+
+# Pipeline configuration and contracts
+/pipeline/ @sialkot/cantt-smallize
+
+# .NET reflection tool
+/tools/DllReflector/ @sialkot/cantt-smallize
+
+# Documentation
+/docs/ @sialkot/cantt-smallize

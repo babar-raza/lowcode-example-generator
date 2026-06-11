@@ -31,6 +31,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class Scenario:
     """A planned example scenario."""
+
     scenario_id: str
     title: str
     target_type: str
@@ -42,7 +43,9 @@ class Scenario:
     validation_plan: str = ""
     status: str = "ready"  # ready, blocked_no_fixture, blocked_unclear_semantics, blocked_obsolete
     blocked_reason: str | None = None
-    input_strategy: str = "none"  # existing_fixture, generated_fixture_file, programmatic_input, hybrid, no_valid_input_strategy, none
+    input_strategy: str = (
+        "none"  # existing_fixture, generated_fixture_file, programmatic_input, hybrid, no_valid_input_strategy, none
+    )
     input_files: list[str] = field(default_factory=list)
     required_input_format: str = ""
     required_output_contract: str = ""  # canonical output from FormatContract
@@ -55,6 +58,7 @@ class Scenario:
 @dataclass
 class PlanningResult:
     """Result of scenario planning."""
+
     family: str
     ready_scenarios: list[Scenario] = field(default_factory=list)
     blocked_scenarios: list[Scenario] = field(default_factory=list)
@@ -132,10 +136,15 @@ def plan_scenarios(
             type_short_name = type_info.get("name", "")
 
             if type_info.get("is_obsolete", False):
-                result.blocked_scenarios.append(_make_blocked_scenario(
-                    family, type_info, ns_name, "blocked_obsolete",
-                    f"Type {full_name} is obsolete",
-                ))
+                result.blocked_scenarios.append(
+                    _make_blocked_scenario(
+                        family,
+                        type_info,
+                        ns_name,
+                        "blocked_obsolete",
+                        f"Type {full_name} is obsolete",
+                    )
+                )
                 continue
 
             # Classify the type role
@@ -143,55 +152,77 @@ def plan_scenarios(
 
             # Enum — not a runnable LowCode API; record in blocked_scenarios for tracking
             if role.role == "enum":
-                result.blocked_scenarios.append(_make_blocked_scenario(
-                    family, type_info, ns_name,
-                    "blocked_enum_not_runnable",
-                    f"Type '{type_info['name']}' is an ENUM — not a runnable LowCode API.",
-                ))
+                result.blocked_scenarios.append(
+                    _make_blocked_scenario(
+                        family,
+                        type_info,
+                        ns_name,
+                        "blocked_enum_not_runnable",
+                        f"Type '{type_info['name']}' is an ENUM — not a runnable LowCode API.",
+                    )
+                )
                 continue
 
             # Allowlist enforcement: if allowed_types is set, block types not in it.
             # ENUMs are classified before this gate so they remain visible as
             # blocked_enum_not_runnable instead of pilot scope exclusions.
             if _allowed and type_short_name not in _allowed:
-                result.blocked_scenarios.append(_make_blocked_scenario(
-                    family, type_info, ns_name, "blocked_pilot_not_in_scope",
-                    f"Type '{type_short_name}' is not in the controlled pilot allowlist. "
-                    f"Allowed: {sorted(_allowed)}",
-                ))
+                result.blocked_scenarios.append(
+                    _make_blocked_scenario(
+                        family,
+                        type_info,
+                        ns_name,
+                        "blocked_pilot_not_in_scope",
+                        f"Type '{type_short_name}' is not in the controlled pilot allowlist. "
+                        f"Allowed: {sorted(_allowed)}",
+                    )
+                )
                 continue
 
             # Score the entrypoint
-            fixture_available = _check_fixture_available(
-                type_info, fixture_registry, default_fixture_extension)
+            fixture_available = _check_fixture_available(type_info, fixture_registry, default_fixture_extension)
             ep_score = score_entrypoint(
-                type_info, role, consumer_map,
+                type_info,
+                role,
+                consumer_map,
                 fixture_available=fixture_available,
             )
 
             # Non-standalone roles are blocked with explicit reason
             if role.role not in STANDALONE_ROLES:
-                result.blocked_scenarios.append(_make_blocked_scenario(
-                    family, type_info, ns_name,
-                    f"blocked_{role.role}",
-                    ep_score.rejection_reason or f"Type role '{role.role}' is not a standalone entrypoint",
-                ))
+                result.blocked_scenarios.append(
+                    _make_blocked_scenario(
+                        family,
+                        type_info,
+                        ns_name,
+                        f"blocked_{role.role}",
+                        ep_score.rejection_reason or f"Type role '{role.role}' is not a standalone entrypoint",
+                    )
+                )
                 continue
 
             # Standalone role but scored as not runnable
             if not ep_score.runnable:
-                result.blocked_scenarios.append(_make_blocked_scenario(
-                    family, type_info, ns_name,
-                    "blocked_low_score",
-                    ep_score.rejection_reason or f"Entrypoint score too low ({ep_score.score:.1f})",
-                ))
+                result.blocked_scenarios.append(
+                    _make_blocked_scenario(
+                        family,
+                        type_info,
+                        ns_name,
+                        "blocked_low_score",
+                        ep_score.rejection_reason or f"Entrypoint score too low ({ep_score.score:.1f})",
+                    )
+                )
                 continue
 
             # Build scenario for this type
             preferred_method = _preferred.get(type_short_name)
             scenario = _build_scenario(
-                family, type_info, ns_name, fixture_registry,
-                default_fixture_extension, preferred_method=preferred_method,
+                family,
+                type_info,
+                ns_name,
+                fixture_registry,
+                default_fixture_extension,
+                preferred_method=preferred_method,
             )
             if scenario.status == "ready":
                 result.ready_scenarios.append(scenario)
@@ -200,7 +231,9 @@ def plan_scenarios(
 
     logger.info(
         "Planning for %s: %d ready, %d blocked",
-        family, result.ready_count, result.blocked_count,
+        family,
+        result.ready_count,
+        result.blocked_count,
     )
     return result
 
@@ -217,6 +250,7 @@ class CatalogHashMismatchError(Exception):
 @dataclass
 class CatalogHashResult:
     """Result of catalog hash validation against denominator."""
+
     family: str
     match: bool | None  # None = indeterminate (no denominator)
     current_hash: str
@@ -262,7 +296,8 @@ def validate_catalog_hash(
 
     if not denom_path.exists():
         logger.info(
-            "No denominator file for %s — catalog hash check skipped", family,
+            "No denominator file for %s — catalog hash check skipped",
+            family,
         )
         return CatalogHashResult(
             family=family,
@@ -277,7 +312,8 @@ def validate_catalog_hash(
 
     if not denom_hash:
         logger.info(
-            "Denominator for %s has no api_catalog_sha256 — check skipped", family,
+            "Denominator for %s has no api_catalog_sha256 — check skipped",
+            family,
         )
         return CatalogHashResult(
             family=family,
@@ -446,6 +482,7 @@ def _build_scenario(
     contract_hash = ""
     try:
         from plugin_examples.format_authority.store import get_contract
+
         contract = get_contract(family, name)
         contract_output = contract.canonical_output_format
         contract_id = contract.contract_id
@@ -498,7 +535,7 @@ def _make_blocked_scenario(
 def _to_slug(name: str) -> str:
     """Convert a class name to a slug."""
     # CamelCase to kebab-case
-    s = re.sub(r'(?<=[a-z0-9])([A-Z])', r'-\1', name)
+    s = re.sub(r"(?<=[a-z0-9])([A-Z])", r"-\1", name)
     return s.lower()
 
 
@@ -512,15 +549,15 @@ def _to_slug(name: str) -> str:
 # Converters that EXPORT to a format use the family default as input.
 _INPUT_FORMAT_MAP: dict[str, str] = {
     # Cells types
-    "textconverter": ".csv",        # TextConverter processes text-based formats only
-    "jsonconverter": ".xlsx",       # JsonConverter exports spreadsheet to JSON
-    "htmlconverter": ".xlsx",       # HtmlConverter exports spreadsheet to HTML
+    "textconverter": ".csv",  # TextConverter processes text-based formats only
+    "jsonconverter": ".xlsx",  # JsonConverter exports spreadsheet to JSON
+    "htmlconverter": ".xlsx",  # HtmlConverter exports spreadsheet to HTML
     "cells:pdfconverter": ".xlsx",  # Cells PdfConverter exports spreadsheet to PDF
-    "imageconverter": ".xlsx",      # ImageConverter renders spreadsheet to image
+    "imageconverter": ".xlsx",  # ImageConverter renders spreadsheet to image
     "spreadsheetconverter": ".xlsx",  # Converts between spreadsheet formats
-    "spreadsheetmerger": ".xlsx",   # Merges multiple spreadsheets
-    "spreadsheetsplitter": ".xlsx", # Splits spreadsheet into sheets
-    "spreadsheetlocker": ".xlsx",   # Locks/protects a spreadsheet
+    "spreadsheetmerger": ".xlsx",  # Merges multiple spreadsheets
+    "spreadsheetsplitter": ".xlsx",  # Splits spreadsheet into sheets
+    "spreadsheetlocker": ".xlsx",  # Locks/protects a spreadsheet
     # Words types — use family-scoped keys for names shared with other families
     "words:converter": ".docx",
     "watermarker": ".docx",
@@ -564,6 +601,7 @@ def _infer_input_format(
     if family:
         try:
             from plugin_examples.format_authority.store import get_contract
+
             contract = get_contract(family, type_name)
             return contract.input_format
         except ImportError:
@@ -605,6 +643,7 @@ def _infer_output_format(
     if family:
         try:
             from plugin_examples.format_authority.store import get_contract
+
             contract = get_contract(family, type_name)
             return contract.canonical_output_format
         except ImportError:
@@ -751,7 +790,9 @@ def build_fixture_resolution_evidence(
         "repo_info": {
             "owner": repo_info.get("owner", "") if repo_info else "",
             "repo": repo_info.get("repo", "") if repo_info else "",
-        } if repo_info else None,
+        }
+        if repo_info
+        else None,
         "total_scenarios": len(scenarios),
         "fixture_blocked_count": sum(1 for s in scenarios if s.get("blocker_class") == "FIXTURE_BLOCKED"),
         "scenarios": scenarios,

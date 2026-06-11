@@ -18,6 +18,7 @@ on:
 jobs:
   refresh:
     runs-on: windows-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -53,6 +54,8 @@ jobs:
 
   regression-check:
     runs-on: windows-latest
+    needs: [refresh]
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 

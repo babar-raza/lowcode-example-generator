@@ -7,6 +7,7 @@ Verifies:
 - No patterns are added when no failures in run dir
 - Evidence JSON is written for each auto-learn run
 """
+
 from __future__ import annotations
 
 import json
@@ -23,9 +24,7 @@ def _write_registry(path: Path, patterns: list[dict]) -> None:
 
 def _write_reviewer_failures(run_dir: Path, failures: list[dict]) -> None:
     run_dir.mkdir(parents=True, exist_ok=True)
-    (run_dir / "reviewer-failures.json").write_text(
-        json.dumps(failures), encoding="utf-8"
-    )
+    (run_dir / "reviewer-failures.json").write_text(json.dumps(failures), encoding="utf-8")
 
 
 def test_new_failure_added_as_candidate(tmp_path):
@@ -35,9 +34,9 @@ def test_new_failure_added_as_candidate(tmp_path):
     run_dir = tmp_path / "run"
     registry_path = tmp_path / "failure-pattern-registry.json"
     _write_registry(registry_path, [])
-    _write_reviewer_failures(run_dir, [
-        {"scenario_id": "pdf/merge-pdf", "failure_reason": "missing TextFragment import", "passed": False}
-    ])
+    _write_reviewer_failures(
+        run_dir, [{"scenario_id": "pdf/merge-pdf", "failure_reason": "missing TextFragment import", "passed": False}]
+    )
 
     result = auto_learn_from_run(run_dir, "pdf", registry_path)
 
@@ -55,15 +54,20 @@ def test_existing_candidate_incremented_not_duplicated(tmp_path):
 
     run_dir = tmp_path / "run"
     registry_path = tmp_path / "failure-pattern-registry.json"
-    _write_registry(registry_path, [{
-        "reason_signature": "missing textfragment import",
-        "family": "pdf",
-        "occurrence_count": 2,
-        "status": "CANDIDATE",
-    }])
-    _write_reviewer_failures(run_dir, [
-        {"scenario_id": "pdf/merge-pdf", "failure_reason": "missing TextFragment import", "passed": False}
-    ])
+    _write_registry(
+        registry_path,
+        [
+            {
+                "reason_signature": "missing textfragment import",
+                "family": "pdf",
+                "occurrence_count": 2,
+                "status": "CANDIDATE",
+            }
+        ],
+    )
+    _write_reviewer_failures(
+        run_dir, [{"scenario_id": "pdf/merge-pdf", "failure_reason": "missing TextFragment import", "passed": False}]
+    )
 
     result = auto_learn_from_run(run_dir, "pdf", registry_path)
 
@@ -82,15 +86,18 @@ def test_confirmed_pattern_never_modified(tmp_path):
     run_dir = tmp_path / "run"
     registry_path = tmp_path / "failure-pattern-registry.json"
     original_count = 5
-    _write_registry(registry_path, [{
-        "reason_signature": "some known confirmed failure",
-        "family": "pdf",
-        "occurrence_count": original_count,
-        "status": "CONFIRMED",
-    }])
-    _write_reviewer_failures(run_dir, [
-        {"failure_reason": "some known confirmed failure", "passed": False}
-    ])
+    _write_registry(
+        registry_path,
+        [
+            {
+                "reason_signature": "some known confirmed failure",
+                "family": "pdf",
+                "occurrence_count": original_count,
+                "status": "CONFIRMED",
+            }
+        ],
+    )
+    _write_reviewer_failures(run_dir, [{"failure_reason": "some known confirmed failure", "passed": False}])
 
     auto_learn_from_run(run_dir, "pdf", registry_path)
 
@@ -109,11 +116,16 @@ def test_no_failures_no_changes(tmp_path):
     run_dir = tmp_path / "run"
     run_dir.mkdir()
     registry_path = tmp_path / "failure-pattern-registry.json"
-    _write_registry(registry_path, [{
-        "reason_signature": "existing pattern",
-        "status": "CANDIDATE",
-        "occurrence_count": 1,
-    }])
+    _write_registry(
+        registry_path,
+        [
+            {
+                "reason_signature": "existing pattern",
+                "status": "CANDIDATE",
+                "occurrence_count": 1,
+            }
+        ],
+    )
 
     result = auto_learn_from_run(run_dir, "pdf", registry_path)
 
@@ -131,9 +143,7 @@ def test_evidence_json_written_on_new_pattern(tmp_path):
     run_dir = tmp_path / "run"
     registry_path = tmp_path / "failure-pattern-registry.json"
     _write_registry(registry_path, [])
-    _write_reviewer_failures(run_dir, [
-        {"failure_reason": "new failure for testing", "passed": False}
-    ])
+    _write_reviewer_failures(run_dir, [{"failure_reason": "new failure for testing", "passed": False}])
 
     auto_learn_from_run(run_dir, "cells", registry_path)
 
@@ -164,7 +174,11 @@ def test_find_confirmed_repair_returns_confirmed_match(tmp_path):
 
     loader = HealingIntelligenceLoader.__new__(HealingIntelligenceLoader)
     loader._repair_patterns = [
-        {"failure_reason": "missing textfragment import", "status": "CONFIRMED", "repair_hint": "add using Aspose.Pdf.Text;"},
+        {
+            "failure_reason": "missing textfragment import",
+            "status": "CONFIRMED",
+            "repair_hint": "add using Aspose.Pdf.Text;",
+        },
     ]
     loader._loaded = True
 

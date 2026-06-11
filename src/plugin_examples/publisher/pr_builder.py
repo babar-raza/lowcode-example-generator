@@ -41,6 +41,7 @@ def compute_pr_scope_type(
 @dataclass
 class PRContent:
     """Content for a GitHub PR."""
+
     title: str
     body: str
     branch: str
@@ -80,9 +81,7 @@ def build_pr(
         PRContent with title, body, branch, labels.
     """
     family_cap = family.capitalize()
-    title = (
-        f"Add verified Aspose.{family_cap} LowCode examples for .NET controlled pilot"
-    )
+    title = f"Add verified Aspose.{family_cap} LowCode examples for .NET controlled pilot"
 
     # Build included examples section
     if examples_list:

@@ -66,10 +66,7 @@ def classify_documentation_hit(text: str, location: str) -> dict:
     own API documentation code example — not a pipeline call.
     """
     is_xml_doc = (
-        location.endswith(".xml")
-        or "/nuget/" in location
-        or "\\nuget\\" in location
-        or "extracted" in location.lower()
+        location.endswith(".xml") or "/nuget/" in location or "\\nuget\\" in location or "extracted" in location.lower()
     )
     return {
         "location": location,
@@ -107,13 +104,10 @@ def validate_provider_family(provider_family: str) -> list[str]:
     violations = []
     if provider_family not in APPROVED_PROVIDERS:
         violations.append(
-            f"Provider family '{provider_family}' is not approved. "
-            f"Approved: {sorted(APPROVED_PROVIDERS)}"
+            f"Provider family '{provider_family}' is not approved. " f"Approved: {sorted(APPROVED_PROVIDERS)}"
         )
     if provider_family in UNAPPROVED_PROVIDERS:
-        violations.append(
-            f"Provider family '{provider_family}' is explicitly forbidden."
-        )
+        violations.append(f"Provider family '{provider_family}' is explicitly forbidden.")
     return violations
 
 
@@ -128,8 +122,7 @@ def validate_model_for_provider(provider_family: str, model_name: str) -> list[s
     violations = []
     if model_name in FORBIDDEN_PIPELINE_MODELS:
         violations.append(
-            f"Model '{model_name}' is forbidden as a configured pipeline model. "
-            "Remove it from configuration."
+            f"Model '{model_name}' is forbidden as a configured pipeline model. " "Remove it from configuration."
         )
     return violations
 
@@ -142,10 +135,7 @@ def classify_llm_hit(text: str, location: str) -> dict:
     """
     # Extracted NuGet XML documentation: not a pipeline call
     is_xml_doc = (
-        location.endswith(".xml")
-        or "/nuget/" in location
-        or "\\nuget\\" in location
-        or "extracted" in location.lower()
+        location.endswith(".xml") or "/nuget/" in location or "\\nuget\\" in location or "extracted" in location.lower()
     )
     if is_xml_doc:
         return {

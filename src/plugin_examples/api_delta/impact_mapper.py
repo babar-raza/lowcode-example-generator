@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class ExampleImpact:
     """Impact assessment for a single existing example."""
+
     example_id: str
     impact_type: str  # new_api_available, api_removed, api_modified, no_impact
     affected_symbols: list[str] = field(default_factory=list)
@@ -24,6 +25,7 @@ class ExampleImpact:
 @dataclass
 class ImpactReport:
     """Overall impact assessment."""
+
     delta_summary: dict = field(default_factory=dict)
     new_api_examples_needed: list[dict] = field(default_factory=list)
     existing_example_impacts: list[ExampleImpact] = field(default_factory=list)
@@ -57,12 +59,14 @@ def map_impact(
 
     # New types need new examples
     for td in delta.added_types:
-        report.new_api_examples_needed.append({
-            "full_name": td.full_name,
-            "namespace": td.namespace,
-            "methods": td.added_methods,
-            "properties": td.added_properties,
-        })
+        report.new_api_examples_needed.append(
+            {
+                "full_name": td.full_name,
+                "namespace": td.namespace,
+                "methods": td.added_methods,
+                "properties": td.added_properties,
+            }
+        )
 
     if not existing_examples_index:
         return report
@@ -80,19 +84,23 @@ def map_impact(
         modified_hits = used_symbols & modified_symbols
 
         if removed_hits:
-            report.existing_example_impacts.append(ExampleImpact(
-                example_id=ex_id,
-                impact_type="api_removed",
-                affected_symbols=sorted(removed_hits),
-                action="deprecate",
-            ))
+            report.existing_example_impacts.append(
+                ExampleImpact(
+                    example_id=ex_id,
+                    impact_type="api_removed",
+                    affected_symbols=sorted(removed_hits),
+                    action="deprecate",
+                )
+            )
         elif modified_hits:
-            report.existing_example_impacts.append(ExampleImpact(
-                example_id=ex_id,
-                impact_type="api_modified",
-                affected_symbols=sorted(modified_hits),
-                action="update",
-            ))
+            report.existing_example_impacts.append(
+                ExampleImpact(
+                    example_id=ex_id,
+                    impact_type="api_modified",
+                    affected_symbols=sorted(modified_hits),
+                    action="update",
+                )
+            )
 
     logger.info(
         "Impact: %d new APIs, %d existing impacts",

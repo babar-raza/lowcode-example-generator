@@ -46,6 +46,7 @@ from plugin_examples.generator.code_generator import GeneratedExample
 
 # --- Test 1: Example-reviewer fixture system discovered ---
 
+
 class TestExampleReviewerFixtureSystemDiscovered:
     def test_example_reviewer_fixture_system_discovered(self):
         """Discovery doc and JSON must exist after Step 1."""
@@ -60,6 +61,7 @@ class TestExampleReviewerFixtureSystemDiscovered:
 
 
 # --- Test 2: Fixture strategy blocks without valid input ---
+
 
 class TestFixtureStrategyBlocksWithoutInput:
     def test_fixture_strategy_blocks_without_input(self):
@@ -111,6 +113,7 @@ class TestFixtureStrategyBlocksWithoutInput:
 
 # --- Test 3: Generated fixture file exists before run ---
 
+
 class TestGeneratedFixtureFileExistsBeforeRun:
     def test_xlsx_fixture_is_valid_zip(self, tmp_path):
         """Generated .xlsx fixture must be a valid ZIP/OOXML file."""
@@ -118,11 +121,11 @@ class TestGeneratedFixtureFileExistsBeforeRun:
         assert generate_xlsx(dest) is True
         assert dest.exists()
         assert dest.stat().st_size > 0
-        with zipfile.ZipFile(dest, 'r') as zf:
+        with zipfile.ZipFile(dest, "r") as zf:
             names = zf.namelist()
-            assert '[Content_Types].xml' in names
-            assert 'xl/workbook.xml' in names
-            assert 'xl/worksheets/sheet1.xml' in names
+            assert "[Content_Types].xml" in names
+            assert "xl/workbook.xml" in names
+            assert "xl/worksheets/sheet1.xml" in names
 
     def test_csv_fixture_has_content(self, tmp_path):
         dest = tmp_path / "input.csv"
@@ -162,6 +165,7 @@ class TestGeneratedFixtureFileExistsBeforeRun:
 
 # --- Test 4: Programmatic input creates file before plugin call ---
 
+
 class TestProgrammaticInputCreatesFileBeforePluginCall:
     def test_programmatic_strategy_does_not_generate_fixture(self, tmp_path):
         """Programmatic input strategy means code creates the file, not the pipeline."""
@@ -190,6 +194,7 @@ class TestProgrammaticInputCreatesFileBeforePluginCall:
 
 # --- Test 5: LLM packet forbids unlisted input files ---
 
+
 class TestLlmPacketForbidsUnlistedInputFiles:
     def test_packet_constraints_forbid_unlisted_files(self):
         """Packet must contain constraints against referencing unlisted files."""
@@ -198,8 +203,7 @@ class TestLlmPacketForbidsUnlistedInputFiles:
             "target_type": "Aspose.Cells.LowCode.HtmlConverter",
             "target_namespace": "Aspose.Cells.LowCode",
             "target_methods": ["Process"],
-            "required_symbols": ["Aspose.Cells.LowCode.HtmlConverter",
-                                 "Aspose.Cells.LowCode.HtmlConverter.Process"],
+            "required_symbols": ["Aspose.Cells.LowCode.HtmlConverter", "Aspose.Cells.LowCode.HtmlConverter.Process"],
             "required_fixtures": ["input.xlsx"],
             "output_plan": "Convert to HTML",
             "input_strategy": "generated_fixture_file",
@@ -257,6 +261,7 @@ class TestLlmPacketForbidsUnlistedInputFiles:
 
 # --- Test 6: Project generator copies existing fixture ---
 
+
 class TestProjectGeneratorCopiesExistingFixture:
     def test_project_generator_writes_generated_fixture(self, tmp_path):
         """When input_strategy is generated_fixture_file, fixture must exist in project dir."""
@@ -279,10 +284,11 @@ class TestProjectGeneratorCopiesExistingFixture:
         assert fixture_path.stat().st_size > 0
         # Verify it's a valid XLSX
         with zipfile.ZipFile(fixture_path) as zf:
-            assert 'xl/workbook.xml' in zf.namelist()
+            assert "xl/workbook.xml" in zf.namelist()
 
 
 # --- Test 7: Project generator writes generated fixture ---
+
 
 class TestProjectGeneratorWritesGeneratedFixture:
     def test_csproj_includes_fixture_copy_items(self, tmp_path):
@@ -300,11 +306,12 @@ class TestProjectGeneratorWritesGeneratedFixture:
 
 # --- Test 8: Expected output records input dependencies ---
 
+
 class TestExpectedOutputRecordsInputDependencies:
     def test_expected_output_records_input_dependencies(self, tmp_path):
         example = GeneratedExample(
             scenario_id="cells-dep-test",
-            code='class P { static void Main() {} }',
+            code="class P { static void Main() {} }",
         )
         project = generate_project(
             example,
@@ -319,6 +326,7 @@ class TestExpectedOutputRecordsInputDependencies:
 
 
 # --- Test 9: Missing input file demotes scenario ---
+
 
 class TestMissingInputFileDemotesScenario:
     def test_missing_input_file_demotes_scenario(self):
@@ -360,14 +368,20 @@ class TestMissingInputFileDemotesScenario:
             scenario_id="cells-fail",
             restore=_MockDotnetResult("restore", True),
             build=_MockDotnetResult("build", True),
-            run=_MockDotnetResult("run", False, exit_code=1,
-                                  stderr="FileNotFoundException: Could not find file 'input.xlsx'"),
+            run=_MockDotnetResult(
+                "run", False, exit_code=1, stderr="FileNotFoundException: Could not find file 'input.xlsx'"
+            ),
             passed=False,
             failure_stage="run",
         )
         rc = _MockRuntimeClassification("cells-fail")
-        projects = [{"scenario_id": "cells-fail", "project_dir": "/gen/cells-fail",
-                      "program_path": "/gen/cells-fail/Program.cs"}]
+        projects = [
+            {
+                "scenario_id": "cells-fail",
+                "project_dir": "/gen/cells-fail",
+                "program_path": "/gen/cells-fail/Program.cs",
+            }
+        ]
 
         eg = evaluate_example_gates([vr], projects, runtime_classifications=[rc])
         feedback = build_scenario_feedback(eg)
@@ -376,6 +390,7 @@ class TestMissingInputFileDemotesScenario:
 
 
 # --- Test 10: Cells converter scenario has valid input strategy ---
+
 
 class TestCellsConverterScenarioHasValidInputStrategy:
     def test_cells_converter_scenario_has_valid_input_strategy(self):
@@ -398,15 +413,14 @@ class TestCellsConverterScenarioHasValidInputStrategy:
         }
         scenario = _build_scenario("cells", type_info, "Aspose.Cells.LowCode", None, ".xlsx")
         assert scenario.input_strategy != "no_valid_input_strategy"
-        assert scenario.input_strategy in (
-            "existing_fixture", "generated_fixture_file", "programmatic_input", "none"
-        )
+        assert scenario.input_strategy in ("existing_fixture", "generated_fixture_file", "programmatic_input", "none")
         assert scenario.status == "ready"
 
     def test_all_supported_formats_produce_valid_strategy(self):
         """Every format in SUPPORTED_FORMATS must produce a ready scenario.
         Uses mock contract so fixture factory layer is tested independently of FA store."""
         from unittest.mock import patch
+
         type_info = {
             "full_name": "Aspose.Cells.LowCode.SpreadsheetConverter",
             "name": "SpreadsheetConverter",
@@ -442,13 +456,18 @@ class TestCellsConverterScenarioHasValidInputStrategy:
 
 # --- Evidence writer test ---
 
+
 class TestFixtureEvidenceWriter:
     def test_write_generated_fixtures_evidence(self, tmp_path):
         fixtures = [
-            GeneratedFixture(path="/gen/input.xlsx", format=".xlsx",
-                             created_by="fixture_factory",
-                             validity_check="file_exists_and_size_1234",
-                             size_bytes=1234, ready=True),
+            GeneratedFixture(
+                path="/gen/input.xlsx",
+                format=".xlsx",
+                created_by="fixture_factory",
+                validity_check="file_exists_and_size_1234",
+                size_bytes=1234,
+                ready=True,
+            ),
         ]
         path = write_generated_fixtures_evidence(fixtures, tmp_path)
         assert path.exists()
@@ -458,6 +477,7 @@ class TestFixtureEvidenceWriter:
 
 
 # --- New family fixture strategy tests ---
+
 
 class TestDocxFixtureGenerator:
     """Tests for DOCX fixture generation (stdlib OOXML)."""
@@ -471,10 +491,10 @@ class TestDocxFixtureGenerator:
     def test_generate_docx_is_valid_zip(self, tmp_path):
         dest = tmp_path / "input.docx"
         generate_docx(dest)
-        with zipfile.ZipFile(dest, 'r') as zf:
+        with zipfile.ZipFile(dest, "r") as zf:
             names = zf.namelist()
-            assert '[Content_Types].xml' in names
-            assert 'word/document.xml' in names
+            assert "[Content_Types].xml" in names
+            assert "word/document.xml" in names
 
     def test_docx_in_supported_formats(self):
         assert ".docx" in SUPPORTED_FORMATS
@@ -496,9 +516,14 @@ class TestDiagramFixtureStrategy:
             "name": "PdfConverter",
             "kind": "class",
             "methods": [
-                {"name": "Process", "is_static": True,
-                 "parameters": [{"name": "templateFile", "type": "System.String"},
-                                {"name": "resultStream", "type": "System.String"}]},
+                {
+                    "name": "Process",
+                    "is_static": True,
+                    "parameters": [
+                        {"name": "templateFile", "type": "System.String"},
+                        {"name": "resultStream", "type": "System.String"},
+                    ],
+                },
             ],
         }
         scenario = _build_scenario("diagram", type_info, "Aspose.Diagram.LowCode", None, ".vsdx")
@@ -513,9 +538,14 @@ class TestDiagramFixtureStrategy:
             "name": "DiagramConverter",
             "kind": "class",
             "methods": [
-                {"name": "Process", "is_static": True,
-                 "parameters": [{"name": "templateFile", "type": "System.String"},
-                                {"name": "resultStream", "type": "System.String"}]},
+                {
+                    "name": "Process",
+                    "is_static": True,
+                    "parameters": [
+                        {"name": "templateFile", "type": "System.String"},
+                        {"name": "resultStream", "type": "System.String"},
+                    ],
+                },
             ],
         }
         scenario = _build_scenario("diagram", type_info, "Aspose.Diagram.LowCode", None, ".vsdx")
@@ -525,18 +555,21 @@ class TestDiagramFixtureStrategy:
     def test_diagram_input_format_map(self):
         """Diagram types should map to .vsdx input format."""
         from plugin_examples.scenario_planner.planner import _infer_input_format
+
         assert _infer_input_format("PdfConverter", ".vsdx", family="diagram") == ".vsdx"
         assert _infer_input_format("DiagramConverter", ".vsdx", family="diagram") == ".vsdx"
 
     def test_diagram_pdfconverter_no_collision_with_cells(self):
         """Diagram PdfConverter should not collide with Cells PdfConverter."""
         from plugin_examples.scenario_planner.planner import _infer_input_format
+
         assert _infer_input_format("PdfConverter", ".xlsx", family="cells") == ".xlsx"
         assert _infer_input_format("PdfConverter", ".vsdx", family="diagram") == ".vsdx"
 
     def test_diagram_output_format_map(self):
         """Diagram types should map to correct output formats."""
         from plugin_examples.scenario_planner.planner import _infer_output_format
+
         assert _infer_output_format("DiagramConverter", ".vsdx", family="diagram") == ".vdx"
         assert _infer_output_format("PdfConverter", ".vsdx", family="diagram") == ".pdf"
 
@@ -547,6 +580,7 @@ class TestEmailFixtureStrategy:
     def test_email_converter_no_collision_with_words(self):
         """Email Converter should use .eml default, not Words .docx."""
         from plugin_examples.scenario_planner.planner import _infer_input_format
+
         # Words Converter → .docx (scoped)
         assert _infer_input_format("Converter", ".docx", family="words") == ".docx"
         # Email Converter → .eml (falls to family_default, no email:converter entry)
@@ -559,10 +593,15 @@ class TestEmailFixtureStrategy:
             "name": "Converter",
             "kind": "class",
             "methods": [
-                {"name": "ConvertToMsg", "is_static": True,
-                 "parameters": [{"name": "input", "type": "System.IO.Stream"},
-                                {"name": "inputName", "type": "System.String"},
-                                {"name": "handler", "type": "IOutputHandler"}]},
+                {
+                    "name": "ConvertToMsg",
+                    "is_static": True,
+                    "parameters": [
+                        {"name": "input", "type": "System.IO.Stream"},
+                        {"name": "inputName", "type": "System.String"},
+                        {"name": "handler", "type": "IOutputHandler"},
+                    ],
+                },
             ],
         }
         # Email default extension is .eml, not in SUPPORTED_FORMATS
@@ -581,9 +620,14 @@ class TestSlidesFixtureStrategy:
             "name": "Convert",
             "kind": "class",
             "methods": [
-                {"name": "ToPdf", "is_static": True,
-                 "parameters": [{"name": "presPath", "type": "System.String"},
-                                {"name": "outPath", "type": "System.String"}]},
+                {
+                    "name": "ToPdf",
+                    "is_static": True,
+                    "parameters": [
+                        {"name": "presPath", "type": "System.String"},
+                        {"name": "outPath", "type": "System.String"},
+                    ],
+                },
             ],
         }
         scenario = _build_scenario("slides", type_info, "Aspose.Slides.LowCode", None, ".pptx")
@@ -597,9 +641,14 @@ class TestSlidesFixtureStrategy:
             "name": "Merger",
             "kind": "class",
             "methods": [
-                {"name": "Process", "is_static": True,
-                 "parameters": [{"name": "inputFileNames", "type": "System.String[]"},
-                                {"name": "outputFileName", "type": "System.String"}]},
+                {
+                    "name": "Process",
+                    "is_static": True,
+                    "parameters": [
+                        {"name": "inputFileNames", "type": "System.String[]"},
+                        {"name": "outputFileName", "type": "System.String"},
+                    ],
+                },
             ],
         }
         scenario = _build_scenario("slides", type_info, "Aspose.Slides.LowCode", None, ".pptx")
@@ -609,6 +658,7 @@ class TestSlidesFixtureStrategy:
     def test_slides_input_format_map(self):
         """Slides types should map to .pptx input format."""
         from plugin_examples.scenario_planner.planner import _infer_input_format
+
         assert _infer_input_format("Convert", ".pptx", family="slides") == ".pptx"
         assert _infer_input_format("Merger", ".pptx", family="slides") == ".pptx"
         assert _infer_input_format("Compress", ".pptx", family="slides") == ".pptx"
@@ -616,6 +666,7 @@ class TestSlidesFixtureStrategy:
     def test_slides_output_format_map(self):
         """Slides types should map to correct output formats."""
         from plugin_examples.scenario_planner.planner import _infer_output_format
+
         assert _infer_output_format("Convert", ".pptx", family="slides") == ".pdf"
         assert _infer_output_format("Merger", ".pptx", family="slides") == ".pptx"
         assert _infer_output_format("Compress", ".pptx", family="slides") == ".pptx"

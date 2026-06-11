@@ -22,21 +22,26 @@ import pytest
 # FormImporter version-watch tests
 # ---------------------------------------------------------------------------
 
+
 class TestFormImporterVersionCompare:
     def test_compare_versions_advanced(self):
         from plugin_examples.package_watcher.formimporter_watch import _compare_versions
+
         assert _compare_versions("26.6.0", "26.5.0") == 1
 
     def test_compare_versions_same(self):
         from plugin_examples.package_watcher.formimporter_watch import _compare_versions
+
         assert _compare_versions("26.5.0", "26.5.0") == 0
 
     def test_compare_versions_older(self):
         from plugin_examples.package_watcher.formimporter_watch import _compare_versions
+
         assert _compare_versions("26.4.0", "26.5.0") == -1
 
     def test_compare_versions_major_change(self):
         from plugin_examples.package_watcher.formimporter_watch import _compare_versions
+
         assert _compare_versions("27.0.0", "26.5.0") == 1
 
 
@@ -89,7 +94,8 @@ class TestFormImporterWatch:
 
     def test_write_watch_report(self):
         from plugin_examples.package_watcher.formimporter_watch import (
-            FormImporterWatchResult, write_watch_report,
+            FormImporterWatchResult,
+            write_watch_report,
         )
 
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -118,6 +124,7 @@ class TestFormImporterWatch:
 # Post-publication verifier tests
 # ---------------------------------------------------------------------------
 
+
 class TestPostPublicationVerifier:
     def _make_example_dir(self, base: Path, example_name: str, family: str = "pdf") -> Path:
         """Create a minimal example directory structure."""
@@ -131,7 +138,7 @@ class TestPostPublicationVerifier:
             encoding="utf-8",
         )
         csproj = example_dir / f"{example_name}.csproj"
-        csproj.write_text("<Project Sdk=\"Microsoft.NET.Sdk\"></Project>", encoding="utf-8")
+        csproj.write_text('<Project Sdk="Microsoft.NET.Sdk"></Project>', encoding="utf-8")
         (example_dir / "README.md").write_text(f"# {example_name}\n", encoding="utf-8")
         return example_dir
 
@@ -197,7 +204,8 @@ class TestPostPublicationVerifier:
 
     def test_write_verification_report(self):
         from plugin_examples.publisher.post_publication_verifier import (
-            PostPublicationReport, write_verification_report,
+            PostPublicationReport,
+            write_verification_report,
         )
 
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -219,6 +227,7 @@ class TestPostPublicationVerifier:
 # ---------------------------------------------------------------------------
 # Portfolio dashboard tests
 # ---------------------------------------------------------------------------
+
 
 class TestPortfolioDashboard:
     def test_build_dashboard_smoke(self):
@@ -252,7 +261,8 @@ class TestPortfolioDashboard:
 
     def test_write_dashboard_json(self):
         from plugin_examples.publisher.portfolio_dashboard import (
-            build_portfolio_dashboard, write_dashboard_json,
+            build_portfolio_dashboard,
+            write_dashboard_json,
         )
 
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -266,7 +276,8 @@ class TestPortfolioDashboard:
 
     def test_write_dashboard_markdown(self):
         from plugin_examples.publisher.portfolio_dashboard import (
-            build_portfolio_dashboard, write_dashboard_markdown,
+            build_portfolio_dashboard,
+            write_dashboard_markdown,
         )
 
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -280,7 +291,8 @@ class TestPortfolioDashboard:
 
     def test_dashboard_all_families_present(self):
         from plugin_examples.publisher.portfolio_dashboard import (
-            build_portfolio_dashboard, FAMILIES,
+            build_portfolio_dashboard,
+            FAMILIES,
         )
 
         dashboard = build_portfolio_dashboard("sprint34")
@@ -306,6 +318,7 @@ class TestPortfolioDashboard:
 # ---------------------------------------------------------------------------
 # Batch publisher tests
 # ---------------------------------------------------------------------------
+
 
 class TestBatchPublisher:
     def test_get_packages_for_pdf(self):
@@ -362,7 +375,9 @@ class TestBatchPublisher:
 
     def test_write_batch_report(self):
         from plugin_examples.publisher.batch_publisher import (
-            BatchPublishResult, PackagePublishResult, write_batch_report,
+            BatchPublishResult,
+            PackagePublishResult,
+            write_batch_report,
         )
 
         with tempfile.TemporaryDirectory() as tmpdir:

@@ -40,6 +40,7 @@ NUGET_INDEX_URL = "https://api.nuget.org/v3-flatcontainer/{package_lower}/index.
 @dataclass
 class FamilyDriftResult:
     """Version drift result for one family."""
+
     family: str
     package_id: str
     denominator_version: str | None
@@ -54,6 +55,7 @@ class FamilyDriftResult:
 @dataclass
 class VersionDriftReport:
     """Full version drift report for all families."""
+
     generated_at: str
     families: list[FamilyDriftResult] = field(default_factory=list)
     drifted_count: int = 0
@@ -118,8 +120,10 @@ def _load_denominator_version(family: str, repo_root: Path) -> str | None:
 
 def _compare_versions(a: str, b: str) -> int:
     """Return -1, 0, or 1. a < b → -1, a > b → 1."""
+
     def parts(v: str) -> tuple[int, ...]:
         return tuple(int(x) for x in v.split(".") if x.isdigit())
+
     pa, pb = parts(a), parts(b)
     if pa < pb:
         return -1
@@ -175,9 +179,7 @@ def run_version_drift_check(
     if families is None:
         families = list(LOWCODE_FAMILIES.keys())
 
-    report = VersionDriftReport(
-        generated_at=datetime.now(timezone.utc).isoformat()
-    )
+    report = VersionDriftReport(generated_at=datetime.now(timezone.utc).isoformat())
 
     for family in families:
         if family not in LOWCODE_FAMILIES:

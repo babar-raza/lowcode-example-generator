@@ -18,6 +18,7 @@ Required files for a fully-proven package:
 - output-validation.json
 - output/ directory with at least one non-zero file
 """
+
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -58,8 +59,7 @@ class ProofResult:
             "error_count": self.error_count,
             "warning_count": self.warning_count,
             "violations": [
-                {"rule": v.rule, "severity": v.severity, "message": v.message, "path": v.path}
-                for v in self.violations
+                {"rule": v.rule, "severity": v.severity, "message": v.message, "path": v.path} for v in self.violations
             ],
         }
 
@@ -107,102 +107,138 @@ def run_full_package_proof_validator(pkg_dir: Path, package_key: str) -> ProofRe
 
     # FPP-01
     if not (pkg_dir / "Program.cs").exists():
-        result.violations.append(ProofViolation(
-            "FPP-01", "ERROR",
-            f"{package_key}: Program.cs missing",
-            str(pkg_dir / "Program.cs"),
-        ))
+        result.violations.append(
+            ProofViolation(
+                "FPP-01",
+                "ERROR",
+                f"{package_key}: Program.cs missing",
+                str(pkg_dir / "Program.cs"),
+            )
+        )
 
     # FPP-02
     csproj = list(pkg_dir.glob("*.csproj"))
     if not csproj:
-        result.violations.append(ProofViolation(
-            "FPP-02", "ERROR",
-            f"{package_key}: no *.csproj found",
-            str(pkg_dir),
-        ))
+        result.violations.append(
+            ProofViolation(
+                "FPP-02",
+                "ERROR",
+                f"{package_key}: no *.csproj found",
+                str(pkg_dir),
+            )
+        )
 
     # FPP-03
     if not (pkg_dir / "README.md").exists():
-        result.violations.append(ProofViolation(
-            "FPP-03", "WARNING",
-            f"{package_key}: README.md missing",
-            str(pkg_dir / "README.md"),
-        ))
+        result.violations.append(
+            ProofViolation(
+                "FPP-03",
+                "WARNING",
+                f"{package_key}: README.md missing",
+                str(pkg_dir / "README.md"),
+            )
+        )
 
     # FPP-04
     if not (pkg_dir / "source-provenance.json").exists():
-        result.violations.append(ProofViolation(
-            "FPP-04", "ERROR",
-            f"{package_key}: source-provenance.json missing",
-            str(pkg_dir / "source-provenance.json"),
-        ))
+        result.violations.append(
+            ProofViolation(
+                "FPP-04",
+                "ERROR",
+                f"{package_key}: source-provenance.json missing",
+                str(pkg_dir / "source-provenance.json"),
+            )
+        )
 
     # FPP-05
     if not (pkg_dir / "package-manifest.json").exists():
-        result.violations.append(ProofViolation(
-            "FPP-05", "WARNING",
-            f"{package_key}: package-manifest.json missing",
-            str(pkg_dir / "package-manifest.json"),
-        ))
+        result.violations.append(
+            ProofViolation(
+                "FPP-05",
+                "WARNING",
+                f"{package_key}: package-manifest.json missing",
+                str(pkg_dir / "package-manifest.json"),
+            )
+        )
 
     # FPP-06
     if not _find_log(pkg_dir, "restore.log"):
-        result.violations.append(ProofViolation(
-            "FPP-06", "WARNING",
-            f"{package_key}: restore.log missing",
-            str(pkg_dir),
-        ))
+        result.violations.append(
+            ProofViolation(
+                "FPP-06",
+                "WARNING",
+                f"{package_key}: restore.log missing",
+                str(pkg_dir),
+            )
+        )
 
     # FPP-07
     if not _find_log(pkg_dir, "build.log"):
-        result.violations.append(ProofViolation(
-            "FPP-07", "WARNING",
-            f"{package_key}: build.log missing",
-            str(pkg_dir),
-        ))
+        result.violations.append(
+            ProofViolation(
+                "FPP-07",
+                "WARNING",
+                f"{package_key}: build.log missing",
+                str(pkg_dir),
+            )
+        )
 
     # FPP-08
     if not _find_log(pkg_dir, "run.log"):
-        result.violations.append(ProofViolation(
-            "FPP-08", "WARNING",
-            f"{package_key}: run.log missing",
-            str(pkg_dir),
-        ))
+        result.violations.append(
+            ProofViolation(
+                "FPP-08",
+                "WARNING",
+                f"{package_key}: run.log missing",
+                str(pkg_dir),
+            )
+        )
 
     # FPP-09
     if not (pkg_dir / "output-validation.json").exists():
-        result.violations.append(ProofViolation(
-            "FPP-09", "ERROR",
-            f"{package_key}: output-validation.json missing",
-            str(pkg_dir / "output-validation.json"),
-        ))
+        result.violations.append(
+            ProofViolation(
+                "FPP-09",
+                "ERROR",
+                f"{package_key}: output-validation.json missing",
+                str(pkg_dir / "output-validation.json"),
+            )
+        )
 
     # FPP-10
     out_dir = pkg_dir / "output"
     if not out_dir.exists():
-        result.violations.append(ProofViolation(
-            "FPP-10", "ERROR",
-            f"{package_key}: output/ directory missing",
-            str(out_dir),
-        ))
+        result.violations.append(
+            ProofViolation(
+                "FPP-10",
+                "ERROR",
+                f"{package_key}: output/ directory missing",
+                str(out_dir),
+            )
+        )
     else:
         non_zero = [f for f in out_dir.iterdir() if f.is_file() and f.stat().st_size > 0]
         if not non_zero:
-            result.violations.append(ProofViolation(
-                "FPP-10", "ERROR",
-                f"{package_key}: output/ exists but has no non-zero files",
-                str(out_dir),
-            ))
+            result.violations.append(
+                ProofViolation(
+                    "FPP-10",
+                    "ERROR",
+                    f"{package_key}: output/ exists but has no non-zero files",
+                    str(out_dir),
+                )
+            )
 
     # FPP-11
     has_errors = any(v.severity == "ERROR" for v in result.violations)
     if verdict == "PASS" and has_errors:
-        result.violations.append(ProofViolation(
-            "FPP-11", "ERROR",
-            f"{package_key}: verdict=PASS but package has proof errors above",
-            str(pkg_dir / "output-validation.json"),
-        ))
+        result.violations.append(
+            ProofViolation(
+                "FPP-11",
+                "ERROR",
+                f"{package_key}: verdict=PASS but package has proof errors above",
+                str(pkg_dir / "output-validation.json"),
+            )
+        )
 
     # FPP-12: If package-manifest says METADATA_ONLY but full files exist
     pm = _read_json(pkg_dir / "package-manifest.json") or {}
@@ -214,11 +250,14 @@ def run_full_package_proof_validator(pkg_dir: Path, package_key: str) -> ProofRe
         and out_dir.exists()
     )
     if proof_type == "METADATA_ONLY" and full_files_present:
-        result.violations.append(ProofViolation(
-            "FPP-12", "WARNING",
-            f"{package_key}: package-manifest says METADATA_ONLY but full proof files are present — should be upgraded",
-            str(pkg_dir / "package-manifest.json"),
-        ))
+        result.violations.append(
+            ProofViolation(
+                "FPP-12",
+                "WARNING",
+                f"{package_key}: package-manifest says METADATA_ONLY but full proof files are present — should be upgraded",
+                str(pkg_dir / "package-manifest.json"),
+            )
+        )
         proof_type = "METADATA_ONLY_UPGRADE_AVAILABLE"
 
     # Determine proof type

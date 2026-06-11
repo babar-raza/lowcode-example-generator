@@ -1,0 +1,246 @@
+stages:
+  - lint
+  - test
+  - build
+  - schedule
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.pip-cache"
+
+# ── Lint ─────────────────────────────────────────────────────
+
+ruff-lint:
+  # Blocking gate: ruff check src/ tests/ exits 0 after TC-H09 fixes.
+  # Scope matches CI: src/ and tests/ only (scripts/ and reports/ are legacy generated files).
+  stage: lint
+  image: python:3.13-slim
+  cache:
+    key: pip-lint
+    paths:
+      - .pip-cache/
+  script:
+    - pip install "ruff>=0.4"
+    - ruff check src/ tests/
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+compile-check:
+  stage: lint
+  image: python:3.13-slim
+  script:
+    - python -m compileall src/
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+gate-isolation:
+  # TC-H14: RISK-10 — gate modules must not import AI/LLM modules.
+  # Blocking gate: scoped to example_gates.py only, matching unit test scope in test_risk_mitigations.py.
+  # publication_gate.py probe import (try/except ImportError) is intentionally excluded from this check.
+  stage: lint
+  image: python:3.13-slim
+  script:
+    - |
+      if grep -rn \
+        "from plugin_examples\.llm_router\|import plugin_examples\.llm_router\|from plugin_examples\.healing_intelligence\|import plugin_examples\.healing_intelligence\|from plugin_examples\.generator\|import plugin_examples\.generator" \
+        src/plugin_examples/gates/example_gates.py; then
+        echo "RISK-10 VIOLATION: Gate modules must not import AI/LLM modules"
+        exit 1
+      fi
+      echo "Gate isolation check passed — no AI imports found in example_gates.py"
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+pip-audit:
+  # TC-H04: Advisory dependency vulnerability scan. Never blocks the pipeline.
+  stage: lint
+  image: python:3.13-slim
+  allow_failure: true
+  cache:
+    key: pip-lint
+    paths:
+      - .pip-cache/
+  before_script:
+    - pip install pip-audit
+    - pip install -e ".[dev]"
+  script:
+    - pip-audit --strict
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+# ── Tests ────────────────────────────────────────────────────
+
+.test-base:
+  stage: test
+  cache:
+    key: "pip-${PYTHON_VERSION}"
+    paths:
+      - .pip-cache/
+  before_script:
+    - pip install --upgrade pip
+    - pip install -e ".[dev]"
+  artifacts:
+    when: always
+    reports:
+      junit: report-*.xml
+    expire_in: 7 days
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+unit-tests-py312:
+  # TC-H02: Coverage flags added to match GitHub Actions build-and-test.yml.
+  extends: .test-base
+  image: python:3.12
+  variables:
+    PYTHON_VERSION: "3.12"
+    PYTHONPATH: src
+  script:
+    - >
+      python -m pytest tests/unit -v --timeout=60
+      --junitxml=report-unit-py312.xml
+      --cov=src/plugin_examples --cov-report=term-missing --cov-fail-under=60
+
+unit-tests-py313:
+  extends: .test-base
+  image: python:3.13
+  variables:
+    PYTHON_VERSION: "3.13"
+    PYTHONPATH: src
+  script:
+    - >
+      python -m pytest tests/unit -v --timeout=60
+      --junitxml=report-unit-py313.xml
+      --cov=src/plugin_examples --cov-report=term-missing --cov-fail-under=60
+
+integration-tests-py312:
+  extends: .test-base
+  image: python:3.12
+  variables:
+    PYTHON_VERSION: "3.12"
+    PYTHONPATH: src
+  script:
+    - >
+      python -m pytest tests/integration -v --timeout=120
+      --junitxml=report-integration-py312.xml
+
+integration-tests-py313:
+  extends: .test-base
+  image: python:3.13
+  variables:
+    PYTHON_VERSION: "3.13"
+    PYTHONPATH: src
+  script:
+    - >
+      python -m pytest tests/integration -v --timeout=120
+      --junitxml=report-integration-py313.xml
+
+# ── .NET Build ───────────────────────────────────────────────
+
+dotnet-build:
+  stage: build
+  image: mcr.microsoft.com/dotnet/sdk:8.0
+  script:
+    - dotnet build tools/DllReflector/DllReflector.csproj -c Release
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+# ── Scheduled Jobs ────────────────────────────────────────────
+#
+# TC-H10: Port weekly-discovery and monthly-refresh to GitLab CI scheduled pipelines.
+#
+# Setup required (GitLab admin):
+#   1. Go to CI/CD → Schedules in the GitLab project UI.
+#   2. Create a schedule for weekly discovery:
+#        Description: "Weekly Discovery Sweep"
+#        Cron: "0 6 * * 1"  (every Monday 06:00 UTC)
+#        Variable: SCHEDULE_TYPE = weekly-discovery
+#   3. Create a schedule for monthly refresh:
+#        Description: "Monthly Package Refresh"
+#        Cron: "0 6 1 * *"  (1st of month 06:00 UTC)
+#        Variable: SCHEDULE_TYPE = monthly-refresh
+#   4. Required CI/CD variables (Settings → CI/CD → Variables):
+#        gl_pat — personal/project access token with write_repository + api scope
+#                 Already set as a Windows system env var; mirror it to GitLab CI/CD Variables.
+#
+# BLOCKED_EXTERNAL: EXT-01 (runner availability), EXT-03 (variable configuration)
+# Remote execution unverified until TC-H11 confirmed.
+
+weekly-discovery:
+  # TC-H10: Port of .github/workflows/weekly-discovery.yml
+  # Triggers: GitLab schedule with SCHEDULE_TYPE=weekly-discovery, or manual pipeline.
+  # Replaces GITHUB_TOKEN git push with CI_JOB_TOKEN credential injection.
+  stage: schedule
+  image: python:3.13-slim
+  variables:
+    PYTHONPATH: src
+    GIT_STRATEGY: clone
+  before_script:
+    - pip install --upgrade pip
+    - pip install -e .
+    - git config user.name "pipeline-bot"
+    - git config user.email "pipeline-bot@pipeline"
+    - git remote set-url origin "https://oauth2:${gl_pat}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
+  script:
+    - python -m plugin_examples discover-lowcode --all-families
+    - git add workspace/verification/latest/
+    - git diff --cached --quiet || git commit -m "chore(discovery): weekly sweep $(date -u +%Y-%m-%d)"
+    - git diff HEAD~1..HEAD --quiet || git push origin HEAD:${CI_COMMIT_BRANCH}
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_TYPE == "weekly-discovery"'
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+      when: manual
+
+monthly-refresh:
+  # TC-H10: Port of .github/workflows/monthly-package-refresh.yml (refresh job).
+  # Uses mcr.microsoft.com/dotnet/sdk:8.0 (Linux) instead of windows-latest.
+  # gl_pat exposed as GITHUB_TOKEN so pipeline code needs no changes.
+  stage: schedule
+  image: mcr.microsoft.com/dotnet/sdk:8.0
+  variables:
+    PYTHONPATH: src
+    GITHUB_TOKEN: $gl_pat
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq python3 python3-pip python3-venv
+    - python3 -m venv /opt/venv
+    - /opt/venv/bin/pip install --upgrade pip
+    - /opt/venv/bin/pip install -e .
+    - dotnet build tools/DllReflector/DllReflector.csproj -c Release
+  script:
+    - /opt/venv/bin/python -m plugin_examples run --family ${REFRESH_FAMILY:-cells} ${REFRESH_DRY_RUN:+--dry-run}
+    - /opt/venv/bin/python -m pytest tests/unit/test_denominator_model.py tests/unit/test_scenario_contracts.py -q --tb=short
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_TYPE == "monthly-refresh"'
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+      when: manual
+
+monthly-regression-check:
+  # TC-H10: Port of .github/workflows/monthly-package-refresh.yml (regression-check job).
+  # Depends on monthly-refresh completing successfully.
+  stage: schedule
+  image: mcr.microsoft.com/dotnet/sdk:8.0
+  needs: [monthly-refresh]
+  variables:
+    PYTHONPATH: src
+    GITHUB_TOKEN: $gl_pat
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq python3 python3-pip python3-venv
+    - python3 -m venv /opt/venv
+    - /opt/venv/bin/pip install --upgrade pip
+    - /opt/venv/bin/pip install -e .
+    - dotnet build tools/DllReflector/DllReflector.csproj -c Release
+  script:
+    - /opt/venv/bin/python scripts/validate_published_examples_build.py
+  artifacts:
+    when: always
+    paths:
+      - workspace/verification/latest/monthly-build-regression-report.json
+    expire_in: 30 days
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_TYPE == "monthly-refresh"'
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+      when: manual

@@ -22,11 +22,13 @@ class TestAdvisoryCodeContractValidation:
 
     def test_no_code_returns_advisory_no_code(self, tmp_path):
         from plugin_examples.gates.example_gates import _advisory_code_contract_validation
+
         result = _advisory_code_contract_validation(str(tmp_path), "cells-spreadsheetconverter")
         assert result == "advisory_no_code"
 
     def test_correct_code_advisory_passed(self, tmp_path):
         from plugin_examples.gates.example_gates import _advisory_code_contract_validation
+
         # Write Program.cs with correct output for SpreadsheetConverter
         code = 'SpreadsheetConverter.Process("input.xlsx", "output.csv");'
         (tmp_path / "Program.cs").write_text(code, encoding="utf-8")
@@ -46,6 +48,7 @@ class TestAdvisoryCodeContractValidation:
 
     def test_wrong_output_ext_advisory_failed(self, tmp_path):
         from plugin_examples.gates.example_gates import _advisory_code_contract_validation
+
         # Write Program.cs with WRONG output for SpreadsheetConverter (xlsx instead of csv)
         code = 'SpreadsheetConverter.Process("input.xlsx", "output.xlsx");'
         (tmp_path / "Program.cs").write_text(code, encoding="utf-8")
@@ -64,6 +67,7 @@ class TestAdvisoryCodeContractValidation:
 
     def test_no_manifest_falls_back_to_store(self, tmp_path):
         from plugin_examples.gates.example_gates import _advisory_code_contract_validation
+
         # No manifest — falls back to store lookup by scenario_id
         code = 'SpreadsheetConverter.Process("input.xlsx", "output.csv");'
         (tmp_path / "Program.cs").write_text(code, encoding="utf-8")
@@ -74,7 +78,8 @@ class TestAdvisoryCodeContractValidation:
     def test_advisory_never_blocks(self, tmp_path):
         """Advisory validation result is never a blocking verdict."""
         from plugin_examples.gates.example_gates import _advisory_code_contract_validation
-        code = 'Bad code with output.out'
+
+        code = "Bad code with output.out"
         (tmp_path / "Program.cs").write_text(code, encoding="utf-8")
         result = _advisory_code_contract_validation(str(tmp_path), "unknown-type")
         # Even with bad code, advisory should not raise
@@ -86,12 +91,16 @@ class TestContractBlockingMode:
 
     def _make_valid_vr(self, scenario_id: str, project_path: str):
         """Helper: create a passed ValidationResult-like object."""
+
         class FakeBuild:
             success = True
+
         class FakeRun:
             success = True
+
         class FakeVR:
             restore = None
+
         vr = FakeVR()
         vr.scenario_id = scenario_id
         vr.build = FakeBuild()
@@ -101,6 +110,7 @@ class TestContractBlockingMode:
     def test_blocking_mode_blocks_on_code_contract_failed(self, tmp_path):
         """When contract_blocking_mode=True and code contract fails, example is blocked."""
         from plugin_examples.gates.example_gates import evaluate_example_gates
+
         proj_dir = tmp_path / "cells-spreadsheetconverter"
         proj_dir.mkdir()
         # Wrong output extension → advisory_failed
@@ -130,6 +140,7 @@ class TestContractBlockingMode:
     def test_advisory_mode_does_not_block_on_code_contract_failed(self, tmp_path):
         """When contract_blocking_mode=False and code contract fails, example still passes."""
         from plugin_examples.gates.example_gates import evaluate_example_gates
+
         proj_dir = tmp_path / "cells-spreadsheetconverter"
         proj_dir.mkdir()
         code = 'SpreadsheetConverter.Process("input.xlsx", "output.xlsx");'
@@ -159,6 +170,7 @@ class TestContractBlockingMode:
     def test_blocking_mode_passes_on_correct_contract(self, tmp_path):
         """When contract_blocking_mode=True and code contract passes, example is ready."""
         from plugin_examples.gates.example_gates import evaluate_example_gates
+
         proj_dir = tmp_path / "cells-spreadsheetconverter"
         proj_dir.mkdir()
         # Correct output extension

@@ -30,6 +30,7 @@ class CandidateNotReflectedError(ValueError):
 @dataclass
 class ProbeFiles:
     """Generated probe code files."""
+
     cs_path: Path
     csproj_path: Path
     cs_content: str
@@ -45,21 +46,15 @@ class ProbeGenerator:
       PR-03: not abstract/interface; has constructor or static factory
     """
 
-    def validate_candidate(
-        self, candidate: CandidateMapping, catalog: ReflectionCatalog
-    ) -> None:
+    def validate_candidate(self, candidate: CandidateMapping, catalog: ReflectionCatalog) -> None:
         """Validate candidate against catalog.
 
         Raises:
             CandidateNotReflectedError: if PR-01, PR-02, or PR-03 fail.
         """
-        type_info = next(
-            (t for t in catalog.types if t.name == candidate.type_name), None
-        )
+        type_info = next((t for t in catalog.types if t.name == candidate.type_name), None)
         if type_info is None:
-            raise CandidateNotReflectedError(
-                f"PR-01 FAIL: type '{candidate.type_name}' not found in catalog"
-            )
+            raise CandidateNotReflectedError(f"PR-01 FAIL: type '{candidate.type_name}' not found in catalog")
 
         method_found = any(m.name == candidate.method_name for m in type_info.methods)
         if not method_found:
@@ -68,9 +63,7 @@ class ProbeGenerator:
             )
 
         if type_info.is_abstract or type_info.is_interface:
-            raise CandidateNotReflectedError(
-                f"PR-03 FAIL: type '{candidate.type_name}' is abstract or interface"
-            )
+            raise CandidateNotReflectedError(f"PR-03 FAIL: type '{candidate.type_name}' is abstract or interface")
         has_factory = any(m.is_static for m in type_info.methods)
         if not type_info.has_public_constructor and not has_factory:
             raise CandidateNotReflectedError(

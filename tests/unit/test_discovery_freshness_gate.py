@@ -1,4 +1,5 @@
 """Tests for discovery freshness gate (mode-aware) — Wave 25 Lane C."""
+
 from __future__ import annotations
 
 import json
@@ -14,6 +15,7 @@ from plugin_examples.website_catalog.drift_detector import (
 
 
 # ── is_discovery_stale ────────────────────────────────────────────────────────
+
 
 def test_fresh_metadata_not_stale():
     meta = make_discovery_metadata(ttl_seconds=86400)
@@ -47,12 +49,13 @@ def test_malformed_expires_at_treated_as_stale():
 
 # ── Discovery evidence written with metadata ───────────────────────────────────
 
+
 def test_discovery_sweep_writes_metadata(tmp_path, monkeypatch):
     """Verify discovery_sweep embeds discovery_metadata in the evidence file."""
-    import json
 
     # Build a minimal summary with metadata — mirrors what run_discovery_sweep does
     from plugin_examples.website_catalog.drift_detector import make_discovery_metadata
+
     meta = make_discovery_metadata()
     summary = {
         "total_families": 0,
@@ -73,6 +76,7 @@ def test_discovery_sweep_writes_metadata(tmp_path, monkeypatch):
 
 # ── Mode: read_only — warns but does not block ───────────────────────────────
 
+
 def test_read_only_mode_warns_on_stale_does_not_raise():
     """In read_only mode, stale discovery evidence produces a warning, not an error."""
     # We test the is_discovery_stale function itself here.
@@ -89,6 +93,7 @@ def test_read_only_mode_warns_on_stale_does_not_raise():
 
 # ── Mode: publication — should block on stale ────────────────────────────────
 
+
 def test_stale_evidence_is_correctly_identified_for_publication_block():
     """Verify that a stale evidence file would trigger a block in publication mode."""
     now = datetime.now(timezone.utc)
@@ -102,6 +107,7 @@ def test_stale_evidence_is_correctly_identified_for_publication_block():
 
 
 # ── Freshness invariant ───────────────────────────────────────────────────────
+
 
 def test_fresh_evidence_within_ttl_passes():
     meta = make_discovery_metadata(ttl_seconds=7 * 24 * 3600)  # 7 day default

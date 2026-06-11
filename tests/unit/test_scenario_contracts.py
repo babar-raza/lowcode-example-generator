@@ -25,6 +25,7 @@ _DENOMINATOR_DIR = _REPO_ROOT / "pipeline" / "configs" / "denominators"
 # Helper
 # ---------------------------------------------------------------------------
 
+
 def _load_contracts(family: str) -> list[dict]:
     """Load all contract files for a family."""
     family_dir = _CONTRACTS_DIR / family
@@ -50,8 +51,9 @@ def _all_contracts() -> list[dict]:
 # TestContractFilesExist
 # ---------------------------------------------------------------------------
 
+
 class TestContractFilesExist:
-    def test_contracts_dir_exists(self):
+    def test_contracts_root_dir_exists(self):
         assert _CONTRACTS_DIR.exists(), f"pipeline/contracts/ directory missing"
 
     @pytest.mark.parametrize("family", _ALL_FAMILIES)
@@ -86,6 +88,7 @@ class TestContractFilesExist:
 # TestContractSchemaValidation
 # ---------------------------------------------------------------------------
 
+
 class TestContractSchemaValidation:
     @pytest.fixture(scope="class")
     def schema(self):
@@ -104,9 +107,7 @@ class TestContractSchemaValidation:
         required = schema.get("required", [])
         for contract in _load_contracts(family):
             for field in required:
-                assert field in contract, (
-                    f"Contract {contract.get('scenario_id','?')} missing required field: {field}"
-                )
+                assert field in contract, f"Contract {contract.get('scenario_id','?')} missing required field: {field}"
 
     def test_all_scenario_ids_are_unique(self):
         contracts = _all_contracts()
@@ -123,65 +124,74 @@ class TestContractSchemaValidation:
 
     def test_all_contracts_have_non_empty_expected_symbols(self):
         for contract in _all_contracts():
-            assert len(contract.get("expected_symbols", [])) >= 1, (
-                f"Contract {contract['scenario_id']} has empty expected_symbols"
-            )
+            assert (
+                len(contract.get("expected_symbols", [])) >= 1
+            ), f"Contract {contract['scenario_id']} has empty expected_symbols"
 
     def test_all_contracts_have_output_format(self):
         for contract in _all_contracts():
-            assert contract.get("output_expectations", {}).get("output_format"), (
-                f"Contract {contract['scenario_id']} missing output_format"
-            )
+            assert contract.get("output_expectations", {}).get(
+                "output_format"
+            ), f"Contract {contract['scenario_id']} missing output_format"
 
     def test_publication_status_is_valid_enum(self):
         valid = {"MERGED", "PR_DRY_RUN_READY", "REVIEWER_PASSED", "PR_OPEN", "IN_GENERATION", "PLANNED"}
         for contract in _all_contracts():
             status = contract.get("publication_status", "")
-            assert status in valid, (
-                f"Contract {contract['scenario_id']} has invalid publication_status: {status}"
-            )
+            assert status in valid, f"Contract {contract['scenario_id']} has invalid publication_status: {status}"
 
     def test_fixture_type_is_valid_enum(self):
         valid = {
-            "generated_fixture_file", "programmatic_input", "programmatic_pdf_single",
-            "programmatic_pdf_multi_page", "programmatic_pdf_pair", "programmatic_pdf_known_text",
-            "programmatic_vsdx_single", "existing_fixture", "none"
+            "generated_fixture_file",
+            "programmatic_input",
+            "programmatic_pdf_single",
+            "programmatic_pdf_multi_page",
+            "programmatic_pdf_pair",
+            "programmatic_pdf_known_text",
+            "programmatic_vsdx_single",
+            "existing_fixture",
+            "none",
         }
         for contract in _all_contracts():
             ft = contract.get("fixture_type", "")
-            assert ft in valid, (
-                f"Contract {contract['scenario_id']} has invalid fixture_type: {ft}"
-            )
+            assert ft in valid, f"Contract {contract['scenario_id']} has invalid fixture_type: {ft}"
 
 
 # ---------------------------------------------------------------------------
 # TestCellsContracts
 # ---------------------------------------------------------------------------
 
+
 class TestCellsContracts:
     def test_all_cells_contracts_are_merged(self):
         for contract in _load_contracts("cells"):
-            assert contract["publication_status"] == "MERGED", (
-                f"Cells contract {contract['scenario_id']} is not MERGED: {contract['publication_status']}"
-            )
+            assert (
+                contract["publication_status"] == "MERGED"
+            ), f"Cells contract {contract['scenario_id']} is not MERGED: {contract['publication_status']}"
 
     def test_all_cells_use_generated_fixture(self):
         for contract in _load_contracts("cells"):
-            assert contract["fixture_type"] == "generated_fixture_file", (
-                f"Cells contract {contract['scenario_id']} has unexpected fixture_type: {contract['fixture_type']}"
-            )
+            assert (
+                contract["fixture_type"] == "generated_fixture_file"
+            ), f"Cells contract {contract['scenario_id']} has unexpected fixture_type: {contract['fixture_type']}"
 
     def test_all_cells_use_process_method(self):
         for contract in _load_contracts("cells"):
-            assert contract["primary_method"] == "Process", (
-                f"Cells contract {contract['scenario_id']} primary_method is not Process: {contract['primary_method']}"
-            )
+            assert (
+                contract["primary_method"] == "Process"
+            ), f"Cells contract {contract['scenario_id']} primary_method is not Process: {contract['primary_method']}"
 
     def test_cells_scenario_ids_present(self):
         expected_ids = {
-            "cells-html-converter", "cells-image-converter", "cells-json-converter",
-            "cells-pdf-converter", "cells-spreadsheet-converter", "cells-spreadsheet-locker",
-            "cells-spreadsheet-merger", "cells-spreadsheet-splitter", "cells-text-converter",
+            "cells-html-converter",
+            "cells-image-converter",
+            "cells-json-converter",
+            "cells-pdf-converter",
+            "cells-spreadsheet-converter",
+            "cells-spreadsheet-locker",
+            "cells-spreadsheet-merger",
+            "cells-spreadsheet-splitter",
+            "cells-text-converter",
         }
         actual_ids = {c["scenario_id"] for c in _load_contracts("cells")}
         assert actual_ids == expected_ids, f"Mismatch: {expected_ids ^ actual_ids}"
@@ -193,32 +203,37 @@ class TestCellsContracts:
 
     def test_cells_contracts_forbid_datasources(self):
         for contract in _load_contracts("cells"):
-            assert "DataSources" in contract.get("forbidden_patterns", []), (
-                f"Cells contract {contract['scenario_id']} missing DataSources forbidden pattern"
-            )
+            assert "DataSources" in contract.get(
+                "forbidden_patterns", []
+            ), f"Cells contract {contract['scenario_id']} missing DataSources forbidden pattern"
 
 
 # ---------------------------------------------------------------------------
 # TestWordsContracts
 # ---------------------------------------------------------------------------
 
+
 class TestWordsContracts:
     def test_all_words_contracts_are_merged(self):
         for contract in _load_contracts("words"):
-            assert contract["publication_status"] == "MERGED", (
-                f"Words contract {contract['scenario_id']} is not MERGED"
-            )
+            assert contract["publication_status"] == "MERGED", f"Words contract {contract['scenario_id']} is not MERGED"
 
     def test_all_words_use_programmatic_input(self):
         for contract in _load_contracts("words"):
-            assert contract["fixture_type"] == "programmatic_input", (
-                f"Words contract {contract['scenario_id']} unexpected fixture_type: {contract['fixture_type']}"
-            )
+            assert (
+                contract["fixture_type"] == "programmatic_input"
+            ), f"Words contract {contract['scenario_id']} unexpected fixture_type: {contract['fixture_type']}"
 
     def test_words_scenario_ids_present(self):
         expected_ids = {
-            "words-converter", "words-replacer", "words-splitter", "words-watermarker",
-            "words-comparer", "words-merger", "words-mail-merger", "words-report-builder",
+            "words-converter",
+            "words-replacer",
+            "words-splitter",
+            "words-watermarker",
+            "words-comparer",
+            "words-merger",
+            "words-mail-merger",
+            "words-report-builder",
         }
         actual_ids = {c["scenario_id"] for c in _load_contracts("words")}
         assert actual_ids == expected_ids, f"Mismatch: {expected_ids ^ actual_ids}"
@@ -238,16 +253,31 @@ class TestWordsContracts:
 # TestPdfContracts
 # ---------------------------------------------------------------------------
 
+
 class TestPdfContracts:
     def test_pdf_scenario_ids_present(self):
         expected_ids = {
-            "pdf-merger", "pdf-text-extractor", "pdf-splitter", "pdf-optimizer", "pdf-pdfa-converter",
-            "pdf-doc-converter", "pdf-xls-converter", "pdf-html-converter",
+            "pdf-merger",
+            "pdf-text-extractor",
+            "pdf-splitter",
+            "pdf-optimizer",
+            "pdf-pdfa-converter",
+            "pdf-doc-converter",
+            "pdf-xls-converter",
+            "pdf-html-converter",
             # Wave C (Sprint 9) + Wave D (Sprint 18/20)
-            "pdf-jpeg", "pdf-png", "pdf-tiff",
-            "pdf-table-generator", "pdf-toc-generator", "pdf-image-extractor",
+            "pdf-jpeg",
+            "pdf-png",
+            "pdf-tiff",
+            "pdf-table-generator",
+            "pdf-toc-generator",
+            "pdf-image-extractor",
             # Wave E/F/G (Sprint 39)
-            "pdf-security", "pdf-form-flattener", "pdf-form-editor", "pdf-form-exporter", "pdf-signature",
+            "pdf-security",
+            "pdf-form-flattener",
+            "pdf-form-editor",
+            "pdf-form-exporter",
+            "pdf-signature",
         }
         actual_ids = {c["scenario_id"] for c in _load_contracts("pdf")}
         assert actual_ids == expected_ids, f"Mismatch: {expected_ids ^ actual_ids}"
@@ -256,9 +286,9 @@ class TestPdfContracts:
         """All 19 PDF types are published and merged in the target repo."""
         contracts = _load_contracts("pdf")
         for contract in contracts:
-            assert contract["publication_status"] == "MERGED", (
-                f"PDF contract {contract['scenario_id']} is not MERGED: {contract['publication_status']}"
-            )
+            assert (
+                contract["publication_status"] == "MERGED"
+            ), f"PDF contract {contract['scenario_id']} is not MERGED: {contract['publication_status']}"
 
     def test_pdf_merger_forbids_plugin_options(self):
         contracts = {c["scenario_id"]: c for c in _load_contracts("pdf")}
@@ -277,14 +307,15 @@ class TestPdfContracts:
 
     def test_pdf_contracts_all_use_programmatic_input(self):
         for contract in _load_contracts("pdf"):
-            assert contract["fixture_type"] == "programmatic_input", (
-                f"PDF contract {contract['scenario_id']} unexpected fixture_type: {contract['fixture_type']}"
-            )
+            assert (
+                contract["fixture_type"] == "programmatic_input"
+            ), f"PDF contract {contract['scenario_id']} unexpected fixture_type: {contract['fixture_type']}"
 
 
 # ---------------------------------------------------------------------------
 # TestContractConsistencyWithDenominator
 # ---------------------------------------------------------------------------
+
 
 class TestContractConsistencyWithDenominator:
     def _load_denominator(self, family: str) -> dict:
@@ -295,25 +326,29 @@ class TestContractConsistencyWithDenominator:
     def test_cells_contract_count_matches_denominator_published(self):
         denom = self._load_denominator("cells")
         contracts = _load_contracts("cells")
-        assert len(contracts) >= denom["published_count"], (
-            f"Cells: {len(contracts)} contracts < {denom['published_count']} published scenarios"
-        )
+        assert (
+            len(contracts) >= denom["published_count"]
+        ), f"Cells: {len(contracts)} contracts < {denom['published_count']} published scenarios"
 
     def test_words_contract_count_matches_denominator_published(self):
         denom = self._load_denominator("words")
         contracts = _load_contracts("words")
-        assert len(contracts) >= denom["published_count"], (
-            f"Words: {len(contracts)} contracts < {denom['published_count']} published scenarios"
-        )
+        assert (
+            len(contracts) >= denom["published_count"]
+        ), f"Words: {len(contracts)} contracts < {denom['published_count']} published scenarios"
 
     def test_pdf_contract_count_matches_denominator_published_plus_pipeline(self):
         denom = self._load_denominator("pdf")
         contracts = _load_contracts("pdf")
         # PDF has 2 merged + 2 PR_DRY_RUN_READY + 1 REVIEWER_PASSED = 5 in pipeline
-        pipeline_count = denom.get("published_count", 0) + denom.get("pr_dry_run_ready_count", 0) + denom.get("reviewer_passed_awaiting_pr_count", 0)
-        assert len(contracts) >= pipeline_count, (
-            f"PDF: {len(contracts)} contracts < {pipeline_count} scenarios in pipeline"
+        pipeline_count = (
+            denom.get("published_count", 0)
+            + denom.get("pr_dry_run_ready_count", 0)
+            + denom.get("reviewer_passed_awaiting_pr_count", 0)
         )
+        assert (
+            len(contracts) >= pipeline_count
+        ), f"PDF: {len(contracts)} contracts < {pipeline_count} scenarios in pipeline"
 
     def test_all_cells_runnable_ids_have_contracts(self):
         denom = self._load_denominator("cells")
@@ -325,28 +360,29 @@ class TestContractConsistencyWithDenominator:
     def test_email_contract_count_matches_denominator(self):
         denom = self._load_denominator("email")
         contracts = _load_contracts("email")
-        assert len(contracts) >= denom["published_count"], (
-            f"Email: {len(contracts)} contracts < {denom['published_count']} published"
-        )
+        assert (
+            len(contracts) >= denom["published_count"]
+        ), f"Email: {len(contracts)} contracts < {denom['published_count']} published"
 
     def test_slides_contract_count_matches_denominator(self):
         denom = self._load_denominator("slides")
         contracts = _load_contracts("slides")
-        assert len(contracts) >= denom["published_count"], (
-            f"Slides: {len(contracts)} contracts < {denom['published_count']} published"
-        )
+        assert (
+            len(contracts) >= denom["published_count"]
+        ), f"Slides: {len(contracts)} contracts < {denom['published_count']} published"
 
     def test_diagram_contract_count_matches_denominator(self):
         denom = self._load_denominator("diagram")
         contracts = _load_contracts("diagram")
-        assert len(contracts) >= denom["published_count"], (
-            f"Diagram: {len(contracts)} contracts < {denom['published_count']} published"
-        )
+        assert (
+            len(contracts) >= denom["published_count"]
+        ), f"Diagram: {len(contracts)} contracts < {denom['published_count']} published"
 
 
 # ---------------------------------------------------------------------------
 # TestEmailContracts
 # ---------------------------------------------------------------------------
+
 
 class TestEmailContracts:
     def test_email_converter_scenario_id(self):
@@ -370,6 +406,7 @@ class TestEmailContracts:
 # TestSlidesContracts
 # ---------------------------------------------------------------------------
 
+
 class TestSlidesContracts:
     def test_slides_scenario_ids_present(self):
         expected_ids = {"slides-compress", "slides-convert", "slides-merger"}
@@ -378,9 +415,7 @@ class TestSlidesContracts:
 
     def test_all_slides_contracts_are_merged(self):
         for contract in _load_contracts("slides"):
-            assert contract["publication_status"] == "MERGED", (
-                f"Slides contract {contract['scenario_id']} not MERGED"
-            )
+            assert contract["publication_status"] == "MERGED", f"Slides contract {contract['scenario_id']} not MERGED"
 
     def test_slides_convert_outputs_pdf(self):
         contracts = {c["scenario_id"]: c for c in _load_contracts("slides")}
@@ -398,9 +433,9 @@ class TestSlidesContracts:
         for contract in _load_contracts("slides"):
             forbidden = contract.get("forbidden_patterns", [])
             type_name = contract["type_name"]
-            assert f"new {type_name}(" in forbidden, (
-                f"Slides contract {contract['scenario_id']} missing 'new {type_name}(' forbidden pattern"
-            )
+            assert (
+                f"new {type_name}(" in forbidden
+            ), f"Slides contract {contract['scenario_id']} missing 'new {type_name}(' forbidden pattern"
 
 
 # ---------------------------------------------------------------------------
@@ -411,6 +446,7 @@ class TestSlidesContracts:
 # pipeline/contracts and pipeline/format-authority.
 # ---------------------------------------------------------------------------
 
+
 class TestFormatAuthorityContractDrift:
     """Sprint56-LaneB: contracts must agree with FormatAuthority canonical formats."""
 
@@ -420,9 +456,9 @@ class TestFormatAuthorityContractDrift:
         """
         contracts = {c["scenario_id"]: c for c in _load_contracts("cells")}
         c = contracts["cells-spreadsheet-converter"]
-        assert c["output_expectations"]["output_format"] == ".csv", (
-            "cells-spreadsheet-converter output_format must be .csv (FormatAuthority canonical)"
-        )
+        assert (
+            c["output_expectations"]["output_format"] == ".csv"
+        ), "cells-spreadsheet-converter output_format must be .csv (FormatAuthority canonical)"
 
     def test_cells_text_converter_output_is_txt_not_csv(self):
         """TextConverter outputs plain text (.txt) — not .csv.
@@ -430,9 +466,9 @@ class TestFormatAuthorityContractDrift:
         """
         contracts = {c["scenario_id"]: c for c in _load_contracts("cells")}
         c = contracts["cells-text-converter"]
-        assert c["output_expectations"]["output_format"] == ".txt", (
-            "cells-text-converter output_format must be .txt (FormatAuthority canonical)"
-        )
+        assert (
+            c["output_expectations"]["output_format"] == ".txt"
+        ), "cells-text-converter output_format must be .txt (FormatAuthority canonical)"
 
     def test_email_converter_output_is_directory_not_html(self):
         """Email Converter outputs a directory (FolderOutputHandler) — not a single .html file.
@@ -440,15 +476,15 @@ class TestFormatAuthorityContractDrift:
         """
         contracts = {c["scenario_id"]: c for c in _load_contracts("email")}
         c = contracts["email-converter"]
-        assert c["output_expectations"]["output_format"] == "directory", (
-            "email-converter output_format must be 'directory' (FolderOutputHandler output)"
-        )
-        assert c["output_expectations"].get("output_kind") == "directory", (
-            "email-converter output_kind must be 'directory'"
-        )
-        assert c["output_expectations"]["validation_method"] == "directory_exists", (
-            "email-converter validation_method must be 'directory_exists'"
-        )
+        assert (
+            c["output_expectations"]["output_format"] == "directory"
+        ), "email-converter output_format must be 'directory' (FolderOutputHandler output)"
+        assert (
+            c["output_expectations"].get("output_kind") == "directory"
+        ), "email-converter output_kind must be 'directory'"
+        assert (
+            c["output_expectations"]["validation_method"] == "directory_exists"
+        ), "email-converter validation_method must be 'directory_exists'"
 
     def test_pdf_image_extractor_output_is_png_not_jpg(self):
         """ImageExtractor produces .png images — not .jpg.
@@ -456,9 +492,9 @@ class TestFormatAuthorityContractDrift:
         """
         contracts = {c["scenario_id"]: c for c in _load_contracts("pdf")}
         c = contracts["pdf-image-extractor"]
-        assert c["output_expectations"]["output_format"] == ".png", (
-            "pdf-image-extractor output_format must be .png (FormatAuthority canonical)"
-        )
+        assert (
+            c["output_expectations"]["output_format"] == ".png"
+        ), "pdf-image-extractor output_format must be .png (FormatAuthority canonical)"
 
     def test_pdf_text_extractor_output_is_stdout_not_text_string(self):
         """TextExtractor writes to stdout — not a text_string return value.
@@ -466,9 +502,9 @@ class TestFormatAuthorityContractDrift:
         """
         contracts = {c["scenario_id"]: c for c in _load_contracts("pdf")}
         c = contracts["pdf-text-extractor"]
-        assert c["output_expectations"]["output_format"] == "stdout", (
-            "pdf-text-extractor output_format must be 'stdout' (FormatAuthority canonical)"
-        )
-        assert c["output_expectations"].get("output_kind") == "stdout", (
-            "pdf-text-extractor output_kind must be 'stdout'"
-        )
+        assert (
+            c["output_expectations"]["output_format"] == "stdout"
+        ), "pdf-text-extractor output_format must be 'stdout' (FormatAuthority canonical)"
+        assert (
+            c["output_expectations"].get("output_kind") == "stdout"
+        ), "pdf-text-extractor output_kind must be 'stdout'"

@@ -47,7 +47,6 @@ def _write_denominator(tmp_path: Path, family: str, sha256: str) -> Path:
 
 
 class TestCatalogHashComputation:
-
     def test_hash_is_deterministic(self):
         h1 = compute_catalog_hash(SAMPLE_CATALOG)
         h2 = compute_catalog_hash(SAMPLE_CATALOG)
@@ -76,7 +75,6 @@ class TestCatalogHashComputation:
 
 
 class TestCatalogHashValidation:
-
     def test_match_passes(self, tmp_path):
         expected_hash = compute_catalog_hash(SAMPLE_CATALOG)
         _write_denominator(tmp_path, "cells", expected_hash)
@@ -144,7 +142,6 @@ class TestCatalogHashValidation:
 
 
 class TestPlanScenariosWithRepoRoot:
-
     def test_plan_scenarios_accepts_repo_root(self, tmp_path):
         """plan_scenarios with repo_root does not crash even without denominator."""
         from plugin_examples.scenario_planner.planner import plan_scenarios
@@ -283,13 +280,18 @@ class TestRunnerCatalogHashEnforcement:
         # The hash check passes, so execution reaches plan_scenarios.
         # We verify evidence was written with match=True, then let plan_scenarios
         # be mocked since we only care about the hash enforcement path.
-        original_fn = _stage_scenario_planning.__wrapped__ if hasattr(_stage_scenario_planning, "__wrapped__") else _stage_scenario_planning
+        original_fn = (
+            _stage_scenario_planning.__wrapped__
+            if hasattr(_stage_scenario_planning, "__wrapped__")
+            else _stage_scenario_planning
+        )
 
         evidence_file = tmp_path / "latest" / "catalog-hash-validation.json"
 
         # Call the function — it will proceed past hash check but fail on
         # source-of-truth gate. We catch that expected error.
         from plugin_examples.plugin_detector.proof_reporter import SourceOfTruthGateError
+
         with pytest.raises(SourceOfTruthGateError):
             _stage_scenario_planning(ctx)
 

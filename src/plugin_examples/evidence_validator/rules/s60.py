@@ -64,7 +64,8 @@ class CoreRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Destination content audit must show 42/42 authority-mapped",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="No destination content audit file found",
             )
 
@@ -74,7 +75,8 @@ class CoreRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Destination content audit must show 42/42 authority-mapped",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Cannot read audit file: {exc}",
             )
 
@@ -85,7 +87,8 @@ class CoreRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Destination content audit must show 42/42 authority-mapped",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"{no_auth_count} PRESENT_NO_AUTHORITY entries remain",
             )
 
@@ -95,14 +98,16 @@ class CoreRules:
                 return RuleResult(
                     rule_id=rule_id,
                     description="Destination content audit must show 42/42 authority-mapped",
-                    severity="FAILURE", passed=False,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail=f"authority_match_rate is {authority_matched}, expected 42/42",
                 )
 
         return RuleResult(
             rule_id=rule_id,
             description="Destination content audit must show 42/42 authority-mapped",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"authority_matched={authority_matched}",
         )
 
@@ -123,19 +128,23 @@ class CoreRules:
                     return RuleResult(
                         rule_id=rule_id,
                         description="No PRESENT_NO_AUTHORITY entries allowed",
-                        severity="FAILURE", passed=False,
+                        severity="FAILURE",
+                        passed=False,
                         failure_detail=f"{max(count, len(no_auth))} PRESENT_NO_AUTHORITY entries found",
                     )
                 return RuleResult(
                     rule_id=rule_id,
                     description="No PRESENT_NO_AUTHORITY entries allowed",
-                    severity="FAILURE", passed=True, evidence="present_no_authority=0",
+                    severity="FAILURE",
+                    passed=True,
+                    evidence="present_no_authority=0",
                 )
 
         return RuleResult(
             rule_id=rule_id,
             description="No PRESENT_NO_AUTHORITY entries allowed",
-            severity="FAILURE", passed=False,
+            severity="FAILURE",
+            passed=False,
             failure_detail="No destination content audit file found",
         )
 
@@ -158,20 +167,23 @@ class CoreRules:
                         return RuleResult(
                             rule_id=rule_id,
                             description="PARTIAL entries must be acknowledged in final verdict",
-                            severity="FAILURE", passed=False,
+                            severity="FAILURE",
+                            passed=False,
                             failure_detail=f"PARTIAL entries {partials} not mentioned in final-verdict.md",
                         )
                 return RuleResult(
                     rule_id=rule_id,
                     description="PARTIAL entries must be acknowledged in final verdict",
-                    severity="FAILURE", passed=True,
+                    severity="FAILURE",
+                    passed=True,
                     evidence="partial count=0 or acknowledged in verdict",
                 )
 
         return RuleResult(
             rule_id=rule_id,
             description="PARTIAL entries must be acknowledged in final verdict",
-            severity="FAILURE", passed=False,
+            severity="FAILURE",
+            passed=False,
             failure_detail="No destination content audit file found",
         )
 
@@ -183,7 +195,8 @@ class CoreRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="README audit must be content-based",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="readme/example-readme-content-audit.json not found",
             )
 
@@ -193,7 +206,9 @@ class CoreRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="README audit must be content-based",
-                severity="FAILURE", passed=False, failure_detail=str(exc),
+                severity="FAILURE",
+                passed=False,
+                failure_detail=str(exc),
             )
 
         records = data.get("records", [])
@@ -203,14 +218,16 @@ class CoreRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="README audit must be content-based (not size/presence only)",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="No content-check fields found in README audit records (size/presence only)",
             )
 
         return RuleResult(
             rule_id=rule_id,
             description="README audit must be content-based",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"{len(records)} records with content checks",
         )
 
@@ -222,7 +239,8 @@ class CoreRules:
         patch_path = self.bundle_dir / "readme" / "readme-gate-source-proof.patch"
 
         missing = [
-            name for p, name in [
+            name
+            for p, name in [
                 (impl_path, "readme-gate-implementation.md"),
                 (test_path, "readme-gate-test-results.txt"),
                 (patch_path, "readme-gate-source-proof.patch"),
@@ -234,7 +252,8 @@ class CoreRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="README gate must be implemented, tested, and have source proof",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Missing evidence: {missing}",
             )
 
@@ -243,14 +262,16 @@ class CoreRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="README gate must be implemented, tested, and have source proof",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="README gate test results show failures",
             )
 
         return RuleResult(
             rule_id=rule_id,
             description="README gate must be implemented, tested, and have source proof",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="implementation + tests + source proof all present",
         )
 
@@ -263,28 +284,27 @@ class CoreRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Evidence validator must have actually run",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="evidence/validator-test-results.txt not found",
             )
 
         content = validator_output.read_text(encoding="utf-8", errors="replace")
-        has_test_output = bool(
-            re.search(r"\d+\s+passed", content)
-            or "PASSED" in content
-            or "passed in" in content
-        )
+        has_test_output = bool(re.search(r"\d+\s+passed", content) or "PASSED" in content or "passed in" in content)
         if not has_test_output:
             return RuleResult(
                 rule_id=rule_id,
                 description="Evidence validator must have actually run",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="validator-test-results.txt does not look like actual test output",
             )
 
         return RuleResult(
             rule_id=rule_id,
             description="Evidence validator must have actually run",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="validator-test-results.txt contains test output",
         )
 
@@ -297,7 +317,8 @@ class CoreRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="todo.md must have no unchecked active items",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="todo.md not found",
             )
 
@@ -307,14 +328,16 @@ class CoreRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="todo.md must have no unchecked active items",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"{len(unchecked)} unchecked [ ] items remain in todo.md",
             )
 
         return RuleResult(
             rule_id=rule_id,
             description="todo.md must have no unchecked active items",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="No unchecked [ ] items found in todo.md",
         )
 
@@ -325,8 +348,10 @@ class CoreRules:
 
         if not auth_path.exists():
             return RuleResult(
-                rule_id=rule_id, description="Zero unknown input formats",
-                severity="WARNING", passed=True,
+                rule_id=rule_id,
+                description="Zero unknown input formats",
+                severity="WARNING",
+                passed=True,
                 evidence="No io-authority matrix in this bundle (may be in prior sprint evidence)",
             )
 
@@ -334,22 +359,28 @@ class CoreRules:
             data = json.loads(auth_path.read_text(encoding="utf-8"))
         except (OSError, ValueError):
             return RuleResult(
-                rule_id=rule_id, description="Zero unknown input formats",
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description="Zero unknown input formats",
+                severity="FAILURE",
+                passed=False,
                 failure_detail="Cannot read io-authority matrix",
             )
 
         unknown_count = data.get("unknown_input_formats", -1)
         if unknown_count > 0:
             return RuleResult(
-                rule_id=rule_id, description="Zero unknown input formats",
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description="Zero unknown input formats",
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"{unknown_count} unknown input formats remain",
             )
 
         return RuleResult(
-            rule_id=rule_id, description="Zero unknown input formats",
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description="Zero unknown input formats",
+            severity="FAILURE",
+            passed=True,
             evidence=f"unknown_input_formats={unknown_count}",
         )
 
@@ -360,23 +391,29 @@ class CoreRules:
 
         if not log_path.exists():
             return RuleResult(
-                rule_id=rule_id, description="Test log must exist and show 0 failed",
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description="Test log must exist and show 0 failed",
+                severity="FAILURE",
+                passed=False,
                 failure_detail="lanes/lane-I/test-run.log not found",
             )
 
         content = log_path.read_text(encoding="utf-8", errors="replace")
         if "0 failed" not in content and " failed" in content:
             return RuleResult(
-                rule_id=rule_id, description="Test log must exist and show 0 failed",
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description="Test log must exist and show 0 failed",
+                severity="FAILURE",
+                passed=False,
                 failure_detail="Test log shows failures",
                 evidence=content[-300:],
             )
 
         return RuleResult(
-            rule_id=rule_id, description="Test log must exist and show 0 failed",
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description="Test log must exist and show 0 failed",
+            severity="FAILURE",
+            passed=True,
             evidence="Test log exists with no failed tests",
         )
 
@@ -387,22 +424,28 @@ class CoreRules:
 
         if not log_path.exists():
             return RuleResult(
-                rule_id=rule_id, description="commands.log must not be IN_PROGRESS",
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description="commands.log must not be IN_PROGRESS",
+                severity="FAILURE",
+                passed=False,
                 failure_detail="commands.log not found",
             )
 
         content = log_path.read_text(encoding="utf-8", errors="replace")
         if "IN_PROGRESS" in content:
             return RuleResult(
-                rule_id=rule_id, description="commands.log must not be IN_PROGRESS",
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description="commands.log must not be IN_PROGRESS",
+                severity="FAILURE",
+                passed=False,
                 failure_detail="commands.log contains IN_PROGRESS marker",
             )
 
         return RuleResult(
-            rule_id=rule_id, description="commands.log must not be IN_PROGRESS",
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description="commands.log must not be IN_PROGRESS",
+            severity="FAILURE",
+            passed=True,
             evidence="commands.log present and complete",
         )
 
@@ -417,14 +460,16 @@ class CoreRules:
             return RuleResult(
                 rule_id=rule_id,
                 description=f"Bundle must contain at least {min_files} files",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Bundle has {file_count} files (minimum {min_files})",
             )
 
         return RuleResult(
             rule_id=rule_id,
             description=f"Bundle must contain at least {min_files} files",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"Bundle has {file_count} files",
         )
 

@@ -20,9 +20,20 @@ _QUEUE_PATH = _REPO_ROOT / "workspace" / "queues" / "example-completion-queue.js
 _DENOMINATOR_DIR = _REPO_ROOT / "pipeline" / "configs" / "denominators"
 
 _VALID_STATES = {
-    "DISCOVERED", "CONTRACTED", "FIXTURE_READY", "GENERATION_READY",
-    "GENERATED", "BUILT", "RAN", "REVIEWED", "PR_READY", "PR_OPEN",
-    "MERGED", "POST_MERGE_VERIFIED", "BACKLOGGED", "BLOCKED",
+    "DISCOVERED",
+    "CONTRACTED",
+    "FIXTURE_READY",
+    "GENERATION_READY",
+    "GENERATED",
+    "BUILT",
+    "RAN",
+    "REVIEWED",
+    "PR_READY",
+    "PR_OPEN",
+    "MERGED",
+    "POST_MERGE_VERIFIED",
+    "BACKLOGGED",
+    "BLOCKED",
     "PERMANENTLY_BLOCKED",
 }
 
@@ -73,9 +84,7 @@ class TestQueueFileIntegrity:
 
     def test_all_states_are_valid(self, entries):
         for entry in entries:
-            assert entry["state"] in _VALID_STATES, (
-                f"Entry {entry['scenario_id']} has invalid state: {entry['state']}"
-            )
+            assert entry["state"] in _VALID_STATES, f"Entry {entry['scenario_id']} has invalid state: {entry['state']}"
 
     def test_scenario_ids_are_unique(self, entries):
         ids = [e["scenario_id"] for e in entries]
@@ -83,9 +92,14 @@ class TestQueueFileIntegrity:
 
     def test_families_are_valid(self, entries):
         for entry in entries:
-            assert entry["family"] in ("cells", "words", "pdf", "diagram", "email", "slides"), (
-                f"Entry {entry['scenario_id']} has invalid family: {entry['family']}"
-            )
+            assert entry["family"] in (
+                "cells",
+                "words",
+                "pdf",
+                "diagram",
+                "email",
+                "slides",
+            ), f"Entry {entry['scenario_id']} has invalid family: {entry['family']}"
 
 
 class TestQueueCoversDenominator:
@@ -103,10 +117,7 @@ class TestQueueCoversDenominator:
     def test_words_pilot_published_in_queue_as_post_merge_verified(self, entries):
         denom = self._load_denom("words")
         # Words pilot published entries must all be POST_MERGE_VERIFIED
-        words_verified = [
-            e for e in entries
-            if e["family"] == "words" and e["state"] == "POST_MERGE_VERIFIED"
-        ]
+        words_verified = [e for e in entries if e["family"] == "words" and e["state"] == "POST_MERGE_VERIFIED"]
         assert len(words_verified) == denom["published_count"], (
             f"Words POST_MERGE_VERIFIED count ({len(words_verified)}) != "
             f"published_count ({denom['published_count']})"
@@ -117,18 +128,15 @@ class TestQueueCoversDenominator:
         # Active PDF entries (not BACKLOGGED or PERMANENTLY_BLOCKED)
         # should match published + pr_dry_run_ready + reviewer_passed
         _inactive = {"BACKLOGGED", "PERMANENTLY_BLOCKED"}
-        queue_pdf_active = [
-            e for e in entries
-            if e["family"] == "pdf" and e["state"] not in _inactive
-        ]
+        queue_pdf_active = [e for e in entries if e["family"] == "pdf" and e["state"] not in _inactive]
         pipeline_count = (
-            denom.get("published_count", 0) +
-            denom.get("pr_dry_run_ready_count", 0) +
-            denom.get("reviewer_passed_awaiting_pr_count", 0)
+            denom.get("published_count", 0)
+            + denom.get("pr_dry_run_ready_count", 0)
+            + denom.get("reviewer_passed_awaiting_pr_count", 0)
         )
-        assert len(queue_pdf_active) == pipeline_count, (
-            f"PDF active queue entries ({len(queue_pdf_active)}) != pipeline scenarios ({pipeline_count})"
-        )
+        assert (
+            len(queue_pdf_active) == pipeline_count
+        ), f"PDF active queue entries ({len(queue_pdf_active)}) != pipeline scenarios ({pipeline_count})"
 
     def test_active_pipeline_entries_match_denominator(self, entries):
         # Active (non-BACKLOGGED) entries across all families with denominators
@@ -139,18 +147,15 @@ class TestQueueCoversDenominator:
                 continue
             denom = json.loads(denom_path.read_text(encoding="utf-8"))
             expected_active += (
-                denom.get("published_count", 0) +
-                denom.get("pr_ready_count", 0) +
-                denom.get("pr_dry_run_ready_count", 0) +
-                denom.get("reviewer_passed_awaiting_pr_count", 0)
+                denom.get("published_count", 0)
+                + denom.get("pr_ready_count", 0)
+                + denom.get("pr_dry_run_ready_count", 0)
+                + denom.get("reviewer_passed_awaiting_pr_count", 0)
             )
-        active_entries = [
-            e for e in entries
-            if e["state"] not in ("BACKLOGGED", "PERMANENTLY_BLOCKED")
-        ]
-        assert len(active_entries) == expected_active, (
-            f"Active pipeline entries ({len(active_entries)}) != expected ({expected_active})"
-        )
+        active_entries = [e for e in entries if e["state"] not in ("BACKLOGGED", "PERMANENTLY_BLOCKED")]
+        assert (
+            len(active_entries) == expected_active
+        ), f"Active pipeline entries ({len(active_entries)}) != expected ({expected_active})"
 
     def test_total_queue_covers_active_plus_backlogged(self, entries):
         # Total queue = active + backlogged + permanently_blocked entries
@@ -164,7 +169,9 @@ class TestQueueCoversDenominator:
         # All 19 PDF active types now have contracts and are MERGED.
         assert len(active) >= 42, f"Expected at least 42 active entries, got {len(active)}"
         assert len(backlogged) >= 5, f"Expected at least 5 backlogged entries, got {len(backlogged)}"
-        assert len(permanently_blocked) >= 7, "Expected at least 7 PERMANENTLY_BLOCKED entries (Processor, PdfExtractor, SplitCriteria, PdfToImage, 3 diagram OPTIONS)"
+        assert (
+            len(permanently_blocked) >= 7
+        ), "Expected at least 7 PERMANENTLY_BLOCKED entries (Processor, PdfExtractor, SplitCriteria, PdfToImage, 3 diagram OPTIONS)"
         assert len(entries) == len(active) + len(backlogged) + len(permanently_blocked)
 
 
@@ -195,9 +202,9 @@ class TestQueueStateConsistency:
     def test_cells_all_post_merge_verified(self, entries):
         cells = [e for e in entries if e["family"] == "cells"]
         for entry in cells:
-            assert entry["state"] == "POST_MERGE_VERIFIED", (
-                f"Cells entry {entry['scenario_id']} is not POST_MERGE_VERIFIED: {entry['state']}"
-            )
+            assert (
+                entry["state"] == "POST_MERGE_VERIFIED"
+            ), f"Cells entry {entry['scenario_id']} is not POST_MERGE_VERIFIED: {entry['state']}"
 
     def test_words_pilot_entries_post_merge_verified(self, entries):
         # Words entries may be POST_MERGE_VERIFIED (Wave 1 published), PR_READY (Wave 2 pending pub),
@@ -214,21 +221,29 @@ class TestQueueStateConsistency:
         queue_dict = {e["scenario_id"]: e for e in words}
         for sid in pilot_ids:
             assert sid in queue_dict, f"Words pilot entry {sid} missing from queue"
-            assert queue_dict[sid]["state"] == "POST_MERGE_VERIFIED", (
-                f"Words Wave 1 entry {sid} expected POST_MERGE_VERIFIED, got {queue_dict[sid]['state']}"
-            )
+            assert (
+                queue_dict[sid]["state"] == "POST_MERGE_VERIFIED"
+            ), f"Words Wave 1 entry {sid} expected POST_MERGE_VERIFIED, got {queue_dict[sid]['state']}"
 
     def test_pdf_wave_b_g_entries_are_post_merge_verified(self, entries):
         # Sprint57-LaneA+LaneG: 14 PDF entries (Waves B-G) were downgraded to MERGED
         # (with real GitHub merge SHAs), then upgraded to POST_MERGE_VERIFIED after
         # destination repo content verification confirmed all 14 examples are present.
         wave_b_g_ids = {
-            "pdf-doc-converter", "pdf-html", "pdf-xls-converter",  # Wave B (PR#11)
-            "pdf-jpeg", "pdf-png", "pdf-tiff",                     # Wave C (PR#17)
-            "pdf-image-extractor", "pdf-table-generator", "pdf-toc-generator",  # Wave D (PR#18)
-            "pdf-form-flattener", "pdf-security",                  # Wave E (PR#19)
-            "pdf-form-editor", "pdf-form-exporter",                # Wave F (PR#20)
-            "pdf-signature",                                        # Wave G (PR#21)
+            "pdf-doc-converter",
+            "pdf-html",
+            "pdf-xls-converter",  # Wave B (PR#11)
+            "pdf-jpeg",
+            "pdf-png",
+            "pdf-tiff",  # Wave C (PR#17)
+            "pdf-image-extractor",
+            "pdf-table-generator",
+            "pdf-toc-generator",  # Wave D (PR#18)
+            "pdf-form-flattener",
+            "pdf-security",  # Wave E (PR#19)
+            "pdf-form-editor",
+            "pdf-form-exporter",  # Wave F (PR#20)
+            "pdf-signature",  # Wave G (PR#21)
         }
         queue_dict = {e["scenario_id"]: e for e in entries}
         for sid in wave_b_g_ids:
@@ -236,9 +251,7 @@ class TestQueueStateConsistency:
                 f"{sid} expected POST_MERGE_VERIFIED (merge SHA confirmed + content verified), "
                 f"got {queue_dict[sid]['state']}"
             )
-            assert queue_dict[sid].get("merge_sha") is not None, (
-                f"{sid} is POST_MERGE_VERIFIED but has no merge_sha"
-            )
+            assert queue_dict[sid].get("merge_sha") is not None, f"{sid} is POST_MERGE_VERIFIED but has no merge_sha"
             assert queue_dict[sid].get("post_merge_validation") == "CONTENT_VERIFIED", (
                 f"{sid} expected post_merge_validation=CONTENT_VERIFIED, "
                 f"got {queue_dict[sid].get('post_merge_validation')}"
@@ -247,9 +260,9 @@ class TestQueueStateConsistency:
     def test_pdf_merger_and_text_extractor_are_post_merge_verified(self, entries):
         queue_dict = {e["scenario_id"]: e for e in entries}
         for sid in ("pdf-merger", "pdf-text-extractor"):
-            assert queue_dict[sid]["state"] == "POST_MERGE_VERIFIED", (
-                f"{sid} expected POST_MERGE_VERIFIED, got {queue_dict[sid]['state']}"
-            )
+            assert (
+                queue_dict[sid]["state"] == "POST_MERGE_VERIFIED"
+            ), f"{sid} expected POST_MERGE_VERIFIED, got {queue_dict[sid]['state']}"
 
     def test_pdf_splitter_is_post_merge_verified(self, entries):
         queue_dict = {e["scenario_id"]: e for e in entries}
@@ -278,30 +291,43 @@ class TestBackloggedEntries:
     def test_backlogged_entries_have_blocking_reason(self, entries):
         for entry in entries:
             if entry["state"] == "BACKLOGGED":
-                assert entry.get("blocking_reason"), (
-                    f"BACKLOGGED entry {entry['scenario_id']} missing blocking_reason"
-                )
+                assert entry.get("blocking_reason"), f"BACKLOGGED entry {entry['scenario_id']} missing blocking_reason"
 
     def test_backlogged_entries_have_blocking_taskcard(self, entries):
         for entry in entries:
             if entry["state"] == "BACKLOGGED":
                 reason = entry.get("blocking_reason") or ""
                 # Non-runnable OPTIONS/RESULT/CALLBACK types don't need taskcards
-                is_non_runnable = reason.startswith("OPTIONS_CLASS:") or \
-                    reason.startswith("NON_RUNNABLE:")
+                is_non_runnable = reason.startswith("OPTIONS_CLASS:") or reason.startswith("NON_RUNNABLE:")
                 if not is_non_runnable:
-                    assert entry.get("blocking_taskcard"), (
-                        f"BACKLOGGED entry {entry['scenario_id']} missing blocking_taskcard"
-                    )
+                    assert entry.get(
+                        "blocking_taskcard"
+                    ), f"BACKLOGGED entry {entry['scenario_id']} missing blocking_taskcard"
 
     def test_pdf_deferred_workflow_roots_in_queue(self, entries):
         # 21 PDF WORKFLOW_ROOT types deferred from pilot scope must be in queue
         expected_deferred = {
-            "pdf-doc-converter", "pdf-form-editor", "pdf-form-exporter", "pdf-form-flattener",
-            "pdf-form-importer", "pdf-html", "pdf-image-extractor", "pdf-jpeg", "pdf-ofd",
-            "pdf-pdf-a-converter", "pdf-pdf-extractor", "pdf-pdf-to-image", "pdf-png",
-            "pdf-security", "pdf-select-field", "pdf-signature", "pdf-table-generator",
-            "pdf-tiff", "pdf-timestamp", "pdf-toc-generator", "pdf-xls-converter",
+            "pdf-doc-converter",
+            "pdf-form-editor",
+            "pdf-form-exporter",
+            "pdf-form-flattener",
+            "pdf-form-importer",
+            "pdf-html",
+            "pdf-image-extractor",
+            "pdf-jpeg",
+            "pdf-ofd",
+            "pdf-pdf-a-converter",
+            "pdf-pdf-extractor",
+            "pdf-pdf-to-image",
+            "pdf-png",
+            "pdf-security",
+            "pdf-select-field",
+            "pdf-signature",
+            "pdf-table-generator",
+            "pdf-tiff",
+            "pdf-timestamp",
+            "pdf-toc-generator",
+            "pdf-xls-converter",
         }
         queue_ids = {e["scenario_id"] for e in entries}
         missing = expected_deferred - queue_ids
@@ -310,8 +336,11 @@ class TestBackloggedEntries:
     def test_words_deferred_scenarios_in_queue(self, entries):
         # 5 Words deferred scenarios must be in queue as BACKLOGGED
         expected_deferred = {
-            "words-comparer", "words-merger", "words-mail-merger",
-            "words-splitter-split", "words-report-builder",
+            "words-comparer",
+            "words-merger",
+            "words-mail-merger",
+            "words-splitter-split",
+            "words-report-builder",
         }
         queue_ids = {e["scenario_id"] for e in entries}
         missing = expected_deferred - queue_ids
@@ -321,17 +350,17 @@ class TestBackloggedEntries:
         # No BACKLOGGED PDF entry should have a merge_sha or post_merge_validation
         for entry in entries:
             if entry["family"] == "pdf" and entry["state"] == "BACKLOGGED":
-                assert entry.get("merge_sha") is None, (
-                    f"BACKLOGGED PDF entry {entry['scenario_id']} has merge_sha (should be None)"
-                )
-                assert entry.get("post_merge_validation") is None, (
-                    f"BACKLOGGED PDF entry {entry['scenario_id']} has post_merge_validation (should be None)"
-                )
+                assert (
+                    entry.get("merge_sha") is None
+                ), f"BACKLOGGED PDF entry {entry['scenario_id']} has merge_sha (should be None)"
+                assert (
+                    entry.get("post_merge_validation") is None
+                ), f"BACKLOGGED PDF entry {entry['scenario_id']} has post_merge_validation (should be None)"
 
     def test_backlogged_words_entries_are_not_published(self, entries):
         # No BACKLOGGED Words entry should have a merge_sha
         for entry in entries:
             if entry["family"] == "words" and entry["state"] == "BACKLOGGED":
-                assert entry.get("merge_sha") is None, (
-                    f"BACKLOGGED Words entry {entry['scenario_id']} has merge_sha (should be None)"
-                )
+                assert (
+                    entry.get("merge_sha") is None
+                ), f"BACKLOGGED Words entry {entry['scenario_id']} has merge_sha (should be None)"

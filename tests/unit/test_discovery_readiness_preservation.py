@@ -47,7 +47,9 @@ class TestDiscoveryReadinessPreservation:
             {"family": "pdf", "generation_ready": False, "recommended_next_action": "needs_type_role_rules"},
         ]
         # Simulate a words-only run
-        words_only = [{"family": "words", "generation_ready": False, "recommended_next_action": "needs_options_aware_rules"}]
+        words_only = [
+            {"family": "words", "generation_ready": False, "recommended_next_action": "needs_options_aware_rules"}
+        ]
 
         merged, scope = _merge_ranking_entries(existing, words_only)
         families_in_merged = {e["family"] for e in merged}
@@ -111,9 +113,7 @@ class TestDiscoveryReadinessPreservation:
         assert "pdf" in families_in_file, "pdf must be in rank file"
         # Each must have the generation_ready field
         for entry in data:
-            assert "generation_ready" in entry, (
-                f"family '{entry.get('family')}' missing generation_ready field"
-            )
+            assert "generation_ready" in entry, f"family '{entry.get('family')}' missing generation_ready field"
 
     def test_empty_existing_file_case(self):
         """When no existing file, new run creates the file with only the new entries."""
@@ -159,7 +159,7 @@ class TestFamilyScopedEvidencePromotion:
         # First: promote Words evidence
         src_words = self._make_src_latest(tmp_path, "words")
         promote_family_evidence(src_words, verification_dir, "words", "pilot-words-20260501")
-        words_vr = (verification_dir / "latest" / "families" / "words" / "validation-results.json")
+        words_vr = verification_dir / "latest" / "families" / "words" / "validation-results.json"
         assert words_vr.exists()
         original_words_content = words_vr.read_text(encoding="utf-8")
 
@@ -169,9 +169,9 @@ class TestFamilyScopedEvidencePromotion:
 
         # Words evidence must be untouched in families/words/
         assert words_vr.exists(), "Words validation-results.json must still exist"
-        assert words_vr.read_text(encoding="utf-8") == original_words_content, (
-            "Cells promotion must not overwrite Words family-scoped evidence"
-        )
+        assert (
+            words_vr.read_text(encoding="utf-8") == original_words_content
+        ), "Cells promotion must not overwrite Words family-scoped evidence"
 
     def test_single_family_words_promotion_does_not_overwrite_cells_latest(self, tmp_path):
         """Words promotion must not remove or corrupt Cells evidence in families/cells/."""
@@ -179,7 +179,7 @@ class TestFamilyScopedEvidencePromotion:
         # First: promote Cells evidence
         src_cells = self._make_src_latest(tmp_path, "cells")
         promote_family_evidence(src_cells, verification_dir, "cells", "pilot-cells-20260430")
-        cells_vr = (verification_dir / "latest" / "families" / "cells" / "validation-results.json")
+        cells_vr = verification_dir / "latest" / "families" / "cells" / "validation-results.json"
         original_cells_content = cells_vr.read_text(encoding="utf-8")
 
         # Then: promote Words evidence
@@ -188,9 +188,9 @@ class TestFamilyScopedEvidencePromotion:
 
         # Cells evidence must be untouched in families/cells/
         assert cells_vr.exists(), "Cells validation-results.json must still exist"
-        assert cells_vr.read_text(encoding="utf-8") == original_cells_content, (
-            "Words promotion must not overwrite Cells family-scoped evidence"
-        )
+        assert (
+            cells_vr.read_text(encoding="utf-8") == original_cells_content
+        ), "Words promotion must not overwrite Cells family-scoped evidence"
 
     def test_global_latest_files_preserved(self, tmp_path):
         """Global files in verification/latest/ must not be deleted by family promotion."""
@@ -259,9 +259,7 @@ class TestFamilyScopedEvidencePromotion:
             "last_promoted_run_id": "pilot-words-20260501",
             "last_promoted_at": "2026-05-01T00:00:00+00:00",
         }
-        (verification_dir / "latest" / "_last_promoted_by.json").write_text(
-            json.dumps(notice), encoding="utf-8"
-        )
+        (verification_dir / "latest" / "_last_promoted_by.json").write_text(json.dumps(notice), encoding="utf-8")
         warnings = detect_cross_family_contamination(verification_dir, expected_family="cells")
         assert len(warnings) == 1, "Must detect 1 contamination warning"
         assert "words" in warnings[0]
@@ -277,9 +275,7 @@ class TestFamilyScopedEvidencePromotion:
             "last_promoted_run_id": "pilot-cells-20260430",
             "last_promoted_at": "2026-04-30T00:00:00+00:00",
         }
-        (verification_dir / "latest" / "_last_promoted_by.json").write_text(
-            json.dumps(notice), encoding="utf-8"
-        )
+        (verification_dir / "latest" / "_last_promoted_by.json").write_text(json.dumps(notice), encoding="utf-8")
         warnings = detect_cross_family_contamination(verification_dir, expected_family="cells")
         assert warnings == [], f"No warnings expected for same-family, got: {warnings}"
 
@@ -291,9 +287,7 @@ class TestFamilyScopedEvidencePromotion:
         sub = src / "families" / family
         sub.mkdir(parents=True)
         gate_data = {"family": family, "expected_count": 6, "ready_count": 6, "status": "pass"}
-        (sub / "completeness-gate-result.json").write_text(
-            json.dumps(gate_data), encoding="utf-8"
-        )
+        (sub / "completeness-gate-result.json").write_text(json.dumps(gate_data), encoding="utf-8")
 
         verification_dir = tmp_path / "verification"
         result = promote_family_evidence(src, verification_dir, family, "pilot-words-20260513")
@@ -337,28 +331,22 @@ class TestFamilyScopedEvidencePromotion:
         stale_dst = verification_dir / "latest" / "families" / family
         stale_dst.mkdir(parents=True)
         stale_gate = {"family": family, "expected_count": 4, "ready_count": 4, "status": "pass"}
-        (stale_dst / "completeness-gate-result.json").write_text(
-            json.dumps(stale_gate), encoding="utf-8"
-        )
+        (stale_dst / "completeness-gate-result.json").write_text(json.dumps(stale_gate), encoding="utf-8")
 
         # Simulate new run with expected_count=6 in subdirectory
         src = self._make_src_latest(tmp_path, family)
         sub = src / "families" / family
         sub.mkdir(parents=True)
         new_gate = {"family": family, "expected_count": 6, "ready_count": 6, "status": "pass"}
-        (sub / "completeness-gate-result.json").write_text(
-            json.dumps(new_gate), encoding="utf-8"
-        )
+        (sub / "completeness-gate-result.json").write_text(json.dumps(new_gate), encoding="utf-8")
 
         promote_family_evidence(src, verification_dir, family, "pilot-words-20260513-wave2")
 
         # After promotion, the gate must have the new data (expected_count=6), not stale (4)
-        promoted = json.loads(
-            (stale_dst / "completeness-gate-result.json").read_text(encoding="utf-8")
-        )
-        assert promoted["expected_count"] == 6, (
-            f"Completeness gate must show expected_count=6 after Wave 2, got {promoted['expected_count']}"
-        )
+        promoted = json.loads((stale_dst / "completeness-gate-result.json").read_text(encoding="utf-8"))
+        assert (
+            promoted["expected_count"] == 6
+        ), f"Completeness gate must show expected_count=6 after Wave 2, got {promoted['expected_count']}"
         assert promoted["ready_count"] == 6
 
     def test_family_scoped_evidence_files_constant_is_complete(self):
@@ -370,6 +358,6 @@ class TestFamilyScopedEvidencePromotion:
             "example-reviewer-results.json",
         }
         for f in contaminated:
-            assert f in FAMILY_SCOPED_EVIDENCE_FILES, (
-                f"{f} must be in FAMILY_SCOPED_EVIDENCE_FILES — it caused cross-family contamination"
-            )
+            assert (
+                f in FAMILY_SCOPED_EVIDENCE_FILES
+            ), f"{f} must be in FAMILY_SCOPED_EVIDENCE_FILES — it caused cross-family contamination"

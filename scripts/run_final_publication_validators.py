@@ -2,7 +2,8 @@
 Validators for lowcode-final-publication-20260601 sprint.
 10 validation rules checking consistency across all artifacts.
 """
-import json, sys
+import json
+import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent

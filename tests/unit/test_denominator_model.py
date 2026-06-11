@@ -23,6 +23,7 @@ FAMILIES = ["cells", "words", "pdf", "diagram", "email", "slides"]
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _load_denominator(family: str) -> dict:
     path = DENOMINATOR_DIR / f"{family}.json"
     assert path.exists(), f"Denominator file missing: {path}"
@@ -37,6 +38,7 @@ def _load_schema() -> dict:
 # ---------------------------------------------------------------------------
 # Existence tests (REM-001 / REM-002 / REM-003)
 # ---------------------------------------------------------------------------
+
 
 class TestDenominatorFilesExist:
     def test_cells_denominator_exists(self):
@@ -65,6 +67,7 @@ class TestDenominatorFilesExist:
 # Parse tests
 # ---------------------------------------------------------------------------
 
+
 class TestDenominatorFilesParseValidJson:
     @pytest.mark.parametrize("family", FAMILIES)
     def test_denominator_parses_as_valid_json(self, family: str):
@@ -80,6 +83,7 @@ class TestDenominatorFilesParseValidJson:
 # ---------------------------------------------------------------------------
 # Schema validation tests (REM-004)
 # ---------------------------------------------------------------------------
+
 
 class TestDenominatorSchemaValidation:
     @pytest.mark.parametrize("family", FAMILIES)
@@ -98,10 +102,18 @@ class TestDenominatorSchemaValidation:
     def test_denominator_has_required_fields(self, family: str):
         d = _load_denominator(family)
         required = [
-            "family", "source_package", "source_version", "api_catalog_sha256",
-            "plugin_namespace", "total_lowcode_types", "denominator_basis",
-            "runnable_scenarios", "published_count", "excluded_count",
-            "evidence_sources", "last_verified_at",
+            "family",
+            "source_package",
+            "source_version",
+            "api_catalog_sha256",
+            "plugin_namespace",
+            "total_lowcode_types",
+            "denominator_basis",
+            "runnable_scenarios",
+            "published_count",
+            "excluded_count",
+            "evidence_sources",
+            "last_verified_at",
         ]
         for field in required:
             assert field in d, f"Missing required field '{field}' in {family} denominator"
@@ -116,29 +128,28 @@ class TestDenominatorSchemaValidation:
 # Cells-specific tests (REM-001)
 # ---------------------------------------------------------------------------
 
+
 class TestCellsDenominator:
     def setup_method(self):
         self.d = _load_denominator("cells")
 
     def test_cells_total_types_is_22(self):
-        assert self.d["total_lowcode_types"] == 22, (
-            f"Cells total_lowcode_types should be 22 (from SOT proof), got {self.d['total_lowcode_types']}"
-        )
+        assert (
+            self.d["total_lowcode_types"] == 22
+        ), f"Cells total_lowcode_types should be 22 (from SOT proof), got {self.d['total_lowcode_types']}"
 
     def test_cells_workflow_root_types_is_9(self):
-        assert self.d["workflow_root_types"] == 9, (
-            f"Cells workflow_root_types should be 9 (confirmed by lifecycle), got {self.d['workflow_root_types']}"
-        )
+        assert (
+            self.d["workflow_root_types"] == 9
+        ), f"Cells workflow_root_types should be 9 (confirmed by lifecycle), got {self.d['workflow_root_types']}"
 
     def test_cells_published_count_is_9(self):
-        assert self.d["published_count"] == 9, (
-            f"Cells published_count should be 9 (all scenarios reviewer_passed), got {self.d['published_count']}"
-        )
+        assert (
+            self.d["published_count"] == 9
+        ), f"Cells published_count should be 9 (all scenarios reviewer_passed), got {self.d['published_count']}"
 
     def test_cells_excluded_count_is_13(self):
-        assert self.d["excluded_count"] == 13, (
-            f"Cells excluded_count should be 13, got {self.d['excluded_count']}"
-        )
+        assert self.d["excluded_count"] == 13, f"Cells excluded_count should be 13, got {self.d['excluded_count']}"
 
     def test_cells_runnable_scenarios_is_9(self):
         assert self.d["runnable_scenarios"] == 9
@@ -147,9 +158,9 @@ class TestCellsDenominator:
         assert self.d["denominator_basis"] == "FULL_SOT"
 
     def test_cells_allowed_pilot_types_is_null(self):
-        assert self.d["allowed_pilot_types"] is None, (
-            "Cells has no allowed_types restriction; allowed_pilot_types must be null"
-        )
+        assert (
+            self.d["allowed_pilot_types"] is None
+        ), "Cells has no allowed_types restriction; allowed_pilot_types must be null"
 
     def test_cells_coverage_pct_of_runnable_is_100(self):
         pct = self.d.get("coverage_pct_of_runnable")
@@ -163,9 +174,9 @@ class TestCellsDenominator:
         total = self.d["total_lowcode_types"]
         runnable = self.d["runnable_scenarios"]
         excluded = self.d["excluded_count"]
-        assert total == runnable + excluded, (
-            f"Cells: total_lowcode_types ({total}) != runnable ({runnable}) + excluded ({excluded})"
-        )
+        assert (
+            total == runnable + excluded
+        ), f"Cells: total_lowcode_types ({total}) != runnable ({runnable}) + excluded ({excluded})"
 
     def test_cells_runnable_scenario_ids_count_matches(self):
         ids = self.d.get("runnable_scenario_ids")
@@ -175,6 +186,7 @@ class TestCellsDenominator:
 # ---------------------------------------------------------------------------
 # Words-specific tests (REM-002)
 # ---------------------------------------------------------------------------
+
 
 class TestWordsDenominator:
     def setup_method(self):
@@ -189,7 +201,16 @@ class TestWordsDenominator:
     def test_words_allowed_pilot_types_present(self):
         types = self.d["allowed_pilot_types"]
         assert isinstance(types, list) and len(types) == 8
-        for t in ["Converter", "Watermarker", "Splitter", "Replacer", "Merger", "Comparer", "MailMerger", "ReportBuilder"]:
+        for t in [
+            "Converter",
+            "Watermarker",
+            "Splitter",
+            "Replacer",
+            "Merger",
+            "Comparer",
+            "MailMerger",
+            "ReportBuilder",
+        ]:
             assert t in types, f"Words allowed_pilot_types missing '{t}'"
         assert "Processor" not in types, "Processor must NOT be in allowed_pilot_types (API investigation required)"
 
@@ -207,26 +228,24 @@ class TestWordsDenominator:
         assert self.d["runnable_scenarios"] == 8
 
     def test_words_denominator_basis_is_pilot_allowed(self):
-        assert self.d["denominator_basis"] == "PILOT_ALLOWED", (
-            "Words is in pilot mode; denominator_basis must be PILOT_ALLOWED"
-        )
+        assert (
+            self.d["denominator_basis"] == "PILOT_ALLOWED"
+        ), "Words is in pilot mode; denominator_basis must be PILOT_ALLOWED"
 
     def test_words_coverage_pct_of_pilot_runnable_is_100(self):
         pct = self.d.get("coverage_pct_of_pilot_runnable")
         assert pct is not None and abs(pct - 100.0) < 0.1
 
     def test_words_does_not_claim_full_sot_basis(self):
-        assert self.d["denominator_basis"] != "FULL_SOT", (
-            "Words must NOT claim FULL_SOT denominator_basis — type classification incomplete"
-        )
+        assert (
+            self.d["denominator_basis"] != "FULL_SOT"
+        ), "Words must NOT claim FULL_SOT denominator_basis — type classification incomplete"
 
     def test_words_total_equals_pilot_plus_excluded(self):
         total = self.d["total_lowcode_types"]
         pilot = self.d["allowed_pilot_count"]
         excluded = self.d["excluded_count"]
-        assert total == pilot + excluded, (
-            f"Words: total ({total}) != pilot ({pilot}) + excluded ({excluded})"
-        )
+        assert total == pilot + excluded, f"Words: total ({total}) != pilot ({pilot}) + excluded ({excluded})"
 
     def test_words_full_sot_classification_evidence_present(self):
         sources = self.d["evidence_sources"]
@@ -236,14 +255,15 @@ class TestWordsDenominator:
         total = self.d["total_lowcode_types"]
         runnable = self.d["workflow_root_types"]
         non_runnable = self.d["non_runnable_types"]
-        assert total == runnable + non_runnable, (
-            f"Words: total ({total}) != runnable ({runnable}) + non_runnable ({non_runnable})"
-        )
+        assert (
+            total == runnable + non_runnable
+        ), f"Words: total ({total}) != runnable ({runnable}) + non_runnable ({non_runnable})"
 
 
 # ---------------------------------------------------------------------------
 # PDF-specific tests (REM-003)
 # ---------------------------------------------------------------------------
+
 
 class TestPdfDenominator:
     def setup_method(self):
@@ -260,23 +280,40 @@ class TestPdfDenominator:
         )
 
     def test_pdf_pilot_allowed_count_is_19(self):
-        assert self.d["allowed_pilot_count"] == 19, (
-            "PDF pilot expanded to 19 types in Sprint 26 (Wave G: Signature added to Wave A=5 + Wave B=3 + Wave C=3 + Wave D=3 + Wave E=2 + Wave F=2)"
-        )
+        assert (
+            self.d["allowed_pilot_count"] == 19
+        ), "PDF pilot expanded to 19 types in Sprint 26 (Wave G: Signature added to Wave A=5 + Wave B=3 + Wave C=3 + Wave D=3 + Wave E=2 + Wave F=2)"
 
     def test_pdf_allowed_pilot_types_present(self):
         types = self.d["allowed_pilot_types"]
         assert isinstance(types, list) and len(types) == 19
-        for t in ["Merger", "TextExtractor", "Splitter", "Optimizer", "PdfAConverter",
-                  "DocConverter", "XlsConverter", "Html", "Jpeg", "Png", "Tiff",
-                  "TocGenerator", "TableGenerator", "ImageExtractor",
-                  "Security", "FormFlattener", "FormEditor", "FormExporter", "Signature"]:
+        for t in [
+            "Merger",
+            "TextExtractor",
+            "Splitter",
+            "Optimizer",
+            "PdfAConverter",
+            "DocConverter",
+            "XlsConverter",
+            "Html",
+            "Jpeg",
+            "Png",
+            "Tiff",
+            "TocGenerator",
+            "TableGenerator",
+            "ImageExtractor",
+            "Security",
+            "FormFlattener",
+            "FormEditor",
+            "FormExporter",
+            "Signature",
+        ]:
             assert t in types, f"PDF allowed_pilot_types missing '{t}'"
 
     def test_pdf_published_count_is_19(self):
-        assert self.d["published_count"] == 19, (
-            f"PDF published_count should be 19 (all pilot-allowed types published via PRs #1,#2,#4,#11,#17-#21), got {self.d['published_count']}"
-        )
+        assert (
+            self.d["published_count"] == 19
+        ), f"PDF published_count should be 19 (all pilot-allowed types published via PRs #1,#2,#4,#11,#17-#21), got {self.d['published_count']}"
 
     def test_pdf_denominator_basis_is_pilot_allowed(self):
         assert self.d["denominator_basis"] == "PILOT_ALLOWED"
@@ -284,9 +321,7 @@ class TestPdfDenominator:
     def test_pdf_workflow_root_separates_from_pilot(self):
         wf = self.d["workflow_root_types"]
         pilot = self.d["allowed_pilot_count"]
-        assert wf > pilot, (
-            f"PDF workflow_root_types ({wf}) must exceed allowed_pilot_count ({pilot})"
-        )
+        assert wf > pilot, f"PDF workflow_root_types ({wf}) must exceed allowed_pilot_count ({pilot})"
 
     def test_pdf_coverage_pct_detail_present(self):
         detail = self.d.get("coverage_pct_detail")
@@ -299,19 +334,18 @@ class TestPdfDenominator:
         assert len(sha) == 64
 
     def test_pdf_excluded_count_is_82(self):
-        assert self.d["excluded_count"] == 82, (
-            "Wave G adds Signature to pilot (19 total) — excluded 101-19=82"
-        )
+        assert self.d["excluded_count"] == 82, "Wave G adds Signature to pilot (19 total) — excluded 101-19=82"
 
     def test_pdf_runnable_scenarios_is_19(self):
-        assert self.d["runnable_scenarios"] == 19, (
-            "PDF pilot expanded to 19 types in Sprint 26 (Wave A=5 + Wave B=3 + Wave C=3 + Wave D=3 + Wave E=2 + Wave F=2 + Wave G=1)"
-        )
+        assert (
+            self.d["runnable_scenarios"] == 19
+        ), "PDF pilot expanded to 19 types in Sprint 26 (Wave A=5 + Wave B=3 + Wave C=3 + Wave D=3 + Wave E=2 + Wave F=2 + Wave G=1)"
 
 
 # ---------------------------------------------------------------------------
 # Diagram-specific tests
 # ---------------------------------------------------------------------------
+
 
 class TestDiagramDenominator:
     def setup_method(self):
@@ -354,6 +388,7 @@ class TestDiagramDenominator:
 # Email-specific tests
 # ---------------------------------------------------------------------------
 
+
 class TestEmailDenominator:
     def setup_method(self):
         self.d = _load_denominator("email")
@@ -390,6 +425,7 @@ class TestEmailDenominator:
 # ---------------------------------------------------------------------------
 # Slides-specific tests
 # ---------------------------------------------------------------------------
+
 
 class TestSlidesDenominator:
     def setup_method(self):
@@ -438,13 +474,14 @@ class TestSlidesDenominator:
 # Cross-family consistency tests
 # ---------------------------------------------------------------------------
 
+
 class TestDenominatorCrossFamily:
     @pytest.mark.parametrize("family", FAMILIES)
     def test_published_count_does_not_exceed_runnable(self, family: str):
         d = _load_denominator(family)
-        assert d["published_count"] <= d["runnable_scenarios"], (
-            f"{family}: published_count ({d['published_count']}) > runnable_scenarios ({d['runnable_scenarios']})"
-        )
+        assert (
+            d["published_count"] <= d["runnable_scenarios"]
+        ), f"{family}: published_count ({d['published_count']}) > runnable_scenarios ({d['runnable_scenarios']})"
 
     @pytest.mark.parametrize("family", FAMILIES)
     def test_evidence_sources_non_empty(self, family: str):
@@ -495,6 +532,5 @@ class TestDenominatorCrossFamily:
         runnable = d["runnable_scenarios"]
         bucket_str = " + ".join(f"{k}={v}" for k, v in buckets.items() if v > 0)
         assert total == runnable, (
-            f"{family}: conservation equation failed: "
-            f"{bucket_str} = {total} != runnable_scenarios ({runnable})"
+            f"{family}: conservation equation failed: " f"{bucket_str} = {total} != runnable_scenarios ({runnable})"
         )

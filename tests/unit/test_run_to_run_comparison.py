@@ -53,8 +53,7 @@ class TestStateStrengthOrdering:
         strengths = [_state_strength(s) for s in success_path]
         for i in range(1, len(strengths)):
             assert strengths[i] > strengths[i - 1], (
-                f"Non-monotonic: {success_path[i-1]}({strengths[i-1]}) >= "
-                f"{success_path[i]}({strengths[i]})"
+                f"Non-monotonic: {success_path[i-1]}({strengths[i-1]}) >= " f"{success_path[i]}({strengths[i]})"
             )
 
     def test_failure_states_weaker_than_pass_states(self):
@@ -146,18 +145,19 @@ def _make_registry(family: str, run_id: str, scenarios: list[tuple[str, str]]) -
     return reg
 
 
-def _write_prior_lifecycle(repo_root: Path, run_id: str, family: str,
-                            scenarios: list[tuple[str, str]]) -> None:
+def _write_prior_lifecycle(repo_root: Path, run_id: str, family: str, scenarios: list[tuple[str, str]]) -> None:
     """Helper: write a prior lifecycle record file."""
     records = []
     for scenario_id, stage in scenarios:
-        records.append({
-            "scenario_id": scenario_id,
-            "family": family,
-            "run_id": run_id,
-            "current_stage": stage,
-            "final_verdict": "PENDING",
-        })
+        records.append(
+            {
+                "scenario_id": scenario_id,
+                "family": family,
+                "run_id": run_id,
+                "current_stage": stage,
+                "final_verdict": "PENDING",
+            }
+        )
     path = repo_root / "workspace" / "runs" / run_id / "evidence" / "latest" / "example-lifecycle-records.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     data = {
@@ -170,7 +170,6 @@ def _write_prior_lifecycle(repo_root: Path, run_id: str, family: str,
 
 
 class TestComparisonLogic:
-
     def test_no_regression_when_same_state(self, tmp_path):
         prior_scenarios = [("s1", "reviewer_passed"), ("s2", "pr_candidate")]
         current_scenarios = [("s1", "reviewer_passed"), ("s2", "pr_candidate")]
@@ -264,8 +263,8 @@ class TestComparisonLogic:
 
     def test_mixed_results(self, tmp_path):
         prior_scenarios = [
-            ("s1", "pr_candidate"),     # will stay same
-            ("s2", "build_passed"),     # will improve
+            ("s1", "pr_candidate"),  # will stay same
+            ("s2", "build_passed"),  # will improve
             ("s3", "reviewer_passed"),  # will regress
         ]
         current_scenarios = [
@@ -291,7 +290,6 @@ class TestComparisonLogic:
 
 
 class TestComparisonEvidenceWriter:
-
     def test_comparison_artifact_has_required_fields(self, tmp_path):
         result = RunToRunComparisonResult(
             current_run_id="run-002",
@@ -303,11 +301,20 @@ class TestComparisonEvidenceWriter:
         assert path.exists()
         data = json.loads(path.read_text())
         required = [
-            "current_run_id", "prior_run_id", "family", "generated_at",
-            "total_prior_scenarios", "total_current_scenarios",
-            "unchanged_count", "improved_count", "regressed_count",
-            "missing_from_current_count", "new_scenario_count",
-            "regression_detected", "per_scenario_results", "verdict",
+            "current_run_id",
+            "prior_run_id",
+            "family",
+            "generated_at",
+            "total_prior_scenarios",
+            "total_current_scenarios",
+            "unchanged_count",
+            "improved_count",
+            "regressed_count",
+            "missing_from_current_count",
+            "new_scenario_count",
+            "regression_detected",
+            "per_scenario_results",
+            "verdict",
         ]
         for field in required:
             assert field in data, f"Missing required field: {field}"
@@ -319,13 +326,22 @@ class TestComparisonEvidenceWriter:
 
 
 class TestCLICompareRun:
-
     def test_cli_accepts_compare_run_flag(self):
         """Verify --compare-run is accepted by the parser (no error on parse)."""
         result = subprocess.run(
-            [sys.executable, "-m", "plugin_examples", "run", "--family", "cells",
-             "--compare-run", "some-prior-run", "--help"],
-            capture_output=True, text=True,
+            [
+                sys.executable,
+                "-m",
+                "plugin_examples",
+                "run",
+                "--family",
+                "cells",
+                "--compare-run",
+                "some-prior-run",
+                "--help",
+            ],
+            capture_output=True,
+            text=True,
             env={**__import__("os").environ, "PYTHONPATH": "src"},
             cwd=str(Path(__file__).resolve().parents[2]),
         )
@@ -335,7 +351,8 @@ class TestCLICompareRun:
     def test_cli_help_mentions_compare_run(self):
         result = subprocess.run(
             [sys.executable, "-m", "plugin_examples", "run", "--help"],
-            capture_output=True, text=True,
+            capture_output=True,
+            text=True,
             env={**__import__("os").environ, "PYTHONPATH": "src"},
             cwd=str(Path(__file__).resolve().parents[2]),
         )
@@ -348,15 +365,19 @@ class TestCLICompareRun:
 
 
 class TestPromotedEvidenceFallback:
-
     def test_compare_run_latest_uses_promoted_evidence(self, tmp_path):
         """When prior_run_id='latest', use promoted family evidence."""
         # Write promoted evidence
         family_dir = tmp_path / "workspace" / "verification" / "latest" / "families" / "cells"
         family_dir.mkdir(parents=True, exist_ok=True)
         records = [
-            {"scenario_id": "s1", "family": "cells", "run_id": "latest",
-             "current_stage": "reviewer_passed", "final_verdict": "PENDING"},
+            {
+                "scenario_id": "s1",
+                "family": "cells",
+                "run_id": "latest",
+                "current_stage": "reviewer_passed",
+                "final_verdict": "PENDING",
+            },
         ]
         data = {"family": "cells", "run_id": "latest", "summary": {}, "records": records}
         (family_dir / "example-lifecycle-records.json").write_text(json.dumps(data))

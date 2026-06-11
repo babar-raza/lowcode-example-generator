@@ -54,17 +54,20 @@ class TestProviderPolicyIntegrity:
 
     def test_approved_providers_match_agents_md(self):
         from plugin_examples.llm_router.provider_policy import APPROVED_PROVIDERS
+
         assert "llm_professionalize" in APPROVED_PROVIDERS
         assert "ollama" in APPROVED_PROVIDERS
 
     def test_unapproved_providers_match_agents_md(self):
         from plugin_examples.llm_router.provider_policy import UNAPPROVED_PROVIDERS
+
         assert "openai" in UNAPPROVED_PROVIDERS
         assert "gpt_oss" in UNAPPROVED_PROVIDERS
 
     def test_no_direct_openai_construction_in_codebase(self):
         """OpenAI( construction is only allowed in approved modules."""
         from plugin_examples.llm_router.provider_policy import is_direct_openai_construction
+
         src_dir = REPO_ROOT / "src" / "plugin_examples"
         # provider_policy.py contains "OpenAI(" as a detection string, not actual usage
         detection_modules = {"provider_policy.py"}
@@ -130,8 +133,11 @@ class TestGateOrder:
     def test_pipeline_stages_has_17_stages(self):
         content = (REPO_ROOT / "docs" / "architecture" / "pipeline-stages.md").read_text(encoding="utf-8")
         # Count table rows (lines starting with |, excluding header separator)
-        rows = [line for line in content.split("\n")
-                if line.strip().startswith("|") and "---" not in line and "Order" not in line]
+        rows = [
+            line
+            for line in content.split("\n")
+            if line.strip().startswith("|") and "---" not in line and "Order" not in line
+        ]
         assert len(rows) >= 15, f"Expected at least 15 stage rows, got {len(rows)}"
 
 

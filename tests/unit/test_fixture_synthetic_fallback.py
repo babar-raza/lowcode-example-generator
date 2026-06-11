@@ -1,4 +1,5 @@
 """Tests for fixture synthetic fallback logic — Wave 25 Lane B."""
+
 from __future__ import annotations
 
 import pytest

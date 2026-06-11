@@ -22,6 +22,7 @@ from src.plugin_examples.fixture_factory.secret_hygiene_validators import (
 # PCLV-01
 # ============================================================
 
+
 def make_readiness(total, packages=None):
     if packages is None:
         packages = [{"family": f"fam{i}", "slug": f"slug{i}", "pr_packet_exists": True} for i in range(total)]
@@ -59,6 +60,7 @@ class TestPCLV01:
 # PCLV-02
 # ============================================================
 
+
 class TestPCLV02:
     def test_pass_all_have_field(self):
         readiness = make_readiness(3)
@@ -84,6 +86,7 @@ class TestPCLV02:
 # PCLV-03
 # ============================================================
 
+
 class TestPCLV03:
     def test_pass_all_pr_packets_accounted(self):
         packages = [{"family": f"f{i}", "slug": f"s{i}", "pr_packet_exists": True} for i in range(16)]
@@ -93,8 +96,10 @@ class TestPCLV03:
 
     def test_pass_wave16_addition_explained(self):
         packages = [{"family": f"f{i}", "slug": f"s{i}", "pr_packet_exists": True} for i in range(14)]
-        packages += [{"family": "html", "slug": "xps", "pr_packet_exists": True},
-                     {"family": "psd", "slug": "png", "pr_packet_exists": True}]
+        packages += [
+            {"family": "html", "slug": "xps", "pr_packet_exists": True},
+            {"family": "psd", "slug": "png", "pr_packet_exists": True},
+        ]
         readiness = {"pclc_total": 16, "packages": packages, "pr_packets_total": 16, "pr_packets_wave16_count": 2}
         result = pclv_03_pr_packet_count_matches_ready_count(readiness)
         assert result.passed
@@ -103,6 +108,7 @@ class TestPCLV03:
 # ============================================================
 # run_all_pclv
 # ============================================================
+
 
 class TestRunAllPCLV:
     def test_wave16_correct_state_passes(self):
@@ -124,6 +130,7 @@ class TestRunAllPCLV:
 # ============================================================
 # SHV-01
 # ============================================================
+
 
 class TestSHV01:
     def test_pass_no_pfx(self):
@@ -154,6 +161,7 @@ class TestSHV01:
 # SHV-02
 # ============================================================
 
+
 class TestSHV02:
     def test_pass_no_secret_files(self):
         result = shv_02_no_pem_key_p12_untracked_or_staged("M  src/foo.py\n")
@@ -175,6 +183,7 @@ class TestSHV02:
 # ============================================================
 # SHV-03
 # ============================================================
+
 
 class TestSHV03:
     def test_pass_no_credential_filenames(self):
@@ -198,6 +207,7 @@ class TestSHV03:
 # ============================================================
 # run_all_shv integration
 # ============================================================
+
 
 class TestRunAllSHV:
     def test_clean_git_status_all_pass(self):

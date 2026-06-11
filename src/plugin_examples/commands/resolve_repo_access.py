@@ -15,11 +15,15 @@ def add_parser(subparsers):
         help="Probe GitHub API access for family publish targets (read-only)",
     )
     parser.add_argument(
-        "--families", nargs="+", metavar="FAMILY", default=["cells", "words", "pdf"],
+        "--families",
+        nargs="+",
+        metavar="FAMILY",
+        default=["cells", "words", "pdf"],
         help="Families to probe (default: cells words pdf)",
     )
     parser.add_argument(
-        "--promote-latest", action="store_true",
+        "--promote-latest",
+        action="store_true",
         help="Write report to workspace/verification/latest/ (always on)",
     )
 
@@ -36,7 +40,9 @@ def handle(args) -> int:
 
     repo_root = _Path(__file__).resolve().parents[3]
     msession, mcollector = _create_metrics_session(
-        args, command="resolve-repo-access", repo_root=repo_root,
+        args,
+        command="resolve-repo-access",
+        repo_root=repo_root,
     )
     config_dir = repo_root / "pipeline" / "configs" / "families"
     verification_dir = repo_root / "workspace" / "verification"
@@ -77,4 +83,3 @@ def handle(args) -> int:
         items_failed=summary["total_checked"] - summary["accessible"],
     )
     return 0 if summary["accessible"] > 0 else 1
-

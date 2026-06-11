@@ -14,15 +14,18 @@ def add_parser(subparsers):
     )
     parser.add_argument("--family", required=True, help="Family name (e.g., cells, words)")
     parser.add_argument(
-        "--package-path", metavar="PATH",
+        "--package-path",
+        metavar="PATH",
         help="Override package path (default: workspace/pr-dry-run/{family}-controlled-pilot/)",
     )
     parser.add_argument(
-        "--promote-latest", action="store_true",
+        "--promote-latest",
+        action="store_true",
         help="Write audit evidence to workspace/verification/latest/ (always on)",
     )
     parser.add_argument(
-        "--cumulative", action="store_true",
+        "--cumulative",
+        action="store_true",
         help="Use cumulative inventory (all packages + post-merge evidence) instead of single package",
     )
 
@@ -45,7 +48,10 @@ def handle(args) -> int:
     verification_dir = repo_root / "workspace" / "verification"
     family = args.family
     msession, mcollector = _create_metrics_session(
-        args, command="render-root-readme", family=family, repo_root=repo_root,
+        args,
+        command="render-root-readme",
+        family=family,
+        repo_root=repo_root,
     )
 
     # --- Load family config ---
@@ -216,4 +222,3 @@ def handle(args) -> int:
         return 1
     _finalize_metrics_session(msession, items_discovered=1, items_succeeded=1, items_failed=0)
     return 0
-

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import logging
 import os
@@ -17,19 +18,25 @@ from typing import Any, Callable
 def _now_utc() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
+
 logger = logging.getLogger(__name__)
+
+# Bind pipeline context to structured log records for this run
+from plugin_examples.observability import bind_context as _bind_obs_context  # noqa: E402
 
 
 # ---------------------------------------------------------------------------
 # Core types
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class StageResult:
     """Result of a single pipeline stage."""
+
     name: str
     order: int
-    status: str = "pending"       # success | failed | degraded | skipped
+    status: str = "pending"  # success | failed | degraded | skipped
     duration_ms: float = 0.0
     error: str | None = None
     artifacts: dict = field(default_factory=dict)
@@ -38,6 +45,7 @@ class StageResult:
 @dataclass
 class PipelineContext:
     """Mutable state threaded through all stages."""
+
     family: str
     run_id: str
     dry_run: bool
@@ -77,11 +85,15 @@ class PipelineContext:
     # Non-LowCode fallback candidates — set by _stage_fallback_registry_lookup().
     # Only PROBE_CONFIRMED and VERIFIED_PUBLISHABLE entries are included.
     fallback_candidates: list | None = None
+    # Strict output validation — when True, advisory_no_output and advisory_failed
+    # block publication instead of being advisory-only.
+    strict_output_validation: bool = False
 
 
 # ---------------------------------------------------------------------------
 # Public helpers
 # ---------------------------------------------------------------------------
+
 
 def scenario_to_dict(s) -> dict:
     """Convert a Scenario dataclass to a plain dict for build_packet.
@@ -110,6 +122,7 @@ def _write_catalog_hash_evidence(result, evidence_dir: Path) -> None:
     """Write catalog-hash-validation.json evidence."""
     import json as _json
     from datetime import datetime, timezone
+
     out = evidence_dir / "latest" / "catalog-hash-validation.json"
     out.parent.mkdir(parents=True, exist_ok=True)
     data = result.to_dict()
@@ -120,36 +133,51 @@ def _write_catalog_hash_evidence(result, evidence_dir: Path) -> None:
 def _write_fixture_strategy_plan(planning, evidence_dir: Path) -> None:
     """Write fixture-strategy-plan.json evidence."""
     import json as _json
+
     scenarios = []
-    for s in (planning.ready_scenarios + planning.blocked_scenarios):
-        scenarios.append({
-            "scenario_id": s.scenario_id,
-            "required_input_formats": [getattr(s, "required_input_format", "")] if getattr(s, "required_input_format", "") else [],
-            "input_strategy": getattr(s, "input_strategy", "none"),
-            "input_files": getattr(s, "input_files", []),
-            "strategy_status": s.status if s.status.startswith("blocked") else "ready",
-            "blocked_reason": s.blocked_reason,
-        })
+    for s in planning.ready_scenarios + planning.blocked_scenarios:
+        scenarios.append(
+            {
+                "scenario_id": s.scenario_id,
+                "required_input_formats": [getattr(s, "required_input_format", "")]
+                if getattr(s, "required_input_format", "")
+                else [],
+                "input_strategy": getattr(s, "input_strategy", "none"),
+                "input_files": getattr(s, "input_files", []),
+                "strategy_status": s.status if s.status.startswith("blocked") else "ready",
+                "blocked_reason": s.blocked_reason,
+            }
+        )
     out = evidence_dir / "latest" / "fixture-strategy-plan.json"
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(_json.dumps({
-        "total_scenarios": len(scenarios),
-        "ready": sum(1 for s in scenarios if s["strategy_status"] == "ready"),
-        "blocked": sum(1 for s in scenarios if s["strategy_status"] != "ready"),
-        "strategies": {
-            "generated_fixture_file": sum(1 for s in scenarios if s["input_strategy"] == "generated_fixture_file"),
-            "existing_fixture": sum(1 for s in scenarios if s["input_strategy"] == "existing_fixture"),
-            "programmatic_input": sum(1 for s in scenarios if s["input_strategy"] == "programmatic_input"),
-            "none": sum(1 for s in scenarios if s["input_strategy"] == "none"),
-            "no_valid_input_strategy": sum(1 for s in scenarios if s["input_strategy"] == "no_valid_input_strategy"),
-        },
-        "scenarios": scenarios,
-    }, indent=2))
+    out.write_text(
+        _json.dumps(
+            {
+                "total_scenarios": len(scenarios),
+                "ready": sum(1 for s in scenarios if s["strategy_status"] == "ready"),
+                "blocked": sum(1 for s in scenarios if s["strategy_status"] != "ready"),
+                "strategies": {
+                    "generated_fixture_file": sum(
+                        1 for s in scenarios if s["input_strategy"] == "generated_fixture_file"
+                    ),
+                    "existing_fixture": sum(1 for s in scenarios if s["input_strategy"] == "existing_fixture"),
+                    "programmatic_input": sum(1 for s in scenarios if s["input_strategy"] == "programmatic_input"),
+                    "none": sum(1 for s in scenarios if s["input_strategy"] == "none"),
+                    "no_valid_input_strategy": sum(
+                        1 for s in scenarios if s["input_strategy"] == "no_valid_input_strategy"
+                    ),
+                },
+                "scenarios": scenarios,
+            },
+            indent=2,
+        )
+    )
 
 
 def _write_scenario_input_format_map(planning, evidence_dir: Path) -> None:
     """Write scenario-input-format-map.json evidence using FormatContract authority."""
     import json as _json
+
     entries = []
     for s in planning.ready_scenarios:
         type_name = s.target_type.split(".")[-1]
@@ -162,6 +190,7 @@ def _write_scenario_input_format_map(planning, evidence_dir: Path) -> None:
         if not output_fmt:
             try:
                 from plugin_examples.format_authority.store import get_contract
+
                 _fam = s.scenario_id.split("-", 1)[0] if s.scenario_id else ""
                 if _fam:
                     fc = get_contract(_fam, type_name)
@@ -170,20 +199,23 @@ def _write_scenario_input_format_map(planning, evidence_dir: Path) -> None:
                     contract_hash = fc.contract_hash
             except (KeyError, ImportError):
                 from plugin_examples.scenario_planner.planner import _infer_output_format
+
                 output_fmt = _infer_output_format(type_name)
                 source = "planner_map_deprecated"
 
-        entries.append({
-            "scenario_id": s.scenario_id,
-            "workflow_type": type_name,
-            "selected_input_format": input_fmt,
-            "selected_output_format": output_fmt,
-            "source": source,
-            "contract_id": contract_id,
-            "contract_hash": contract_hash,
-            "confidence": "high" if source == "format_contract" else "medium",
-            "blocked_if_unclear": False,
-        })
+        entries.append(
+            {
+                "scenario_id": s.scenario_id,
+                "workflow_type": type_name,
+                "selected_input_format": input_fmt,
+                "selected_output_format": output_fmt,
+                "source": source,
+                "contract_id": contract_id,
+                "contract_hash": contract_hash,
+                "confidence": "high" if source == "format_contract" else "medium",
+                "blocked_if_unclear": False,
+            }
+        )
     out = evidence_dir / "latest" / "scenario-input-format-map.json"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(_json.dumps({"scenarios": entries}, indent=2))
@@ -192,6 +224,7 @@ def _write_scenario_input_format_map(planning, evidence_dir: Path) -> None:
 def _write_fewshot_patterns(generated_projects: list[dict], evidence_dir: Path) -> None:
     """Write llm-fewshot-patterns.json from generated projects."""
     import json as _json
+
     patterns = []
     for proj in generated_projects:
         program_path = Path(proj.get("program_path", ""))
@@ -203,31 +236,34 @@ def _write_fewshot_patterns(generated_projects: list[dict], evidence_dir: Path) 
             has_output_check = "output" in code.lower()
             no_readkey = "Console.ReadKey" not in code
             no_readline = "Console.ReadLine" not in code
-            patterns.append({
-                "scenario_id": proj["scenario_id"],
-                "uses_basedir": has_basedir,
-                "validates_input": has_file_check,
-                "validates_output": has_output_check,
-                "no_interactive_input": no_readkey and no_readline,
-                "input_strategy": proj.get("input_strategy", "none"),
-            })
+            patterns.append(
+                {
+                    "scenario_id": proj["scenario_id"],
+                    "uses_basedir": has_basedir,
+                    "validates_input": has_file_check,
+                    "validates_output": has_output_check,
+                    "no_interactive_input": no_readkey and no_readline,
+                    "input_strategy": proj.get("input_strategy", "none"),
+                }
+            )
 
     out = evidence_dir / "latest" / "llm-fewshot-patterns.json"
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(_json.dumps({
-        "total_patterns": len(patterns),
-        "verified_passing": 0,  # Updated after validation
-        "patterns": patterns,
-    }, indent=2))
+    out.write_text(
+        _json.dumps(
+            {
+                "total_patterns": len(patterns),
+                "verified_passing": 0,  # Updated after validation
+                "patterns": patterns,
+            },
+            indent=2,
+        )
+    )
 
 
 def _fixture_sources_to_dicts(sources) -> list[dict]:
     """Convert list[FixtureSource] dataclasses to list[dict]."""
-    return [
-        {"type": s.type, "owner": s.owner, "repo": s.repo,
-         "branch": s.branch, "paths": s.paths}
-        for s in sources
-    ]
+    return [{"type": s.type, "owner": s.owner, "repo": s.repo, "branch": s.branch, "paths": s.paths} for s in sources]
 
 
 def _fixture_registry_to_dict(registry) -> dict | None:
@@ -235,10 +271,7 @@ def _fixture_registry_to_dict(registry) -> dict | None:
     if registry is None:
         return None
     return {
-        "fixtures": [
-            {"filename": f.filename, "available": f.available}
-            for f in registry.fixtures
-        ],
+        "fixtures": [{"filename": f.filename, "available": f.available} for f in registry.fixtures],
     }
 
 
@@ -255,15 +288,14 @@ def _find_type_in_catalog(catalog: dict, full_name: str) -> dict | None:
 # Workspace snapshot
 # ---------------------------------------------------------------------------
 
+
 def _snapshot_workspace(manifests_dir: Path, verification_dir: Path) -> dict:
     """List non-.gitkeep files in manifests and verification/latest."""
+
     def _list_files(d: Path) -> list[str]:
         if not d.exists():
             return []
-        return sorted(
-            f.name for f in d.iterdir()
-            if f.is_file() and f.name != ".gitkeep"
-        )
+        return sorted(f.name for f in d.iterdir() if f.is_file() and f.name != ".gitkeep")
 
     latest = verification_dir / "latest"
     return {
@@ -275,6 +307,7 @@ def _snapshot_workspace(manifests_dir: Path, verification_dir: Path) -> dict:
 # ---------------------------------------------------------------------------
 # Stage runner
 # ---------------------------------------------------------------------------
+
 
 def _run_stage(
     name: str,
@@ -288,15 +321,21 @@ def _run_stage(
         artifacts = fn(ctx)
         duration = (time.time() - start) * 1000
         return StageResult(
-            name=name, order=order, status="success",
-            duration_ms=duration, artifacts=artifacts or {},
+            name=name,
+            order=order,
+            status="success",
+            duration_ms=duration,
+            artifacts=artifacts or {},
         )
     except Exception as e:
         duration = (time.time() - start) * 1000
         logger.error("Stage %s failed: %s", name, e)
         return StageResult(
-            name=name, order=order, status="failed",
-            duration_ms=duration, error=str(e),
+            name=name,
+            order=order,
+            status="failed",
+            duration_ms=duration,
+            error=str(e),
         )
 
 
@@ -304,10 +343,12 @@ def _run_stage(
 # Stage implementations
 # ---------------------------------------------------------------------------
 
+
 def _stage_load_config(ctx: PipelineContext) -> dict:
     import hashlib as _hashlib
     import re as _re
     from plugin_examples.family_config import load_family_config
+
     # Allow CLI override via --family-config
     override = getattr(ctx, "_family_config_path", None)
     if override:
@@ -322,8 +363,7 @@ def _stage_load_config(ctx: PipelineContext) -> dict:
     ctx.config = load_family_config(config_path)
     if ctx.config.status == "experimental" and not getattr(ctx, "_allow_experimental", False):
         raise RuntimeError(
-            f"Family '{ctx.family}' is experimental. "
-            "Use --allow-experimental to run experimental families."
+            f"Family '{ctx.family}' is experimental. " "Use --allow-experimental to run experimental families."
         )
     if ctx.config.status == "discovery_only":
         raise RuntimeError(
@@ -346,10 +386,12 @@ def _stage_load_config(ctx: PipelineContext) -> dict:
     # Discovery freshness gate (Wave 25 Lane C) — mode-aware
     try:
         from plugin_examples.website_catalog.drift_detector import is_discovery_stale
+
         discovery_mode = getattr(ctx.config, "discovery_mode", "dry_run") or "dry_run"
         evidence_path = ctx.repo_root / "workspace" / "verification" / "latest" / "all-family-lowcode-discovery.json"
         if evidence_path.exists():
             import json as _json
+
             _evidence = _json.loads(evidence_path.read_text(encoding="utf-8"))
             _meta = _evidence.get("discovery_metadata", {})
             if _meta and is_discovery_stale(_meta):
@@ -360,9 +402,9 @@ def _stage_load_config(ctx: PipelineContext) -> dict:
                     )
                 else:
                     logger.warning(
-                        "Discovery evidence is stale (expires_at=%s). "
-                        "Mode=%s — continuing with warning.",
-                        _meta.get("expires_at"), discovery_mode,
+                        "Discovery evidence is stale (expires_at=%s). " "Mode=%s — continuing with warning.",
+                        _meta.get("expires_at"),
+                        discovery_mode,
                     )
                     artifacts["discovery_freshness"] = "STALE_WARNING"
             else:
@@ -377,12 +419,15 @@ def _stage_load_config(ctx: PipelineContext) -> dict:
 
 def _stage_nuget_fetch(ctx: PipelineContext) -> dict:
     from plugin_examples.nuget_fetcher import fetch_package
+
     cfg = ctx.config.nuget
     ctx.download_manifest = fetch_package(
-        cfg.package_id, cfg.version_policy,
+        cfg.package_id,
+        cfg.version_policy,
         pinned_version=cfg.pinned_version,
         allow_prerelease=cfg.allow_prerelease,
-        run_dir=ctx.run_dir, family=ctx.family,
+        run_dir=ctx.run_dir,
+        family=ctx.family,
     )
     return {
         "version": ctx.download_manifest["version"],
@@ -409,9 +454,7 @@ def _stage_version_drift_preflight(ctx: PipelineContext) -> dict:
     import json as _json
 
     fetched = ctx.download_manifest["version"] if ctx.download_manifest else None
-    denom_path = (
-        ctx.repo_root / "pipeline" / "configs" / "denominators" / f"{ctx.family}.json"
-    )
+    denom_path = ctx.repo_root / "pipeline" / "configs" / "denominators" / f"{ctx.family}.json"
     denominator_version: str | None = None
     if denom_path.exists():
         try:
@@ -441,6 +484,7 @@ def _stage_version_drift_preflight(ctx: PipelineContext) -> dict:
         }
         try:
             import json as _json2
+
             _mismatch_path = ctx.run_dir / "version-mismatch-alert.json"
             _mismatch_path.write_text(_json2.dumps(mismatch_evidence, indent=2), encoding="utf-8")
         except Exception:
@@ -458,6 +502,7 @@ def _stage_version_drift_preflight(ctx: PipelineContext) -> dict:
                 # Write drift acceptance record for audit trail
                 try:
                     import json as _json3
+
                     acceptance = {
                         "family": ctx.family,
                         "accepted_at": _now_utc(),
@@ -471,15 +516,19 @@ def _stage_version_drift_preflight(ctx: PipelineContext) -> dict:
                 except Exception:
                     pass
                 logger.warning(
-                    "VERSION DRIFT ACCEPTED via ACCEPT_VERSION_DRIFT=1 for family '%s': "
-                    "pinned=%s, live=%s",
-                    ctx.family, denominator_version, fetched,
+                    "VERSION DRIFT ACCEPTED via ACCEPT_VERSION_DRIFT=1 for family '%s': " "pinned=%s, live=%s",
+                    ctx.family,
+                    denominator_version,
+                    fetched,
                 )
         else:
             logger.warning(
                 "VERSION DRIFT DETECTED for family '%s': fetched=%s, denominator=%s. "
                 "The catalog hash check will likely fail at scenario_planning. %s",
-                ctx.family, fetched, denominator_version, action,
+                ctx.family,
+                fetched,
+                denominator_version,
+                action,
             )
 
     return {
@@ -497,6 +546,7 @@ def _stage_dependency_resolution(ctx: PipelineContext) -> dict:
         write_dependency_manifest,
         update_package_lock,
     )
+
     cfg = ctx.config.nuget
     nupkg_path = Path(ctx.download_manifest["cached_path"])
 
@@ -508,7 +558,8 @@ def _stage_dependency_resolution(ctx: PipelineContext) -> dict:
         nupkg_path,
         target_frameworks=cfg.target_framework_preference,
         max_depth=cfg.dependency_resolution.max_depth,
-        run_dir=ctx.run_dir, family=ctx.family,
+        run_dir=ctx.run_dir,
+        family=ctx.family,
         include_all_tfm_groups=cfg.dependency_resolution.include_all_tfm_groups,
     )
     write_dependency_manifest(ctx.deps, ctx.run_dir, ctx.family)
@@ -518,11 +569,9 @@ def _stage_dependency_resolution(ctx: PipelineContext) -> dict:
 
 def _stage_extraction(ctx: PipelineContext) -> dict:
     from plugin_examples.nupkg_extractor import extract_package
+
     nupkg_path = Path(ctx.download_manifest["cached_path"])
-    dep_paths = [
-        Path(d["cached_path"]) for d in (ctx.deps or [])
-        if d.get("status") == "ok" and d.get("cached_path")
-    ]
+    dep_paths = [Path(d["cached_path"]) for d in (ctx.deps or []) if d.get("status") == "ok" and d.get("cached_path")]
     ctx.extraction = extract_package(
         nupkg_path,
         package_id=ctx.config.nuget.package_id,
@@ -540,6 +589,7 @@ def _stage_extraction(ctx: PipelineContext) -> dict:
 
 def _stage_reflection(ctx: PipelineContext) -> dict:
     from plugin_examples.reflection_catalog import build_catalog
+
     catalog_dir = ctx.run_dir / "catalog" / ctx.family
     catalog_dir.mkdir(parents=True, exist_ok=True)
     output_path = catalog_dir / "api-catalog.json"
@@ -565,8 +615,10 @@ def _stage_plugin_detection(ctx: PipelineContext) -> dict:
         write_product_inventory,
         assert_source_of_truth_eligible,
     )
+
     ctx.detection = detect_plugin_namespaces(
-        ctx.catalog, ctx.config.plugin_detection.namespace_patterns,
+        ctx.catalog,
+        ctx.config.plugin_detection.namespace_patterns,
     )
 
     # Write product inventory
@@ -607,23 +659,27 @@ def _stage_plugin_detection(ctx: PipelineContext) -> dict:
     }
 
 
-_FALLBACK_USABLE_STATUSES = frozenset({
-    "PROBE_CANDIDATE",
-    "PROBE_CONFIRMED",
-    "VERIFIED_PUBLISHABLE",
-})
+_FALLBACK_USABLE_STATUSES = frozenset(
+    {
+        "PROBE_CANDIDATE",
+        "PROBE_CONFIRMED",
+        "VERIFIED_PUBLISHABLE",
+    }
+)
 
-_FALLBACK_EXCLUDED_STATUSES = frozenset({
-    "PROBE_FAILED",
-    "STATIC_MAPPING_REQUIRED",
-    "BLOCKED_PACKAGE_UNAVAILABLE",
-    "BLOCKED_REFLECTION_FAILED",
-    "BLOCKED_LICENSE_RESTRICTED",
-    "REJECTED_BY_VALIDATOR",
-    "WEBSITE_DISCOVERED",
-    "REFLECTION_CANDIDATE",
-    "AI_DRAFT",
-})
+_FALLBACK_EXCLUDED_STATUSES = frozenset(
+    {
+        "PROBE_FAILED",
+        "STATIC_MAPPING_REQUIRED",
+        "BLOCKED_PACKAGE_UNAVAILABLE",
+        "BLOCKED_REFLECTION_FAILED",
+        "BLOCKED_LICENSE_RESTRICTED",
+        "REJECTED_BY_VALIDATOR",
+        "WEBSITE_DISCOVERED",
+        "REFLECTION_CANDIDATE",
+        "AI_DRAFT",
+    }
+)
 
 
 def _stage_fallback_registry_lookup(ctx: PipelineContext) -> dict:
@@ -641,6 +697,7 @@ def _stage_fallback_registry_lookup(ctx: PipelineContext) -> dict:
     Writes fallback_candidates.json to ctx.run_dir as a dry-run artifact.
     """
     import json
+
     strategy = getattr(ctx.config.plugin_detection, "fallback_strategy", None)
     if strategy is None:
         return {"status": "SKIPPED", "reason": "fallback_strategy is None"}
@@ -654,6 +711,7 @@ def _stage_fallback_registry_lookup(ctx: PipelineContext) -> dict:
 
     try:
         import yaml
+
         with open(registry_path, encoding="utf-8") as fh:
             registry_data = yaml.safe_load(fh)
     except Exception as exc:  # noqa: BLE001
@@ -684,22 +742,27 @@ def _stage_fallback_registry_lookup(ctx: PipelineContext) -> dict:
     artifact_path = ctx.run_dir / "fallback_candidates.json"
     artifact_path.parent.mkdir(parents=True, exist_ok=True)
     with open(artifact_path, "w", encoding="utf-8") as fh:
-        json.dump({
-            "family": ctx.family,
-            "strategy": strategy,
-            "total_registry_entries": len(entries),
-            "usable_entries": candidate_count,
-            "generation_ready_entries": len(generation_ready),
-            "excluded_entries": len(excluded),
-            "status_counts": status_counts,
-            "exclusion_reason": "statuses not in PROBE_CANDIDATE/PROBE_CONFIRMED/VERIFIED_PUBLISHABLE",
-            "generation_exclusion_reason": "PROBE_CANDIDATE excluded from generation (requires probe validation first)",
-            "candidates": usable,
-        }, fh, indent=2)
+        json.dump(
+            {
+                "family": ctx.family,
+                "strategy": strategy,
+                "total_registry_entries": len(entries),
+                "usable_entries": candidate_count,
+                "generation_ready_entries": len(generation_ready),
+                "excluded_entries": len(excluded),
+                "status_counts": status_counts,
+                "exclusion_reason": "statuses not in PROBE_CANDIDATE/PROBE_CONFIRMED/VERIFIED_PUBLISHABLE",
+                "generation_exclusion_reason": "PROBE_CANDIDATE excluded from generation (requires probe validation first)",
+                "candidates": usable,
+            },
+            fh,
+            indent=2,
+        )
 
     # Populate ctx.fallback_candidates with PluginCandidate objects for the generation stage.
     if generation_ready:
         from plugin_examples.fixture_factory.shared_downstream_executor import PluginCandidate
+
         ctx.fallback_candidates = [
             PluginCandidate(
                 slug=e.get("plugin_slug") or e.get("slug", "unknown"),
@@ -712,7 +775,8 @@ def _stage_fallback_registry_lookup(ctx: PipelineContext) -> dict:
         ]
         logger.info(
             "Non-LowCode fallback: %d generation-ready candidates for %s (PROBE_CONFIRMED/VERIFIED_PUBLISHABLE)",
-            len(ctx.fallback_candidates), ctx.family,
+            len(ctx.fallback_candidates),
+            ctx.family,
         )
     else:
         ctx.fallback_candidates = []
@@ -720,16 +784,22 @@ def _stage_fallback_registry_lookup(ctx: PipelineContext) -> dict:
             logger.info(
                 "Non-LowCode fallback: %d usable entries for %s, but none are generation-ready "
                 "(all are PROBE_CANDIDATE — probe validation required first)",
-                len(usable), ctx.family,
+                len(usable),
+                ctx.family,
             )
 
-    return {"status": "OK", "candidate_count": candidate_count,
-            "generation_ready": len(generation_ready), "fallback_mode": True}
+    return {
+        "status": "OK",
+        "candidate_count": candidate_count,
+        "generation_ready": len(generation_ready),
+        "fallback_mode": True,
+    }
 
 
 def _stage_api_delta(ctx: PipelineContext) -> dict:
     from plugin_examples.api_delta import compute_delta
     from plugin_examples.api_delta.delta_engine import write_delta_report
+
     ctx.delta = compute_delta(ctx.catalog, old_catalog=None)
     write_delta_report(ctx.delta, ctx.evidence_dir)
     return {
@@ -741,6 +811,7 @@ def _stage_api_delta(ctx: PipelineContext) -> dict:
 def _stage_impact_mapping(ctx: PipelineContext) -> dict:
     from plugin_examples.api_delta import map_impact
     from plugin_examples.api_delta.impact_mapper import write_impact_report
+
     impact = map_impact(ctx.delta, existing_examples_index=None)
     write_impact_report(impact, ctx.evidence_dir)
     return {"new_api_needed": len(impact.new_api_examples_needed)}
@@ -751,6 +822,7 @@ def _stage_fixture_registry(ctx: PipelineContext) -> dict:
         build_fixture_registry,
         write_fixture_registry,
     )
+
     sources = _fixture_sources_to_dicts(ctx.config.fixtures.sources)
     registry = build_fixture_registry(ctx.family, sources)
     write_fixture_registry(registry, ctx.evidence_dir)
@@ -761,6 +833,7 @@ def _stage_fixture_registry(ctx: PipelineContext) -> dict:
 def _stage_example_mining(ctx: PipelineContext) -> dict:
     from plugin_examples.example_miner import mine_examples
     from plugin_examples.example_miner.miner import write_examples_index, write_stale_report
+
     sources = _fixture_sources_to_dicts(ctx.config.existing_examples.sources)
     mining = mine_examples(ctx.family, sources, catalog=ctx.catalog)
     write_examples_index(mining, ctx.evidence_dir)
@@ -786,10 +859,9 @@ def _stage_scenario_planning(ctx: PipelineContext) -> dict:
         score_entrypoint,
         write_entrypoint_scores,
     )
+
     matched_ns = [m.namespace for m in ctx.detection.matched_namespaces]
-    fixture_dict = _fixture_registry_to_dict(
-        getattr(ctx, "_fixture_registry", None)
-    )
+    fixture_dict = _fixture_registry_to_dict(getattr(ctx, "_fixture_registry", None))
 
     fixture_ext = ".xlsx"
     if ctx.config and hasattr(ctx.config, "template_hints"):
@@ -809,8 +881,7 @@ def _stage_scenario_planning(ctx: PipelineContext) -> dict:
         type_info = _find_type_in_catalog(ctx.catalog, r.full_name)
         if type_info:
             fixture_avail = bool(fixture_dict and fixture_dict.get("fixtures"))
-            scores.append(score_entrypoint(type_info, r, consumer_map,
-                                           fixture_available=fixture_avail))
+            scores.append(score_entrypoint(type_info, r, consumer_map, fixture_available=fixture_avail))
     write_entrypoint_scores(scores, ctx.evidence_dir)
 
     # Catalog hash validation (B-013) — strict enforcement (F-1 closure)
@@ -818,8 +889,11 @@ def _stage_scenario_planning(ctx: PipelineContext) -> dict:
         CatalogHashMismatchError,
         validate_catalog_hash,
     )
+
     catalog_hash_result = validate_catalog_hash(
-        ctx.family, ctx.catalog, ctx.repo_root,
+        ctx.family,
+        ctx.catalog,
+        ctx.repo_root,
     )
     _write_catalog_hash_evidence(catalog_hash_result, ctx.evidence_dir)
     # Evidence is written first; now enforce strict blocking on mismatch
@@ -855,11 +929,13 @@ def _stage_scenario_planning(ctx: PipelineContext) -> dict:
 
     # Write fixture resolution evidence (Lane B-4)
     from plugin_examples.scenario_planner.planner import build_fixture_resolution_evidence
+
     _family_config = None
     if ctx.config and hasattr(ctx.config, "_raw_yaml"):
         _family_config = ctx.config._raw_yaml
     _fixture_resolution = build_fixture_resolution_evidence(ctx.planning, _family_config)
     import json as _json_fr
+
     _fr_path = ctx.evidence_dir / "scenario-fixture-resolution.json"
     _fr_path.write_text(_json_fr.dumps(_fixture_resolution, indent=2), encoding="utf-8")
     logger.info("Fixture resolution evidence written: %s", _fr_path)
@@ -870,6 +946,7 @@ def _stage_scenario_planning(ctx: PipelineContext) -> dict:
         write_completeness_gate_result,
     )
     import json as _json
+
     _denom_path = ctx.repo_root / "pipeline" / "configs" / "denominators" / f"{ctx.family}.json"
     _denominator: dict = {}
     if _denom_path.exists():
@@ -879,18 +956,17 @@ def _stage_scenario_planning(ctx: PipelineContext) -> dict:
             logger.warning("Could not load denominator for completeness gate: %s", _e)
 
     # Unknown types: in matched namespaces but not in any planning result
-    _accounted_types = (
-        {s.target_type for s in ctx.planning.ready_scenarios}
-        | {s.target_type for s in ctx.planning.blocked_scenarios}
-    )
+    _accounted_types = {s.target_type for s in ctx.planning.ready_scenarios} | {
+        s.target_type for s in ctx.planning.blocked_scenarios
+    }
     _unknown_count = sum(
-        1 for r in roles
-        if any(r.full_name.startswith(ns) for ns in matched_ns)
-        and r.full_name not in _accounted_types
+        1 for r in roles if any(r.full_name.startswith(ns) for ns in matched_ns) and r.full_name not in _accounted_types
     )
 
     _completeness_result = check_completeness(
-        ctx.family, _denominator, ctx.planning,
+        ctx.family,
+        _denominator,
+        ctx.planning,
         dry_run=ctx.dry_run,
         unknown_type_count=_unknown_count,
     )
@@ -909,6 +985,7 @@ def _stage_scenario_planning(ctx: PipelineContext) -> dict:
 def _stage_llm_preflight(ctx: PipelineContext) -> dict:
     from plugin_examples.llm_router import LLMRouter
     from plugin_examples.llm_router.router import write_preflight_report
+
     ctx.llm_router = LLMRouter(
         provider_order=ctx.config.llm.provider_order,
         metrics_collector=ctx.metrics_collector,
@@ -940,17 +1017,19 @@ def _generate_nonlowcode_examples(ctx: PipelineContext) -> dict:
 
     # Convert DownstreamResult records to the project-dict format used by subsequent stages
     for r in batch_result.results:
-        ctx.generated_projects.append({
-            "slug": r.slug,
-            "family": r.family,
-            "namespace_source": r.namespace_source,
-            "discovery_method": r.discovery_method,
-            "artifact_contract": r.artifact_contract,
-            "pr_packet": r.pr_packet,
-            "publication_state": r.publication_state,
-            "evidence": r.evidence,
-            "errors": r.errors,
-        })
+        ctx.generated_projects.append(
+            {
+                "slug": r.slug,
+                "family": r.family,
+                "namespace_source": r.namespace_source,
+                "discovery_method": r.discovery_method,
+                "artifact_contract": r.artifact_contract,
+                "pr_packet": r.pr_packet,
+                "publication_state": r.publication_state,
+                "evidence": r.evidence,
+                "errors": r.errors,
+            }
+        )
 
     summary = {
         "candidates": batch_result.candidates,
@@ -963,7 +1042,9 @@ def _generate_nonlowcode_examples(ctx: PipelineContext) -> dict:
 
     logger.info(
         "Non-LowCode generation: %d candidates, %d passed, %d failed",
-        batch_result.candidates, batch_result.passed, batch_result.failed,
+        batch_result.candidates,
+        batch_result.passed,
+        batch_result.failed,
     )
     return {
         "examples_generated": batch_result.candidates,
@@ -987,7 +1068,8 @@ def _stage_generation(ctx: PipelineContext) -> dict:
     # always tracked even when ready_count == 0.
     if ctx.lifecycle_registry is None:
         ctx.lifecycle_registry = ExampleLifecycleRegistry(
-            family=ctx.family, run_id=ctx.run_id,
+            family=ctx.family,
+            run_id=ctx.run_id,
         )
 
     # Register blocked/excluded scenarios in lifecycle so they are never silently
@@ -1011,7 +1093,10 @@ def _stage_generation(ctx: PipelineContext) -> dict:
     if ctx.healing_intelligence is None:
         try:
             from plugin_examples.healing_intelligence.loader import HealingIntelligenceLoader
-            hi = HealingIntelligenceLoader(ctx.repo_root / "workspace" / "verification" / "latest" / "healing-intelligence")
+
+            hi = HealingIntelligenceLoader(
+                ctx.repo_root / "workspace" / "verification" / "latest" / "healing-intelligence"
+            )
             hi.load()
             ctx.healing_intelligence = hi
             healing_evidence["loaded"] = True
@@ -1037,6 +1122,7 @@ def _stage_generation(ctx: PipelineContext) -> dict:
             hints = {}
             if ctx.config and hasattr(ctx.config, "template_hints"):
                 from dataclasses import asdict as _asdict
+
                 hints = _asdict(ctx.config.template_hints)
             # Inject family into hints for FormatContract lookup in codegen
             hints["family"] = ctx.family
@@ -1046,7 +1132,8 @@ def _stage_generation(ctx: PipelineContext) -> dict:
             if ctx.healing_intelligence and ctx.healing_intelligence.is_loaded():
                 type_short = scenario_dict.get("target_type", "").split(".")[-1]
                 hi_constraints = ctx.healing_intelligence.get_steering_constraints(
-                    ctx.family, type_short,
+                    ctx.family,
+                    type_short,
                 )
                 # Advisory constraints from healing intelligence are merged
                 # into per_type_constraints.  Config constraints are authoritative
@@ -1063,15 +1150,18 @@ def _stage_generation(ctx: PipelineContext) -> dict:
                     )
                     _ptc = dict(_ptc)
                     _ptc[type_short] = existing
-                    healing_evidence["constraints_applied"].append({
-                        "scenario_id": scenario.scenario_id,
-                        "type": type_short,
-                        "hi_required": hi_required,
-                        "hi_forbidden": hi_forbidden,
-                    })
+                    healing_evidence["constraints_applied"].append(
+                        {
+                            "scenario_id": scenario.scenario_id,
+                            "type": type_short,
+                            "hi_required": hi_required,
+                            "hi_forbidden": hi_forbidden,
+                        }
+                    )
 
             packet = build_packet(
-                scenario_dict, ctx.catalog,
+                scenario_dict,
+                ctx.catalog,
                 template_hints=hints,
                 per_type_constraints=_ptc,
             )
@@ -1093,10 +1183,7 @@ def _stage_generation(ctx: PipelineContext) -> dict:
             )
             # Store constraints for build repair re-injection (all families).
             # The packet is not available in _stage_validation, so we persist here.
-            project["pdf_constraints"] = [
-                c for c in packet.constraints
-                if "REQUIRED:" in c or "FORBIDDEN:" in c
-            ]
+            project["pdf_constraints"] = [c for c in packet.constraints if "REQUIRED:" in c or "FORBIDDEN:" in c]
             project["family_name"] = ctx.family
             _type_name_ptc = packet.target_type.split(".")[-1] if packet.target_type else ""
             project["type_short"] = _type_name_ptc.lower()
@@ -1113,17 +1200,23 @@ def _stage_generation(ctx: PipelineContext) -> dict:
         GeneratedFixture,
         write_generated_fixtures_evidence,
     )
+
     all_fixtures: list[GeneratedFixture] = []
     for proj in ctx.generated_projects:
         placed = proj.get("placed_fixtures", [])
         for fp in placed:
             p = Path(fp)
             if p.exists():
-                all_fixtures.append(GeneratedFixture(
-                    path=fp, format=p.suffix, created_by="fixture_factory",
-                    validity_check=f"file_exists_and_size_{p.stat().st_size}",
-                    size_bytes=p.stat().st_size, ready=True,
-                ))
+                all_fixtures.append(
+                    GeneratedFixture(
+                        path=fp,
+                        format=p.suffix,
+                        created_by="fixture_factory",
+                        validity_check=f"file_exists_and_size_{p.stat().st_size}",
+                        size_bytes=p.stat().st_size,
+                        ready=True,
+                    )
+                )
     if all_fixtures:
         write_generated_fixtures_evidence(all_fixtures, ctx.evidence_dir)
 
@@ -1133,11 +1226,22 @@ def _stage_generation(ctx: PipelineContext) -> dict:
     # Write healing intelligence evidence
     if healing_evidence.get("loaded"):
         import json as _json
+
         hi_path = ctx.evidence_dir / "latest" / "healing-intelligence-usage.json"
         hi_path.parent.mkdir(parents=True, exist_ok=True)
         hi_path.write_text(_json.dumps(healing_evidence, indent=2), encoding="utf-8")
-        logger.info("Healing intelligence evidence written: %d constraints applied",
-                     len(healing_evidence.get("constraints_applied", [])))
+        logger.info(
+            "Healing intelligence evidence written: %d constraints applied",
+            len(healing_evidence.get("constraints_applied", [])),
+        )
+
+    # Write generation decision audit (per-scenario strategy tracking)
+    try:
+        from plugin_examples.generator.decision_audit import write_generation_decision_audit
+
+        write_generation_decision_audit(ctx)
+    except Exception:
+        logger.debug("Generation decision audit skipped (non-critical)", exc_info=True)
 
     return {
         "examples_generated": len(ctx.generated_projects),
@@ -1163,9 +1267,13 @@ def _stage_validation(ctx: PipelineContext) -> dict:
 
     # Repairable runtime failure classifications
     repairable_classifications = {
-        "interactive_console_call", "wrong_input_format", "invalid_api_usage",
-        "blocked_invalid_operation", "blocked_null_argument",
-        "missing_options_input", "null_options_passed",
+        "interactive_console_call",
+        "wrong_input_format",
+        "invalid_api_usage",
+        "blocked_invalid_operation",
+        "blocked_null_argument",
+        "missing_options_input",
+        "null_options_passed",
         "blocked_runtime_context_required",
     }
 
@@ -1210,19 +1318,23 @@ def _stage_validation(ctx: PipelineContext) -> dict:
             pdf_constraints = proj.get("pdf_constraints", [])
             pdf_constraint_reminder = ""
             if pdf_constraints:
-                pdf_constraint_reminder = (
-                    "\n\nREQUIRED CONSTRAINTS (must be satisfied in fixed code):\n"
-                    + "\n".join(f"- {c}" for c in pdf_constraints)
+                pdf_constraint_reminder = "\n\nREQUIRED CONSTRAINTS (must be satisfied in fixed code):\n" + "\n".join(
+                    f"- {c}" for c in pdf_constraints
                 )
             # Healing intelligence: inject known repair strategy if available
             hi_hint = ""
             scenario_repair = hi_repair_hints.get(proj["scenario_id"], "")
             if scenario_repair:
                 hi_hint = f"\n\nKNOWN REPAIR STRATEGY: {scenario_repair}"
+            # RISK-07/08: sanitize compiler output before prompt construction
+            from plugin_examples.llm_router.sanitizer import sanitize_llm_input, scrub_secrets
+
+            _clean_build_stdout = sanitize_llm_input(build_stdout)
+            _clean_build_stderr = sanitize_llm_input(build_stderr)
             repair_prompt = (
                 f"The following C# code fails to compile. Fix it.\n\n"
-                f"Compiler stdout:\n{build_stdout[:800]}\n\n"
-                f"Compiler stderr:\n{build_stderr[:800]}\n\n"
+                f"Compiler stdout:\n{_clean_build_stdout}\n\n"
+                f"Compiler stderr:\n{_clean_build_stderr}\n\n"
                 f"Code:\n```csharp\n{current_code}\n```\n\n"
                 f"RULES: Do NOT use Console.ReadKey() or Console.ReadLine(). "
                 f"Do NOT use try/catch to hide errors. "
@@ -1230,13 +1342,44 @@ def _stage_validation(ctx: PipelineContext) -> dict:
                 f"{pdf_constraint_reminder}"
                 f"{hi_hint}"
             )
+            repair_prompt = scrub_secrets(repair_prompt)
+            _prompt_hash = hashlib.sha256(repair_prompt.encode("utf-8")).hexdigest()
             try:
-                response = ctx.llm_router.generate(repair_prompt, system_prompt=(
-                    "You are an expert C# developer. Fix the compilation errors. "
-                    "FORBIDDEN: Console.ReadKey(), Console.ReadLine(), TODO, NotImplementedException. "
-                    "Return ONLY the corrected code in a single ```csharp code block."
-                ))
+                response = ctx.llm_router.generate(
+                    repair_prompt,
+                    system_prompt=(
+                        "You are an expert C# developer. Fix the compilation errors. "
+                        "FORBIDDEN: Console.ReadKey(), Console.ReadLine(), TODO, NotImplementedException. "
+                        "Return ONLY the corrected code in a single ```csharp code block."
+                    ),
+                )
                 fixed_code = _extract_code(response)
+                _code_hash = hashlib.sha256(fixed_code.encode("utf-8")).hexdigest() if fixed_code else ""
+                # RISK-01: Repair diff cap — reject repairs that rewrite >60% of code
+                if fixed_code and current_code:
+                    from difflib import SequenceMatcher
+
+                    _similarity = SequenceMatcher(None, current_code, fixed_code).ratio()
+                    if _similarity < 0.4:  # >60% changed
+                        logger.warning(
+                            "Build repair attempt %d for %s rejected: diff too large (similarity=%.2f, threshold=0.40)",
+                            attempt,
+                            proj["scenario_id"],
+                            _similarity,
+                        )
+                        repair_log.append(
+                            {
+                                "scenario_id": proj["scenario_id"],
+                                "repair_type": "build",
+                                "attempt": attempt,
+                                "success": False,
+                                "rejection_reason": "repair_diff_cap_exceeded",
+                                "similarity": round(_similarity, 3),
+                                "output_hash": _code_hash,
+                                "prompt_hash": _prompt_hash,
+                            }
+                        )
+                        break
                 if fixed_code and fixed_code != current_code:
                     # Semantic validation before writing — PDF-specific check + per-type constraints
                     proj_family = proj.get("family_name", "pdf" if pdf_constraints else "")
@@ -1244,21 +1387,25 @@ def _stage_validation(ctx: PipelineContext) -> dict:
                     semantic_issues = _validate_code(fixed_code, family=proj_family, type_short=proj_type_short)
                     proj_type_constraints = proj.get("type_constraints", {})
                     if proj_type_constraints:
-                        semantic_issues.extend(
-                            _validate_code_from_constraints(fixed_code, proj_type_constraints)
-                        )
+                        semantic_issues.extend(_validate_code_from_constraints(fixed_code, proj_type_constraints))
                     if semantic_issues:
                         logger.warning(
                             "Build repair attempt %d for %s produced semantically invalid code: %s",
-                            attempt, proj["scenario_id"], semantic_issues,
+                            attempt,
+                            proj["scenario_id"],
+                            semantic_issues,
                         )
-                        repair_log.append({
-                            "scenario_id": proj["scenario_id"],
-                            "repair_type": "build",
-                            "attempt": attempt,
-                            "success": False,
-                            "semantic_issues": semantic_issues,
-                        })
+                        repair_log.append(
+                            {
+                                "scenario_id": proj["scenario_id"],
+                                "repair_type": "build",
+                                "attempt": attempt,
+                                "success": False,
+                                "semantic_issues": semantic_issues,
+                                "output_hash": _code_hash,
+                                "prompt_hash": _prompt_hash,
+                            }
+                        )
                         # Do NOT write the invalid code — continue to next attempt or stop
                         break
                     program_path.write_text(fixed_code, encoding="utf-8")
@@ -1268,15 +1415,22 @@ def _stage_validation(ctx: PipelineContext) -> dict:
                         skip_run=ctx.skip_run,
                     )
                     repairs_done += 1
-                    repair_log.append({
-                        "scenario_id": proj["scenario_id"],
-                        "repair_type": "build",
-                        "attempt": attempt,
-                        "success": vr.passed or (vr.build and vr.build.success),
-                    })
-                    logger.info("Build repair attempt %d for %s: %s",
-                                attempt, proj["scenario_id"],
-                                "passed" if vr.passed else "still failing")
+                    repair_log.append(
+                        {
+                            "scenario_id": proj["scenario_id"],
+                            "repair_type": "build",
+                            "attempt": attempt,
+                            "success": vr.passed or (vr.build and vr.build.success),
+                            "output_hash": _code_hash,
+                            "prompt_hash": _prompt_hash,
+                        }
+                    )
+                    logger.info(
+                        "Build repair attempt %d for %s: %s",
+                        attempt,
+                        proj["scenario_id"],
+                        "passed" if vr.passed else "still failing",
+                    )
                 else:
                     break
             except Exception as e:
@@ -1285,9 +1439,7 @@ def _stage_validation(ctx: PipelineContext) -> dict:
 
         # Runtime-repair cycle: fix repairable runtime failures
         rt_attempt = 0
-        while (not vr.passed and vr.failure_stage == "run"
-               and rt_attempt < max_runtime_repairs
-               and vr.run):
+        while not vr.passed and vr.failure_stage == "run" and rt_attempt < max_runtime_repairs and vr.run:
             rt_attempt += 1
             rc = classify_runtime_failure(
                 proj["scenario_id"],
@@ -1313,37 +1465,38 @@ def _stage_validation(ctx: PipelineContext) -> dict:
                 )
                 logger.info(
                     "Runtime repair attempt %d for %s: re-injecting %d pdf_constraints",
-                    rt_attempt, proj["scenario_id"], len(rt_pdf_constraints),
+                    rt_attempt,
+                    proj["scenario_id"],
+                    len(rt_pdf_constraints),
                 )
             rt_type_constraints = proj.get("type_constraints", {})
             rt_type_constraint_reminder = ""
             if rt_type_constraints:
-                required_lines = [
-                    c for c in rt_type_constraints.get("REQUIRED", [])
-                ]
-                forbidden_lines = [
-                    c for c in rt_type_constraints.get("FORBIDDEN", [])
-                ]
+                required_lines = [c for c in rt_type_constraints.get("REQUIRED", [])]
+                forbidden_lines = [c for c in rt_type_constraints.get("FORBIDDEN", [])]
                 if required_lines or forbidden_lines:
                     parts = []
                     if required_lines:
                         parts.append("REQUIRED:\n" + "\n".join(f"  - {c}" for c in required_lines))
                     if forbidden_lines:
                         parts.append("FORBIDDEN:\n" + "\n".join(f"  - {c}" for c in forbidden_lines))
-                    rt_type_constraint_reminder = (
-                        "\n\nPER-TYPE CONSTRAINTS (must be respected):\n" + "\n".join(parts)
-                    )
+                    rt_type_constraint_reminder = "\n\nPER-TYPE CONSTRAINTS (must be respected):\n" + "\n".join(parts)
                     logger.info(
                         "Runtime repair attempt %d for %s: re-injecting type_constraints "
                         "(%d required, %d forbidden)",
-                        rt_attempt, proj["scenario_id"],
-                        len(required_lines), len(forbidden_lines),
+                        rt_attempt,
+                        proj["scenario_id"],
+                        len(required_lines),
+                        len(forbidden_lines),
                     )
+            # RISK-07/08: sanitize runtime output before prompt construction
+            _clean_run_stdout = sanitize_llm_input(run_stdout)
+            _clean_run_stderr = sanitize_llm_input(run_stderr)
             repair_prompt = (
                 f"The following C# code compiles but fails at runtime.\n\n"
                 f"Runtime classification: {rc.classification}\n"
-                f"Runtime stdout:\n{run_stdout[:600]}\n\n"
-                f"Runtime stderr:\n{run_stderr[:600]}\n\n"
+                f"Runtime stdout:\n{_clean_run_stdout}\n\n"
+                f"Runtime stderr:\n{_clean_run_stderr}\n\n"
                 f"Code:\n```csharp\n{current_code}\n```\n\n"
                 f"RULES: Do NOT use Console.ReadKey() or Console.ReadLine(). "
                 f"Do NOT use try/catch to hide errors. "
@@ -1353,35 +1506,73 @@ def _stage_validation(ctx: PipelineContext) -> dict:
                 f"{rt_type_constraint_reminder}"
                 f"{hi_repair_hints.get(proj['scenario_id'], '') and ('\n\nKNOWN REPAIR STRATEGY: ' + hi_repair_hints[proj['scenario_id']]) or ''}"
             )
+            repair_prompt = scrub_secrets(repair_prompt)
+            _prompt_hash = hashlib.sha256(repair_prompt.encode("utf-8")).hexdigest()
             try:
-                response = ctx.llm_router.generate(repair_prompt, system_prompt=(
-                    "You are an expert C# developer. Fix the runtime error. "
-                    "FORBIDDEN: Console.ReadKey(), Console.ReadLine(). "
-                    "Return ONLY the corrected code in a single ```csharp code block."
-                ))
+                response = ctx.llm_router.generate(
+                    repair_prompt,
+                    system_prompt=(
+                        "You are an expert C# developer. Fix the runtime error. "
+                        "FORBIDDEN: Console.ReadKey(), Console.ReadLine(). "
+                        "Return ONLY the corrected code in a single ```csharp code block."
+                    ),
+                )
                 fixed_code = _extract_code(response)
+                _code_hash = hashlib.sha256(fixed_code.encode("utf-8")).hexdigest() if fixed_code else ""
+                # RISK-01: Repair diff cap — reject repairs that rewrite >60% of code
+                if fixed_code and current_code:
+                    from difflib import SequenceMatcher
+
+                    _similarity = SequenceMatcher(None, current_code, fixed_code).ratio()
+                    if _similarity < 0.4:  # >60% changed
+                        logger.warning(
+                            "Runtime repair attempt %d for %s rejected: diff too large (similarity=%.2f, threshold=0.40)",
+                            rt_attempt,
+                            proj["scenario_id"],
+                            _similarity,
+                        )
+                        repair_log.append(
+                            {
+                                "scenario_id": proj["scenario_id"],
+                                "repair_type": "runtime",
+                                "classification": rc.classification,
+                                "attempt": rt_attempt,
+                                "success": False,
+                                "rejection_reason": "repair_diff_cap_exceeded",
+                                "similarity": round(_similarity, 3),
+                                "output_hash": _code_hash,
+                                "prompt_hash": _prompt_hash,
+                            }
+                        )
+                        break
                 if fixed_code and fixed_code != current_code:
                     # Semantic validation before writing — PDF-specific check + per-type constraints
                     rt_proj_family = proj.get("family_name", "pdf" if rt_pdf_constraints else "")
                     rt_proj_type_short = proj.get("type_short", "")
-                    rt_semantic_issues = _validate_code(fixed_code, family=rt_proj_family, type_short=rt_proj_type_short)
+                    rt_semantic_issues = _validate_code(
+                        fixed_code, family=rt_proj_family, type_short=rt_proj_type_short
+                    )
                     if rt_type_constraints:
-                        rt_semantic_issues.extend(
-                            _validate_code_from_constraints(fixed_code, rt_type_constraints)
-                        )
+                        rt_semantic_issues.extend(_validate_code_from_constraints(fixed_code, rt_type_constraints))
                     if rt_semantic_issues:
                         logger.warning(
                             "Runtime repair attempt %d for %s produced semantically invalid code: %s",
-                            rt_attempt, proj["scenario_id"], rt_semantic_issues,
+                            rt_attempt,
+                            proj["scenario_id"],
+                            rt_semantic_issues,
                         )
-                        repair_log.append({
-                            "scenario_id": proj["scenario_id"],
-                            "repair_type": "runtime",
-                            "classification": rc.classification,
-                            "attempt": rt_attempt,
-                            "success": False,
-                            "semantic_issues": rt_semantic_issues,
-                        })
+                        repair_log.append(
+                            {
+                                "scenario_id": proj["scenario_id"],
+                                "repair_type": "runtime",
+                                "classification": rc.classification,
+                                "attempt": rt_attempt,
+                                "success": False,
+                                "semantic_issues": rt_semantic_issues,
+                                "output_hash": _code_hash,
+                                "prompt_hash": _prompt_hash,
+                            }
+                        )
                         # Do NOT write the invalid code — continue to next attempt or stop
                         break
                     program_path.write_text(fixed_code, encoding="utf-8")
@@ -1391,16 +1582,24 @@ def _stage_validation(ctx: PipelineContext) -> dict:
                         skip_run=ctx.skip_run,
                     )
                     runtime_repairs_done += 1
-                    repair_log.append({
-                        "scenario_id": proj["scenario_id"],
-                        "repair_type": "runtime",
-                        "classification": rc.classification,
-                        "attempt": rt_attempt,
-                        "success": vr.passed,
-                    })
-                    logger.info("Runtime repair attempt %d for %s (%s): %s",
-                                rt_attempt, proj["scenario_id"], rc.classification,
-                                "passed" if vr.passed else "still failing")
+                    repair_log.append(
+                        {
+                            "scenario_id": proj["scenario_id"],
+                            "repair_type": "runtime",
+                            "classification": rc.classification,
+                            "attempt": rt_attempt,
+                            "success": vr.passed,
+                            "output_hash": _code_hash,
+                            "prompt_hash": _prompt_hash,
+                        }
+                    )
+                    logger.info(
+                        "Runtime repair attempt %d for %s (%s): %s",
+                        rt_attempt,
+                        proj["scenario_id"],
+                        rc.classification,
+                        "passed" if vr.passed else "still failing",
+                    )
                 else:
                     break
             except Exception as e:
@@ -1438,6 +1637,7 @@ def _stage_validation(ctx: PipelineContext) -> dict:
         classify_validation_results,
         write_runtime_failure_classifications,
     )
+
     runtime_failures = classify_validation_results(ctx.validation_results)
     if runtime_failures:
         write_runtime_failure_classifications(runtime_failures, ctx.evidence_dir)
@@ -1447,11 +1647,17 @@ def _stage_validation(ctx: PipelineContext) -> dict:
         repair_path = ctx.evidence_dir / "latest" / "repair-attempts.json"
         repair_path.parent.mkdir(parents=True, exist_ok=True)
         import json as _json
-        repair_path.write_text(_json.dumps({
-            "total_build_repairs": repairs_done,
-            "total_runtime_repairs": runtime_repairs_done,
-            "attempts": repair_log,
-        }, indent=2))
+
+        repair_path.write_text(
+            _json.dumps(
+                {
+                    "total_build_repairs": repairs_done,
+                    "total_runtime_repairs": runtime_repairs_done,
+                    "attempts": repair_log,
+                },
+                indent=2,
+            )
+        )
 
     # Backlog failed examples with root cause and recommended fix
     if ctx.lifecycle_registry:
@@ -1482,8 +1688,7 @@ def _stage_validation(ctx: PipelineContext) -> dict:
 
     if failed > 0 and ctx.require_validation:
         raise RuntimeError(
-            f"Validation failed for {failed}/{len(ctx.validation_results)} examples "
-            "and --require-validation is set"
+            f"Validation failed for {failed}/{len(ctx.validation_results)} examples " "and --require-validation is set"
         )
 
     build_passed = sum(1 for v in ctx.validation_results if v.build and v.build.success)
@@ -1507,9 +1712,16 @@ _REVIEWER_MAX_REPAIR_ATTEMPTS = 2
 # Retryable reviewer errors — transient or code-fixable failures.
 # Non-retryable: infrastructure errors, timeout, unavailable.
 _REVIEWER_RETRYABLE_KEYWORDS = (
-    "compilation error", "build error", "CS0", "CS1",
-    "missing using", "syntax error", "type mismatch",
-    "namespace", "undeclared", "does not contain",
+    "compilation error",
+    "build error",
+    "CS0",
+    "CS1",
+    "missing using",
+    "syntax error",
+    "type mismatch",
+    "namespace",
+    "undeclared",
+    "does not contain",
 )
 
 
@@ -1573,14 +1785,18 @@ def _stage_reviewer(ctx: PipelineContext) -> dict:
         repair_attempts += 1
         logger.info(
             "Reviewer repair attempt %d/%d for %s (error: %s)",
-            repair_attempts, _REVIEWER_MAX_REPAIR_ATTEMPTS,
-            ctx.family, result.error,
+            repair_attempts,
+            _REVIEWER_MAX_REPAIR_ATTEMPTS,
+            ctx.family,
+            result.error,
         )
-        repair_log.append({
-            "attempt": repair_attempts,
-            "prior_error": result.error,
-            "retryable": True,
-        })
+        repair_log.append(
+            {
+                "attempt": repair_attempts,
+                "prior_error": result.error,
+                "retryable": True,
+            }
+        )
         try:
             result = run_example_reviewer(
                 family=ctx.family,
@@ -1612,14 +1828,16 @@ def _stage_reviewer(ctx: PipelineContext) -> dict:
     # G-1: Auto-learn from run failures (additive CANDIDATE only — never promotes CONFIRMED).
     try:
         from plugin_examples.healing_intelligence.loader import auto_learn_from_run
-        registry_dir = (
-            ctx.repo_root / "workspace" / "verification" / "latest" / "healing-intelligence"
-        )
+
+        registry_dir = ctx.repo_root / "workspace" / "verification" / "latest" / "healing-intelligence"
         registry_path = registry_dir / "failure-pattern-registry.json"
         learn_result = auto_learn_from_run(ctx.run_dir, ctx.family, registry_path)
         logger.info(
             "Healing auto-learn: +%d new, %d incremented, %d skipped for %s",
-            learn_result["added"], learn_result["incremented"], learn_result["skipped"], ctx.family,
+            learn_result["added"],
+            learn_result["incremented"],
+            learn_result["skipped"],
+            ctx.family,
         )
     except Exception as _e:  # noqa: BLE001
         logger.warning("Healing auto-learn failed (non-blocking): %s", _e)
@@ -1668,18 +1886,21 @@ def _stage_publisher(ctx: PipelineContext) -> dict:
 # Verdict determination
 # ---------------------------------------------------------------------------
 
+
 def _determine_verdict(stages: list[StageResult], ctx: PipelineContext) -> str:
     """Determine the proof verdict based on stage outcomes.
 
     Delegates to the central gate engine for honest verdict computation.
     """
     from plugin_examples.gates.evaluator import determine_verdict
+
     return determine_verdict(stages, ctx)
 
 
 # ---------------------------------------------------------------------------
 # Report builder
 # ---------------------------------------------------------------------------
+
 
 def _build_report(
     ctx: PipelineContext,
@@ -1697,9 +1918,7 @@ def _build_report(
     failed = sum(1 for s in stages if s.status == "failed")
     skipped = sum(1 for s in stages if s.status in ("skipped", "skipped_replayed"))
 
-    hard_stopped = any(
-        s.status == "failed" for s in stages[:7]
-    )
+    hard_stopped = any(s.status == "failed" for s in stages[:7])
 
     # Use partitioned verdict from gate_verdict if available
     verdict = ctx.gate_verdict.verdict if ctx.gate_verdict else _determine_verdict(stages, ctx)
@@ -1729,7 +1948,9 @@ def _build_report(
         "catalog_path": stages[4].artifacts.get("catalog_path") if len(stages) > 4 else None,
         "matched_plugin_namespaces": det_stage.artifacts.get("matched_namespaces", []) if det_stage else [],
         "source_of_truth_status": "eligible" if (det_stage and det_stage.status == "success") else "failed",
-        "delta_status": ("initial_run" if stages[7].artifacts.get("initial_run", True) else "diff") if len(stages) > 7 else "unknown",
+        "delta_status": ("initial_run" if stages[7].artifacts.get("initial_run", True) else "diff")
+        if len(stages) > 7
+        else "unknown",
         "fixture_count": stages[9].artifacts.get("fixture_count", 0) if len(stages) > 9 else 0,
         "mined_example_count": stages[10].artifacts.get("mined_total", 0) if len(stages) > 10 else 0,
         "ready_scenario_count": plan_stage.artifacts.get("ready_count", 0) if plan_stage else 0,
@@ -1737,9 +1958,15 @@ def _build_report(
         "llm_preflight_result": llm_stage.artifacts.get("selected_provider", "no_provider") if llm_stage else "skipped",
         "generation_mode": gen_stage.artifacts.get("generation_mode", "skipped") if gen_stage else "skipped",
         "examples_generated_count": gen_stage.artifacts.get("examples_generated", 0) if gen_stage else 0,
-        "dotnet_restore_passed": sum(1 for v in ctx.validation_results if v.restore and v.restore.success) if ctx.validation_results else 0,
-        "dotnet_build_passed": sum(1 for v in ctx.validation_results if v.build and v.build.success) if ctx.validation_results else 0,
-        "dotnet_run_passed": sum(1 for v in ctx.validation_results if v.run and v.run.success) if ctx.validation_results else 0,
+        "dotnet_restore_passed": sum(1 for v in ctx.validation_results if v.restore and v.restore.success)
+        if ctx.validation_results
+        else 0,
+        "dotnet_build_passed": sum(1 for v in ctx.validation_results if v.build and v.build.success)
+        if ctx.validation_results
+        else 0,
+        "dotnet_run_passed": sum(1 for v in ctx.validation_results if v.run and v.run.success)
+        if ctx.validation_results
+        else 0,
         "reviewer_available": rev_stage.artifacts.get("available", False) if rev_stage else False,
         "reviewer_result": "passed" if (rev_stage and rev_stage.artifacts.get("passed")) else "unavailable",
         "publisher_status": pub_stage.artifacts.get("status", "skipped") if pub_stage else "skipped",
@@ -1821,9 +2048,15 @@ STAGE_DEFINITIONS = [
 ]
 
 # Hard-stop stages (pipeline halts on failure)
-HARD_STOP_STAGES = {"load_config", "nuget_fetch", "dependency_resolution",
-                     "extraction", "reflection", "plugin_detection",
-                     "scenario_planning"}
+HARD_STOP_STAGES = {
+    "load_config",
+    "nuget_fetch",
+    "dependency_resolution",
+    "extraction",
+    "reflection",
+    "plugin_detection",
+    "scenario_planning",
+}
 
 
 def run_pipeline(
@@ -1885,6 +2118,10 @@ def run_pipeline(
     ctx._allow_experimental = allow_experimental
     ctx._family_config_path = family_config_path
 
+    # Bind structured-log context so every downstream logger emits run_id + family
+    _bind_obs_context(run_id=run_id, family=family)
+    logger.info("pipeline_start run_id=%s family=%s dry_run=%s", run_id, family, dry_run)
+
     # ---------------------------------------------------------------------------
     # Replay setup (fail-closed; runs before any stage)
     # ---------------------------------------------------------------------------
@@ -1913,13 +2150,9 @@ def run_pipeline(
             )
         _prior_run_dir = repo_root / "workspace" / "runs" / _reuse_run_id
         if not _prior_run_dir.is_dir():
-            raise RuntimeError(
-                f"--reuse-run '{_reuse_run_id}' does not exist at {_prior_run_dir}"
-            )
+            raise RuntimeError(f"--reuse-run '{_reuse_run_id}' does not exist at {_prior_run_dir}")
 
-        logger.info(
-            "replay: starting %r replay from run '%s'", replay_from, _reuse_run_id
-        )
+        logger.info("replay: starting %r replay from run '%s'", replay_from, _reuse_run_id)
 
         # Integrity checks (writes stale-artifact-check.json; raises on hard fail)
         _integrity = check_replay_integrity(
@@ -1937,6 +2170,7 @@ def run_pipeline(
         _prior_report = _prior_run_dir / "pilot-report.json"
         if _prior_report.exists():
             import json as _json
+
             _prior_data = _json.loads(_prior_report.read_text(encoding="utf-8"))
             _nf_stage = next(
                 (s for s in _prior_data.get("stages", []) if s.get("name") == "nuget_fetch"),
@@ -1955,9 +2189,7 @@ def run_pipeline(
 
         # Restore generated_projects for validation / reviewer / publisher modes
         if replay_from in {"validation", "reviewer", "publisher"}:
-            ctx.generated_projects = restore_generated_projects(
-                _prior_run_dir, family, repo_root
-            )
+            ctx.generated_projects = restore_generated_projects(_prior_run_dir, family, repo_root)
 
         # Restore validation_results (typed) for reviewer / publisher modes
         if replay_from in {"reviewer", "publisher"}:
@@ -1988,10 +2220,7 @@ def run_pipeline(
     hard_stopped = False
 
     # Effective stage list (stage 7 = source_of_truth_gate is combined into stage 6)
-    effective_stages = [
-        (name, order, fn) for name, order, fn in STAGE_DEFINITIONS
-        if fn is not None
-    ]
+    effective_stages = [(name, order, fn) for name, order, fn in STAGE_DEFINITIONS if fn is not None]
 
     for name, order, fn in effective_stages:
         if hard_stopped:
@@ -2001,8 +2230,7 @@ def run_pipeline(
             continue
 
         if order > max_stage_order:
-            r = StageResult(name=name, order=order, status="skipped",
-                            error=f"Skipped: max tier {max_tier}")
+            r = StageResult(name=name, order=order, status="skipped", error=f"Skipped: max tier {max_tier}")
             stages.append(r)
             ctx._completed_stages = list(stages)
             continue
@@ -2046,6 +2274,7 @@ def run_pipeline(
     if replay_from and _reuse_run_id:
         try:
             from plugin_examples.replay import write_replay_manifest  # noqa: PLC0415
+
             write_replay_manifest(
                 evidence_dir=evidence_dir,
                 replay_from=replay_from,
@@ -2127,6 +2356,7 @@ def run_pipeline(
             write_lifecycle_evidence,
             update_backlog_from_lifecycle,
         )
+
         write_lifecycle_evidence(ctx.lifecycle_registry, evidence_dir)
         backlog_dir = verification_dir / "latest"
         update_backlog_from_lifecycle(ctx.lifecycle_registry, backlog_dir)
@@ -2138,8 +2368,11 @@ def run_pipeline(
             compare_with_prior_run,
             write_comparison_evidence,
         )
+
         comparison_result = compare_with_prior_run(
-            ctx.lifecycle_registry, compare_run, repo_root,
+            ctx.lifecycle_registry,
+            compare_run,
+            repo_root,
         )
         write_comparison_evidence(comparison_result, evidence_dir)
         # Re-write lifecycle evidence with comparison fields populated
@@ -2147,26 +2380,34 @@ def run_pipeline(
         if comparison_result.regression_detected:
             logger.warning(
                 "RUN-TO-RUN REGRESSION DETECTED: %d scenario(s) regressed vs %s",
-                comparison_result.regressed_count, compare_run,
+                comparison_result.regressed_count,
+                compare_run,
             )
         else:
             logger.info(
                 "Run-to-run comparison vs %s: %s",
-                compare_run, comparison_result.verdict,
+                compare_run,
+                comparison_result.verdict,
             )
 
     # After snapshot
     after = _snapshot_workspace(manifests_dir, verification_dir)
 
     # Add run-scoped evidence listing
-    after["run_evidence_files"] = sorted(
-        f.name for f in (evidence_dir / "latest").iterdir()
-        if f.is_file()
-    ) if (evidence_dir / "latest").exists() else []
+    after["run_evidence_files"] = (
+        sorted(f.name for f in (evidence_dir / "latest").iterdir() if f.is_file())
+        if (evidence_dir / "latest").exists()
+        else []
+    )
 
     report = _build_report(
-        ctx, stages, before, after,
-        start_time, end_time, total_ms,
+        ctx,
+        stages,
+        before,
+        after,
+        start_time,
+        end_time,
+        total_ms,
         command=command,
     )
 
@@ -2188,9 +2429,13 @@ def run_pipeline(
         # Promote manifests (package-lock, fixture-registry, etc.)
         dst_manifests = manifests_dir
         dst_manifests.mkdir(parents=True, exist_ok=True)
-        manifest_files = ["package-lock.json", "fixture-registry.json",
-                          "existing-examples-index.json", "scenario-catalog.json",
-                          "example-index.json"]
+        manifest_files = [
+            "package-lock.json",
+            "fixture-registry.json",
+            "existing-examples-index.json",
+            "scenario-catalog.json",
+            "example-index.json",
+        ]
         for mf in manifest_files:
             src_mf = evidence_dir / mf
             if src_mf.exists():

@@ -7,6 +7,7 @@ Wave 13 additions:
 - BMV-01: passes when sidecar_path present (defers to BMV-06)
 - BMV-06: external sidecar .sha256 verification
 """
+
 import pytest
 import pathlib
 import tempfile
@@ -30,9 +31,9 @@ from src.plugin_examples.fixture_factory.taskcard_closeout_validators import (
 
 # ---- Fixtures ----------------------------------------------------------------
 
+
 def _make_taskcards(count: int, status: str = "COMPLETE", evidence: str = "some evidence") -> list[dict]:
-    return [{"id": f"TC-{i:02d}", "lane": str(i % 3), "status": status, "evidence": evidence}
-            for i in range(count)]
+    return [{"id": f"TC-{i:02d}", "lane": str(i % 3), "status": status, "evidence": evidence} for i in range(count)]
 
 
 GOOD_CLOSEOUT = {
@@ -52,6 +53,7 @@ GOOD_CLOSEOUT = {
 
 
 # ---- TCC-01 ------------------------------------------------------------------
+
 
 class TestTCC01:
     def test_pass_all_complete(self):
@@ -96,6 +98,7 @@ class TestTCC01:
 
 # ---- TCC-02 ------------------------------------------------------------------
 
+
 class TestTCC02:
     def test_pass_all_have_evidence(self):
         tcs = _make_taskcards(5, evidence="coordinator/lane-ledger.json")
@@ -123,6 +126,7 @@ class TestTCC02:
 
 # ---- TCC-03 ------------------------------------------------------------------
 
+
 class TestTCC03:
     def test_pass_all_lanes_covered(self):
         tcs = [{"id": f"TC-{i}", "lane": str(i), "status": "COMPLETE"} for i in range(5)]
@@ -145,6 +149,7 @@ class TestTCC03:
 
 
 # ---- TCC-04 ------------------------------------------------------------------
+
 
 class TestTCC04:
     def test_pass_unique_ids(self):
@@ -171,6 +176,7 @@ class TestTCC04:
 
 # ---- TCC-05 ------------------------------------------------------------------
 
+
 class TestTCC05:
     def test_pass_taskcards_present(self):
         tcs = _make_taskcards(5)
@@ -191,6 +197,7 @@ class TestTCC05:
 
 
 # ---- TCC-06 ------------------------------------------------------------------
+
 
 class TestTCC06:
     def test_pass_complete_verdict_all_complete(self):
@@ -225,6 +232,7 @@ class TestTCC06:
 
 # ---- BMV-01 ------------------------------------------------------------------
 
+
 class TestBMV01:
     def test_pass_valid_sha(self):
         result = bmv_01_bundle_sha_not_pending(GOOD_CLOSEOUT)
@@ -255,6 +263,7 @@ class TestBMV01:
 
 # ---- BMV-02 ------------------------------------------------------------------
 
+
 class TestBMV02:
     def test_pass_valid_commit(self):
         result = bmv_02_commit_sha_not_pending(GOOD_CLOSEOUT)
@@ -277,6 +286,7 @@ class TestBMV02:
 
 
 # ---- BMV-03 ------------------------------------------------------------------
+
 
 class TestBMV03:
     def test_pass_positive_count(self):
@@ -301,6 +311,7 @@ class TestBMV03:
 
 # ---- BMV-04 ------------------------------------------------------------------
 
+
 class TestBMV04:
     def test_pass_positive_size(self):
         result = bmv_04_bundle_size_positive(GOOD_CLOSEOUT)
@@ -323,6 +334,7 @@ class TestBMV04:
 
 # ---- BMV-05 ------------------------------------------------------------------
 
+
 class TestBMV05:
     def test_pass_good_counts(self):
         result = bmv_05_pytest_passed_count_positive(GOOD_CLOSEOUT)
@@ -344,6 +356,7 @@ class TestBMV05:
 
 
 # ---- BMV-06 ------------------------------------------------------------------
+
 
 class TestBMV06:
     def test_pass_no_sidecar_path(self):
@@ -389,19 +402,24 @@ class TestBMV06:
 
 # ---- Aggregate TCC -----------------------------------------------------------
 
+
 class TestRunAllTCC:
     def test_pass_all_conditions_met(self):
         tcs = _make_taskcards(12, evidence="some evidence")
         # Give each a unique lane
         for i, tc in enumerate(tcs):
             tc["lane"] = str(i % 6)
-        result = run_all_tcc_validators(tcs, expected_lane_count=6, closeout_date="2026-06-06", closeout_verdict="SPRINT_COMPLETE")
+        result = run_all_tcc_validators(
+            tcs, expected_lane_count=6, closeout_date="2026-06-06", closeout_verdict="SPRINT_COMPLETE"
+        )
         assert result["verdict"] == "ALL_PASS"
         assert result["fail"] == 0
 
     def test_fail_pending_taskcards(self):
         tcs = _make_taskcards(5, status="PENDING")
-        result = run_all_tcc_validators(tcs, expected_lane_count=1, closeout_date="2026-06-06", closeout_verdict="SPRINT_COMPLETE")
+        result = run_all_tcc_validators(
+            tcs, expected_lane_count=1, closeout_date="2026-06-06", closeout_verdict="SPRINT_COMPLETE"
+        )
         assert result["verdict"] == "FAIL"
         assert result["fail"] > 0
 
@@ -410,12 +428,15 @@ class TestRunAllTCC:
         for i, tc in enumerate(tcs):
             tc["lane"] = str(i % 6)
         tcs.append({"id": "TC-DEFERRED", "lane": "D", "status": "DEFERRED_TO_WAVE13", "evidence": None})
-        result = run_all_tcc_validators(tcs, expected_lane_count=6, closeout_date="2026-06-06", closeout_verdict="SPRINT_COMPLETE")
+        result = run_all_tcc_validators(
+            tcs, expected_lane_count=6, closeout_date="2026-06-06", closeout_verdict="SPRINT_COMPLETE"
+        )
         assert result["verdict"] == "ALL_PASS"
         assert result["fail"] == 0
 
 
 # ---- Aggregate BMV -----------------------------------------------------------
+
 
 class TestRunAllBMV:
     def test_pass_all_conditions_met(self):

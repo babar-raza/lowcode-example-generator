@@ -32,9 +32,7 @@ def find_reflector_executable(reflector_dir: Path | None = None) -> Path:
         if candidate.exists():
             return candidate
 
-    raise ReflectorError(
-        f"DllReflector not built. Run: dotnet build {base / 'DllReflector.csproj'} -c Release"
-    )
+    raise ReflectorError(f"DllReflector not built. Run: dotnet build {base / 'DllReflector.csproj'} -c Release")
 
 
 def run_reflector(
@@ -98,9 +96,7 @@ def run_reflector(
         )
 
     if not output_path.exists():
-        raise ReflectorError(
-            f"DllReflector completed but output file not found: {output_path}"
-        )
+        raise ReflectorError(f"DllReflector completed but output file not found: {output_path}")
 
     try:
         with open(output_path) as f:

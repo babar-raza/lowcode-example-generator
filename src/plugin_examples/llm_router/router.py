@@ -11,6 +11,8 @@ from pathlib import Path
 
 import requests
 
+from plugin_examples.llm_router.decision_audit import record_decision
+
 logger = logging.getLogger(__name__)
 
 # Backoff delays (seconds) between retry attempts 1→2 and 2→3.
@@ -28,6 +30,7 @@ class LLMProviderError(Exception):
 @dataclass
 class PreflightResult:
     """Result of a single provider preflight check."""
+
     provider: str
     endpoint_reachable: bool = False
     model_available: bool = False
@@ -39,22 +42,49 @@ class PreflightResult:
 
     @property
     def passed(self) -> bool:
-        return all([
-            self.endpoint_reachable,
-            self.model_available,
-            self.json_response,
-            self.structured_response_parseable,
-            self.timeout_within_limit,
-        ])
+        return all(
+            [
+                self.endpoint_reachable,
+                self.model_available,
+                self.json_response,
+                self.structured_response_parseable,
+                self.timeout_within_limit,
+            ]
+        )
 
 
 @dataclass
 class LLMRouter:
     """Route LLM requests to available providers."""
+
     provider_order: list[str] = field(default_factory=list)
     preflight_results: list[PreflightResult] = field(default_factory=list)
     selected_provider: str | None = None
     metrics_collector: object | None = None  # Optional MetricsCollector instance
+
+    # Circuit breaker state (RISK-06)
+    _consecutive_failures: int = 0
+    _circuit_breaker_tripped: bool = False
+    _CIRCUIT_BREAKER_THRESHOLD: int = 5
+
+    def _record_success(self) -> None:
+        """Reset circuit breaker on successful call."""
+        self._consecutive_failures = 0
+
+    def _record_failure(self) -> None:
+        """Increment failure count; trip breaker at threshold."""
+        self._consecutive_failures += 1
+        if self._consecutive_failures >= self._CIRCUIT_BREAKER_THRESHOLD:
+            self._circuit_breaker_tripped = True
+            logger.warning(
+                "LLM circuit breaker tripped after %d consecutive failures. " "Remaining LLM calls will be skipped.",
+                self._consecutive_failures,
+            )
+
+    @property
+    def circuit_breaker_tripped(self) -> bool:
+        """Return True if the circuit breaker has been tripped."""
+        return self._circuit_breaker_tripped
 
     def run_preflight(
         self,
@@ -90,10 +120,7 @@ class LLMRouter:
     def get_provider(self) -> str:
         """Get the selected provider, raising if none available."""
         if not self.selected_provider:
-            raise LLMProviderError(
-                "No LLM provider passed preflight. "
-                f"Tried: {', '.join(self.provider_order)}"
-            )
+            raise LLMProviderError("No LLM provider passed preflight. " f"Tried: {', '.join(self.provider_order)}")
         return self.selected_provider
 
     def generate(
@@ -113,11 +140,39 @@ class LLMRouter:
         Returns:
             Generated text response.
         """
+        if self._circuit_breaker_tripped:
+            raise LLMProviderError(
+                "LLM circuit breaker is tripped — too many consecutive failures. "
+                "Pipeline should fall back to template mode."
+            )
         provider = self.get_provider()
-        return _call_provider(
-            provider, prompt, system_prompt=system_prompt, timeout=timeout,
-            metrics_collector=self.metrics_collector,
-        )
+        _start = time.time()
+        try:
+            result = _call_provider(
+                provider,
+                prompt,
+                system_prompt=system_prompt,
+                timeout=timeout,
+                metrics_collector=self.metrics_collector,
+            )
+            self._record_success()
+            record_decision(
+                provider=provider,
+                model=_get_provider_model(provider) or "",
+                latency_ms=(time.time() - _start) * 1000,
+                outcome="success",
+            )
+            return result
+        except Exception as exc:
+            self._record_failure()
+            record_decision(
+                provider=provider,
+                model=_get_provider_model(provider) or "",
+                latency_ms=(time.time() - _start) * 1000,
+                outcome="error",
+                error_message=type(exc).__name__,
+            )
+            raise
 
 
 def write_preflight_report(
@@ -197,7 +252,9 @@ def _check_provider(provider: str, *, timeout: int = 30, config: dict | None = N
                 return result
             start = time.time()
             resp = requests.get(
-                endpoint, headers={"Authorization": f"Bearer {api_key}"}, timeout=timeout,
+                endpoint,
+                headers={"Authorization": f"Bearer {api_key}"},
+                timeout=timeout,
             )
         else:
             start = time.time()
@@ -277,7 +334,11 @@ def _route_label(provider: str | None) -> str:
 
 
 def _call_provider(
-    provider: str, prompt: str, *, system_prompt: str = "", timeout: int = 120,
+    provider: str,
+    prompt: str,
+    *,
+    system_prompt: str = "",
+    timeout: int = 120,
     metrics_collector: object | None = None,
 ) -> str:
     """Call an LLM provider to generate text."""
@@ -287,8 +348,7 @@ def _call_provider(
             f"Approved: {sorted(_APPROVED_PROVIDER_FAMILIES)}"
         )
     if provider == "ollama":
-        return _call_ollama(prompt, system_prompt=system_prompt, timeout=timeout,
-                            metrics_collector=metrics_collector)
+        return _call_ollama(prompt, system_prompt=system_prompt, timeout=timeout, metrics_collector=metrics_collector)
     elif provider == "llm_professionalize":
         api_key = _resolve_api_key("llm_professionalize")
         base = os.environ.get("GPT_OSS_ENDPOINT", "http://localhost:8080/v1/").rstrip("/")
@@ -296,9 +356,13 @@ def _call_provider(
         model = (os.environ.get("GPT_OSS_MODEL") or "").strip() or "recommended"
         return _call_openai_compatible(
             f"{base}/chat/completions",
-            prompt, system_prompt=system_prompt, timeout=timeout,
-            api_key=api_key, model=model,
-            metrics_collector=metrics_collector, metrics_provider=provider,
+            prompt,
+            system_prompt=system_prompt,
+            timeout=timeout,
+            api_key=api_key,
+            model=model,
+            metrics_collector=metrics_collector,
+            metrics_provider=provider,
             metrics_model=model,
         )
     else:
@@ -306,7 +370,10 @@ def _call_provider(
 
 
 def _call_ollama(
-    prompt: str, *, system_prompt: str = "", timeout: int = 120,
+    prompt: str,
+    *,
+    system_prompt: str = "",
+    timeout: int = 120,
     metrics_collector: object | None = None,
 ) -> str:
     """Call Ollama API with retry on transient timeout/connection errors."""
@@ -316,7 +383,13 @@ def _call_ollama(
         try:
             resp = requests.post(
                 "http://localhost:11434/api/generate",
-                json={"model": "codellama", "prompt": prompt, "system": system_prompt, "stream": False},
+                json={
+                    "model": "codellama",
+                    "prompt": prompt,
+                    "system": system_prompt,
+                    "stream": False,
+                    "options": {"temperature": 0.0},
+                },
                 timeout=timeout,
             )
             http_status = resp.status_code
@@ -328,17 +401,26 @@ def _call_ollama(
             error_cat = "timeout" if isinstance(exc, requests.exceptions.Timeout) else "connection_error"
             if metrics_collector is not None and hasattr(metrics_collector, "record_call"):
                 metrics_collector.record_call(
-                    stage="", provider="ollama", model="codellama",
-                    success=False, http_status=http_status,
-                    prompt_tokens=0, completion_tokens=0, total_tokens=0,
-                    token_usage_available=False, duration_ms=duration_ms,
+                    stage="",
+                    provider="ollama",
+                    model="codellama",
+                    success=False,
+                    http_status=http_status,
+                    prompt_tokens=0,
+                    completion_tokens=0,
+                    total_tokens=0,
+                    token_usage_available=False,
+                    duration_ms=duration_ms,
                     error_category=error_cat,
                 )
             if attempt < _LLM_MAX_RETRIES:
                 delay = _LLM_RETRY_BACKOFF_SECONDS[attempt] if attempt < len(_LLM_RETRY_BACKOFF_SECONDS) else 60
                 logger.warning(
                     "Ollama LLM call attempt %d/%d failed (%s), retrying in %ds",
-                    attempt + 1, _LLM_MAX_RETRIES + 1, type(exc).__name__, delay,
+                    attempt + 1,
+                    _LLM_MAX_RETRIES + 1,
+                    type(exc).__name__,
+                    delay,
                 )
                 time.sleep(delay)
                 continue
@@ -347,10 +429,16 @@ def _call_ollama(
             if metrics_collector is not None and hasattr(metrics_collector, "record_call"):
                 duration_ms = (time.time() - start) * 1000
                 metrics_collector.record_call(
-                    stage="", provider="ollama", model="codellama",
-                    success=False, http_status=http_status,
-                    prompt_tokens=0, completion_tokens=0, total_tokens=0,
-                    token_usage_available=False, duration_ms=duration_ms,
+                    stage="",
+                    provider="ollama",
+                    model="codellama",
+                    success=False,
+                    http_status=http_status,
+                    prompt_tokens=0,
+                    completion_tokens=0,
+                    total_tokens=0,
+                    token_usage_available=False,
+                    duration_ms=duration_ms,
                     error_category="request_failed",
                 )
             raise
@@ -361,9 +449,13 @@ def _call_ollama(
             prompt_eval = data.get("prompt_eval_count", 0)
             total = eval_count + prompt_eval
             metrics_collector.record_call(
-                stage="", provider="ollama", model="codellama",
-                success=True, http_status=http_status,
-                prompt_tokens=prompt_eval, completion_tokens=eval_count,
+                stage="",
+                provider="ollama",
+                model="codellama",
+                success=True,
+                http_status=http_status,
+                prompt_tokens=prompt_eval,
+                completion_tokens=eval_count,
                 total_tokens=total,
                 token_usage_available="eval_count" in data,
                 duration_ms=duration_ms,
@@ -390,7 +482,7 @@ def _call_openai_compatible(
         messages.append({"role": "system", "content": system_prompt})
     messages.append({"role": "user", "content": prompt})
 
-    body: dict = {"messages": messages, "temperature": 0.2}
+    body: dict = {"messages": messages, "temperature": 0.0}
     if model:
         body["model"] = model
 
@@ -411,17 +503,26 @@ def _call_openai_compatible(
             error_cat = "timeout" if isinstance(exc, requests.exceptions.Timeout) else "connection_error"
             if metrics_collector is not None and hasattr(metrics_collector, "record_call"):
                 metrics_collector.record_call(
-                    stage="", provider=metrics_provider, model=metrics_model,
-                    success=False, http_status=http_status,
-                    prompt_tokens=0, completion_tokens=0, total_tokens=0,
-                    token_usage_available=False, duration_ms=duration_ms,
+                    stage="",
+                    provider=metrics_provider,
+                    model=metrics_model,
+                    success=False,
+                    http_status=http_status,
+                    prompt_tokens=0,
+                    completion_tokens=0,
+                    total_tokens=0,
+                    token_usage_available=False,
+                    duration_ms=duration_ms,
                     error_category=error_cat,
                 )
             if attempt < _LLM_MAX_RETRIES:
                 delay = _LLM_RETRY_BACKOFF_SECONDS[attempt] if attempt < len(_LLM_RETRY_BACKOFF_SECONDS) else 60
                 logger.warning(
                     "OpenAI-compatible LLM call attempt %d/%d failed (%s), retrying in %ds",
-                    attempt + 1, _LLM_MAX_RETRIES + 1, type(exc).__name__, delay,
+                    attempt + 1,
+                    _LLM_MAX_RETRIES + 1,
+                    type(exc).__name__,
+                    delay,
                 )
                 time.sleep(delay)
                 continue
@@ -430,10 +531,16 @@ def _call_openai_compatible(
             if metrics_collector is not None and hasattr(metrics_collector, "record_call"):
                 duration_ms = (time.time() - start) * 1000
                 metrics_collector.record_call(
-                    stage="", provider=metrics_provider, model=metrics_model,
-                    success=False, http_status=http_status,
-                    prompt_tokens=0, completion_tokens=0, total_tokens=0,
-                    token_usage_available=False, duration_ms=duration_ms,
+                    stage="",
+                    provider=metrics_provider,
+                    model=metrics_model,
+                    success=False,
+                    http_status=http_status,
+                    prompt_tokens=0,
+                    completion_tokens=0,
+                    total_tokens=0,
+                    token_usage_available=False,
+                    duration_ms=duration_ms,
                     error_category="request_failed",
                 )
             raise
@@ -447,9 +554,13 @@ def _call_openai_compatible(
             completion_tokens = usage.get("completion_tokens", 0)
             total_tokens = usage.get("total_tokens", 0)
             metrics_collector.record_call(
-                stage="", provider=metrics_provider, model=metrics_model,
-                success=True, http_status=http_status,
-                prompt_tokens=prompt_tokens, completion_tokens=completion_tokens,
+                stage="",
+                provider=metrics_provider,
+                model=metrics_model,
+                success=True,
+                http_status=http_status,
+                prompt_tokens=prompt_tokens,
+                completion_tokens=completion_tokens,
                 total_tokens=total_tokens,
                 token_usage_available="usage" in data,
                 duration_ms=duration_ms,

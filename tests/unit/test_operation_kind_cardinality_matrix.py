@@ -4,6 +4,7 @@ Verifies that format authority contract JSON files have correct cardinality
 values for all 42 types. Derives expected values from the contract files
 themselves and checks internal consistency.
 """
+
 import json
 from pathlib import Path
 import pytest
@@ -52,9 +53,15 @@ class TestContractCardinality:
                 name = t.get("type_name", "unknown")
                 op = t.get("operation_kind", "")
                 assert op, f"{fam}/{name}: operation_kind is blank"
-                assert op in {"converter", "transform", "merger", "splitter",
-                               "extractor", "exporter", "processor"}, \
-                    f"{fam}/{name}: unknown operation_kind '{op}'"
+                assert op in {
+                    "converter",
+                    "transform",
+                    "merger",
+                    "splitter",
+                    "extractor",
+                    "exporter",
+                    "processor",
+                }, f"{fam}/{name}: unknown operation_kind '{op}'"
 
     def test_merger_types_have_multi_input(self):
         """All types with operation_kind=merger must have multi input_cardinality."""
@@ -64,8 +71,9 @@ class TestContractCardinality:
                 if t.get("operation_kind") == "merger":
                     name = t["type_name"]
                     inp_card = t["input_artifacts"][0].get("cardinality", "single")
-                    assert inp_card == "multi", \
-                        f"{fam}/{name}: merger must have multi input_cardinality, got '{inp_card}'"
+                    assert (
+                        inp_card == "multi"
+                    ), f"{fam}/{name}: merger must have multi input_cardinality, got '{inp_card}'"
 
     def test_splitter_types_have_multi_output(self):
         """All types with operation_kind=splitter must have multi output_cardinality."""
@@ -75,8 +83,9 @@ class TestContractCardinality:
                 if t.get("operation_kind") == "splitter":
                     name = t["type_name"]
                     out_card = t.get("output_cardinality", "single")
-                    assert out_card == "multi", \
-                        f"{fam}/{name}: splitter must have multi output_cardinality, got '{out_card}'"
+                    assert (
+                        out_card == "multi"
+                    ), f"{fam}/{name}: splitter must have multi output_cardinality, got '{out_card}'"
 
     def test_output_cardinality_matches_output_artifacts(self):
         """output_cardinality field must match cardinality in output_artifacts."""
@@ -88,8 +97,9 @@ class TestContractCardinality:
                 out_artifacts = t.get("output_artifacts", [])
                 if out_artifacts:
                     artifact_card = out_artifacts[0].get("cardinality", "single")
-                    assert out_card_field == artifact_card, \
-                        f"{fam}/{name}: output_cardinality={out_card_field} != artifact.cardinality={artifact_card}"
+                    assert (
+                        out_card_field == artifact_card
+                    ), f"{fam}/{name}: output_cardinality={out_card_field} != artifact.cardinality={artifact_card}"
 
     def test_known_multi_input_types_have_multi_input(self):
         """Explicit known-multi-input types are verified against contract."""
@@ -106,8 +116,7 @@ class TestContractCardinality:
             assert type_name in types_by_name, f"Type not found: {fam}/{type_name}"
             t = types_by_name[type_name]
             inp_card = t["input_artifacts"][0].get("cardinality", "single")
-            assert inp_card == "multi", \
-                f"{fam}/{type_name}: expected multi input, got '{inp_card}'"
+            assert inp_card == "multi", f"{fam}/{type_name}: expected multi input, got '{inp_card}'"
 
     def test_known_multi_output_types_have_multi_output(self):
         """Explicit known-multi-output types are verified against contract."""
@@ -126,8 +135,7 @@ class TestContractCardinality:
             assert type_name in types_by_name, f"Type not found: {fam}/{type_name}"
             t = types_by_name[type_name]
             out_card = t.get("output_cardinality", "single")
-            assert out_card == "multi", \
-                f"{fam}/{type_name}: expected multi output, got '{out_card}'"
+            assert out_card == "multi", f"{fam}/{type_name}: expected multi output, got '{out_card}'"
 
     def test_total_type_count_is_42(self):
         """Total types across all contracts must be 42 (canonical main-class workflow types only).
@@ -136,7 +144,5 @@ class TestContractCardinality:
           DigitalSignatureUtil.Sign is in Aspose.Words.DigitalSignatures, not LowCode namespace.
         slides/ForEach excluded: ForEach is NON_RUNNABLE_HELPER (utility iterator), not main workflow.
         """
-        total = sum(
-            len(load_contract(fam)["types"]) for fam in FAMILIES
-        )
+        total = sum(len(load_contract(fam)["types"]) for fam in FAMILIES)
         assert total == 42, f"Expected 42 total types, got {total}"

@@ -27,18 +27,23 @@ from plugin_examples.scenario_planner.runtime_feedback import (
 
 # --- Helpers ---
 
+
 def _make_catalog(type_name: str, methods: list[dict]) -> dict:
     full_name = f"Aspose.Cells.LowCode.{type_name}"
     return {
-        "namespaces": [{
-            "namespace": "Aspose.Cells.LowCode",
-            "types": [{
-                "full_name": full_name,
-                "name": type_name,
-                "kind": "class",
-                "methods": methods,
-            }],
-        }]
+        "namespaces": [
+            {
+                "namespace": "Aspose.Cells.LowCode",
+                "types": [
+                    {
+                        "full_name": full_name,
+                        "name": type_name,
+                        "kind": "class",
+                        "methods": methods,
+                    }
+                ],
+            }
+        ]
     }
 
 
@@ -59,19 +64,25 @@ def _make_scenario(type_name: str, methods: list[str], **overrides) -> dict:
 
 # --- Test 1: Prompt forbids null options ---
 
+
 class TestPromptForbidsNullOptions:
     def test_prompt_forbids_null_lowcode_options(self):
         """Prompt constraints must forbid passing null for LowCodeLoadOptions/LowCodeSaveOptions."""
         scenario = _make_scenario("HtmlConverter", ["Process"])
-        catalog = _make_catalog("HtmlConverter", [{
-            "name": "Process",
-            "is_static": True,
-            "is_obsolete": False,
-            "parameters": [
-                {"name": "templateFile", "type": "System.String"},
-                {"name": "resultFile", "type": "System.String"},
+        catalog = _make_catalog(
+            "HtmlConverter",
+            [
+                {
+                    "name": "Process",
+                    "is_static": True,
+                    "is_obsolete": False,
+                    "parameters": [
+                        {"name": "templateFile", "type": "System.String"},
+                        {"name": "resultFile", "type": "System.String"},
+                    ],
+                }
             ],
-        }])
+        )
         packet = build_packet(scenario, catalog)
         constraints_text = " ".join(packet.constraints)
         assert "null" in constraints_text.lower()
@@ -80,15 +91,20 @@ class TestPromptForbidsNullOptions:
     def test_prompt_requires_single_overload(self):
         """Prompt must instruct LLM to call only ONE overload."""
         scenario = _make_scenario("HtmlConverter", ["Process"])
-        catalog = _make_catalog("HtmlConverter", [{
-            "name": "Process",
-            "is_static": True,
-            "is_obsolete": False,
-            "parameters": [
-                {"name": "templateFile", "type": "System.String"},
-                {"name": "resultFile", "type": "System.String"},
+        catalog = _make_catalog(
+            "HtmlConverter",
+            [
+                {
+                    "name": "Process",
+                    "is_static": True,
+                    "is_obsolete": False,
+                    "parameters": [
+                        {"name": "templateFile", "type": "System.String"},
+                        {"name": "resultFile", "type": "System.String"},
+                    ],
+                }
             ],
-        }])
+        )
         packet = build_packet(scenario, catalog)
         constraints_text = " ".join(packet.constraints)
         assert (
@@ -101,24 +117,26 @@ class TestPromptForbidsNullOptions:
 
 # --- Test 2: Code validator detects null options ---
 
+
 class TestCodeValidatorDetectsNullOptions:
     def test_detects_null_load_options(self):
-        code = 'HtmlConverter.Process((LowCodeLoadOptions)null, saveOpts);'
+        code = "HtmlConverter.Process((LowCodeLoadOptions)null, saveOpts);"
         issues = _validate_code(code)
         assert any("null" in i.lower() and "LowCodeLoadOptions" in i for i in issues)
 
     def test_detects_null_save_options(self):
-        code = 'HtmlConverter.Process(loadOpts, (LowCodeSaveOptions)null);'
+        code = "HtmlConverter.Process(loadOpts, (LowCodeSaveOptions)null);"
         issues = _validate_code(code)
         assert any("null" in i.lower() and "LowCodeSaveOptions" in i for i in issues)
 
     def test_passes_simple_overload(self):
-        code = 'HtmlConverter.Process(inputPath, outputPath);'
+        code = "HtmlConverter.Process(inputPath, outputPath);"
         issues = _validate_code(code)
         assert len(issues) == 0
 
 
 # --- Test 3: Code validator detects empty options without properties ---
+
 
 class TestCodeValidatorDetectsEmptyOptions:
     def test_detects_empty_load_options(self):
@@ -150,6 +168,7 @@ HtmlConverter.Process(loadOpts, saveOpts);"""
 
 # --- Test 4: Code validator detects multiple Process calls ---
 
+
 class TestCodeValidatorDetectsMultipleProcessCalls:
     def test_detects_multiple_process_calls(self):
         code = """HtmlConverter.Process(inputPath, outputPath);
@@ -158,17 +177,19 @@ HtmlConverter.Process(loadOpts, saveOpts);"""
         assert any("Process()" in i and "ONE" in i for i in issues)
 
     def test_passes_single_process_call(self):
-        code = 'HtmlConverter.Process(inputPath, outputPath);'
+        code = "HtmlConverter.Process(inputPath, outputPath);"
         issues = _validate_code(code)
         assert not any("Process()" in i for i in issues)
 
 
 # --- Test 5: Runtime failure classifies missing options input ---
 
+
 class TestRuntimeFailureClassifiesMissingOptionsInput:
     def test_classifies_no_input_specified(self):
         rc = classify_runtime_failure(
-            "test-scenario", 1,
+            "test-scenario",
+            1,
             stderr="Unhandled exception. Aspose.Cells.CellsException: No input has been specified for the process.",
         )
         assert rc.classification == "missing_options_input"
@@ -176,7 +197,8 @@ class TestRuntimeFailureClassifiesMissingOptionsInput:
 
     def test_classifies_null_ref_as_actionable(self):
         rc = classify_runtime_failure(
-            "test-scenario", 1,
+            "test-scenario",
+            1,
             stderr="Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.",
         )
         assert rc.classification == "blocked_runtime_context_required"
@@ -185,10 +207,12 @@ class TestRuntimeFailureClassifiesMissingOptionsInput:
 
 # --- Test 6: Runtime failure classifies interactive call (still works) ---
 
+
 class TestRuntimeClassificationsUnchanged:
     def test_interactive_console_still_classified(self):
         rc = classify_runtime_failure(
-            "test-scenario", 1,
+            "test-scenario",
+            1,
             stderr="Cannot read keys when either application does not have a console",
         )
         assert rc.classification == "interactive_console_call"
@@ -196,7 +220,8 @@ class TestRuntimeClassificationsUnchanged:
 
     def test_wrong_input_format_still_classified(self):
         rc = classify_runtime_failure(
-            "test-scenario", 1,
+            "test-scenario",
+            1,
             stderr="Only text based formats such as Csv, Tsv... are allowed",
         )
         assert rc.classification == "wrong_input_format"
@@ -205,18 +230,24 @@ class TestRuntimeClassificationsUnchanged:
 
 # --- Test 7: System prompt forbids null options ---
 
+
 class TestSystemPromptForbidsNullOptions:
     def test_system_prompt_mentions_null_options(self):
         scenario = _make_scenario("HtmlConverter", ["Process"])
-        catalog = _make_catalog("HtmlConverter", [{
-            "name": "Process",
-            "is_static": True,
-            "is_obsolete": False,
-            "parameters": [
-                {"name": "templateFile", "type": "System.String"},
-                {"name": "resultFile", "type": "System.String"},
+        catalog = _make_catalog(
+            "HtmlConverter",
+            [
+                {
+                    "name": "Process",
+                    "is_static": True,
+                    "is_obsolete": False,
+                    "parameters": [
+                        {"name": "templateFile", "type": "System.String"},
+                        {"name": "resultFile", "type": "System.String"},
+                    ],
+                }
             ],
-        }])
+        )
         packet = build_packet(scenario, catalog)
         assert "null" in packet.system_prompt.lower()
         assert (
@@ -227,15 +258,20 @@ class TestSystemPromptForbidsNullOptions:
 
     def test_system_prompt_mentions_single_overload(self):
         scenario = _make_scenario("HtmlConverter", ["Process"])
-        catalog = _make_catalog("HtmlConverter", [{
-            "name": "Process",
-            "is_static": True,
-            "is_obsolete": False,
-            "parameters": [
-                {"name": "templateFile", "type": "System.String"},
-                {"name": "resultFile", "type": "System.String"},
+        catalog = _make_catalog(
+            "HtmlConverter",
+            [
+                {
+                    "name": "Process",
+                    "is_static": True,
+                    "is_obsolete": False,
+                    "parameters": [
+                        {"name": "templateFile", "type": "System.String"},
+                        {"name": "resultFile", "type": "System.String"},
+                    ],
+                }
             ],
-        }])
+        )
         packet = build_packet(scenario, catalog)
         assert (
             "ONE overload" in packet.system_prompt
@@ -247,24 +283,31 @@ class TestSystemPromptForbidsNullOptions:
 
 # --- Test 8: User prompt no longer suggests null ---
 
+
 class TestUserPromptDoesNotSuggestNull:
     def test_user_prompt_does_not_say_use_null(self):
         scenario = _make_scenario("HtmlConverter", ["Process"])
-        catalog = _make_catalog("HtmlConverter", [{
-            "name": "Process",
-            "is_static": True,
-            "is_obsolete": False,
-            "parameters": [
-                {"name": "templateFile", "type": "System.String"},
-                {"name": "resultFile", "type": "System.String"},
+        catalog = _make_catalog(
+            "HtmlConverter",
+            [
+                {
+                    "name": "Process",
+                    "is_static": True,
+                    "is_obsolete": False,
+                    "parameters": [
+                        {"name": "templateFile", "type": "System.String"},
+                        {"name": "resultFile", "type": "System.String"},
+                    ],
+                }
             ],
-        }])
+        )
         packet = build_packet(scenario, catalog)
         # The old prompt said "use null or a mock value" — this must be removed
         assert "use null or a mock value" not in packet.user_prompt
 
 
 # --- Test 9: SpreadsheetLocker simple overload preferred ---
+
 
 class TestSpreadsheetLockerOverloadPreference:
     def test_spreadsheet_locker_uses_xlsx_input(self):
@@ -278,6 +321,7 @@ class TestSpreadsheetLockerOverloadPreference:
 
 # --- Test 10: HtmlConverter simple overload preferred ---
 
+
 class TestHtmlConverterOverloadPreference:
     def test_html_converter_uses_xlsx_input(self):
         fmt = _infer_input_format("HtmlConverter", ".xlsx")
@@ -289,6 +333,7 @@ class TestHtmlConverterOverloadPreference:
 
 
 # --- Test 11: Validate code passes clean single-overload examples ---
+
 
 class TestValidateCodePassesCleanExamples:
     def test_clean_html_converter_example(self):
@@ -345,6 +390,7 @@ namespace LockerDemo
 
 
 # --- Test 12: Validate code rejects the exact failing patterns from pilot ---
+
 
 class TestValidateCodeRejectsFailingPilotPatterns:
     def test_rejects_html_converter_pilot_pattern(self):

@@ -2,6 +2,7 @@
 Publication Readiness Validators (PRV-01..PRV-04)
 Wave 16: verify that PCLC packages in readiness files have proper PR packet entries.
 """
+
 from __future__ import annotations
 import re
 from dataclasses import dataclass
@@ -18,11 +19,7 @@ class PRVResult:
 def prv_01_all_pclc_have_pr_packet(readiness: dict) -> PRVResult:
     """PRV-01: Every PCLC entry must have pr_packet_exists=true."""
     packages = readiness.get("packages", [])
-    missing = [
-        f"{p.get('family')}/{p.get('slug')}"
-        for p in packages
-        if not p.get("pr_packet_exists", False)
-    ]
+    missing = [f"{p.get('family')}/{p.get('slug')}" for p in packages if not p.get("pr_packet_exists", False)]
     if missing:
         return PRVResult(
             rule_id="PRV-01",

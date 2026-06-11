@@ -31,13 +31,10 @@ class TestPipelineUsesOnlyGithubTokenEnv:
 
         # When GITHUB_TOKEN is absent, headers should be None
         with patch.dict(os.environ, {}, clear=False):
-            env_without = {k: v for k, v in os.environ.items()
-                          if k not in ("GITHUB_TOKEN", "GH_TOKEN")}
+            env_without = {k: v for k, v in os.environ.items() if k not in ("GITHUB_TOKEN", "GH_TOKEN")}
             with patch.dict(os.environ, env_without, clear=True):
                 result = _get_headers()
-            assert result is None, (
-                "_get_headers() must return None when GITHUB_TOKEN is absent"
-            )
+            assert result is None, "_get_headers() must return None when GITHUB_TOKEN is absent"
 
     def test_repo_access_resolver_reads_github_token_when_set(self):
         """_get_headers() uses GITHUB_TOKEN when set."""
@@ -54,6 +51,7 @@ class TestPipelineUsesOnlyGithubTokenEnv:
         """publish-pr command handler reads GITHUB_TOKEN env var."""
         import ast
         import textwrap
+
         cmd_path = Path("src/plugin_examples/commands/publish_pr.py")
         source = cmd_path.read_text(encoding="utf-8")
         # Confirm GITHUB_TOKEN is referenced in the publish-pr handler
@@ -71,9 +69,7 @@ class TestPipelineUsesOnlyGithubTokenEnv:
 
     def test_github_pr_publisher_does_not_reference_gh_token(self):
         """github_pr_publisher.py must not reference GH_TOKEN directly."""
-        source = Path("src/plugin_examples/publisher/github_pr_publisher.py").read_text(
-            encoding="utf-8"
-        )
+        source = Path("src/plugin_examples/publisher/github_pr_publisher.py").read_text(encoding="utf-8")
         assert "GH_TOKEN" not in source, "github_pr_publisher.py must not reference GH_TOKEN"
 
 
@@ -90,13 +86,15 @@ class TestRunbookDoesNotRequireGhToken:
         assert runbook_path.exists(), f"Runbook not found: {runbook_path}"
         content = runbook_path.read_text(encoding="utf-8")
         # The pipeline variable GITHUB_TOKEN must always be documented
-        assert "GITHUB_TOKEN" in content, (
-            "Runbook must document GITHUB_TOKEN — that is what the pipeline reads."
-        )
+        assert "GITHUB_TOKEN" in content, "Runbook must document GITHUB_TOKEN — that is what the pipeline reads."
         # If GH_TOKEN is mentioned (as operator storage), the runbook must also
         # clarify that the pipeline reads GITHUB_TOKEN (not GH_TOKEN directly)
         if "GH_TOKEN" in content:
-            assert "pipeline reads" in content.lower() or "never read directly" in content.lower() or "GITHUB_TOKEN" in content, (
+            assert (
+                "pipeline reads" in content.lower()
+                or "never read directly" in content.lower()
+                or "GITHUB_TOKEN" in content
+            ), (
                 "If GH_TOKEN appears in the runbook, it must clarify that "
                 "the pipeline reads GITHUB_TOKEN, not GH_TOKEN directly."
             )
@@ -143,15 +141,22 @@ class TestTokenValueNotWrittenToEvidence:
 
         def mock_check(owner, repo, branch, headers=None):
             return {
-                "can_read": True, "can_push": True, "http_status": 200,
-                "visibility": "public", "default_branch": "main", "branch_exists": True,
-                "repo_access_ready": True, "pr_permission_ready": True,
+                "can_read": True,
+                "can_push": True,
+                "http_status": 200,
+                "visibility": "public",
+                "default_branch": "main",
+                "branch_exists": True,
+                "repo_access_ready": True,
+                "pr_permission_ready": True,
                 "error_classification": "repo_access_ok",
                 "interpretation": "Repo accessible.",
             }
 
-        with patch.dict(os.environ, {"GITHUB_TOKEN": fake_token}), \
-             patch("plugin_examples.publisher.repo_access_resolver.check_repo_access", mock_check):
+        with (
+            patch.dict(os.environ, {"GITHUB_TOKEN": fake_token}),
+            patch("plugin_examples.publisher.repo_access_resolver.check_repo_access", mock_check),
+        ):
             probe_publish_permissions(
                 [("cells", cfg, "cells.yml")],
                 tmp_path / "verification",
@@ -161,9 +166,7 @@ class TestTokenValueNotWrittenToEvidence:
         report_path = tmp_path / "verification" / "latest" / "publish-permission-probe.json"
         assert report_path.exists()
         content = report_path.read_text(encoding="utf-8")
-        assert fake_token not in content, (
-            "GITHUB_TOKEN value must NEVER appear in the probe report"
-        )
+        assert fake_token not in content, "GITHUB_TOKEN value must NEVER appear in the probe report"
 
     def test_publishing_report_does_not_store_token_value(self, tmp_path):
         """publishing-report.json must not contain the GITHUB_TOKEN value."""
@@ -192,6 +195,7 @@ class TestLivePublishBlocksWhenGithubTokenAbsent:
 
     def _make_passing_verdict(self):
         from plugin_examples.gates.models import GateVerdict
+
         return GateVerdict(
             verdict="PR_DRY_RUN_READY",
             publishable=False,
@@ -202,6 +206,7 @@ class TestLivePublishBlocksWhenGithubTokenAbsent:
 
     def _make_family_config(self):
         from types import SimpleNamespace
+
         pub_repo = SimpleNamespace(
             owner="aspose-words-net",
             repo="Aspose.Words.LowCode-for-.NET-Examples",
@@ -253,6 +258,7 @@ class TestTokenCapabilityPreflightReportsRepoScopeFailure:
             check_repo_access,
             TOKEN_MISSING,
         )
+
         result = check_repo_access(
             "aspose-words-net",
             "Aspose.Words.LowCode-for-.NET-Examples",
@@ -269,6 +275,7 @@ class TestTokenCapabilityPreflightReportsRepoScopeFailure:
             check_repo_access,
             REPO_NOT_FOUND,
         )
+
         with patch(
             "plugin_examples.publisher.repo_access_resolver._github_get",
             return_value=(404, None),
@@ -328,15 +335,22 @@ class TestTokenCapabilityPreflightReportsRepoScopeFailure:
 
         def mock_check(owner, repo, branch, headers=None):
             return {
-                "can_read": True, "can_push": True, "http_status": 200,
-                "visibility": "public", "default_branch": "main", "branch_exists": True,
-                "repo_access_ready": True, "pr_permission_ready": True,
+                "can_read": True,
+                "can_push": True,
+                "http_status": 200,
+                "visibility": "public",
+                "default_branch": "main",
+                "branch_exists": True,
+                "repo_access_ready": True,
+                "pr_permission_ready": True,
                 "error_classification": "repo_access_ok",
                 "interpretation": "Repo accessible.",
             }
 
-        with patch.dict(os.environ, {"GITHUB_TOKEN": fake_token}), \
-             patch("plugin_examples.publisher.repo_access_resolver.check_repo_access", mock_check):
+        with (
+            patch.dict(os.environ, {"GITHUB_TOKEN": fake_token}),
+            patch("plugin_examples.publisher.repo_access_resolver.check_repo_access", mock_check),
+        ):
             result = probe_publish_permissions(
                 [("words", cfg, "words.yml")],
                 tmp_path / "verification",

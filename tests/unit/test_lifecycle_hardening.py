@@ -26,10 +26,11 @@ from plugin_examples.gates.example_lifecycle import (
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _make_registry(family="pdf", run_id="test-run", scenarios=None):
     """Create a lifecycle registry with optional pre-populated records."""
     reg = ExampleLifecycleRegistry(family=family, run_id=run_id)
-    for s in (scenarios or []):
+    for s in scenarios or []:
         rec = reg.create_record(s["scenario_id"])
         if s.get("excluded"):
             rec.mark_excluded(s.get("excluded_reason", "blocked"))
@@ -81,10 +82,12 @@ class TestEveryPlannedExampleGetsLifecycleRecord:
 
     def test_excluded_by_allowlist_gets_lifecycle_record(self):
         """Excluded scenarios must have a lifecycle record with EXCLUDED_BY_SCOPE."""
-        reg = _make_registry(scenarios=[
-            {"scenario_id": "pdf-merger", "generated": True, "build_passed": True, "run_passed": True},
-            {"scenario_id": "pdf-splitter", "excluded": True, "excluded_reason": "blocked_pilot_not_in_scope"},
-        ])
+        reg = _make_registry(
+            scenarios=[
+                {"scenario_id": "pdf-merger", "generated": True, "build_passed": True, "run_passed": True},
+                {"scenario_id": "pdf-splitter", "excluded": True, "excluded_reason": "blocked_pilot_not_in_scope"},
+            ]
+        )
         splitter = reg.get_record("pdf-splitter")
         assert splitter is not None
         assert splitter.current_stage == "excluded"
@@ -94,21 +97,25 @@ class TestEveryPlannedExampleGetsLifecycleRecord:
 
     def test_every_planned_example_gets_lifecycle_record(self):
         """All 4 PDF pilot scenarios must appear in lifecycle."""
-        reg = _make_registry(scenarios=[
-            {"scenario_id": "pdf-merger", "generated": True, "build_passed": True, "run_passed": True},
-            {"scenario_id": "pdf-text-extractor", "generated": True, "build_passed": True, "run_passed": True},
-            {"scenario_id": "pdf-splitter", "excluded": True, "excluded_reason": "not_in_allowlist"},
-            {"scenario_id": "pdf-optimizer", "excluded": True, "excluded_reason": "not_in_allowlist"},
-        ])
+        reg = _make_registry(
+            scenarios=[
+                {"scenario_id": "pdf-merger", "generated": True, "build_passed": True, "run_passed": True},
+                {"scenario_id": "pdf-text-extractor", "generated": True, "build_passed": True, "run_passed": True},
+                {"scenario_id": "pdf-splitter", "excluded": True, "excluded_reason": "not_in_allowlist"},
+                {"scenario_id": "pdf-optimizer", "excluded": True, "excluded_reason": "not_in_allowlist"},
+            ]
+        )
         assert reg.total == 4
         assert len(reg.pr_candidates) == 2
         assert len(reg.excluded_records) == 2
 
     def test_excluded_by_allowlist_gets_backlog_or_taskcard(self):
         """Excluded scenarios should be backloggable."""
-        reg = _make_registry(scenarios=[
-            {"scenario_id": "pdf-splitter", "excluded": True, "excluded_reason": "not_in_allowlist"},
-        ])
+        reg = _make_registry(
+            scenarios=[
+                {"scenario_id": "pdf-splitter", "excluded": True, "excluded_reason": "not_in_allowlist"},
+            ]
+        )
         rec = reg.get_record("pdf-splitter")
         rec.mark_backlogged(
             root_cause="LLM uses PluginOptions instead of SplitOptions",
@@ -123,10 +130,16 @@ class TestFailedExamplesGetBacklogEntries:
     """Verify that build/runtime/reviewer failures produce backlog entries."""
 
     def test_build_failed_example_gets_backlog_entry(self, tmp_path):
-        reg = _make_registry(scenarios=[
-            {"scenario_id": "test-ex", "generated": True, "build_failed": True,
-             "build_failure_reason": "CS0246: type not found"},
-        ])
+        reg = _make_registry(
+            scenarios=[
+                {
+                    "scenario_id": "test-ex",
+                    "generated": True,
+                    "build_failed": True,
+                    "build_failure_reason": "CS0246: type not found",
+                },
+            ]
+        )
         rec = reg.get_record("test-ex")
         rec.mark_backlogged(
             root_cause="CS0246: type not found",
@@ -140,10 +153,17 @@ class TestFailedExamplesGetBacklogEntries:
         assert entry.root_cause == "CS0246: type not found"
 
     def test_runtime_failed_example_gets_backlog_entry(self, tmp_path):
-        reg = _make_registry(scenarios=[
-            {"scenario_id": "test-rt", "generated": True, "build_passed": True,
-             "run_failed": True, "run_failure_reason": "ArgumentException"},
-        ])
+        reg = _make_registry(
+            scenarios=[
+                {
+                    "scenario_id": "test-rt",
+                    "generated": True,
+                    "build_passed": True,
+                    "run_failed": True,
+                    "run_failure_reason": "ArgumentException",
+                },
+            ]
+        )
         rec = reg.get_record("test-rt")
         rec.mark_backlogged(
             root_cause="ArgumentException",
@@ -156,9 +176,11 @@ class TestFailedExamplesGetBacklogEntries:
         assert entry.root_cause == "ArgumentException"
 
     def test_reviewer_failed_example_gets_backlog_entry(self, tmp_path):
-        reg = _make_registry(scenarios=[
-            {"scenario_id": "test-rev", "generated": True, "build_passed": True, "run_passed": True},
-        ])
+        reg = _make_registry(
+            scenarios=[
+                {"scenario_id": "test-rev", "generated": True, "build_passed": True, "run_passed": True},
+            ]
+        )
         rec = reg.get_record("test-rev")
         rec.mark_reviewer_failed("code quality issue")
         rec.mark_backlogged(
@@ -231,11 +253,12 @@ class TestReadinessRankCountsBackloggedExamples:
 
     def test_readiness_rank_counts_backlogged_examples(self):
         """Registry summary should include backlogged count."""
-        reg = _make_registry(scenarios=[
-            {"scenario_id": "ex1", "generated": True, "build_passed": True, "run_passed": True},
-            {"scenario_id": "ex2", "generated": True, "build_failed": True,
-             "build_failure_reason": "error"},
-        ])
+        reg = _make_registry(
+            scenarios=[
+                {"scenario_id": "ex1", "generated": True, "build_passed": True, "run_passed": True},
+                {"scenario_id": "ex2", "generated": True, "build_failed": True, "build_failure_reason": "error"},
+            ]
+        )
         rec2 = reg.get_record("ex2")
         rec2.mark_backlogged(root_cause="build_failed", recommended_fix="fix", priority="high")
         summary = reg.summary()
@@ -247,11 +270,12 @@ class TestFailedExamplesNotMissingFromLatestFamilyLifecycle:
     """Verify that lifecycle evidence preserves all records."""
 
     def test_failed_examples_not_missing_from_latest_family_lifecycle(self, tmp_path):
-        reg = _make_registry(scenarios=[
-            {"scenario_id": "ok", "generated": True, "build_passed": True, "run_passed": True},
-            {"scenario_id": "fail", "generated": True, "build_failed": True,
-             "build_failure_reason": "CS0001"},
-        ])
+        reg = _make_registry(
+            scenarios=[
+                {"scenario_id": "ok", "generated": True, "build_passed": True, "run_passed": True},
+                {"scenario_id": "fail", "generated": True, "build_failed": True, "build_failure_reason": "CS0001"},
+            ]
+        )
         evidence_dir = tmp_path / "evidence"
         evidence_dir.mkdir(parents=True)
         latest = evidence_dir / "latest"
@@ -295,7 +319,9 @@ class TestReviewerFeedbackLoopPendingStatusIsReported:
     def test_reviewer_feedback_loop_pending_status_is_reported(self):
         gap_path = (
             Path(__file__).resolve().parents[2]
-            / "workspace" / "verification" / "latest"
+            / "workspace"
+            / "verification"
+            / "latest"
             / "example-reviewer-feedback-loop-gap-analysis.json"
         )
         if not gap_path.exists():
@@ -314,20 +340,28 @@ class TestRunnerRegistersBlockedScenarios:
         from plugin_examples.runner import PipelineContext
 
         ctx = PipelineContext(
-            family="pdf", run_id="test-blocked", dry_run=True,
-            skip_run=False, template_mode=True,
-            require_llm=False, require_validation=False,
-            require_reviewer=False, repo_root=Path("."),
-            run_dir=Path("."), evidence_dir=Path("."),
+            family="pdf",
+            run_id="test-blocked",
+            dry_run=True,
+            skip_run=False,
+            template_mode=True,
+            require_llm=False,
+            require_validation=False,
+            require_reviewer=False,
+            repo_root=Path("."),
+            run_dir=Path("."),
+            evidence_dir=Path("."),
         )
 
         # Simulate: lifecycle registry initialized with blocked scenarios
         reg = ExampleLifecycleRegistry(family="pdf", run_id="test-blocked")
         blocked = [
-            _MockScenario("pdf-splitter", status="blocked_pilot_not_in_scope",
-                          blocked_reason="Type 'Splitter' not in allowlist"),
-            _MockScenario("pdf-optimizer", status="blocked_pilot_not_in_scope",
-                          blocked_reason="Type 'Optimizer' not in allowlist"),
+            _MockScenario(
+                "pdf-splitter", status="blocked_pilot_not_in_scope", blocked_reason="Type 'Splitter' not in allowlist"
+            ),
+            _MockScenario(
+                "pdf-optimizer", status="blocked_pilot_not_in_scope", blocked_reason="Type 'Optimizer' not in allowlist"
+            ),
         ]
         for b in blocked:
             rec = reg.create_record(b.scenario_id)
@@ -355,10 +389,16 @@ class TestLoadExcludedScenarioSummaries:
             "family": "pdf",
             "blocked_count": 2,
             "blocked_scenarios": [
-                {"scenario_id": "pdf-splitter", "status": "blocked_pilot_not_in_scope",
-                 "blocked_reason": "Not in allowlist"},
-                {"scenario_id": "pdf-optimizer", "status": "blocked_pilot_not_in_scope",
-                 "blocked_reason": "Not in allowlist"},
+                {
+                    "scenario_id": "pdf-splitter",
+                    "status": "blocked_pilot_not_in_scope",
+                    "blocked_reason": "Not in allowlist",
+                },
+                {
+                    "scenario_id": "pdf-optimizer",
+                    "status": "blocked_pilot_not_in_scope",
+                    "blocked_reason": "Not in allowlist",
+                },
             ],
         }
         (families_dir / "blocked-scenarios.json").write_text(json.dumps(blocked))

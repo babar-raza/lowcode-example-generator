@@ -2,7 +2,12 @@
 ZIP builder for lowcode-system-repair-20260601 sprint.
 2-pass build: pass1 computes SHA, writes artifact-verification; pass2 rebuilds with verification.
 """
-import hashlib, json, os, subprocess, sys, zipfile
+import hashlib
+import json
+import os
+import subprocess
+import sys
+import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 

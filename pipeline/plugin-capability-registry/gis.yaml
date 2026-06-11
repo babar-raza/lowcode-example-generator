@@ -54,7 +54,7 @@ entries:
     selected_api_mapping: null
     status: WEBSITE_DISCOVERED
     confidence_score: 0.52
-    confidence_rationale: GIS layer reading: VectorLayer.Open(path, driver) → iterate features.
+    confidence_rationale: "GIS layer reading: VectorLayer.Open(path, driver) → iterate features."
     probe_evidence: null
     failure_taxonomy: null
     rejection_reason: null

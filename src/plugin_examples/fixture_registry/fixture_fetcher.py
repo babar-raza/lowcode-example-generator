@@ -26,6 +26,7 @@ Backward compatibility:
     The old ``fetch_fixtures(registry, output_dir, dry_run=True)`` signature
     is still supported via ``fetch_fixtures_legacy()``.
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -44,14 +45,36 @@ logger = logging.getLogger(__name__)
 # Listing cache TTL (24 hours)
 _LISTING_TTL_SECONDS = 24 * 3600
 
-_DEFAULT_EXTENSION_ALLOWLIST = frozenset({
-    ".xlsx", ".docx", ".pdf", ".dwg", ".dxf", ".svg", ".ttf", ".otf",
-    ".png", ".jpg", ".html", ".zip", ".xbrl", ".glb", ".3ds", ".fbx",
-    ".tiff", ".bmp", ".odt", ".csv", ".eml", ".vsdx", ".sxc",
-})
+_DEFAULT_EXTENSION_ALLOWLIST = frozenset(
+    {
+        ".xlsx",
+        ".docx",
+        ".pdf",
+        ".dwg",
+        ".dxf",
+        ".svg",
+        ".ttf",
+        ".otf",
+        ".png",
+        ".jpg",
+        ".html",
+        ".zip",
+        ".xbrl",
+        ".glb",
+        ".3ds",
+        ".fbx",
+        ".tiff",
+        ".bmp",
+        ".odt",
+        ".csv",
+        ".eml",
+        ".vsdx",
+        ".sxc",
+    }
+)
 
 _DEFAULT_FIXTURE_PATHS = ["Examples/Data"]
-_DEFAULT_MAX_FILE_SIZE = 5 * 1024 * 1024    # 5 MB
+_DEFAULT_MAX_FILE_SIZE = 5 * 1024 * 1024  # 5 MB
 _DEFAULT_MAX_TOTAL_SIZE = 50 * 1024 * 1024  # 50 MB
 
 
@@ -65,8 +88,8 @@ class FixtureBlockedError(FixtureFetchError):
 
 @dataclass
 class FetchResult:
-    strategy: str         # "real_github", "synthetic_fallback", "dry_run_validated", "fixture_blocked"
-    fetched: list[dict]   # per-file result dicts
+    strategy: str  # "real_github", "synthetic_fallback", "dry_run_validated", "fixture_blocked"
+    fetched: list[dict]  # per-file result dicts
     cache_hits: int = 0
     cache_misses: int = 0
     synthetic_count: int = 0
@@ -75,6 +98,7 @@ class FetchResult:
 
 
 # ── Public API ─────────────────────────────────────────────────────────────────
+
 
 def fetch_fixtures(
     family: str,
@@ -110,13 +134,9 @@ def fetch_fixtures(
 
     branch = repo_config.get("branch", "master")
     fixture_paths = repo_config.get("fixture_paths", _DEFAULT_FIXTURE_PATHS)
-    extension_allowlist = frozenset(
-        repo_config.get("extension_allowlist", list(_DEFAULT_EXTENSION_ALLOWLIST))
-    )
+    extension_allowlist = frozenset(repo_config.get("extension_allowlist", list(_DEFAULT_EXTENSION_ALLOWLIST)))
     effective_extensions = (
-        frozenset(required_extensions) & extension_allowlist
-        if required_extensions
-        else extension_allowlist
+        frozenset(required_extensions) & extension_allowlist if required_extensions else extension_allowlist
     )
     max_file_size = repo_config.get("max_file_size_bytes", _DEFAULT_MAX_FILE_SIZE)
     max_total_size = repo_config.get("max_total_size_bytes", _DEFAULT_MAX_TOTAL_SIZE)
@@ -138,9 +158,7 @@ def fetch_fixtures(
         logger.warning("[fixture_fetcher] No GITHUB_TOKEN for %s", family)
         if synthetic_fallback_allowed:
             return _synthetic_fallback(family)
-        raise FixtureBlockedError(
-            f"No GITHUB_TOKEN and synthetic_fallback_allowed=false for {family}"
-        )
+        raise FixtureBlockedError(f"No GITHUB_TOKEN and synthetic_fallback_allowed=false for {family}")
 
     listing_cache_dir = Path(".local/fixture-listings") / family
     listing_cache_dir.mkdir(parents=True, exist_ok=True)
@@ -148,9 +166,14 @@ def fetch_fixtures(
     all_files: list[dict] = []
     for fixture_path in fixture_paths:
         files = _list_github_files(
-            owner, repo, branch, fixture_path,
-            effective_extensions, max_file_size,
-            listing_cache_dir, gh_token,
+            owner,
+            repo,
+            branch,
+            fixture_path,
+            effective_extensions,
+            max_file_size,
+            listing_cache_dir,
+            gh_token,
         )
         all_files.extend(files)
 
@@ -168,7 +191,8 @@ def fetch_fixtures(
         if running_total + size > max_total_size:
             logger.warning(
                 "[fixture_fetcher] Total size limit hit for %s — stopping at %d files",
-                family, len(selected),
+                family,
+                len(selected),
             )
             break
         selected.append(f)
@@ -184,13 +208,15 @@ def fetch_fixtures(
         if cached_file.exists() and cached_sha:
             result.cache_hits += 1
             _copy_with_provenance(cached_file, dest_dir / filename, f, owner, repo, branch, cached_sha)
-            result.fetched.append({
-                "filename": filename,
-                "source_path": f["path"],
-                "status": "CACHE_HIT",
-                "sha256": cached_sha,
-                "size_bytes": cached_file.stat().st_size,
-            })
+            result.fetched.append(
+                {
+                    "filename": filename,
+                    "source_path": f["path"],
+                    "status": "CACHE_HIT",
+                    "sha256": cached_sha,
+                    "size_bytes": cached_file.stat().st_size,
+                }
+            )
             result.total_bytes += cached_file.stat().st_size
         else:
             try:
@@ -210,13 +236,15 @@ def fetch_fixtures(
             _save_manifest(manifest_path, manifest)
             _copy_with_provenance(cached_file, dest_dir / filename, f, owner, repo, branch, downloaded_sha)
             result.cache_misses += 1
-            result.fetched.append({
-                "filename": filename,
-                "source_path": f["path"],
-                "status": "CACHE_MISS",
-                "sha256": downloaded_sha,
-                "size_bytes": size,
-            })
+            result.fetched.append(
+                {
+                    "filename": filename,
+                    "source_path": f["path"],
+                    "status": "CACHE_MISS",
+                    "sha256": downloaded_sha,
+                    "size_bytes": size,
+                }
+            )
             result.total_bytes += size
 
     if not result.fetched:
@@ -249,6 +277,7 @@ def check_fixture_availability(
 
 # ── Internal helpers ───────────────────────────────────────────────────────────
 
+
 def _list_github_files(
     owner: str,
     repo: str,
@@ -271,9 +300,9 @@ def _list_github_files(
             try:
                 cached = json.loads(cache_file.read_text(encoding="utf-8"))
                 return [
-                    f for f in cached
-                    if Path(f["path"]).suffix.lower() in extensions
-                    and f.get("size", 0) <= max_file_size
+                    f
+                    for f in cached
+                    if Path(f["path"]).suffix.lower() in extensions and f.get("size", 0) <= max_file_size
                 ]
             except Exception:
                 pass
@@ -284,7 +313,10 @@ def _list_github_files(
     if proc.returncode != 0:
         logger.warning(
             "[fixture_fetcher] gh api failed for %s/%s/%s: %s",
-            owner, repo, tree_path, proc.stderr.strip(),
+            owner,
+            repo,
+            tree_path,
+            proc.stderr.strip(),
         )
         return []
 
@@ -305,11 +337,7 @@ def _list_github_files(
 
     cache_file.write_text(json.dumps(all_files, indent=2), encoding="utf-8")
 
-    return [
-        f for f in all_files
-        if Path(f["path"]).suffix.lower() in extensions
-        and f.get("size", 0) <= max_file_size
-    ]
+    return [f for f in all_files if Path(f["path"]).suffix.lower() in extensions and f.get("size", 0) <= max_file_size]
 
 
 def _download_file(

@@ -10,7 +10,10 @@ MANDATORY ARTIFACT-STAGING CONVENTION:
 Critical check: git status --short MUST be empty before ZIP build.
 If any tracked file is dirty, this script aborts.
 """
-import json, subprocess, sys, zipfile
+import json
+import subprocess
+import sys
+import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 

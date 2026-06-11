@@ -54,17 +54,19 @@ _KNOWN_FAMILY_NAMES = {"cells", "diagram", "email", "pdf", "slides", "words"}
 @dataclass
 class CategoryResult:
     """Result for one evidence contract category."""
+
     id: str
     name: str
     file: str
     blocking: bool
-    status: str        # PRESENT | MISSING | ZERO_BYTES | SEMANTIC_FAILED | PENDING
-    detail: str = ""   # Reason for failure
+    status: str  # PRESENT | MISSING | ZERO_BYTES | SEMANTIC_FAILED | PENDING
+    detail: str = ""  # Reason for failure
 
 
 @dataclass
 class ContractComputeResult:
     """Full computed result for an evidence contract."""
+
     contract_id: str
     computed_at: str
     total_categories: int
@@ -122,6 +124,7 @@ class EvidenceContractComputer:
         contract_id = contract.get("sprint_id") or contract.get("contract_id", "unknown")
 
         from datetime import datetime, timezone
+
         now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
         # Support both "required_evidence_categories" (legacy) and "categories" (new format)
@@ -138,8 +141,7 @@ class EvidenceContractComputer:
         semantic_failed = sum(1 for c in categories if c.status == "SEMANTIC_FAILED")
         pending = sum(1 for c in categories if c.status == "PENDING")
         blocking_failures = sum(
-            1 for c in categories
-            if c.blocking and c.status in ("MISSING", "ZERO_BYTES", "SEMANTIC_FAILED", "PENDING")
+            1 for c in categories if c.blocking and c.status in ("MISSING", "ZERO_BYTES", "SEMANTIC_FAILED", "PENDING")
         )
 
         return ContractComputeResult(
@@ -168,16 +170,22 @@ class EvidenceContractComputer:
 
         if not file_path.exists():
             return CategoryResult(
-                id=cat_id, name=cat_name, file=file_rel,
-                blocking=blocking, status="MISSING",
+                id=cat_id,
+                name=cat_name,
+                file=file_rel,
+                blocking=blocking,
+                status="MISSING",
                 detail=f"File not found: {file_rel}",
             )
 
         size = file_path.stat().st_size
         if size == 0:
             return CategoryResult(
-                id=cat_id, name=cat_name, file=file_rel,
-                blocking=blocking, status="ZERO_BYTES",
+                id=cat_id,
+                name=cat_name,
+                file=file_rel,
+                blocking=blocking,
+                status="ZERO_BYTES",
                 detail="File is empty (0 bytes)",
             )
 
@@ -185,14 +193,20 @@ class EvidenceContractComputer:
             fail_detail = self._check_semantic(file_path, semantic)
             if fail_detail:
                 return CategoryResult(
-                    id=cat_id, name=cat_name, file=file_rel,
-                    blocking=blocking, status="SEMANTIC_FAILED",
+                    id=cat_id,
+                    name=cat_name,
+                    file=file_rel,
+                    blocking=blocking,
+                    status="SEMANTIC_FAILED",
                     detail=fail_detail,
                 )
 
         return CategoryResult(
-            id=cat_id, name=cat_name, file=file_rel,
-            blocking=blocking, status="PRESENT",
+            id=cat_id,
+            name=cat_name,
+            file=file_rel,
+            blocking=blocking,
+            status="PRESENT",
         )
 
     def _check_semantic(self, file_path: Path, semantic: str) -> str:
@@ -220,9 +234,8 @@ class EvidenceContractComputer:
         #    when all tests pass — e.g. "76 passed in 12.07s" with no "failed" line)
         if "0 failed" in semantic.lower() or "passed" in semantic.lower():
             has_literal_zero_failed = bool(_TEST_ZERO_FAILED_LITERAL_PATTERN.search(text))
-            has_passed_no_failures = (
-                bool(_TEST_PASSED_PATTERN.search(text))
-                and not bool(_TEST_FAILED_COUNT_PATTERN.search(text))
+            has_passed_no_failures = bool(_TEST_PASSED_PATTERN.search(text)) and not bool(
+                _TEST_FAILED_COUNT_PATTERN.search(text)
             )
             if not has_literal_zero_failed and not has_passed_no_failures:
                 return "File does not contain passing test result indicator (no '0 failed' or 'N passed')"
@@ -245,10 +258,7 @@ class EvidenceContractComputer:
                 # Check for internal contradiction: failed=0 but a FAILURE rule is passed=false
                 failed_count = data.get("failed", 0)
                 rules = data.get("rules", [])
-                actually_failed = [
-                    r for r in rules
-                    if not r.get("passed", True) and r.get("severity", "") == "FAILURE"
-                ]
+                actually_failed = [r for r in rules if not r.get("passed", True) and r.get("severity", "") == "FAILURE"]
                 if failed_count == 0 and actually_failed:
                     rule_ids = [r.get("rule_id", "?") for r in actually_failed]
                     return (
@@ -267,29 +277,21 @@ class EvidenceContractComputer:
                     return f"Only {len(records)} entries (expected 42)"
                 # Check for required fields
                 if "output_format" in semantic.lower():
-                    missing_fields = [
-                        r.get("scenario_id", "?") for r in records
-                        if not r.get("output_format")
-                    ]
+                    missing_fields = [r.get("scenario_id", "?") for r in records if not r.get("output_format")]
                     if missing_fields:
                         return f"{len(missing_fields)} records missing output_format"
                 if "api_type" in semantic.lower():
-                    missing_fields = [
-                        r.get("scenario_id", "?") for r in records
-                        if not r.get("api_type")
-                    ]
+                    missing_fields = [r.get("scenario_id", "?") for r in records if not r.get("api_type")]
                     if missing_fields:
                         return f"{len(missing_fields)} records missing api_type"
                 if "output_kind" in semantic.lower():
-                    missing_fields = [
-                        r.get("scenario_id", "?") for r in records
-                        if not r.get("output_kind")
-                    ]
+                    missing_fields = [r.get("scenario_id", "?") for r in records if not r.get("output_kind")]
                     if missing_fields:
                         return f"{len(missing_fields)} records missing output_kind"
                 if "readme_status" in semantic.lower():
                     missing_fields = [
-                        r.get("scenario_id", "?") for r in records
+                        r.get("scenario_id", "?")
+                        for r in records
                         if "readme_input_status" not in r
                         and "readme_output_status" not in r
                         and "readme_has_io" not in r

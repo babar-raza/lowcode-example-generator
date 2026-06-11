@@ -26,73 +26,81 @@ def registry_dir(tmp_path: Path) -> Path:
     )
     # Failure patterns
     (d / "failure-pattern-registry.json").write_text(
-        json.dumps({
-            "patterns": [
-                {
-                    "id": "FP-001",
-                    "name": "missing_namespace_using_directive",
-                    "affected_families": ["cells"],
-                    "affected_types": ["SpreadsheetConverter"],
-                },
-                {
-                    "id": "FP-002",
-                    "name": "wrong_static_call",
-                    "affected_families": ["pdf"],
-                    "affected_types": ["Merger"],
-                },
-            ]
-        }),
+        json.dumps(
+            {
+                "patterns": [
+                    {
+                        "id": "FP-001",
+                        "name": "missing_namespace_using_directive",
+                        "affected_families": ["cells"],
+                        "affected_types": ["SpreadsheetConverter"],
+                    },
+                    {
+                        "id": "FP-002",
+                        "name": "wrong_static_call",
+                        "affected_families": ["pdf"],
+                        "affected_types": ["Merger"],
+                    },
+                ]
+            }
+        ),
         encoding="utf-8",
     )
     # Repair patterns
     (d / "repair-pattern-registry.json").write_text(
-        json.dumps({
-            "patterns": [
-                {
-                    "id": "RP-001",
-                    "resolves_failure": "FP-001",
-                    "strategy": "add_using_directive",
-                },
-            ]
-        }),
+        json.dumps(
+            {
+                "patterns": [
+                    {
+                        "id": "RP-001",
+                        "resolves_failure": "FP-001",
+                        "strategy": "add_using_directive",
+                    },
+                ]
+            }
+        ),
         encoding="utf-8",
     )
     # Semantic steering
     (d / "semantic-steering-registry.json").write_text(
-        json.dumps({
-            "families": {
-                "cells": {
-                    "global_required": ["using Aspose.Cells"],
-                    "global_forbidden": ["using Aspose.Words"],
-                    "per_type": {
-                        "SpreadsheetConverter": {
-                            "required": ["Process("],
-                            "forbidden": ["new SpreadsheetConverter()"],
-                        }
-                    },
+        json.dumps(
+            {
+                "families": {
+                    "cells": {
+                        "global_required": ["using Aspose.Cells"],
+                        "global_forbidden": ["using Aspose.Words"],
+                        "per_type": {
+                            "SpreadsheetConverter": {
+                                "required": ["Process("],
+                                "forbidden": ["new SpreadsheetConverter()"],
+                            }
+                        },
+                    }
                 }
             }
-        }),
+        ),
         encoding="utf-8",
     )
     # Validator patterns
     (d / "validator-pattern-registry.json").write_text(
-        json.dumps({
-            "rules": [
-                {
-                    "id": "VR-001",
-                    "applies_to": {"families": ["cells"], "types": "all"},
-                    "current_status": "IMPLEMENTED",
-                    "check": "namespace_present",
-                },
-                {
-                    "id": "VR-002",
-                    "applies_to": {"families": "all", "types": ["Merger"]},
-                    "current_status": "NOT_IMPLEMENTED",
-                    "check": "output_file_check",
-                },
-            ]
-        }),
+        json.dumps(
+            {
+                "rules": [
+                    {
+                        "id": "VR-001",
+                        "applies_to": {"families": ["cells"], "types": "all"},
+                        "current_status": "IMPLEMENTED",
+                        "check": "namespace_present",
+                    },
+                    {
+                        "id": "VR-002",
+                        "applies_to": {"families": "all", "types": ["Merger"]},
+                        "current_status": "NOT_IMPLEMENTED",
+                        "check": "output_file_check",
+                    },
+                ]
+            }
+        ),
         encoding="utf-8",
     )
     return d

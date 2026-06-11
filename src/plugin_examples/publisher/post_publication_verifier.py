@@ -23,6 +23,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class ExampleVerification:
     """Verification result for a single example."""
+
     example_name: str
     file_found: bool
     has_program_cs: bool
@@ -37,6 +38,7 @@ class ExampleVerification:
 @dataclass
 class PackageVerification:
     """Verification result for a single PR package."""
+
     pr_number: int
     package_name: str
     family: str
@@ -51,6 +53,7 @@ class PackageVerification:
 @dataclass
 class PostPublicationReport:
     """Full post-publication verification report."""
+
     verified_at: str
     family: str
     mode: str  # "dry_run_local" | "live_github"
@@ -100,10 +103,7 @@ def verify_local_package(
         for p in sorted(examples_root.rglob("Program.cs")):
             example_dirs.append(p.parent)
     if not example_dirs:
-        example_dirs = sorted(
-            d for d in package_path.iterdir()
-            if d.is_dir() and not d.name.startswith(".")
-        )
+        example_dirs = sorted(d for d in package_path.iterdir() if d.is_dir() and not d.name.startswith("."))
 
     for example_dir in example_dirs:
         program_cs = example_dir / "Program.cs"
@@ -141,25 +141,25 @@ def verify_local_package(
         else:
             status = "missing_files"
 
-        example_verifications.append(ExampleVerification(
-            example_name=example_dir.name,
-            file_found=file_found,
-            has_program_cs=has_program_cs,
-            has_readme=has_readme,
-            has_csproj=has_csproj,
-            program_cs_bytes=program_cs_bytes,
-            readme_bytes=readme_bytes,
-            lowcode_api_present=lowcode_api_present,
-            status=status,
-        ))
+        example_verifications.append(
+            ExampleVerification(
+                example_name=example_dir.name,
+                file_found=file_found,
+                has_program_cs=has_program_cs,
+                has_readme=has_readme,
+                has_csproj=has_csproj,
+                program_cs_bytes=program_cs_bytes,
+                readme_bytes=readme_bytes,
+                lowcode_api_present=lowcode_api_present,
+                status=status,
+            )
+        )
 
     total = len(example_verifications)
     verified = sum(1 for e in example_verifications if e.status == "verified")
     failed = total - verified
 
-    verdict = "ALL_VERIFIED" if verified == total and total > 0 else (
-        "PARTIAL" if verified > 0 else "ALL_FAILED"
-    )
+    verdict = "ALL_VERIFIED" if verified == total and total > 0 else ("PARTIAL" if verified > 0 else "ALL_FAILED")
 
     return PackageVerification(
         pr_number=pr_number,
@@ -198,16 +198,22 @@ def run_post_publication_verification(
         package_results.append(result)
         logger.info(
             "Package %s (PR#%d): %s (%d/%d verified)",
-            package_name, pr_number, result.verdict,
-            result.verified_examples, result.total_examples,
+            package_name,
+            pr_number,
+            result.verdict,
+            result.verified_examples,
+            result.total_examples,
         )
 
     total_packages = len(package_results)
     all_verified = all(p.verdict in ("ALL_VERIFIED",) for p in package_results)
 
-    verdict = "ALL_PACKAGES_VERIFIED" if all_verified else (
-        "PARTIAL_VERIFICATION" if any(p.verified_examples > 0 for p in package_results)
-        else "VERIFICATION_FAILED"
+    verdict = (
+        "ALL_PACKAGES_VERIFIED"
+        if all_verified
+        else (
+            "PARTIAL_VERIFICATION" if any(p.verified_examples > 0 for p in package_results) else "VERIFICATION_FAILED"
+        )
     )
 
     return PostPublicationReport(

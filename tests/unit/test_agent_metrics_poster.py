@@ -14,8 +14,10 @@ def _config(tmp_path):
 
     cfg_data = {
         "metrics": {
-            "agent_owner": "Test", "agent_name": "test-gen",
-            "website": "aspose.net", "family_to_product": {"cells": "Aspose.Cells"},
+            "agent_owner": "Test",
+            "agent_name": "test-gen",
+            "website": "aspose.net",
+            "family_to_product": {"cells": "Aspose.Cells"},
             "command_to_job_type": {"run": "Examples Generation"},
             "verdict_to_status": {"PR_READY": "success"},
             "api_endpoint": "https://example.com/exec",
@@ -34,7 +36,8 @@ class TestDryRun:
         with patch("plugin_examples.metrics.poster.requests.post") as mock_post:
             result = post_metrics(
                 {"run_id": "t-1", "job_type": "Test"},
-                _config, dry_run=True,
+                _config,
+                dry_run=True,
             )
         mock_post.assert_not_called()
         assert result["posted"] is False
@@ -54,7 +57,9 @@ class TestTestOnlySprint:
 
         result = post_metrics(
             {"run_id": "t-1", "job_type": "Examples Generation"},
-            _config, dry_run=False, test_only_sprint=True,
+            _config,
+            dry_run=False,
+            test_only_sprint=True,
         )
         assert result["posted"] is False
         assert "blocked" in result["reason"]
@@ -70,7 +75,9 @@ class TestTestOnlySprint:
         with patch("plugin_examples.metrics.poster.requests.post", return_value=mock_resp):
             result = post_metrics(
                 {"run_id": "test-1", "job_type": "Test"},
-                _config, dry_run=False, test_only_sprint=True,
+                _config,
+                dry_run=False,
+                test_only_sprint=True,
             )
         assert result["posted"] is True
 
@@ -121,7 +128,9 @@ class TestNetworkFailure:
         with patch("plugin_examples.metrics.poster.requests.post", side_effect=Exception("timeout")):
             result = post_metrics(
                 {"run_id": "test-net", "job_type": "Test"},
-                _config, dry_run=False, test_only_sprint=True,
+                _config,
+                dry_run=False,
+                test_only_sprint=True,
             )
         assert result["posted"] is False
         assert result["reason"] == "network_error"
@@ -134,7 +143,9 @@ class TestTokenSecurity:
         monkeypatch.delenv("AGENT_METRICS_TOKEN", raising=False)
         result = post_metrics(
             {"run_id": "test-notoken", "job_type": "Test"},
-            _config, dry_run=False, test_only_sprint=True,
+            _config,
+            dry_run=False,
+            test_only_sprint=True,
         )
         assert result["posted"] is False
         assert "missing" in result["reason"]
@@ -150,7 +161,9 @@ class TestTokenSecurity:
         with patch("plugin_examples.metrics.poster.requests.post", return_value=mock_resp):
             result = post_metrics(
                 {"run_id": "test-sec", "job_type": "Test"},
-                _config, dry_run=False, test_only_sprint=True,
+                _config,
+                dry_run=False,
+                test_only_sprint=True,
             )
 
         result_str = json.dumps(result)
@@ -169,7 +182,9 @@ class TestLedger:
         with patch("plugin_examples.metrics.poster.requests.post", return_value=mock_resp):
             post_metrics(
                 {"run_id": "test-ledger", "job_type": "Test"},
-                _config, dry_run=False, test_only_sprint=True,
+                _config,
+                dry_run=False,
+                test_only_sprint=True,
             )
 
         ledger = Path(_config.post_ledger_path)

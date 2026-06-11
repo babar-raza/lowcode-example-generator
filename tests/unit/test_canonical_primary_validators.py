@@ -2,6 +2,7 @@
 Tests for CPV-01..CPV-12 canonical-primary invariant validators.
 Sprint: lowcode-plugin-canonical-primary-wave8-20260605
 """
+
 import json
 import pytest
 from pathlib import Path
@@ -25,8 +26,9 @@ def _make_pkg(key, verdict="PASS", canon_slug=None, legacy_slug=None, path=None,
     }
 
 
-def _make_entry(family, slug, canon_slug=None, identity_status="CANONICAL_IDENTITY_VERIFIED",
-                display_name=None, canonical_url=None):
+def _make_entry(
+    family, slug, canon_slug=None, identity_status="CANONICAL_IDENTITY_VERIFIED", display_name=None, canonical_url=None
+):
     return {
         "family": family,
         "plugin_slug": slug,
@@ -39,6 +41,7 @@ def _make_entry(family, slug, canon_slug=None, identity_status="CANONICAL_IDENTI
 
 
 # --- CPV-01: legacy slug as publication candidate ---
+
 
 def test_cpv01_pass_canonical_slug_in_candidates():
     packages = {
@@ -79,6 +82,7 @@ def test_cpv01_fail_legacy_slug_no_canonical():
 
 # --- CPV-02: canonical entry must have canonical_plugin_slug ---
 
+
 def test_cpv02_pass_verified_has_canon_slug():
     entries = [_make_entry("barcode", "1d-barcode-writer")]
     result = run_canonical_primary_validators({}, registry_entries=entries)
@@ -95,6 +99,7 @@ def test_cpv02_fail_verified_missing_canon_slug():
 
 # --- CPV-03: canonical entry must have display_plugin_name ---
 
+
 def test_cpv03_pass_verified_has_display_name():
     entries = [_make_entry("barcode", "1d-barcode-writer", display_name="1D Barcode Writer for .NET")]
     result = run_canonical_primary_validators({}, registry_entries=entries)
@@ -109,6 +114,7 @@ def test_cpv03_warn_verified_missing_display_name():
 
 
 # --- CPV-04: legacy alias must not be in canonical candidates ---
+
 
 def test_cpv04_pass_no_overlap():
     packages = {}
@@ -132,6 +138,7 @@ def test_cpv04_fail_double_counted():
 
 
 # --- CPV-05: dryrun path must use canonical slug ---
+
 
 def test_cpv05_pass_canonical_slug_no_alias_record():
     packages = {
@@ -158,6 +165,7 @@ def test_cpv05_fail_generic_slug_no_alias_record():
 
 # --- CPV-08: BarCode generic names must not be in publication candidate list ---
 
+
 def test_cpv08_pass_no_generic_in_candidates():
     pub = {"canonical_candidates": ["barcode/1d-barcode-writer", "barcode/2d-barcode-reader"]}
     result = run_canonical_primary_validators({}, publication_matrix=pub)
@@ -172,6 +180,7 @@ def test_cpv08_fail_generic_in_candidates():
 
 
 # --- CPV-09: identity_review_required must not overlap canonical candidates ---
+
 
 def test_cpv09_pass_no_overlap():
     pub = {
@@ -194,6 +203,7 @@ def test_cpv09_fail_contaminated_matrix():
 
 # --- CPV-10: family-level probe detection ---
 
+
 def test_cpv10_pass_plugin_level_coverage():
     pub = {"canonical_candidates": ["barcode/1d-barcode-writer"]}
     result = run_canonical_primary_validators({}, publication_matrix=pub)
@@ -207,6 +217,7 @@ def test_cpv10_warn_family_slug_equals_family():
 
 
 # --- CPV-11: family plugin list required ---
+
 
 def test_cpv11_pass_family_has_plugin_list():
     entries = [_make_entry("barcode", "1d-barcode-writer")]
@@ -223,6 +234,7 @@ def test_cpv11_warn_family_missing_plugin_list():
 
 
 # --- CPV-12: summary counts canonical and legacy separately ---
+
 
 def test_cpv12_pass_counts_match():
     pub = {
@@ -247,6 +259,7 @@ def test_cpv12_warn_counts_mismatch():
 
 
 # --- CpvResult properties ---
+
 
 def test_cpv_result_passes_no_violations():
     result = CpvResult()

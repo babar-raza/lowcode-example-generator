@@ -42,7 +42,7 @@ def _make_nupkg(
         # Add a minimal .nuspec
         zf.writestr(
             f"{package_id}.nuspec",
-            f'<package><metadata><id>{package_id}</id></metadata></package>',
+            f"<package><metadata><id>{package_id}</id></metadata></package>",
         )
     nupkg_path.write_bytes(buf.getvalue())
     return nupkg_path
@@ -130,9 +130,13 @@ class TestFrameworkSelector:
 
 class TestExtractPackage:
     def test_dll_path_recorded(self, tmp_path):
-        nupkg = _make_nupkg(tmp_path, "TestPkg", {
-            "netstandard2.0": ["TestPkg.dll", "TestPkg.xml"],
-        })
+        nupkg = _make_nupkg(
+            tmp_path,
+            "TestPkg",
+            {
+                "netstandard2.0": ["TestPkg.dll", "TestPkg.xml"],
+            },
+        )
         run_dir = tmp_path / "run"
         run_dir.mkdir()
 
@@ -148,9 +152,13 @@ class TestExtractPackage:
         assert Path(result["dll_path"]).name == "TestPkg.dll"
 
     def test_xml_path_recorded(self, tmp_path):
-        nupkg = _make_nupkg(tmp_path, "TestPkg", {
-            "netstandard2.0": ["TestPkg.dll", "TestPkg.xml"],
-        })
+        nupkg = _make_nupkg(
+            tmp_path,
+            "TestPkg",
+            {
+                "netstandard2.0": ["TestPkg.dll", "TestPkg.xml"],
+            },
+        )
         run_dir = tmp_path / "run"
         run_dir.mkdir()
 
@@ -166,9 +174,13 @@ class TestExtractPackage:
         assert Path(result["xml_path"]).name == "TestPkg.xml"
 
     def test_warnings_on_missing_xml(self, tmp_path):
-        nupkg = _make_nupkg(tmp_path, "TestPkg", {
-            "netstandard2.0": ["TestPkg.dll"],  # No XML
-        })
+        nupkg = _make_nupkg(
+            tmp_path,
+            "TestPkg",
+            {
+                "netstandard2.0": ["TestPkg.dll"],  # No XML
+            },
+        )
         run_dir = tmp_path / "run"
         run_dir.mkdir()
 
@@ -191,9 +203,13 @@ class TestExtractPackage:
         assert warnings[0]["type"] == "missing_xml_documentation"
 
     def test_missing_dll_raises(self, tmp_path):
-        nupkg = _make_nupkg(tmp_path, "TestPkg", {
-            "netstandard2.0": ["SomeOther.dll"],  # Wrong DLL name
-        })
+        nupkg = _make_nupkg(
+            tmp_path,
+            "TestPkg",
+            {
+                "netstandard2.0": ["SomeOther.dll"],  # Wrong DLL name
+            },
+        )
         run_dir = tmp_path / "run"
         run_dir.mkdir()
 
@@ -207,9 +223,13 @@ class TestExtractPackage:
             )
 
     def test_extraction_manifest_fields(self, tmp_path):
-        nupkg = _make_nupkg(tmp_path, "TestPkg", {
-            "netstandard2.0": ["TestPkg.dll", "TestPkg.xml"],
-        })
+        nupkg = _make_nupkg(
+            tmp_path,
+            "TestPkg",
+            {
+                "netstandard2.0": ["TestPkg.dll", "TestPkg.xml"],
+            },
+        )
         run_dir = tmp_path / "run"
         run_dir.mkdir()
 
@@ -246,9 +266,13 @@ class TestExtractPackage:
             assert field in written
 
     def test_requires_windows_runner_in_manifest(self, tmp_path):
-        nupkg = _make_nupkg(tmp_path, "TestPkg", {
-            "net48": ["TestPkg.dll"],
-        })
+        nupkg = _make_nupkg(
+            tmp_path,
+            "TestPkg",
+            {
+                "net48": ["TestPkg.dll"],
+            },
+        )
         run_dir = tmp_path / "run"
         run_dir.mkdir()
 
@@ -268,9 +292,13 @@ class TestExtractPackage:
 
 class TestDependencyExtraction:
     def test_dependency_dlls_extracted(self, tmp_path):
-        primary = _make_nupkg(tmp_path, "Primary", {
-            "netstandard2.0": ["Primary.dll"],
-        })
+        primary = _make_nupkg(
+            tmp_path,
+            "Primary",
+            {
+                "netstandard2.0": ["Primary.dll"],
+            },
+        )
         dep = _make_nupkg(
             tmp_path,
             "Dep.One",
@@ -295,9 +323,13 @@ class TestDependencyExtraction:
         assert dep_dll.name == "Dep.One.dll"
 
     def test_dependency_dlls_in_resolved_libs(self, tmp_path):
-        primary = _make_nupkg(tmp_path, "Primary", {
-            "netstandard2.0": ["Primary.dll"],
-        })
+        primary = _make_nupkg(
+            tmp_path,
+            "Primary",
+            {
+                "netstandard2.0": ["Primary.dll"],
+            },
+        )
         dep = _make_nupkg(
             tmp_path,
             "Dep.One",
@@ -322,15 +354,23 @@ class TestDependencyExtraction:
         assert (resolved_libs / "Dep.One.dll").exists()
 
     def test_multiple_dependencies(self, tmp_path):
-        primary = _make_nupkg(tmp_path, "Primary", {
-            "netstandard2.0": ["Primary.dll"],
-        })
+        primary = _make_nupkg(
+            tmp_path,
+            "Primary",
+            {
+                "netstandard2.0": ["Primary.dll"],
+            },
+        )
         dep1 = _make_nupkg(
-            tmp_path, "DepA", {"netstandard2.0": ["DepA.dll"]},
+            tmp_path,
+            "DepA",
+            {"netstandard2.0": ["DepA.dll"]},
             name="DepA.1.0.0.nupkg",
         )
         dep2 = _make_nupkg(
-            tmp_path, "DepB", {"netstandard2.0": ["DepB.dll"]},
+            tmp_path,
+            "DepB",
+            {"netstandard2.0": ["DepB.dll"]},
             name="DepB.3.0.0.nupkg",
         )
 
@@ -354,9 +394,13 @@ class TestDependencyExtraction:
 
 class TestPathCorrectness:
     def test_all_paths_under_run_dir(self, tmp_path):
-        nupkg = _make_nupkg(tmp_path, "TestPkg", {
-            "netstandard2.0": ["TestPkg.dll"],
-        })
+        nupkg = _make_nupkg(
+            tmp_path,
+            "TestPkg",
+            {
+                "netstandard2.0": ["TestPkg.dll"],
+            },
+        )
         run_dir = tmp_path / "workspace" / "runs" / "test-run"
         run_dir.mkdir(parents=True)
 
@@ -373,9 +417,13 @@ class TestPathCorrectness:
 
     def test_no_old_root_paths_created(self, tmp_path):
         """Verify no old root-level runs/ or extracted/ dirs created."""
-        nupkg = _make_nupkg(tmp_path, "TestPkg", {
-            "netstandard2.0": ["TestPkg.dll"],
-        })
+        nupkg = _make_nupkg(
+            tmp_path,
+            "TestPkg",
+            {
+                "netstandard2.0": ["TestPkg.dll"],
+            },
+        )
         run_dir = tmp_path / "workspace" / "runs" / "test-run"
         run_dir.mkdir(parents=True)
 

@@ -12,7 +12,12 @@ Prior runs (template-generated, build-verified):
   slides  -> pilot-slides-final-20260528
   words   -> pilot-words-heal2-20260528
 """
-import json, os, pathlib, subprocess, sys, time
+import json
+import os
+import pathlib
+import subprocess
+import sys
+import time
 from datetime import datetime, timezone
 
 REPO_ROOT = pathlib.Path(__file__).parent.parent

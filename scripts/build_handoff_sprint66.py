@@ -1,5 +1,8 @@
 """Phase 3: Build self-contained handoff artifacts from sprint64 packages."""
-import json, shutil, hashlib, os
+import json
+import shutil
+import hashlib
+import os
 from pathlib import Path
 from datetime import datetime
 

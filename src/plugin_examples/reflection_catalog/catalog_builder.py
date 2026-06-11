@@ -60,8 +60,7 @@ def build_catalog(
     errors = validate_catalog(catalog)
     if errors:
         raise CatalogBuildError(
-            f"Catalog validation failed with {len(errors)} error(s):\n"
-            + "\n".join(f"  - {e}" for e in errors[:10])
+            f"Catalog validation failed with {len(errors)} error(s):\n" + "\n".join(f"  - {e}" for e in errors[:10])
         )
 
     # Write final catalog
@@ -96,10 +95,7 @@ def _normalize(
 
     if namespace_filter:
         filter_lower = [f.lower() for f in namespace_filter]
-        namespaces = [
-            ns for ns in namespaces
-            if any(f in ns.get("namespace", "").lower() for f in filter_lower)
-        ]
+        namespaces = [ns for ns in namespaces if any(f in ns.get("namespace", "").lower() for f in filter_lower)]
 
     for ns in namespaces:
         normalized_ns = {

@@ -13,6 +13,7 @@ These validators check that:
 - RBC-07: Evidence bundle SHA-256 is recorded in sprint-closeout.json (not PENDING/null).
 - RBC-08: Sprint-closeout.json commit_sha is recorded (not PENDING/null).
 """
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -40,9 +41,7 @@ def rbc_01_civ_entries_have_packages_or_queue(
     missing = []
     for slug in civ_slugs:
         family, name = slug.split("/", 1) if "/" in slug else ("", slug)
-        has_package = any(
-            (base / family / name).exists() for base in package_base_dirs
-        )
+        has_package = any((base / family / name).exists() for base in package_base_dirs)
         in_queue = slug in queue_slugs
         if not has_package and not in_queue:
             missing.append(slug)
@@ -66,6 +65,7 @@ def rbc_02_packages_have_manifest(package_dirs: list[Path]) -> dict:
             errors.append(f"{pkg.name}: missing package-manifest.json")
             continue
         import json
+
         data = json.loads(manifest.read_text(encoding="utf-8"))
         missing_fields = REQUIRED - set(data.keys())
         if missing_fields:
@@ -78,6 +78,7 @@ def rbc_02_packages_have_manifest(package_dirs: list[Path]) -> dict:
 def rbc_03_packages_have_output_validation_pass(package_dirs: list[Path]) -> dict:
     """RBC-03: All proven packages have output-validation.json with verdict=PASS."""
     import json
+
     errors = []
     for pkg in package_dirs:
         ov = pkg / "output-validation.json"
@@ -96,10 +97,7 @@ def rbc_04_packages_have_log_proof(package_dirs: list[Path]) -> dict:
     """RBC-04: All proven packages have restore.log, build.log, and run.log."""
     errors = []
     for pkg in package_dirs:
-        missing_logs = [
-            log for log in ("restore.log", "build.log", "run.log")
-            if not (pkg / log).exists()
-        ]
+        missing_logs = [log for log in ("restore.log", "build.log", "run.log") if not (pkg / log).exists()]
         if missing_logs:
             errors.append(f"{pkg.name}: missing {', '.join(missing_logs)}")
     if errors:

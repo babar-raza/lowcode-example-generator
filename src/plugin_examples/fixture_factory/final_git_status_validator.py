@@ -20,10 +20,7 @@ class FGSResult:
 def _find_final_git_status(names: list[str]) -> list[str]:
     """Find bundle entries that look like a final (post-sprint) git status file."""
     # Must contain 'git-status' and NOT be under 'preflight/'
-    candidates = [
-        n for n in names
-        if "git-status" in n and "preflight" not in n
-    ]
+    candidates = [n for n in names if "git-status" in n and "preflight" not in n]
     return candidates
 
 

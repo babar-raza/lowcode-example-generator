@@ -33,6 +33,7 @@ from plugin_examples.evidence_layout import (
 # Helper fixtures
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture()
 def tmp_evidence_dir(tmp_path: Path) -> Path:
     """Create a temporary evidence_dir/latest/ with all expected files."""
@@ -61,6 +62,7 @@ def _populate_partial_files(evidence_dir: Path, skip: list[str]) -> None:
 # ---------------------------------------------------------------------------
 # TestEvidenceCompleteness
 # ---------------------------------------------------------------------------
+
 
 class TestEvidenceCompletenessGate:
     def test_complete_when_all_files_present(self, tmp_evidence_dir: Path):
@@ -127,16 +129,27 @@ class TestEvidenceCompletenessGate:
         _populate_all_files(tmp_evidence_dir)
         result = check_completeness("cells", tmp_evidence_dir, run_id="test-run")
         d = result.to_dict()
-        for key in ["family", "run_id", "checked_at", "evidence_dir",
-                    "total_expected", "total_found", "total_missing",
-                    "missing_files", "found_files", "completeness_pct",
-                    "status", "mode"]:
+        for key in [
+            "family",
+            "run_id",
+            "checked_at",
+            "evidence_dir",
+            "total_expected",
+            "total_found",
+            "total_missing",
+            "missing_files",
+            "found_files",
+            "completeness_pct",
+            "status",
+            "mode",
+        ]:
             assert key in d, f"Missing key in CompletionResult.to_dict(): {key}"
 
 
 # ---------------------------------------------------------------------------
 # TestWriteCompletenessReport
 # ---------------------------------------------------------------------------
+
 
 class TestWriteCompletenessReport:
     def test_writes_valid_json(self, tmp_path: Path, tmp_evidence_dir: Path):
@@ -168,6 +181,7 @@ class TestWriteCompletenessReport:
 # TestEvidenceLayoutConsistency (REM-007)
 # ---------------------------------------------------------------------------
 
+
 class TestEvidenceLayoutConsistency:
     def test_global_aggregate_allowlist_is_frozenset(self):
         assert isinstance(GLOBAL_AGGREGATE_ALLOWLIST, frozenset)
@@ -178,8 +192,7 @@ class TestEvidenceLayoutConsistency:
     def test_family_scoped_files_do_not_overlap_with_allowlist(self):
         overlap = FAMILY_SCOPED_EVIDENCE_FILES & GLOBAL_AGGREGATE_ALLOWLIST
         assert len(overlap) == 0, (
-            f"Files should not be in both FAMILY_SCOPED_EVIDENCE_FILES and "
-            f"GLOBAL_AGGREGATE_ALLOWLIST: {overlap}"
+            f"Files should not be in both FAMILY_SCOPED_EVIDENCE_FILES and " f"GLOBAL_AGGREGATE_ALLOWLIST: {overlap}"
         )
 
     def test_expected_evidence_files_matches_family_scoped(self):

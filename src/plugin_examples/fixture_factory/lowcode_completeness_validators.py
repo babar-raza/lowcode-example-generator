@@ -25,6 +25,7 @@ Rules:
   LCV-14: No unresolved dirty workspace in final git status
   LCV-15: No "only external gates remain" while local issues exist
 """
+
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import List
@@ -60,15 +61,13 @@ class LcvResult:
             "error_count": self.error_count,
             "warning_count": self.warning_count,
             "violations": [
-                {"rule": v.rule, "severity": v.severity,
-                 "message": v.message, "context": v.context}
+                {"rule": v.rule, "severity": v.severity, "message": v.message, "context": v.context}
                 for v in self.violations
             ],
         }
 
 
-def _add(result: LcvResult, rule: str, severity: str,
-         message: str, context: str = "") -> None:
+def _add(result: LcvResult, rule: str, severity: str, message: str, context: str = "") -> None:
     result.violations.append(LcvViolation(rule, severity, message, context))
 
 
@@ -86,12 +85,15 @@ def check_lcv_01_no_complete_with_pending_evidence(closeout: dict, result: LcvRe
         pending_ids = taskcards.get("pending_ids", [])
         # Filter out post-freeze tasks that are acceptable
         post_freeze_pattern = ("L0-07", "L0-08", "L0-09", "LH-03")
-        real_pending = [p for p in pending_ids
-                        if not any(pf in p for pf in post_freeze_pattern)]
+        real_pending = [p for p in pending_ids if not any(pf in p for pf in post_freeze_pattern)]
         if real_pending:
-            _add(result, "LCV-01", "ERROR",
-                 f"Sprint is COMPLETE but has non-post-freeze pending taskcards: {real_pending}",
-                 f"verdict={verdict!r}")
+            _add(
+                result,
+                "LCV-01",
+                "ERROR",
+                f"Sprint is COMPLETE but has non-post-freeze pending taskcards: {real_pending}",
+                f"verdict={verdict!r}",
+            )
 
 
 # ---------------------------------------------------------------------------
@@ -108,9 +110,13 @@ def check_lcv_02_no_complete_with_pending_taskcards(closeout: dict, result: LcvR
     if total > 0 and pending > 0:
         # Only error if iv_prerequisite_satisfied is not True
         if not taskcards.get("iv_prerequisite_satisfied", False):
-            _add(result, "LCV-02", "ERROR",
-                 f"Sprint is COMPLETE but taskcards show {pending}/{total} PENDING without iv_prerequisite_satisfied",
-                 f"complete={complete} total={total}")
+            _add(
+                result,
+                "LCV-02",
+                "ERROR",
+                f"Sprint is COMPLETE but taskcards show {pending}/{total} PENDING without iv_prerequisite_satisfied",
+                f"complete={complete} total={total}",
+            )
 
 
 # ---------------------------------------------------------------------------
@@ -123,9 +129,13 @@ def check_lcv_03_no_verdict_without_sidecar(closeout: dict, result: LcvResult) -
     bundle = closeout.get("evidence_bundle", {})
     sidecar = bundle.get("external_sidecar", "") if isinstance(bundle, dict) else ""
     if not sidecar:
-        _add(result, "LCV-03", "ERROR",
-             "Sprint verdict is COMPLETE but evidence_bundle.external_sidecar is missing",
-             f"bundle={bundle!r}")
+        _add(
+            result,
+            "LCV-03",
+            "ERROR",
+            "Sprint verdict is COMPLETE but evidence_bundle.external_sidecar is missing",
+            f"bundle={bundle!r}",
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -139,9 +149,13 @@ def check_lcv_04_no_verdict_without_attestation(closeout: dict, result: LcvResul
     sha = bundle.get("sha256", "") if isinstance(bundle, dict) else ""
     protocol_note = bundle.get("protocol_note", "") if isinstance(bundle, dict) else ""
     if not sha:
-        _add(result, "LCV-04", "ERROR",
-             "Sprint verdict is COMPLETE but evidence_bundle.sha256 is missing — attestation not recorded",
-             f"bundle={bundle!r}")
+        _add(
+            result,
+            "LCV-04",
+            "ERROR",
+            "Sprint verdict is COMPLETE but evidence_bundle.sha256 is missing — attestation not recorded",
+            f"bundle={bundle!r}",
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -153,9 +167,13 @@ def check_lcv_05_no_verdict_with_pending_iv(closeout: dict, result: LcvResult) -
         return
     iv_verdict = closeout.get("iv_verdict", "")
     if iv_verdict and "PASS" not in iv_verdict.upper():
-        _add(result, "LCV-05", "ERROR",
-             f"Sprint is COMPLETE but iv_verdict is not PASS: {iv_verdict!r}",
-             f"verdict={verdict!r}")
+        _add(
+            result,
+            "LCV-05",
+            "ERROR",
+            f"Sprint is COMPLETE but iv_verdict is not PASS: {iv_verdict!r}",
+            f"verdict={verdict!r}",
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -167,24 +185,31 @@ def check_lcv_06_no_verdict_with_pending_adversarial(closeout: dict, result: Lcv
         return
     ar_verdict = closeout.get("adversarial_review_verdict", "")
     if ar_verdict and "PASS" not in ar_verdict.upper():
-        _add(result, "LCV-06", "ERROR",
-             f"Sprint is COMPLETE but adversarial_review_verdict is not PASS: {ar_verdict!r}",
-             f"verdict={verdict!r}")
+        _add(
+            result,
+            "LCV-06",
+            "ERROR",
+            f"Sprint is COMPLETE but adversarial_review_verdict is not PASS: {ar_verdict!r}",
+            f"verdict={verdict!r}",
+        )
 
 
 # ---------------------------------------------------------------------------
 # LCV-07: No PR_READY claim without physical PR packet file
 # ---------------------------------------------------------------------------
-def check_lcv_07_pr_ready_requires_packet(closeout: dict, report_root: Path,
-                                           result: LcvResult) -> None:
+def check_lcv_07_pr_ready_requires_packet(closeout: dict, report_root: Path, result: LcvResult) -> None:
     pclc_total = closeout.get("pclc_total", 0)
     if not pclc_total:
         return
     pr_packet_dir = report_root / "publication" / "pr-packets"
     if not pr_packet_dir.exists():
-        _add(result, "LCV-07", "ERROR",
-             f"pclc_total={pclc_total} claimed but no publication/pr-packets directory exists",
-             str(pr_packet_dir))
+        _add(
+            result,
+            "LCV-07",
+            "ERROR",
+            f"pclc_total={pclc_total} claimed but no publication/pr-packets directory exists",
+            str(pr_packet_dir),
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -195,13 +220,21 @@ def check_lcv_08_pr_created_requires_url(closeout: dict, result: LcvResult) -> N
     pr_urls = closeout.get("pr_urls", [])
     if prs_created and int(prs_created) > 0:
         if not pr_urls:
-            _add(result, "LCV-08", "ERROR",
-                 f"prs_created={prs_created} but pr_urls list is empty",
-                 f"closeout keys: {list(closeout.keys())[:10]}")
+            _add(
+                result,
+                "LCV-08",
+                "ERROR",
+                f"prs_created={prs_created} but pr_urls list is empty",
+                f"closeout keys: {list(closeout.keys())[:10]}",
+            )
         elif len(pr_urls) != int(prs_created):
-            _add(result, "LCV-08", "WARNING",
-                 f"prs_created={prs_created} but pr_urls has {len(pr_urls)} entries",
-                 f"urls={pr_urls}")
+            _add(
+                result,
+                "LCV-08",
+                "WARNING",
+                f"prs_created={prs_created} but pr_urls has {len(pr_urls)} entries",
+                f"urls={pr_urls}",
+            )
 
 
 # ---------------------------------------------------------------------------
@@ -212,16 +245,19 @@ def check_lcv_09_published_requires_evidence(closeout: dict, result: LcvResult) 
     if published and int(published) > 0:
         release_evidence = closeout.get("release_evidence", [])
         if not release_evidence:
-            _add(result, "LCV-09", "ERROR",
-                 f"published={published} claimed but release_evidence is empty",
-                 "PUBLISHED status requires merge confirmation and/or release URL")
+            _add(
+                result,
+                "LCV-09",
+                "ERROR",
+                f"published={published} claimed but release_evidence is empty",
+                "PUBLISHED status requires merge confirmation and/or release URL",
+            )
 
 
 # ---------------------------------------------------------------------------
 # LCV-10: No package proof without restore+build+run+output validation
 # ---------------------------------------------------------------------------
-def check_lcv_10_package_proof_completeness(closeout: dict, report_root: Path,
-                                             result: LcvResult) -> None:
+def check_lcv_10_package_proof_completeness(closeout: dict, report_root: Path, result: LcvResult) -> None:
     new_packages = closeout.get("new_packages_proven_w19", []) or closeout.get("new_packages_proven", [])
     if not new_packages:
         return
@@ -231,84 +267,100 @@ def check_lcv_10_package_proof_completeness(closeout: dict, report_root: Path,
         family, slug = pkg.split("/", 1) if "/" in pkg else (pkg, "")
         found = list(report_root.rglob(f"*/{slug}/output-validation.json"))
         if not found:
-            _add(result, "LCV-10", "WARNING",
-                 f"Package {pkg!r} listed as proven but no output-validation.json found in report dir",
-                 str(report_root))
+            _add(
+                result,
+                "LCV-10",
+                "WARNING",
+                f"Package {pkg!r} listed as proven but no output-validation.json found in report dir",
+                str(report_root),
+            )
 
 
 # ---------------------------------------------------------------------------
 # LCV-11: No test count claim without raw log evidence
 # ---------------------------------------------------------------------------
-def check_lcv_11_test_count_requires_log(closeout: dict, report_root: Path,
-                                          result: LcvResult) -> None:
+def check_lcv_11_test_count_requires_log(closeout: dict, report_root: Path, result: LcvResult) -> None:
     validators_info = closeout.get("validators", {})
     if not validators_info:
         return
     full_suite = validators_info.get("full_suite", "") if isinstance(validators_info, dict) else str(validators_info)
     if "passed" in full_suite.lower():
         # Look for a raw test log
-        log_files = (list(report_root.rglob("raw-validator-test.log")) +
-                     list(report_root.rglob("pytest-summary.txt")) +
-                     list(report_root.rglob("*.test.log")))
+        log_files = (
+            list(report_root.rglob("raw-validator-test.log"))
+            + list(report_root.rglob("pytest-summary.txt"))
+            + list(report_root.rglob("*.test.log"))
+        )
         if not log_files:
-            _add(result, "LCV-11", "WARNING",
-                 f"Test count claimed ({full_suite!r}) but no raw test log found in report dir",
-                 str(report_root))
+            _add(
+                result,
+                "LCV-11",
+                "WARNING",
+                f"Test count claimed ({full_suite!r}) but no raw test log found in report dir",
+                str(report_root),
+            )
 
 
 # ---------------------------------------------------------------------------
 # LCV-12: No final git status omission in closeout
 # ---------------------------------------------------------------------------
-def check_lcv_12_final_git_status_required(closeout: dict, report_root: Path,
-                                            result: LcvResult) -> None:
+def check_lcv_12_final_git_status_required(closeout: dict, report_root: Path, result: LcvResult) -> None:
     verdict = closeout.get("verdict", "")
     if "COMPLETE" not in verdict.upper():
         return
     git_status_files = list(report_root.rglob("git-status-final.txt"))
     if not git_status_files:
-        _add(result, "LCV-12", "ERROR",
-             "Sprint is COMPLETE but no final/git-status-final.txt found in report dir",
-             str(report_root))
+        _add(
+            result,
+            "LCV-12",
+            "ERROR",
+            "Sprint is COMPLETE but no final/git-status-final.txt found in report dir",
+            str(report_root),
+        )
 
 
 # ---------------------------------------------------------------------------
 # LCV-13: No target repo claim without clone/fetch/PR evidence
 # ---------------------------------------------------------------------------
-def check_lcv_13_target_repo_requires_evidence(closeout: dict, report_root: Path,
-                                                result: LcvResult) -> None:
+def check_lcv_13_target_repo_requires_evidence(closeout: dict, report_root: Path, result: LcvResult) -> None:
     prs_created = closeout.get("prs_created", 0)
     if not prs_created or int(prs_created) == 0:
         return
     # Check for target-publication or pr-review directory with evidence
     target_pub = report_root / "target-publication"
     pr_review = report_root / "pr-review"
-    has_evidence = (
-        (target_pub.exists() and any(target_pub.rglob("*.json"))) or
-        (pr_review.exists() and any(pr_review.rglob("*.json")))
+    has_evidence = (target_pub.exists() and any(target_pub.rglob("*.json"))) or (
+        pr_review.exists() and any(pr_review.rglob("*.json"))
     )
     if not has_evidence:
-        _add(result, "LCV-13", "ERROR",
-             f"prs_created={prs_created} claimed but no target-publication or pr-review evidence found",
-             str(report_root))
+        _add(
+            result,
+            "LCV-13",
+            "ERROR",
+            f"prs_created={prs_created} claimed but no target-publication or pr-review evidence found",
+            str(report_root),
+        )
 
 
 # ---------------------------------------------------------------------------
 # LCV-14: No unresolved dirty workspace in final git status
 # ---------------------------------------------------------------------------
-def check_lcv_14_dirty_workspace_must_be_classified(closeout: dict, report_root: Path,
-                                                     result: LcvResult) -> None:
+def check_lcv_14_dirty_workspace_must_be_classified(closeout: dict, report_root: Path, result: LcvResult) -> None:
     final_verdict = closeout.get("final_verdict", "")
     if "APPROVAL_BLOCKED" not in final_verdict.upper():
         return
     remaining_blockers = closeout.get("remaining_blockers", [])
     # Check if any blocker mentions dirty workspace
-    dirty_classified = any("dirty" in str(b).lower() or "hygiene" in str(b).lower()
-                           for b in remaining_blockers)
+    dirty_classified = any("dirty" in str(b).lower() or "hygiene" in str(b).lower() for b in remaining_blockers)
     hygiene_evidence = list(report_root.rglob("dirty-state-classification.json"))
     if not hygiene_evidence:
-        _add(result, "LCV-14", "WARNING",
-             "Sprint claims APPROVAL_BLOCKED but no workspace-hygiene/dirty-state-classification.json found",
-             "Dirty workspace must be classified before claiming only external gates remain")
+        _add(
+            result,
+            "LCV-14",
+            "WARNING",
+            "Sprint claims APPROVAL_BLOCKED but no workspace-hygiene/dirty-state-classification.json found",
+            "Dirty workspace must be classified before claiming only external gates remain",
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -333,9 +385,13 @@ def check_lcv_15_no_only_external_while_local_issues(closeout: dict, result: Lcv
     if pending_count > 0 and not taskcards.get("iv_prerequisite_satisfied"):
         issues.append(f"taskcards_pending={pending_count}")
     if issues:
-        _add(result, "LCV-15", "ERROR",
-             f"Sprint claims 'only external gates remain' but local issues exist: {issues}",
-             f"final_verdict_reason={final_verdict_reason!r}")
+        _add(
+            result,
+            "LCV-15",
+            "ERROR",
+            f"Sprint claims 'only external gates remain' but local issues exist: {issues}",
+            f"final_verdict_reason={final_verdict_reason!r}",
+        )
 
 
 # ---------------------------------------------------------------------------

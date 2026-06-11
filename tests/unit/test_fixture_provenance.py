@@ -1,4 +1,5 @@
 """Tests for fixture provenance sidecar format — Wave 25 Lane B."""
+
 from __future__ import annotations
 
 import hashlib
@@ -88,6 +89,7 @@ def test_provenance_sidecar_license_note_present(tmp_path):
 
 def test_provenance_sidecar_downloaded_at_is_iso8601(tmp_path):
     from datetime import datetime
+
     _, sidecar = _make_sidecar(tmp_path)
     ts = sidecar["downloaded_at"]
     # Should parse without error

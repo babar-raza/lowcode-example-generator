@@ -43,6 +43,7 @@ LIFECYCLE_STAGES = (
 # Core dataclass
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class ExampleLifecycleRecord:
     """Tracks the full lifecycle of a single planned example.
@@ -50,6 +51,7 @@ class ExampleLifecycleRecord:
     Every scenario that enters the planner's ready_scenarios gets a record.
     Examples that fail at ANY stage remain tracked — never silently dropped.
     """
+
     scenario_id: str
     family: str
     run_id: str
@@ -189,9 +191,11 @@ class ExampleLifecycleRecord:
 # Registry: per-run lifecycle tracking
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class ExampleLifecycleRegistry:
     """Collects all lifecycle records for a single pipeline run."""
+
     family: str
     run_id: str
     records: list[ExampleLifecycleRecord] = field(default_factory=list)
@@ -262,9 +266,11 @@ class ExampleLifecycleRegistry:
 # Per-family backlog
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class FamilyBacklogEntry:
     """A persistent backlog entry for a failed example across runs."""
+
     scenario_id: str
     family: str
     last_run_id: str
@@ -364,6 +370,7 @@ def update_backlog_from_lifecycle(
 # Evidence writer
 # ---------------------------------------------------------------------------
 
+
 def write_lifecycle_evidence(
     registry: ExampleLifecycleRegistry,
     evidence_dir: Path,
@@ -418,6 +425,7 @@ def _state_strength(stage: str) -> int:
 @dataclass
 class ScenarioComparisonResult:
     """Comparison result for a single scenario between two runs."""
+
     scenario_id: str
     prior_state: str
     current_state: str
@@ -428,6 +436,7 @@ class ScenarioComparisonResult:
 @dataclass
 class RunToRunComparisonResult:
     """Aggregate comparison between a current run and a prior run."""
+
     current_run_id: str
     prior_run_id: str
     family: str
@@ -455,8 +464,7 @@ def _load_prior_lifecycle(
     """Load prior run lifecycle records. Returns list of record dicts or None."""
     # Try run-scoped evidence first
     run_path = (
-        repo_root / "workspace" / "runs" / prior_run_id
-        / "evidence" / "latest" / "example-lifecycle-records.json"
+        repo_root / "workspace" / "runs" / prior_run_id / "evidence" / "latest" / "example-lifecycle-records.json"
     )
     if run_path.exists():
         try:
@@ -467,8 +475,7 @@ def _load_prior_lifecycle(
 
     # Try promoted family evidence
     family_path = (
-        repo_root / "workspace" / "verification" / "latest"
-        / "families" / family / "example-lifecycle-records.json"
+        repo_root / "workspace" / "verification" / "latest" / "families" / family / "example-lifecycle-records.json"
     )
     if family_path.exists():
         try:
@@ -504,7 +511,8 @@ def compare_with_prior_run(
         result.verdict = "RUN_TO_RUN_COMPARISON_BLOCKED_PRIOR_RUN_NOT_FOUND"
         logger.error(
             "Prior run '%s' lifecycle not found for family '%s'",
-            prior_run_id, registry.family,
+            prior_run_id,
+            registry.family,
         )
         return result
 
@@ -586,9 +594,10 @@ def compare_with_prior_run(
                 current_state="(missing)",
                 classification="MISSING_FROM_CURRENT",
                 regression_reason=(
-                    f"Scenario present in prior run at stage '{prior_stage}' "
-                    f"but absent from current run"
-                ) if is_regression else None,
+                    f"Scenario present in prior run at stage '{prior_stage}' " f"but absent from current run"
+                )
+                if is_regression
+                else None,
             )
             result.missing_from_current_count += 1
             if is_regression:

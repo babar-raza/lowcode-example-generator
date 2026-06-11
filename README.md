@@ -281,16 +281,28 @@ python3 -m plugin_examples run --family cells --promote-latest
 
 ```powershell
 $env:PYTHONPATH = "src"
-python -m pytest tests/unit -v --timeout=60
+# Unit tests with coverage (CI requires >= 60%)
+python -m pytest tests/unit -v --timeout=60 --cov=src/plugin_examples --cov-report=term-missing --cov-fail-under=60
+# Integration tests
+python -m pytest tests/integration -v --timeout=120
 python -m compileall src
 dotnet build tools/DllReflector/DllReflector.csproj -c Release
 ```
 
 ```bash
 # bash / Linux / macOS
-PYTHONPATH=src python3 -m pytest tests/unit -v --timeout=60
+# Unit tests with coverage (CI requires >= 60%)
+PYTHONPATH=src python3 -m pytest tests/unit -v --timeout=60 --cov=src/plugin_examples --cov-report=term-missing --cov-fail-under=60
+# Integration tests
+PYTHONPATH=src python3 -m pytest tests/integration -v --timeout=120
 python3 -m compileall src
 dotnet build tools/DllReflector/DllReflector.csproj -c Release
+```
+
+**Doctor health check:**
+
+```bash
+PYTHONPATH=src python3 -m plugin_examples doctor
 ```
 
 ## Architecture

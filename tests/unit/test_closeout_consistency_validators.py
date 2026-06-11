@@ -2,6 +2,7 @@
 Tests for Closeout Consistency Validators (CCV-01..CCV-18)
 Sprint: lowcode-plugin-canonical-package-wave10-20260605
 """
+
 import json
 import pytest
 from pathlib import Path
@@ -35,6 +36,7 @@ from src.plugin_examples.fixture_factory.closeout_consistency_validators import 
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def complete_closeout(**overrides):
     base = {
         "verdict": "SPRINT_COMPLETE",
@@ -55,7 +57,12 @@ def pending_closeout(**overrides):
     return base
 
 
-def verified_entry(slug="my-plugin", family="myFamily", url="https://products.aspose.net/myFamily/my-plugin/", name="My Plugin for .NET"):
+def verified_entry(
+    slug="my-plugin",
+    family="myFamily",
+    url="https://products.aspose.net/myFamily/my-plugin/",
+    name="My Plugin for .NET",
+):
     return {
         "plugin_slug": slug,
         "family": family,
@@ -68,6 +75,7 @@ def verified_entry(slug="my-plugin", family="myFamily", url="https://products.as
 # ---------------------------------------------------------------------------
 # CCV-01
 # ---------------------------------------------------------------------------
+
 
 def test_ccv_01_passes_when_bundle_complete():
     result = CcvResult()
@@ -92,11 +100,14 @@ def test_ccv_01_no_false_positive_when_verdict_pending():
 # CCV-02
 # ---------------------------------------------------------------------------
 
+
 def complete_lane_ledger():
-    return {"lanes": [
-        {"lane": "A", "status": "COMPLETE"},
-        {"lane": "B", "status": "COMPLETE"},
-    ]}
+    return {
+        "lanes": [
+            {"lane": "A", "status": "COMPLETE"},
+            {"lane": "B", "status": "COMPLETE"},
+        ]
+    }
 
 
 def test_ccv_02_passes_when_all_lanes_complete():
@@ -129,6 +140,7 @@ def test_ccv_02_no_check_when_sprint_not_complete():
 # CCV-03
 # ---------------------------------------------------------------------------
 
+
 def test_ccv_03_passes_when_taskcards_complete():
     result = CcvResult()
     cards = [{"id": "TC-01", "status": "COMPLETE"}]
@@ -160,6 +172,7 @@ def test_ccv_03_no_check_when_sprint_pending():
 # CCV-04
 # ---------------------------------------------------------------------------
 
+
 def test_ccv_04_no_violation_when_no_test_count_claimed():
     result = CcvResult()
     check_ccv_04_test_log_exists({}, None, result)
@@ -189,6 +202,7 @@ def test_ccv_04_error_when_no_report_dir():
 # CCV-05
 # ---------------------------------------------------------------------------
 
+
 def test_ccv_05_no_violation_when_git_status_present(tmp_path):
     (tmp_path / "git-status.txt").write_text("nothing to commit")
     result = CcvResult()
@@ -212,6 +226,7 @@ def test_ccv_05_no_check_when_not_complete(tmp_path):
 # CCV-06
 # ---------------------------------------------------------------------------
 
+
 def test_ccv_06_passes_with_commit_sha():
     result = CcvResult()
     check_ccv_06_commit_proof_recorded(complete_closeout(commit_sha="abc1234"), result)
@@ -234,6 +249,7 @@ def test_ccv_06_no_check_when_pending():
 # ---------------------------------------------------------------------------
 # CCV-07
 # ---------------------------------------------------------------------------
+
 
 def test_ccv_07_passes_when_url_present():
     result = CcvResult()
@@ -260,6 +276,7 @@ def test_ccv_07_skips_non_verified_entries():
 # CCV-08
 # ---------------------------------------------------------------------------
 
+
 def test_ccv_08_passes_when_display_name_present():
     result = CcvResult()
     check_ccv_08_display_name_for_verified([verified_entry()], result)
@@ -278,9 +295,14 @@ def test_ccv_08_warning_when_display_name_missing():
 # CCV-09
 # ---------------------------------------------------------------------------
 
+
 def test_ccv_09_passes_when_url_present():
     result = CcvResult()
-    row = {"package_key": "family/plugin", "publication_status": "PUBLICATION_READY", "canonical_url": "https://example.com"}
+    row = {
+        "package_key": "family/plugin",
+        "publication_status": "PUBLICATION_READY",
+        "canonical_url": "https://example.com",
+    }
     check_ccv_09_publication_clean_has_canonical_url([row], result)
     assert not any(v.rule == "CCV-09" for v in result.violations)
 
@@ -302,6 +324,7 @@ def test_ccv_09_skips_non_publication_rows():
 # ---------------------------------------------------------------------------
 # CCV-10 / CCV-11 / CCV-12
 # ---------------------------------------------------------------------------
+
 
 def test_ccv_10_passes_when_program_cs_exists(tmp_path):
     (tmp_path / "Program.cs").write_text("// test")
@@ -359,6 +382,7 @@ def test_ccv_12_passes_when_log_exists(tmp_path):
 # CCV-13
 # ---------------------------------------------------------------------------
 
+
 def test_ccv_13_error_when_legacy_alias_in_clean_matrix():
     result = CcvResult()
     registry = [{"plugin_slug": "canonical-slug", "family": "imaging", "legacy_aliases": ["compress-image"]}]
@@ -378,6 +402,7 @@ def test_ccv_13_passes_when_canonical_slug_in_matrix():
 # ---------------------------------------------------------------------------
 # CCV-14
 # ---------------------------------------------------------------------------
+
 
 def test_ccv_14_error_when_no_canonical_url_column():
     result = CcvResult()
@@ -413,13 +438,17 @@ def test_ccv_14_no_violation_for_empty_matrix():
 # CCV-15
 # ---------------------------------------------------------------------------
 
+
 def test_ccv_15_passes_when_program_cs_found(tmp_path):
     pkg_dir = tmp_path / "imaging" / "image-compressor"
     pkg_dir.mkdir(parents=True)
     (pkg_dir / "Program.cs").write_text("// test")
     result = CcvResult()
-    row = {"package_key": "imaging/image-compressor", "publication_status": "PUBLICATION_READY",
-           "canonical_url": "https://example.com"}
+    row = {
+        "package_key": "imaging/image-compressor",
+        "publication_status": "PUBLICATION_READY",
+        "canonical_url": "https://example.com",
+    }
     check_ccv_15_publication_ready_has_package_proof([row], [tmp_path], result)
     assert not any(v.rule == "CCV-15" for v in result.violations)
 
@@ -465,6 +494,7 @@ def test_ccv_15_checks_multiple_base_dirs(tmp_path):
 # CCV-16
 # ---------------------------------------------------------------------------
 
+
 def test_ccv_16_passes_when_counts_match():
     result = CcvResult()
     closeout = complete_closeout(registry_total=70)
@@ -503,6 +533,7 @@ def test_ccv_16_uses_total_registry_entries_key():
 # CCV-17
 # ---------------------------------------------------------------------------
 
+
 def test_ccv_17_no_violation_when_no_errors():
     result = CcvResult()
     check_ccv_17_no_errors_with_complete_verdict(complete_closeout(), result)
@@ -534,6 +565,7 @@ def test_ccv_17_no_violation_when_only_warnings():
 # ---------------------------------------------------------------------------
 # CCV-18
 # ---------------------------------------------------------------------------
+
 
 def test_ccv_18_passes_when_entries_positive():
     result = CcvResult()
@@ -574,6 +606,7 @@ def test_ccv_18_no_violation_when_bundle_not_dict():
 # ---------------------------------------------------------------------------
 # Aggregate runner
 # ---------------------------------------------------------------------------
+
 
 def test_aggregate_runner_clean_state(tmp_path):
     (tmp_path / "pytest-stdout.txt").write_text("100 passed")

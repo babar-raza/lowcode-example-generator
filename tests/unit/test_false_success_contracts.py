@@ -68,11 +68,22 @@ class _FakeCtx:
 
 def _make_stages(overrides: dict | None = None) -> list[_FakeStage]:
     names = [
-        "load_config", "nuget_fetch", "dependency_resolution",
-        "extraction", "reflection", "plugin_detection",
-        "api_delta", "impact_mapping", "fixture_registry",
-        "example_mining", "scenario_planning", "llm_preflight",
-        "generation", "validation", "reviewer", "publisher",
+        "load_config",
+        "nuget_fetch",
+        "dependency_resolution",
+        "extraction",
+        "reflection",
+        "plugin_detection",
+        "api_delta",
+        "impact_mapping",
+        "fixture_registry",
+        "example_mining",
+        "scenario_planning",
+        "llm_preflight",
+        "generation",
+        "validation",
+        "reviewer",
+        "publisher",
     ]
     stages = []
     for i, name in enumerate(names):
@@ -96,12 +107,14 @@ class TestBuildFailureBlocksFullE2E:
     def test_build_failure_blocks_full_e2e(self):
         """Build failure must NEVER produce FULL_E2E_PASSED."""
         ctx = _FakeCtx(template_mode=False, skip_run=False, dry_run=False)
-        stages = _make_stages({
-            "scenario_planning": {"artifacts": {"ready_count": 3}},
-            "generation": {"artifacts": {"examples_generated": 3, "generation_mode": "llm"}},
-            "validation": {"artifacts": {"passed": 0, "failed": 3, "total": 3}},
-            "reviewer": {"artifacts": {"available": True, "passed": True}},
-        })
+        stages = _make_stages(
+            {
+                "scenario_planning": {"artifacts": {"ready_count": 3}},
+                "generation": {"artifacts": {"examples_generated": 3, "generation_mode": "llm"}},
+                "validation": {"artifacts": {"passed": 0, "failed": 3, "total": 3}},
+                "reviewer": {"artifacts": {"available": True, "passed": True}},
+            }
+        )
         verdict = evaluate_gates(stages, ctx)
         assert verdict.verdict != "FULL_E2E_PASSED"
         assert verdict.verdict == "BLOCKED_BUILD_FAILED"
@@ -117,7 +130,9 @@ class TestReviewerUnavailableBlocksPublish:
     def test_reviewer_unavailable_blocks_publish(self):
         """Reviewer unavailable on publish path must NOT produce PR_READY."""
         ctx = _FakeCtx(
-            template_mode=False, skip_run=False, dry_run=False,
+            template_mode=False,
+            skip_run=False,
+            dry_run=False,
             require_reviewer=True,
         )
         vr = _FakeValidationResult(
@@ -127,12 +142,14 @@ class TestReviewerUnavailableBlocksPublish:
             run=_FakeDotnetResult(success=True),
         )
         ctx.validation_results = [vr]
-        stages = _make_stages({
-            "scenario_planning": {"artifacts": {"ready_count": 3}},
-            "generation": {"artifacts": {"examples_generated": 3, "generation_mode": "llm"}},
-            "validation": {"artifacts": {"passed": 3, "failed": 0, "total": 3}},
-            "reviewer": {"status": "failed", "artifacts": {"available": False, "passed": False}},
-        })
+        stages = _make_stages(
+            {
+                "scenario_planning": {"artifacts": {"ready_count": 3}},
+                "generation": {"artifacts": {"examples_generated": 3, "generation_mode": "llm"}},
+                "validation": {"artifacts": {"passed": 3, "failed": 0, "total": 3}},
+                "reviewer": {"status": "failed", "artifacts": {"available": False, "passed": False}},
+            }
+        )
         verdict = evaluate_gates(stages, ctx)
         assert verdict.verdict != "PR_READY"
         assert verdict.verdict != "FULL_E2E_PASSED"
@@ -155,12 +172,14 @@ class TestTemplateModeNeverFullE2E:
         verdict. Template mode with successful build/run is publishable.
         """
         ctx = _FakeCtx(template_mode=True, skip_run=False, dry_run=False)
-        stages = _make_stages({
-            "scenario_planning": {"artifacts": {"ready_count": 10}},
-            "generation": {"artifacts": {"examples_generated": 10, "generation_mode": "template"}},
-            "validation": {"artifacts": {"passed": 10, "failed": 0, "total": 10}},
-            "reviewer": {"artifacts": {"available": True, "passed": True}},
-        })
+        stages = _make_stages(
+            {
+                "scenario_planning": {"artifacts": {"ready_count": 10}},
+                "generation": {"artifacts": {"examples_generated": 10, "generation_mode": "template"}},
+                "validation": {"artifacts": {"passed": 10, "failed": 0, "total": 10}},
+                "reviewer": {"artifacts": {"available": True, "passed": True}},
+            }
+        )
         verdict = evaluate_gates(stages, ctx)
         assert verdict.verdict != "FULL_E2E_PASSED"
         assert verdict.verdict == "CANONICAL_TEMPLATE_GENERATION_PASS"
@@ -175,12 +194,14 @@ class TestSkipRunNeverFullE2E:
     def test_skip_run_never_full_e2e(self):
         """skip_run=True must NEVER produce FULL_E2E_PASSED."""
         ctx = _FakeCtx(template_mode=False, skip_run=True, dry_run=False)
-        stages = _make_stages({
-            "scenario_planning": {"artifacts": {"ready_count": 5}},
-            "generation": {"artifacts": {"examples_generated": 5, "generation_mode": "llm"}},
-            "validation": {"artifacts": {"passed": 5, "failed": 0, "total": 5}},
-            "reviewer": {"artifacts": {"available": True, "passed": True}},
-        })
+        stages = _make_stages(
+            {
+                "scenario_planning": {"artifacts": {"ready_count": 5}},
+                "generation": {"artifacts": {"examples_generated": 5, "generation_mode": "llm"}},
+                "validation": {"artifacts": {"passed": 5, "failed": 0, "total": 5}},
+                "reviewer": {"artifacts": {"available": True, "passed": True}},
+            }
+        )
         verdict = evaluate_gates(stages, ctx)
         assert verdict.verdict != "FULL_E2E_PASSED"
         assert verdict.verdict == "DATA_FLOW_PROTOTYPE_ONLY"
@@ -330,11 +351,14 @@ class TestPackageWatcherDetectsNoChange:
             lambda pkg: "26.4.0",
         )
         lock_path = tmp_path / "package-lock.json"
-        lock_path.write_text(json.dumps({
-            "packages": {"Aspose.Cells": {"version": "26.4.0"}},
-        }))
-        families = [{"family": "cells", "enabled": True, "status": "active",
-                      "nuget": {"package_id": "Aspose.Cells"}}]
+        lock_path.write_text(
+            json.dumps(
+                {
+                    "packages": {"Aspose.Cells": {"version": "26.4.0"}},
+                }
+            )
+        )
+        families = [{"family": "cells", "enabled": True, "status": "active", "nuget": {"package_id": "Aspose.Cells"}}]
         results = check_for_updates(families, tmp_path)
         assert len(results) == 1
         assert not results[0].has_update
@@ -352,11 +376,14 @@ class TestPackageWatcherDetectsChangedVersion:
             lambda pkg: "26.5.0",
         )
         lock_path = tmp_path / "package-lock.json"
-        lock_path.write_text(json.dumps({
-            "packages": {"Aspose.Cells": {"version": "26.4.0"}},
-        }))
-        families = [{"family": "cells", "enabled": True, "status": "active",
-                      "nuget": {"package_id": "Aspose.Cells"}}]
+        lock_path.write_text(
+            json.dumps(
+                {
+                    "packages": {"Aspose.Cells": {"version": "26.4.0"}},
+                }
+            )
+        )
+        families = [{"family": "cells", "enabled": True, "status": "active", "nuget": {"package_id": "Aspose.Cells"}}]
         results = check_for_updates(families, tmp_path)
         assert len(results) == 1
         assert results[0].has_update

@@ -19,6 +19,7 @@ class ReviewerUnavailableError(Exception):
 @dataclass
 class ReviewerResult:
     """Result of example-reviewer validation."""
+
     available: bool = False
     passed: bool = False
     error: str | None = None
@@ -108,17 +109,20 @@ def run_example_reviewer(
     reviewer_path = _resolve_reviewer_path(reviewer_path)
     if not check_reviewer_availability(reviewer_path):
         raise ReviewerUnavailableError(
-            "example-reviewer is not available. "
-            "Ensure the repo is cloned and dependencies installed."
+            "example-reviewer is not available. " "Ensure the repo is cloned and dependencies installed."
         )
 
     try:
         python_exe = _get_reviewer_python(reviewer_path)
         cmd = [
-            python_exe, "-m", "src.cli.main",
-            "--json", "--safe-workspace",
+            python_exe,
+            "-m",
+            "src.cli.main",
+            "--json",
+            "--safe-workspace",
             "compile-verify",
-            "--family", family,
+            "--family",
+            family,
         ]
 
         proc = subprocess.run(

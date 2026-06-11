@@ -263,9 +263,7 @@ def probe_org_repo_creation(
         )
     else:
         result["can_create_repos"] = None
-        result["interpretation"] = (
-            f"Org '{org}' check inconclusive (HTTP {m_status})."
-        )
+        result["interpretation"] = f"Org '{org}' check inconclusive (HTTP {m_status})."
 
     return result
 
@@ -294,45 +292,51 @@ def resolve_repo_access(
 
     for family, config, config_path in families:
         if config is None:
-            resolution_records.append({
-                "family": family,
-                "config_path": config_path,
-                "error_classification": TOKEN_MISSING if not token_present else UNKNOWN_ERROR,
-                "can_read": False,
-                "can_push": None,
-                "branch_exists": None,
-                "org_probe": None,
-                "interpretation": "family_config is None — cannot determine publish target",
-            })
+            resolution_records.append(
+                {
+                    "family": family,
+                    "config_path": config_path,
+                    "error_classification": TOKEN_MISSING if not token_present else UNKNOWN_ERROR,
+                    "can_read": False,
+                    "can_push": None,
+                    "branch_exists": None,
+                    "org_probe": None,
+                    "interpretation": "family_config is None — cannot determine publish target",
+                }
+            )
             continue
 
         status = getattr(config, "status", "unknown")
         if status not in {"active"}:
-            resolution_records.append({
-                "family": family,
-                "config_path": config_path,
-                "error_classification": "skipped_family_not_active",
-                "can_read": False,
-                "can_push": None,
-                "branch_exists": None,
-                "org_probe": None,
-                "interpretation": f"Family status={status} — not active, skipping access check",
-            })
+            resolution_records.append(
+                {
+                    "family": family,
+                    "config_path": config_path,
+                    "error_classification": "skipped_family_not_active",
+                    "can_read": False,
+                    "can_push": None,
+                    "branch_exists": None,
+                    "org_probe": None,
+                    "interpretation": f"Family status={status} — not active, skipping access check",
+                }
+            )
             continue
 
         github_cfg = getattr(config, "github", None)
         pub_repo = getattr(github_cfg, "published_plugin_examples_repo", None) if github_cfg else None
         if pub_repo is None:
-            resolution_records.append({
-                "family": family,
-                "config_path": config_path,
-                "error_classification": UNKNOWN_ERROR,
-                "can_read": False,
-                "can_push": None,
-                "branch_exists": None,
-                "org_probe": None,
-                "interpretation": "No published_plugin_examples_repo in family config",
-            })
+            resolution_records.append(
+                {
+                    "family": family,
+                    "config_path": config_path,
+                    "error_classification": UNKNOWN_ERROR,
+                    "can_read": False,
+                    "can_push": None,
+                    "branch_exists": None,
+                    "org_probe": None,
+                    "interpretation": "No published_plugin_examples_repo in family config",
+                }
+            )
             continue
 
         owner = getattr(pub_repo, "owner", "") or ""

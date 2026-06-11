@@ -17,27 +17,33 @@ def add_parser(subparsers):
     parser.add_argument("--family", required=True, help="Family name (e.g., cells, words)")
     publish_pr_mode = parser.add_mutually_exclusive_group()
     publish_pr_mode.add_argument(
-        "--dry-run", action="store_true", default=False,
+        "--dry-run",
+        action="store_true",
+        default=False,
         help="Simulate PR creation without pushing (default when --publish not specified)",
     )
     publish_pr_mode.add_argument(
-        "--publish", action="store_true",
+        "--publish",
+        action="store_true",
         help="Create a real PR on GitHub (requires GITHUB_TOKEN + --approval-token APPROVE_LIVE_PR)",
     )
     parser.add_argument(
-        "--approval-token", metavar="VALUE",
+        "--approval-token",
+        metavar="VALUE",
         help="Live publish approval token. Must equal 'APPROVE_LIVE_PR'. "
-             "Required for --publish mode. Also readable from PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL.",
+        "Required for --publish mode. Also readable from PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL.",
     )
     parser.add_argument(
-        "--package-path", metavar="PATH",
+        "--package-path",
+        metavar="PATH",
         help="Override package path (default: workspace/pr-dry-run/{family}-controlled-pilot/). "
-             "Use to publish PR groups with separate packages without manual swapping, e.g. "
-             "pdf-controlled-pilot-pr5 for Jpeg/Tiff/Png or pdf-controlled-pilot-pr6 for "
-             "TableGenerator/TocGenerator/ImageExtractor.",
+        "Use to publish PR groups with separate packages without manual swapping, e.g. "
+        "pdf-controlled-pilot-pr5 for Jpeg/Tiff/Png or pdf-controlled-pilot-pr6 for "
+        "TableGenerator/TocGenerator/ImageExtractor.",
     )
     parser.add_argument(
-        "--promote-latest", action="store_true",
+        "--promote-latest",
+        action="store_true",
         help="Write report to workspace/verification/latest/",
     )
 
@@ -58,7 +64,10 @@ def handle(args) -> int:
 
     repo_root = _Path(__file__).resolve().parents[3]
     msession, mcollector = _create_metrics_session(
-        args, command="publish-pr", family=args.family, repo_root=repo_root,
+        args,
+        command="publish-pr",
+        family=args.family,
+        repo_root=repo_root,
     )
     config_dir = repo_root / "pipeline" / "configs" / "families"
     verification_dir = repo_root / "workspace" / "verification"
@@ -197,9 +206,13 @@ def handle(args) -> int:
                     print(f"ERROR: README audit FAILED for {family} — blocking live publish: {_readme_audit.warnings}")
                     return 1
                 else:
-                    print(f"WARNING: README audit failed for {family} (non-blocking in dry-run): {_readme_audit.warnings}")
+                    print(
+                        f"WARNING: README audit failed for {family} (non-blocking in dry-run): {_readme_audit.warnings}"
+                    )
             else:
-                print(f"  README.md rendered and audited: PASS ({len(_readme_content)} bytes, {len(_inv_entries)} examples)")
+                print(
+                    f"  README.md rendered and audited: PASS ({len(_readme_content)} bytes, {len(_inv_entries)} examples)"
+                )
 
             # Staleness gate: fail closed if README is stale against intended branch content
             _expected_names = [e.name for e in _inv_entries]
@@ -229,6 +242,7 @@ def handle(args) -> int:
 
     # Load excluded scenario summaries for PR body
     from plugin_examples.publisher.publisher import _load_excluded_scenario_summaries
+
     excluded_scenario_lines = _load_excluded_scenario_summaries(verification_dir, family)
 
     # Build PR content
@@ -261,7 +275,9 @@ def handle(args) -> int:
             return 1
         if not approved:
             print(f"ERROR: Live publish blocked: {approval_blocked}")
-            print("  Set PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR or pass --approval-token APPROVE_LIVE_PR")
+            print(
+                "  Set PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR or pass --approval-token APPROVE_LIVE_PR"
+            )
             return 1
         if not package_exists or len(example_dirs) == 0:
             print(f"ERROR: Package not found or empty: {package_path}")
@@ -270,7 +286,9 @@ def handle(args) -> int:
             print(f"ERROR: Gate verdict not publishable: {gate_verdict_name}")
             return 1
         if not repo_access_ready or not pr_permission_ready:
-            print(f"ERROR: Repo access not ready (repo_access={repo_access_ready}, pr_permission={pr_permission_ready})")
+            print(
+                f"ERROR: Repo access not ready (repo_access={repo_access_ready}, pr_permission={pr_permission_ready})"
+            )
             print("  Run: python -m plugin_examples probe-publish-permissions --families " + family)
             return 1
         if target_owner is None:
@@ -283,6 +301,7 @@ def handle(args) -> int:
             README_AUDIT_ENV_VAR as _README_ENV,
             README_AUDIT_EXPECTED_VALUE as _README_EXPECTED,
         )
+
         _readme_push_approval = os.environ.get(_README_ENV, getattr(args, "approval_token", None))
         _gate_result = _check_readme_gate(
             family=family,
@@ -373,14 +392,16 @@ def handle(args) -> int:
         return 0
 
     # --- DRY-RUN / SIMULATION MODE ---
-    simulation_passed = all([
-        package_exists,
-        len(example_dirs) > 0,
-        gate_verdict_ok,
-        repo_access_ready,
-        pr_permission_ready,
-        target_owner is not None,
-    ])
+    simulation_passed = all(
+        [
+            package_exists,
+            len(example_dirs) > 0,
+            gate_verdict_ok,
+            repo_access_ready,
+            pr_permission_ready,
+            target_owner is not None,
+        ]
+    )
     blocked_reasons = []
     if not package_exists:
         blocked_reasons.append(f"dry_run_package_not_found: {package_path}")
@@ -451,9 +472,9 @@ def handle(args) -> int:
     print(f"  live_push_performed: False")
     print(f"Report: {output_path}")
     _finalize_metrics_session(
-        msession, items_discovered=1,
+        msession,
+        items_discovered=1,
         items_succeeded=1 if simulation_passed else 0,
         items_failed=0 if simulation_passed else 1,
     )
     return 0 if simulation_passed else 1
-

@@ -48,10 +48,11 @@ _CATALOG_NOISE_PATTERNS: list[str] = [
 @dataclass
 class ReadmeAuditResult:
     """Result of auditing a README against expected context."""
+
     passed: bool
     missing_sections: list[str] = field(default_factory=list)
-    stale_version: bool = False          # package_version not found in README
-    stale_examples: bool = False         # number of example rows doesn't match
+    stale_version: bool = False  # package_version not found in README
+    stale_examples: bool = False  # number of example rows doesn't match
     missing_examples: list[str] = field(default_factory=list)
     extra_examples: list[str] = field(default_factory=list)
     central_repo_reference_found: bool = False
@@ -153,10 +154,7 @@ def audit_readme(readme_content: str, context) -> ReadmeAuditResult:
         package_version = getattr(context, "package_version", "")
         examples_raw = getattr(context, "examples", [])
         # ExampleEntry objects or dicts
-        examples = [
-            ex if isinstance(ex, dict) else {"name": ex.name}
-            for ex in examples_raw
-        ]
+        examples = [ex if isinstance(ex, dict) else {"name": ex.name} for ex in examples_raw]
         family = getattr(context, "family", "")
 
     result = ReadmeAuditResult(
@@ -187,9 +185,7 @@ def audit_readme(readme_content: str, context) -> ReadmeAuditResult:
 
     if found_count != expected_count:
         result.stale_examples = True
-        failures.append(
-            f"Example row count mismatch: expected {expected_count}, found {found_count}"
-        )
+        failures.append(f"Example row count mismatch: expected {expected_count}, found {found_count}")
 
     # --- 4. Each expected example name appears in the table ---
     table_names = _find_example_names_in_table(examples_section)
@@ -200,10 +196,7 @@ def audit_readme(readme_content: str, context) -> ReadmeAuditResult:
             failures.append(f"Example '{name}' missing from README table")
 
     # Extra examples in table that are not in context
-    context_names = {
-        (ex.get("name", "") if isinstance(ex, dict) else ex)
-        for ex in examples
-    }
+    context_names = {(ex.get("name", "") if isinstance(ex, dict) else ex) for ex in examples}
     for tname in table_names:
         if tname and tname not in context_names:
             result.extra_examples.append(tname)
@@ -261,15 +254,11 @@ def audit_readme(readme_content: str, context) -> ReadmeAuditResult:
     # If family is known, verify the opposite family's specific markers are absent
     if family == "cells":
         if "Aspose.Words" in readme_content or "aspose-words-net" in readme_content:
-            result.warnings.append(
-                "Words-specific content detected in Cells README"
-            )
+            result.warnings.append("Words-specific content detected in Cells README")
             failures.append("Words content found in Cells README")
     elif family == "words":
         if "Aspose.Cells" in readme_content or "aspose-cells-net" in readme_content:
-            result.warnings.append(
-                "Cells-specific content detected in Words README"
-            )
+            result.warnings.append("Cells-specific content detected in Words README")
             failures.append("Cells content found in Words README")
 
     # --- 13. Format-claim validation (table columns vs context) ---
@@ -348,9 +337,7 @@ def audit_readme(readme_content: str, context) -> ReadmeAuditResult:
         out_fmt = ex.get("output_format", "")
         name = ex.get("name", "")
         if op_kind == "converter" and in_fmt and out_fmt and in_fmt == out_fmt:
-            result.same_format_converter_warnings.append(
-                f"{name}: converter with same input/output format '{in_fmt}'"
-            )
+            result.same_format_converter_warnings.append(f"{name}: converter with same input/output format '{in_fmt}'")
 
     # --- 17. Splitter cardinality warning (advisory, non-fatal) ---
     for ex in examples:
@@ -405,6 +392,7 @@ def audit_readme(readme_content: str, context) -> ReadmeAuditResult:
     if family:
         try:
             from plugin_examples.format_authority.store import get_contract, MissingFormatContractError
+
             for ex in examples:
                 if not isinstance(ex, dict):
                     continue
@@ -441,9 +429,7 @@ def audit_readme(readme_content: str, context) -> ReadmeAuditResult:
     _forbidden = find_forbidden_aspose_com_links(readme_content)
     if _forbidden:
         result.forbidden_aspose_com_links = _forbidden
-        failures.append(
-            f"Forbidden aspose.com links found (must use aspose.net): {_forbidden}"
-        )
+        failures.append(f"Forbidden aspose.com links found (must use aspose.net): {_forbidden}")
 
     # Check 9: aspose.net URLs with /net platform suffix (wrong)
     _family_slug = family if family else ""
@@ -451,9 +437,7 @@ def audit_readme(readme_content: str, context) -> ReadmeAuditResult:
         _path_errors = find_platform_path_errors(readme_content, _family_slug)
         if _path_errors:
             result.platform_path_errors = _path_errors
-            failures.append(
-                f"aspose.net URLs with incorrect /net platform suffix: {_path_errors}"
-            )
+            failures.append(f"aspose.net URLs with incorrect /net platform suffix: {_path_errors}")
 
     # Check 10: Wrong blog URL (aspose.com/category/ instead of aspose.net/categories/.../)
     _wrong_blog = find_wrong_blog_links(readme_content)
@@ -467,9 +451,7 @@ def audit_readme(readme_content: str, context) -> ReadmeAuditResult:
     _wrong_contact = find_wrong_contact_links(readme_content)
     if _wrong_contact:
         result.wrong_contact_links = _wrong_contact
-        failures.append(
-            f"Wrong contact URL (use about.aspose.net/contact/): {_wrong_contact}"
-        )
+        failures.append(f"Wrong contact URL (use about.aspose.net/contact/): {_wrong_contact}")
 
     # Check 12: Missing required KB link
     _missing = find_missing_required_links(readme_content, _family_slug or None)
@@ -510,9 +492,11 @@ def audit_readme_file(readme_path: Path, context) -> ReadmeAuditResult:
 # Staleness detection for cumulative README inventory
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class ReadmeStalenessResult:
     """Result of comparing README example table against expected inventory."""
+
     is_stale: bool
     missing_from_readme: list[str] = field(default_factory=list)
     extra_in_readme: list[str] = field(default_factory=list)

@@ -42,6 +42,7 @@ from plugin_examples.verifier_bridge.output_validator import (
 
 # --- Test 1: Prompt forbids Console.ReadKey ---
 
+
 class TestPromptForbidsConsoleReadKey:
     def test_prompt_forbids_console_readkey(self):
         """Prompt constraints must forbid Console.ReadKey."""
@@ -50,31 +51,36 @@ class TestPromptForbidsConsoleReadKey:
             "target_type": "Aspose.Cells.LowCode.HtmlConverter",
             "target_namespace": "Aspose.Cells.LowCode",
             "target_methods": ["Process"],
-            "required_symbols": ["Aspose.Cells.LowCode.HtmlConverter",
-                                 "Aspose.Cells.LowCode.HtmlConverter.Process"],
+            "required_symbols": ["Aspose.Cells.LowCode.HtmlConverter", "Aspose.Cells.LowCode.HtmlConverter.Process"],
             "required_fixtures": ["input.xlsx"],
             "output_plan": "Convert to HTML",
             "input_strategy": "generated_fixture_file",
             "input_files": ["input.xlsx"],
         }
         catalog = {
-            "namespaces": [{
-                "namespace": "Aspose.Cells.LowCode",
-                "types": [{
-                    "full_name": "Aspose.Cells.LowCode.HtmlConverter",
-                    "name": "HtmlConverter",
-                    "kind": "class",
-                    "methods": [{
-                        "name": "Process",
-                        "is_static": True,
-                        "is_obsolete": False,
-                        "parameters": [
-                            {"name": "inputFile", "type": "System.String"},
-                            {"name": "outputFile", "type": "System.String"},
-                        ],
-                    }],
-                }],
-            }]
+            "namespaces": [
+                {
+                    "namespace": "Aspose.Cells.LowCode",
+                    "types": [
+                        {
+                            "full_name": "Aspose.Cells.LowCode.HtmlConverter",
+                            "name": "HtmlConverter",
+                            "kind": "class",
+                            "methods": [
+                                {
+                                    "name": "Process",
+                                    "is_static": True,
+                                    "is_obsolete": False,
+                                    "parameters": [
+                                        {"name": "inputFile", "type": "System.String"},
+                                        {"name": "outputFile", "type": "System.String"},
+                                    ],
+                                }
+                            ],
+                        }
+                    ],
+                }
+            ]
         }
         packet = build_packet(scenario, catalog)
         constraints_text = " ".join(packet.constraints)
@@ -85,6 +91,7 @@ class TestPromptForbidsConsoleReadKey:
 
 # --- Test 2: Prompt forbids Console.ReadLine ---
 
+
 class TestPromptForbidsConsoleReadLine:
     def test_prompt_forbids_console_readline(self):
         """Prompt constraints must forbid Console.ReadLine."""
@@ -93,26 +100,31 @@ class TestPromptForbidsConsoleReadLine:
             "target_type": "Aspose.Cells.LowCode.HtmlConverter",
             "target_namespace": "Aspose.Cells.LowCode",
             "target_methods": ["Process"],
-            "required_symbols": ["Aspose.Cells.LowCode.HtmlConverter",
-                                 "Aspose.Cells.LowCode.HtmlConverter.Process"],
+            "required_symbols": ["Aspose.Cells.LowCode.HtmlConverter", "Aspose.Cells.LowCode.HtmlConverter.Process"],
             "input_strategy": "none",
             "input_files": [],
         }
         catalog = {
-            "namespaces": [{
-                "namespace": "Aspose.Cells.LowCode",
-                "types": [{
-                    "full_name": "Aspose.Cells.LowCode.HtmlConverter",
-                    "name": "HtmlConverter",
-                    "kind": "class",
-                    "methods": [{
-                        "name": "Process",
-                        "is_static": True,
-                        "is_obsolete": False,
-                        "parameters": [],
-                    }],
-                }],
-            }]
+            "namespaces": [
+                {
+                    "namespace": "Aspose.Cells.LowCode",
+                    "types": [
+                        {
+                            "full_name": "Aspose.Cells.LowCode.HtmlConverter",
+                            "name": "HtmlConverter",
+                            "kind": "class",
+                            "methods": [
+                                {
+                                    "name": "Process",
+                                    "is_static": True,
+                                    "is_obsolete": False,
+                                    "parameters": [],
+                                }
+                            ],
+                        }
+                    ],
+                }
+            ]
         }
         packet = build_packet(scenario, catalog)
         constraints_text = " ".join(packet.constraints)
@@ -121,14 +133,15 @@ class TestPromptForbidsConsoleReadLine:
 
 # --- Test 3: Code validator detects Console.ReadKey ---
 
+
 class TestCodeValidatorDetectsInteractive:
     def test_validate_code_detects_readkey(self):
-        code = 'Console.ReadKey();'
+        code = "Console.ReadKey();"
         issues = _validate_code(code)
         assert any("ReadKey" in i for i in issues)
 
     def test_validate_code_detects_readline(self):
-        code = 'Console.ReadLine();'
+        code = "Console.ReadLine();"
         issues = _validate_code(code)
         assert any("ReadLine" in i for i in issues)
 
@@ -139,6 +152,7 @@ class TestCodeValidatorDetectsInteractive:
 
 
 # --- Test 4: Input format map for TextConverter ---
+
 
 class TestInputFormatMapTextConverterNotXlsx:
     def test_input_format_map_text_converter(self):
@@ -160,15 +174,17 @@ class TestInputFormatMapTextConverterNotXlsx:
             "full_name": "Aspose.Cells.LowCode.TextConverter",
             "name": "TextConverter",
             "kind": "class",
-            "methods": [{
-                "name": "Process",
-                "is_static": True,
-                "is_obsolete": False,
-                "parameters": [
-                    {"name": "inputFile", "type": "System.String"},
-                    {"name": "outputFile", "type": "System.String"},
-                ],
-            }],
+            "methods": [
+                {
+                    "name": "Process",
+                    "is_static": True,
+                    "is_obsolete": False,
+                    "parameters": [
+                        {"name": "inputFile", "type": "System.String"},
+                        {"name": "outputFile", "type": "System.String"},
+                    ],
+                }
+            ],
         }
         scenario = _build_scenario("cells", type_info, "Aspose.Cells.LowCode", None, ".xlsx")
         assert scenario.required_input_format == ".xlsx"
@@ -177,6 +193,7 @@ class TestInputFormatMapTextConverterNotXlsx:
 
 
 # --- Test 5: Few-shot snippet in LLM packet ---
+
 
 class TestLlmPacketUsesVerifiedFewshotOnly:
     def test_llm_packet_uses_verified_fewshot_only(self):
@@ -193,10 +210,12 @@ class TestLlmPacketUsesVerifiedFewshotOnly:
 
 # --- Test 6: Runtime failure classifies interactive console call ---
 
+
 class TestRuntimeFailureClassifiesInteractiveConsoleCall:
     def test_runtime_failure_classifies_interactive_console_call(self):
         rc = classify_runtime_failure(
-            "test-scenario", 1,
+            "test-scenario",
+            1,
             stderr="Cannot read keys when either application does not have a console",
         )
         assert rc.classification == "interactive_console_call"
@@ -204,7 +223,8 @@ class TestRuntimeFailureClassifiesInteractiveConsoleCall:
 
     def test_runtime_failure_classifies_wrong_input_format(self):
         rc = classify_runtime_failure(
-            "test-scenario", 1,
+            "test-scenario",
+            1,
             stderr="Only text based formats such as Csv, Tsv... are allowed",
         )
         assert rc.classification == "wrong_input_format"
@@ -213,6 +233,7 @@ class TestRuntimeFailureClassifiesInteractiveConsoleCall:
 
 # --- Test 7: Build repair reads stdout and stderr ---
 
+
 class TestBuildRepairReadsStdoutAndStderr:
     def test_build_repair_reads_stdout_and_stderr(self):
         """Verify repair prompt captures both stdout and stderr from compiler."""
@@ -220,12 +241,14 @@ class TestBuildRepairReadsStdoutAndStderr:
         # both build_stdout and build_stderr. We verify by checking the code structure.
         import inspect
         from plugin_examples.runner import _stage_validation
+
         source = inspect.getsource(_stage_validation)
         assert "build_stdout" in source
         assert "build_stderr" in source
 
 
 # --- Test 8: Semantic validator checks CSV content ---
+
 
 class TestSemanticValidatorChecksCsvContent:
     def test_semantic_validator_checks_csv_content(self, tmp_path):
@@ -240,6 +263,7 @@ class TestSemanticValidatorChecksCsvContent:
 
 
 # --- Test 9: Semantic validator checks JSON parse ---
+
 
 class TestSemanticValidatorChecksJsonParse:
     def test_semantic_validator_checks_json_parse(self, tmp_path):
@@ -258,6 +282,7 @@ class TestSemanticValidatorChecksJsonParse:
 
 # --- Test 10: Semantic validator checks HTML content ---
 
+
 class TestSemanticValidatorChecksHtmlContent:
     def test_semantic_validator_checks_html_content(self, tmp_path):
         html_file = tmp_path / "output.html"
@@ -268,6 +293,7 @@ class TestSemanticValidatorChecksHtmlContent:
 
 
 # --- Test 11: Semantic validator checks PDF header ---
+
 
 class TestSemanticValidatorChecksPdfHeader:
     def test_semantic_validator_checks_pdf_header(self, tmp_path):
@@ -285,6 +311,7 @@ class TestSemanticValidatorChecksPdfHeader:
 
 
 # --- Test 12: Generated fixtures contain known values ---
+
 
 class TestGeneratedFixtureContainsKnownValues:
     def test_generated_fixture_contains_known_values(self, tmp_path):
@@ -327,11 +354,13 @@ class TestGeneratedFixtureContainsKnownValues:
 
 # --- Test 13: Discovery sweep does not generate examples ---
 
+
 class TestDiscoverLowcodeDoesNotGenerateExamples:
     def test_discover_lowcode_does_not_generate_examples(self):
         """Discovery sweep module must not import generator."""
         import inspect
         from plugin_examples import discovery_sweep
+
         source = inspect.getsource(discovery_sweep)
         assert "generate_example" not in source
         assert "generate_project" not in source
@@ -339,11 +368,13 @@ class TestDiscoverLowcodeDoesNotGenerateExamples:
 
 # --- Test 14: Discovery sweep does not call LLM ---
 
+
 class TestDiscoverLowcodeDoesNotCallLlm:
     def test_discover_lowcode_does_not_call_llm(self):
         """Discovery sweep module must not import LLM router."""
         import inspect
         from plugin_examples import discovery_sweep
+
         source = inspect.getsource(discovery_sweep)
         assert "llm_router" not in source.lower()
         assert "LLMRouter" not in source
@@ -351,10 +382,12 @@ class TestDiscoverLowcodeDoesNotCallLlm:
 
 # --- Test 15: Discovery sweep writes family inventory ---
 
+
 class TestDiscoverLowcodeWritesFamilyInventory:
     def test_discover_lowcode_writes_family_inventory(self, tmp_path):
         """Discovery sweep must produce all-family-lowcode-discovery.json."""
         from plugin_examples.discovery_sweep import run_discovery_sweep
+
         # Run with a non-existent family to test the blocked path
         result = run_discovery_sweep(
             families=["nonexistent_test_family"],
@@ -369,31 +402,31 @@ class TestDiscoverLowcodeWritesFamilyInventory:
 
 # --- Tests: Discovery sweep dependency resolution (Follow-up Stabilization Sprint) ---
 
+
 class TestDiscoverySweepDepsResolution:
     def test_discovery_sweep_resolves_dependencies(self):
         """Source must call resolve_dependencies before building the catalog."""
         import inspect
         from plugin_examples import discovery_sweep
+
         source = inspect.getsource(discovery_sweep)
-        assert "resolve_dependencies" in source, (
-            "discovery_sweep must call resolve_dependencies to fetch dep DLLs"
-        )
+        assert "resolve_dependencies" in source, "discovery_sweep must call resolve_dependencies to fetch dep DLLs"
 
     def test_discovery_sweep_passes_deps_to_reflector(self):
         """Source must pass dependency_paths to build_catalog."""
         import inspect
         from plugin_examples import discovery_sweep
+
         source = inspect.getsource(discovery_sweep)
-        assert "dependency_paths" in source, (
-            "discovery_sweep must pass dependency_paths= to build_catalog"
-        )
-        assert "dependency_dll_paths" in source, (
-            "discovery_sweep must extract dependency_dll_paths from extraction result"
-        )
+        assert "dependency_paths" in source, "discovery_sweep must pass dependency_paths= to build_catalog"
+        assert (
+            "dependency_dll_paths" in source
+        ), "discovery_sweep must extract dependency_dll_paths from extraction result"
 
     def test_discovery_result_has_dependency_fields(self, tmp_path):
         """Result dict for a blocked family still includes dependency_count and dependency_paths."""
         from plugin_examples.discovery_sweep import run_discovery_sweep
+
         result = run_discovery_sweep(
             families=["nonexistent_for_deps_test"],
             repo_root=tmp_path,
@@ -405,17 +438,16 @@ class TestDiscoverySweepDepsResolution:
     def test_discover_lowcode_writes_family_proofs(self, tmp_path):
         """Discovery sweep writes all-family-lowcode-discovery.json with family entries."""
         from plugin_examples.discovery_sweep import run_discovery_sweep
+
         result = run_discovery_sweep(
             families=["nonexistent_proof_family", "another_nonexistent"],
             repo_root=tmp_path,
         )
         assert result["total_families"] == 2
-        evidence_file = (
-            tmp_path / "workspace" / "verification" / "latest"
-            / "all-family-lowcode-discovery.json"
-        )
+        evidence_file = tmp_path / "workspace" / "verification" / "latest" / "all-family-lowcode-discovery.json"
         assert evidence_file.exists()
         import json
+
         data = json.loads(evidence_file.read_text())
         assert data["total_families"] == 2
         for fam in data["families"]:
@@ -433,6 +465,7 @@ class TestMultiFamilyDiscoveryExpansion:
     def test_discover_lowcode_accepts_specific_family_list(self, tmp_path):
         """run_discovery_sweep accepts a list of families and processes exactly those."""
         from plugin_examples.discovery_sweep import run_discovery_sweep
+
         result = run_discovery_sweep(
             families=["alpha_nonexistent", "beta_nonexistent"],
             repo_root=tmp_path,
@@ -446,6 +479,7 @@ class TestMultiFamilyDiscoveryExpansion:
         """Discovery sweep source must not import generator or LLM router."""
         import inspect
         from plugin_examples import discovery_sweep
+
         source = inspect.getsource(discovery_sweep)
         assert "generate_example" not in source
         assert "generate_project" not in source
@@ -456,14 +490,14 @@ class TestMultiFamilyDiscoveryExpansion:
         """Discovery sweep source must call write_source_of_truth_proof."""
         import inspect
         from plugin_examples import discovery_sweep
+
         source = inspect.getsource(discovery_sweep)
-        assert "write_source_of_truth_proof" in source, (
-            "discovery_sweep must write per-family source-of-truth proofs"
-        )
+        assert "write_source_of_truth_proof" in source, "discovery_sweep must write per-family source-of-truth proofs"
 
     def test_disabled_families_remain_skipped(self, tmp_path):
         """Families in disabled/ that are not in enabled/ are skipped during --all-families scan."""
         from plugin_examples.discovery_sweep import run_discovery_sweep
+
         # Scan using a repo_root that has no enabled configs at all
         # (no .yml files in tmp_path/pipeline/configs/families/)
         result = run_discovery_sweep(all_families=True, repo_root=tmp_path)
@@ -476,6 +510,7 @@ class TestMultiFamilyDiscoveryExpansion:
         result_families = set()
         (tmp_path / "pipeline" / "configs" / "families").mkdir(parents=True, exist_ok=True)
         from plugin_examples.discovery_sweep import run_discovery_sweep
+
         result = run_discovery_sweep(all_families=True, repo_root=tmp_path)
         # No email or slides in enabled families
         names = [r["family"] for r in result.get("families", [])]
@@ -485,6 +520,7 @@ class TestMultiFamilyDiscoveryExpansion:
     def test_discovery_only_status_allows_discovery_without_experimental_flag(self, tmp_path):
         """Families with status=discovery_only run without --allow-experimental."""
         import yaml
+
         # Create a minimal discovery_only config (will fail during reflection but must not be skipped)
         cfg_dir = tmp_path / "pipeline" / "configs" / "families"
         cfg_dir.mkdir(parents=True, exist_ok=True)
@@ -493,9 +529,12 @@ class TestMultiFamilyDiscoveryExpansion:
             "display_name": "Test Discovery",
             "enabled": True,
             "status": "discovery_only",
-            "nuget": {"package_id": "Fake.Package", "version_policy": "latest-stable",
-                      "target_framework_preference": ["netstandard2.0"],
-                      "dependency_resolution": {"enabled": False, "max_depth": 1}},
+            "nuget": {
+                "package_id": "Fake.Package",
+                "version_policy": "latest-stable",
+                "target_framework_preference": ["netstandard2.0"],
+                "dependency_resolution": {"enabled": False, "max_depth": 1},
+            },
             "plugin_detection": {"namespace_patterns": ["Fake.LowCode"]},
             "github": {
                 "official_examples_repo": {"owner": "x", "repo": "y", "branch": "main"},
@@ -510,6 +549,7 @@ class TestMultiFamilyDiscoveryExpansion:
         (cfg_dir / "testdisc.yml").write_text(yaml.dump(cfg))
 
         from plugin_examples.discovery_sweep import run_discovery_sweep
+
         result = run_discovery_sweep(
             families=["testdisc"],
             repo_root=tmp_path,
@@ -517,13 +557,14 @@ class TestMultiFamilyDiscoveryExpansion:
         )
         fam = result["families"][0]
         # Must attempt discovery (not return experimental_skipped)
-        assert fam["status"] != "experimental_skipped", (
-            "discovery_only families must not be skipped without --allow-experimental"
-        )
+        assert (
+            fam["status"] != "experimental_skipped"
+        ), "discovery_only families must not be skipped without --allow-experimental"
 
     def test_discovery_ranker_outputs_generation_readiness(self):
         """compute_generation_readiness returns list with all required fields."""
         from plugin_examples.discovery_sweep import compute_generation_readiness
+
         mock_results = [
             {
                 "family": "cells",
@@ -566,6 +607,7 @@ class TestMultiFamilyDiscoveryExpansion:
 
 # --- Test 16: Output format inference ---
 
+
 class TestOutputFormatInference:
     def test_infer_output_text_converter(self):
         assert _infer_output_format("TextConverter") == ".txt"
@@ -581,6 +623,7 @@ class TestOutputFormatInference:
 
 
 # --- Test 17: PDF Optimizer build-repair constraint injection ---
+
 
 class TestPdfOptimizerBuildRepairConstraints:
     """Verify that packet_builder injects OptimizeOptions constraints for Optimizer."""
@@ -640,9 +683,9 @@ class TestPdfOptimizerBuildRepairConstraints:
         catalog = self._make_pdf_catalog("Optimizer")
         packet = build_packet(scenario, catalog)
         constraint_text = " ".join(packet.constraints)
-        assert "OptimizeOptions" in constraint_text, (
-            "Build repair will lose OptimizeOptions if it's not in packet.constraints"
-        )
+        assert (
+            "OptimizeOptions" in constraint_text
+        ), "Build repair will lose OptimizeOptions if it's not in packet.constraints"
 
     def test_pdf_optimizer_repair_prompt_preserves_exact_usage_pattern(self):
         """packet_builder must inject REQUIRED: exact usage pattern for Optimizer."""
@@ -654,9 +697,9 @@ class TestPdfOptimizerBuildRepairConstraints:
             None,
         )
         assert exact_pattern is not None, "Missing 'REQUIRED: exact usage pattern' in Optimizer constraints"
-        assert "new Optimizer().Process" in exact_pattern, (
-            "Exact usage pattern must include 'new Optimizer().Process(options)'"
-        )
+        assert (
+            "new Optimizer().Process" in exact_pattern
+        ), "Exact usage pattern must include 'new Optimizer().Process(options)'"
 
     def test_pdf_optimizer_rejects_file_copy_semantic_substitute(self):
         """_validate_code must reject File.Copy() for PDF family as a semantic substitute."""
@@ -667,9 +710,9 @@ class TestPdfOptimizerBuildRepairConstraints:
             'Console.WriteLine("done"); } }'
         )
         issues = _validate_code(file_copy_code, family="pdf", type_short="optimizer")
-        assert any("File.Copy" in issue for issue in issues), (
-            "_validate_code must flag File.Copy() as forbidden in PDF family"
-        )
+        assert any(
+            "File.Copy" in issue for issue in issues
+        ), "_validate_code must flag File.Copy() as forbidden in PDF family"
 
     def test_pdf_optimizer_requires_lowcode_optimizer_process(self):
         """_validate_code must require new Optimizer().Process(options) for type_short='optimizer'."""
@@ -681,12 +724,12 @@ class TestPdfOptimizerBuildRepairConstraints:
             'options.AddInput(new FileDataSource("input.pdf")); '
             'options.AddOutput(new FileDataSource("output.pdf")); '
             "var result = new PdfOptimizer().Process(options); "
-            '} }'
+            "} }"
         )
         issues = _validate_code(missing_optimizer_code, family="pdf", type_short="optimizer")
-        assert any("Optimizer" in issue and "Process" in issue for issue in issues), (
-            "_validate_code must require new Optimizer().Process(options) for optimizer type"
-        )
+        assert any(
+            "Optimizer" in issue and "Process" in issue for issue in issues
+        ), "_validate_code must require new Optimizer().Process(options) for optimizer type"
 
     def test_pdf_repair_prompt_preserves_packet_constraints_for_all_pdf_pilot_types(self):
         """All 4 PDF pilot types must inject REQUIRED: options class constraint."""
@@ -714,12 +757,13 @@ class TestPdfOptimizerBuildRepairConstraints:
             catalog = self._make_pdf_catalog(type_name)
             packet = build_packet(scenario, catalog)
             constraint_text = " ".join(packet.constraints)
-            assert options_class in constraint_text, (
-                f"Missing '{options_class}' in constraints for PDF type '{type_name}'"
-            )
+            assert (
+                options_class in constraint_text
+            ), f"Missing '{options_class}' in constraints for PDF type '{type_name}'"
 
 
 # --- Test 18: PDF TextExtractor static validation regression rules ---
+
 
 class TestPdfTextExtractorRegressionRules:
     """Verify _validate_code correctly handles TextExtractor patterns."""
@@ -756,16 +800,17 @@ class TestPdfTextExtractorRegressionRules:
             '  var doc = new Document("input.pdf");\n'
             "  var absorber = new TextAbsorber();\n"
             "  doc.Pages.Accept(absorber);\n"
-            '  Console.WriteLine(absorber.Text);\n'
+            "  Console.WriteLine(absorber.Text);\n"
             "} }"
         )
         issues = _validate_code(textabsorber_code, family="pdf", type_short="textextractor")
-        assert any("TextAbsorber" in issue for issue in issues), (
-            "_validate_code must flag TextAbsorber usage for PDF TextExtractor"
-        )
+        assert any(
+            "TextAbsorber" in issue for issue in issues
+        ), "_validate_code must flag TextAbsorber usage for PDF TextExtractor"
 
 
 # --- Test 19: PDF Optimizer repair prompt includes FORBIDDEN DataSources constraint ---
+
 
 class TestPdfOptimizerRepairPromptForbiddenConstraint:
     """Verify generate_example repair prompt includes FORBIDDEN DataSources constraint.
@@ -888,9 +933,10 @@ class TestPdfOptimizerRepairPromptForbiddenConstraint:
             "the LLM from re-hallucinating the forbidden sub-namespace during build repair. "
             f"Repair prompt excerpt (first 600 chars): {repair_prompt[:600]}"
         )
-        assert result.status in ("repaired", "generated"), (
-            f"Expected repaired/generated result after fix, got: {result.status}, reason: {result.failure_reason}"
-        )
+        assert result.status in (
+            "repaired",
+            "generated",
+        ), f"Expected repaired/generated result after fix, got: {result.status}, reason: {result.failure_reason}"
 
     def test_code_generator_optimizer_repair_prompt_includes_pluginoptions_forbidden_constraint(self):
         """Repair prompt for PDF Optimizer must include FORBIDDEN PluginOptions constraint."""
@@ -900,9 +946,9 @@ class TestPdfOptimizerRepairPromptForbiddenConstraint:
 
         # Verify FORBIDDEN PluginOptions is in packet constraints
         constraint_text = " ".join(packet.constraints)
-        assert "FORBIDDEN:" in constraint_text and "PluginOptions" in constraint_text, (
-            "packet.constraints must include FORBIDDEN PluginOptions constraint"
-        )
+        assert (
+            "FORBIDDEN:" in constraint_text and "PluginOptions" in constraint_text
+        ), "packet.constraints must include FORBIDDEN PluginOptions constraint"
 
         # Trigger repair and capture prompt
         captured_prompts = []
@@ -1007,26 +1053,36 @@ class TestPdfOptimizerRepairPromptForbiddenConstraint:
         catalog = {
             "assembly_name": "Aspose.PDF",
             "assembly_version": "26.4.0",
-            "namespaces": [{
-                "namespace": "Aspose.Pdf.LowCode",
-                "types": [{
-                    "name": "Splitter",
-                    "full_name": "Aspose.Pdf.LowCode.Splitter",
-                    "kind": "class",
-                    "is_obsolete": False,
-                    "methods": [{"name": "Process", "return_type": "ResultContainer",
-                                 "is_static": False, "is_obsolete": False,
-                                 "parameters": [{"name": "options", "type": "IPluginOptions"}]}],
-                    "properties": [],
-                    "constructors": [{"parameters": []}],
-                }],
-            }],
+            "namespaces": [
+                {
+                    "namespace": "Aspose.Pdf.LowCode",
+                    "types": [
+                        {
+                            "name": "Splitter",
+                            "full_name": "Aspose.Pdf.LowCode.Splitter",
+                            "kind": "class",
+                            "is_obsolete": False,
+                            "methods": [
+                                {
+                                    "name": "Process",
+                                    "return_type": "ResultContainer",
+                                    "is_static": False,
+                                    "is_obsolete": False,
+                                    "parameters": [{"name": "options", "type": "IPluginOptions"}],
+                                }
+                            ],
+                            "properties": [],
+                            "constructors": [{"parameters": []}],
+                        }
+                    ],
+                }
+            ],
             "diagnostics": {"xml_documentation_loaded": False, "metadata_only": True},
         }
         packet = build_packet(scenario, catalog)
         constraint_text = " ".join(packet.constraints)
         # Splitter constraints must still be intact
         assert "SplitOptions" in constraint_text, "Splitter must have SplitOptions in constraints"
-        assert "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources" in constraint_text, (
-            "DataSources FORBIDDEN constraint must be in Splitter constraints too"
-        )
+        assert (
+            "FORBIDDEN: using Aspose.Pdf.LowCode.DataSources" in constraint_text
+        ), "DataSources FORBIDDEN constraint must be in Splitter constraints too"

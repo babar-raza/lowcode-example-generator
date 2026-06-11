@@ -46,12 +46,14 @@ class TestFixtureRegistry:
 
     def test_has_fixture(self):
         registry = FixtureRegistry(family="cells")
-        registry.add_fixture(FixtureEntry(
-            filename="test.xlsx",
-            source_type="local",
-            source_path="local:test.xlsx",
-            provenance="local",
-        ))
+        registry.add_fixture(
+            FixtureEntry(
+                filename="test.xlsx",
+                source_type="local",
+                source_path="local:test.xlsx",
+                provenance="local",
+            )
+        )
         assert registry.has_fixture("test.xlsx")
         assert not registry.has_fixture("missing.xlsx")
 
@@ -114,6 +116,7 @@ class TestGitHub403Handling:
         with patch.dict(os.environ, {"GITHUB_TOKEN": "test-token-abc"}):
             with patch("requests.get", mock_get):
                 from plugin_examples.fixture_registry.registry import _try_contents_api
+
                 _try_contents_api("owner", "repo", "main", "path", {"Authorization": "token test-token-abc"})
 
         call_kwargs = mock_get.call_args
@@ -137,11 +140,12 @@ class TestGitHub403Handling:
             with patch("requests.get", MagicMock(return_value=mock_response)):
                 with caplog.at_level(logging.WARNING, logger="plugin_examples.fixture_registry.registry"):
                     from plugin_examples.fixture_registry.registry import _fetch_github_file_listing
+
                     _fetch_github_file_listing("owner", "repo", "main", "path")
 
-        assert any("GITHUB_TOKEN" in r.message for r in caplog.records), (
-            "Expected a WARNING mentioning GITHUB_TOKEN when token is absent"
-        )
+        assert any(
+            "GITHUB_TOKEN" in r.message for r in caplog.records
+        ), "Expected a WARNING mentioning GITHUB_TOKEN when token is absent"
 
     def test_github_403_marks_source_unavailable(self):
         """When GitHub returns 403, fixture source is marked unavailable with explicit reason."""
@@ -162,9 +166,9 @@ class TestGitHub403Handling:
         unavailable = [f for f in registry.fixtures if not f.available]
         assert len(unavailable) >= 1
         reasons = [f.unavailable_reason for f in unavailable]
-        assert any(r == "github_api_403_rate_limited" for r in reasons), (
-            f"Expected github_api_403_rate_limited in reasons, got: {reasons}"
-        )
+        assert any(
+            r == "github_api_403_rate_limited" for r in reasons
+        ), f"Expected github_api_403_rate_limited in reasons, got: {reasons}"
 
     def test_github_403_does_not_return_empty_success(self):
         """When GitHub returns 403, the result is not treated as an empty successful listing."""
@@ -178,8 +182,12 @@ class TestGitHub403Handling:
             os.environ.pop("GITHUB_TOKEN", None)
             with patch("requests.get", MagicMock(return_value=mock_response)):
                 from plugin_examples.fixture_registry.registry import _try_contents_api
+
                 files, reason = _try_contents_api(
-                    "owner", "repo", "main", "path",
+                    "owner",
+                    "repo",
+                    "main",
+                    "path",
                     headers={"Accept": "application/vnd.github.v3+json"},
                 )
 
@@ -189,14 +197,16 @@ class TestGitHub403Handling:
     def test_scenario_blocks_when_fixture_source_unavailable(self):
         """Fixture registry marks entries as unavailable when API fails; has_fixture returns False."""
         registry = FixtureRegistry(family="cells")
-        registry.add_fixture(FixtureEntry(
-            filename="Examples/Data",
-            source_type="github",
-            source_path="aspose-cells/Aspose.Cells-for-.NET:master:Examples/Data",
-            provenance="aspose-cells/Aspose.Cells-for-.NET:master",
-            available=False,
-            unavailable_reason="github_api_403_rate_limited",
-        ))
+        registry.add_fixture(
+            FixtureEntry(
+                filename="Examples/Data",
+                source_type="github",
+                source_path="aspose-cells/Aspose.Cells-for-.NET:master:Examples/Data",
+                provenance="aspose-cells/Aspose.Cells-for-.NET:master",
+                available=False,
+                unavailable_reason="github_api_403_rate_limited",
+            )
+        )
         # has_fixture must return False when the fixture is marked unavailable
         assert not registry.has_fixture("Examples/Data")
         assert registry.get_available_fixtures() == []
@@ -206,6 +216,7 @@ class TestFixtureFetcher:
     def test_dry_run_mode(self, tmp_path):
         """New fetch_fixtures API: dry_run=True returns FetchResult with strategy=dry_run_validated."""
         from plugin_examples.fixture_registry.fixture_fetcher import fetch_fixtures as new_fetch_fixtures, FetchResult
+
         repo_config = {
             "owner": "aspose-cells",
             "repo": "Aspose.Cells-for-.NET",
@@ -217,7 +228,10 @@ class TestFixtureFetcher:
             "synthetic_fallback_allowed": True,
         }
         result = new_fetch_fixtures(
-            "cells", repo_config, [".xlsx"], tmp_path / "dest",
+            "cells",
+            repo_config,
+            [".xlsx"],
+            tmp_path / "dest",
             cache_root=tmp_path / "cache",
             dry_run=True,
         )
@@ -226,10 +240,14 @@ class TestFixtureFetcher:
 
     def test_availability_check_found(self):
         registry = FixtureRegistry(family="cells")
-        registry.add_fixture(FixtureEntry(
-            filename="test.xlsx", source_type="local",
-            source_path="local:test.xlsx", provenance="local",
-        ))
+        registry.add_fixture(
+            FixtureEntry(
+                filename="test.xlsx",
+                source_type="local",
+                source_path="local:test.xlsx",
+                provenance="local",
+            )
+        )
         result = check_fixture_availability(registry, ["test.xlsx"])
         assert not result["blocked"]
         assert "test.xlsx" in result["available"]

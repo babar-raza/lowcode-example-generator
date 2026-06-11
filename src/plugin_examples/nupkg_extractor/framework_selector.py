@@ -47,17 +47,12 @@ def select_framework(
             is_windows = _is_windows_only(key)
             return FrameworkSelection(
                 selected_framework=original,
-                selection_reason=(
-                    f"Matched preference #{preference_order.index(preferred) + 1}: "
-                    f"{preferred}"
-                ),
+                selection_reason=(f"Matched preference #{preference_order.index(preferred) + 1}: " f"{preferred}"),
                 requires_windows_runner=is_windows,
             )
 
     raise ValueError(
-        f"No supported framework found. "
-        f"Available: {available_frameworks}, "
-        f"Preference: {preference_order}"
+        f"No supported framework found. " f"Available: {available_frameworks}, " f"Preference: {preference_order}"
     )
 
 

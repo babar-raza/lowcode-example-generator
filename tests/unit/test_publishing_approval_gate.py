@@ -39,6 +39,7 @@ def _setup_evidence(latest: Path, family: str) -> None:
 
 def _make_family_cfg(family: str, owner: str, repo: str):
     from types import SimpleNamespace
+
     pub_repo = SimpleNamespace(owner=owner, repo=repo, branch="main")
     github_cfg = SimpleNamespace(published_plugin_examples_repo=pub_repo, central_repo_allowed=False)
     return SimpleNamespace(status="active", github=github_cfg)
@@ -197,6 +198,7 @@ class TestLivePRApprovalGate:
             check_family_publish_readiness,
             BLOCKED_FAMILY_NOT_ACTIVE,
         )
+
         cfg = SimpleNamespace(status="discovery_only", github=None)
         record = check_family_publish_readiness("pdf", cfg)
         assert record["publish_ready"] is False
@@ -219,6 +221,7 @@ class TestLivePRApprovalGate:
             return 200, fake_body
 
         from types import SimpleNamespace
+
         pub_repo = SimpleNamespace(
             owner="aspose-cells-net",
             repo="Aspose.Cells.LowCode-for-.NET-Examples",
@@ -227,12 +230,15 @@ class TestLivePRApprovalGate:
         github_cfg = SimpleNamespace(published_plugin_examples_repo=pub_repo, central_repo_allowed=False)
         cfg = SimpleNamespace(status="active", github=github_cfg)
 
-        with patch(
-            "plugin_examples.publisher.repo_access_resolver._github_get",
-            side_effect=mock_get,
-        ), patch(
-            "plugin_examples.publisher.repo_access_resolver._get_headers",
-            return_value={"Authorization": "token test_token"},
+        with (
+            patch(
+                "plugin_examples.publisher.repo_access_resolver._github_get",
+                side_effect=mock_get,
+            ),
+            patch(
+                "plugin_examples.publisher.repo_access_resolver._get_headers",
+                return_value={"Authorization": "token test_token"},
+            ),
         ):
             result = probe_publish_permissions(
                 [("cells", cfg, "cells.yml")],

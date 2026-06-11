@@ -38,7 +38,10 @@ class TestPayloadBuilder:
         from plugin_examples.metrics.payload_builder import build_payload
 
         payload = build_payload(
-            _config, command="run", family="cells", run_id="test-001",
+            _config,
+            command="run",
+            family="cells",
+            run_id="test-001",
         )
         assert payload["website"] == "aspose.net"
 
@@ -48,9 +51,12 @@ class TestPayloadBuilder:
 
         cfg_data = {
             "metrics": {
-                "agent_owner": "X", "agent_name": "x-gen",
-                "website": "custom.example.org", "family_to_product": {"a": "A"},
-                "command_to_job_type": {"run": "gen"}, "verdict_to_status": {},
+                "agent_owner": "X",
+                "agent_name": "x-gen",
+                "website": "custom.example.org",
+                "family_to_product": {"a": "A"},
+                "command_to_job_type": {"run": "gen"},
+                "verdict_to_status": {},
                 "api_endpoint": "https://x.com",
             }
         }
@@ -94,15 +100,15 @@ class TestPayloadBuilder:
     def test_job_type_test_override(self, _config):
         from plugin_examples.metrics.payload_builder import build_payload
 
-        p = build_payload(_config, command="run", family="cells", run_id="t",
-                          job_type_override="Test")
+        p = build_payload(_config, command="run", family="cells", run_id="t", job_type_override="Test")
         assert p["job_type"] == "Test"
 
     def test_test_mode_markers(self, _config):
         from plugin_examples.metrics.payload_builder import build_payload
 
-        p = build_payload(_config, command="run", family="cells", run_id="myrun",
-                          test_mode=True, job_type_override="Test")
+        p = build_payload(
+            _config, command="run", family="cells", run_id="myrun", test_mode=True, job_type_override="Test"
+        )
         assert p["agent_name"].startswith("test-")
         assert p["run_id"].startswith("test-")
         assert "test" in p["item_name"].lower()
@@ -118,6 +124,7 @@ class TestPayloadBuilder:
         cfg = load_metrics_config(config_path=cfg_path)
 
         from plugin_examples.gates.models import VERDICTS
+
         for v in VERDICTS:
             status, unknown = cfg.resolve_status(v)
             assert not unknown, f"Verdict {v} is not in verdict_to_status mapping"
@@ -131,9 +138,16 @@ class TestPayloadValidator:
         from plugin_examples.metrics.validator import validate_payload
 
         payload = build_payload(
-            _config, command="run", family="cells", run_id="test-001",
-            items_discovered=5, items_succeeded=3, items_failed=2,
-            run_duration_ms=1000, token_usage=500, api_calls_count=2,
+            _config,
+            command="run",
+            family="cells",
+            run_id="test-001",
+            items_discovered=5,
+            items_succeeded=3,
+            items_failed=2,
+            run_duration_ms=1000,
+            token_usage=500,
+            api_calls_count=2,
         )
         result = validate_payload(payload, _config)
         assert result["valid"], f"Errors: {result['errors']}"

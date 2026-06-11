@@ -1,4 +1,5 @@
 """Tests for SharedDownstreamExecutor — Wave 23 Lane C pipeline parity."""
+
 from __future__ import annotations
 
 import json
@@ -24,14 +25,9 @@ from plugin_examples.fixture_factory.shared_downstream_executor import (
 def make_quality_example(tmp_path: Path, slug: str, family: str = "barcode") -> Path:
     d = tmp_path / slug
     d.mkdir(parents=True)
-    (d / "example.manifest.json").write_text(
-        json.dumps({"scenario_id": slug}), encoding="utf-8"
-    )
+    (d / "example.manifest.json").write_text(json.dumps({"scenario_id": slug}), encoding="utf-8")
     (d / "expected-output.json").write_text("{}", encoding="utf-8")
-    readme = (
-        f"# {family}/{slug}\n\n## Purpose\nDoes X.\n\n"
-        "## Prerequisites\n.NET 8\n\n## Expected Output\nPNG.\n"
-    )
+    readme = f"# {family}/{slug}\n\n## Purpose\nDoes X.\n\n" "## Prerequisites\n.NET 8\n\n## Expected Output\nPNG.\n"
     (d / "README.md").write_text(readme, encoding="utf-8")
     return d
 
@@ -133,7 +129,9 @@ class TestSharedDownstreamExecutor:
         d = tmp_path / "slug"
         d.mkdir()
         (d / "expected-output.json").write_text("{}", encoding="utf-8")
-        (d / "README.md").write_text("# t\n## Purpose\nX\n## Prerequisites\n.NET\n## Expected Output\nY\n", encoding="utf-8")
+        (d / "README.md").write_text(
+            "# t\n## Purpose\nX\n## Prerequisites\n.NET\n## Expected Output\nY\n", encoding="utf-8"
+        )
         candidate = PluginCandidate("slug", "fam", "LOWCODE", "namespace_scan", d)
         result = SharedDownstreamExecutor().execute(candidate)
         assert not result.ok
@@ -144,7 +142,9 @@ class TestSharedDownstreamExecutor:
         d = tmp_path / "slug"
         d.mkdir()
         (d / "example.manifest.json").write_text("{}", encoding="utf-8")
-        (d / "README.md").write_text("# t\n## Purpose\nX\n## Prerequisites\n.NET\n## Expected Output\nY\n", encoding="utf-8")
+        (d / "README.md").write_text(
+            "# t\n## Purpose\nX\n## Prerequisites\n.NET\n## Expected Output\nY\n", encoding="utf-8"
+        )
         candidate = PluginCandidate("slug", "fam", "NON_LOWCODE_PLUGIN", "capability_registry_fallback", d)
         result = SharedDownstreamExecutor().execute(candidate)
         assert not result.ok

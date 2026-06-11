@@ -1,4 +1,5 @@
 """Tests for PPV-01..16 non-LowCode parity validators."""
+
 from __future__ import annotations
 
 import json
@@ -243,7 +244,12 @@ class TestRunAllPpvChecks:
         csproj.write_text('<PackageReference Include="Aspose.BarCode" />', encoding="utf-8")
 
         result = run_all_ppv_checks(
-            pr_packet={"namespace_source": "NON_LOWCODE_PLUGIN", "pr_title": "feat(plugins): add barcode", "pr_body": "plugin examples", "branch_name": "plugins/wave21/barcode"},
+            pr_packet={
+                "namespace_source": "NON_LOWCODE_PLUGIN",
+                "pr_title": "feat(plugins): add barcode",
+                "pr_body": "plugin examples",
+                "branch_name": "plugins/wave21/barcode",
+            },
             example_dirs=[ex],
             repo_root=repo,
             family="barcode",

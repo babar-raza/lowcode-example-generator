@@ -35,6 +35,7 @@ class TestExampleEntryContractDisplayFields:
 
     def test_entry_has_operation_kind_field(self):
         from plugin_examples.publisher.readme_renderer import ExampleEntry
+
         e = ExampleEntry(name="test", api_class="Test", input_format=".xlsx", output_format=".csv")
         assert hasattr(e, "operation_kind")
         assert hasattr(e, "input_format_display")
@@ -42,24 +43,28 @@ class TestExampleEntryContractDisplayFields:
 
     def test_converter_display_includes_formats(self):
         from plugin_examples.publisher.readme_renderer import _compute_display_fields
+
         in_disp, out_disp = _compute_display_fields("converter", ".xlsx", ".csv")
         assert isinstance(in_disp, str)
         assert isinstance(out_disp, str)
 
     def test_merger_display_not_empty(self):
         from plugin_examples.publisher.readme_renderer import _compute_display_fields
+
         in_disp, out_disp = _compute_display_fields("merger", ".xlsx", ".xlsx")
         assert isinstance(in_disp, str)
         assert isinstance(out_disp, str)
 
     def test_splitter_display_not_empty(self):
         from plugin_examples.publisher.readme_renderer import _compute_display_fields
+
         in_disp, out_disp = _compute_display_fields("splitter", ".docx", ".docx")
         assert isinstance(in_disp, str)
         assert isinstance(out_disp, str)
 
     def test_extractor_stdout_display(self):
         from plugin_examples.publisher.readme_renderer import _compute_display_fields
+
         in_disp, out_disp = _compute_display_fields("extractor", ".pdf", "")
         assert isinstance(in_disp, str)
         assert isinstance(out_disp, str)
@@ -70,6 +75,7 @@ class TestReadmeRendererContractConsistency:
 
     def test_build_readme_context_has_operation_kind(self):
         from plugin_examples.publisher.readme_renderer import build_readme_context
+
         cfg = _make_family_config("cells")
         examples = [
             {"name": "spreadsheet-converter", "output_format": "csv"},
@@ -87,6 +93,7 @@ class TestReadmeRendererContractConsistency:
 
     def test_spreadsheet_converter_rendered_has_display_fields(self):
         from plugin_examples.publisher.readme_renderer import build_readme_context
+
         cfg = _make_family_config("cells")
         examples = [{"name": "spreadsheet-converter"}]
         ctx = build_readme_context(
@@ -120,21 +127,13 @@ class TestReadmeAuditorContractCrossCheck:
         return audit_readme(rendered, ctx)
 
     def test_audit_result_has_contract_mismatch_field(self):
-        result = self._render_and_audit(
-            "cells",
-            [{"name": "spreadsheet-converter", "output_format": "csv"}]
-        )
-        assert hasattr(result, "contract_format_mismatches"), (
-            "AuditResult missing contract_format_mismatches field"
-        )
+        result = self._render_and_audit("cells", [{"name": "spreadsheet-converter", "output_format": "csv"}])
+        assert hasattr(result, "contract_format_mismatches"), "AuditResult missing contract_format_mismatches field"
         assert isinstance(result.contract_format_mismatches, list)
 
     def test_correct_format_produces_no_contract_mismatch(self):
         """When rendered format matches contract, contract_format_mismatches should be empty."""
-        result = self._render_and_audit(
-            "cells",
-            [{"name": "spreadsheet-converter", "output_format": "csv"}]
-        )
-        assert result.contract_format_mismatches == [], (
-            f"Expected no mismatches when format is correct, got: {result.contract_format_mismatches}"
-        )
+        result = self._render_and_audit("cells", [{"name": "spreadsheet-converter", "output_format": "csv"}])
+        assert (
+            result.contract_format_mismatches == []
+        ), f"Expected no mismatches when format is correct, got: {result.contract_format_mismatches}"

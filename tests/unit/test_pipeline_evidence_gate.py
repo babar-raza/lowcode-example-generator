@@ -36,26 +36,39 @@ def _make_valid_bundle(tmpdir: str) -> Path:
 
     (b / "destination").mkdir(parents=True)
     (b / "destination" / "content-audit-repaired.json").write_text(
-        json.dumps({
-            "authority_mapped": "42/42",
-            "present_no_authority": 0,
-            "total_examples": 42,
-            "examples": [
-                {
-                    "scenario_id": f"s-{i}",
-                    "content_match": "MATCH",
-                    "input_format_in_programcs": ".docx",
-                    "input_classification": "AddInput",
-                }
-                for i in range(42)
-            ],
-        }),
+        json.dumps(
+            {
+                "authority_mapped": "42/42",
+                "present_no_authority": 0,
+                "total_examples": 42,
+                "examples": [
+                    {
+                        "scenario_id": f"s-{i}",
+                        "content_match": "MATCH",
+                        "input_format_in_programcs": ".docx",
+                        "input_classification": "AddInput",
+                    }
+                    for i in range(42)
+                ],
+            }
+        ),
         encoding="utf-8",
     )
 
     (b / "readme").mkdir(parents=True)
     (b / "readme" / "example-readme-content-audit.json").write_text(
-        json.dumps({"records": [{"scenario_id": "s-0", "family_in_readme": True, "workflow_type_in_readme": True, "package_id_in_readme": True}]}),
+        json.dumps(
+            {
+                "records": [
+                    {
+                        "scenario_id": "s-0",
+                        "family_in_readme": True,
+                        "workflow_type_in_readme": True,
+                        "package_id_in_readme": True,
+                    }
+                ]
+            }
+        ),
         encoding="utf-8",
     )
     (b / "readme" / "readme-gate-implementation.md").write_text("# Gate wired\n", encoding="utf-8")
@@ -68,26 +81,38 @@ def _make_valid_bundle(tmpdir: str) -> Path:
     (b / "evidence").mkdir(parents=True)
     (b / "evidence" / "validator-test-results.txt").write_text("20 passed, 0 failed in 0.45s\n", encoding="utf-8")
     (b / "evidence" / "sprint61-bundle-validation-result.json").write_text(
-        json.dumps({"sprint_id": "sprint61-test", "overall_valid": True, "passed": 21, "failed": 0, "warnings": 0, "total_rules": 21, "rules": []}),
+        json.dumps(
+            {
+                "sprint_id": "sprint61-test",
+                "overall_valid": True,
+                "passed": 21,
+                "failed": 0,
+                "warnings": 0,
+                "total_rules": 21,
+                "rules": [],
+            }
+        ),
         encoding="utf-8",
     )
     (b / "evidence" / "pipeline-integration-proof.md").write_text(
         "# Pipeline Integration\nEvidenceValidator is called in release-status command.\n", encoding="utf-8"
     )
     (b / "evidence" / "evidence-contract-computed.json").write_text(
-        json.dumps({
-            "contract_id": "sprint-test",
-            "computed_at": "2026-05-22T07:30:00Z",
-            "total_categories": 36,
-            "present": 36,
-            "missing": 0,
-            "zero_bytes": 0,
-            "semantic_failed": 0,
-            "pending": 0,
-            "blocking_failures": 0,
-            "closure_valid": True,
-            "categories": [],
-        }),
+        json.dumps(
+            {
+                "contract_id": "sprint-test",
+                "computed_at": "2026-05-22T07:30:00Z",
+                "total_categories": 36,
+                "present": 36,
+                "missing": 0,
+                "zero_bytes": 0,
+                "semantic_failed": 0,
+                "pending": 0,
+                "blocking_failures": 0,
+                "closure_valid": True,
+                "categories": [],
+            }
+        ),
         encoding="utf-8",
     )
 
@@ -102,28 +127,30 @@ def _make_valid_bundle(tmpdir: str) -> Path:
     # Sprint 65+66: destination/content-audit-final.json with all required fields
     # Sprint 66: includes output_kind and api_type (rules 37, ECC check)
     (b / "destination" / "content-audit-final.json").write_text(
-        json.dumps({
-            "total_publication_artifacts": 42,
-            "standard_package_artifacts": 40,
-            "special_case_artifacts": 2,
-            "records_ready": 42,
-            "records": [
-                {
-                    "scenario_id": f"s-{i}",
-                    "family": "cells",
-                    "package_version": "26.5.1",
-                    "output_format": ".xlsx",
-                    "output_kind": "converter",
-                    "api_type": "Converter",
-                    "readme_status": "IO_DOC",
-                    "root_readme_status": "INCLUDED",
-                    "final_readiness": "READY",
-                    "final_status": "READY",
-                    "special_case": False,
-                }
-                for i in range(42)
-            ],
-        }),
+        json.dumps(
+            {
+                "total_publication_artifacts": 42,
+                "standard_package_artifacts": 40,
+                "special_case_artifacts": 2,
+                "records_ready": 42,
+                "records": [
+                    {
+                        "scenario_id": f"s-{i}",
+                        "family": "cells",
+                        "package_version": "26.5.1",
+                        "output_format": ".xlsx",
+                        "output_kind": "converter",
+                        "api_type": "Converter",
+                        "readme_status": "IO_DOC",
+                        "root_readme_status": "INCLUDED",
+                        "final_readiness": "READY",
+                        "final_status": "READY",
+                        "special_case": False,
+                    }
+                    for i in range(42)
+                ],
+            }
+        ),
         encoding="utf-8",
     )
 
@@ -137,10 +164,14 @@ def _make_valid_bundle(tmpdir: str) -> Path:
     # Sprint 65: special-cases/special-case-publication-map.json
     (b / "special-cases").mkdir(parents=True)
     (b / "special-cases" / "special-case-publication-map.json").write_text(
-        json.dumps({"special_cases": [
-            {"scenario_id": "pdf-pdfa-converter", "destination_path": "examples/pdf/lowcode/pdfa-converter"},
-            {"scenario_id": "pdf-text-extractor", "destination_path": "examples/pdf/lowcode/text-extractor"},
-        ]}),
+        json.dumps(
+            {
+                "special_cases": [
+                    {"scenario_id": "pdf-pdfa-converter", "destination_path": "examples/pdf/lowcode/pdfa-converter"},
+                    {"scenario_id": "pdf-text-extractor", "destination_path": "examples/pdf/lowcode/text-extractor"},
+                ]
+            }
+        ),
         encoding="utf-8",
     )
 
@@ -154,9 +185,7 @@ def _make_valid_bundle(tmpdir: str) -> Path:
     # Sprint 65: final-verdict.md + publication/remote-proof-index.json
     (b / "final-verdict.md").write_text("Verdict: TEST_DRY_RUN_APPROVAL_BLOCKED\n", encoding="utf-8")
     (b / "publication").mkdir(parents=True)
-    (b / "publication" / "remote-proof-index.json").write_text(
-        json.dumps({"families": ["cells"]}), encoding="utf-8"
-    )
+    (b / "publication" / "remote-proof-index.json").write_text(json.dumps({"families": ["cells"]}), encoding="utf-8")
 
     # Sprint 65: evidence/*revalidation*.json — overall_valid=false
     (b / "evidence" / "sprint64-revalidation-result.json").write_text(
@@ -167,45 +196,57 @@ def _make_valid_bundle(tmpdir: str) -> Path:
     # Sprint 66: remote/remote-pr-proof-index.json — per-example PR coverage (rule 33)
     (b / "remote").mkdir(parents=True)
     (b / "remote" / "remote-pr-proof-index.json").write_text(
-        json.dumps({
-            "generated": "2026-05-22T00:00:00Z",
-            "families": {
-                "cells": [{"pr_number": 1, "examples_count": 9, "scenario_ids_covered": [f"cells-ex-{i}" for i in range(9)]}],
-            },
-        }),
+        json.dumps(
+            {
+                "generated": "2026-05-22T00:00:00Z",
+                "families": {
+                    "cells": [
+                        {
+                            "pr_number": 1,
+                            "examples_count": 9,
+                            "scenario_ids_covered": [f"cells-ex-{i}" for i in range(9)],
+                        }
+                    ],
+                },
+            }
+        ),
         encoding="utf-8",
     )
 
     # Sprint 66: remote/remote-example-inventory.json — content hashes (rule 34)
     (b / "remote" / "remote-example-inventory.json").write_text(
-        json.dumps({
-            "generated": "2026-05-22T00:00:00Z",
-            "total": 42,
-            "records": [
-                {
-                    "scenario_id": f"s-{i}",
-                    "family": "cells",
-                    "readme_sha": f"abc{i:04x}",
-                    "readme_content_sha256": f"sha256-{i:04x}",
-                    "programcs_sha": f"def{i:04x}",
-                }
-                for i in range(42)
-            ],
-        }),
+        json.dumps(
+            {
+                "generated": "2026-05-22T00:00:00Z",
+                "total": 42,
+                "records": [
+                    {
+                        "scenario_id": f"s-{i}",
+                        "family": "cells",
+                        "readme_sha": f"abc{i:04x}",
+                        "readme_content_sha256": f"sha256-{i:04x}",
+                        "programcs_sha": f"def{i:04x}",
+                    }
+                    for i in range(42)
+                ],
+            }
+        ),
         encoding="utf-8",
     )
 
     # Sprint 66: remote/remote-readme-io-audit.json — I/O status per example (rule 35)
     (b / "remote" / "remote-readme-io-audit.json").write_text(
-        json.dumps({
-            "generated": "2026-05-22T00:00:00Z",
-            "total": 42,
-            "io_doc_count": 0,
-            "records": [
-                {"scenario_id": f"s-{i}", "family": "cells", "has_io_section": False, "io_status": "OLD_FORMAT"}
-                for i in range(42)
-            ],
-        }),
+        json.dumps(
+            {
+                "generated": "2026-05-22T00:00:00Z",
+                "total": 42,
+                "io_doc_count": 0,
+                "records": [
+                    {"scenario_id": f"s-{i}", "family": "cells", "has_io_section": False, "io_status": "OLD_FORMAT"}
+                    for i in range(42)
+                ],
+            }
+        ),
         encoding="utf-8",
     )
 
@@ -221,7 +262,7 @@ def _make_valid_bundle(tmpdir: str) -> Path:
             encoding="utf-8",
         )
         (family_dir / f"{family}-example.csproj").write_text(
-            "<Project Sdk=\"Microsoft.NET.Sdk\"></Project>", encoding="utf-8"
+            '<Project Sdk="Microsoft.NET.Sdk"></Project>', encoding="utf-8"
         )
     (b / "handoff" / "publication-handoff-index.json").write_text(
         json.dumps({"total_examples": 42, "ok_count": 42}), encoding="utf-8"
@@ -229,21 +270,23 @@ def _make_valid_bundle(tmpdir: str) -> Path:
 
     # Sprint 66: publication/publication-truth-matrix-final.json — separate state fields (rule 38)
     (b / "publication" / "publication-truth-matrix-final.json").write_text(
-        json.dumps({
-            "generated": "2026-05-22T00:00:00Z",
-            "total": 42,
-            "records": [
-                {
-                    "scenario_id": f"s-{i}",
-                    "family": "cells",
-                    "remote_example_present": True,
-                    "remote_readme_has_io_docs": False,
-                    "approval_blocked": True,
-                    "publication_status": "REMOTE_PUBLISHED_STALE_IO",
-                }
-                for i in range(42)
-            ],
-        }),
+        json.dumps(
+            {
+                "generated": "2026-05-22T00:00:00Z",
+                "total": 42,
+                "records": [
+                    {
+                        "scenario_id": f"s-{i}",
+                        "family": "cells",
+                        "remote_example_present": True,
+                        "remote_readme_has_io_docs": False,
+                        "approval_blocked": True,
+                        "publication_status": "REMOTE_PUBLISHED_STALE_IO",
+                    }
+                    for i in range(42)
+                ],
+            }
+        ),
         encoding="utf-8",
     )
 
@@ -312,14 +355,15 @@ def _make_valid_bundle(tmpdir: str) -> Path:
     # Sprint 68: sprint-specific content audit with no stale PDF 26.4.0 (rule 55)
     # sprint_id="sprint61-test" → look for content-audit-sprint61-test.json
     (b / "destination" / "content-audit-sprint61-test.json").write_text(
-        json.dumps({
-            "sprint_id": "sprint61-test",
-            "total": 42,
-            "records": [
-                {"scenario_id": f"s-{i}", "family": "cells", "package_version": "26.5.1"}
-                for i in range(42)
-            ],
-        }),
+        json.dumps(
+            {
+                "sprint_id": "sprint61-test",
+                "total": 42,
+                "records": [
+                    {"scenario_id": f"s-{i}", "family": "cells", "package_version": "26.5.1"} for i in range(42)
+                ],
+            }
+        ),
         encoding="utf-8",
     )
 
@@ -345,9 +389,16 @@ def _make_valid_bundle(tmpdir: str) -> Path:
     # sprint_id="sprint61-test" => source_path must start with
     # reports/sprint61-test/handoff/per-family/{family}/
     import hashlib as _hashlib_fixture_gate
+
     _gate_fam_readme_hashes = {}
-    for family, ver in [("cells", "26.5.1"), ("words", "26.5.0"), ("pdf", "26.5.0"),
-                        ("diagram", "26.5.0"), ("email", "26.4.0"), ("slides", "26.5.0")]:
+    for family, ver in [
+        ("cells", "26.5.1"),
+        ("words", "26.5.0"),
+        ("pdf", "26.5.0"),
+        ("diagram", "26.5.0"),
+        ("email", "26.4.0"),
+        ("slides", "26.5.0"),
+    ]:
         fam_dir = b / "handoff" / "per-family" / family
         fam_dir.mkdir(parents=True, exist_ok=True)
         readme_content = f"# {family.capitalize()} Root README\n\nInput and Output examples.\n"
@@ -355,12 +406,19 @@ def _make_valid_bundle(tmpdir: str) -> Path:
         (fam_dir / "README.md").write_bytes(readme_bytes)
         _gate_fam_readme_hashes[family] = _hashlib_fixture_gate.sha256(readme_bytes).hexdigest()
         (fam_dir / "handoff-index.json").write_text(
-            json.dumps({"family": family, "nuget_version": ver, "examples": [],
-                        "root_readme": {
-                            "source_path": f"reports/sprint61-test/handoff/per-family/{family}/README.md",
-                            "sha256": _gate_fam_readme_hashes[family],
-                            "destination_path": "README.md",
-                            "destination_repo": f"aspose-{family}-net/repo"}}),
+            json.dumps(
+                {
+                    "family": family,
+                    "nuget_version": ver,
+                    "examples": [],
+                    "root_readme": {
+                        "source_path": f"reports/sprint61-test/handoff/per-family/{family}/README.md",
+                        "sha256": _gate_fam_readme_hashes[family],
+                        "destination_path": "README.md",
+                        "destination_repo": f"aspose-{family}-net/repo",
+                    },
+                }
+            ),
             encoding="utf-8",
         )
         (fam_dir / "Directory.Packages.props").write_text(
@@ -443,15 +501,20 @@ def _make_valid_bundle(tmpdir: str) -> Path:
     # Rule 71: publication_handoff_root_readme_hash_matches — also needs root_readme_source_path
     handoff_dir = b / "handoff"
     (handoff_dir / "publication-handoff-index.json").write_text(
-        json.dumps({"sprint_id": "sprint61-test", "families": [
+        json.dumps(
             {
-                "family": f,
-                "root_readme_sha256": _gate_fam_readme_hashes[f],
-                "root_readme_source_path": f"reports/sprint61-test/handoff/per-family/{f}/README.md",
-                "example_count": 1,
+                "sprint_id": "sprint61-test",
+                "families": [
+                    {
+                        "family": f,
+                        "root_readme_sha256": _gate_fam_readme_hashes[f],
+                        "root_readme_source_path": f"reports/sprint61-test/handoff/per-family/{f}/README.md",
+                        "example_count": 1,
+                    }
+                    for f in ["cells", "words", "pdf", "diagram", "email", "slides"]
+                ],
             }
-            for f in ["cells", "words", "pdf", "diagram", "email", "slides"]
-        ]}),
+        ),
         encoding="utf-8",
     )
 
@@ -473,38 +536,48 @@ def _make_valid_bundle(tmpdir: str) -> Path:
     remote_dir = b / "remote"
     remote_dir.mkdir(exist_ok=True)
     (remote_dir / "remote-vs-handoff-final.json").write_text(
-        json.dumps({
-            "sprint_id": "sprint61-test",
-            "comparison": "current",
-            "families": [
-                {"family": f, "handoff_path": f"reports/sprint61-test/handoff/per-family/{f}/", "status": "OK"}
-                for f in ["cells", "words", "pdf", "diagram", "email", "slides"]
-            ],
-        }),
+        json.dumps(
+            {
+                "sprint_id": "sprint61-test",
+                "comparison": "current",
+                "families": [
+                    {"family": f, "handoff_path": f"reports/sprint61-test/handoff/per-family/{f}/", "status": "OK"}
+                    for f in ["cells", "words", "pdf", "diagram", "email", "slides"]
+                ],
+            }
+        ),
         encoding="utf-8",
     )
 
     # Sprint 72 rules 79-85: remote proof consistency
     (remote_dir / "remote-proof-consistency-audit.json").write_text(
-        json.dumps({
-            "sprint_id": "sprint61-test",
-            "consistent": True,
-            "checks": [{"check_id": "RPC01", "consistent": True}],
-        }),
+        json.dumps(
+            {
+                "sprint_id": "sprint61-test",
+                "consistent": True,
+                "checks": [{"check_id": "RPC01", "consistent": True}],
+            }
+        ),
         encoding="utf-8",
     )
     (remote_dir / "remote-readme-io-audit-final.json").write_text(
-        json.dumps({
-            "sprint_id": "sprint61-test",
-            "total": 42,
-            "io_doc_count": 0,
-            "old_format_count": 42,
-            "records": [
-                {"scenario_id": f"cells-example-{i}", "family": "cells",
-                 "has_io_section": False, "io_status": "OLD_FORMAT"}
-                for i in range(42)
-            ],
-        }),
+        json.dumps(
+            {
+                "sprint_id": "sprint61-test",
+                "total": 42,
+                "io_doc_count": 0,
+                "old_format_count": 42,
+                "records": [
+                    {
+                        "scenario_id": f"cells-example-{i}",
+                        "family": "cells",
+                        "has_io_section": False,
+                        "io_status": "OLD_FORMAT",
+                    }
+                    for i in range(42)
+                ],
+            }
+        ),
         encoding="utf-8",
     )
     history_dir = b / "history"
@@ -557,23 +630,25 @@ def _make_valid_bundle(tmpdir: str) -> Path:
     # Rules 94+95: output_confirmed=true, no NO_INPUT_FIXTURE runtime_result
     (b / "post-merge-runtime").mkdir(parents=True, exist_ok=True)
     (b / "post-merge-runtime" / "post-merge-validation-matrix.json").write_text(
-        json.dumps({
-            "sprint_id": "sprint61-test",
-            "records": [
-                {
-                    "scenario_id": "email-html-converter",
-                    "post_merge_validated": True,
-                    "output_confirmed": True,
-                    "runtime_result": "RUNTIME_VALIDATED",
-                },
-                {
-                    "scenario_id": "slides-compress",
-                    "post_merge_validated": True,
-                    "output_confirmed": True,
-                    "runtime_result": "RUNTIME_VALIDATED",
-                },
-            ],
-        }),
+        json.dumps(
+            {
+                "sprint_id": "sprint61-test",
+                "records": [
+                    {
+                        "scenario_id": "email-html-converter",
+                        "post_merge_validated": True,
+                        "output_confirmed": True,
+                        "runtime_result": "RUNTIME_VALIDATED",
+                    },
+                    {
+                        "scenario_id": "slides-compress",
+                        "post_merge_validated": True,
+                        "output_confirmed": True,
+                        "runtime_result": "RUNTIME_VALIDATED",
+                    },
+                ],
+            }
+        ),
         encoding="utf-8",
     )
 
@@ -642,17 +717,21 @@ class TestReleaseStatusValidateBundleFlag(unittest.TestCase):
     def _run_validate_bundle(self, bundle_dir: Path) -> int:
         """Call the release-status --validate-bundle path in __main__.main() directly."""
         from plugin_examples.__main__ import main
+
         argv_backup = sys.argv[:]
         try:
             sys.argv = [
                 "plugin_examples",
                 "release-status",
-                "--validate-bundle", str(bundle_dir),
+                "--validate-bundle",
+                str(bundle_dir),
             ]
             # Mock the heavy release-status computation so we only test the EV wiring
-            with patch("plugin_examples.publisher.release_status.compute_release_status") as mock_compute, \
-                 patch("plugin_examples.publisher.release_status.write_release_status_report") as mock_write, \
-                 patch("plugin_examples.publisher.release_status.ALL_RELEASE_FAMILIES", ["cells"]):
+            with (
+                patch("plugin_examples.publisher.release_status.compute_release_status") as mock_compute,
+                patch("plugin_examples.publisher.release_status.write_release_status_report") as mock_write,
+                patch("plugin_examples.publisher.release_status.ALL_RELEASE_FAMILIES", ["cells"]),
+            ):
                 mock_compute.return_value = {
                     "families": [
                         {
@@ -689,6 +768,7 @@ class TestReleaseStatusValidateBundleFlag(unittest.TestCase):
     def test_validate_bundle_not_called_without_flag(self):
         """Without --validate-bundle, EvidenceValidator is NOT called."""
         from plugin_examples.__main__ import main
+
         argv_backup = sys.argv[:]
         called = []
         original_ev = EvidenceValidator.__init__
@@ -699,10 +779,12 @@ class TestReleaseStatusValidateBundleFlag(unittest.TestCase):
 
         try:
             sys.argv = ["plugin_examples", "release-status"]
-            with patch("plugin_examples.publisher.release_status.compute_release_status") as mock_compute, \
-                 patch("plugin_examples.publisher.release_status.write_release_status_report") as mock_write, \
-                 patch("plugin_examples.publisher.release_status.ALL_RELEASE_FAMILIES", ["cells"]), \
-                 patch.object(EvidenceValidator, "__init__", spy_init):
+            with (
+                patch("plugin_examples.publisher.release_status.compute_release_status") as mock_compute,
+                patch("plugin_examples.publisher.release_status.write_release_status_report") as mock_write,
+                patch("plugin_examples.publisher.release_status.ALL_RELEASE_FAMILIES", ["cells"]),
+                patch.object(EvidenceValidator, "__init__", spy_init),
+            ):
                 mock_compute.return_value = {
                     "families": [
                         {

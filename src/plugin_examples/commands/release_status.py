@@ -13,15 +13,21 @@ def add_parser(subparsers):
         help="Report per-family release state from evidence files (read-only)",
     )
     parser.add_argument(
-        "--families", nargs="+", metavar="FAMILY", default=None,
+        "--families",
+        nargs="+",
+        metavar="FAMILY",
+        default=None,
         help="Families to report on (default: cells words pdf diagram email slides)",
     )
     parser.add_argument(
-        "--promote-latest", action="store_true",
+        "--promote-latest",
+        action="store_true",
         help="Write report to workspace/verification/latest/ (always on)",
     )
     parser.add_argument(
-        "--validate-bundle", metavar="BUNDLE_DIR", default=None,
+        "--validate-bundle",
+        metavar="BUNDLE_DIR",
+        default=None,
         help=(
             "Run EvidenceValidator on a sprint bundle directory after computing release status. "
             "Prints a validation summary; exits 1 if the bundle fails any FAILURE-severity rule."
@@ -44,7 +50,9 @@ def handle(args) -> int:
 
     repo_root = _Path(__file__).resolve().parents[3]
     msession, mcollector = _create_metrics_session(
-        args, command="release-status", repo_root=repo_root,
+        args,
+        command="release-status",
+        repo_root=repo_root,
     )
     verification_dir = repo_root / "workspace" / "verification"
 
@@ -59,8 +67,10 @@ def handle(args) -> int:
         validation = rec["last_post_merge_validation_status"]
         count = rec["published_examples_count"]
         scope = rec.get("release_scope_status", "UNKNOWN")
-        print(f"  {fam}: merged={sha[:12] if rec['last_merge_sha'] else 'no'}, "
-              f"examples={count}, post_merge={validation}, scope={scope}")
+        print(
+            f"  {fam}: merged={sha[:12] if rec['last_merge_sha'] else 'no'}, "
+            f"examples={count}, post_merge={validation}, scope={scope}"
+        )
         print(f"    next: {rec['next_required_action']}")
     print(f"  all_merged: {status['all_merged']}")
     print(f"  all_post_merge_validated: {status['all_post_merge_validated']}")
@@ -69,6 +79,7 @@ def handle(args) -> int:
     # Optional: validate sprint evidence bundle
     if getattr(args, "validate_bundle", None):
         from plugin_examples.evidence_validator import EvidenceValidator as _EV
+
         _bundle_dir = _Path(args.validate_bundle)
         _source_root = _Path(__file__).resolve().parent
         print(f"\nValidating bundle: {_bundle_dir}")
@@ -89,4 +100,3 @@ def handle(args) -> int:
         items_failed=0,
     )
     return 0
-

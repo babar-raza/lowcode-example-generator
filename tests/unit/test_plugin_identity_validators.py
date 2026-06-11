@@ -2,6 +2,7 @@
 Unit tests for plugin identity invariant validators (PIV-01..PIV-14).
 Sprint: lowcode-plugin-canonical-identity-wave7-20260605
 """
+
 import json
 import pytest
 from pathlib import Path
@@ -104,7 +105,9 @@ class TestPiv05FolderSlugMismatch:
         }
         (pkg / "source-provenance.json").write_text(json.dumps(sp))
         (pkg / "output-validation.json").write_text(json.dumps({"verdict": "PASS"}))
-        (pkg / "package-manifest.json").write_text(json.dumps({"canonical_url": "https://products.aspose.net/barcode/1d-barcode-writer/"}))
+        (pkg / "package-manifest.json").write_text(
+            json.dumps({"canonical_url": "https://products.aspose.net/barcode/1d-barcode-writer/"})
+        )
         (pkg / "README.md").write_text("# Test")
         (pkg / "output" / "r.txt").write_text("ok")
         r = run_plugin_identity_validators(pkg, "barcode/my-custom-name")
@@ -125,7 +128,9 @@ class TestPiv05FolderSlugMismatch:
         }
         (pkg / "source-provenance.json").write_text(json.dumps(sp))
         (pkg / "output-validation.json").write_text(json.dumps({"verdict": "PASS"}))
-        (pkg / "package-manifest.json").write_text(json.dumps({"canonical_url": "https://products.aspose.net/barcode/1d-barcode-writer/"}))
+        (pkg / "package-manifest.json").write_text(
+            json.dumps({"canonical_url": "https://products.aspose.net/barcode/1d-barcode-writer/"})
+        )
         (pkg / "README.md").write_text("# 1D Barcode Writer")
         (pkg / "output" / "r.txt").write_text("ok")
         r = run_plugin_identity_validators(pkg, "barcode/generate-barcode")

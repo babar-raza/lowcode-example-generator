@@ -12,7 +12,6 @@ from plugin_examples.evidence_validator.models import RuleResult
 logger = logging.getLogger(__name__)
 
 
-
 class Sprint87to88Rules:
     """Rule mixin for evidence validation."""
 
@@ -28,21 +27,24 @@ class Sprint87to88Rules:
         log_path = self.bundle_dir / "commands.log"
         if not log_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="commands.log not found — rule not applicable",
             )
 
         content = log_path.read_text(encoding="utf-8", errors="replace")
         pending_lines = [
-            line.strip() for line in content.splitlines()
-            if re.search(r"result\s+pending", line, re.IGNORECASE)
+            line.strip() for line in content.splitlines() if re.search(r"result\s+pending", line, re.IGNORECASE)
         ]
 
         if pending_lines:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"S86-D1: commands.log has {len(pending_lines)} line(s) with "
                     f"'result pending': {pending_lines[:3]}"
@@ -50,8 +52,10 @@ class Sprint87to88Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence="No 'result pending' entries found in commands.log",
         )
 
@@ -68,16 +72,20 @@ class Sprint87to88Rules:
         evidence_dir = self.bundle_dir / "evidence"
         if not evidence_dir.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="evidence/ directory not found — rule not applicable",
             )
 
         vr_files = list(evidence_dir.glob("*-final-validation-result.json"))
         if not vr_files:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="No *-final-validation-result.json found — rule not applicable",
             )
 
@@ -91,8 +99,10 @@ class Sprint87to88Rules:
             total = data.get("total_rules", 0)
             if total > 100 and applicable + diagnostic != total:
                 return RuleResult(
-                    rule_id=rule_id, description=description,
-                    severity="FAILURE", passed=False,
+                    rule_id=rule_id,
+                    description=description,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail=(
                         f"S86-D2: {vr_path.name} has applicable={applicable} + "
                         f"diagnostic={diagnostic} = {applicable + diagnostic} != "
@@ -101,8 +111,10 @@ class Sprint87to88Rules:
                 )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence="Validation result applicable + diagnostic = total_rules",
         )
 
@@ -118,8 +130,10 @@ class Sprint87to88Rules:
         manifest_path = self.bundle_dir / "bundle-manifest.json"
         if not manifest_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="bundle-manifest.json not found — rule not applicable",
             )
 
@@ -127,26 +141,31 @@ class Sprint87to88Rules:
             data = json.loads(manifest_path.read_text(encoding="utf-8", errors="replace"))
         except (OSError, ValueError):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="Could not parse bundle-manifest.json — rule not applicable",
             )
 
         source_sha = data.get("source_sha", "")
         if not source_sha or source_sha in ("TBD", "TBD_AFTER_COMMIT", "PLACEHOLDER"):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
-                    f"S86-D3: bundle-manifest.json source_sha is '{source_sha}' "
-                    f"which is not a valid SHA."
+                    f"S86-D3: bundle-manifest.json source_sha is '{source_sha}' " f"which is not a valid SHA."
                 ),
             )
 
         if not re.match(r"^[0-9a-f]{7,40}$", source_sha):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"S86-D3: bundle-manifest.json source_sha='{source_sha}' "
                     f"does not match [0-9a-f]{{7,40}} pattern."
@@ -154,8 +173,10 @@ class Sprint87to88Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence=f"source_sha='{source_sha}' is a valid SHA",
         )
 
@@ -171,8 +192,10 @@ class Sprint87to88Rules:
         verdict_path = self.bundle_dir / "final-verdict.md"
         if not verdict_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="final-verdict.md not found — rule not applicable",
             )
 
@@ -183,8 +206,10 @@ class Sprint87to88Rules:
 
         if has_old and not has_deprecation:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "S86-D4: final-verdict.md uses PLUGIN_EXAMPLES_README_PUSH_APPROVAL "
                     "without a deprecation note. Use PLUGIN_EXAMPLES_MERGE_PR_APPROVAL "
@@ -193,8 +218,10 @@ class Sprint87to88Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence="Approval variable naming is consistent or properly documented",
         )
 
@@ -210,8 +237,10 @@ class Sprint87to88Rules:
         drift_path = self.bundle_dir / "version-drift" / "words-version-drift-current.json"
         if not drift_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="words-version-drift-current.json not found — rule not applicable",
             )
 
@@ -219,8 +248,10 @@ class Sprint87to88Rules:
             drift_data = json.loads(drift_path.read_text(encoding="utf-8", errors="replace"))
         except (OSError, ValueError):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="Could not parse words drift file — rule not applicable",
             )
 
@@ -230,16 +261,20 @@ class Sprint87to88Rules:
         # Only enforce when drift is boolean True AND drift_type is present
         if not isinstance(drift_val, bool) or not drift_val:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence=f"drift={drift_val!r} — rule applies only to boolean true drift",
             )
 
         # If drift=true, drift_type must not be empty or "RESOLVED"
         if drift_type.upper() in ("RESOLVED", ""):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"S86-D5: words-version-drift-current.json has drift=true but "
                     f"drift_type='{drift_type}'. If drift exists, drift_type must "
@@ -248,8 +283,10 @@ class Sprint87to88Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence=f"Words drift status is consistent: drift={drift_val}, drift_type={drift_type}",
         )
 
@@ -270,8 +307,10 @@ class Sprint87to88Rules:
 
         if not proof_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="final-clean-proof.txt not found — rule not applicable",
             )
 
@@ -286,8 +325,10 @@ class Sprint87to88Rules:
             if not has_log:
                 missing.append("log")
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"S86-D6: final-clean-proof.txt is missing {', '.join(missing)} "
                     f"section(s). Must include git diff and git log output."
@@ -295,8 +336,10 @@ class Sprint87to88Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence="final-clean-proof.txt includes diff and log sections",
         )
 
@@ -312,8 +355,10 @@ class Sprint87to88Rules:
         discovery_path = self.bundle_dir / "advancement" / "next-family-discovery.md"
         if not discovery_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="advancement/next-family-discovery.md not found — rule not applicable",
             )
 
@@ -326,8 +371,10 @@ class Sprint87to88Rules:
 
         if not has_config_ref:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "S86-A1: next-family-discovery.md does not reference "
                     "pipeline/configs/families/. Discovery must come from repo configs."
@@ -336,8 +383,10 @@ class Sprint87to88Rules:
 
         if not has_new_family:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "S86-A1: next-family-discovery.md does not mention any "
                     "non-current family. Must identify candidates beyond the current 6."
@@ -345,8 +394,10 @@ class Sprint87to88Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence="Next-family discovery references pipeline configs and identifies new candidates",
         )
 
@@ -362,16 +413,20 @@ class Sprint87to88Rules:
         freeze_path = self.bundle_dir / "baseline-freeze" / "publication-baseline-freeze.json"
         if not freeze_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="No baseline freeze — rule not applicable",
             )
 
         adv_dir = self.bundle_dir / "advancement"
         if not adv_dir.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "S86-A2: baseline-freeze exists but advancement/ directory "
                     "is missing. Baseline freeze must not avoid product advancement."
@@ -381,8 +436,10 @@ class Sprint87to88Rules:
         adv_files = list(adv_dir.iterdir())
         if len(adv_files) < 2:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"S86-A2: baseline-freeze exists but advancement/ has only "
                     f"{len(adv_files)} file(s). Must have substantial advancement work."
@@ -390,8 +447,10 @@ class Sprint87to88Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence=f"advancement/ has {len(adv_files)} files — real advancement present",
         )
 
@@ -411,8 +470,10 @@ class Sprint87to88Rules:
         manifest_path = self.bundle_dir / "bundle-manifest.json"
         if not manifest_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="bundle-manifest.json not found — rule not applicable",
             )
 
@@ -420,24 +481,30 @@ class Sprint87to88Rules:
             data = json.loads(manifest_path.read_text(encoding="utf-8", errors="replace"))
         except (OSError, ValueError):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="Could not parse bundle-manifest.json — rule not applicable",
             )
 
         source_sha = data.get("source_sha", "")
         if not source_sha or source_sha in ("TBD", "TBD_AFTER_COMMIT", "PLACEHOLDER"):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="source_sha not set — head_sha rule not applicable",
             )
 
         head_sha = data.get("head_sha", "")
         if not head_sha or not re.match(r"^[0-9a-f]{7,40}$", head_sha):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"S87-D1: bundle-manifest.json has source_sha='{source_sha}' "
                     f"but head_sha='{head_sha}' is missing or invalid. "
@@ -446,8 +513,10 @@ class Sprint87to88Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence=f"head_sha='{head_sha}' present alongside source_sha='{source_sha}'",
         )
 
@@ -463,8 +532,10 @@ class Sprint87to88Rules:
         verdict_path = self.bundle_dir / "final-verdict.md"
         if not verdict_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="final-verdict.md not found — rule not applicable",
             )
 
@@ -473,16 +544,20 @@ class Sprint87to88Rules:
 
         if not mentions_publication:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="final-verdict.md does not mention publication — rule not applicable",
             )
 
         ptm_path = self.bundle_dir / "publication" / "publication-truth-matrix-final.json"
         if not ptm_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "S87-D3: final-verdict.md mentions publication but "
                     "publication/publication-truth-matrix-final.json is missing."
@@ -490,8 +565,10 @@ class Sprint87to88Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence="publication truth matrix present alongside publication verdict",
         )
 
@@ -507,8 +584,10 @@ class Sprint87to88Rules:
         matrix_path = self.bundle_dir / "next-family" / "next-family-candidate-matrix.json"
         if not matrix_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="next-family-candidate-matrix.json not found — rule not applicable",
             )
 
@@ -516,16 +595,20 @@ class Sprint87to88Rules:
             data = json.loads(matrix_path.read_text(encoding="utf-8", errors="replace"))
         except (OSError, ValueError):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="Could not parse candidate matrix — rule not applicable",
             )
 
         candidates = data.get("candidates", [])
         if not candidates:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="No candidates in matrix — rule not applicable",
             )
 
@@ -533,8 +616,10 @@ class Sprint87to88Rules:
         for c in candidates:
             if "classification" not in c or "nuget_exists" not in c:
                 return RuleResult(
-                    rule_id=rule_id, description=description,
-                    severity="FAILURE", passed=False,
+                    rule_id=rule_id,
+                    description=description,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail=(
                         f"S87-D6: candidate '{c.get('family', '?')}' missing "
                         f"classification or nuget_exists field. Real API checks required."
@@ -544,8 +629,10 @@ class Sprint87to88Rules:
         # Must have discovery_method field
         if "discovery_method" not in data:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "S87-D6: next-family-candidate-matrix.json missing "
                     "discovery_method field. Must document how discovery was performed."
@@ -553,8 +640,10 @@ class Sprint87to88Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence=f"Candidate matrix has {len(candidates)} candidates with real API check fields",
         )
 
@@ -570,16 +659,20 @@ class Sprint87to88Rules:
         adv_dir = self.bundle_dir / "advancement"
         if not adv_dir.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="advancement/ not found — rule not applicable",
             )
 
         discovery_path = adv_dir / "next-family-discovery.md"
         if not discovery_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="No next-family-discovery.md in advancement/ — rule not applicable",
             )
 
@@ -587,8 +680,10 @@ class Sprint87to88Rules:
         summary_path = impl_dir / "implementation-summary.md"
         if not impl_dir.exists() or not summary_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "S87-D7: advancement/next-family-discovery.md exists but "
                     "implementation/implementation-summary.md is missing. "
@@ -597,8 +692,10 @@ class Sprint87to88Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence="implementation-summary.md present alongside next-family discovery",
         )
 
@@ -614,8 +711,10 @@ class Sprint87to88Rules:
         matrix_path = self.bundle_dir / "next-family" / "next-family-candidate-matrix.json"
         if not matrix_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="next-family-candidate-matrix.json not found — rule not applicable",
             )
 
@@ -623,8 +722,10 @@ class Sprint87to88Rules:
             data = json.loads(matrix_path.read_text(encoding="utf-8", errors="replace"))
         except (OSError, ValueError):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="Could not parse candidate matrix — rule not applicable",
             )
 
@@ -635,8 +736,10 @@ class Sprint87to88Rules:
                 blocker = c.get("blocker", "")
                 if not blocker or len(blocker) < 10:
                     return RuleResult(
-                        rule_id=rule_id, description=description,
-                        severity="FAILURE", passed=False,
+                        rule_id=rule_id,
+                        description=description,
+                        severity="FAILURE",
+                        passed=False,
                         failure_detail=(
                             f"S87-D6b: candidate '{c.get('family', '?')}' has "
                             f"classification={classification} but blocker='{blocker}' "
@@ -645,8 +748,10 @@ class Sprint87to88Rules:
                     )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence="All BLOCKED candidates have detailed blocker fields",
         )
 
@@ -662,8 +767,10 @@ class Sprint87to88Rules:
         drift_path = self.bundle_dir / "version-drift" / "words-version-drift-current.json"
         if not drift_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="words-version-drift-current.json not found — rule not applicable",
             )
 
@@ -671,8 +778,10 @@ class Sprint87to88Rules:
             drift_data = json.loads(drift_path.read_text(encoding="utf-8", errors="replace"))
         except (OSError, ValueError):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="Could not parse words drift file — rule not applicable",
             )
 
@@ -683,23 +792,29 @@ class Sprint87to88Rules:
         # (consistent with Rule 131 which also gates on isinstance(drift_val, bool))
         if not isinstance(drift_val, bool) or not drift_val:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence=f"drift={drift_val!r} — rule applies only to boolean true drift",
             )
 
         if isinstance(drift_type, str) and drift_type.upper() == "RESOLVED":
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence=f"drift_type={drift_type!r} — drift resolved, no reconciliation needed",
             )
 
         recon_path = self.bundle_dir / "closure-repair" / "words-version-drift-reconciliation.json"
         if not recon_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"S87-D5b: words drift is active (drift={drift_val}, "
                     f"drift_type={drift_type}) but closure-repair/"
@@ -708,8 +823,10 @@ class Sprint87to88Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence="Version drift reconciliation present for active Words drift",
         )
 

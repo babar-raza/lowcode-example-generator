@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class OutputValidation:
     """Result of output validation."""
+
     scenario_id: str
     passed: bool = False
     has_output: bool = False
@@ -159,11 +160,13 @@ def validate_output_file_semantic(
     result["extension"] = ext
 
     min_bytes = (expected_output or {}).get("min_bytes", 1)
-    result["checks"].append({
-        "check": "min_bytes",
-        "passed": size >= min_bytes,
-        "detail": f"Size {size} bytes (min {min_bytes})",
-    })
+    result["checks"].append(
+        {
+            "check": "min_bytes",
+            "passed": size >= min_bytes,
+            "detail": f"Size {size} bytes (min {min_bytes})",
+        }
+    )
 
     # Extension-specific checks
     if ext in (".csv", ".txt"):
@@ -206,19 +209,23 @@ def _validate_text_output(path: Path, expected: dict | None) -> list[dict]:
 
     if expected and expected.get("content_contains"):
         for val in expected["content_contains"]:
-            checks.append({
-                "check": f"contains_{val}",
-                "passed": val in content,
-                "detail": f"'{val}' {'found' if val in content else 'not found'}",
-            })
+            checks.append(
+                {
+                    "check": f"contains_{val}",
+                    "passed": val in content,
+                    "detail": f"'{val}' {'found' if val in content else 'not found'}",
+                }
+            )
 
     if expected and expected.get("content_not_contains"):
         for val in expected["content_not_contains"]:
-            checks.append({
-                "check": f"not_contains_{val}",
-                "passed": val not in content,
-                "detail": f"'{val}' {'absent' if val not in content else 'present'}",
-            })
+            checks.append(
+                {
+                    "check": f"not_contains_{val}",
+                    "passed": val not in content,
+                    "detail": f"'{val}' {'absent' if val not in content else 'present'}",
+                }
+            )
 
     return checks
 
@@ -245,9 +252,13 @@ def _validate_html_output(path: Path, expected: dict | None) -> list[dict]:
         return [{"check": "readable", "passed": False, "detail": str(e)}]
 
     has_table = "<table" in content.lower()
-    checks.append({"check": "html_has_table", "passed": has_table, "detail": f"Table {'found' if has_table else 'not found'}"})
+    checks.append(
+        {"check": "html_has_table", "passed": has_table, "detail": f"Table {'found' if has_table else 'not found'}"}
+    )
     has_html = "<html" in content.lower()
-    checks.append({"check": "html_structure", "passed": has_html, "detail": f"HTML tag {'found' if has_html else 'not found'}"})
+    checks.append(
+        {"check": "html_structure", "passed": has_html, "detail": f"HTML tag {'found' if has_html else 'not found'}"}
+    )
     return checks
 
 
@@ -257,7 +268,9 @@ def _validate_pdf_output(path: Path, expected: dict | None) -> list[dict]:
         with open(path, "rb") as f:
             header = f.read(5)
         is_pdf = header == b"%PDF-"
-        checks.append({"check": "pdf_header", "passed": is_pdf, "detail": f"PDF header {'valid' if is_pdf else 'invalid'}"})
+        checks.append(
+            {"check": "pdf_header", "passed": is_pdf, "detail": f"PDF header {'valid' if is_pdf else 'invalid'}"}
+        )
     except Exception as e:
         return [{"check": "pdf_header", "passed": False, "detail": str(e)}]
 
@@ -301,7 +314,13 @@ def _validate_xlsx_output(path: Path, expected: dict | None) -> list[dict]:
             names = z.namelist()
             checks.append({"check": "xlsx_valid_zip", "passed": True, "detail": f"Valid ZIP with {len(names)} entries"})
             has_wb = "xl/workbook.xml" in names
-            checks.append({"check": "xlsx_has_workbook", "passed": has_wb, "detail": f"workbook.xml {'found' if has_wb else 'not found'}"})
+            checks.append(
+                {
+                    "check": "xlsx_has_workbook",
+                    "passed": has_wb,
+                    "detail": f"workbook.xml {'found' if has_wb else 'not found'}",
+                }
+            )
     except Exception as e:
         checks.append({"check": "xlsx_valid_zip", "passed": False, "detail": str(e)})
     return checks
@@ -313,11 +332,13 @@ def _validate_ooxml_output(path: Path, expected: dict | None, doc_type: str = "d
         with open(path, "rb") as f:
             magic = f.read(4)
         is_zip = magic == b"PK\x03\x04"
-        checks.append({
-            "check": f"{doc_type}_zip_magic",
-            "passed": is_zip,
-            "detail": f"ZIP magic bytes {'valid' if is_zip else 'invalid'}",
-        })
+        checks.append(
+            {
+                "check": f"{doc_type}_zip_magic",
+                "passed": is_zip,
+                "detail": f"ZIP magic bytes {'valid' if is_zip else 'invalid'}",
+            }
+        )
         if not is_zip:
             return checks
     except Exception as e:
@@ -329,11 +350,13 @@ def _validate_ooxml_output(path: Path, expected: dict | None, doc_type: str = "d
         with zipfile.ZipFile(path, "r") as z:
             names = z.namelist()
             has_entry = internal_entry in names
-            checks.append({
-                "check": f"{doc_type}_internal_xml",
-                "passed": has_entry,
-                "detail": f"{internal_entry} {'found' if has_entry else 'not found'}",
-            })
+            checks.append(
+                {
+                    "check": f"{doc_type}_internal_xml",
+                    "passed": has_entry,
+                    "detail": f"{internal_entry} {'found' if has_entry else 'not found'}",
+                }
+            )
     except Exception as e:
         checks.append({"check": f"{doc_type}_internal_xml", "passed": False, "detail": str(e)})
 
@@ -347,11 +370,13 @@ def _validate_ole2_output(path: Path, doc_type: str = "doc") -> list[dict]:
         with open(path, "rb") as f:
             header = f.read(8)
         is_ole2 = header[:4] == _OLE2_MAGIC
-        checks.append({
-            "check": f"{doc_type}_ole2_magic",
-            "passed": is_ole2,
-            "detail": f"OLE2 magic bytes {'valid' if is_ole2 else 'invalid'}",
-        })
+        checks.append(
+            {
+                "check": f"{doc_type}_ole2_magic",
+                "passed": is_ole2,
+                "detail": f"OLE2 magic bytes {'valid' if is_ole2 else 'invalid'}",
+            }
+        )
     except Exception as e:
         checks.append({"check": f"{doc_type}_ole2_magic", "passed": False, "detail": str(e)})
     return checks
@@ -368,11 +393,13 @@ def _validate_eml_output(path: Path) -> list[dict]:
         except Exception:
             text = raw.decode("latin-1", errors="replace")
         has_header = any(h in text for h in _RFC2822_HEADERS)
-        checks.append({
-            "check": "eml_rfc2822_headers",
-            "passed": has_header,
-            "detail": f"RFC 2822 headers {'found' if has_header else 'not found'}",
-        })
+        checks.append(
+            {
+                "check": "eml_rfc2822_headers",
+                "passed": has_header,
+                "detail": f"RFC 2822 headers {'found' if has_header else 'not found'}",
+            }
+        )
     except Exception as e:
         checks.append({"check": "eml_rfc2822_headers", "passed": False, "detail": str(e)})
     return checks
@@ -385,11 +412,13 @@ def _validate_msg_output(path: Path) -> list[dict]:
         with open(path, "rb") as f:
             header = f.read(8)
         is_ole2 = header[:4] == _OLE2_MAGIC
-        checks.append({
-            "check": "msg_ole2_magic",
-            "passed": is_ole2,
-            "detail": f"OLE2 magic bytes (Outlook .msg) {'valid' if is_ole2 else 'invalid'}",
-        })
+        checks.append(
+            {
+                "check": "msg_ole2_magic",
+                "passed": is_ole2,
+                "detail": f"OLE2 magic bytes (Outlook .msg) {'valid' if is_ole2 else 'invalid'}",
+            }
+        )
     except Exception as e:
         checks.append({"check": "msg_ole2_magic", "passed": False, "detail": str(e)})
     return checks

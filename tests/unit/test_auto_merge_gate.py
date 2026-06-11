@@ -2,6 +2,7 @@
 
 Covers all 10 AMG conditions independently plus backward-compat alias check.
 """
+
 from __future__ import annotations
 
 import os
@@ -59,6 +60,7 @@ def _call_gate(env: dict | None = None, **overrides):
 
 # ── AMG-01: APPROVE_LIVE_MERGE env gate ───────────────────────────────────────
 
+
 def test_amg01_absent_returns_credential_blocked(monkeypatch):
     monkeypatch.setenv("GITHUB_TOKEN", "ghp_test")
     monkeypatch.delenv("APPROVE_LIVE_MERGE", raising=False)
@@ -75,6 +77,7 @@ def test_amg01_wrong_value_returns_credential_blocked(monkeypatch):
 
 
 # ── AMG-02: GITHUB_TOKEN ──────────────────────────────────────────────────────
+
 
 def test_amg02_no_token_returns_credential_blocked(monkeypatch):
     monkeypatch.delenv("GITHUB_TOKEN", raising=False)
@@ -94,6 +97,7 @@ def test_amg02_gh_token_fallback_accepted(monkeypatch):
 
 
 # ── AMG-03: publication repo allowlist ────────────────────────────────────────
+
 
 def test_amg03_fixture_source_repo_returns_review_policy_blocked(monkeypatch):
     monkeypatch.setenv("GITHUB_TOKEN", "ghp_test")
@@ -121,6 +125,7 @@ def test_amg03_all_approved_repos_pass(monkeypatch):
 
 # ── AMG-04: branch pattern ────────────────────────────────────────────────────
 
+
 def test_amg04_wrong_branch_returns_review_policy_blocked(monkeypatch):
     monkeypatch.setenv("GITHUB_TOKEN", "ghp_test")
     monkeypatch.setenv("APPROVE_LIVE_MERGE", "1")
@@ -140,6 +145,7 @@ def test_amg04_correct_pattern_passes(monkeypatch):
 
 # ── AMG-05: PR state ──────────────────────────────────────────────────────────
 
+
 def test_amg05_closed_pr_returns_merge_gate_ready(monkeypatch):
     monkeypatch.setenv("GITHUB_TOKEN", "ghp_test")
     monkeypatch.setenv("APPROVE_LIVE_MERGE", "1")
@@ -155,6 +161,7 @@ def test_amg05_not_mergeable_returns_merge_gate_ready(monkeypatch):
 
 
 # ── AMG-06..08: artifact gates ────────────────────────────────────────────────
+
 
 def test_amg06_artifact_not_pass_returns_merge_gate_ready(monkeypatch):
     monkeypatch.setenv("GITHUB_TOKEN", "ghp_test")
@@ -179,6 +186,7 @@ def test_amg08_readme_not_quality_returns_merge_gate_ready(monkeypatch):
 
 # ── APPROVAL_BLOCKED is NOT produced by new code ─────────────────────────────
 
+
 def test_approval_blocked_never_produced_as_verdict(monkeypatch):
     """New code must never emit APPROVAL_BLOCKED as a verdict string."""
     monkeypatch.setenv("GITHUB_TOKEN", "ghp_test")
@@ -190,12 +198,13 @@ def test_approval_blocked_never_produced_as_verdict(monkeypatch):
     for overrides in scenarios:
         monkeypatch.delenv("APPROVE_LIVE_MERGE", raising=False)
         result = _call_gate(**overrides)
-        assert result.verdict != "APPROVAL_BLOCKED", (
-            f"APPROVAL_BLOCKED must never be produced by new code; got {result.verdict!r} for {overrides}"
-        )
+        assert (
+            result.verdict != "APPROVAL_BLOCKED"
+        ), f"APPROVAL_BLOCKED must never be produced by new code; got {result.verdict!r} for {overrides}"
 
 
 # ── backward-compat alias ─────────────────────────────────────────────────────
+
 
 def test_approval_blocked_alias_equals_credential_blocked():
     """APPROVAL_BLOCKED is a compatibility alias pointing to CREDENTIAL_BLOCKED."""
@@ -203,6 +212,7 @@ def test_approval_blocked_alias_equals_credential_blocked():
 
 
 # ── Branch delete gate ────────────────────────────────────────────────────────
+
 
 def test_bdg_no_env_var_returns_skipped_policy(monkeypatch):
     monkeypatch.delenv("APPROVE_DELETE_BRANCH", raising=False)

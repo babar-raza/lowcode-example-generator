@@ -1,4 +1,5 @@
 """Unit tests for src/plugin_examples/fixture_factory/."""
+
 import json
 import tempfile
 from pathlib import Path
@@ -31,6 +32,7 @@ def tmpdir():
 
 
 # ── Generator tests ──────────────────────────────────────────────────────────
+
 
 class TestGenerators:
     def test_minimal_png_1x1(self, tmpdir):
@@ -106,6 +108,7 @@ class TestGenerators:
 
 # ── Validator tests ──────────────────────────────────────────────────────────
 
+
 class TestDetectFormat:
     def test_png(self, tmpdir):
         f = tmpdir / "a.png"
@@ -166,15 +169,16 @@ class TestValidatePackageOutputs:
     def _make_package(self, tmpdir, with_output=True, output_size=100) -> Path:
         pkg = tmpdir / "test_pkg"
         pkg.mkdir()
-        (pkg / "Program.cs").write_text("Console.WriteLine(\"test\");")
+        (pkg / "Program.cs").write_text('Console.WriteLine("test");')
         readme = "# Test\n\n## Run\n\n```bash\ndotnet restore\ndotnet build\ndotnet run\n```\n"
         (pkg / "README.md").write_text(readme)
         (pkg / "source-provenance.json").write_text(
             json.dumps({"family": "test", "canonical_url": "https://example.com"})
         )
         (pkg / "output-validation.json").write_text(
-            json.dumps({"restore_status": "SUCCESS", "build_status": "SUCCESS",
-                        "run_status": "SUCCESS", "verdict": "PASS"})
+            json.dumps(
+                {"restore_status": "SUCCESS", "build_status": "SUCCESS", "run_status": "SUCCESS", "verdict": "PASS"}
+            )
         )
         (pkg / "restore.log").write_text("restored")
         (pkg / "build.log").write_text("built")
@@ -193,8 +197,7 @@ class TestValidatePackageOutputs:
     def test_missing_output_fails(self, tmpdir):
         pkg = self._make_package(tmpdir, with_output=False)
         result = validate_package_outputs(pkg, "test/no-output")
-        assert result.verdict in ("NO_OUTPUTS", "MISSING_OUTPUT", "MISSING_REQUIRED_FILES",
-                                  "OUTPUT_VALIDATION_FAILED")
+        assert result.verdict in ("NO_OUTPUTS", "MISSING_OUTPUT", "MISSING_REQUIRED_FILES", "OUTPUT_VALIDATION_FAILED")
 
     def test_zero_byte_output_fails(self, tmpdir):
         pkg = self._make_package(tmpdir, output_size=0)
@@ -215,11 +218,12 @@ class TestValidatePackageOutputs:
 
 # ── Invariant tests ──────────────────────────────────────────────────────────
 
+
 class TestPackageInvariants:
     def _make_valid_package(self, tmpdir) -> Path:
         pkg = tmpdir / "valid_pkg"
         pkg.mkdir()
-        (pkg / "Program.cs").write_text("Console.WriteLine(\"hello\");")
+        (pkg / "Program.cs").write_text('Console.WriteLine("hello");')
         (pkg / "README.md").write_text("# Test\n\n## Run\n\n```bash\ndotnet run\n```\n")
         (pkg / "source-provenance.json").write_text(
             json.dumps({"family": "test", "canonical_url": "https://example.com"})
@@ -270,9 +274,7 @@ class TestPackageInvariants:
 
     def test_missing_canonical_url(self, tmpdir):
         pkg = self._make_valid_package(tmpdir)
-        (pkg / "source-provenance.json").write_text(
-            json.dumps({"family": "test", "canonical_url": ""})
-        )
+        (pkg / "source-provenance.json").write_text(json.dumps({"family": "test", "canonical_url": ""}))
         violations = check_package(pkg)
         assert any("INV-15" in v for v in violations)
 
@@ -285,9 +287,11 @@ class TestPackageInvariants:
 
 # ── Wave 5 fixture generator tests ───────────────────────────────────────────
 
+
 class TestWave5Generators:
     def test_geojson_inline(self):
         from plugin_examples.fixture_factory.generators import generate_geojson_fixture
+
         result = generate_geojson_fixture()
         assert result.fixture_type == "GeoJSON"
         assert result.size_bytes > 0
@@ -296,6 +300,7 @@ class TestWave5Generators:
 
     def test_geojson_to_file(self, tmpdir):
         from plugin_examples.fixture_factory.generators import generate_geojson_fixture
+
         dest = tmpdir / "fixture.geojson"
         result = generate_geojson_fixture(dest)
         assert result.success
@@ -305,6 +310,7 @@ class TestWave5Generators:
 
     def test_obj_inline(self):
         from plugin_examples.fixture_factory.generators import generate_obj_fixture
+
         result = generate_obj_fixture()
         assert result.fixture_type == "OBJ"
         assert result.size_bytes > 0
@@ -312,6 +318,7 @@ class TestWave5Generators:
 
     def test_obj_to_file(self, tmpdir):
         from plugin_examples.fixture_factory.generators import generate_obj_fixture
+
         dest = tmpdir / "model.obj"
         result = generate_obj_fixture(dest)
         assert result.success
@@ -322,12 +329,14 @@ class TestWave5Generators:
 
     def test_xbrl_inline(self):
         from plugin_examples.fixture_factory.generators import generate_xbrl_fixture
+
         result = generate_xbrl_fixture()
         assert result.fixture_type == "XBRL"
         assert result.size_bytes > 0
 
     def test_xbrl_to_file(self, tmpdir):
         from plugin_examples.fixture_factory.generators import generate_xbrl_fixture
+
         dest = tmpdir / "report.xbrl"
         result = generate_xbrl_fixture(dest)
         assert result.success
@@ -337,12 +346,14 @@ class TestWave5Generators:
 
     def test_ps_inline(self):
         from plugin_examples.fixture_factory.generators import generate_ps_fixture
+
         result = generate_ps_fixture(title="My Doc")
         assert result.fixture_type == "PS"
         assert result.size_bytes > 0
 
     def test_ps_to_file(self, tmpdir):
         from plugin_examples.fixture_factory.generators import generate_ps_fixture
+
         dest = tmpdir / "doc.ps"
         result = generate_ps_fixture(dest, title="Hello")
         assert result.success
@@ -352,12 +363,14 @@ class TestWave5Generators:
 
     def test_note_xml_inline(self):
         from plugin_examples.fixture_factory.generators import generate_note_xml_fixture
+
         result = generate_note_xml_fixture()
         assert result.fixture_type == "NOTE_XML"
         assert result.size_bytes > 0
 
     def test_note_xml_to_file(self, tmpdir):
         from plugin_examples.fixture_factory.generators import generate_note_xml_fixture
+
         dest = tmpdir / "note.xml"
         result = generate_note_xml_fixture(dest, title="My Note")
         assert result.success
@@ -367,12 +380,14 @@ class TestWave5Generators:
 
     def test_drawing_xml_inline(self):
         from plugin_examples.fixture_factory.generators import generate_drawing_xml_fixture
+
         result = generate_drawing_xml_fixture()
         assert result.fixture_type == "DRAWING_XML"
         assert result.size_bytes > 0
 
     def test_drawing_xml_to_file(self, tmpdir):
         from plugin_examples.fixture_factory.generators import generate_drawing_xml_fixture
+
         dest = tmpdir / "drawing.xml"
         result = generate_drawing_xml_fixture(dest)
         assert result.success

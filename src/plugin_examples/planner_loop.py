@@ -32,10 +32,7 @@ def board_fingerprint(board: ActionBoard) -> str:
         "head": board.generated_from_head,
         "dirty_summary": board.git_dirty_summary,
         "actions": sorted(
-            [
-                (a.id, a.type, a.current_state, a.safe_to_execute_now, a.gate_present)
-                for a in board.actions
-            ]
+            [(a.id, a.type, a.current_state, a.safe_to_execute_now, a.gate_present) for a in board.actions]
         ),
     }
     raw = json.dumps(stable, sort_keys=True)
@@ -45,6 +42,7 @@ def board_fingerprint(board: ActionBoard) -> str:
 # ---------------------------------------------------------------------------
 # Cycle ledger
 # ---------------------------------------------------------------------------
+
 
 @dataclass
 class CycleResult:
@@ -118,6 +116,7 @@ _APPROVAL_GATED_TYPES = {
 def _handle_conservation_check(repo_root: Path, evidence_dir: Path, **_kw: Any) -> dict:
     """Execute portfolio conservation check. Always read-only, never changes state."""
     from plugin_examples.portfolio_action_planner import _load_denominators, _count_contracts, ACTIVE_FAMILIES
+
     denoms = _load_denominators(repo_root)
     contracts = _count_contracts(repo_root)
     results = {}
@@ -136,6 +135,7 @@ def _handle_conservation_check(repo_root: Path, evidence_dir: Path, **_kw: Any) 
 def _handle_version_drift_check(repo_root: Path, evidence_dir: Path, **_kw: Any) -> dict:
     """Execute version drift check. Always read-only, never changes state."""
     from plugin_examples.portfolio_action_planner import _load_denominators, ACTIVE_FAMILIES
+
     denoms = _load_denominators(repo_root)
     versions = {f: denoms.get(f, {}).get("source_version", "?") for f in ACTIVE_FAMILIES}
     return {"versions": versions, "status": "checked", "changed": False}
@@ -148,7 +148,9 @@ def _handle_blocker_recheck(repo_root: Path, evidence_dir: Path, action_id: str 
         try:
             r = subprocess.run(
                 ["curl", "-s", "https://api.nuget.org/v3-flatcontainer/aspose.pdf/index.json"],
-                capture_output=True, text=True, timeout=15,
+                capture_output=True,
+                text=True,
+                timeout=15,
             )
             data = json.loads(r.stdout)
             latest = data.get("versions", [])[-1] if data.get("versions") else "unknown"
@@ -159,9 +161,18 @@ def _handle_blocker_recheck(repo_root: Path, evidence_dir: Path, action_id: str 
     elif action_id == "OCR_DEPENDENCY_RECHECK":
         try:
             r = subprocess.run(
-                ["curl", "-s", "-o", "/dev/null", "-w", "%{http_code}",
-                 "https://api.nuget.org/v3-flatcontainer/aspose.ai.llm/index.json"],
-                capture_output=True, text=True, timeout=15,
+                [
+                    "curl",
+                    "-s",
+                    "-o",
+                    "/dev/null",
+                    "-w",
+                    "%{http_code}",
+                    "https://api.nuget.org/v3-flatcontainer/aspose.ai.llm/index.json",
+                ],
+                capture_output=True,
+                text=True,
+                timeout=15,
             )
             results["http_status"] = r.stdout.strip()
             results["still_blocked"] = r.stdout.strip() != "200"
@@ -172,9 +183,18 @@ def _handle_blocker_recheck(repo_root: Path, evidence_dir: Path, action_id: str 
     elif action_id == "PSD_DEPENDENCY_RECHECK":
         try:
             r = subprocess.run(
-                ["curl", "-s", "-o", "/dev/null", "-w", "%{http_code}",
-                 "https://api.nuget.org/v3-flatcontainer/aspose.javaattributes/index.json"],
-                capture_output=True, text=True, timeout=15,
+                [
+                    "curl",
+                    "-s",
+                    "-o",
+                    "/dev/null",
+                    "-w",
+                    "%{http_code}",
+                    "https://api.nuget.org/v3-flatcontainer/aspose.javaattributes/index.json",
+                ],
+                capture_output=True,
+                text=True,
+                timeout=15,
             )
             results["http_status"] = r.stdout.strip()
             results["still_blocked"] = r.stdout.strip() != "200"
@@ -201,11 +221,13 @@ _ACTION_HANDLERS = {
 # Execution loop
 # ---------------------------------------------------------------------------
 
+
 def run_execution_loop(
     repo_root: Path,
     evidence_dir: Path,
     max_cycles: int = 5,
     dry_run_remote: bool = True,
+    history_path: Path | None = None,
 ) -> LoopResult:
     """Run the planner-driven execution loop.
 
@@ -215,12 +237,22 @@ def run_execution_loop(
     4. Save cycle evidence
     5. Stop when: no safe actions, board fingerprint unchanged and no handlers
        changed state, or max_cycles reached
+
+    history_path: Optional path to cross-run history JSON. When provided,
+    families with >= 3 consecutive failures are deprioritized (deferred).
     """
     import time
 
     result = LoopResult()
     evidence_dir.mkdir(parents=True, exist_ok=True)
     prev_fingerprint: str | None = None
+
+    # Load cross-run history for adaptive deprioritization (lazy import — optional feature)
+    history = None
+    if history_path is not None:
+        from plugin_examples.state.run_history import RunHistory
+
+        history = RunHistory.load(history_path)
 
     for cycle_num in range(1, max_cycles + 1):
         t0 = time.monotonic()
@@ -262,18 +294,34 @@ def run_execution_loop(
         for action in board.safe_actions():
             if action.type in _APPROVAL_GATED_TYPES:
                 if dry_run_remote or not action.gate_present:
-                    deferred_this_cycle.append({
-                        "id": action.id,
-                        "reason": "approval-gated (dry-run or gate absent)",
-                        "taskcard_id": action.taskcard_id or "",
-                    })
+                    deferred_this_cycle.append(
+                        {
+                            "id": action.id,
+                            "reason": "approval-gated (dry-run or gate absent)",
+                            "taskcard_id": action.taskcard_id or "",
+                        }
+                    )
                     continue
+
+            # Adaptive deprioritization: skip families with repeated failures
+            if history is not None and action.family and history.should_deprioritize(action.family):
+                deferred_this_cycle.append(
+                    {
+                        "id": action.id,
+                        "reason": "deprioritized_consecutive_failures",
+                        "family": action.family,
+                        "taskcard_id": action.taskcard_id or "",
+                    }
+                )
+                continue
 
             handler = _ACTION_HANDLERS.get(action.id)
             if handler:
                 try:
                     handler_result = handler(
-                        repo_root, evidence_dir, action_id=action.id,
+                        repo_root,
+                        evidence_dir,
+                        action_id=action.id,
                     )
                     executed_this_cycle.append(action.id)
                     if handler_result.get("changed", False):
@@ -283,20 +331,25 @@ def run_execution_loop(
                     # Save handler result
                     handler_path = evidence_dir / f"handler-{action.id.lower()}-cycle{cycle_num:02d}.json"
                     handler_path.write_text(
-                        json.dumps(handler_result, indent=2), encoding="utf-8",
+                        json.dumps(handler_result, indent=2),
+                        encoding="utf-8",
                     )
                 except Exception as e:
-                    deferred_this_cycle.append({
-                        "id": action.id,
-                        "reason": f"handler error: {e}",
-                    })
+                    deferred_this_cycle.append(
+                        {
+                            "id": action.id,
+                            "reason": f"handler error: {e}",
+                        }
+                    )
             else:
                 # No handler — defer with taskcard
-                deferred_this_cycle.append({
-                    "id": action.id,
-                    "reason": "no handler implemented",
-                    "taskcard_id": action.taskcard_id or "",
-                })
+                deferred_this_cycle.append(
+                    {
+                        "id": action.id,
+                        "reason": "no handler implemented",
+                        "taskcard_id": action.taskcard_id or "",
+                    }
+                )
 
         cycle.executed = executed_this_cycle
         cycle.changed_actions = changed_this_cycle
@@ -325,6 +378,22 @@ def run_execution_loop(
             break
     else:
         result.stop_reason = "loop completed normally"
+
+    # Persist cross-run history with summary record for this loop run
+    if history is not None:
+        from plugin_examples.state.run_history import RunRecord
+
+        history.record_run(
+            RunRecord(
+                family="__loop__",
+                wave=str(len(result.cycles)),
+                verdict="SPRINT_COMPLETE" if result.total_executed > 0 else "NO_SAFE_EXECUTABLE_ACTIONS",
+                scenarios_attempted=result.total_executed + result.total_deferred,
+                scenarios_succeeded=result.total_executed,
+                scenarios_blocked=result.total_deferred,
+            )
+        )
+        history.save()
 
     # Final board
     result.final_board = compute_action_board(repo_root)

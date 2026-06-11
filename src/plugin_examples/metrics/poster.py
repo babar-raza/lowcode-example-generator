@@ -46,13 +46,13 @@ def _append_ledger(ledger_path: Path, entry: dict, max_entries: int = 500) -> No
 
 
 def check_duplicate(
-    ledger_path: Path, run_id: str, job_type: str,
+    ledger_path: Path,
+    run_id: str,
+    job_type: str,
 ) -> bool:
     """Return True if this run_id+job_type already posted (non-dry-run)."""
     for entry in _read_ledger(ledger_path):
-        if (entry.get("run_id") == run_id
-                and entry.get("job_type") == job_type
-                and not entry.get("dry_run", True)):
+        if entry.get("run_id") == run_id and entry.get("job_type") == job_type and not entry.get("dry_run", True):
             return True
     return False
 

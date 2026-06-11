@@ -15,15 +15,21 @@ def add_parser(subparsers):
         help="Read-only probe of GitHub push permissions for family publish targets",
     )
     parser.add_argument(
-        "--families", nargs="+", metavar="FAMILY", default=["cells", "words", "pdf"],
+        "--families",
+        nargs="+",
+        metavar="FAMILY",
+        default=["cells", "words", "pdf"],
         help="Families to probe (default: cells words pdf)",
     )
     parser.add_argument(
-        "--dry-run", action="store_true", default=True,
+        "--dry-run",
+        action="store_true",
+        default=True,
         help="Dry-run mode (always on — probe is always read-only)",
     )
     parser.add_argument(
-        "--promote-latest", action="store_true",
+        "--promote-latest",
+        action="store_true",
         help="Write report to workspace/verification/latest/ (always on)",
     )
 
@@ -40,7 +46,9 @@ def handle(args) -> int:
 
     repo_root = _Path(__file__).resolve().parents[3]
     msession, mcollector = _create_metrics_session(
-        args, command="probe-publish-permissions", repo_root=repo_root,
+        args,
+        command="probe-publish-permissions",
+        repo_root=repo_root,
     )
     config_dir = repo_root / "pipeline" / "configs" / "families"
     verification_dir = repo_root / "workspace" / "verification"
@@ -82,4 +90,3 @@ def handle(args) -> int:
         items_failed=summary["total_probed"] - summary["permission_ready"],
     )
     return 0 if summary["permission_ready"] > 0 else 1
-

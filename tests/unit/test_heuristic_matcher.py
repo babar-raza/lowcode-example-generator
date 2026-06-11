@@ -88,9 +88,9 @@ class TestHeuristicMatcher:
         matcher = HeuristicMatcher()
         for verb in ("convert", "generate"):
             for result in matcher.match(catalog, verb):
-                assert 0.0 <= result.confidence_score <= 1.05, (
-                    f"confidence_score {result.confidence_score} out of range for {result}"
-                )
+                assert (
+                    0.0 <= result.confidence_score <= 1.05
+                ), f"confidence_score {result.confidence_score} out of range for {result}"
 
     def test_candidate_mapping_status_is_probe_candidate(self):
         """Every CandidateMapping must have status='PROBE_CANDIDATE' (authoritative enum)."""

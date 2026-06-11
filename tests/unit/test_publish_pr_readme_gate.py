@@ -36,6 +36,7 @@ from plugin_examples.publisher.readme_audit_gate import (
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _write_content_audit(verification_dir: Path, family: str, records: list[dict]) -> Path:
     """Write a content-based README audit artifact for a family."""
     families_dir = verification_dir / "latest" / "families" / family
@@ -72,6 +73,7 @@ def _shallow_record(scenario_id: str) -> dict:
 # Unit tests for check_readme_audit_gate directly
 # ---------------------------------------------------------------------------
 
+
 class TestReadmeAuditGateUnit(unittest.TestCase):
     """Direct unit tests for check_readme_audit_gate."""
 
@@ -95,10 +97,14 @@ class TestReadmeAuditGateUnit(unittest.TestCase):
     def test_passes_when_audit_is_content_based_and_all_pass(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             vdir = Path(tmpdir) / "verification"
-            _write_content_audit(vdir, "cells", [
-                _content_record("cells-html-converter", passed=True),
-                _content_record("cells-pdf-converter", passed=True),
-            ])
+            _write_content_audit(
+                vdir,
+                "cells",
+                [
+                    _content_record("cells-html-converter", passed=True),
+                    _content_record("cells-pdf-converter", passed=True),
+                ],
+            )
             result = check_readme_audit_gate("cells", vdir)
         self.assertTrue(result["gate_passed"])
         self.assertIsNone(result["blocked_reason"])
@@ -107,10 +113,14 @@ class TestReadmeAuditGateUnit(unittest.TestCase):
     def test_blocks_when_audit_has_failures(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             vdir = Path(tmpdir) / "verification"
-            _write_content_audit(vdir, "cells", [
-                _content_record("cells-html-converter", passed=True),
-                _content_record("cells-pdf-converter", passed=False),  # FAIL
-            ])
+            _write_content_audit(
+                vdir,
+                "cells",
+                [
+                    _content_record("cells-html-converter", passed=True),
+                    _content_record("cells-pdf-converter", passed=False),  # FAIL
+                ],
+            )
             result = check_readme_audit_gate("cells", vdir)
         self.assertFalse(result["gate_passed"])
         self.assertEqual(result["blocked_reason"], BLOCKED_README_AUDIT_FAILED)
@@ -119,11 +129,16 @@ class TestReadmeAuditGateUnit(unittest.TestCase):
         """APPROVE_README_PUSH must NOT bypass a failed audit (Sprint 62 hardening)."""
         with tempfile.TemporaryDirectory() as tmpdir:
             vdir = Path(tmpdir) / "verification"
-            _write_content_audit(vdir, "cells", [
-                _content_record("cells-html-converter", passed=False),
-            ])
+            _write_content_audit(
+                vdir,
+                "cells",
+                [
+                    _content_record("cells-html-converter", passed=False),
+                ],
+            )
             result = check_readme_audit_gate(
-                "cells", vdir,
+                "cells",
+                vdir,
                 readme_push_approval=README_AUDIT_EXPECTED_VALUE,
             )
         self.assertFalse(result["gate_passed"])
@@ -134,9 +149,13 @@ class TestReadmeAuditGateUnit(unittest.TestCase):
         """APPROVE_README_PUSH from env var must NOT bypass a failed audit (Sprint 62 hardening)."""
         with tempfile.TemporaryDirectory() as tmpdir:
             vdir = Path(tmpdir) / "verification"
-            _write_content_audit(vdir, "cells", [
-                _content_record("cells-html-converter", passed=False),
-            ])
+            _write_content_audit(
+                vdir,
+                "cells",
+                [
+                    _content_record("cells-html-converter", passed=False),
+                ],
+            )
             with patch.dict("os.environ", {README_AUDIT_ENV_VAR: README_AUDIT_EXPECTED_VALUE}):
                 result = check_readme_audit_gate("cells", vdir)
         self.assertFalse(result["gate_passed"])
@@ -146,9 +165,13 @@ class TestReadmeAuditGateUnit(unittest.TestCase):
         """APPROVE_README_AUDIT_OVERRIDE emergency token must bypass a failed audit."""
         with tempfile.TemporaryDirectory() as tmpdir:
             vdir = Path(tmpdir) / "verification"
-            _write_content_audit(vdir, "cells", [
-                _content_record("cells-html-converter", passed=False),
-            ])
+            _write_content_audit(
+                vdir,
+                "cells",
+                [
+                    _content_record("cells-html-converter", passed=False),
+                ],
+            )
             with patch.dict("os.environ", {README_AUDIT_OVERRIDE_ENV_VAR: README_AUDIT_OVERRIDE_VALUE}):
                 result = check_readme_audit_gate("cells", vdir)
         self.assertTrue(result["gate_passed"])
@@ -158,10 +181,14 @@ class TestReadmeAuditGateUnit(unittest.TestCase):
         """Emergency override must set audit_override_used=True to record evidence."""
         with tempfile.TemporaryDirectory() as tmpdir:
             vdir = Path(tmpdir) / "verification"
-            _write_content_audit(vdir, "cells", [
-                _content_record("cells-pdf-converter", passed=False),
-                _content_record("cells-json-converter", passed=False),
-            ])
+            _write_content_audit(
+                vdir,
+                "cells",
+                [
+                    _content_record("cells-pdf-converter", passed=False),
+                    _content_record("cells-json-converter", passed=False),
+                ],
+            )
             with patch.dict("os.environ", {README_AUDIT_OVERRIDE_ENV_VAR: README_AUDIT_OVERRIDE_VALUE}):
                 result = check_readme_audit_gate("cells", vdir)
         self.assertTrue(result["gate_passed"])
@@ -171,11 +198,16 @@ class TestReadmeAuditGateUnit(unittest.TestCase):
     def test_wrong_approval_token_does_not_bypass(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             vdir = Path(tmpdir) / "verification"
-            _write_content_audit(vdir, "cells", [
-                _content_record("cells-html-converter", passed=False),
-            ])
+            _write_content_audit(
+                vdir,
+                "cells",
+                [
+                    _content_record("cells-html-converter", passed=False),
+                ],
+            )
             result = check_readme_audit_gate(
-                "cells", vdir,
+                "cells",
+                vdir,
                 readme_push_approval="WRONG_TOKEN",
             )
         self.assertFalse(result["gate_passed"])
@@ -185,9 +217,13 @@ class TestReadmeAuditGateUnit(unittest.TestCase):
         """audit_override_used must be False when audit passes without override."""
         with tempfile.TemporaryDirectory() as tmpdir:
             vdir = Path(tmpdir) / "verification"
-            _write_content_audit(vdir, "cells", [
-                _content_record("cells-html-converter", passed=True),
-            ])
+            _write_content_audit(
+                vdir,
+                "cells",
+                [
+                    _content_record("cells-html-converter", passed=True),
+                ],
+            )
             result = check_readme_audit_gate("cells", vdir)
         self.assertTrue(result["gate_passed"])
         self.assertFalse(result["audit_override_used"])
@@ -196,6 +232,7 @@ class TestReadmeAuditGateUnit(unittest.TestCase):
 # ---------------------------------------------------------------------------
 # Integration tests: publish-pr --publish README gate wiring
 # ---------------------------------------------------------------------------
+
 
 class TestPublishPrReadmeGateWiring(unittest.TestCase):
     """Verify that check_readme_audit_gate is wired into publish-pr --publish."""
@@ -256,11 +293,15 @@ class TestPublishPrReadmeGateWiring(unittest.TestCase):
         """Gate gate_passed=True for content-based, all-PASS audit."""
         with tempfile.TemporaryDirectory() as tmpdir:
             vdir = Path(tmpdir) / "verification"
-            _write_content_audit(vdir, "cells", [
-                _content_record("cells-html-converter"),
-                _content_record("cells-pdf-converter"),
-                _content_record("cells-json-converter"),
-            ])
+            _write_content_audit(
+                vdir,
+                "cells",
+                [
+                    _content_record("cells-html-converter"),
+                    _content_record("cells-pdf-converter"),
+                    _content_record("cells-json-converter"),
+                ],
+            )
             result = check_readme_audit_gate("cells", vdir)
         self.assertTrue(result["gate_passed"])
         self.assertIsNone(result["blocked_reason"])
@@ -271,10 +312,14 @@ class TestPublishPrReadmeGateWiring(unittest.TestCase):
         """APPROVE_README_PUSH + failed audit = BLOCKED (Sprint 62 hardened semantics)."""
         with tempfile.TemporaryDirectory() as tmpdir:
             vdir = Path(tmpdir) / "verification"
-            _write_content_audit(vdir, "words", [
-                _content_record("words-converter", passed=True),
-                _content_record("words-merger", passed=False),  # failed
-            ])
+            _write_content_audit(
+                vdir,
+                "words",
+                [
+                    _content_record("words-converter", passed=True),
+                    _content_record("words-merger", passed=False),  # failed
+                ],
+            )
             with patch.dict("os.environ", {README_AUDIT_ENV_VAR: README_AUDIT_EXPECTED_VALUE}):
                 result = check_readme_audit_gate("words", vdir)
         # Must be blocked — APPROVE_README_PUSH cannot bypass a failed audit
@@ -285,6 +330,7 @@ class TestPublishPrReadmeGateWiring(unittest.TestCase):
 # ---------------------------------------------------------------------------
 # Source scan: verify check_readme_audit_gate is imported in __main__.py
 # ---------------------------------------------------------------------------
+
 
 class TestReadmeGateWiredInMainPy(unittest.TestCase):
     """Verify check_readme_audit_gate import appears in __main__.py source."""

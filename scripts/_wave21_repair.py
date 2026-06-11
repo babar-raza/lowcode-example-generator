@@ -2,7 +2,13 @@
 # _wave21_repair.py — Wave 21 Lanes E, F, H, I, J, K, M
 # Generates manifests, scaffolding, pushes to PR branches, creates reports
 
-import json, pathlib, datetime, subprocess, base64, hashlib, textwrap
+import json
+import pathlib
+import datetime
+import subprocess
+import base64
+import hashlib
+import textwrap
 
 SPRINT_ID = "lowcode-plugin-canonical-package-wave21-20260608"
 REPO_ROOT = pathlib.Path("c:/Users/prora/OneDrive/Documents/GitHub/lowcode-example-generator-gitlab")

@@ -6,40 +6,44 @@ from dataclasses import dataclass, field
 
 
 # Canonical verdict taxonomy — these are the ONLY allowed verdict strings.
-VERDICTS = frozenset({
-    "SOURCE_OF_TRUTH_PROVEN_ONLY",
-    "DATA_FLOW_PROTOTYPE_ONLY",
-    "BLOCKED_SOURCE_OF_TRUTH",
-    "BLOCKED_FIXTURE_DISCOVERY",
-    "BLOCKED_SCENARIO_PLANNING",
-    "BLOCKED_GENERATION",
-    "BLOCKED_RESTORE_FAILED",
-    "BLOCKED_BUILD_FAILED",
-    "BLOCKED_RUN_FAILED",
-    "BLOCKED_OUTPUT_VALIDATION_FAILED",
-    "BLOCKED_REVIEWER_UNAVAILABLE",
-    "BLOCKED_REVIEWER_FAILED",
-    "BLOCKED_NO_PUBLISHABLE_EXAMPLES",
-    "PARTIAL_PR_DRY_RUN_READY",
-    "PARTIAL_PR_READY",
-    "PR_DRY_RUN_READY",
-    "PR_READY",
-    "FULL_E2E_PASSED",
-    "CANONICAL_TEMPLATE_GENERATION_PASS",
-    "CANONICAL_LLM_GENERATION_PASS",
-    "VALIDATION_BLOCKED",
-    "GENERATION_BLOCKED",
-})
+VERDICTS = frozenset(
+    {
+        "SOURCE_OF_TRUTH_PROVEN_ONLY",
+        "DATA_FLOW_PROTOTYPE_ONLY",
+        "BLOCKED_SOURCE_OF_TRUTH",
+        "BLOCKED_FIXTURE_DISCOVERY",
+        "BLOCKED_SCENARIO_PLANNING",
+        "BLOCKED_GENERATION",
+        "BLOCKED_RESTORE_FAILED",
+        "BLOCKED_BUILD_FAILED",
+        "BLOCKED_RUN_FAILED",
+        "BLOCKED_OUTPUT_VALIDATION_FAILED",
+        "BLOCKED_REVIEWER_UNAVAILABLE",
+        "BLOCKED_REVIEWER_FAILED",
+        "BLOCKED_NO_PUBLISHABLE_EXAMPLES",
+        "PARTIAL_PR_DRY_RUN_READY",
+        "PARTIAL_PR_READY",
+        "PR_DRY_RUN_READY",
+        "PR_READY",
+        "FULL_E2E_PASSED",
+        "CANONICAL_TEMPLATE_GENERATION_PASS",
+        "CANONICAL_LLM_GENERATION_PASS",
+        "VALIDATION_BLOCKED",
+        "GENERATION_BLOCKED",
+    }
+)
 
 # Canonical status values for gate results.
-GATE_STATUSES = frozenset({
-    "passed",
-    "failed",
-    "blocked",
-    "skipped",
-    "degraded",
-    "not_applicable",
-})
+GATE_STATUSES = frozenset(
+    {
+        "passed",
+        "failed",
+        "blocked",
+        "skipped",
+        "degraded",
+        "not_applicable",
+    }
+)
 
 
 @dataclass

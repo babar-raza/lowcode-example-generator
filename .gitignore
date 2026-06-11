@@ -71,8 +71,13 @@ reports/**/*.zip
 # Local artifact staging (evidence bundles, not committed)
 .local/
 
+# GitLab CI pip cache (created by PIP_CACHE_DIR variable)
+.pip-cache/
+
 # OS
 .DS_Store
 Thumbs.db
 /workspace
 *output*
+*input*
+*template*

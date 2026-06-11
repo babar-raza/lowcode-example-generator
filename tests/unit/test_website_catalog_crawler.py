@@ -66,6 +66,7 @@ class TestCachedReplay:
 
         # Patch the cache base path
         import plugin_examples.website_catalog.crawler as crawler_mod
+
         monkeypatch.setattr(crawler_mod, "_CACHE_BASE", tmp_path)
 
         # Ensure no HTTP calls are made
@@ -82,6 +83,7 @@ class TestMissingPage:
     def test_missing_page_classified_not_raises(self, tmp_path, monkeypatch):
         """A fetch failure returns an entry with empty hash — does not raise."""
         import plugin_examples.website_catalog.crawler as crawler_mod
+
         monkeypatch.setattr(crawler_mod, "_CACHE_BASE", tmp_path)
         monkeypatch.setattr(crawler_mod, "_DEFAULT_DELAY_MS", 0)
 
@@ -97,6 +99,7 @@ class TestPluginEntries:
     def test_crawl_family_returns_plugin_entries_with_marketing_only_true(self, tmp_path, monkeypatch):
         """All returned PluginEntry objects must have marketing_only=True."""
         import plugin_examples.website_catalog.crawler as crawler_mod
+
         monkeypatch.setattr(crawler_mod, "_CACHE_BASE", tmp_path)
         monkeypatch.setattr(crawler_mod, "_DEFAULT_DELAY_MS", 0)
 

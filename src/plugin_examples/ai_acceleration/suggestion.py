@@ -12,12 +12,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 # Path to the JSON Schema for AI suggestions
-_SCHEMA_PATH = (
-    Path(__file__).resolve().parents[4]
-    / "pipeline"
-    / "schemas"
-    / "ai-suggestion-schema.json"
-)
+_SCHEMA_PATH = Path(__file__).resolve().parents[4] / "pipeline" / "schemas" / "ai-suggestion-schema.json"
 
 _VALID_STATUSES = {
     "AI_DRAFT",
@@ -49,17 +44,11 @@ class AiSuggestion:
 
     def __post_init__(self) -> None:
         if self.status not in _VALID_STATUSES:
-            raise ValueError(
-                f"Invalid status '{self.status}'. Must be one of: {sorted(_VALID_STATUSES)}"
-            )
+            raise ValueError(f"Invalid status '{self.status}'. Must be one of: {sorted(_VALID_STATUSES)}")
         if self.status in _PROBE_EVIDENCE_REQUIRED_STATUSES and not self.probe_evidence:
-            raise ValueError(
-                f"status='{self.status}' requires a non-empty probe_evidence field"
-            )
+            raise ValueError(f"status='{self.status}' requires a non-empty probe_evidence field")
         if not (0.0 <= self.confidence <= 1.0):
-            raise ValueError(
-                f"confidence must be in [0.0, 1.0], got {self.confidence}"
-            )
+            raise ValueError(f"confidence must be in [0.0, 1.0], got {self.confidence}")
 
     @classmethod
     def from_dict(cls, data: dict) -> "AiSuggestion":
@@ -76,8 +65,19 @@ class AiSuggestion:
             probe_evidence=data.get("probe_evidence"),
             rejection_reason=data.get("rejection_reason"),
             rationale=data.get("rationale", ""),
-            extra={k: v for k, v in data.items() if k not in {
-                "type_name", "method_name", "status", "confidence",
-                "model", "probe_evidence", "rejection_reason", "rationale",
-            }},
+            extra={
+                k: v
+                for k, v in data.items()
+                if k
+                not in {
+                    "type_name",
+                    "method_name",
+                    "status",
+                    "confidence",
+                    "model",
+                    "probe_evidence",
+                    "rejection_reason",
+                    "rationale",
+                }
+            },
         )

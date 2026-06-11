@@ -1,4 +1,5 @@
 """Data models for the plugin-code registry."""
+
 from dataclasses import dataclass, field
 from typing import Optional
 
@@ -79,10 +80,7 @@ class PluginEntry:
         """Heuristic: families/models that can run without external file fixtures."""
         fixture_free_models = {"STATIC_CONVERTER_CLASS"}
         fixture_free_families = {"barcode", "tex", "svg", "html"}
-        return (
-            self.implementation_model in fixture_free_models
-            or self.family in fixture_free_families
-        )
+        return self.implementation_model in fixture_free_models or self.family in fixture_free_families
 
     def readiness_score(self) -> int:
         """Score for prioritizing transformation candidates."""

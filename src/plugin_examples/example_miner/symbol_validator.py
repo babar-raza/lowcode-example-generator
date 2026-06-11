@@ -11,6 +11,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class SymbolValidationResult:
     """Result of validating symbols against the catalog."""
+
     example_id: str
     valid_symbols: list[str] = field(default_factory=list)
     invalid_symbols: list[str] = field(default_factory=list)
@@ -48,13 +49,13 @@ def validate_symbols(
 
     if result.invalid_symbols:
         result.stale = True
-        result.stale_reason = (
-            f"Symbols not found in catalog: {', '.join(result.invalid_symbols[:5])}"
-        )
+        result.stale_reason = f"Symbols not found in catalog: {', '.join(result.invalid_symbols[:5])}"
 
     logger.debug(
         "Symbol validation for %s: %d valid, %d invalid",
-        example_id, len(result.valid_symbols), len(result.invalid_symbols),
+        example_id,
+        len(result.valid_symbols),
+        len(result.invalid_symbols),
     )
     return result
 

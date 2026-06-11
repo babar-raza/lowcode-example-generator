@@ -26,12 +26,8 @@ class NuGetConfig:
     version_policy: str
     pinned_version: str | None = None
     allow_prerelease: bool = False
-    target_framework_preference: list[str] = field(
-        default_factory=lambda: ["netstandard2.0"]
-    )
-    dependency_resolution: DependencyResolution = field(
-        default_factory=DependencyResolution
-    )
+    target_framework_preference: list[str] = field(default_factory=lambda: ["netstandard2.0"])
+    dependency_resolution: DependencyResolution = field(default_factory=DependencyResolution)
 
 
 @dataclass(frozen=True)
@@ -134,9 +130,7 @@ class LLMConfig:
 class TemplateHints:
     default_input_extension: str = ".xlsx"
     default_input_filename: str = "input.xlsx"
-    array_input_filenames: list[str] = field(
-        default_factory=lambda: ["input1.xlsx", "input2.xlsx"]
-    )
+    array_input_filenames: list[str] = field(default_factory=lambda: ["input1.xlsx", "input2.xlsx"])
     input_creation_lines: list[str] = field(default_factory=list)
     merger_input_creation_lines: list[str] = field(default_factory=list)
     additional_usings: list[str] = field(default_factory=list)

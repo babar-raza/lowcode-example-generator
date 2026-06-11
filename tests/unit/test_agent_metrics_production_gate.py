@@ -12,6 +12,7 @@ import yaml
 # Shared fixture
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture
 def _config(tmp_path):
     from plugin_examples.metrics.config import load_metrics_config
@@ -40,41 +41,48 @@ def _config(tmp_path):
 # Tests 1-5: is_agent_metrics_production_enabled() env var behavior
 # ---------------------------------------------------------------------------
 
+
 class TestProductionGateEnvVar:
     def test_production_gate_absent_keeps_sprint_true(self, monkeypatch):
         """Gate absent → production disabled → test_only_sprint=True."""
         monkeypatch.delenv("AGENT_METRICS_PRODUCTION_ENABLED", raising=False)
         from plugin_examples.metrics.config import is_agent_metrics_production_enabled
+
         assert is_agent_metrics_production_enabled() is False
 
     def test_production_gate_empty_string_keeps_sprint_true(self, monkeypatch):
         """Empty string → production disabled."""
         monkeypatch.setenv("AGENT_METRICS_PRODUCTION_ENABLED", "")
         from plugin_examples.metrics.config import is_agent_metrics_production_enabled
+
         assert is_agent_metrics_production_enabled() is False
 
     def test_production_gate_false_keeps_sprint_true(self, monkeypatch):
         """'false' → production disabled."""
         monkeypatch.setenv("AGENT_METRICS_PRODUCTION_ENABLED", "false")
         from plugin_examples.metrics.config import is_agent_metrics_production_enabled
+
         assert is_agent_metrics_production_enabled() is False
 
     def test_production_gate_mixed_case_invalid_keeps_sprint_true(self, monkeypatch):
         """'True' (capital T) must NOT enable production — only exact 'true' allowed."""
         monkeypatch.setenv("AGENT_METRICS_PRODUCTION_ENABLED", "True")
         from plugin_examples.metrics.config import is_agent_metrics_production_enabled
+
         assert is_agent_metrics_production_enabled() is False
 
     def test_production_gate_true_enables_production(self, monkeypatch):
         """Exact lowercase 'true' → production enabled."""
         monkeypatch.setenv("AGENT_METRICS_PRODUCTION_ENABLED", "true")
         from plugin_examples.metrics.config import is_agent_metrics_production_enabled
+
         assert is_agent_metrics_production_enabled() is True
 
 
 # ---------------------------------------------------------------------------
 # Tests 6-10: Production gate does not bypass other poster gates
 # ---------------------------------------------------------------------------
+
 
 class TestProductionGateDoesNotBypassOtherGates:
     def test_production_gate_does_not_bypass_dry_run(self, _config):
@@ -144,7 +152,7 @@ class TestProductionGateDoesNotBypassOtherGates:
             _config,
             dry_run=False,
             test_only_sprint=True,  # sprint gate active
-            force_repost=True,      # only bypasses dedup, not sprint gate
+            force_repost=True,  # only bypasses dedup, not sprint gate
         )
         assert result["posted"] is False
         assert "blocked" in result["reason"]
@@ -153,6 +161,7 @@ class TestProductionGateDoesNotBypassOtherGates:
 # ---------------------------------------------------------------------------
 # Tests 11-12: Production payload shape
 # ---------------------------------------------------------------------------
+
 
 class TestProductionPayloadShape:
     def test_production_payload_has_no_test_prefixes(self, _config):
@@ -172,12 +181,15 @@ class TestProductionPayloadShape:
             api_calls_count=3,
             test_mode=False,
         )
-        assert not payload["agent_name"].startswith("test-"), \
-            f"agent_name should not start with 'test-', got: {payload['agent_name']}"
-        assert not payload["item_name"].startswith("test-"), \
-            f"item_name should not start with 'test-', got: {payload['item_name']}"
-        assert not payload["run_id"].startswith("test-"), \
-            f"run_id should not start with 'test-', got: {payload['run_id']}"
+        assert not payload["agent_name"].startswith(
+            "test-"
+        ), f"agent_name should not start with 'test-', got: {payload['agent_name']}"
+        assert not payload["item_name"].startswith(
+            "test-"
+        ), f"item_name should not start with 'test-', got: {payload['item_name']}"
+        assert not payload["run_id"].startswith(
+            "test-"
+        ), f"run_id should not start with 'test-', got: {payload['run_id']}"
         assert payload["agent_name"] == "Lowcode Example Generator"
         assert payload["item_name"] == "Examples"
 
@@ -207,11 +219,13 @@ class TestProductionPayloadShape:
 # Test 13: Runner integration — test_only_sprint=False when gate enabled
 # ---------------------------------------------------------------------------
 
+
 class TestRunnerProductionGateIntegration:
     def test_runner_passes_test_only_sprint_false_when_gate_enabled(self, monkeypatch):
         """When AGENT_METRICS_PRODUCTION_ENABLED=true, runner passes test_only_sprint=False."""
         monkeypatch.setenv("AGENT_METRICS_PRODUCTION_ENABLED", "true")
         from plugin_examples.metrics.config import is_agent_metrics_production_enabled
+
         # Verify helper returns True
         assert is_agent_metrics_production_enabled() is True
         # Verify test_only_sprint logic: not is_agent_metrics_production_enabled() == False
@@ -222,6 +236,7 @@ class TestRunnerProductionGateIntegration:
         """When AGENT_METRICS_PRODUCTION_ENABLED is not set, runner passes test_only_sprint=True."""
         monkeypatch.delenv("AGENT_METRICS_PRODUCTION_ENABLED", raising=False)
         from plugin_examples.metrics.config import is_agent_metrics_production_enabled
+
         assert is_agent_metrics_production_enabled() is False
         test_only_sprint = not is_agent_metrics_production_enabled()
         assert test_only_sprint is True

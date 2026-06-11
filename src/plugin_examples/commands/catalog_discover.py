@@ -32,13 +32,39 @@ _FAMILY_INDEX_URLS: dict[str, str] = {
     "tex": "https://products.aspose.net/tex/net/",
 }
 
-_COMMON_VERBS = frozenset([
-    "generate", "convert", "read", "write", "create", "edit", "parse",
-    "render", "export", "import", "compress", "decompress", "extract",
-    "merge", "split", "rotate", "resize", "crop", "watermark", "sign",
-    "recognize", "scan", "load", "save", "encode", "decode", "validate",
-    "transform", "process",
-])
+_COMMON_VERBS = frozenset(
+    [
+        "generate",
+        "convert",
+        "read",
+        "write",
+        "create",
+        "edit",
+        "parse",
+        "render",
+        "export",
+        "import",
+        "compress",
+        "decompress",
+        "extract",
+        "merge",
+        "split",
+        "rotate",
+        "resize",
+        "crop",
+        "watermark",
+        "sign",
+        "recognize",
+        "scan",
+        "load",
+        "save",
+        "encode",
+        "decode",
+        "validate",
+        "transform",
+        "process",
+    ]
+)
 
 # File format tokens to extract from page content
 _FORMAT_RE = re.compile(
@@ -67,31 +93,40 @@ def add_parser(subparsers):
         help="Discover non-LowCode plugin pages from products.aspose.net",
     )
     parser.add_argument(
-        "--family", metavar="FAMILY",
+        "--family",
+        metavar="FAMILY",
         help="Single family slug to discover (e.g. barcode)",
     )
     parser.add_argument(
-        "--families", nargs="+", metavar="FAMILY",
+        "--families",
+        nargs="+",
+        metavar="FAMILY",
         help="Multiple family slugs to discover",
     )
     parser.add_argument(
-        "--all-families", action="store_true",
+        "--all-families",
+        action="store_true",
         help="Discover all known non-LowCode families",
     )
     parser.add_argument(
-        "--replay", action="store_true",
+        "--replay",
+        action="store_true",
         help="Use cached pages only — no HTTP calls",
     )
     parser.add_argument(
-        "--sitemap", action="store_true",
+        "--sitemap",
+        action="store_true",
         help="Attempt sitemap discovery before family-page discovery",
     )
     parser.add_argument(
-        "--output", metavar="PATH",
+        "--output",
+        metavar="PATH",
         help="Write catalog JSON to this path (default: pipeline/plugin-capability-registry/website-catalog.json)",
     )
     parser.add_argument(
-        "--delay-ms", type=int, default=1000,
+        "--delay-ms",
+        type=int,
+        default=1000,
         help="Delay between HTTP requests in milliseconds (default: 1000)",
     )
     parser.set_defaults(func=handle)
@@ -120,8 +155,10 @@ def handle(args) -> int:
     if hasattr(args, "delay_ms"):
         os.environ["CATALOG_CRAWL_DELAY_MS"] = str(args.delay_ms)
 
-    output_path = Path(args.output) if getattr(args, "output", None) else (
-        repo_root / "pipeline" / "plugin-capability-registry" / "website-catalog.json"
+    output_path = (
+        Path(args.output)
+        if getattr(args, "output", None)
+        else (repo_root / "pipeline" / "plugin-capability-registry" / "website-catalog.json")
     )
 
     # Load existing catalog to merge/update
@@ -343,14 +380,13 @@ def _enrich_entry(base_entry, html: str, family_slug: str, timestamp: str) -> di
 
     # Extract title
     title_match = re.search(r"<h1[^>]*>(.*?)</h1>", html, re.IGNORECASE | re.DOTALL)
-    marketing_title = (
-        re.sub(r"<[^>]+>", "", title_match.group(1)).strip() if title_match else base_entry.plugin_name
-    )
+    marketing_title = re.sub(r"<[^>]+>", "", title_match.group(1)).strip() if title_match else base_entry.plugin_name
 
     # Extract description from meta or first <p>
     desc_match = re.search(
         r'<meta\s+name=["\']description["\'][^>]*content=["\']([^"\']+)["\']',
-        html, re.IGNORECASE,
+        html,
+        re.IGNORECASE,
     ) or re.search(r"<p[^>]*>(.*?)</p>", html, re.IGNORECASE | re.DOTALL)
     description = ""
     if desc_match:

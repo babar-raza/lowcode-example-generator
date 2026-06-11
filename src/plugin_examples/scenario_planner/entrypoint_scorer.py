@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class EntrypointScore:
     """Score and explanation for a candidate scenario entrypoint."""
+
     full_name: str
     name: str
     role: str
@@ -51,7 +52,9 @@ def score_entrypoint(
     properties = type_info.get("properties", [])
 
     result = EntrypointScore(
-        full_name=full_name, name=name, role=role.role,
+        full_name=full_name,
+        name=name,
+        role=role.role,
     )
 
     signals = []
@@ -61,13 +64,13 @@ def score_entrypoint(
     # Static public method
     static_methods = [m for m in methods if m.get("is_static")]
     if static_methods:
-        signals.append({"signal": "has_static_methods", "weight": 3.0,
-                        "detail": f"{len(static_methods)} static methods"})
+        signals.append(
+            {"signal": "has_static_methods", "weight": 3.0, "detail": f"{len(static_methods)} static methods"}
+        )
 
     # Belongs to standalone role
     if role.role in STANDALONE_ROLES:
-        signals.append({"signal": "standalone_role", "weight": 3.0,
-                        "detail": f"Role: {role.role}"})
+        signals.append({"signal": "standalone_role", "weight": 3.0, "detail": f"Role: {role.role}"})
 
     # Has simple string/file parameters
     simple_param_methods = 0
@@ -76,45 +79,48 @@ def score_entrypoint(
         if all(_is_simple_param(p) for p in params):
             simple_param_methods += 1
     if simple_param_methods > 0:
-        signals.append({"signal": "simple_parameters", "weight": 2.0,
-                        "detail": f"{simple_param_methods} methods with simple params"})
+        signals.append(
+            {
+                "signal": "simple_parameters",
+                "weight": 2.0,
+                "detail": f"{simple_param_methods} methods with simple params",
+            }
+        )
 
     # Has file I/O semantics
     has_file_io = any(
-        any(kw in p.get("name", "").lower()
-            for kw in ("path", "file", "input", "output", "source", "result"))
-        for m in methods for p in m.get("parameters", [])
+        any(kw in p.get("name", "").lower() for kw in ("path", "file", "input", "output", "source", "result"))
+        for m in methods
+        for p in m.get("parameters", [])
     )
     if has_file_io:
-        signals.append({"signal": "file_io_semantics", "weight": 1.5,
-                        "detail": "Methods reference file paths"})
+        signals.append({"signal": "file_io_semantics", "weight": 1.5, "detail": "Methods reference file paths"})
 
     # XML summary describes action
     has_summary = bool(type_info.get("xml_summary", "").strip())
     if has_summary:
-        signals.append({"signal": "has_xml_summary", "weight": 0.5,
-                        "detail": "Type has XML documentation"})
+        signals.append({"signal": "has_xml_summary", "weight": 0.5, "detail": "Type has XML documentation"})
 
     # Fixture available
     if fixture_available:
-        signals.append({"signal": "fixture_available", "weight": 1.0,
-                        "detail": "Fixture files accessible"})
+        signals.append({"signal": "fixture_available", "weight": 1.0, "detail": "Fixture files accessible"})
 
     # --- Negative signals ---
 
     # Provider/callback role
     if role.role == "provider_callback":
-        signals.append({"signal": "provider_callback_role", "weight": -5.0,
-                        "detail": "Provider/callback type — not standalone"})
+        signals.append(
+            {"signal": "provider_callback_role", "weight": -5.0, "detail": "Provider/callback type — not standalone"}
+        )
 
     if role.role == "event_callback":
-        signals.append({"signal": "event_callback_role", "weight": -5.0,
-                        "detail": "Event callback type — not standalone"})
+        signals.append(
+            {"signal": "event_callback_role", "weight": -5.0, "detail": "Event callback type — not standalone"}
+        )
 
     # Interface or abstract
     if role.role in ("interface_contract", "abstract_base"):
-        signals.append({"signal": "abstract_or_interface", "weight": -5.0,
-                        "detail": "Cannot be instantiated"})
+        signals.append({"signal": "abstract_or_interface", "weight": -5.0, "detail": "Cannot be instantiated"})
 
     # Method requires callback context (takes provider/callback params)
     callback_params = 0
@@ -124,8 +130,13 @@ def score_entrypoint(
             if any(kw in ptype for kw in ("Provider", "Callback", "Handler", "EventArgs")):
                 callback_params += 1
     if callback_params > 0:
-        signals.append({"signal": "requires_callback_params", "weight": -2.0,
-                        "detail": f"{callback_params} parameters are callback types"})
+        signals.append(
+            {
+                "signal": "requires_callback_params",
+                "weight": -2.0,
+                "detail": f"{callback_params} parameters are callback types",
+            }
+        )
 
     # Complex object parameters without construction path
     complex_params = 0
@@ -134,13 +145,13 @@ def score_entrypoint(
             if not _is_simple_param(p) and not _is_callback_param(p):
                 complex_params += 1
     if complex_params > 0:
-        signals.append({"signal": "complex_parameters", "weight": -1.0,
-                        "detail": f"{complex_params} complex object parameters"})
+        signals.append(
+            {"signal": "complex_parameters", "weight": -1.0, "detail": f"{complex_params} complex object parameters"}
+        )
 
     # No methods
     if not methods:
-        signals.append({"signal": "no_methods", "weight": -3.0,
-                        "detail": "No public methods"})
+        signals.append({"signal": "no_methods", "weight": -3.0, "detail": "No public methods"})
 
     # Compute score
     total_positive = sum(s["weight"] for s in signals if s["weight"] > 0)
@@ -215,9 +226,15 @@ def _is_simple_param(param: dict) -> bool:
     """Check if a parameter is simple (string, int, bool, enum, stream)."""
     ptype = param.get("type", "")
     simple_types = {
-        "System.String", "String", "System.Int32", "System.Int64",
-        "System.Boolean", "System.IO.Stream", "Stream",
-        "System.String[]", "String[]",
+        "System.String",
+        "String",
+        "System.Int32",
+        "System.Int64",
+        "System.Boolean",
+        "System.IO.Stream",
+        "Stream",
+        "System.String[]",
+        "String[]",
     }
     return ptype in simple_types
 

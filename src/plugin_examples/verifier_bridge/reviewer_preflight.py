@@ -16,6 +16,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class ReviewerPreflightResult:
     """Result of reviewer environment preflight check."""
+
     reviewer_path_configured: bool
     reviewer_path_exists: bool
     reviewer_python_found: bool
@@ -74,7 +75,10 @@ def run_reviewer_preflight(
                     py = str(venv_python) if venv_python.exists() else "python"
                     result = subprocess.run(
                         [py, "-m", "src.cli.main", "--json", "--safe-workspace", "status"],
-                        cwd=str(rp), capture_output=True, text=True, timeout=30,
+                        cwd=str(rp),
+                        capture_output=True,
+                        text=True,
+                        timeout=30,
                     )
                     if result.returncode == 0:
                         cli_responds = True
@@ -93,7 +97,10 @@ def run_reviewer_preflight(
     dotnet_version = None
     try:
         result = subprocess.run(
-            ["dotnet", "--version"], capture_output=True, text=True, timeout=10,
+            ["dotnet", "--version"],
+            capture_output=True,
+            text=True,
+            timeout=10,
         )
         if result.returncode == 0:
             dotnet_found = True

@@ -16,15 +16,18 @@ def add_parser(subparsers):
     )
     parser.add_argument("--family", required=True, help="Family name (e.g., cells, words)")
     parser.add_argument(
-        "--publish", action="store_true",
+        "--publish",
+        action="store_true",
         help="Live mode: create real PR on GitHub (requires GITHUB_TOKEN + approval token)",
     )
     parser.add_argument(
-        "--approval-token", metavar="TOKEN",
+        "--approval-token",
+        metavar="TOKEN",
         help="Approval token (must equal APPROVE_LIVE_PR for live mode)",
     )
     parser.add_argument(
-        "--promote-latest", action="store_true",
+        "--promote-latest",
+        action="store_true",
         help="Write evidence to workspace/verification/latest/ (always on)",
     )
 
@@ -49,7 +52,10 @@ def handle(args) -> int:
     verification_dir = repo_root / "workspace" / "verification"
     family = args.family
     msession, mcollector = _create_metrics_session(
-        args, command="publish-readme", family=family, repo_root=repo_root,
+        args,
+        command="publish-readme",
+        family=family,
+        repo_root=repo_root,
     )
     live_mode = getattr(args, "publish", False)
     dry_run = not live_mode
@@ -79,6 +85,7 @@ def handle(args) -> int:
         build_cumulative_examples_meta as _build_cum_meta_pr,
         build_package_path_map as _build_pkg_map_pr,
     )
+
     _inv_entries_pr, _inv_trail_pr = _discover_inv_pr(
         family=family,
         repo_root=repo_root,
@@ -319,4 +326,3 @@ def handle(args) -> int:
     print(f"  Evidence: {ev_path}")
     _finalize_metrics_session(msession, items_discovered=1, items_succeeded=1, items_failed=0)
     return 0
-

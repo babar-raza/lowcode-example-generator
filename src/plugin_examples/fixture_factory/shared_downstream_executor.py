@@ -131,13 +131,9 @@ def _check_pr_packet(candidate: PluginCandidate, result: DownstreamResult) -> No
         "namespace_source": candidate.namespace_source,
         "discovery_method": candidate.discovery_method,
         "pr_title_prefix": (
-            "feat(plugins):" if candidate.namespace_source == "NON_LOWCODE_PLUGIN"
-            else "feat(lowcode):"
+            "feat(plugins):" if candidate.namespace_source == "NON_LOWCODE_PLUGIN" else "feat(lowcode):"
         ),
-        "branch_prefix": (
-            "plugins" if candidate.namespace_source == "NON_LOWCODE_PLUGIN"
-            else "lowcode-examples"
-        ),
+        "branch_prefix": ("plugins" if candidate.namespace_source == "NON_LOWCODE_PLUGIN" else "lowcode-examples"),
     }
 
 

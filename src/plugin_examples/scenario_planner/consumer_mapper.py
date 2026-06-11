@@ -41,23 +41,27 @@ def build_consumer_map(catalog: dict, plugin_namespaces: list[str]) -> dict:
                 for p in m.get("parameters", []):
                     param_type = p.get("type", "")
                     if param_type in consumer_map:
-                        consumer_map[param_type].append({
-                            "consumer_type": type_name,
-                            "consumer_method": m["name"],
-                            "parameter_name": p.get("name", ""),
-                            "is_static": m.get("is_static", False),
-                        })
+                        consumer_map[param_type].append(
+                            {
+                                "consumer_type": type_name,
+                                "consumer_method": m["name"],
+                                "parameter_name": p.get("name", ""),
+                                "is_static": m.get("is_static", False),
+                            }
+                        )
             # Check constructors
             for ctor in t.get("constructors", []):
                 for p in ctor.get("parameters", []):
                     param_type = p.get("type", "")
                     if param_type in consumer_map:
-                        consumer_map[param_type].append({
-                            "consumer_type": type_name,
-                            "consumer_method": ".ctor",
-                            "parameter_name": p.get("name", ""),
-                            "is_static": False,
-                        })
+                        consumer_map[param_type].append(
+                            {
+                                "consumer_type": type_name,
+                                "consumer_method": ".ctor",
+                                "parameter_name": p.get("name", ""),
+                                "is_static": False,
+                            }
+                        )
 
     return consumer_map
 
@@ -78,9 +82,7 @@ def write_consumer_relationships(
         "total_types": len(consumer_map),
         "types_with_consumers": len(with_consumers),
         "types_without_consumers": len(without_consumers),
-        "relationships": {
-            k: v for k, v in consumer_map.items()
-        },
+        "relationships": {k: v for k, v in consumer_map.items()},
     }
 
     with open(path, "w") as f:

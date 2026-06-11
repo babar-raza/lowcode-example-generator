@@ -47,9 +47,7 @@ def _make_catalog(namespaces: list[dict] | None = None) -> dict:
                                 "return_type": "System.Void",
                                 "is_static": True,
                                 "is_obsolete": False,
-                                "parameters": [
-                                    {"name": "options", "type": "LockOptions", "is_optional": False}
-                                ],
+                                "parameters": [{"name": "options", "type": "LockOptions", "is_optional": False}],
                             },
                         ],
                         "constructors": [],
@@ -191,10 +189,7 @@ class TestDetector:
         catalog = _make_catalog()
         result = detect_plugin_namespaces(catalog, ["Aspose.Cells.LowCode.*"])
         assert result.is_eligible
-        assert any(
-            m.namespace == "Aspose.Cells.LowCode.Converters"
-            for m in result.matched_namespaces
-        )
+        assert any(m.namespace == "Aspose.Cells.LowCode.Converters" for m in result.matched_namespaces)
 
     def test_no_namespace_match_marks_not_eligible(self):
         catalog = _make_catalog()
@@ -257,12 +252,21 @@ class TestProofReporterWriting:
         with open(proof_path) as f:
             proof = json.load(f)
         required = [
-            "package_id", "resolved_version", "nupkg_sha256",
-            "selected_target_framework", "dll_path", "xml_path",
-            "xml_warning", "dependency_count", "dependency_paths",
-            "api_catalog_path", "namespace_count",
-            "matched_plugin_namespaces", "public_plugin_type_count",
-            "public_plugin_method_count", "eligibility_status",
+            "package_id",
+            "resolved_version",
+            "nupkg_sha256",
+            "selected_target_framework",
+            "dll_path",
+            "xml_path",
+            "xml_warning",
+            "dependency_count",
+            "dependency_paths",
+            "api_catalog_path",
+            "namespace_count",
+            "matched_plugin_namespaces",
+            "public_plugin_type_count",
+            "public_plugin_method_count",
+            "eligibility_status",
             "eligibility_reason",
         ]
         for field in required:
@@ -308,10 +312,14 @@ class TestDownstreamGate:
 
     def test_not_eligible_proof_fails_gate(self, tmp_path):
         proof_path = tmp_path / "proof.json"
-        proof_path.write_text(json.dumps({
-            "eligibility_status": "not_eligible",
-            "eligibility_reason": "No plugin namespaces matched",
-        }))
+        proof_path.write_text(
+            json.dumps(
+                {
+                    "eligibility_status": "not_eligible",
+                    "eligibility_reason": "No plugin namespaces matched",
+                }
+            )
+        )
         with pytest.raises(SourceOfTruthGateError, match="not_eligible"):
             assert_source_of_truth_eligible(str(proof_path))
 

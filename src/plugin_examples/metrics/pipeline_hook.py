@@ -57,9 +57,7 @@ def finalize_metrics(
             ready = getattr(plan, "ready_scenarios", []) if plan else []
             blocked = getattr(plan, "blocked_count", 0) if plan else 0
             items_discovered = len(ready) + blocked
-            items_succeeded = sum(
-                1 for v in (ctx.validation_results or []) if v.passed
-            )
+            items_succeeded = sum(1 for v in (ctx.validation_results or []) if v.passed)
             items_failed = len(ctx.generated_projects) - items_succeeded
         else:
             # Simple 1/0 for non-run commands

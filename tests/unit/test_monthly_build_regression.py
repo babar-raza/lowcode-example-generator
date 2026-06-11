@@ -27,7 +27,6 @@ from validate_published_examples_build import (
 
 
 class TestBuildReport:
-
     def test_all_pass_verdict(self):
         results = [
             FamilyBuildResult(family="cells", repo="r1", build_exit_code=0, verdict="PASS"),
@@ -73,8 +72,12 @@ class TestBuildReport:
         report = build_report(results)
         data = asdict(report)
         required = [
-            "generated_at", "families_checked", "families_passed",
-            "families_regressed", "overall_verdict", "results",
+            "generated_at",
+            "families_checked",
+            "families_passed",
+            "families_regressed",
+            "overall_verdict",
+            "results",
         ]
         for field_name in required:
             assert field_name in data, f"Missing required field: {field_name}"
@@ -86,7 +89,6 @@ class TestBuildReport:
 
 
 class TestFamilyDiscovery:
-
     def test_discovers_families_from_merge_results(self, tmp_path):
         verification = tmp_path / "workspace" / "verification" / "latest"
         verification.mkdir(parents=True, exist_ok=True)
@@ -108,7 +110,6 @@ class TestFamilyDiscovery:
 
 
 class TestFamilyRepoMap:
-
     def test_map_has_all_published_families(self):
         assert "cells" in FAMILY_REPO_MAP
         assert "words" in FAMILY_REPO_MAP

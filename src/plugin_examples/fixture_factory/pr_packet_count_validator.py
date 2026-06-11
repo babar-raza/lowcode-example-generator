@@ -17,9 +17,7 @@ class PRCResult:
     details: dict = field(default_factory=dict)
 
 
-def prc_01_bundle_pr_packet_count_gte_pclc_total(
-    bundle_path: str, pclc_total: int
-) -> PRCResult:
+def prc_01_bundle_pr_packet_count_gte_pclc_total(bundle_path: str, pclc_total: int) -> PRCResult:
     """PRC-01: count of pr-packet.json in bundle >= pclc_total."""
     try:
         with zipfile.ZipFile(bundle_path) as zf:
@@ -47,9 +45,7 @@ def prc_01_bundle_pr_packet_count_gte_pclc_total(
     )
 
 
-def prc_02_each_pclc_package_has_pr_packet_in_bundle(
-    bundle_path: str, pclc_packages: list[dict]
-) -> PRCResult:
+def prc_02_each_pclc_package_has_pr_packet_in_bundle(bundle_path: str, pclc_packages: list[dict]) -> PRCResult:
     """PRC-02: Each PCLC package (family/slug) must have a pr-packet.json in bundle."""
     try:
         with zipfile.ZipFile(bundle_path) as zf:
@@ -87,9 +83,7 @@ def prc_02_each_pclc_package_has_pr_packet_in_bundle(
     )
 
 
-def run_all_prc(
-    bundle_path: str, pclc_total: int, pclc_packages: list[dict]
-) -> list[PRCResult]:
+def run_all_prc(bundle_path: str, pclc_total: int, pclc_packages: list[dict]) -> list[PRCResult]:
     return [
         prc_01_bundle_pr_packet_count_gte_pclc_total(bundle_path, pclc_total),
         prc_02_each_pclc_package_has_pr_packet_in_bundle(bundle_path, pclc_packages),

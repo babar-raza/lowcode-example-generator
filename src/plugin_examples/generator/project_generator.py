@@ -15,16 +15,32 @@ import re as _re
 _OUTPUT_CODE_PATTERN = _re.compile(r'["\']output\.(\w+)["\']')
 
 _OP_KIND_PATTERNS = {
-    "merger": "merger", "splitter": "splitter", "extractor": "extractor",
-    "compressor": "transform", "compress": "transform", "locker": "transform",
-    "optimizer": "transform", "security": "transform", "signature": "transform",
-    "watermarker": "transform", "replacer": "transform", "pdfa": "transform",
+    "merger": "merger",
+    "splitter": "splitter",
+    "extractor": "extractor",
+    "compressor": "transform",
+    "compress": "transform",
+    "locker": "transform",
+    "optimizer": "transform",
+    "security": "transform",
+    "signature": "transform",
+    "watermarker": "transform",
+    "replacer": "transform",
+    "pdfa": "transform",
     "comparer": "transform",
-    "flattener": "form_processor", "formeditor": "form_processor",
-    "formexporter": "form_exporter", "generator": "generator",
-    "builder": "generator", "mailmerger": "generator", "mail-merger": "generator",
-    "converter": "converter", "convert": "converter",
-    "html": "converter", "jpeg": "converter", "png": "converter", "tiff": "converter",
+    "flattener": "form_processor",
+    "formeditor": "form_processor",
+    "formexporter": "form_exporter",
+    "generator": "generator",
+    "builder": "generator",
+    "mailmerger": "generator",
+    "mail-merger": "generator",
+    "converter": "converter",
+    "convert": "converter",
+    "html": "converter",
+    "jpeg": "converter",
+    "png": "converter",
+    "tiff": "converter",
 }
 
 
@@ -92,6 +108,7 @@ def generate_project(
     placed_fixtures: list[str] = []
     if input_strategy in ("generated_fixture_file", "existing_fixture") and input_files:
         from plugin_examples.fixture_registry.fixture_factory import generate_fixtures_for_scenario
+
         fixtures = generate_fixtures_for_scenario(input_files, project_dir)
         placed_fixtures = [f.path for f in fixtures if f.ready]
 
@@ -137,6 +154,7 @@ def generate_project(
             _type_guess = "".join(p.capitalize() for p in _slug.split("-"))
             try:
                 from plugin_examples.format_authority.store import get_contract
+
                 _fc = get_contract(_fam, _type_guess)
                 _fc_dict = _fc.to_dict()
             except (KeyError, ImportError):
@@ -157,13 +175,14 @@ def generate_project(
     expected_output_path = project_dir / "expected-output.json"
     expected_output = {
         "must_contain": [f"Example: {example.scenario_id}"],
-        "must_not_contain": ["Unhandled exception", "System.Exception",
-                             "Console.ReadKey", "Console.ReadLine"],
+        "must_not_contain": ["Unhandled exception", "System.Exception", "Console.ReadKey", "Console.ReadLine"],
         "has_output": True,
         "input_dependencies": input_files,
         "forbidden_code_patterns": [
-            "Console.ReadKey(", "Console.ReadLine(",
-            "TODO", "NotImplementedException",
+            "Console.ReadKey(",
+            "Console.ReadLine(",
+            "TODO",
+            "NotImplementedException",
         ],
     }
 
@@ -225,9 +244,14 @@ def _ensure_run_level_files(
 
     global_json = run_generated_dir / "global.json"
     if not global_json.exists():
-        global_json.write_text(json.dumps({
-            "sdk": {"version": "8.0.100", "rollForward": "latestMajor"},
-        }, indent=2))
+        global_json.write_text(
+            json.dumps(
+                {
+                    "sdk": {"version": "8.0.100", "rollForward": "latestMajor"},
+                },
+                indent=2,
+            )
+        )
 
 
 def _generate_csproj(package_id: str, target_framework: str, input_files: list[str] | None = None) -> str:
@@ -237,8 +261,8 @@ def _generate_csproj(package_id: str, target_framework: str, input_files: list[s
         lines = []
         for f in input_files:
             lines.append(f'    <None Include="{f}">')
-            lines.append(f'      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>')
-            lines.append(f'    </None>')
+            lines.append(f"      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>")
+            lines.append(f"    </None>")
         fixture_items = "\n\n  <ItemGroup>\n" + "\n".join(lines) + "\n  </ItemGroup>"
 
     return f"""<Project Sdk="Microsoft.NET.Sdk">

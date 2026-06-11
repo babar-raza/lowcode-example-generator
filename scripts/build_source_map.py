@@ -1,5 +1,8 @@
 """Build plugin-to-source-code map for all families from GitHub repo trees."""
-import json, re, hashlib, time
+import json
+import re
+import hashlib
+import time
 from pathlib import Path
 
 # Map plugin slug to search keywords in file paths

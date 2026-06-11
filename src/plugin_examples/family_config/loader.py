@@ -74,9 +74,7 @@ def _build_model(data: dict) -> FamilyConfig:
         version_policy=nuget_data["version_policy"],
         pinned_version=nuget_data.get("pinned_version"),
         allow_prerelease=nuget_data.get("allow_prerelease", False),
-        target_framework_preference=nuget_data.get(
-            "target_framework_preference", ["netstandard2.0"]
-        ),
+        target_framework_preference=nuget_data.get("target_framework_preference", ["netstandard2.0"]),
         dependency_resolution=DependencyResolution(
             enabled=dep_res.get("enabled", True),
             max_depth=dep_res.get("max_depth", 2),
@@ -93,21 +91,14 @@ def _build_model(data: dict) -> FamilyConfig:
     github_data = data["github"]
     github = GitHubConfig(
         official_examples_repo=RepoRef(**github_data["official_examples_repo"]),
-        published_plugin_examples_repo=RepoRef(
-            **github_data["published_plugin_examples_repo"]
-        ),
+        published_plugin_examples_repo=RepoRef(**github_data["published_plugin_examples_repo"]),
         central_repo_allowed=github_data.get("central_repo_allowed", False),
     )
 
-    fixtures = FixturesConfig(
-        sources=[FixtureSource(**s) for s in data["fixtures"].get("sources", [])]
-    )
+    fixtures = FixturesConfig(sources=[FixtureSource(**s) for s in data["fixtures"].get("sources", [])])
 
     existing_examples = ExistingExamplesConfig(
-        sources=[
-            FixtureSource(**s)
-            for s in data["existing_examples"].get("sources", [])
-        ]
+        sources=[FixtureSource(**s) for s in data["existing_examples"].get("sources", [])]
     )
 
     gen_data = data["generation"]
@@ -115,9 +106,7 @@ def _build_model(data: dict) -> FamilyConfig:
         min_examples_per_family=gen_data["min_examples_per_family"],
         max_examples_per_monthly_run=gen_data["max_examples_per_monthly_run"],
         allow_new_fixtures=gen_data.get("allow_new_fixtures", True),
-        allow_generated_input_files=gen_data.get(
-            "allow_generated_input_files", True
-        ),
+        allow_generated_input_files=gen_data.get("allow_generated_input_files", True),
         allowed_types=gen_data.get("allowed_types", []),
         preferred_methods_per_type=gen_data.get("preferred_methods_per_type", {}),
     )
@@ -138,9 +127,7 @@ def _build_model(data: dict) -> FamilyConfig:
     template_hints = TemplateHints(
         default_input_extension=hints_data.get("default_input_extension", ".xlsx"),
         default_input_filename=hints_data.get("default_input_filename", "input.xlsx"),
-        array_input_filenames=hints_data.get(
-            "array_input_filenames", ["input1.xlsx", "input2.xlsx"]
-        ),
+        array_input_filenames=hints_data.get("array_input_filenames", ["input1.xlsx", "input2.xlsx"]),
         input_creation_lines=hints_data.get("input_creation_lines", []),
         merger_input_creation_lines=hints_data.get("merger_input_creation_lines", []),
         additional_usings=hints_data.get("additional_usings", []),

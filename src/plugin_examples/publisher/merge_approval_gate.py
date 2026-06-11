@@ -29,41 +29,47 @@ from dataclasses import dataclass, field
 
 # ── Allowlists ────────────────────────────────────────────────────────────────
 
-APPROVED_PUBLICATION_REPOS: frozenset[str] = frozenset({
-    "aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples",
-    "aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples",
-    "aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples",
-})
+APPROVED_PUBLICATION_REPOS: frozenset[str] = frozenset(
+    {
+        "aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples",
+        "aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples",
+        "aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples",
+    }
+)
 
-FIXTURE_SOURCE_REPOS: frozenset[str] = frozenset({
-    "aspose-barcode/Aspose.BarCode-for-.NET",
-    "aspose-svg/Aspose.SVG-for-.NET",
-    "aspose-cad/Aspose.CAD-for-.NET",
-    "aspose-cells/Aspose.Cells-for-.NET",
-    "aspose-words/Aspose.Words-for-.NET",
-    "aspose-html/Aspose.HTML-for-.NET",
-    "aspose-font/Aspose.Font-for-.NET",
-    "aspose-imaging/Aspose.Imaging-for-.NET",
-    "aspose-gis/Aspose.GIS-for-.NET",
-    "aspose-finance/Aspose.Finance-for-.NET",
-    "aspose-omr/Aspose.OMR-for-.NET",
-    "aspose-note/Aspose.Note-for-.NET",
-    "aspose-tasks/Aspose.Tasks-for-.NET",
-    "aspose-page/Aspose.TeX-for-.NET",
-    "aspose-ocr/Aspose.OCR-for-.NET",
-    "aspose-3d/Aspose.3D-for-.NET",
-    "aspose-psd/Aspose.PSD-for-.NET",
-    "aspose-zip/Aspose.ZIP-for-.NET",
-})
+FIXTURE_SOURCE_REPOS: frozenset[str] = frozenset(
+    {
+        "aspose-barcode/Aspose.BarCode-for-.NET",
+        "aspose-svg/Aspose.SVG-for-.NET",
+        "aspose-cad/Aspose.CAD-for-.NET",
+        "aspose-cells/Aspose.Cells-for-.NET",
+        "aspose-words/Aspose.Words-for-.NET",
+        "aspose-html/Aspose.HTML-for-.NET",
+        "aspose-font/Aspose.Font-for-.NET",
+        "aspose-imaging/Aspose.Imaging-for-.NET",
+        "aspose-gis/Aspose.GIS-for-.NET",
+        "aspose-finance/Aspose.Finance-for-.NET",
+        "aspose-omr/Aspose.OMR-for-.NET",
+        "aspose-note/Aspose.Note-for-.NET",
+        "aspose-tasks/Aspose.Tasks-for-.NET",
+        "aspose-page/Aspose.TeX-for-.NET",
+        "aspose-ocr/Aspose.OCR-for-.NET",
+        "aspose-3d/Aspose.3D-for-.NET",
+        "aspose-psd/Aspose.PSD-for-.NET",
+        "aspose-zip/Aspose.ZIP-for-.NET",
+    }
+)
 
 # Branch pattern: lowcode/wave*/…
 _BRANCH_PATTERN = re.compile(r"^lowcode/wave\d+/.+")
 
 # ── Result dataclass ──────────────────────────────────────────────────────────
 
+
 @dataclass
 class MergeGateResult:
     """Result of evaluating all AMG gates for a single PR."""
+
     verdict: str
     """One of: MERGE_GATE_READY, AUTO_MERGE_AUTHORIZED, AUTO_MERGE_TRIGGERED,
     MERGED, MERGE_FAILED, CREDENTIAL_BLOCKED, REVIEW_POLICY_BLOCKED."""
@@ -78,11 +84,12 @@ class MergeGateResult:
 
 @dataclass
 class BranchDeleteResult:
-    verdict: str   # BRANCH_DELETE_AUTHORIZED | BRANCH_DELETE_SKIPPED_POLICY
+    verdict: str  # BRANCH_DELETE_AUTHORIZED | BRANCH_DELETE_SKIPPED_POLICY
     reason: str | None = None
 
 
 # ── AMG gate evaluation ───────────────────────────────────────────────────────
+
 
 def evaluate_merge_gate(
     pr_url: str,
@@ -190,7 +197,9 @@ def evaluate_merge_gate(
     if approve_live_merge != "1":
         r._check("AMG-01", False, "APPROVE_LIVE_MERGE != '1' in env")
         r.verdict = "CREDENTIAL_BLOCKED"
-        r.reason = "APPROVE_LIVE_MERGE not set to '1' in env — all artifact gates pass, merge authorized but env gate not set"
+        r.reason = (
+            "APPROVE_LIVE_MERGE not set to '1' in env — all artifact gates pass, merge authorized but env gate not set"
+        )
         return r
     r._check("AMG-01", True, "APPROVE_LIVE_MERGE=1 present")
 
@@ -215,6 +224,7 @@ def evaluate_merge_gate(
 
 
 # ── Branch deletion gate ──────────────────────────────────────────────────────
+
 
 def evaluate_branch_delete_gate(
     repo: str,
@@ -285,6 +295,7 @@ def check_merge_approval(token: str | None) -> tuple[bool, str]:
 
 
 # ── Internal helpers ──────────────────────────────────────────────────────────
+
 
 def _extract_sha(stdout: str) -> str | None:
     """Extract merge SHA from gh pr merge output, if present."""

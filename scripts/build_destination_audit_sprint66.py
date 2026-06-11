@@ -1,5 +1,6 @@
 """Phase 4: Build full destination audit for Sprint 66 with all 25 required fields."""
-import json, hashlib
+import json
+import hashlib
 from pathlib import Path
 from datetime import datetime
 

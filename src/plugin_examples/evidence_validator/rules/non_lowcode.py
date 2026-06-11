@@ -24,38 +24,45 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 
-_AUTHORITATIVE_STATUSES = frozenset({
-    "WEBSITE_DISCOVERED",
-    "REFLECTION_CANDIDATE",
-    "AI_DRAFT",
-    "PROBE_CANDIDATE",
-    "PROBE_CONFIRMED",
-    "PROBE_FAILED",
-    "VERIFIED_PUBLISHABLE",
-    "STATIC_MAPPING_REQUIRED",
-    "BLOCKED_PACKAGE_UNAVAILABLE",
-    "BLOCKED_REFLECTION_FAILED",
-    "BLOCKED_LICENSE_RESTRICTED",
-    "REJECTED_BY_VALIDATOR",
-})
+_AUTHORITATIVE_STATUSES = frozenset(
+    {
+        "WEBSITE_DISCOVERED",
+        "REFLECTION_CANDIDATE",
+        "AI_DRAFT",
+        "PROBE_CANDIDATE",
+        "PROBE_CONFIRMED",
+        "PROBE_FAILED",
+        "VERIFIED_PUBLISHABLE",
+        "STATIC_MAPPING_REQUIRED",
+        "BLOCKED_PACKAGE_UNAVAILABLE",
+        "BLOCKED_REFLECTION_FAILED",
+        "BLOCKED_LICENSE_RESTRICTED",
+        "REJECTED_BY_VALIDATOR",
+    }
+)
 
-_VALID_FAILURE_TAXONOMIES = frozenset({
-    "PROBE_FAILED_LICENSE",
-    "PROBE_FAILED_API",
-    "PROBE_FAILED_BUILD",
-    "PROBE_FAILED_RESTORE",
-    "PROBE_FAILED_TIMEOUT",
-})
+_VALID_FAILURE_TAXONOMIES = frozenset(
+    {
+        "PROBE_FAILED_LICENSE",
+        "PROBE_FAILED_API",
+        "PROBE_FAILED_BUILD",
+        "PROBE_FAILED_RESTORE",
+        "PROBE_FAILED_TIMEOUT",
+    }
+)
 
-_VALID_REJECTION_REASONS = frozenset({
-    "TYPE_NOT_IN_REFLECTION",
-    "METHOD_NOT_IN_REFLECTION",
-})
+_VALID_REJECTION_REASONS = frozenset(
+    {
+        "TYPE_NOT_IN_REFLECTION",
+        "METHOD_NOT_IN_REFLECTION",
+    }
+)
 
 
 # Import here to avoid circular at module top
 def _RuleResult(**kwargs):
     from plugin_examples.evidence_validator.models import RuleResult
+
     return RuleResult(**kwargs)
 
 
@@ -82,8 +89,10 @@ class NonLowCodeValidatorRules:
         registry_dir = self._nl_registry_dir()
         if not registry_dir.exists():
             return _RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="SKIP: plugin-capability-registry/ does not exist",
             )
 
@@ -92,8 +101,10 @@ class NonLowCodeValidatorRules:
             registry_file = registry_dir / f"{family}.yaml"
             if not registry_file.exists():
                 return _RuleResult(
-                    rule_id=rule_id, description=description,
-                    severity="FAILURE", passed=True,
+                    rule_id=rule_id,
+                    description=description,
+                    severity="FAILURE",
+                    passed=True,
                     evidence=f"SKIP: no registry file for family '{family}'",
                 )
 
@@ -102,8 +113,10 @@ class NonLowCodeValidatorRules:
             pd = getattr(config, "plugin_detection", None)
             if pd is not None and getattr(pd, "fallback_strategy", None) is None:
                 return _RuleResult(
-                    rule_id=rule_id, description=description,
-                    severity="FAILURE", passed=True,
+                    rule_id=rule_id,
+                    description=description,
+                    severity="FAILURE",
+                    passed=True,
                     evidence="SKIP: fallback_strategy is None",
                 )
 
@@ -130,6 +143,7 @@ class NonLowCodeValidatorRules:
             return []
         try:
             import yaml
+
             data = yaml.safe_load(registry_file.read_text(encoding="utf-8"))
             return data.get("entries", []) if isinstance(data, dict) else []
         except Exception:  # noqa: BLE001
@@ -148,25 +162,41 @@ class NonLowCodeValidatorRules:
         rule_id, description = "NL-V01", "Registry YAML must exist for non-LowCode families"
         registry_dir = self._nl_registry_dir()
         if not registry_dir.exists():
-            return _RuleResult(rule_id=rule_id, description=description,
-                               severity="FAILURE", passed=True,
-                               evidence="SKIP: plugin-capability-registry/ does not exist")
+            return _RuleResult(
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
+                evidence="SKIP: plugin-capability-registry/ does not exist",
+            )
         config = getattr(self, "config", None)
         if config is not None:
             pd = getattr(config, "plugin_detection", None)
             if pd is not None and getattr(pd, "fallback_strategy", None) is None:
-                return _RuleResult(rule_id=rule_id, description=description,
-                                   severity="FAILURE", passed=True,
-                                   evidence="SKIP: fallback_strategy is None")
+                return _RuleResult(
+                    rule_id=rule_id,
+                    description=description,
+                    severity="FAILURE",
+                    passed=True,
+                    evidence="SKIP: fallback_strategy is None",
+                )
         family = getattr(self, "family", "")
         registry_file = registry_dir / f"{family}.yaml"
         if registry_file.exists():
-            return _RuleResult(rule_id=rule_id, description=description,
-                               severity="FAILURE", passed=True,
-                               evidence=f"Registry file exists: {registry_file.name}")
-        return _RuleResult(rule_id=rule_id, description=description,
-                           severity="FAILURE", passed=False,
-                           failure_detail=f"NL-V01: Registry file missing for family '{family}'")
+            return _RuleResult(
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
+                evidence=f"Registry file exists: {registry_file.name}",
+            )
+        return _RuleResult(
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=False,
+            failure_detail=f"NL-V01: Registry file missing for family '{family}'",
+        )
 
     def rule_nl_v02(self) -> "RuleResult":
         """NL-V02: Every registry entry must have a status from the 12-value enum."""
@@ -177,12 +207,20 @@ class NonLowCodeValidatorRules:
         entries = self._nl_load_registry_entries()
         invalid = [e.get("status") for e in entries if e.get("status") not in _AUTHORITATIVE_STATUSES]
         if not invalid:
-            return _RuleResult(rule_id=rule_id, description=description,
-                               severity="FAILURE", passed=True,
-                               evidence=f"All {len(entries)} entries use authoritative status values")
-        return _RuleResult(rule_id=rule_id, description=description,
-                           severity="FAILURE", passed=False,
-                           failure_detail=f"NL-V02: Invalid status values found: {invalid}")
+            return _RuleResult(
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
+                evidence=f"All {len(entries)} entries use authoritative status values",
+            )
+        return _RuleResult(
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=False,
+            failure_detail=f"NL-V02: Invalid status values found: {invalid}",
+        )
 
     def rule_nl_v03(self) -> "RuleResult":
         """NL-V03: confidence_score must be in [0.0, 1.05] for all entries."""
@@ -198,12 +236,20 @@ class NonLowCodeValidatorRules:
             or not (0.0 <= float(e.get("confidence_score", -1)) <= 1.05)
         ]
         if not violations:
-            return _RuleResult(rule_id=rule_id, description=description,
-                               severity="FAILURE", passed=True,
-                               evidence=f"All {len(entries)} entries have valid confidence_score")
-        return _RuleResult(rule_id=rule_id, description=description,
-                           severity="FAILURE", passed=False,
-                           failure_detail=f"NL-V03: confidence_score out of range: {violations}")
+            return _RuleResult(
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
+                evidence=f"All {len(entries)} entries have valid confidence_score",
+            )
+        return _RuleResult(
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=False,
+            failure_detail=f"NL-V03: confidence_score out of range: {violations}",
+        )
 
     def rule_nl_v04(self) -> "RuleResult":
         """NL-V04: package_id must not be inferred from slug (must use alias table)."""
@@ -231,12 +277,20 @@ class NonLowCodeValidatorRules:
                     except Exception:  # noqa: BLE001
                         pass
         if not violations:
-            return _RuleResult(rule_id=rule_id, description=description,
-                               severity="FAILURE", passed=True,
-                               evidence="package_id values are explicit")
-        return _RuleResult(rule_id=rule_id, description=description,
-                           severity="FAILURE", passed=False,
-                           failure_detail=f"NL-V04: Mismatched package_id: {violations}")
+            return _RuleResult(
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
+                evidence="package_id values are explicit",
+            )
+        return _RuleResult(
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=False,
+            failure_detail=f"NL-V04: Mismatched package_id: {violations}",
+        )
 
     def rule_nl_v05(self) -> "RuleResult":
         """NL-V05: PROBE_CONFIRMED entries must have probe_evidence field."""
@@ -246,18 +300,23 @@ class NonLowCodeValidatorRules:
             return skip
         entries = self._nl_load_registry_entries()
         violations = [
-            e.get("type_name")
-            for e in entries
-            if e.get("status") == "PROBE_CONFIRMED"
-            and not e.get("probe_evidence")
+            e.get("type_name") for e in entries if e.get("status") == "PROBE_CONFIRMED" and not e.get("probe_evidence")
         ]
         if not violations:
-            return _RuleResult(rule_id=rule_id, description=description,
-                               severity="FAILURE", passed=True,
-                               evidence="All PROBE_CONFIRMED entries have probe_evidence")
-        return _RuleResult(rule_id=rule_id, description=description,
-                           severity="FAILURE", passed=False,
-                           failure_detail=f"NL-V05: PROBE_CONFIRMED missing probe_evidence: {violations}")
+            return _RuleResult(
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
+                evidence="All PROBE_CONFIRMED entries have probe_evidence",
+            )
+        return _RuleResult(
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=False,
+            failure_detail=f"NL-V05: PROBE_CONFIRMED missing probe_evidence: {violations}",
+        )
 
     def rule_nl_v06(self) -> "RuleResult":
         """NL-V06: VERIFIED_PUBLISHABLE entries must have probe_evidence field."""
@@ -269,16 +328,23 @@ class NonLowCodeValidatorRules:
         violations = [
             e.get("type_name")
             for e in entries
-            if e.get("status") == "VERIFIED_PUBLISHABLE"
-            and not e.get("probe_evidence")
+            if e.get("status") == "VERIFIED_PUBLISHABLE" and not e.get("probe_evidence")
         ]
         if not violations:
-            return _RuleResult(rule_id=rule_id, description=description,
-                               severity="FAILURE", passed=True,
-                               evidence="All VERIFIED_PUBLISHABLE entries have probe_evidence")
-        return _RuleResult(rule_id=rule_id, description=description,
-                           severity="FAILURE", passed=False,
-                           failure_detail=f"NL-V06: VERIFIED_PUBLISHABLE missing probe_evidence: {violations}")
+            return _RuleResult(
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
+                evidence="All VERIFIED_PUBLISHABLE entries have probe_evidence",
+            )
+        return _RuleResult(
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=False,
+            failure_detail=f"NL-V06: VERIFIED_PUBLISHABLE missing probe_evidence: {violations}",
+        )
 
     def rule_nl_v07(self) -> "RuleResult":
         """NL-V07: PROBE_FAILED entries must have failure_taxonomy from 5-code enum."""
@@ -290,16 +356,23 @@ class NonLowCodeValidatorRules:
         violations = [
             f"{e.get('type_name')}:{e.get('failure_taxonomy')}"
             for e in entries
-            if e.get("status") == "PROBE_FAILED"
-            and e.get("failure_taxonomy") not in _VALID_FAILURE_TAXONOMIES
+            if e.get("status") == "PROBE_FAILED" and e.get("failure_taxonomy") not in _VALID_FAILURE_TAXONOMIES
         ]
         if not violations:
-            return _RuleResult(rule_id=rule_id, description=description,
-                               severity="FAILURE", passed=True,
-                               evidence="All PROBE_FAILED entries have valid failure_taxonomy")
-        return _RuleResult(rule_id=rule_id, description=description,
-                           severity="FAILURE", passed=False,
-                           failure_detail=f"NL-V07: Invalid failure_taxonomy: {violations}")
+            return _RuleResult(
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
+                evidence="All PROBE_FAILED entries have valid failure_taxonomy",
+            )
+        return _RuleResult(
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=False,
+            failure_detail=f"NL-V07: Invalid failure_taxonomy: {violations}",
+        )
 
     def rule_nl_v08(self) -> "RuleResult":
         """NL-V08: REJECTED_BY_VALIDATOR entries must have rejection_reason."""
@@ -311,16 +384,23 @@ class NonLowCodeValidatorRules:
         violations = [
             e.get("type_name")
             for e in entries
-            if e.get("status") == "REJECTED_BY_VALIDATOR"
-            and e.get("rejection_reason") not in _VALID_REJECTION_REASONS
+            if e.get("status") == "REJECTED_BY_VALIDATOR" and e.get("rejection_reason") not in _VALID_REJECTION_REASONS
         ]
         if not violations:
-            return _RuleResult(rule_id=rule_id, description=description,
-                               severity="FAILURE", passed=True,
-                               evidence="All REJECTED_BY_VALIDATOR entries have rejection_reason")
-        return _RuleResult(rule_id=rule_id, description=description,
-                           severity="FAILURE", passed=False,
-                           failure_detail=f"NL-V08: REJECTED_BY_VALIDATOR missing rejection_reason: {violations}")
+            return _RuleResult(
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
+                evidence="All REJECTED_BY_VALIDATOR entries have rejection_reason",
+            )
+        return _RuleResult(
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=False,
+            failure_detail=f"NL-V08: REJECTED_BY_VALIDATOR missing rejection_reason: {violations}",
+        )
 
     def rule_nl_v09(self) -> "RuleResult":
         """NL-V09: assembly_fingerprint must be a 64-char hex string if present."""
@@ -335,12 +415,20 @@ class NonLowCodeValidatorRules:
             if fp and (len(fp) != 64 or not all(c in "0123456789abcdef" for c in fp.lower())):
                 violations.append(f"{e.get('type_name')}:'{fp}'")
         if not violations:
-            return _RuleResult(rule_id=rule_id, description=description,
-                               severity="FAILURE", passed=True,
-                               evidence="All assembly_fingerprint values are valid")
-        return _RuleResult(rule_id=rule_id, description=description,
-                           severity="FAILURE", passed=False,
-                           failure_detail=f"NL-V09: Invalid fingerprints: {violations}")
+            return _RuleResult(
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
+                evidence="All assembly_fingerprint values are valid",
+            )
+        return _RuleResult(
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=False,
+            failure_detail=f"NL-V09: Invalid fingerprints: {violations}",
+        )
 
     def rule_nl_v10(self) -> "RuleResult":
         """NL-V10: PROBE_CONFIRMED entries must have a last_validated timestamp."""
@@ -350,17 +438,23 @@ class NonLowCodeValidatorRules:
             return skip
         entries = self._nl_load_registry_entries()
         violations = [
-            e.get("type_name")
-            for e in entries
-            if e.get("status") == "PROBE_CONFIRMED" and not e.get("last_validated")
+            e.get("type_name") for e in entries if e.get("status") == "PROBE_CONFIRMED" and not e.get("last_validated")
         ]
         if not violations:
-            return _RuleResult(rule_id=rule_id, description=description,
-                               severity="FAILURE", passed=True,
-                               evidence="All PROBE_CONFIRMED entries have last_validated")
-        return _RuleResult(rule_id=rule_id, description=description,
-                           severity="FAILURE", passed=False,
-                           failure_detail=f"NL-V10: PROBE_CONFIRMED missing last_validated: {violations}")
+            return _RuleResult(
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
+                evidence="All PROBE_CONFIRMED entries have last_validated",
+            )
+        return _RuleResult(
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=False,
+            failure_detail=f"NL-V10: PROBE_CONFIRMED missing last_validated: {violations}",
+        )
 
     def rule_nl_v11(self) -> "RuleResult":
         """NL-V11: entries must not have status=PROBE_UNKNOWN (forbidden unclassified status)."""
@@ -371,12 +465,20 @@ class NonLowCodeValidatorRules:
         entries = self._nl_load_registry_entries()
         violations = [e.get("type_name") for e in entries if e.get("status") == "PROBE_UNKNOWN"]
         if not violations:
-            return _RuleResult(rule_id=rule_id, description=description,
-                               severity="FAILURE", passed=True,
-                               evidence="No PROBE_UNKNOWN entries found")
-        return _RuleResult(rule_id=rule_id, description=description,
-                           severity="FAILURE", passed=False,
-                           failure_detail=f"NL-V11: Forbidden PROBE_UNKNOWN status: {violations}")
+            return _RuleResult(
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
+                evidence="No PROBE_UNKNOWN entries found",
+            )
+        return _RuleResult(
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=False,
+            failure_detail=f"NL-V11: Forbidden PROBE_UNKNOWN status: {violations}",
+        )
 
     def rule_nl_v12(self) -> "RuleResult":
         """NL-V12: AI-sourced entries (ai_source_flag=True) must not be VERIFIED_PUBLISHABLE."""
@@ -391,12 +493,20 @@ class NonLowCodeValidatorRules:
             if e.get("ai_source_flag") is True and e.get("status") == "VERIFIED_PUBLISHABLE"
         ]
         if not violations:
-            return _RuleResult(rule_id=rule_id, description=description,
-                               severity="FAILURE", passed=True,
-                               evidence="No AI-sourced VERIFIED_PUBLISHABLE entries")
-        return _RuleResult(rule_id=rule_id, description=description,
-                           severity="FAILURE", passed=False,
-                           failure_detail=f"NL-V12: AI entries must not be VERIFIED_PUBLISHABLE: {violations}")
+            return _RuleResult(
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
+                evidence="No AI-sourced VERIFIED_PUBLISHABLE entries",
+            )
+        return _RuleResult(
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=False,
+            failure_detail=f"NL-V12: AI entries must not be VERIFIED_PUBLISHABLE: {violations}",
+        )
 
     def rule_nl_v13(self) -> "RuleResult":
         """NL-V13: registry entries must not reference format-authority paths."""
@@ -411,12 +521,20 @@ class NonLowCodeValidatorRules:
             if "format-authority" in pe:
                 violations.append(f"{e.get('type_name')}:{pe}")
         if not violations:
-            return _RuleResult(rule_id=rule_id, description=description,
-                               severity="FAILURE", passed=True,
-                               evidence="No format-authority references in registry entries")
-        return _RuleResult(rule_id=rule_id, description=description,
-                           severity="FAILURE", passed=False,
-                           failure_detail=f"NL-V13: format-authority referenced: {violations}")
+            return _RuleResult(
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
+                evidence="No format-authority references in registry entries",
+            )
+        return _RuleResult(
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=False,
+            failure_detail=f"NL-V13: format-authority referenced: {violations}",
+        )
 
     def rule_nl_v14(self) -> "RuleResult":
         """NL-V14: type_name and method_name must be non-empty in all entries."""
@@ -425,18 +543,22 @@ class NonLowCodeValidatorRules:
         if skip:
             return skip
         entries = self._nl_load_registry_entries()
-        violations = [
-            str(i)
-            for i, e in enumerate(entries)
-            if not e.get("type_name") or not e.get("method_name")
-        ]
+        violations = [str(i) for i, e in enumerate(entries) if not e.get("type_name") or not e.get("method_name")]
         if not violations:
-            return _RuleResult(rule_id=rule_id, description=description,
-                               severity="FAILURE", passed=True,
-                               evidence=f"All {len(entries)} entries have type_name and method_name")
-        return _RuleResult(rule_id=rule_id, description=description,
-                           severity="FAILURE", passed=False,
-                           failure_detail=f"NL-V14: Missing type_name or method_name at indices: {violations}")
+            return _RuleResult(
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
+                evidence=f"All {len(entries)} entries have type_name and method_name",
+            )
+        return _RuleResult(
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=False,
+            failure_detail=f"NL-V14: Missing type_name or method_name at indices: {violations}",
+        )
 
     def rule_nl_v15(self) -> "RuleResult":
         """NL-V15: When fallback_strategy is capability_registry and namespace_patterns is empty,
@@ -449,7 +571,9 @@ class NonLowCodeValidatorRules:
         skipped.
         """
         rule_id = "NL-V15"
-        description = "capability_registry families with empty namespace_patterns must have at least one PROBE_CONFIRMED entry"
+        description = (
+            "capability_registry families with empty namespace_patterns must have at least one PROBE_CONFIRMED entry"
+        )
         skip = self._nl_skip_check(rule_id, description)
         if skip:
             return skip
@@ -466,20 +590,32 @@ class NonLowCodeValidatorRules:
 
         # Only applies when fallback_strategy is capability_registry and namespace_patterns is empty
         if fallback_strategy != "capability_registry" or namespace_patterns:
-            return _RuleResult(rule_id=rule_id, description=description,
-                               severity="FAILURE", passed=True,
-                               evidence="SKIP: rule only applies when fallback_strategy=capability_registry and namespace_patterns=[]")
+            return _RuleResult(
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
+                evidence="SKIP: rule only applies when fallback_strategy=capability_registry and namespace_patterns=[]",
+            )
 
         entries = self._nl_load_registry_entries()
         confirmed = [e for e in entries if e.get("status") == "PROBE_CONFIRMED"]
         if confirmed:
-            return _RuleResult(rule_id=rule_id, description=description,
-                               severity="FAILURE", passed=True,
-                               evidence=f"{len(confirmed)} PROBE_CONFIRMED entries found — generation-ready candidates exist")
-        return _RuleResult(rule_id=rule_id, description=description,
-                           severity="FAILURE", passed=False,
-                           failure_detail=(
-                               "NL-V15: fallback_strategy=capability_registry with empty namespace_patterns "
-                               "but no PROBE_CONFIRMED entries — non-LowCode pipeline produces zero generation-ready candidates. "
-                               "Run probe validation to promote at least one entry to PROBE_CONFIRMED."
-                           ))
+            return _RuleResult(
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
+                evidence=f"{len(confirmed)} PROBE_CONFIRMED entries found — generation-ready candidates exist",
+            )
+        return _RuleResult(
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=False,
+            failure_detail=(
+                "NL-V15: fallback_strategy=capability_registry with empty namespace_patterns "
+                "but no PROBE_CONFIRMED entries — non-LowCode pipeline produces zero generation-ready candidates. "
+                "Run probe validation to promote at least one entry to PROBE_CONFIRMED."
+            ),
+        )

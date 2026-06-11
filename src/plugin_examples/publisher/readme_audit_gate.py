@@ -50,12 +50,14 @@ BLOCKED_README_AUDIT_STALE = "blocked_readme_audit_stale"
 _README_AUDIT_FILENAME = "readme-audit.json"
 
 # Fields that prove a README audit is content-based (not size/presence only)
-_CONTENT_AUDIT_PROOF_FIELDS = frozenset({
-    "workflow_type_in_readme",
-    "family_in_readme",
-    "package_id_in_readme",
-    "content_audit",
-})
+_CONTENT_AUDIT_PROOF_FIELDS = frozenset(
+    {
+        "workflow_type_in_readme",
+        "family_in_readme",
+        "package_id_in_readme",
+        "content_audit",
+    }
+)
 
 # Shallow audit detection: if none of these fields are present, it's size/presence only
 _SHALLOW_DETECTION_FIELDS = _CONTENT_AUDIT_PROOF_FIELDS
@@ -114,6 +116,7 @@ def check_readme_audit_gate(
     # Load and validate the audit artifact
     try:
         import json
+
         audit_data = json.loads(audit_path.read_text(encoding="utf-8"))
     except (OSError, ValueError) as exc:
         result["blocked_reason"] = BLOCKED_README_AUDIT_MISSING
@@ -138,27 +141,27 @@ def check_readme_audit_gate(
     # Check for audit failures
     # IMPORTANT: APPROVE_README_PUSH does NOT bypass this check.
     # Only APPROVE_README_AUDIT_OVERRIDE (emergency override) can bypass a failed audit.
-    failed_records = [
-        r for r in records
-        if r.get("content_audit") in ("FAIL", "NEEDS_REVIEW")
-    ]
+    failed_records = [r for r in records if r.get("content_audit") in ("FAIL", "NEEDS_REVIEW")]
     if failed_records:
         if not audit_override:
             result["blocked_reason"] = BLOCKED_README_AUDIT_FAILED
             logger.warning(
                 "README audit gate BLOCKED for %s: %d records failed content checks. "
                 "Set %s=%s to emergency-override (records evidence).",
-                family, len(failed_records),
-                README_AUDIT_OVERRIDE_ENV_VAR, README_AUDIT_OVERRIDE_VALUE,
+                family,
+                len(failed_records),
+                README_AUDIT_OVERRIDE_ENV_VAR,
+                README_AUDIT_OVERRIDE_VALUE,
             )
             return result
         # Emergency override applied — record evidence and allow through
         result["audit_override_used"] = True
         logger.warning(
-            "README audit gate: EMERGENCY OVERRIDE applied for %s "
-            "(%d failed records bypassed via %s=%s)",
-            family, len(failed_records),
-            README_AUDIT_OVERRIDE_ENV_VAR, README_AUDIT_OVERRIDE_VALUE,
+            "README audit gate: EMERGENCY OVERRIDE applied for %s " "(%d failed records bypassed via %s=%s)",
+            family,
+            len(failed_records),
+            README_AUDIT_OVERRIDE_ENV_VAR,
+            README_AUDIT_OVERRIDE_VALUE,
         )
 
     # All checks pass

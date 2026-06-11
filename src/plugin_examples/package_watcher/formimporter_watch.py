@@ -37,6 +37,7 @@ REPRO_HARNESS_PATH = "workspace/defect-repros/pdf-formimporter-nullref"
 @dataclass
 class FormImporterWatchResult:
     """Result of a FormImporter version-watch check."""
+
     checked_at: str
     current_version: str | None
     latest_nuget_version: str | None
@@ -52,6 +53,7 @@ class FormImporterWatchResult:
 
 def _compare_versions(a: str, b: str) -> int:
     """Compare two semver-like version strings. Returns -1, 0, or 1."""
+
     def parts(v: str) -> tuple[int, ...]:
         return tuple(int(x) for x in v.split(".") if x.isdigit())
 
@@ -72,6 +74,7 @@ def _get_installed_version(repo_root: Path) -> str | None:
         content = props_path.read_text(encoding="utf-8")
         # Find: <PackageVersion Include="Aspose.PDF" Version="..." />
         import re
+
         m = re.search(r'Include="Aspose\.PDF"[^>]*Version="([^"]+)"', content)
         if m:
             return m.group(1)
@@ -84,6 +87,7 @@ def _get_latest_nuget_version(package_id: str) -> str | None:
     """Fetch latest stable version from NuGet v3 API."""
     try:
         import urllib.request
+
         url = f"https://api.nuget.org/v3-flatcontainer/{package_id.lower()}/index.json"
         with urllib.request.urlopen(url, timeout=15) as resp:
             data = json.loads(resp.read().decode("utf-8"))
@@ -117,7 +121,10 @@ def _run_repro_harness(repo_root: Path) -> tuple[bool, str, int]:
         # First restore
         restore = subprocess.run(
             ["dotnet", "restore", str(project_file)],
-            capture_output=True, text=True, cwd=str(harness_path), timeout=120,
+            capture_output=True,
+            text=True,
+            cwd=str(harness_path),
+            timeout=120,
         )
         if restore.returncode != 0:
             return False, f"dotnet restore failed:\n{restore.stdout}\n{restore.stderr}", restore.returncode
@@ -125,14 +132,13 @@ def _run_repro_harness(repo_root: Path) -> tuple[bool, str, int]:
         # Then run
         run = subprocess.run(
             ["dotnet", "run", "--project", str(project_file)],
-            capture_output=True, text=True, cwd=str(harness_path), timeout=120,
+            capture_output=True,
+            text=True,
+            cwd=str(harness_path),
+            timeout=120,
         )
         combined = run.stdout + "\n" + run.stderr
-        passed = (
-            run.returncode == 0
-            and "NullReferenceException" not in combined
-            and "Exception" not in combined
-        )
+        passed = run.returncode == 0 and "NullReferenceException" not in combined and "Exception" not in combined
         return passed, combined, run.returncode
     except subprocess.TimeoutExpired:
         return False, "Repro harness timed out after 120s", -1
@@ -170,13 +176,9 @@ def check_formimporter(
     if latest:
         version_advanced = _compare_versions(latest, DEFECT_VERSION) > 0
         if version_advanced:
-            notes.append(
-                f"NuGet latest {latest} > defect version {DEFECT_VERSION} — retest eligible"
-            )
+            notes.append(f"NuGet latest {latest} > defect version {DEFECT_VERSION} — retest eligible")
         else:
-            notes.append(
-                f"NuGet latest {latest} <= defect version {DEFECT_VERSION} — still blocked"
-            )
+            notes.append(f"NuGet latest {latest} <= defect version {DEFECT_VERSION} — still blocked")
     elif current:
         version_advanced = _compare_versions(current, DEFECT_VERSION) > 0
         notes.append(f"Using installed version {current} for comparison (NuGet unavailable)")
@@ -210,10 +212,7 @@ def check_formimporter(
             "TC-PDF-FORMIMPORTER-RETEST can be closed. Proceed to Wave H generation."
         )
     else:
-        notes.append(
-            f"Defect still reproduces on version {latest}. "
-            "TC-PDF-FORMIMPORTER-RETEST remains open."
-        )
+        notes.append(f"Defect still reproduces on version {latest}. " "TC-PDF-FORMIMPORTER-RETEST remains open.")
 
     return FormImporterWatchResult(
         checked_at=checked_at,
@@ -262,16 +261,19 @@ def run_watch_cli(argv: list[str] | None = None) -> int:
         description="Check FormImporter defect status against latest NuGet version",
     )
     parser.add_argument(
-        "--run-repro", action="store_true",
+        "--run-repro",
+        action="store_true",
         help="Run repro harness if version has advanced beyond defect version",
     )
     parser.add_argument(
-        "--output", type=Path,
+        "--output",
+        type=Path,
         default=None,
         help="Write JSON report to this path (default: workspace/verification/latest/formimporter-watch-report.json)",
     )
     parser.add_argument(
-        "--repo-root", type=Path,
+        "--repo-root",
+        type=Path,
         default=Path("."),
         help="Root of the repo (default: current directory)",
     )

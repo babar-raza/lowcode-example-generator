@@ -215,7 +215,8 @@ def lane_e_parity_evidence() -> None:
 
     # 3. Parity dry-run — demonstrate both discovery paths
     # LowCode dry-run: namespace scan → candidates → executor
-    import tempfile, os
+    import tempfile
+    import os
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
 

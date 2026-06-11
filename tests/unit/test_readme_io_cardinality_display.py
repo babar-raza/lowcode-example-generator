@@ -3,6 +3,7 @@
 Verifies that sprint67 root README files contain cardinality annotations
 for multi-input and multi-output types (merger, splitter, extractor).
 """
+
 import re
 from pathlib import Path
 import pytest
@@ -57,8 +58,7 @@ class TestRootReadmeCardinality:
             assert lines, f"README for {family} is empty or missing"
             row = find_table_row(lines, slug)
             assert row is not None, f"{family}: table row for '{slug}' not found"
-            assert expected in row, \
-                f"{family}/{slug}: expected cardinality marker '{expected}' in row: {row!r}"
+            assert expected in row, f"{family}/{slug}: expected cardinality marker '{expected}' in row: {row!r}"
 
     def test_multi_output_annotations_present(self):
         for family, slug, expected in MULTI_OUTPUT_TYPES:
@@ -66,8 +66,7 @@ class TestRootReadmeCardinality:
             assert lines, f"README for {family} is empty or missing"
             row = find_table_row(lines, slug)
             assert row is not None, f"{family}: table row for '{slug}' not found"
-            assert expected in row, \
-                f"{family}/{slug}: expected cardinality marker '{expected}' in row: {row!r}"
+            assert expected in row, f"{family}/{slug}: expected cardinality marker '{expected}' in row: {row!r}"
 
     def test_cardinality_key_legend_present_in_patched_families(self):
         """Families with cardinality changes must have the legend note."""
@@ -77,15 +76,20 @@ class TestRootReadmeCardinality:
             if not path.exists():
                 continue
             content = path.read_text(encoding="utf-8")
-            assert "Cardinality key" in content, \
-                f"{fam}: missing 'Cardinality key' legend in sprint67 README"
+            assert "Cardinality key" in content, f"{fam}: missing 'Cardinality key' legend in sprint67 README"
 
     def test_cells_single_cardinality_types_unchanged(self):
         """Single-cardinality types must NOT have ×N markers."""
         lines = get_readme_lines("cells")
-        single_slugs = ["html-converter", "image-converter", "json-converter",
-                        "pdf-converter", "spreadsheet-converter", "spreadsheet-locker",
-                        "text-converter"]
+        single_slugs = [
+            "html-converter",
+            "image-converter",
+            "json-converter",
+            "pdf-converter",
+            "spreadsheet-converter",
+            "spreadsheet-locker",
+            "text-converter",
+        ]
         for slug in single_slugs:
             row = find_table_row(lines, slug)
             if row is None:
@@ -95,8 +99,9 @@ class TestRootReadmeCardinality:
             cells = [c.strip() for c in row.split("|")]
             # cells[2] = example slug, cells[3] = API, cells[4] = input, cells[5] = output
             if len(cells) >= 6:
-                assert "×N" not in cells[4] and "2×" not in cells[4], \
-                    f"{slug}: single-input type should not have cardinality marker in input: {cells[4]!r}"
+                assert (
+                    "×N" not in cells[4] and "2×" not in cells[4]
+                ), f"{slug}: single-input type should not have cardinality marker in input: {cells[4]!r}"
 
     def test_words_single_cardinality_types_unchanged(self):
         """Words single-cardinality types must NOT have ×N markers."""
@@ -108,12 +113,14 @@ class TestRootReadmeCardinality:
                 continue
             cells = [c.strip() for c in row.split("|")]
             if len(cells) >= 6:
-                assert "×N" not in cells[4] and "2×" not in cells[4], \
-                    f"words/{slug}: single-input type should not have cardinality marker in input: {cells[4]!r}"
+                assert (
+                    "×N" not in cells[4] and "2×" not in cells[4]
+                ), f"words/{slug}: single-input type should not have cardinality marker in input: {cells[4]!r}"
 
     def test_diagram_readme_unchanged_no_cardinality_markers(self):
         """Diagram has only single-cardinality types — no ×N markers expected."""
         lines = get_readme_lines("diagram")
         content = "\n".join(lines)
-        assert "×N" not in content, \
-            "diagram README: unexpected ×N cardinality marker (diagram has no multi-cardinality types)"
+        assert (
+            "×N" not in content
+        ), "diagram README: unexpected ×N cardinality marker (diagram has no multi-cardinality types)"

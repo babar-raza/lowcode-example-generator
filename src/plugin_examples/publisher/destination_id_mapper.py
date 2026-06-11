@@ -41,10 +41,12 @@ REPO_DIR_ALIAS_MAP: dict[str, str] = {
 # These APIs don't write to a named output file with an extension;
 # they return output via ResultCollection. The `output_format` claim is
 # proved by API contract, not by a literal file extension in Program.cs.
-RESULT_COLLECTION_OUTPUT_APIS: frozenset[str] = frozenset({
-    "pdf-image-extractor",   # ImageExtractor → ResultCollection contains PNG images
-    "pdf-text-extractor",    # TextExtractor → StringResult (text, no file)
-})
+RESULT_COLLECTION_OUTPUT_APIS: frozenset[str] = frozenset(
+    {
+        "pdf-image-extractor",  # ImageExtractor → ResultCollection contains PNG images
+        "pdf-text-extractor",  # TextExtractor → StringResult (text, no file)
+    }
+)
 
 
 class DestinationIdMapper:
@@ -100,7 +102,7 @@ class DestinationIdMapper:
         # Standard: strip family prefix
         prefix = f"{family}-"
         if scenario_id.startswith(prefix):
-            return scenario_id[len(prefix):]
+            return scenario_id[len(prefix) :]
         return scenario_id
 
     def is_double_family_prefix(self, family: str, scenario_id: str) -> bool:

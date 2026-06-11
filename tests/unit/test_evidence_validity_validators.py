@@ -7,6 +7,7 @@ Regression fixtures derived from Wave 13 evidence integrity defects:
   W13-CONTRA-03: Adversarial review is PRE_CLOSEOUT only
   W13-CONTRA-04: Taskcard claims IV PASS while bundled IV shows IV_FAIL
 """
+
 import pytest
 
 from src.plugin_examples.fixture_factory.evidence_validity_validators import (
@@ -25,6 +26,7 @@ from src.plugin_examples.fixture_factory.evidence_validity_validators import (
 # ─────────────────────────────────────────────────────────────────
 # EVC-01: Bundled IV must be IV_PASS or have a later IV_PASS
 # ─────────────────────────────────────────────────────────────────
+
 
 class TestEVC01:
     def test_pass_when_bundled_iv_is_pass(self):
@@ -63,6 +65,7 @@ class TestEVC01:
 # EVC-02: Bundle must contain final/sprint-closeout.json
 # ─────────────────────────────────────────────────────────────────
 
+
 class TestEVC02:
     def test_pass_when_closeout_in_bundle(self):
         entries = [
@@ -92,9 +95,7 @@ class TestEVC02:
         assert r["status"] == "PASS"
 
     def test_pass_with_sprint_prefix_path_in_entries(self):
-        entries = [
-            "lowcode-plugin-canonical-package-wave14/final/sprint-closeout.json"
-        ]
+        entries = ["lowcode-plugin-canonical-package-wave14/final/sprint-closeout.json"]
         r = evc_02_bundle_must_contain_final_closeout(entries)
         assert r["status"] == "PASS"
 
@@ -102,6 +103,7 @@ class TestEVC02:
 # ─────────────────────────────────────────────────────────────────
 # EVC-03: Adversarial review must not be PRE_CLOSEOUT only
 # ─────────────────────────────────────────────────────────────────
+
 
 class TestEVC03:
     def test_pass_when_not_sprint_complete(self):
@@ -125,15 +127,14 @@ class TestEVC03:
         assert r["status"] == "PASS"
 
     def test_fail_when_sprint_complete_and_no_adversarial_review(self):
-        r = evc_03_adversarial_review_must_not_be_pre_closeout_only(
-            None, sprint_verdict="SPRINT_COMPLETE"
-        )
+        r = evc_03_adversarial_review_must_not_be_pre_closeout_only(None, sprint_verdict="SPRINT_COMPLETE")
         assert r["status"] == "FAIL"
 
 
 # ─────────────────────────────────────────────────────────────────
 # EVC-04: IV verdict must agree with sprint verdict
 # ─────────────────────────────────────────────────────────────────
+
 
 class TestEVC04:
     def test_pass_when_both_pass(self):
@@ -158,6 +159,7 @@ class TestEVC04:
 # ─────────────────────────────────────────────────────────────────
 # EVC-05: PRE_CLOSEOUT adversarial review requires final review
 # ─────────────────────────────────────────────────────────────────
+
 
 class TestEVC05:
     def test_pass_when_no_pre_closeout(self):
@@ -185,6 +187,7 @@ class TestEVC05:
 # EVC-06: Sidecar path referenced must be verified
 # ─────────────────────────────────────────────────────────────────
 
+
 class TestEVC06:
     def test_pass_when_no_sidecar_path(self):
         r = evc_06_sidecar_path_referenced_must_be_verifiable({})
@@ -205,6 +208,7 @@ class TestEVC06:
 # ─────────────────────────────────────────────────────────────────
 # EVC-07: Bundle entry count matches closeout record
 # ─────────────────────────────────────────────────────────────────
+
 
 class TestEVC07:
     def test_pass_when_counts_match(self):
@@ -231,44 +235,36 @@ class TestEVC07:
 # EVC-08: Sprint verdict consistent across artifacts
 # ─────────────────────────────────────────────────────────────────
 
+
 class TestEVC08:
     def test_pass_all_consistent(self):
-        r = evc_08_sprint_verdict_consistent_across_artifacts(
-            "SPRINT_COMPLETE", "SPRINT_COMPLETE", "IV_PASS"
-        )
+        r = evc_08_sprint_verdict_consistent_across_artifacts("SPRINT_COMPLETE", "SPRINT_COMPLETE", "IV_PASS")
         assert r["status"] == "PASS"
 
     def test_pass_non_sprint_complete(self):
-        r = evc_08_sprint_verdict_consistent_across_artifacts(
-            "IN_PROGRESS", "LANE_H_IN_PROGRESS", "IV_FAIL"
-        )
+        r = evc_08_sprint_verdict_consistent_across_artifacts("IN_PROGRESS", "LANE_H_IN_PROGRESS", "IV_FAIL")
         assert r["status"] == "PASS"
 
     def test_fail_when_sprint_complete_but_lane_ledger_in_progress(self):
-        r = evc_08_sprint_verdict_consistent_across_artifacts(
-            "SPRINT_COMPLETE", "LANE_H_IN_PROGRESS", "IV_PASS"
-        )
+        r = evc_08_sprint_verdict_consistent_across_artifacts("SPRINT_COMPLETE", "LANE_H_IN_PROGRESS", "IV_PASS")
         assert r["status"] == "FAIL"
         assert "LANE_H_IN_PROGRESS" in r["message"]
 
     def test_fail_when_sprint_complete_but_iv_fail(self):
-        r = evc_08_sprint_verdict_consistent_across_artifacts(
-            "SPRINT_COMPLETE", "SPRINT_COMPLETE", "IV_FAIL"
-        )
+        r = evc_08_sprint_verdict_consistent_across_artifacts("SPRINT_COMPLETE", "SPRINT_COMPLETE", "IV_FAIL")
         assert r["status"] == "FAIL"
         assert "IV_FAIL" in r["message"]
 
     def test_pass_when_lane_ledger_contains_complete(self):
         """Any lane ledger verdict containing 'COMPLETE' is accepted."""
-        r = evc_08_sprint_verdict_consistent_across_artifacts(
-            "SPRINT_COMPLETE", "ALL_LANES_COMPLETE", "IV_PASS"
-        )
+        r = evc_08_sprint_verdict_consistent_across_artifacts("SPRINT_COMPLETE", "ALL_LANES_COMPLETE", "IV_PASS")
         assert r["status"] == "PASS"
 
 
 # ─────────────────────────────────────────────────────────────────
 # run_all_evc_validators aggregate runner
 # ─────────────────────────────────────────────────────────────────
+
 
 class TestRunAllEVC:
     def test_all_pass_clean_sprint(self):
@@ -294,11 +290,11 @@ class TestRunAllEVC:
         """Regression: Wave 13 exact defect scenario must produce FAIL."""
         closeout = {"sidecar_path": ".local/evidence-bundles/wave13.zip.sha256"}
         result = run_all_evc_validators(
-            bundled_iv_verdict="IV_FAIL",           # W13-CONTRA-01
+            bundled_iv_verdict="IV_FAIL",  # W13-CONTRA-01
             bundle_entries=["reports/wave13/taskcards/taskcards.json"],  # no final/sprint-closeout.json
             adversarial_verdict="ADVERSARIAL_REVIEW_PASS_PRE_CLOSEOUT",  # W13-CONTRA-03
             sprint_verdict="SPRINT_COMPLETE",
-            iv_verdict="IV_FAIL",                   # W13-CONTRA-04
+            iv_verdict="IV_FAIL",  # W13-CONTRA-04
             closeout=closeout,
             lane_ledger_verdict="SPRINT_COMPLETE",
             has_later_iv_pass=False,

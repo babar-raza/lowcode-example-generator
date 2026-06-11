@@ -84,15 +84,15 @@ def extract_package(
     warnings: list[dict] = []
     xml_warning = None
     if xml_path is None:
-        xml_warning = (
-            f"XML documentation not found: {package_id}.xml in {fw_dir}"
+        xml_warning = f"XML documentation not found: {package_id}.xml in {fw_dir}"
+        warnings.append(
+            {
+                "type": "missing_xml_documentation",
+                "package_id": package_id,
+                "framework": selection.selected_framework,
+                "message": xml_warning,
+            }
         )
-        warnings.append({
-            "type": "missing_xml_documentation",
-            "package_id": package_id,
-            "framework": selection.selected_framework,
-            "message": xml_warning,
-        })
         logger.warning(xml_warning)
 
     if warnings:

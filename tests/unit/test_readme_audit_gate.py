@@ -102,10 +102,14 @@ class TestGateBlocksWhenAuditIsShallow(unittest.TestCase):
         """Gate must block if audit has only size/presence fields (no content checks)."""
         with tempfile.TemporaryDirectory() as tmpdir:
             vdir = Path(tmpdir)
-            self._write_shallow_audit(vdir, "cells", [
-                _shallow_record("cells-html-converter"),
-                _shallow_record("cells-image-converter"),
-            ])
+            self._write_shallow_audit(
+                vdir,
+                "cells",
+                [
+                    _shallow_record("cells-html-converter"),
+                    _shallow_record("cells-image-converter"),
+                ],
+            )
             result = check_readme_audit_gate("cells", vdir)
         self.assertFalse(result["gate_passed"])
         self.assertEqual(result["blocked_reason"], BLOCKED_README_AUDIT_SHALLOW)
@@ -126,10 +130,14 @@ class TestGateBlocksWhenAuditHasFailedRecords(unittest.TestCase):
         """Gate must block if any record has content_audit=FAIL or NEEDS_REVIEW."""
         with tempfile.TemporaryDirectory() as tmpdir:
             vdir = Path(tmpdir)
-            self._write_audit(vdir, "pdf", [
-                _content_record("pdf-doc-converter", "MATCH"),
-                _content_record("pdf-image-extractor", "NEEDS_REVIEW"),
-            ])
+            self._write_audit(
+                vdir,
+                "pdf",
+                [
+                    _content_record("pdf-doc-converter", "MATCH"),
+                    _content_record("pdf-image-extractor", "NEEDS_REVIEW"),
+                ],
+            )
             result = check_readme_audit_gate("pdf", vdir)
         self.assertFalse(result["gate_passed"])
         self.assertEqual(result["blocked_reason"], BLOCKED_README_AUDIT_FAILED)
@@ -149,11 +157,15 @@ class TestGatePassesWithContentAudit(unittest.TestCase):
         """Gate must pass if audit is content-based and all records are MATCH."""
         with tempfile.TemporaryDirectory() as tmpdir:
             vdir = Path(tmpdir)
-            self._write_audit(vdir, "cells", [
-                _content_record("cells-html-converter"),
-                _content_record("cells-pdf-converter"),
-                _content_record("cells-image-converter"),
-            ])
+            self._write_audit(
+                vdir,
+                "cells",
+                [
+                    _content_record("cells-html-converter"),
+                    _content_record("cells-pdf-converter"),
+                    _content_record("cells-image-converter"),
+                ],
+            )
             result = check_readme_audit_gate("cells", vdir)
         self.assertTrue(result["gate_passed"])
         self.assertIsNone(result["blocked_reason"])
@@ -163,10 +175,14 @@ class TestGatePassesWithContentAudit(unittest.TestCase):
         """Gate passes when audit covers expected records with content checks."""
         with tempfile.TemporaryDirectory() as tmpdir:
             vdir = Path(tmpdir)
-            self._write_audit(vdir, "diagram", [
-                _content_record("diagram-diagram-converter"),
-                _content_record("diagram-pdf-converter"),
-            ])
+            self._write_audit(
+                vdir,
+                "diagram",
+                [
+                    _content_record("diagram-diagram-converter"),
+                    _content_record("diagram-pdf-converter"),
+                ],
+            )
             result = check_readme_audit_gate("diagram", vdir)
         self.assertTrue(result["gate_passed"])
         self.assertEqual(result["audit_record_count"], 2)
@@ -175,11 +191,16 @@ class TestGatePassesWithContentAudit(unittest.TestCase):
         """APPROVE_README_PUSH does NOT bypass a failed audit (Sprint 62 hardening)."""
         with tempfile.TemporaryDirectory() as tmpdir:
             vdir = Path(tmpdir)
-            self._write_audit(vdir, "pdf", [
-                _content_record("pdf-image-extractor", "NEEDS_REVIEW"),
-            ])
+            self._write_audit(
+                vdir,
+                "pdf",
+                [
+                    _content_record("pdf-image-extractor", "NEEDS_REVIEW"),
+                ],
+            )
             result = check_readme_audit_gate(
-                "pdf", vdir,
+                "pdf",
+                vdir,
                 readme_push_approval=README_AUDIT_EXPECTED_VALUE,
             )
         self.assertFalse(result["gate_passed"])
@@ -204,9 +225,13 @@ class TestGatePassesWithContentAudit(unittest.TestCase):
         """APPROVE_README_AUDIT_OVERRIDE bypasses a failed audit (emergency only)."""
         with tempfile.TemporaryDirectory() as tmpdir:
             vdir = Path(tmpdir)
-            self._write_audit(vdir, "pdf", [
-                _content_record("pdf-image-extractor", "NEEDS_REVIEW"),
-            ])
+            self._write_audit(
+                vdir,
+                "pdf",
+                [
+                    _content_record("pdf-image-extractor", "NEEDS_REVIEW"),
+                ],
+            )
             with patch.dict(os.environ, {README_AUDIT_OVERRIDE_ENV_VAR: README_AUDIT_OVERRIDE_VALUE}):
                 result = check_readme_audit_gate("pdf", vdir)
         self.assertTrue(result["gate_passed"])

@@ -4,6 +4,7 @@ Package invariant rules for dry-run example packages.
 Each rule returns None (pass) or a string violation message.
 Rules are numbered INV-01 through INV-16.
 """
+
 import json
 from pathlib import Path
 from typing import Callable, Optional
@@ -17,6 +18,7 @@ def invariant(code: str):
     def decorator(fn: Rule):
         REGISTRY.append((code, fn))
         return fn
+
     return decorator
 
 
@@ -127,8 +129,9 @@ def check_no_hardcoded_absolute_paths(pkg_dir: Path) -> Optional[str]:
     for cs_file in pkg_dir.glob("*.cs"):
         content = cs_file.read_text(encoding="utf-8", errors="replace")
         import re
+
         # Windows absolute paths like C:\Users\...
-        if re.search(r'[A-Z]:\\\\Users\\\\', content) or re.search(r'"[A-Z]:\\\\', content):
+        if re.search(r"[A-Z]:\\\\Users\\\\", content) or re.search(r'"[A-Z]:\\\\', content):
             return f"INV-13: Hardcoded Windows absolute path in {cs_file.name}"
         # Unix absolute paths
         if '"/home/' in content or '"/Users/' in content:

@@ -3,6 +3,7 @@
 These validators would have caught every non-LowCode pipeline flaw before PR creation.
 All checks are offline (no network), deterministic, and additive.
 """
+
 from __future__ import annotations
 
 import json
@@ -62,7 +63,10 @@ def check_ppv_03_branch_naming_warn(pr_packet: dict, result: PpvResult) -> None:
     ns = pr_packet.get("namespace_source", "LOWCODE")
     branch = pr_packet.get("branch_name", "")
     if ns == "NON_LOWCODE_PLUGIN" and branch.startswith("lowcode/"):
-        result.warn("PPV-03", f"Branch '{branch}' uses 'lowcode/' prefix for NON_LOWCODE_PLUGIN family (legacy; use 'plugins/' for new branches)")
+        result.warn(
+            "PPV-03",
+            f"Branch '{branch}' uses 'lowcode/' prefix for NON_LOWCODE_PLUGIN family (legacy; use 'plugins/' for new branches)",
+        )
     else:
         result.ok("PPV-03", "Branch naming acceptable")
 
@@ -90,7 +94,11 @@ def check_ppv_06_output_validation_not_only_contract(example_dir: Path, result: 
     ov = example_dir / "output-validation.json"
     eo = example_dir / "expected-output.json"
     if ov.exists() and not eo.exists():
-        result.fail("PPV-06", "output-validation.json exists but expected-output.json is missing; internal evidence must not replace public contract", str(example_dir))
+        result.fail(
+            "PPV-06",
+            "output-validation.json exists but expected-output.json is missing; internal evidence must not replace public contract",
+            str(example_dir),
+        )
     else:
         result.ok("PPV-06", "output-validation.json does not substitute expected-output.json")
 
@@ -110,8 +118,12 @@ def check_ppv_08_csproj_no_version(csproj_path: Path, result: PpvResult) -> None
         result.fail("PPV-08", f"csproj not found: {csproj_path}")
         return
     content = csproj_path.read_text(encoding="utf-8")
-    if re.search(r'<PackageReference\s[^>]*Version=', content):
-        result.fail("PPV-08", f"csproj has explicit Version in PackageReference (use central management): {csproj_path.name}", str(csproj_path))
+    if re.search(r"<PackageReference\s[^>]*Version=", content):
+        result.fail(
+            "PPV-08",
+            f"csproj has explicit Version in PackageReference (use central management): {csproj_path.name}",
+            str(csproj_path),
+        )
     else:
         result.ok("PPV-08", f"csproj uses central package management: {csproj_path.name}")
 
@@ -135,8 +147,9 @@ def check_ppv_10_ci_workflow(repo_root: Path, result: PpvResult) -> None:
 
 
 # ─── PPV-11: Folder layout must match approved convention ────────────────────
-def check_ppv_11_folder_layout(example_dir: Path, family: str, slug: str,
-                                 namespace_source: str, result: PpvResult) -> None:
+def check_ppv_11_folder_layout(
+    example_dir: Path, family: str, slug: str, namespace_source: str, result: PpvResult
+) -> None:
     """
     LOWCODE: must be examples/<family>/lowcode/<slug>
     NON_LOWCODE_PLUGIN in plugin-only repo: must be examples/<family>/<slug>
@@ -177,7 +190,10 @@ def check_ppv_12_fixture_provenance(example_dir: Path, result: PpvResult) -> Non
             has_strategy = bool(manifest.get("input_strategy"))
             has_url = bool(manifest.get("canonical_url"))
             if not (has_strategy and has_url):
-                result.warn("PPV-12", f"Fixture {fname} exists but provenance (input_strategy/canonical_url) incomplete in manifest")
+                result.warn(
+                    "PPV-12",
+                    f"Fixture {fname} exists but provenance (input_strategy/canonical_url) incomplete in manifest",
+                )
             else:
                 result.ok("PPV-12", f"Fixture provenance documented: {fname} via {manifest.get('input_strategy')}")
         else:
@@ -268,7 +284,7 @@ def run_all_ppv_checks(
         check_ppv_12_fixture_provenance(ex_dir, result)
         check_ppv_13_manifest_namespace_source(ex_dir, namespace_source, result)
 
-    for entry in (registry_entries or []):
+    for entry in registry_entries or []:
         check_ppv_14_status_not_inflated(entry, result)
 
     check_ppv_16_shared_downstream_path(pipeline_stages or [], result)

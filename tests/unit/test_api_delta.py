@@ -29,12 +29,22 @@ def _make_catalog(version: str = "1.0.0.0", types: list[dict] | None = None) -> 
                 "kind": "class",
                 "is_obsolete": False,
                 "methods": [
-                    {"name": "Process", "return_type": "void", "is_static": True,
-                     "is_obsolete": False, "parameters": []},
+                    {
+                        "name": "Process",
+                        "return_type": "void",
+                        "is_static": True,
+                        "is_obsolete": False,
+                        "parameters": [],
+                    },
                 ],
                 "properties": [
-                    {"name": "Options", "type": "ConvertOptions", "can_read": True,
-                     "can_write": True, "is_obsolete": False},
+                    {
+                        "name": "Options",
+                        "type": "ConvertOptions",
+                        "can_read": True,
+                        "can_write": True,
+                        "is_obsolete": False,
+                    },
                 ],
                 "constructors": [],
             },
@@ -65,13 +75,19 @@ class TestDeltaEngine:
 
     def test_added_type_detected(self):
         old = _make_catalog("1.0.0")
-        new_types = old["namespaces"][0]["types"] + [{
-            "name": "Merger", "full_name": "Aspose.Cells.LowCode.Merger",
-            "kind": "class", "is_obsolete": False,
-            "methods": [{"name": "Merge", "return_type": "void", "is_static": True,
-                         "is_obsolete": False, "parameters": []}],
-            "properties": [], "constructors": [],
-        }]
+        new_types = old["namespaces"][0]["types"] + [
+            {
+                "name": "Merger",
+                "full_name": "Aspose.Cells.LowCode.Merger",
+                "kind": "class",
+                "is_obsolete": False,
+                "methods": [
+                    {"name": "Merge", "return_type": "void", "is_static": True, "is_obsolete": False, "parameters": []}
+                ],
+                "properties": [],
+                "constructors": [],
+            }
+        ]
         new = _make_catalog("2.0.0", new_types)
         delta = compute_delta(new, old)
         assert len(delta.added_types) == 1
@@ -85,21 +101,40 @@ class TestDeltaEngine:
 
     def test_modified_type_detected(self):
         old = _make_catalog("1.0.0")
-        modified_types = [{
-            "name": "Converter", "full_name": "Aspose.Cells.LowCode.Converter",
-            "kind": "class", "is_obsolete": False,
-            "methods": [
-                {"name": "Process", "return_type": "void", "is_static": True,
-                 "is_obsolete": False, "parameters": []},
-                {"name": "ProcessAsync", "return_type": "Task", "is_static": True,
-                 "is_obsolete": False, "parameters": []},
-            ],
-            "properties": [
-                {"name": "Options", "type": "ConvertOptions", "can_read": True,
-                 "can_write": True, "is_obsolete": False},
-            ],
-            "constructors": [],
-        }]
+        modified_types = [
+            {
+                "name": "Converter",
+                "full_name": "Aspose.Cells.LowCode.Converter",
+                "kind": "class",
+                "is_obsolete": False,
+                "methods": [
+                    {
+                        "name": "Process",
+                        "return_type": "void",
+                        "is_static": True,
+                        "is_obsolete": False,
+                        "parameters": [],
+                    },
+                    {
+                        "name": "ProcessAsync",
+                        "return_type": "Task",
+                        "is_static": True,
+                        "is_obsolete": False,
+                        "parameters": [],
+                    },
+                ],
+                "properties": [
+                    {
+                        "name": "Options",
+                        "type": "ConvertOptions",
+                        "can_read": True,
+                        "can_write": True,
+                        "is_obsolete": False,
+                    },
+                ],
+                "constructors": [],
+            }
+        ]
         new = _make_catalog("2.0.0", modified_types)
         delta = compute_delta(new, old)
         assert len(delta.modified_types) == 1
@@ -138,11 +173,17 @@ class TestImpactMapper:
 
     def test_modified_type_impacts_example(self):
         old = _make_catalog("1.0.0")
-        modified = [{
-            "name": "Converter", "full_name": "Aspose.Cells.LowCode.Converter",
-            "kind": "class", "is_obsolete": False,
-            "methods": [], "properties": [], "constructors": [],
-        }]
+        modified = [
+            {
+                "name": "Converter",
+                "full_name": "Aspose.Cells.LowCode.Converter",
+                "kind": "class",
+                "is_obsolete": False,
+                "methods": [],
+                "properties": [],
+                "constructors": [],
+            }
+        ]
         new = _make_catalog("2.0.0", modified)
         delta = compute_delta(new, old)
         existing = {
@@ -156,11 +197,17 @@ class TestImpactMapper:
 
     def test_no_impact_unaffected_example(self):
         old = _make_catalog("1.0.0")
-        new_types = old["namespaces"][0]["types"] + [{
-            "name": "Merger", "full_name": "Aspose.Cells.LowCode.Merger",
-            "kind": "class", "is_obsolete": False,
-            "methods": [], "properties": [], "constructors": [],
-        }]
+        new_types = old["namespaces"][0]["types"] + [
+            {
+                "name": "Merger",
+                "full_name": "Aspose.Cells.LowCode.Merger",
+                "kind": "class",
+                "is_obsolete": False,
+                "methods": [],
+                "properties": [],
+                "constructors": [],
+            }
+        ]
         new = _make_catalog("2.0.0", new_types)
         delta = compute_delta(new, old)
         existing = {

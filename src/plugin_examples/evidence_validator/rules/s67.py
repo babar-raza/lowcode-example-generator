@@ -12,7 +12,6 @@ from plugin_examples.evidence_validator.models import RuleResult
 logger = logging.getLogger(__name__)
 
 
-
 class Sprint67Rules:
     """Rule mixin for evidence validation."""
 
@@ -29,7 +28,8 @@ class Sprint67Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="root-readme/cardinality-audit.json must be present",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="root-readme/cardinality-audit.json not found",
             )
         try:
@@ -38,14 +38,16 @@ class Sprint67Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="root-readme/cardinality-audit.json must be present",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Could not parse cardinality-audit.json: {exc}",
             )
         families = data.get("families", {})
         return RuleResult(
             rule_id=rule_id,
             description="root-readme/cardinality-audit.json must be present",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"cardinality-audit.json present with {len(families)} families",
         )
 
@@ -62,7 +64,8 @@ class Sprint67Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Root READMEs must have cardinality markers for merger/splitter",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="root-readme/per-family/ directory not found",
             )
 
@@ -72,31 +75,31 @@ class Sprint67Rules:
             content = cells_readme.read_text(encoding="utf-8", errors="replace")
             # Look for ×N in merger row
             import re
-            merger_row = next(
-                (ln for ln in content.splitlines() if "spreadsheet-merger" in ln), None
-            )
-            splitter_row = next(
-                (ln for ln in content.splitlines() if "spreadsheet-splitter" in ln), None
-            )
+
+            merger_row = next((ln for ln in content.splitlines() if "spreadsheet-merger" in ln), None)
+            splitter_row = next((ln for ln in content.splitlines() if "spreadsheet-splitter" in ln), None)
             if merger_row and "×N" not in merger_row and "xN" not in merger_row:
                 return RuleResult(
                     rule_id=rule_id,
                     description="Root READMEs must have cardinality markers for merger/splitter",
-                    severity="FAILURE", passed=False,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail="cells-root-readme.md: spreadsheet-merger row missing ×N cardinality marker",
                 )
             if splitter_row and "×N" not in splitter_row and "xN" not in splitter_row:
                 return RuleResult(
                     rule_id=rule_id,
                     description="Root READMEs must have cardinality markers for merger/splitter",
-                    severity="FAILURE", passed=False,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail="cells-root-readme.md: spreadsheet-splitter row missing ×N cardinality marker",
                 )
 
         return RuleResult(
             rule_id=rule_id,
             description="Root READMEs must have cardinality markers for merger/splitter",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="cells-root-readme.md has ×N cardinality markers for merger and splitter",
         )
 
@@ -112,7 +115,8 @@ class Sprint67Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="version/pdf-version-decision.md must be present (S66-D2)",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="version/pdf-version-decision.md not found",
             )
         content = decision_path.read_text(encoding="utf-8", errors="replace")
@@ -120,13 +124,15 @@ class Sprint67Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="version/pdf-version-decision.md must be present (S66-D2)",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="pdf-version-decision.md contains IN_PROGRESS — not complete",
             )
         return RuleResult(
             rule_id=rule_id,
             description="version/pdf-version-decision.md must be present (S66-D2)",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="pdf-version-decision.md is present and complete",
         )
 
@@ -141,7 +147,8 @@ class Sprint67Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="version/version-truth-matrix.json must be present",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="version/version-truth-matrix.json not found",
             )
         try:
@@ -150,14 +157,16 @@ class Sprint67Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="version/version-truth-matrix.json must be present",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Could not parse version-truth-matrix.json: {exc}",
             )
         families = data.get("families", {})
         return RuleResult(
             rule_id=rule_id,
             description="version/version-truth-matrix.json must be present",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"version-truth-matrix.json present with {len(families)} families",
         )
 
@@ -178,7 +187,8 @@ class Sprint67Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Content audit must have no cross-sprint path leakage",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="Neither content-audit-sprint67.json nor content-audit-final.json found",
             )
         try:
@@ -187,7 +197,8 @@ class Sprint67Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Content audit must have no cross-sprint path leakage",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Could not parse {sprint_audit.name}: {exc}",
             )
 
@@ -205,13 +216,15 @@ class Sprint67Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Content audit must have no cross-sprint path leakage",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"{len(stale)} records have stale sprint path refs: {stale[:3]}",
             )
         return RuleResult(
             rule_id=rule_id,
             description="Content audit must have no cross-sprint path leakage",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"All {len(records)} records have clean sprint-specific paths in {sprint_audit.name}",
         )
 
@@ -222,14 +235,13 @@ class Sprint67Rules:
         README Sync plans had unresolved items not explicitly closed or carried.
         """
         rule_id = "legacy_plans_reconciliation_present"
-        idx_path = (
-            self.bundle_dir / "legacy-plan-reconciliation" / "reconciliation-index.md"
-        )
+        idx_path = self.bundle_dir / "legacy-plan-reconciliation" / "reconciliation-index.md"
         if not idx_path.exists():
             return RuleResult(
                 rule_id=rule_id,
                 description="legacy-plan-reconciliation/reconciliation-index.md must be present",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="legacy-plan-reconciliation/reconciliation-index.md not found",
             )
         content = idx_path.read_text(encoding="utf-8", errors="replace")
@@ -237,13 +249,15 @@ class Sprint67Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="legacy-plan-reconciliation/reconciliation-index.md must be present",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="reconciliation-index.md contains IN_PROGRESS — not complete",
             )
         return RuleResult(
             rule_id=rule_id,
             description="legacy-plan-reconciliation/reconciliation-index.md must be present",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="legacy-plan-reconciliation/reconciliation-index.md is present and complete",
         )
 
@@ -266,9 +280,7 @@ class Sprint67Rules:
                 pass
 
         if sprint_num:
-            specific_path = (
-                self.bundle_dir / "destination" / f"content-audit-sprint{sprint_num}.json"
-            )
+            specific_path = self.bundle_dir / "destination" / f"content-audit-sprint{sprint_num}.json"
             if specific_path.exists():
                 try:
                     data = json.loads(specific_path.read_text(encoding="utf-8"))
@@ -276,7 +288,8 @@ class Sprint67Rules:
                     return RuleResult(
                         rule_id=rule_id,
                         description="Sprint-specific content audit must be present",
-                        severity="FAILURE", passed=True,
+                        severity="FAILURE",
+                        passed=True,
                         evidence=f"content-audit-sprint{sprint_num}.json present with {count} records",
                     )
                 except (OSError, ValueError):
@@ -284,7 +297,8 @@ class Sprint67Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Sprint-specific content audit must be present",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"destination/content-audit-sprint{sprint_num}.json not found",
             )
 
@@ -292,7 +306,8 @@ class Sprint67Rules:
         return RuleResult(
             rule_id=rule_id,
             description="Sprint-specific content audit must be present",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="sprint_number not found in sprint-state.json; check skipped",
         )
 
@@ -314,13 +329,15 @@ class Sprint67Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="All 6 family handoff-index.json files must be present",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Missing handoff-index.json for: {missing}",
             )
         return RuleResult(
             rule_id=rule_id,
             description="All 6 family handoff-index.json files must be present",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="All 6 per-family handoff-index.json files present",
         )
 
@@ -335,13 +352,15 @@ class Sprint67Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="readme-sync/sync-state.json must be present",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="readme-sync/sync-state.json not found",
             )
         return RuleResult(
             rule_id=rule_id,
             description="readme-sync/sync-state.json must be present",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="readme-sync/sync-state.json is present",
         )
 
@@ -357,7 +376,8 @@ class Sprint67Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="remote/remote-proof-summary.md must be present",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="remote/remote-proof-summary.md not found",
             )
         content = summary_path.read_text(encoding="utf-8", errors="replace")
@@ -365,13 +385,15 @@ class Sprint67Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="remote/remote-proof-summary.md must be present",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="remote-proof-summary.md contains IN_PROGRESS — not complete",
             )
         return RuleResult(
             rule_id=rule_id,
             description="remote/remote-proof-summary.md must be present",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="remote/remote-proof-summary.md is present and complete",
         )
 

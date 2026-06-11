@@ -22,9 +22,7 @@ from typing import Any
 logger = logging.getLogger(__name__)
 
 # Default location relative to the project root.
-_DEFAULT_REGISTRY_DIR = Path(
-    "workspace/verification/latest/healing-intelligence"
-)
+_DEFAULT_REGISTRY_DIR = Path("workspace/verification/latest/healing-intelligence")
 
 _REGISTRY_FILES = {
     "bootstrap": "healing-intelligence-bootstrap.json",
@@ -79,8 +77,7 @@ class HealingIntelligenceLoader:
             path = self._registry_dir / filename
             if not path.exists():
                 logger.warning(
-                    "Healing intelligence registry not found: %s — "
-                    "run will proceed without this knowledge layer",
+                    "Healing intelligence registry not found: %s — " "run will proceed without this knowledge layer",
                     path,
                 )
                 continue
@@ -112,10 +109,7 @@ class HealingIntelligenceLoader:
 
     def registries_present(self) -> dict[str, bool]:
         """Return a dict indicating which registry files exist on disk."""
-        return {
-            key: (self._registry_dir / filename).exists()
-            for key, filename in _REGISTRY_FILES.items()
-        }
+        return {key: (self._registry_dir / filename).exists() for key, filename in _REGISTRY_FILES.items()}
 
     def all_core_registries_present(self) -> bool:
         """Return True if the 4 core registries (not bootstrap) are all on disk."""
@@ -145,9 +139,9 @@ class HealingIntelligenceLoader:
     def get_failures_for_type(self, family: str, type_name: str) -> list[dict]:
         """Return all known failure patterns affecting a specific type."""
         return [
-            p for p in self._failure_patterns
-            if family in p.get("affected_families", [])
-            and type_name in p.get("affected_types", [])
+            p
+            for p in self._failure_patterns
+            if family in p.get("affected_families", []) and type_name in p.get("affected_types", [])
         ]
 
     # ------------------------------------------------------------------
@@ -218,9 +212,9 @@ class HealingIntelligenceLoader:
     def get_implemented_validator_rules(self) -> list[dict]:
         """Return only validator rules with current_status containing 'IMPLEMENTED'."""
         return [
-            r for r in self._validator_patterns
-            if "IMPLEMENTED" in r.get("current_status", "")
-            and "NOT_IMPLEMENTED" not in r.get("current_status", "")
+            r
+            for r in self._validator_patterns
+            if "IMPLEMENTED" in r.get("current_status", "") and "NOT_IMPLEMENTED" not in r.get("current_status", "")
         ]
 
     # ------------------------------------------------------------------
@@ -235,9 +229,7 @@ class HealingIntelligenceLoader:
             "failure_patterns_count": len(self._failure_patterns),
             "repair_patterns_count": len(self._repair_patterns),
             "validator_rules_count": len(self._validator_patterns),
-            "families_with_steering": list(
-                self._semantic_steering.get("families", {}).keys()
-            ),
+            "families_with_steering": list(self._semantic_steering.get("families", {}).keys()),
             "registries_present": self.registries_present(),
         }
 
@@ -261,6 +253,7 @@ def _normalize_reason(reason: str) -> str:
     if not reason:
         return ""
     import re
+
     # Lower-case, collapse whitespace, strip punctuation
     normalized = reason.lower().strip()
     normalized = re.sub(r"[^\w\s]", " ", normalized)
@@ -340,8 +333,7 @@ def auto_learn_from_run(
             # Existing entry — increment occurrence_count only; NEVER change status
             existing["occurrence_count"] = existing.get("occurrence_count", 1) + 1
             existing["last_seen"] = _utcnow()
-            auto_learned.append({"action": "incremented", "sig": sig,
-                                  "count": existing["occurrence_count"]})
+            auto_learned.append({"action": "incremented", "sig": sig, "count": existing["occurrence_count"]})
             incremented += 1
 
     # Persist updated registry
@@ -354,20 +346,25 @@ def auto_learn_from_run(
         # Write auto-learned-patterns.json evidence sidecar
         evidence_path = run_dir / "auto-learned-patterns.json"
         evidence_path.write_text(
-            json.dumps({
-                "family": family,
-                "run_dir": str(run_dir),
-                "generated_at": _utcnow(),
-                "added": added,
-                "incremented": incremented,
-                "skipped": skipped,
-                "entries": auto_learned,
-            }, indent=2),
+            json.dumps(
+                {
+                    "family": family,
+                    "run_dir": str(run_dir),
+                    "generated_at": _utcnow(),
+                    "added": added,
+                    "incremented": incremented,
+                    "skipped": skipped,
+                    "entries": auto_learned,
+                },
+                indent=2,
+            ),
             encoding="utf-8",
         )
         logger.info(
             "Healing auto-learn: +%d new patterns, %d incremented for %s",
-            added, incremented, family,
+            added,
+            incremented,
+            family,
         )
 
     return {"added": added, "incremented": incremented, "skipped": skipped}

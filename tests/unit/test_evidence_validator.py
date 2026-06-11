@@ -56,37 +56,41 @@ def _make_bundle(tmpdir: str) -> Path:
     # destination/content-audit-repaired.json — 42/42, with non-null input_format_in_programcs
     (b / "destination").mkdir(parents=True)
     (b / "destination" / "content-audit-repaired.json").write_text(
-        json.dumps({
-            "authority_mapped": "42/42",
-            "present_no_authority": 0,
-            "total_examples": 42,
-            "examples": [
-                {
-                    "scenario_id": f"scenario-{i}",
-                    "content_match": "MATCH",
-                    "input_format_in_programcs": ".docx",
-                    "input_classification": "AddInput",
-                }
-                for i in range(42)
-            ],
-        }),
+        json.dumps(
+            {
+                "authority_mapped": "42/42",
+                "present_no_authority": 0,
+                "total_examples": 42,
+                "examples": [
+                    {
+                        "scenario_id": f"scenario-{i}",
+                        "content_match": "MATCH",
+                        "input_format_in_programcs": ".docx",
+                        "input_classification": "AddInput",
+                    }
+                    for i in range(42)
+                ],
+            }
+        ),
         encoding="utf-8",
     )
 
     # readme/example-readme-content-audit.json — content-based (no I/O fields = WARNING/pass)
     (b / "readme").mkdir(parents=True)
     (b / "readme" / "example-readme-content-audit.json").write_text(
-        json.dumps({
-            "records": [
-                {
-                    "scenario_id": "cells-html-converter",
-                    "family_in_readme": True,
-                    "workflow_type_in_readme": True,
-                    "package_id_in_readme": True,
-                    "content_audit": "MATCH",
-                }
-            ]
-        }),
+        json.dumps(
+            {
+                "records": [
+                    {
+                        "scenario_id": "cells-html-converter",
+                        "family_in_readme": True,
+                        "workflow_type_in_readme": True,
+                        "package_id_in_readme": True,
+                        "content_audit": "MATCH",
+                    }
+                ]
+            }
+        ),
         encoding="utf-8",
     )
     (b / "readme" / "readme-gate-implementation.md").write_text("# Gate\n", encoding="utf-8")
@@ -100,40 +104,42 @@ def _make_bundle(tmpdir: str) -> Path:
 
     # evidence/validator-test-results.txt + pipeline-integration-proof.md + bundle-validation-result.json
     (b / "evidence").mkdir(parents=True)
-    (b / "evidence" / "validator-test-results.txt").write_text(
-        "20 passed, 0 failed in 0.45s\n", encoding="utf-8"
-    )
+    (b / "evidence" / "validator-test-results.txt").write_text("20 passed, 0 failed in 0.45s\n", encoding="utf-8")
     (b / "evidence" / "pipeline-integration-proof.md").write_text(
         "# Pipeline Integration\nEvidenceValidator is called in release-status command.\n",
         encoding="utf-8",
     )
     (b / "evidence" / "sprint60-bundle-validation-result.json").write_text(
-        json.dumps({
-            "sprint_id": "sprint60-test",
-            "overall_valid": True,
-            "passed": 21,
-            "failed": 0,
-            "warnings": 0,
-            "total_rules": 21,
-            "rules": [],
-        }),
+        json.dumps(
+            {
+                "sprint_id": "sprint60-test",
+                "overall_valid": True,
+                "passed": 21,
+                "failed": 0,
+                "warnings": 0,
+                "total_rules": 21,
+                "rules": [],
+            }
+        ),
         encoding="utf-8",
     )
     # evidence/evidence-contract-computed.json — ECC result (Sprint 64 rule 22)
     (b / "evidence" / "evidence-contract-computed.json").write_text(
-        json.dumps({
-            "contract_id": "sprint60-test",
-            "computed_at": "2026-05-22T07:30:00Z",
-            "total_categories": 36,
-            "present": 36,
-            "missing": 0,
-            "zero_bytes": 0,
-            "semantic_failed": 0,
-            "pending": 0,
-            "blocking_failures": 0,
-            "closure_valid": True,
-            "categories": [],
-        }),
+        json.dumps(
+            {
+                "contract_id": "sprint60-test",
+                "computed_at": "2026-05-22T07:30:00Z",
+                "total_categories": 36,
+                "present": 36,
+                "missing": 0,
+                "zero_bytes": 0,
+                "semantic_failed": 0,
+                "pending": 0,
+                "blocking_failures": 0,
+                "closure_valid": True,
+                "categories": [],
+            }
+        ),
         encoding="utf-8",
     )
 
@@ -148,41 +154,39 @@ def _make_bundle(tmpdir: str) -> Path:
 
     # lanes/lane-I/test-run.log
     (b / "lanes" / "lane-I").mkdir(parents=True)
-    (b / "lanes" / "lane-I" / "test-run.log").write_text(
-        "2826 passed, 0 failed, 3 skipped\n", encoding="utf-8"
-    )
+    (b / "lanes" / "lane-I" / "test-run.log").write_text("2826 passed, 0 failed, 3 skipped\n", encoding="utf-8")
 
     # sprint-state.json
-    (b / "sprint-state.json").write_text(
-        json.dumps({"sprint_id": "sprint60-test"}), encoding="utf-8"
-    )
+    (b / "sprint-state.json").write_text(json.dumps({"sprint_id": "sprint60-test"}), encoding="utf-8")
 
     # Sprint 65: destination/content-audit-final.json — all required fields, all READY
     # Sprint 66: includes output_kind and api_type fields (rules 37, ECC output_kind check)
     (b / "destination" / "content-audit-final.json").write_text(
-        json.dumps({
-            "sprint": 66,
-            "total_publication_artifacts": 42,
-            "standard_package_artifacts": 40,
-            "special_case_artifacts": 2,
-            "records_ready": 42,
-            "records": [
-                {
-                    "scenario_id": f"scenario-{i}",
-                    "family": "cells",
-                    "package_version": "26.5.1",
-                    "output_format": ".xlsx",
-                    "output_kind": "converter",
-                    "api_type": "Converter",
-                    "readme_status": "IO_DOC",
-                    "root_readme_status": "INCLUDED",
-                    "final_readiness": "READY",
-                    "final_status": "READY",
-                    "special_case": False,
-                }
-                for i in range(42)
-            ],
-        }),
+        json.dumps(
+            {
+                "sprint": 66,
+                "total_publication_artifacts": 42,
+                "standard_package_artifacts": 40,
+                "special_case_artifacts": 2,
+                "records_ready": 42,
+                "records": [
+                    {
+                        "scenario_id": f"scenario-{i}",
+                        "family": "cells",
+                        "package_version": "26.5.1",
+                        "output_format": ".xlsx",
+                        "output_kind": "converter",
+                        "api_type": "Converter",
+                        "readme_status": "IO_DOC",
+                        "root_readme_status": "INCLUDED",
+                        "final_readiness": "READY",
+                        "final_status": "READY",
+                        "special_case": False,
+                    }
+                    for i in range(42)
+                ],
+            }
+        ),
         encoding="utf-8",
     )
 
@@ -196,25 +200,29 @@ def _make_bundle(tmpdir: str) -> Path:
     # Sprint 65: special-cases/special-case-publication-map.json — 2 cases
     (b / "special-cases").mkdir(parents=True)
     (b / "special-cases" / "special-case-publication-map.json").write_text(
-        json.dumps({
-            "special_cases": [
-                {"scenario_id": "pdf-pdfa-converter", "destination_path": "examples/pdf/lowcode/pdfa-converter"},
-                {"scenario_id": "pdf-text-extractor", "destination_path": "examples/pdf/lowcode/text-extractor"},
-            ]
-        }),
+        json.dumps(
+            {
+                "special_cases": [
+                    {"scenario_id": "pdf-pdfa-converter", "destination_path": "examples/pdf/lowcode/pdfa-converter"},
+                    {"scenario_id": "pdf-text-extractor", "destination_path": "examples/pdf/lowcode/text-extractor"},
+                ]
+            }
+        ),
         encoding="utf-8",
     )
 
     # Sprint 65: version/version-policy-final.json — 0 unresolved drift
     (b / "version").mkdir(parents=True)
     (b / "version" / "version-policy-final.json").write_text(
-        json.dumps({
-            "families": {
-                "cells": {"version_match": True, "policy": "MATCH"},
-                "pdf": {"version_match": False, "policy": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED"},
-            },
-            "summary": {"total_drift_unresolved": 0},
-        }),
+        json.dumps(
+            {
+                "families": {
+                    "cells": {"version_match": True, "policy": "MATCH"},
+                    "pdf": {"version_match": False, "policy": "POLICY_CLASSIFIED_VERSION_BUMP_NOT_REGENERATED"},
+                },
+                "summary": {"total_drift_unresolved": 0},
+            }
+        ),
         encoding="utf-8",
     )
 
@@ -237,53 +245,71 @@ def _make_bundle(tmpdir: str) -> Path:
     # Sprint 66: remote/remote-pr-proof-index.json — per-PR per-example coverage (rule 33)
     (b / "remote").mkdir(parents=True)
     (b / "remote" / "remote-pr-proof-index.json").write_text(
-        json.dumps({
-            "generated": "2026-05-22T00:00:00Z",
-            "families": {
-                "cells": [{"pr_number": 1, "examples_count": 9, "scenario_ids_covered": [f"cells-ex-{i}" for i in range(9)]}],
-                "words": [{"pr_number": 1, "examples_count": 8, "scenario_ids_covered": [f"words-ex-{i}" for i in range(8)]}],
-            },
-        }),
+        json.dumps(
+            {
+                "generated": "2026-05-22T00:00:00Z",
+                "families": {
+                    "cells": [
+                        {
+                            "pr_number": 1,
+                            "examples_count": 9,
+                            "scenario_ids_covered": [f"cells-ex-{i}" for i in range(9)],
+                        }
+                    ],
+                    "words": [
+                        {
+                            "pr_number": 1,
+                            "examples_count": 8,
+                            "scenario_ids_covered": [f"words-ex-{i}" for i in range(8)],
+                        }
+                    ],
+                },
+            }
+        ),
         encoding="utf-8",
     )
 
     # Sprint 66: remote/remote-example-inventory.json — content hashes per example (rule 34)
     (b / "remote" / "remote-example-inventory.json").write_text(
-        json.dumps({
-            "generated": "2026-05-22T00:00:00Z",
-            "total": 42,
-            "records": [
-                {
-                    "scenario_id": f"scenario-{i}",
-                    "family": "cells",
-                    "readme_sha": f"abc{i:04x}",
-                    "readme_content_sha256": f"sha256-{i:04x}",
-                    "programcs_sha": f"def{i:04x}",
-                    "programcs_content_sha256": f"psha-{i:04x}",
-                }
-                for i in range(42)
-            ],
-        }),
+        json.dumps(
+            {
+                "generated": "2026-05-22T00:00:00Z",
+                "total": 42,
+                "records": [
+                    {
+                        "scenario_id": f"scenario-{i}",
+                        "family": "cells",
+                        "readme_sha": f"abc{i:04x}",
+                        "readme_content_sha256": f"sha256-{i:04x}",
+                        "programcs_sha": f"def{i:04x}",
+                        "programcs_content_sha256": f"psha-{i:04x}",
+                    }
+                    for i in range(42)
+                ],
+            }
+        ),
         encoding="utf-8",
     )
 
     # Sprint 66: remote/remote-readme-io-audit.json — I/O status per example (rule 35)
     (b / "remote" / "remote-readme-io-audit.json").write_text(
-        json.dumps({
-            "generated": "2026-05-22T00:00:00Z",
-            "total": 42,
-            "io_doc_count": 0,
-            "old_format_count": 42,
-            "records": [
-                {
-                    "scenario_id": f"scenario-{i}",
-                    "family": "cells",
-                    "has_io_section": False,
-                    "io_status": "OLD_FORMAT",
-                }
-                for i in range(42)
-            ],
-        }),
+        json.dumps(
+            {
+                "generated": "2026-05-22T00:00:00Z",
+                "total": 42,
+                "io_doc_count": 0,
+                "old_format_count": 42,
+                "records": [
+                    {
+                        "scenario_id": f"scenario-{i}",
+                        "family": "cells",
+                        "has_io_section": False,
+                        "io_status": "OLD_FORMAT",
+                    }
+                    for i in range(42)
+                ],
+            }
+        ),
         encoding="utf-8",
     )
 
@@ -299,7 +325,7 @@ def _make_bundle(tmpdir: str) -> Path:
             encoding="utf-8",
         )
         (family_dir / f"{family}-example.csproj").write_text(
-            "<Project Sdk=\"Microsoft.NET.Sdk\"></Project>", encoding="utf-8"
+            '<Project Sdk="Microsoft.NET.Sdk"></Project>', encoding="utf-8"
         )
     (b / "handoff" / "publication-handoff-index.json").write_text(
         json.dumps({"total_examples": 42, "ok_count": 42}), encoding="utf-8"
@@ -307,21 +333,23 @@ def _make_bundle(tmpdir: str) -> Path:
 
     # Sprint 66: publication/publication-truth-matrix-final.json — separate state fields (rule 38)
     (b / "publication" / "publication-truth-matrix-final.json").write_text(
-        json.dumps({
-            "generated": "2026-05-22T00:00:00Z",
-            "total": 42,
-            "records": [
-                {
-                    "scenario_id": f"scenario-{i}",
-                    "family": "cells",
-                    "remote_example_present": True,
-                    "remote_readme_has_io_docs": False,
-                    "approval_blocked": True,
-                    "publication_status": "REMOTE_PUBLISHED_STALE_IO",
-                }
-                for i in range(42)
-            ],
-        }),
+        json.dumps(
+            {
+                "generated": "2026-05-22T00:00:00Z",
+                "total": 42,
+                "records": [
+                    {
+                        "scenario_id": f"scenario-{i}",
+                        "family": "cells",
+                        "remote_example_present": True,
+                        "remote_readme_has_io_docs": False,
+                        "approval_blocked": True,
+                        "publication_status": "REMOTE_PUBLISHED_STALE_IO",
+                    }
+                    for i in range(42)
+                ],
+            }
+        ),
         encoding="utf-8",
     )
 
@@ -339,9 +367,7 @@ def _make_bundle(tmpdir: str) -> Path:
         encoding="utf-8",
     )
     for fam in ["words", "pdf", "diagram", "email", "slides"]:
-        (root_readme_dir / f"{fam}-root-readme.md").write_text(
-            f"# {fam} examples\n", encoding="utf-8"
-        )
+        (root_readme_dir / f"{fam}-root-readme.md").write_text(f"# {fam} examples\n", encoding="utf-8")
 
     # Sprint 67: version decision (rules 45-46)
     (b / "version").mkdir(parents=True, exist_ok=True)
@@ -355,19 +381,21 @@ def _make_bundle(tmpdir: str) -> Path:
 
     # Sprint 67: content-audit-sprint67.json (rule 47, 49)
     (b / "destination" / "content-audit-sprint67.json").write_text(
-        json.dumps({
-            "sprint_id": "sprint67",
-            "total": 42,
-            "records": [
-                {
-                    "scenario_id": f"scenario-{i}",
-                    "family": "cells",
-                    "handoff_path": "reports/sprint67/handoff/per-family/cells/example",
-                    "local_package_path": "reports/sprint67/handoff/per-family/cells/example",
-                }
-                for i in range(42)
-            ],
-        }),
+        json.dumps(
+            {
+                "sprint_id": "sprint67",
+                "total": 42,
+                "records": [
+                    {
+                        "scenario_id": f"scenario-{i}",
+                        "family": "cells",
+                        "handoff_path": "reports/sprint67/handoff/per-family/cells/example",
+                        "local_package_path": "reports/sprint67/handoff/per-family/cells/example",
+                    }
+                    for i in range(42)
+                ],
+            }
+        ),
         encoding="utf-8",
     )
 
@@ -457,9 +485,16 @@ def _make_bundle(tmpdir: str) -> Path:
     # source_path must be reports/sprint67/handoff/per-family/{family}/README.md
     # => resolves bundle-relative to handoff/per-family/{family}/README.md
     import hashlib as _hashlib_fixture
+
     fam_readme_hashes = {}
-    for family, ver in [("cells", "26.5.1"), ("words", "26.5.0"), ("pdf", "26.5.0"),
-                        ("diagram", "26.5.0"), ("email", "26.4.0"), ("slides", "26.5.0")]:
+    for family, ver in [
+        ("cells", "26.5.1"),
+        ("words", "26.5.0"),
+        ("pdf", "26.5.0"),
+        ("diagram", "26.5.0"),
+        ("email", "26.4.0"),
+        ("slides", "26.5.0"),
+    ]:
         fam_dir = b / "handoff" / "per-family" / family
         fam_dir.mkdir(parents=True, exist_ok=True)
         # Write root README physically inside handoff folder (sprint70 requirement)
@@ -469,12 +504,19 @@ def _make_bundle(tmpdir: str) -> Path:
         (fam_dir / "README.md").write_bytes(readme_bytes)
         fam_readme_hashes[family] = _hashlib_fixture.sha256(readme_bytes).hexdigest()
         (fam_dir / "handoff-index.json").write_text(
-            json.dumps({"family": family, "nuget_version": ver, "examples": [],
-                        "root_readme": {
-                            "source_path": f"reports/sprint67/handoff/per-family/{family}/README.md",
-                            "sha256": fam_readme_hashes[family],
-                            "destination_path": "README.md",
-                            "destination_repo": f"aspose-{family}-net/repo"}}),
+            json.dumps(
+                {
+                    "family": family,
+                    "nuget_version": ver,
+                    "examples": [],
+                    "root_readme": {
+                        "source_path": f"reports/sprint67/handoff/per-family/{family}/README.md",
+                        "sha256": fam_readme_hashes[family],
+                        "destination_path": "README.md",
+                        "destination_repo": f"aspose-{family}-net/repo",
+                    },
+                }
+            ),
             encoding="utf-8",
         )
         (fam_dir / "Directory.Packages.props").write_text(
@@ -570,15 +612,20 @@ def _make_bundle(tmpdir: str) -> Path:
     # Sprint 71 rules: publication-handoff-index.json must use current sprint paths only.
     handoff_dir = b / "handoff"
     (handoff_dir / "publication-handoff-index.json").write_text(
-        json.dumps({"sprint_id": "sprint67", "families": [
+        json.dumps(
             {
-                "family": f,
-                "root_readme_sha256": fam_readme_hashes[f],
-                "root_readme_source_path": f"reports/sprint67/handoff/per-family/{f}/README.md",
-                "example_count": 1,
+                "sprint_id": "sprint67",
+                "families": [
+                    {
+                        "family": f,
+                        "root_readme_sha256": fam_readme_hashes[f],
+                        "root_readme_source_path": f"reports/sprint67/handoff/per-family/{f}/README.md",
+                        "example_count": 1,
+                    }
+                    for f in ["cells", "words", "pdf", "diagram", "email", "slides"]
+                ],
             }
-            for f in ["cells", "words", "pdf", "diagram", "email", "slides"]
-        ]}),
+        ),
         encoding="utf-8",
     )
 
@@ -620,14 +667,16 @@ def _make_bundle(tmpdir: str) -> Path:
     remote_dir = b / "remote"
     remote_dir.mkdir(exist_ok=True)
     (remote_dir / "remote-vs-handoff-final.json").write_text(
-        json.dumps({
-            "sprint_id": "sprint67",
-            "comparison": "current",
-            "families": [
-                {"family": f, "handoff_path": f"reports/sprint67/handoff/per-family/{f}/", "status": "OK"}
-                for f in ["cells", "words", "pdf", "diagram", "email", "slides"]
-            ],
-        }),
+        json.dumps(
+            {
+                "sprint_id": "sprint67",
+                "comparison": "current",
+                "families": [
+                    {"family": f, "handoff_path": f"reports/sprint67/handoff/per-family/{f}/", "status": "OK"}
+                    for f in ["cells", "words", "pdf", "diagram", "email", "slides"]
+                ],
+            }
+        ),
         encoding="utf-8",
     )
 
@@ -636,28 +685,36 @@ def _make_bundle(tmpdir: str) -> Path:
     # Rule 79: remote_proof_consistency_audit_present
     # Rule 80: remote_proof_consistency_audit_consistent
     (remote_dir / "remote-proof-consistency-audit.json").write_text(
-        json.dumps({
-            "sprint_id": "sprint67",
-            "consistent": True,
-            "checks": [{"check_id": "RPC01", "consistent": True}],
-        }),
+        json.dumps(
+            {
+                "sprint_id": "sprint67",
+                "consistent": True,
+                "checks": [{"check_id": "RPC01", "consistent": True}],
+            }
+        ),
         encoding="utf-8",
     )
 
     # Rule 81: remote_proof_summary_states_zero_io — already updated above to include "0/42"
     # Rule 82: remote_proof_summary_not_contradicted — needs remote-readme-io-audit-final.json
     (remote_dir / "remote-readme-io-audit-final.json").write_text(
-        json.dumps({
-            "sprint_id": "sprint67",
-            "total": 42,
-            "io_doc_count": 0,
-            "old_format_count": 42,
-            "records": [
-                {"scenario_id": f"cells-example-{i}", "family": "cells",
-                 "has_io_section": False, "io_status": "OLD_FORMAT"}
-                for i in range(42)
-            ],
-        }),
+        json.dumps(
+            {
+                "sprint_id": "sprint67",
+                "total": 42,
+                "io_doc_count": 0,
+                "old_format_count": 42,
+                "records": [
+                    {
+                        "scenario_id": f"cells-example-{i}",
+                        "family": "cells",
+                        "has_io_section": False,
+                        "io_status": "OLD_FORMAT",
+                    }
+                    for i in range(42)
+                ],
+            }
+        ),
         encoding="utf-8",
     )
 
@@ -692,11 +749,13 @@ def _make_bundle(tmpdir: str) -> Path:
     pdf_pub_dir = b / "pdf-publication"
     pdf_pub_dir.mkdir(parents=True, exist_ok=True)
     (pdf_pub_dir / "pdf-pr-reconciliation.json").write_text(
-        json.dumps({
-            "sprint_id": "sprint75",
-            "claim_verdict": "VERIFIED_HISTORICAL_BUT_SUPERSEDED",
-            "pdf_prs": [],
-        }),
+        json.dumps(
+            {
+                "sprint_id": "sprint75",
+                "claim_verdict": "VERIFIED_HISTORICAL_BUT_SUPERSEDED",
+                "pdf_prs": [],
+            }
+        ),
         encoding="utf-8",
     )
 
@@ -704,13 +763,15 @@ def _make_bundle(tmpdir: str) -> Path:
     fi_dir = b / "formimporter"
     fi_dir.mkdir(parents=True, exist_ok=True)
     (fi_dir / "formimporter-repro-inventory.json").write_text(
-        json.dumps({
-            "taskcard_id": "TC-PDF-FORMIMPORTER-RETEST",
-            "current_status": "STILL_BLOCKED",
-            "repro_root": "workspace/defect-repros/pdf-formimporter-nullref",
-            "repro_files": [],
-            "next_retest_trigger": "Aspose.PDF NuGet > 26.5.0",
-        }),
+        json.dumps(
+            {
+                "taskcard_id": "TC-PDF-FORMIMPORTER-RETEST",
+                "current_status": "STILL_BLOCKED",
+                "repro_root": "workspace/defect-repros/pdf-formimporter-nullref",
+                "repro_files": [],
+                "next_retest_trigger": "Aspose.PDF NuGet > 26.5.0",
+            }
+        ),
         encoding="utf-8",
     )
 
@@ -718,12 +779,14 @@ def _make_bundle(tmpdir: str) -> Path:
     vd_dir = b / "version-drift"
     vd_dir.mkdir(parents=True, exist_ok=True)
     (vd_dir / "words-version-drift-current.json").write_text(
-        json.dumps({
-            "family": "words",
-            "drift": "REMOTE_DRIFT",
-            "remote_published_version": "26.4.0",
-            "handoff_version": "26.5.0",
-        }),
+        json.dumps(
+            {
+                "family": "words",
+                "drift": "REMOTE_DRIFT",
+                "remote_published_version": "26.4.0",
+                "handoff_version": "26.5.0",
+            }
+        ),
         encoding="utf-8",
     )
 
@@ -732,23 +795,25 @@ def _make_bundle(tmpdir: str) -> Path:
     pmr_dir = b / "post-merge-runtime"
     pmr_dir.mkdir(parents=True, exist_ok=True)
     (pmr_dir / "post-merge-validation-matrix.json").write_text(
-        json.dumps({
-            "sprint_id": "sprint75",
-            "records": [
-                {
-                    "scenario_id": "email-converter",
-                    "post_merge_validated": True,
-                    "output_confirmed": True,
-                    "runtime_result": "RUNTIME_VALIDATED",
-                },
-                {
-                    "scenario_id": "slides-compress",
-                    "post_merge_validated": True,
-                    "output_confirmed": True,
-                    "runtime_result": "RUNTIME_VALIDATED",
-                },
-            ],
-        }),
+        json.dumps(
+            {
+                "sprint_id": "sprint75",
+                "records": [
+                    {
+                        "scenario_id": "email-converter",
+                        "post_merge_validated": True,
+                        "output_confirmed": True,
+                        "runtime_result": "RUNTIME_VALIDATED",
+                    },
+                    {
+                        "scenario_id": "slides-compress",
+                        "post_merge_validated": True,
+                        "output_confirmed": True,
+                        "runtime_result": "RUNTIME_VALIDATED",
+                    },
+                ],
+            }
+        ),
         encoding="utf-8",
     )
 
@@ -791,13 +856,15 @@ def _make_bundle(tmpdir: str) -> Path:
     handoff_dir = b / "handoff"
     handoff_dir.mkdir(parents=True, exist_ok=True)
     (handoff_dir / "handoff-prepublish-validation.json").write_text(
-        json.dumps({
-            "validation_type": "handoff_prepublish_validation",
-            "total_examples": 42,
-            "total_families": 6,
-            "overall_handoff_valid": True,
-            "verdict": "HANDOFF_VALID_42_42_APPROVAL_BLOCKED",
-        }),
+        json.dumps(
+            {
+                "validation_type": "handoff_prepublish_validation",
+                "total_examples": 42,
+                "total_families": 6,
+                "overall_handoff_valid": True,
+                "verdict": "HANDOFF_VALID_42_42_APPROVAL_BLOCKED",
+            }
+        ),
         encoding="utf-8",
     )
 
@@ -805,23 +872,24 @@ def _make_bundle(tmpdir: str) -> Path:
     remote_dir = b / "remote"
     remote_dir.mkdir(parents=True, exist_ok=True)
     (remote_dir / "remote-repo-state-before.json").write_text(
-        json.dumps({
-            "resolution_type": "github_repo_access_resolution",
-            "token_present": True,
-            "families": [
-                {"family": f, "error_classification": "repo_access_ok",
-                 "can_read": True, "can_push": True}
-                for f in ["cells", "words", "pdf", "diagram", "email", "slides"]
-            ],
-            "summary": {
-                "total_checked": 6,
-                "accessible": 6,
-                "blocked": 0,
-                "accessible_families": ["cells", "words", "pdf", "diagram", "email", "slides"],
-                "blocked_families": [],
-                "live_publish_allowed": False,
-            },
-        }),
+        json.dumps(
+            {
+                "resolution_type": "github_repo_access_resolution",
+                "token_present": True,
+                "families": [
+                    {"family": f, "error_classification": "repo_access_ok", "can_read": True, "can_push": True}
+                    for f in ["cells", "words", "pdf", "diagram", "email", "slides"]
+                ],
+                "summary": {
+                    "total_checked": 6,
+                    "accessible": 6,
+                    "blocked": 0,
+                    "accessible_families": ["cells", "words", "pdf", "diagram", "email", "slides"],
+                    "blocked_families": [],
+                    "live_publish_allowed": False,
+                },
+            }
+        ),
         encoding="utf-8",
     )
 
@@ -871,19 +939,21 @@ class TestPresentNoAuthority(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "destination" / "content-audit-repaired.json").write_text(
-                json.dumps({
-                    "authority_mapped": "39/42",
-                    "present_no_authority": 3,
-                    "total_examples": 42,
-                    "examples": [
-                        {"scenario_id": "diagram-diagram-diagram-converter",
-                         "content_match": "PRESENT_NO_AUTHORITY"},
-                        {"scenario_id": "pdf-pdfa-converter",
-                         "content_match": "PRESENT_NO_AUTHORITY"},
-                        {"scenario_id": "diagram-diagram-pdf-converter",
-                         "content_match": "PRESENT_NO_AUTHORITY"},
-                    ],
-                }),
+                json.dumps(
+                    {
+                        "authority_mapped": "39/42",
+                        "present_no_authority": 3,
+                        "total_examples": 42,
+                        "examples": [
+                            {
+                                "scenario_id": "diagram-diagram-diagram-converter",
+                                "content_match": "PRESENT_NO_AUTHORITY",
+                            },
+                            {"scenario_id": "pdf-pdfa-converter", "content_match": "PRESENT_NO_AUTHORITY"},
+                            {"scenario_id": "diagram-diagram-pdf-converter", "content_match": "PRESENT_NO_AUTHORITY"},
+                        ],
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -906,20 +976,22 @@ class TestReadmeAuditContentBased(unittest.TestCase):
             b = _make_bundle(tmpdir)
             # Write shallow (Sprint 59-style) audit records
             (b / "readme" / "example-readme-content-audit.json").write_text(
-                json.dumps({
-                    "records": [
-                        {
-                            "scenario_id": "cells-html-converter",
-                            "readme_present": True,
-                            "readme_size": 350,
-                        },
-                        {
-                            "scenario_id": "cells-pdf-converter",
-                            "readme_present": True,
-                            "readme_size": 300,
-                        },
-                    ]
-                }),
+                json.dumps(
+                    {
+                        "records": [
+                            {
+                                "scenario_id": "cells-html-converter",
+                                "readme_present": True,
+                                "readme_size": 350,
+                            },
+                            {
+                                "scenario_id": "cells-pdf-converter",
+                                "readme_present": True,
+                                "readme_size": 300,
+                            },
+                        ]
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -958,9 +1030,7 @@ class TestReadmeGateImplemented(unittest.TestCase):
     def test_fails_when_gate_test_results_show_failures(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
-            (b / "readme" / "readme-gate-test-results.txt").write_text(
-                "3 passed, 2 failed\n", encoding="utf-8"
-            )
+            (b / "readme" / "readme-gate-test-results.txt").write_text("3 passed, 2 failed\n", encoding="utf-8")
             result = EvidenceValidator(b).validate()
         rule = next(r for r in result.rule_results if r.rule_id == "readme_gate_implemented_and_tested")
         self.assertFalse(rule.passed)
@@ -979,9 +1049,7 @@ class TestTodoAllChecked(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "todo.md").write_text(
-                "- [x] Phase 0 complete\n"
-                "- [ ] Phase 1 README gate wiring\n"
-                "- [ ] Phase 2 bundle commit\n",
+                "- [x] Phase 0 complete\n" "- [ ] Phase 1 README gate wiring\n" "- [ ] Phase 2 bundle commit\n",
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -1039,9 +1107,7 @@ class TestCommandsLog(unittest.TestCase):
     def test_fails_when_commands_log_in_progress(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
-            (b / "commands.log").write_text(
-                "phase0: done\nphase1: IN_PROGRESS\n", encoding="utf-8"
-            )
+            (b / "commands.log").write_text("phase0: done\nphase1: IN_PROGRESS\n", encoding="utf-8")
             result = EvidenceValidator(b).validate()
         rule = next(r for r in result.rule_results if r.rule_id == "commands_log_complete")
         self.assertFalse(rule.passed)
@@ -1131,11 +1197,9 @@ class TestCompleteBundle(unittest.TestCase):
             )
             # Sprint 59 defect SD59-03: shallow README audit
             (b / "readme" / "example-readme-content-audit.json").write_text(
-                json.dumps({
-                    "records": [
-                        {"scenario_id": "cells-html-converter", "readme_present": True, "readme_size": 350}
-                    ]
-                }),
+                json.dumps(
+                    {"records": [{"scenario_id": "cells-html-converter", "readme_present": True, "readme_size": 350}]}
+                ),
                 encoding="utf-8",
             )
             # Sprint 59 defect SD59-04: gate not wired (no source proof)
@@ -1156,20 +1220,22 @@ class TestCompleteBundle(unittest.TestCase):
             (b / "git" / "final-clean-proof.txt").write_text("", encoding="utf-8")
             # SD60-05: all-null programcs input
             (b / "destination" / "content-audit-repaired.json").write_text(
-                json.dumps({
-                    "authority_mapped": "42/42",
-                    "present_no_authority": 0,
-                    "total_examples": 42,
-                    "examples": [
-                        {
-                            "scenario_id": f"scenario-{i}",
-                            "content_match": "MATCH",
-                            "input_format_in_programcs": None,
-                            "input_classification": None,
-                        }
-                        for i in range(42)
-                    ],
-                }),
+                json.dumps(
+                    {
+                        "authority_mapped": "42/42",
+                        "present_no_authority": 0,
+                        "total_examples": 42,
+                        "examples": [
+                            {
+                                "scenario_id": f"scenario-{i}",
+                                "content_match": "MATCH",
+                                "input_format_in_programcs": None,
+                                "input_classification": None,
+                            }
+                            for i in range(42)
+                        ],
+                    }
+                ),
                 encoding="utf-8",
             )
             # SD60-03: gate not wired (remove flow integration proof, no source_root)
@@ -1310,7 +1376,7 @@ class TestReadmeIOFormatNotFalselyComplete(unittest.TestCase):
                     "workflow_type_in_readme": True,
                     "package_id_in_readme": True,
                     "content_audit": "MATCH",
-                    "input_format_in_readme": i >= 20,   # 22 False (i<20 plus 2)
+                    "input_format_in_readme": i >= 20,  # 22 False (i<20 plus 2)
                     "output_format_in_readme": i >= 19,  # 23 False
                 }
                 for i in range(total)
@@ -1345,7 +1411,7 @@ class TestReadmeIOFormatNotFalselyComplete(unittest.TestCase):
                     "workflow_type_in_readme": True,
                     "package_id_in_readme": True,
                     "content_audit": "MATCH",
-                    "input_format_in_readme": True,    # all True
+                    "input_format_in_readme": True,  # all True
                     "output_format_in_readme": True,
                 }
                 for i in range(total)
@@ -1432,9 +1498,7 @@ class TestReadmeGateWiredInPipeline(unittest.TestCase):
             src = Path(tmpdir) / "src"
             src.mkdir()
             (src / "readme_audit_gate.py").write_text("def check(): pass\n", encoding="utf-8")
-            (src / "__main__.py").write_text(
-                "from readme_audit_gate import check\ncheck()\n", encoding="utf-8"
-            )
+            (src / "__main__.py").write_text("from readme_audit_gate import check\ncheck()\n", encoding="utf-8")
             result = EvidenceValidator(b, source_root=src).validate()
         rule = next(r for r in result.rule_results if r.rule_id == "readme_gate_wired_in_pipeline")
         self.assertTrue(rule.passed)
@@ -1491,9 +1555,7 @@ class TestEvidenceValidatorWiredInPipeline(unittest.TestCase):
             src = Path(tmpdir) / "src"
             src.mkdir()
             (src / "evidence_validator.py").write_text("class EvidenceValidator: pass\n", encoding="utf-8")
-            (src / "__main__.py").write_text(
-                "from evidence_validator import EvidenceValidator\n", encoding="utf-8"
-            )
+            (src / "__main__.py").write_text("from evidence_validator import EvidenceValidator\n", encoding="utf-8")
             result = EvidenceValidator(b, source_root=src).validate()
         rule = next(r for r in result.rule_results if r.rule_id == "evidence_validator_wired_in_pipeline")
         self.assertTrue(rule.passed)
@@ -1518,20 +1580,22 @@ class TestDestinationProgramcsInputNotAllNull(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "destination" / "content-audit-repaired.json").write_text(
-                json.dumps({
-                    "authority_mapped": "42/42",
-                    "present_no_authority": 0,
-                    "total_examples": 42,
-                    "examples": [
-                        {
-                            "scenario_id": f"s-{i}",
-                            "content_match": "MATCH",
-                            "input_format_in_programcs": None,
-                            "input_classification": None,
-                        }
-                        for i in range(42)
-                    ],
-                }),
+                json.dumps(
+                    {
+                        "authority_mapped": "42/42",
+                        "present_no_authority": 0,
+                        "total_examples": 42,
+                        "examples": [
+                            {
+                                "scenario_id": f"s-{i}",
+                                "content_match": "MATCH",
+                                "input_format_in_programcs": None,
+                                "input_classification": None,
+                            }
+                            for i in range(42)
+                        ],
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -1545,15 +1609,14 @@ class TestDestinationProgramcsInputNotAllNull(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "destination" / "content-audit-repaired.json").write_text(
-                json.dumps({
-                    "authority_mapped": "42/42",
-                    "present_no_authority": 0,
-                    "total_examples": 42,
-                    "examples": [
-                        {"scenario_id": f"s-{i}", "content_match": "MATCH"}
-                        for i in range(42)
-                    ],
-                }),
+                json.dumps(
+                    {
+                        "authority_mapped": "42/42",
+                        "present_no_authority": 0,
+                        "total_examples": 42,
+                        "examples": [{"scenario_id": f"s-{i}", "content_match": "MATCH"} for i in range(42)],
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -1574,16 +1637,18 @@ class TestDestinationProgramcsInputNotAllNull(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "destination" / "programcs-io-audit-after.json").write_text(
-                json.dumps({
-                    "examples": [
-                        {
-                            "scenario_id": "cells-html-converter",
-                            "input_format_in_programcs": ".xlsx",
-                            "input_classification": "AddInput",
-                            "output_format_in_programcs": ".html",
-                        }
-                    ]
-                }),
+                json.dumps(
+                    {
+                        "examples": [
+                            {
+                                "scenario_id": "cells-html-converter",
+                                "input_format_in_programcs": ".xlsx",
+                                "input_classification": "AddInput",
+                                "output_format_in_programcs": ".html",
+                            }
+                        ]
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -1600,8 +1665,7 @@ class TestNoPriOneItemsWithCompleteVerdict(unittest.TestCase):
             b = _make_bundle(tmpdir)
             (b / "process").mkdir(parents=True, exist_ok=True)
             (b / "process" / "next-work-register.md").write_text(
-                "| README gate CLI wiring | P1 | OPEN |\n"
-                "| EvidenceValidator CLI wiring | P1 | OPEN |\n",
+                "| README gate CLI wiring | P1 | OPEN |\n" "| EvidenceValidator CLI wiring | P1 | OPEN |\n",
                 encoding="utf-8",
             )
             (b / "final-verdict.md").write_text(
@@ -1638,12 +1702,8 @@ class TestNoPriOneItemsWithCompleteVerdict(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "process").mkdir(parents=True, exist_ok=True)
-            (b / "process" / "next-work-register.md").write_text(
-                "| Wiring | P1 | OPEN |\n", encoding="utf-8"
-            )
-            (b / "final-verdict.md").write_text(
-                "Verdict: EVIDENCE_REPAIR_REQUIRED_NOT_CLOSED\n", encoding="utf-8"
-            )
+            (b / "process" / "next-work-register.md").write_text("| Wiring | P1 | OPEN |\n", encoding="utf-8")
+            (b / "final-verdict.md").write_text("Verdict: EVIDENCE_REPAIR_REQUIRED_NOT_CLOSED\n", encoding="utf-8")
             result = EvidenceValidator(b).validate()
         rule = next(r for r in result.rule_results if r.rule_id == "no_p1_items_with_complete_verdict")
         self.assertTrue(rule.passed)
@@ -1712,10 +1772,7 @@ class TestBundleValidationResultPresentAndValid(unittest.TestCase):
             # Remove the bundle-validation-result.json that _make_bundle creates
             (b / "evidence" / "sprint60-bundle-validation-result.json").unlink()
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "bundle_validation_result_present_and_valid"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "bundle_validation_result_present_and_valid")
         self.assertFalse(rule.passed)
         self.assertIn("bundle-validation-result.json", rule.failure_detail)
 
@@ -1724,22 +1781,21 @@ class TestBundleValidationResultPresentAndValid(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "evidence" / "sprint60-bundle-validation-result.json").write_text(
-                json.dumps({
-                    "sprint_id": "sprint60-test",
-                    "overall_valid": False,
-                    "passed": 15,
-                    "failed": 5,
-                    "warnings": 0,
-                    "total_rules": 20,
-                    "rules": [],
-                }),
+                json.dumps(
+                    {
+                        "sprint_id": "sprint60-test",
+                        "overall_valid": False,
+                        "passed": 15,
+                        "failed": 5,
+                        "warnings": 0,
+                        "total_rules": 20,
+                        "rules": [],
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "bundle_validation_result_present_and_valid"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "bundle_validation_result_present_and_valid")
         self.assertFalse(rule.passed)
         self.assertIn("overall_valid=false", rule.failure_detail)
         self.assertIn("5", rule.failure_detail)  # failed count
@@ -1749,10 +1805,7 @@ class TestBundleValidationResultPresentAndValid(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "bundle_validation_result_present_and_valid"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "bundle_validation_result_present_and_valid")
         self.assertTrue(rule.passed)
         self.assertIn("overall_valid=true", rule.evidence)
 
@@ -1762,22 +1815,21 @@ class TestBundleValidationResultPresentAndValid(unittest.TestCase):
             b = _make_bundle(tmpdir)
             # Add a second, newer result file that passes
             (b / "evidence" / "sprint62-bundle-validation-result.json").write_text(
-                json.dumps({
-                    "sprint_id": "sprint62-test",
-                    "overall_valid": True,
-                    "passed": 21,
-                    "failed": 0,
-                    "warnings": 0,
-                    "total_rules": 21,
-                    "rules": [],
-                }),
+                json.dumps(
+                    {
+                        "sprint_id": "sprint62-test",
+                        "overall_valid": True,
+                        "passed": 21,
+                        "failed": 0,
+                        "warnings": 0,
+                        "total_rules": 21,
+                        "rules": [],
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "bundle_validation_result_present_and_valid"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "bundle_validation_result_present_and_valid")
         self.assertTrue(rule.passed)
         self.assertIn("sprint62", rule.evidence)
 
@@ -1825,6 +1877,7 @@ class TestTwoPhaseValidation(unittest.TestCase):
     def test_full_validate_passes_after_storing_phase_a_result(self):
         """After storing phase A result, phase B (all 21 rules) passes."""
         import json
+
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             # Remove old result
@@ -1839,10 +1892,7 @@ class TestTwoPhaseValidation(unittest.TestCase):
                 "failed": phase_a.failed,
                 "warnings": phase_a.warnings,
                 "total_rules": len(phase_a.rule_results),
-                "rules": [
-                    {"rule_id": r.rule_id, "passed": r.passed}
-                    for r in phase_a.rule_results
-                ],
+                "rules": [{"rule_id": r.rule_id, "passed": r.passed} for r in phase_a.rule_results],
             }
             (b / "evidence" / "sprint63-bundle-validation-result.json").write_text(
                 json.dumps(result_data), encoding="utf-8"
@@ -1856,6 +1906,7 @@ class TestTwoPhaseValidation(unittest.TestCase):
     def test_sprint62_style_contradiction_detected_by_rule_21(self):
         """Sprint 62 defect: overall_valid=true + failed=0 but embedded rule has passed=false is detected."""
         import json
+
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             # Write a contradictory result file: claims overall_valid=true but one rule is failed
@@ -1876,10 +1927,7 @@ class TestTwoPhaseValidation(unittest.TestCase):
             # Remove the old result so only the contradictory one is used
             (b / "evidence" / "sprint60-bundle-validation-result.json").unlink()
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "bundle_validation_result_present_and_valid"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "bundle_validation_result_present_and_valid")
         # The contradiction (overall_valid=true but a rule has passed=false) must be detected
         self.assertFalse(rule.passed)
         detail_lower = rule.failure_detail.lower()
@@ -1892,9 +1940,7 @@ class TestTwoPhaseValidation(unittest.TestCase):
         """validate(exclude_rule_ids={'some_rule'}) removes that rule from results."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
-            result = EvidenceValidator(b).validate(
-                exclude_rule_ids={"required_files_nonzero_size"}
-            )
+            result = EvidenceValidator(b).validate(exclude_rule_ids={"required_files_nonzero_size"})
         rule_ids = {r.rule_id for r in result.rule_results}
         self.assertNotIn("required_files_nonzero_size", rule_ids)
         # All other rules still present
@@ -1934,10 +1980,7 @@ class TestECCContractComputedAndValid(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "ecc_contract_computed_and_valid"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "ecc_contract_computed_and_valid")
         self.assertTrue(rule.passed, f"Expected pass, got: {rule.failure_detail}")
 
     def test_fails_when_ecc_result_missing(self):
@@ -1946,10 +1989,7 @@ class TestECCContractComputedAndValid(unittest.TestCase):
             b = _make_bundle(tmpdir)
             (b / "evidence" / "evidence-contract-computed.json").unlink()
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "ecc_contract_computed_and_valid"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "ecc_contract_computed_and_valid")
         self.assertFalse(rule.passed)
         self.assertIn("not found", rule.failure_detail.lower())
 
@@ -1958,29 +1998,34 @@ class TestECCContractComputedAndValid(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "evidence" / "evidence-contract-computed.json").write_text(
-                json.dumps({
-                    "contract_id": "sprint-test",
-                    "computed_at": "2026-05-22T07:18:19Z",
-                    "total_categories": 36,
-                    "present": 25,
-                    "missing": 7,
-                    "zero_bytes": 0,
-                    "semantic_failed": 4,
-                    "pending": 0,
-                    "blocking_failures": 11,
-                    "closure_valid": False,
-                    "categories": [
-                        {"id": "EC10", "name": "ec_computed", "file": "evidence/evidence-contract-computed.json",
-                         "blocking": True, "status": "MISSING", "detail": "File not found"},
-                    ],
-                }),
+                json.dumps(
+                    {
+                        "contract_id": "sprint-test",
+                        "computed_at": "2026-05-22T07:18:19Z",
+                        "total_categories": 36,
+                        "present": 25,
+                        "missing": 7,
+                        "zero_bytes": 0,
+                        "semantic_failed": 4,
+                        "pending": 0,
+                        "blocking_failures": 11,
+                        "closure_valid": False,
+                        "categories": [
+                            {
+                                "id": "EC10",
+                                "name": "ec_computed",
+                                "file": "evidence/evidence-contract-computed.json",
+                                "blocking": True,
+                                "status": "MISSING",
+                                "detail": "File not found",
+                            },
+                        ],
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "ecc_contract_computed_and_valid"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "ecc_contract_computed_and_valid")
         self.assertFalse(rule.passed)
         self.assertIn("blocking_failures=11", rule.failure_detail)
 
@@ -1990,31 +2035,36 @@ class TestECCContractComputedAndValid(unittest.TestCase):
             b = _make_bundle(tmpdir)
             # Simulate ECC run BEFORE final commit: 7 blocking MISSING entries
             stale_categories = [
-                {"id": f"EC{i:02d}", "name": f"file_{i}", "file": f"evidence/file_{i}.json",
-                 "blocking": True, "status": "MISSING", "detail": f"File not found: evidence/file_{i}.json"}
+                {
+                    "id": f"EC{i:02d}",
+                    "name": f"file_{i}",
+                    "file": f"evidence/file_{i}.json",
+                    "blocking": True,
+                    "status": "MISSING",
+                    "detail": f"File not found: evidence/file_{i}.json",
+                }
                 for i in range(7)
             ]
             (b / "evidence" / "evidence-contract-computed.json").write_text(
-                json.dumps({
-                    "contract_id": "sprint-stale",
-                    "computed_at": "2026-05-22T07:18:19Z",  # Before final commit at 07:19+
-                    "total_categories": 36,
-                    "present": 29,
-                    "missing": 7,
-                    "zero_bytes": 0,
-                    "semantic_failed": 0,
-                    "pending": 0,
-                    "blocking_failures": 7,
-                    "closure_valid": False,
-                    "categories": stale_categories,
-                }),
+                json.dumps(
+                    {
+                        "contract_id": "sprint-stale",
+                        "computed_at": "2026-05-22T07:18:19Z",  # Before final commit at 07:19+
+                        "total_categories": 36,
+                        "present": 29,
+                        "missing": 7,
+                        "zero_bytes": 0,
+                        "semantic_failed": 0,
+                        "pending": 0,
+                        "blocking_failures": 7,
+                        "closure_valid": False,
+                        "categories": stale_categories,
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "ecc_contract_computed_and_valid"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "ecc_contract_computed_and_valid")
         self.assertFalse(rule.passed)
         self.assertIn("closure_valid=false", rule.failure_detail.lower())
 
@@ -2029,22 +2079,20 @@ class TestECCContractComputedAndValid(unittest.TestCase):
             b = _make_bundle(tmpdir)
             # ECC shows failure (stale — computed before final commit)
             (b / "evidence" / "evidence-contract-computed.json").write_text(
-                json.dumps({
-                    "contract_id": "sprint-test",
-                    "computed_at": "2026-05-22T07:18:00Z",
-                    "blocking_failures": 5,
-                    "closure_valid": False,
-                    "categories": [],
-                }),
+                json.dumps(
+                    {
+                        "contract_id": "sprint-test",
+                        "computed_at": "2026-05-22T07:18:00Z",
+                        "blocking_failures": 5,
+                        "closure_valid": False,
+                        "categories": [],
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        self.assertFalse(result.overall_valid,
-                         "Combined gate must fail when ECC shows closure_valid=false")
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "ecc_contract_computed_and_valid"
-        )
+        self.assertFalse(result.overall_valid, "Combined gate must fail when ECC shows closure_valid=false")
+        rule = next(r for r in result.rule_results if r.rule_id == "ecc_contract_computed_and_valid")
         self.assertFalse(rule.passed)
 
     def test_both_pass_produces_overall_pass(self):
@@ -2052,28 +2100,29 @@ class TestECCContractComputedAndValid(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        ecc_rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "ecc_contract_computed_and_valid"
-        )
+        ecc_rule = next(r for r in result.rule_results if r.rule_id == "ecc_contract_computed_and_valid")
         self.assertTrue(ecc_rule.passed)
         # The bundle should pass overall (assuming other rules pass too)
         # We only assert ECC rule passes; overall depends on other rules too
         # but ecc_rule must not be the cause of failure
         if not result.overall_valid:
             failing = [r.rule_id for r in result.rule_results if not r.passed and r.severity == "FAILURE"]
-            self.assertNotIn("ecc_contract_computed_and_valid", failing,
-                             f"ECC rule should not be failing when ECC shows closure_valid=true. "
-                             f"Failing rules: {failing}")
+            self.assertNotIn(
+                "ecc_contract_computed_and_valid",
+                failing,
+                f"ECC rule should not be failing when ECC shows closure_valid=true. " f"Failing rules: {failing}",
+            )
 
     def test_ecc_rule_total_is_22(self):
         """validate() must return 147 rules total (145 Sprint 89 + 2 new Multi-Mega-Train 20260530 rules)."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        self.assertEqual(result.total_rules, 147,
-                         f"Expected 147 rules, got {result.total_rules}: "
-                         f"{[r.rule_id for r in result.rule_results]}")
+        self.assertEqual(
+            result.total_rules,
+            147,
+            f"Expected 147 rules, got {result.total_rules}: " f"{[r.rule_id for r in result.rule_results]}",
+        )
 
     def test_validate_for_storage_excludes_self_reference_but_not_ecc_rule(self):
         """validate_for_storage() excludes rule 21 (self-ref) but includes rules 22-147."""
@@ -2081,13 +2130,19 @@ class TestECCContractComputedAndValid(unittest.TestCase):
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate_for_storage()
         rule_ids = {r.rule_id for r in result.rule_results}
-        self.assertNotIn("bundle_validation_result_present_and_valid", rule_ids,
-                         "validate_for_storage must exclude rule 21 (self-reference)")
-        self.assertIn("ecc_contract_computed_and_valid", rule_ids,
-                      "validate_for_storage must include rule 22 (ECC gate)")
-        self.assertEqual(result.total_rules, 146,
-                         f"validate_for_storage must have 146 rules (147 - 1 self-ref), "
-                         f"got {result.total_rules}")
+        self.assertNotIn(
+            "bundle_validation_result_present_and_valid",
+            rule_ids,
+            "validate_for_storage must exclude rule 21 (self-reference)",
+        )
+        self.assertIn(
+            "ecc_contract_computed_and_valid", rule_ids, "validate_for_storage must include rule 22 (ECC gate)"
+        )
+        self.assertEqual(
+            result.total_rules,
+            146,
+            f"validate_for_storage must have 146 rules (147 - 1 self-ref), " f"got {result.total_rules}",
+        )
 
 
 class TestSprint75WeeklyReviewRules(unittest.TestCase):
@@ -2217,7 +2272,9 @@ class TestSprint75WeeklyReviewRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        rule = next(r for r in result.rule_results if r.rule_id == "weekly_review_verdict_not_complete_while_unclassified")
+        rule = next(
+            r for r in result.rule_results if r.rule_id == "weekly_review_verdict_not_complete_while_unclassified"
+        )
         self.assertTrue(rule.passed)
 
     def test_sprint74_bundle_fails_rule86(self):
@@ -2239,10 +2296,7 @@ class TestSprint75WeeklyReviewRules(unittest.TestCase):
             "dirty_tree_classified",
             "sprint27_governance_classified",
         ]
-        failing = [
-            r.rule_id for r in result.rule_results
-            if r.rule_id in sprint75_rules and not r.passed
-        ]
+        failing = [r.rule_id for r in result.rule_results if r.rule_id in sprint75_rules and not r.passed]
         self.assertTrue(
             len(failing) > 0,
             f"Sprint 74 bundle should fail at least one Sprint 75 rule but all passed. "
@@ -2263,11 +2317,13 @@ class TestSprint76ClosureRepairRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "post-merge-runtime" / "post-merge-validation-matrix.json").write_text(
-                json.dumps({
-                    "records": [
-                        {"scenario_id": "slides-compress", "post_merge_validated": True, "output_confirmed": False},
-                    ],
-                }),
+                json.dumps(
+                    {
+                        "records": [
+                            {"scenario_id": "slides-compress", "post_merge_validated": True, "output_confirmed": False},
+                        ],
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -2288,16 +2344,18 @@ class TestSprint76ClosureRepairRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "post-merge-runtime" / "post-merge-validation-matrix.json").write_text(
-                json.dumps({
-                    "records": [
-                        {
-                            "scenario_id": "slides-compress",
-                            "post_merge_validated": True,
-                            "output_confirmed": False,
-                            "runtime_result": "RUNTIME_VALIDATED_NO_INPUT_FIXTURE",
-                        },
-                    ],
-                }),
+                json.dumps(
+                    {
+                        "records": [
+                            {
+                                "scenario_id": "slides-compress",
+                                "post_merge_validated": True,
+                                "output_confirmed": False,
+                                "runtime_result": "RUNTIME_VALIDATED_NO_INPUT_FIXTURE",
+                            },
+                        ],
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -2398,10 +2456,7 @@ class TestSprint76ClosureRepairRules(unittest.TestCase):
             "dirty_classification_must_match_after_snapshot",
             "dirty_after_no_uncommitted_source_test",
         ]
-        failing = [
-            r.rule_id for r in result.rule_results
-            if r.rule_id in sprint76_rules and not r.passed
-        ]
+        failing = [r.rule_id for r in result.rule_results if r.rule_id in sprint76_rules and not r.passed]
         self.assertTrue(
             len(failing) >= 2,
             f"Sprint 75 bundle should fail at least 2 Sprint 76 rules (S75-B1 and S75-B2). "
@@ -2423,9 +2478,7 @@ class TestSprint77EvidenceConsistencyRules(unittest.TestCase):
         """Rule 102: fails when commands.log contains PENDING."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
-            (b / "commands.log").write_text(
-                "phase0: done\nphase4: Exit: PENDING\n", encoding="utf-8"
-            )
+            (b / "commands.log").write_text("phase0: done\nphase4: Exit: PENDING\n", encoding="utf-8")
             result = EvidenceValidator(b).validate()
         rule = next(r for r in result.rule_results if r.rule_id == "commands_log_no_pending")
         self.assertFalse(rule.passed)
@@ -2468,8 +2521,7 @@ class TestSprint77EvidenceConsistencyRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "git" / "final-clean-proof.txt").write_text(
-                "On branch main\nSprint bundle committed: a1b2c3d4e5f\n"
-                "nothing to commit, working tree clean\n",
+                "On branch main\nSprint bundle committed: a1b2c3d4e5f\n" "nothing to commit, working tree clean\n",
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -2497,7 +2549,7 @@ class TestSprint77EvidenceConsistencyRules(unittest.TestCase):
             b = _make_bundle(tmpdir)
             (b / "git" / "dirty-state-after.txt").write_text(
                 "On branch main\nUntracked files:\n"
-                "  (use \"git add <file>...\" to include in what will be committed)\n"
+                '  (use "git add <file>..." to include in what will be committed)\n'
                 "\treports/sprint75/handoff/compress/output.pptx\n\n"
                 "nothing added to commit but untracked files present\n",
                 encoding="utf-8",
@@ -2520,12 +2572,14 @@ class TestSprint77EvidenceConsistencyRules(unittest.TestCase):
             b = _make_bundle(tmpdir)
             # Add an ambiguous validation result (no bundle_type, no canonical_overall_valid)
             (b / "evidence" / "sprint77-bundle-validation-result.json").write_text(
-                json.dumps({
-                    "sprint_id": "sprint77-test",
-                    "overall_valid": False,
-                    "passed": 39,
-                    "failed": 61,
-                }),
+                json.dumps(
+                    {
+                        "sprint_id": "sprint77-test",
+                        "overall_valid": False,
+                        "passed": 39,
+                        "failed": 61,
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -2538,13 +2592,15 @@ class TestSprint77EvidenceConsistencyRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "evidence" / "sprint77-bundle-validation-result.json").write_text(
-                json.dumps({
-                    "sprint_id": "sprint77-test",
-                    "bundle_type": "REPAIR_BUNDLE",
-                    "overall_valid": False,
-                    "passed": 39,
-                    "failed": 61,
-                }),
+                json.dumps(
+                    {
+                        "sprint_id": "sprint77-test",
+                        "bundle_type": "REPAIR_BUNDLE",
+                        "overall_valid": False,
+                        "passed": 39,
+                        "failed": 61,
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -2556,13 +2612,15 @@ class TestSprint77EvidenceConsistencyRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "evidence" / "sprint77-bundle-validation-result.json").write_text(
-                json.dumps({
-                    "sprint_id": "sprint77-test",
-                    "canonical_overall_valid": True,
-                    "overall_valid": False,
-                    "passed": 39,
-                    "failed": 61,
-                }),
+                json.dumps(
+                    {
+                        "sprint_id": "sprint77-test",
+                        "canonical_overall_valid": True,
+                        "overall_valid": False,
+                        "passed": 39,
+                        "failed": 61,
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -2581,14 +2639,11 @@ class TestSprint77EvidenceConsistencyRules(unittest.TestCase):
             "dirty_state_untracked_acknowledged",
             "validation_authority_unambiguous",
         ]
-        failing = [
-            r.rule_id for r in result.rule_results
-            if r.rule_id in sprint77_rules and not r.passed
-        ]
+        failing = [r.rule_id for r in result.rule_results if r.rule_id in sprint77_rules and not r.passed]
         self.assertEqual(
-            len(failing), 4,
-            f"Sprint 76 bundle should fail all 4 Sprint 77 rules. "
-            f"Actually failing: {failing}",
+            len(failing),
+            4,
+            f"Sprint 76 bundle should fail all 4 Sprint 77 rules. " f"Actually failing: {failing}",
         )
 
 
@@ -2600,14 +2655,16 @@ class TestSprint78PublicationTruthRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "publication" / "publication-truth-matrix-final.json").write_text(
-                json.dumps({
-                    "all_published": True,
-                    "all_merged": True,
-                    "families": {
-                        "cells": {"status": "REMOTE_STALE_LOCAL_HANDOFF_READY"},
-                        "words": {"status": "PUBLISHED"},
-                    },
-                }),
+                json.dumps(
+                    {
+                        "all_published": True,
+                        "all_merged": True,
+                        "families": {
+                            "cells": {"status": "REMOTE_STALE_LOCAL_HANDOFF_READY"},
+                            "words": {"status": "PUBLISHED"},
+                        },
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -2620,14 +2677,16 @@ class TestSprint78PublicationTruthRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "publication" / "publication-truth-matrix-final.json").write_text(
-                json.dumps({
-                    "all_published": True,
-                    "all_merged": True,
-                    "families": {
-                        "cells": {"status": "PUBLISHED"},
-                        "words": {"status": "PUBLISHED"},
-                    },
-                }),
+                json.dumps(
+                    {
+                        "all_published": True,
+                        "all_merged": True,
+                        "families": {
+                            "cells": {"status": "PUBLISHED"},
+                            "words": {"status": "PUBLISHED"},
+                        },
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -2690,14 +2749,16 @@ class TestSprint78PublicationTruthRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "remote" / "remote-repo-state-before.json").write_text(
-                json.dumps({
-                    "summary": {
-                        "total_checked": 6,
-                        "accessible": 4,
-                        "blocked": 2,
-                        "blocked_families": ["email", "slides"],
+                json.dumps(
+                    {
+                        "summary": {
+                            "total_checked": 6,
+                            "accessible": 4,
+                            "blocked": 2,
+                            "blocked_families": ["email", "slides"],
+                        }
                     }
-                }),
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -2745,20 +2806,19 @@ class TestSprint79EvidenceRepairRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "evidence" / "evidence-contract-computed.json").write_text(
-                json.dumps({
-                    "contract_id": "sprint-test",
-                    "closure_valid": True,
-                    "blocking_failures": 1,
-                    "present": 31,
-                    "missing": 1,
-                }),
+                json.dumps(
+                    {
+                        "contract_id": "sprint-test",
+                        "closure_valid": True,
+                        "blocking_failures": 1,
+                        "present": 31,
+                        "missing": 1,
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "ecc_closure_valid_only_if_no_blocking_failures"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "ecc_closure_valid_only_if_no_blocking_failures")
         self.assertFalse(rule.passed)
         self.assertIn("blocking_failures=1", rule.failure_detail)
 
@@ -2767,10 +2827,7 @@ class TestSprint79EvidenceRepairRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "ecc_closure_valid_only_if_no_blocking_failures"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "ecc_closure_valid_only_if_no_blocking_failures")
         self.assertTrue(rule.passed)
 
     def test_rule109_passes_trivially_when_ecc_file_absent(self):
@@ -2779,10 +2836,7 @@ class TestSprint79EvidenceRepairRules(unittest.TestCase):
             b = _make_bundle(tmpdir)
             (b / "evidence" / "evidence-contract-computed.json").unlink()
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "ecc_closure_valid_only_if_no_blocking_failures"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "ecc_closure_valid_only_if_no_blocking_failures")
         self.assertTrue(rule.passed)
 
     def test_rule109_passes_when_closure_valid_false(self):
@@ -2790,18 +2844,17 @@ class TestSprint79EvidenceRepairRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "evidence" / "evidence-contract-computed.json").write_text(
-                json.dumps({
-                    "contract_id": "sprint-test",
-                    "closure_valid": False,
-                    "blocking_failures": 2,
-                }),
+                json.dumps(
+                    {
+                        "contract_id": "sprint-test",
+                        "closure_valid": False,
+                        "blocking_failures": 2,
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "ecc_closure_valid_only_if_no_blocking_failures"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "ecc_closure_valid_only_if_no_blocking_failures")
         self.assertTrue(rule.passed)
 
     # Rule 110: diagnostic_bundle_file_has_nonblocking_label
@@ -2811,20 +2864,19 @@ class TestSprint79EvidenceRepairRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "evidence" / "sprint79-bundle-validation-result.json").write_text(
-                json.dumps({
-                    "overall_valid": False,
-                    "bundle_type": "REPAIR_SPRINT",
-                    "passed": 50,
-                    "failed": 60,
-                    # missing: diagnostic_rules_are_non_blocking
-                }),
+                json.dumps(
+                    {
+                        "overall_valid": False,
+                        "bundle_type": "REPAIR_SPRINT",
+                        "passed": 50,
+                        "failed": 60,
+                        # missing: diagnostic_rules_are_non_blocking
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "diagnostic_bundle_file_has_nonblocking_label"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "diagnostic_bundle_file_has_nonblocking_label")
         self.assertFalse(rule.passed)
         self.assertIn("diagnostic_rules_are_non_blocking", rule.failure_detail)
 
@@ -2833,21 +2885,20 @@ class TestSprint79EvidenceRepairRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "evidence" / "sprint79-bundle-validation-result.json").write_text(
-                json.dumps({
-                    "overall_valid": False,
-                    "bundle_type": "REPAIR_SPRINT",
-                    "diagnostic_rules_are_non_blocking": True,
-                    "canonical_overall_valid": True,
-                    "passed": 50,
-                    "failed": 60,
-                }),
+                json.dumps(
+                    {
+                        "overall_valid": False,
+                        "bundle_type": "REPAIR_SPRINT",
+                        "diagnostic_rules_are_non_blocking": True,
+                        "canonical_overall_valid": True,
+                        "passed": 50,
+                        "failed": 60,
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "diagnostic_bundle_file_has_nonblocking_label"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "diagnostic_bundle_file_has_nonblocking_label")
         self.assertTrue(rule.passed)
 
     def test_rule110_passes_trivially_when_no_bundle_validation_files(self):
@@ -2856,10 +2907,7 @@ class TestSprint79EvidenceRepairRules(unittest.TestCase):
             b = _make_bundle(tmpdir)
             (b / "evidence" / "sprint60-bundle-validation-result.json").unlink()
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "diagnostic_bundle_file_has_nonblocking_label"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "diagnostic_bundle_file_has_nonblocking_label")
         self.assertTrue(rule.passed)
 
     def test_rule110_passes_when_bundle_file_overall_valid_true(self):
@@ -2867,10 +2915,7 @@ class TestSprint79EvidenceRepairRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "diagnostic_bundle_file_has_nonblocking_label"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "diagnostic_bundle_file_has_nonblocking_label")
         self.assertTrue(rule.passed)
 
 
@@ -2884,19 +2929,18 @@ class TestSprint80ValidationFileAuthorityRule(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "evidence" / "sprint80-final-validation-result.json").write_text(
-                json.dumps({
-                    "sprint_id": "sprint80",
-                    "overall_valid": False,
-                    "canonical_overall_valid": True,
-                    "applicable_rules_failed": 0,
-                }),
+                json.dumps(
+                    {
+                        "sprint_id": "sprint80",
+                        "overall_valid": False,
+                        "canonical_overall_valid": True,
+                        "applicable_rules_failed": 0,
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "no_active_validation_file_with_ambiguous_false"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "no_active_validation_file_with_ambiguous_false")
         self.assertFalse(rule.passed)
         self.assertIn("sprint80-final-validation-result.json", rule.failure_detail)
 
@@ -2905,19 +2949,18 @@ class TestSprint80ValidationFileAuthorityRule(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "evidence" / "diagnostic-full-rules-non-applicable.json").write_text(
-                json.dumps({
-                    "sprint_id": "sprint80",
-                    "overall_valid": False,
-                    "not_canonical": True,
-                    "diagnostic_rules_are_non_blocking": True,
-                }),
+                json.dumps(
+                    {
+                        "sprint_id": "sprint80",
+                        "overall_valid": False,
+                        "not_canonical": True,
+                        "diagnostic_rules_are_non_blocking": True,
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "no_active_validation_file_with_ambiguous_false"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "no_active_validation_file_with_ambiguous_false")
         self.assertTrue(rule.passed)
 
     def test_rule111_passes_when_validation_result_has_no_overall_valid_false(self):
@@ -2925,18 +2968,17 @@ class TestSprint80ValidationFileAuthorityRule(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "evidence" / "sprint80-final-validation-result.json").write_text(
-                json.dumps({
-                    "sprint_id": "sprint80",
-                    "canonical_overall_valid": True,
-                    "applicable_rules_failed": 0,
-                }),
+                json.dumps(
+                    {
+                        "sprint_id": "sprint80",
+                        "canonical_overall_valid": True,
+                        "applicable_rules_failed": 0,
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "no_active_validation_file_with_ambiguous_false"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "no_active_validation_file_with_ambiguous_false")
         self.assertTrue(rule.passed)
 
     def test_rule111_passes_trivially_when_no_validation_result_files(self):
@@ -2944,10 +2986,7 @@ class TestSprint80ValidationFileAuthorityRule(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "no_active_validation_file_with_ambiguous_false"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "no_active_validation_file_with_ambiguous_false")
         self.assertTrue(rule.passed)
 
     def test_rule111_passes_trivially_when_evidence_dir_absent(self):
@@ -2955,12 +2994,10 @@ class TestSprint80ValidationFileAuthorityRule(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             import shutil
+
             shutil.rmtree(str(b / "evidence"))
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "no_active_validation_file_with_ambiguous_false"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "no_active_validation_file_with_ambiguous_false")
         self.assertTrue(rule.passed)
 
 
@@ -2987,13 +3024,11 @@ class TestSprint83ValidatorHardeningRules(unittest.TestCase):
             (b / "publication").mkdir(parents=True, exist_ok=True)
             records = [self._make_pub_record("cells", f"ex-{i}") for i in range(10)]
             (b / "publication" / "publication-truth-matrix-final.json").write_text(
-                json.dumps(records), encoding="utf-8",
+                json.dumps(records),
+                encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "publication_truth_matrix_has_expected_count"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "publication_truth_matrix_has_expected_count")
         self.assertFalse(rule.passed)
         self.assertIn("42", rule.failure_detail)
 
@@ -3005,13 +3040,11 @@ class TestSprint83ValidatorHardeningRules(unittest.TestCase):
             # 42 records but all cells (should be cells=9)
             records = [self._make_pub_record("cells", f"ex-{i}") for i in range(42)]
             (b / "publication" / "publication-truth-matrix-final.json").write_text(
-                json.dumps(records), encoding="utf-8",
+                json.dumps(records),
+                encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "publication_truth_matrix_has_expected_count"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "publication_truth_matrix_has_expected_count")
         self.assertFalse(rule.passed)
         self.assertIn("cells", rule.failure_detail)
 
@@ -3021,21 +3054,19 @@ class TestSprint83ValidatorHardeningRules(unittest.TestCase):
             b = _make_bundle(tmpdir)
             (b / "publication").mkdir(parents=True, exist_ok=True)
             records = (
-                [self._make_pub_record("cells", f"c{i}") for i in range(9)] +
-                [self._make_pub_record("words", f"w{i}") for i in range(8)] +
-                [self._make_pub_record("pdf", f"p{i}") for i in range(19)] +
-                [self._make_pub_record("diagram", f"d{i}") for i in range(2)] +
-                [self._make_pub_record("email", "converter")] +
-                [self._make_pub_record("slides", f"s{i}") for i in range(3)]
+                [self._make_pub_record("cells", f"c{i}") for i in range(9)]
+                + [self._make_pub_record("words", f"w{i}") for i in range(8)]
+                + [self._make_pub_record("pdf", f"p{i}") for i in range(19)]
+                + [self._make_pub_record("diagram", f"d{i}") for i in range(2)]
+                + [self._make_pub_record("email", "converter")]
+                + [self._make_pub_record("slides", f"s{i}") for i in range(3)]
             )
             (b / "publication" / "publication-truth-matrix-final.json").write_text(
-                json.dumps(records), encoding="utf-8",
+                json.dumps(records),
+                encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "publication_truth_matrix_has_expected_count"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "publication_truth_matrix_has_expected_count")
         self.assertTrue(rule.passed)
 
     def test_rule112_passes_trivially_when_no_matrix_file(self):
@@ -3043,10 +3074,7 @@ class TestSprint83ValidatorHardeningRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "publication_truth_matrix_has_expected_count"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "publication_truth_matrix_has_expected_count")
         self.assertTrue(rule.passed)
 
     # Rule 113: root_readme_conflict_strategy_documented
@@ -3057,17 +3085,16 @@ class TestSprint83ValidatorHardeningRules(unittest.TestCase):
             b = _make_bundle(tmpdir)
             (b / "remote").mkdir(parents=True, exist_ok=True)
             (b / "remote" / "remote-repo-state-before.json").write_text(
-                json.dumps({
-                    "cells": {"open_prs": [{"number": 5, "title": "Add README"}]},
-                    "words": {"open_prs": []},
-                }),
+                json.dumps(
+                    {
+                        "cells": {"open_prs": [{"number": 5, "title": "Add README"}]},
+                        "words": {"open_prs": []},
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "root_readme_conflict_strategy_documented"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "root_readme_conflict_strategy_documented")
         self.assertFalse(rule.passed)
         self.assertIn("cells", rule.failure_detail)
 
@@ -3085,10 +3112,7 @@ class TestSprint83ValidatorHardeningRules(unittest.TestCase):
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "root_readme_conflict_strategy_documented"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "root_readme_conflict_strategy_documented")
         self.assertTrue(rule.passed)
 
     def test_rule113_passes_trivially_when_no_open_prs(self):
@@ -3101,10 +3125,7 @@ class TestSprint83ValidatorHardeningRules(unittest.TestCase):
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "root_readme_conflict_strategy_documented"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "root_readme_conflict_strategy_documented")
         self.assertTrue(rule.passed)
 
     def test_rule113_passes_trivially_when_no_remote_state(self):
@@ -3112,10 +3133,7 @@ class TestSprint83ValidatorHardeningRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "root_readme_conflict_strategy_documented"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "root_readme_conflict_strategy_documented")
         self.assertTrue(rule.passed)
 
     # Rule 114: final_consistency_check_not_stale_after_commit
@@ -3135,10 +3153,7 @@ class TestSprint83ValidatorHardeningRules(unittest.TestCase):
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "final_consistency_check_not_stale_after_commit"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "final_consistency_check_not_stale_after_commit")
         self.assertFalse(rule.passed)
         self.assertIn("PASS_PENDING_COMMIT", rule.failure_detail)
 
@@ -3156,10 +3171,7 @@ class TestSprint83ValidatorHardeningRules(unittest.TestCase):
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "final_consistency_check_not_stale_after_commit"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "final_consistency_check_not_stale_after_commit")
         self.assertTrue(rule.passed)
 
     def test_rule114_passes_when_consistency_check_says_pass(self):
@@ -3176,10 +3188,7 @@ class TestSprint83ValidatorHardeningRules(unittest.TestCase):
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "final_consistency_check_not_stale_after_commit"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "final_consistency_check_not_stale_after_commit")
         self.assertTrue(rule.passed)
 
     def test_rule114_passes_trivially_when_no_consistency_check_file(self):
@@ -3187,10 +3196,7 @@ class TestSprint83ValidatorHardeningRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "final_consistency_check_not_stale_after_commit"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "final_consistency_check_not_stale_after_commit")
         self.assertTrue(rule.passed)
 
     # Rule 115: publication_file_plan_present_if_pr_creation_claimed
@@ -3200,15 +3206,16 @@ class TestSprint83ValidatorHardeningRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "publication").mkdir(parents=True, exist_ok=True)
-            records = [dict(self._make_pub_record("cells", "html-converter"),
-                            pr_url="https://github.com/org/repo/pull/10")]
+            records = [
+                dict(self._make_pub_record("cells", "html-converter"), pr_url="https://github.com/org/repo/pull/10")
+            ]
             (b / "publication" / "publication-truth-matrix-final.json").write_text(
-                json.dumps(records), encoding="utf-8",
+                json.dumps(records),
+                encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
         rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "publication_file_plan_present_if_pr_creation_claimed"
+            r for r in result.rule_results if r.rule_id == "publication_file_plan_present_if_pr_creation_claimed"
         )
         self.assertFalse(rule.passed)
         self.assertIn("publication-file-plan.json", rule.failure_detail)
@@ -3218,10 +3225,12 @@ class TestSprint83ValidatorHardeningRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "publication").mkdir(parents=True, exist_ok=True)
-            records = [dict(self._make_pub_record("cells", "html-converter"),
-                            pr_url="https://github.com/org/repo/pull/10")]
+            records = [
+                dict(self._make_pub_record("cells", "html-converter"), pr_url="https://github.com/org/repo/pull/10")
+            ]
             (b / "publication" / "publication-truth-matrix-final.json").write_text(
-                json.dumps(records), encoding="utf-8",
+                json.dumps(records),
+                encoding="utf-8",
             )
             (b / "publication" / "publication-file-plan.json").write_text(
                 json.dumps({"sprint_id": "sprint83", "families": {}}),
@@ -3229,8 +3238,7 @@ class TestSprint83ValidatorHardeningRules(unittest.TestCase):
             )
             result = EvidenceValidator(b).validate()
         rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "publication_file_plan_present_if_pr_creation_claimed"
+            r for r in result.rule_results if r.rule_id == "publication_file_plan_present_if_pr_creation_claimed"
         )
         self.assertTrue(rule.passed)
 
@@ -3241,12 +3249,12 @@ class TestSprint83ValidatorHardeningRules(unittest.TestCase):
             (b / "publication").mkdir(parents=True, exist_ok=True)
             records = [self._make_pub_record("cells", "html-converter")]
             (b / "publication" / "publication-truth-matrix-final.json").write_text(
-                json.dumps(records), encoding="utf-8",
+                json.dumps(records),
+                encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
         rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "publication_file_plan_present_if_pr_creation_claimed"
+            r for r in result.rule_results if r.rule_id == "publication_file_plan_present_if_pr_creation_claimed"
         )
         self.assertTrue(rule.passed)
 
@@ -3256,8 +3264,7 @@ class TestSprint83ValidatorHardeningRules(unittest.TestCase):
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
         rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "publication_file_plan_present_if_pr_creation_claimed"
+            r for r in result.rule_results if r.rule_id == "publication_file_plan_present_if_pr_creation_claimed"
         )
         self.assertTrue(rule.passed)
 
@@ -3288,9 +3295,7 @@ class TestSprint84ValidatorHardeningRules(unittest.TestCase):
         }
         if bulk_justification is not None:
             plan["bulk_justification"] = bulk_justification
-        (bundle / "publication" / "pr-batching-plan.json").write_text(
-            json.dumps(plan), encoding="utf-8"
-        )
+        (bundle / "publication" / "pr-batching-plan.json").write_text(json.dumps(plan), encoding="utf-8")
 
     def _make_root_readme_file_plan(self, bundle: Path) -> None:
         (bundle / "conflicts").mkdir(parents=True, exist_ok=True)
@@ -3306,8 +3311,7 @@ class TestSprint84ValidatorHardeningRules(unittest.TestCase):
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
         rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "pr_batching_strategy_present_if_pr_creation_attempted"
+            r for r in result.rule_results if r.rule_id == "pr_batching_strategy_present_if_pr_creation_attempted"
         )
         self.assertTrue(rule.passed)
 
@@ -3318,8 +3322,7 @@ class TestSprint84ValidatorHardeningRules(unittest.TestCase):
             self._make_ledger(b, prs_created=0)
             result = EvidenceValidator(b).validate()
         rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "pr_batching_strategy_present_if_pr_creation_attempted"
+            r for r in result.rule_results if r.rule_id == "pr_batching_strategy_present_if_pr_creation_attempted"
         )
         self.assertTrue(rule.passed)
 
@@ -3330,8 +3333,7 @@ class TestSprint84ValidatorHardeningRules(unittest.TestCase):
             self._make_ledger(b, prs_created=6)
             result = EvidenceValidator(b).validate()
         rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "pr_batching_strategy_present_if_pr_creation_attempted"
+            r for r in result.rule_results if r.rule_id == "pr_batching_strategy_present_if_pr_creation_attempted"
         )
         self.assertFalse(rule.passed)
         self.assertIn("S83-G1", rule.failure_detail)
@@ -3344,8 +3346,7 @@ class TestSprint84ValidatorHardeningRules(unittest.TestCase):
             self._make_batching_strategy(b)
             result = EvidenceValidator(b).validate()
         rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "pr_batching_strategy_present_if_pr_creation_attempted"
+            r for r in result.rule_results if r.rule_id == "pr_batching_strategy_present_if_pr_creation_attempted"
         )
         self.assertTrue(rule.passed)
 
@@ -3356,10 +3357,7 @@ class TestSprint84ValidatorHardeningRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "no_bulk_42pr_plan_without_justification"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "no_bulk_42pr_plan_without_justification")
         self.assertTrue(rule.passed)
 
     def test_rule119_passes_when_plan_has_6_prs(self):
@@ -3368,10 +3366,7 @@ class TestSprint84ValidatorHardeningRules(unittest.TestCase):
             b = _make_bundle(tmpdir)
             self._make_batching_plan(b, planned_count=6)
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "no_bulk_42pr_plan_without_justification"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "no_bulk_42pr_plan_without_justification")
         self.assertTrue(rule.passed)
 
     def test_rule119_fails_when_plan_has_42_prs_without_justification(self):
@@ -3380,10 +3375,7 @@ class TestSprint84ValidatorHardeningRules(unittest.TestCase):
             b = _make_bundle(tmpdir)
             self._make_batching_plan(b, planned_count=42, bulk_justification=None)
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "no_bulk_42pr_plan_without_justification"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "no_bulk_42pr_plan_without_justification")
         self.assertFalse(rule.passed)
         self.assertIn("S83-G4", rule.failure_detail)
 
@@ -3391,12 +3383,11 @@ class TestSprint84ValidatorHardeningRules(unittest.TestCase):
         """Rule 119: passes when planned_prs has 42 entries WITH bulk_justification."""
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
-            self._make_batching_plan(b, planned_count=42, bulk_justification="Required for atomic per-example CI gating")
+            self._make_batching_plan(
+                b, planned_count=42, bulk_justification="Required for atomic per-example CI gating"
+            )
             result = EvidenceValidator(b).validate()
-        rule = next(
-            r for r in result.rule_results
-            if r.rule_id == "no_bulk_42pr_plan_without_justification"
-        )
+        rule = next(r for r in result.rule_results if r.rule_id == "no_bulk_42pr_plan_without_justification")
         self.assertTrue(rule.passed)
 
 
@@ -3421,13 +3412,15 @@ class TestSprint85EvidenceHygieneRules(unittest.TestCase):
     def _make_taskcard(self, bundle_dir: Path, content: str = "| A | Topic | COMPLETED |\n"):
         (bundle_dir / "tracking").mkdir(parents=True, exist_ok=True)
         (bundle_dir / "tracking" / "taskcard-update-proof.md").write_text(
-            content, encoding="utf-8",
+            content,
+            encoding="utf-8",
         )
 
     def _make_scoreboard(self, bundle_dir: Path, content: str = "| EV applicable | 56 | 69 | +13 |\n"):
         (bundle_dir / "tracking").mkdir(parents=True, exist_ok=True)
         (bundle_dir / "tracking" / "scoreboard-update-proof.md").write_text(
-            content, encoding="utf-8",
+            content,
+            encoding="utf-8",
         )
 
     # ------------------------------------------------------------------ Rule 120
@@ -3624,7 +3617,9 @@ class TestSprint86ReadinessLoopPreventionRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             self._make_baseline_freeze(b)
-            self._make_final_verdict(b, "Verdict: LOWCODE_LIVE_PUBLICATION_BASELINE_FROZEN_APPROVAL_BLOCKED_SAFE_LANES_ADVANCED")
+            self._make_final_verdict(
+                b, "Verdict: LOWCODE_LIVE_PUBLICATION_BASELINE_FROZEN_APPROVAL_BLOCKED_SAFE_LANES_ADVANCED"
+            )
             result = EvidenceValidator(b).validate()
         rule = next(r for r in result.rule_results if r.rule_id == "no_readiness_only_verdict_after_baseline_freeze")
         self.assertTrue(rule.passed)
@@ -3663,8 +3658,7 @@ class TestSprint87DefectInvariantRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "commands.log").write_text(
-                "[2026-05-25] RUN ECC — result pending\n"
-                "[2026-05-25] RUN EV Phase A — result pending\n",
+                "[2026-05-25] RUN ECC — result pending\n" "[2026-05-25] RUN EV Phase A — result pending\n",
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -3676,8 +3670,7 @@ class TestSprint87DefectInvariantRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             (b / "commands.log").write_text(
-                "[2026-05-25] RUN ECC — Exit: 0\n"
-                "[2026-05-25] RUN EV Phase A — Exit: 0\n",
+                "[2026-05-25] RUN ECC — Exit: 0\n" "[2026-05-25] RUN EV Phase A — Exit: 0\n",
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -3933,7 +3926,8 @@ class TestSprint87DefectInvariantRules(unittest.TestCase):
             b = _make_bundle(tmpdir)
             (b / "baseline-freeze").mkdir(exist_ok=True)
             (b / "baseline-freeze" / "publication-baseline-freeze.json").write_text(
-                json.dumps({"frozen": True}), encoding="utf-8",
+                json.dumps({"frozen": True}),
+                encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
         rule = next(r for r in result.rule_results if r.rule_id == "baseline_freeze_not_avoiding_advancement")
@@ -3945,7 +3939,8 @@ class TestSprint87DefectInvariantRules(unittest.TestCase):
             b = _make_bundle(tmpdir)
             (b / "baseline-freeze").mkdir(exist_ok=True)
             (b / "baseline-freeze" / "publication-baseline-freeze.json").write_text(
-                json.dumps({"frozen": True}), encoding="utf-8",
+                json.dumps({"frozen": True}),
+                encoding="utf-8",
             )
             (b / "advancement").mkdir(exist_ok=True)
             (b / "advancement" / "next-family-discovery.md").write_text("discovery", encoding="utf-8")
@@ -3999,7 +3994,9 @@ class TestSprint88DefectInvariantRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        rule = next(r for r in result.rule_results if r.rule_id == "publication_truth_matrix_present_when_publication_claimed")
+        rule = next(
+            r for r in result.rule_results if r.rule_id == "publication_truth_matrix_present_when_publication_claimed"
+        )
         self.assertTrue(rule.passed)
 
     def test_rule136_fails_when_publication_mentioned_but_no_matrix(self):
@@ -4015,9 +4012,12 @@ class TestSprint88DefectInvariantRules(unittest.TestCase):
             pub_dir = b / "publication"
             if pub_dir.exists():
                 import shutil
+
                 shutil.rmtree(pub_dir)
             result = EvidenceValidator(b).validate()
-        rule = next(r for r in result.rule_results if r.rule_id == "publication_truth_matrix_present_when_publication_claimed")
+        rule = next(
+            r for r in result.rule_results if r.rule_id == "publication_truth_matrix_present_when_publication_claimed"
+        )
         self.assertFalse(rule.passed)
 
     def test_rule136_passes_with_truth_matrix(self):
@@ -4035,7 +4035,9 @@ class TestSprint88DefectInvariantRules(unittest.TestCase):
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        rule = next(r for r in result.rule_results if r.rule_id == "publication_truth_matrix_present_when_publication_claimed")
+        rule = next(
+            r for r in result.rule_results if r.rule_id == "publication_truth_matrix_present_when_publication_claimed"
+        )
         self.assertTrue(rule.passed)
 
     # ------------------------------------------------------------------ Rule 137
@@ -4054,10 +4056,7 @@ class TestSprint88DefectInvariantRules(unittest.TestCase):
             b = _make_bundle(tmpdir)
             (b / "next-family").mkdir(exist_ok=True)
             (b / "next-family" / "next-family-candidate-matrix.json").write_text(
-                json.dumps({
-                    "discovery_method": "manual",
-                    "candidates": [{"family": "ocr"}]
-                }),
+                json.dumps({"discovery_method": "manual", "candidates": [{"family": "ocr"}]}),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -4070,12 +4069,12 @@ class TestSprint88DefectInvariantRules(unittest.TestCase):
             b = _make_bundle(tmpdir)
             (b / "next-family").mkdir(exist_ok=True)
             (b / "next-family" / "next-family-candidate-matrix.json").write_text(
-                json.dumps({
-                    "discovery_method": "NuGet API v3",
-                    "candidates": [
-                        {"family": "ocr", "classification": "BLOCKED", "nuget_exists": True}
-                    ]
-                }),
+                json.dumps(
+                    {
+                        "discovery_method": "NuGet API v3",
+                        "candidates": [{"family": "ocr", "classification": "BLOCKED", "nuget_exists": True}],
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -4139,12 +4138,19 @@ class TestSprint88DefectInvariantRules(unittest.TestCase):
             b = _make_bundle(tmpdir)
             (b / "next-family").mkdir(exist_ok=True)
             (b / "next-family" / "next-family-candidate-matrix.json").write_text(
-                json.dumps({
-                    "discovery_method": "NuGet API",
-                    "candidates": [
-                        {"family": "ocr", "classification": "DISCOVERY_BLOCKED", "nuget_exists": True, "blocker": ""}
-                    ]
-                }),
+                json.dumps(
+                    {
+                        "discovery_method": "NuGet API",
+                        "candidates": [
+                            {
+                                "family": "ocr",
+                                "classification": "DISCOVERY_BLOCKED",
+                                "nuget_exists": True,
+                                "blocker": "",
+                            }
+                        ],
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -4157,17 +4163,19 @@ class TestSprint88DefectInvariantRules(unittest.TestCase):
             b = _make_bundle(tmpdir)
             (b / "next-family").mkdir(exist_ok=True)
             (b / "next-family" / "next-family-candidate-matrix.json").write_text(
-                json.dumps({
-                    "discovery_method": "NuGet API",
-                    "candidates": [
-                        {
-                            "family": "ocr",
-                            "classification": "DISCOVERY_BLOCKED_MISSING_PACKAGE",
-                            "nuget_exists": True,
-                            "blocker": "Aspose.AI.LLM transitive dep not on NuGet (HTTP 404)"
-                        }
-                    ]
-                }),
+                json.dumps(
+                    {
+                        "discovery_method": "NuGet API",
+                        "candidates": [
+                            {
+                                "family": "ocr",
+                                "classification": "DISCOVERY_BLOCKED_MISSING_PACKAGE",
+                                "nuget_exists": True,
+                                "blocker": "Aspose.AI.LLM transitive dep not on NuGet (HTTP 404)",
+                            }
+                        ],
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -4181,7 +4189,9 @@ class TestSprint88DefectInvariantRules(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             b = _make_bundle(tmpdir)
             result = EvidenceValidator(b).validate()
-        rule = next(r for r in result.rule_results if r.rule_id == "version_drift_reconciliation_present_if_drift_active")
+        rule = next(
+            r for r in result.rule_results if r.rule_id == "version_drift_reconciliation_present_if_drift_active"
+        )
         self.assertTrue(rule.passed)
 
     def test_rule140_fails_when_drift_active_no_reconciliation(self):
@@ -4194,7 +4204,9 @@ class TestSprint88DefectInvariantRules(unittest.TestCase):
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        rule = next(r for r in result.rule_results if r.rule_id == "version_drift_reconciliation_present_if_drift_active")
+        rule = next(
+            r for r in result.rule_results if r.rule_id == "version_drift_reconciliation_present_if_drift_active"
+        )
         self.assertFalse(rule.passed)
 
     def test_rule140_passes_with_reconciliation(self):
@@ -4212,7 +4224,9 @@ class TestSprint88DefectInvariantRules(unittest.TestCase):
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
-        rule = next(r for r in result.rule_results if r.rule_id == "version_drift_reconciliation_present_if_drift_active")
+        rule = next(
+            r for r in result.rule_results if r.rule_id == "version_drift_reconciliation_present_if_drift_active"
+        )
         self.assertTrue(rule.passed)
 
 
@@ -4349,10 +4363,18 @@ class TestSprint89DefectInvariantRules(unittest.TestCase):
             b = _make_bundle(tmpdir)
             (b / "next-family").mkdir(exist_ok=True)
             (b / "next-family" / "next-family-candidate-matrix.json").write_text(
-                json.dumps({"candidates": [
-                    {"family": "html", "classification": "NO_LOWCODE_CONFIRMED",
-                     "discovery_method": "binary string scan", "lowcode_matches": 0}
-                ]}),
+                json.dumps(
+                    {
+                        "candidates": [
+                            {
+                                "family": "html",
+                                "classification": "NO_LOWCODE_CONFIRMED",
+                                "discovery_method": "binary string scan",
+                                "lowcode_matches": 0,
+                            }
+                        ]
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -4377,9 +4399,9 @@ class TestSprint89DefectInvariantRules(unittest.TestCase):
                 encoding="utf-8",
             )
             (b / "next-family" / "next-family-candidate-matrix.json").write_text(
-                json.dumps({"candidates": [
-                    {"family": "html", "classification": "REFLECTION_BLOCKED_ASSEMBLY_RESOLUTION"}
-                ]}),
+                json.dumps(
+                    {"candidates": [{"family": "html", "classification": "REFLECTION_BLOCKED_ASSEMBLY_RESOLUTION"}]}
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -4395,9 +4417,7 @@ class TestSprint89DefectInvariantRules(unittest.TestCase):
                 encoding="utf-8",
             )
             (b / "next-family" / "next-family-candidate-matrix.json").write_text(
-                json.dumps({"candidates": [
-                    {"family": "html", "classification": "NO_LOWCODE_CONFIRMED"}
-                ]}),
+                json.dumps({"candidates": [{"family": "html", "classification": "NO_LOWCODE_CONFIRMED"}]}),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -4485,11 +4505,13 @@ class TestSprint89DefectInvariantRules(unittest.TestCase):
             b = _make_bundle(tmpdir)
             (b / "publication" / "packages").mkdir(parents=True, exist_ok=True)
             (b / "publication" / "packages" / "package-completion-report.json").write_text(
-                json.dumps({
-                    "packages": {"cells": {}, "words": {}, "pdf": {}, "diagram": {}, "slides": {}},
-                    "totals": {"total_packaged_examples": 38},
-                    "verdict": "PUBLICATION_PACKAGES_COMPLETE",
-                }),
+                json.dumps(
+                    {
+                        "packages": {"cells": {}, "words": {}, "pdf": {}, "diagram": {}, "slides": {}},
+                        "totals": {"total_packaged_examples": 38},
+                        "verdict": "PUBLICATION_PACKAGES_COMPLETE",
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -4501,11 +4523,13 @@ class TestSprint89DefectInvariantRules(unittest.TestCase):
             b = _make_bundle(tmpdir)
             (b / "publication" / "packages").mkdir(parents=True, exist_ok=True)
             (b / "publication" / "packages" / "package-completion-report.json").write_text(
-                json.dumps({
-                    "packages": {"cells": {}, "words": {}, "pdf": {}, "diagram": {}, "slides": {}, "email": {}},
-                    "totals": {"total_packaged_examples": 41},
-                    "verdict": "PUBLICATION_PACKAGES_INCOMPLETE",
-                }),
+                json.dumps(
+                    {
+                        "packages": {"cells": {}, "words": {}, "pdf": {}, "diagram": {}, "slides": {}, "email": {}},
+                        "totals": {"total_packaged_examples": 41},
+                        "verdict": "PUBLICATION_PACKAGES_INCOMPLETE",
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()
@@ -4517,11 +4541,13 @@ class TestSprint89DefectInvariantRules(unittest.TestCase):
             b = _make_bundle(tmpdir)
             (b / "publication" / "packages").mkdir(parents=True, exist_ok=True)
             (b / "publication" / "packages" / "package-completion-report.json").write_text(
-                json.dumps({
-                    "packages": {"cells": {}, "words": {}, "pdf": {}, "diagram": {}, "slides": {}, "email": {}},
-                    "totals": {"total_packaged_examples": 41},
-                    "verdict": "PUBLICATION_PACKAGES_COMPLETE_FOR_ALL_6_FAMILIES",
-                }),
+                json.dumps(
+                    {
+                        "packages": {"cells": {}, "words": {}, "pdf": {}, "diagram": {}, "slides": {}, "email": {}},
+                        "totals": {"total_packaged_examples": 41},
+                        "verdict": "PUBLICATION_PACKAGES_COMPLETE_FOR_ALL_6_FAMILIES",
+                    }
+                ),
                 encoding="utf-8",
             )
             result = EvidenceValidator(b).validate()

@@ -7,6 +7,7 @@ Rules:
 - A package cannot PASS if all required outputs are zero or missing.
 - Trial/evaluation watermarks are acceptable but must be disclosed.
 """
+
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -73,13 +74,13 @@ INTERMEDIATE_OPTIONAL_PATTERNS = [
     "fixture.bmp",
     "fixture.xps",
     "fixture_barcode.png",
-    "canvas.bmp",           # imaging/merge-images: blank canvas before drawing
-    "source-watermark.bmp", # imaging/watermark-image: source before watermark
-    "src1.bmp",             # imaging/merge-images: source 1
-    "src2.bmp",             # imaging/merge-images: source 2
-    "fixture.psd",          # psd/: intermediate PSD fixture before conversion
-    "fixture.eps",          # page/convert-eps-to-pdf: EPS before conversion
-    "fixture.svg",          # svg/vectorizer: SVG intermediate
+    "canvas.bmp",  # imaging/merge-images: blank canvas before drawing
+    "source-watermark.bmp",  # imaging/watermark-image: source before watermark
+    "src1.bmp",  # imaging/merge-images: source 1
+    "src2.bmp",  # imaging/merge-images: source 2
+    "fixture.psd",  # psd/: intermediate PSD fixture before conversion
+    "fixture.eps",  # page/convert-eps-to-pdf: EPS before conversion
+    "fixture.svg",  # svg/vectorizer: SVG intermediate
 ]
 
 
@@ -98,7 +99,7 @@ def detect_format(data: bytes) -> str:
         return "PSD"
     if data[:4] == b"RIFF":
         return "RIFF"
-    if data[:4] == b"\xD0\xCF\x11\xE0":
+    if data[:4] == b"\xd0\xcf\x11\xe0":
         return "OLE2"  # .doc, .xls, .ppt legacy
     if data[:5].lower() == b"<svg ":
         return "SVG"
@@ -232,9 +233,8 @@ def validate_package_outputs(pkg_dir: Path, package_key: str) -> PackageValidati
         result.verdict = "RUN_FAILED"
     elif not result.output_results:
         result.verdict = "NO_OUTPUTS"
-    elif (
-        any(r.verdict == "ZERO_BYTE_REQUIRED_OUTPUT" for r in result.output_results)
-        and not any(r.verdict == "PASS" and r.size_bytes > 0 for r in result.output_results)
+    elif any(r.verdict == "ZERO_BYTE_REQUIRED_OUTPUT" for r in result.output_results) and not any(
+        r.verdict == "PASS" and r.size_bytes > 0 for r in result.output_results
     ):
         # Only fail for zero-byte if there are NO non-zero passing output files
         result.verdict = "ZERO_BYTE_REQUIRED_OUTPUT"
@@ -246,10 +246,7 @@ def validate_package_outputs(pkg_dir: Path, package_key: str) -> PackageValidati
         result.verdict = "OUTPUT_VALIDATION_FAILED"
 
     # Classify for publication readiness
-    trial_detected = any(
-        "TRIAL_WATERMARK_DETECTED" in (note for note in r.notes)
-        for r in result.output_results
-    )
+    trial_detected = any("TRIAL_WATERMARK_DETECTED" in (note for note in r.notes) for r in result.output_results)
     if result.verdict == "PASS" and not trial_detected and not result.missing_required_files:
         result.publication_classification = "PUBLICATION_CANDIDATE_LOCAL_CLEAN"
     elif result.verdict == "PASS" and trial_detected:

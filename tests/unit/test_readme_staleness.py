@@ -12,12 +12,10 @@ from plugin_examples.publisher.readme_auditor import (
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _build_readme_with_examples(example_names: list[str]) -> str:
     """Build a minimal README with an Included Examples table."""
-    rows = "\n".join(
-        f"| `{name}` | `SomeApi.Process` | `xlsx` | `pdf` | `dotnet run` |"
-        for name in example_names
-    )
+    rows = "\n".join(f"| `{name}` | `SomeApi.Process` | `xlsx` | `pdf` | `dotnet run` |" for name in example_names)
     return (
         "# Test README\n\n"
         "Some intro.\n\n"
@@ -33,8 +31,8 @@ def _build_readme_with_examples(example_names: list[str]) -> str:
 # Tests
 # ---------------------------------------------------------------------------
 
-class TestReadmeStaleness:
 
+class TestReadmeStaleness:
     def test_all_present_not_stale(self):
         content = _build_readme_with_examples(["converter", "merger", "splitter"])
         result = audit_readme_staleness(content, ["converter", "merger", "splitter"])

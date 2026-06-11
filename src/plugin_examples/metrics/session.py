@@ -174,7 +174,8 @@ class MetricsSession:
 
             if effective_post:
                 post_result = post_metrics(
-                    payload, self.config,
+                    payload,
+                    self.config,
                     dry_run=False,
                     force_repost=self.force_repost,
                     repo_root=self.repo_root,
@@ -189,7 +190,8 @@ class MetricsSession:
                 }
             else:
                 post_result = post_metrics(
-                    payload, self.config,
+                    payload,
+                    self.config,
                     dry_run=True,
                     repo_root=self.repo_root,
                     test_only_sprint=True,

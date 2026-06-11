@@ -29,9 +29,7 @@ def _repo_root_from_verification_dir(verification_dir: Path) -> Path:
     return verification_dir.resolve().parents[1]
 
 
-def _load_open_taskcards_from_matrix(
-    verification_dir: Path, family: str
-) -> tuple[list[str], str]:
+def _load_open_taskcards_from_matrix(verification_dir: Path, family: str) -> tuple[list[str], str]:
     """Read open taskcards for a family from the authoritative JSON matrix.
 
     Returns:
@@ -39,9 +37,7 @@ def _load_open_taskcards_from_matrix(
     """
     matrix_path = verification_dir / "latest" / _TASKCARD_MATRIX_FILENAME
     if not matrix_path.exists():
-        logger.warning(
-            "Taskcard matrix not found at %s — open_followups will be empty", matrix_path
-        )
+        logger.warning("Taskcard matrix not found at %s — open_followups will be empty", matrix_path)
         return [], "missing_taskcard_matrix"
 
     try:
@@ -54,11 +50,7 @@ def _load_open_taskcards_from_matrix(
 
     taskcards = matrix.get("taskcards", [])
     prefix = _FAMILY_TASKCARD_PREFIXES.get(family, f"followup-{family}-")
-    open_ids = [
-        tc["id"]
-        for tc in taskcards
-        if tc.get("status") == "OPEN" and tc["id"].startswith(prefix)
-    ]
+    open_ids = [tc["id"] for tc in taskcards if tc.get("status") == "OPEN" and tc["id"].startswith(prefix)]
     return open_ids, str(matrix_path)
 
 
@@ -185,11 +177,7 @@ def compute_release_status(families: list[str], verification_dir: Path) -> dict:
         source_version = denominator.get("source_version")
         for entry in discovery.get("families", []):
             if entry.get("family") == family:
-                source_version = (
-                    entry.get("nuget_version")
-                    or entry.get("package_version")
-                    or source_version
-                )
+                source_version = entry.get("nuget_version") or entry.get("package_version") or source_version
                 break
 
         # Latest published version from live PR result
@@ -207,25 +195,17 @@ def compute_release_status(families: list[str], verification_dir: Path) -> dict:
         merge_date = merge_result.get("merge_date")
 
         # Post-merge validation status
-        post_merge = _load_json(
-            latest / f"{family}-post-merge-clean-checkout-validation.json"
-        )
+        post_merge = _load_json(latest / f"{family}-post-merge-clean-checkout-validation.json")
         post_merge_status = post_merge.get("summary", {}).get("overall_result", "NOT_RUN")
         post_merge_passed = post_merge.get("summary", {}).get("passed", 0)
         post_merge_total = post_merge.get("summary", {}).get("total_examples", 0)
 
         # Open followups for this family — read from authoritative JSON matrix
-        open_followups, taskcard_source = _load_open_taskcards_from_matrix(
-            verification_dir, family
-        )
+        open_followups, taskcard_source = _load_open_taskcards_from_matrix(verification_dir, family)
 
         cumulative_pr_count = _count_cumulative_prs(family, latest)
-        scope_status, scope_reason = _compute_release_scope_status(
-            denominator, published_count
-        )
-        family_coverage_status, family_coverage_reason = _compute_family_coverage_status(
-            denominator, published_count
-        )
+        scope_status, scope_reason = _compute_release_scope_status(denominator, published_count)
+        family_coverage_status, family_coverage_reason = _compute_family_coverage_status(denominator, published_count)
         if scope_status == "DISCOVERY_ONLY":
             next_action = (
                 f"pilot_not_yet_launched - status discovery_only; "
@@ -234,44 +214,40 @@ def compute_release_status(families: list[str], verification_dir: Path) -> dict:
         else:
             next_action = _get_next_action(family, post_merge_status, merge_sha)
 
-        results.append({
-            "family": family,
-            "source_of_truth_version": source_version,
-            "latest_published_version": published_version,
-            "published_examples_count": published_count,
-            "release_scope_status": scope_status,
-            "release_scope_reason": scope_reason,
-            "family_coverage_status": family_coverage_status,
-            "family_coverage_reason": family_coverage_reason,
-            "denominator_basis": denominator.get("denominator_basis"),
-            "workflow_root_types": denominator.get("workflow_root_types"),
-            "allowed_pilot_count": denominator.get("allowed_pilot_count"),
-            "total_lowcode_types": denominator.get("total_lowcode_types"),
-            "last_pr_url": last_pr_url,
-            "last_pr_number": last_pr_number,
-            "last_merge_sha": merge_sha,
-            "last_merge_date": merge_date,
-            "last_post_merge_validation_status": post_merge_status,
-            "post_merge_passed": post_merge_passed,
-            "post_merge_total": post_merge_total,
-            "open_followups": open_followups,
-            "taskcard_evidence_source": taskcard_source,
-            "next_required_action": next_action,
-            "cumulative_pr_count": cumulative_pr_count,
-        })
+        results.append(
+            {
+                "family": family,
+                "source_of_truth_version": source_version,
+                "latest_published_version": published_version,
+                "published_examples_count": published_count,
+                "release_scope_status": scope_status,
+                "release_scope_reason": scope_reason,
+                "family_coverage_status": family_coverage_status,
+                "family_coverage_reason": family_coverage_reason,
+                "denominator_basis": denominator.get("denominator_basis"),
+                "workflow_root_types": denominator.get("workflow_root_types"),
+                "allowed_pilot_count": denominator.get("allowed_pilot_count"),
+                "total_lowcode_types": denominator.get("total_lowcode_types"),
+                "last_pr_url": last_pr_url,
+                "last_pr_number": last_pr_number,
+                "last_merge_sha": merge_sha,
+                "last_merge_date": merge_date,
+                "last_post_merge_validation_status": post_merge_status,
+                "post_merge_passed": post_merge_passed,
+                "post_merge_total": post_merge_total,
+                "open_followups": open_followups,
+                "taskcard_evidence_source": taskcard_source,
+                "next_required_action": next_action,
+                "cumulative_pr_count": cumulative_pr_count,
+            }
+        )
 
     all_merged = all(r["last_merge_sha"] is not None for r in results)
-    all_validated = all(
-        r["last_post_merge_validation_status"] in ("POST_MERGE_VERIFIED", "ALL_PASS")
-        for r in results
-    )
+    all_validated = all(r["last_post_merge_validation_status"] in ("POST_MERGE_VERIFIED", "ALL_PASS") for r in results)
 
     # Compute accurate top-level summary fields from denominator data
     total_published = sum(r["published_examples_count"] for r in results)
-    total_contracts = sum(
-        (r["allowed_pilot_count"] or r["workflow_root_types"] or 0)
-        for r in results
-    )
+    total_contracts = sum((r["allowed_pilot_count"] or r["workflow_root_types"] or 0) for r in results)
     # pr_ready comes from denominator pr_dry_run_ready_count
     total_pr_ready = 0
     for family in families:
@@ -280,13 +256,9 @@ def compute_release_status(families: list[str], verification_dir: Path) -> dict:
 
     all_published = total_contracts > 0 and total_published >= total_contracts
     all_contracts_accounted = total_contracts > 0 and (total_published + total_pr_ready) >= total_contracts
-    families_complete = sum(
-        1 for r in results
-        if r["release_scope_status"] in ("FAMILY_COMPLETE", "PILOT_COMPLETE")
-    )
+    families_complete = sum(1 for r in results if r["release_scope_status"] in ("FAMILY_COMPLETE", "PILOT_COMPLETE"))
     families_partial = sum(
-        1 for r in results
-        if r["release_scope_status"] in ("PARTIAL_CANARY", "PARTIAL_FAMILY_COVERAGE")
+        1 for r in results if r["release_scope_status"] in ("PARTIAL_CANARY", "PARTIAL_FAMILY_COVERAGE")
     )
     approval_blocked = total_pr_ready  # PR-ready but not yet published
 

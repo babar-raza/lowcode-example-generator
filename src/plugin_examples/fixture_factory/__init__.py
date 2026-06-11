@@ -1,4 +1,5 @@
 """Fixture factory: programmatic test fixture generation for dry-run packages."""
+
 from .generators import (
     generate_barcode_png,
     generate_minimal_png,

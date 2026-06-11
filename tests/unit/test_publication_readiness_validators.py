@@ -1,6 +1,7 @@
 """
 Tests for PRV-01..PRV-04 publication readiness validators.
 """
+
 import pytest
 from src.plugin_examples.fixture_factory.publication_readiness_validators import (
     prv_01_all_pclc_have_pr_packet,
@@ -26,6 +27,7 @@ def _pkg(family: str, slug: str, pr_packet: bool = True) -> dict:
 
 # --- PRV-01 ---
 
+
 class TestPRV01:
     def test_pass_all_have_pr_packet(self):
         r = _make_readiness(2, [_pkg("ocr", "scanned-image-to-text"), _pkg("page", "xps-converter")])
@@ -34,7 +36,9 @@ class TestPRV01:
         assert result.rule_id == "PRV-01"
 
     def test_fail_one_missing_pr_packet(self):
-        r = _make_readiness(2, [_pkg("ocr", "scanned-image-to-text"), _pkg("html", "convert-html-to-xps", pr_packet=False)])
+        r = _make_readiness(
+            2, [_pkg("ocr", "scanned-image-to-text"), _pkg("html", "convert-html-to-xps", pr_packet=False)]
+        )
         result = prv_01_all_pclc_have_pr_packet(r)
         assert not result.passed
         assert "html/convert-html-to-xps" in result.detail
@@ -62,6 +66,7 @@ class TestPRV01:
 
 
 # --- PRV-02 ---
+
 
 class TestPRV02:
     def test_pass_valid_branches(self):
@@ -92,6 +97,7 @@ class TestPRV02:
 
 # --- PRV-03 ---
 
+
 class TestPRV03:
     def test_pass_no_duplicates(self):
         r = _make_readiness(2, [_pkg("ocr", "a"), _pkg("ocr", "b")])
@@ -114,6 +120,7 @@ class TestPRV03:
 
 
 # --- PRV-04 ---
+
 
 class TestPRV04:
     def test_pass_count_matches(self):
@@ -153,6 +160,7 @@ class TestPRV04:
 
 
 # --- run_all_prv ---
+
 
 class TestRunAllPRV:
     def test_all_pass(self):

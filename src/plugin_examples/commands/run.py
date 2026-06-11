@@ -13,34 +13,37 @@ def add_parser(subparsers):
     # Run command
     parser = subparsers.add_parser("run", help="Run the pipeline for a family")
     parser.add_argument("--family", required=True, help="Family name (e.g., cells)")
-    parser.add_argument("--family-config", metavar="PATH", default=None,
-                            help="Custom family config YAML path. Defaults to pipeline/configs/families/{family}.yml")
-    parser.add_argument("--dry-run", action="store_true", help="Dry-run mode (default)")
-    parser.add_argument("--template-mode", action="store_true",
-                            help="Use template generation instead of LLM")
-    parser.add_argument("--skip-run", action="store_true",
-                            help="Skip runtime execution after build")
-    parser.add_argument("--require-llm", action="store_true",
-                            help="Fail if no LLM provider is available")
-    parser.add_argument("--require-validation", action="store_true",
-                            help="Fail if any validation fails")
-    parser.add_argument("--require-reviewer", action="store_true",
-                            help="Fail if example-reviewer is unavailable")
-    parser.add_argument("--publish", action="store_true",
-                            help="Enable live publishing (implies --require-validation --require-reviewer)")
     parser.add_argument(
-        "--approval-token", metavar="VALUE",
-        help="Live publish approval token. Must equal 'APPROVE_LIVE_PR'. "
-             "Also readable from PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL env var.",
+        "--family-config",
+        metavar="PATH",
+        default=None,
+        help="Custom family config YAML path. Defaults to pipeline/configs/families/{family}.yml",
     )
-    parser.add_argument("--tier", type=int, default=5, choices=range(0, 6),
-                            help="Max execution tier (0-5, default 5)")
-    parser.add_argument("--promote-latest", action="store_true",
-                            help="Copy evidence to workspace/verification/latest/")
-    parser.add_argument("--allow-experimental", action="store_true",
-                            help="Allow experimental families to run")
-    parser.add_argument("--compare-run", metavar="PRIOR_RUN_ID",
-                            help="Compare current run results against a prior run to detect regressions")
+    parser.add_argument("--dry-run", action="store_true", help="Dry-run mode (default)")
+    parser.add_argument("--template-mode", action="store_true", help="Use template generation instead of LLM")
+    parser.add_argument("--skip-run", action="store_true", help="Skip runtime execution after build")
+    parser.add_argument("--require-llm", action="store_true", help="Fail if no LLM provider is available")
+    parser.add_argument("--require-validation", action="store_true", help="Fail if any validation fails")
+    parser.add_argument("--require-reviewer", action="store_true", help="Fail if example-reviewer is unavailable")
+    parser.add_argument(
+        "--publish",
+        action="store_true",
+        help="Enable live publishing (implies --require-validation --require-reviewer)",
+    )
+    parser.add_argument(
+        "--approval-token",
+        metavar="VALUE",
+        help="Live publish approval token. Must equal 'APPROVE_LIVE_PR'. "
+        "Also readable from PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL env var.",
+    )
+    parser.add_argument("--tier", type=int, default=5, choices=range(0, 6), help="Max execution tier (0-5, default 5)")
+    parser.add_argument("--promote-latest", action="store_true", help="Copy evidence to workspace/verification/latest/")
+    parser.add_argument("--allow-experimental", action="store_true", help="Allow experimental families to run")
+    parser.add_argument(
+        "--compare-run",
+        metavar="PRIOR_RUN_ID",
+        help="Compare current run results against a prior run to detect regressions",
+    )
     parser.add_argument(
         "--replay-from",
         metavar="STEP",
@@ -63,6 +66,12 @@ def add_parser(subparsers):
             "If omitted with --replay-from, the most recent pilot-{family}-* run is used. "
             "Must be a pilot run; discovery- and multi-family- prefixed runs are rejected."
         ),
+    )
+
+    parser.add_argument(
+        "--strict-output-validation",
+        action="store_true",
+        help="Block publication when output validation fails (default: advisory only)",
     )
 
     # Agent metrics flags (shared across commands)
@@ -142,9 +151,11 @@ def handle(args) -> int:
     degraded = gs.get("degraded", 0)
     failed = gs.get("failed", 0)
     skipped = gs.get("skipped", 0)
-    print(f"Pipeline: {total} stages executed — "
-          f"{succeeded} succeeded, {degraded} degraded, "
-          f"{failed} failed, {skipped} skipped")
+    print(
+        f"Pipeline: {total} stages executed — "
+        f"{succeeded} succeeded, {degraded} degraded, "
+        f"{failed} failed, {skipped} skipped"
+    )
 
     # Aggregate example-level summary
     gen_count = comp.get("examples_generated_count", 0)
@@ -152,11 +163,12 @@ def handle(args) -> int:
     run_count = comp.get("dotnet_run_passed", 0)
     if gen_count > 0:
         run_blocked = build_count - run_count
-        print(f"Examples: {gen_count} generated, {build_count} built, "
-              f"{run_count} runtime passed, {run_blocked} runtime blocked")
+        print(
+            f"Examples: {gen_count} generated, {build_count} built, "
+            f"{run_count} runtime passed, {run_blocked} runtime blocked"
+        )
         pr_candidates = report.get("pr_candidate_count", run_count)
-        print(f"PR candidates: {pr_candidates} eligible, "
-              f"{gen_count - pr_candidates} excluded")
+        print(f"PR candidates: {pr_candidates} eligible, " f"{gen_count - pr_candidates} excluded")
 
     print(f"Verdict: {verdict}")
 

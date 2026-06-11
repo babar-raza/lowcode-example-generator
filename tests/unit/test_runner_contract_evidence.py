@@ -44,9 +44,9 @@ class TestRunnerEvidenceUsesContract:
             f"Runner evidence recorded '{row['selected_output_format']}' for SpreadsheetConverter; "
             "expected '.csv' from contract (not '.xlsx' from stale planner map)"
         )
-        assert row["source"] == "format_contract", (
-            f"Source was '{row['source']}' — should be 'format_contract', not 'planner_map_deprecated'"
-        )
+        assert (
+            row["source"] == "format_contract"
+        ), f"Source was '{row['source']}' — should be 'format_contract', not 'planner_map_deprecated'"
 
     def test_form_exporter_evidence_has_json(self, tmp_path):
         from plugin_examples.runner import _write_scenario_input_format_map
@@ -92,9 +92,7 @@ class TestRunnerEvidenceUsesContract:
             ("pdf", "FormExporter"),
         ]
         planning = MagicMock()
-        planning.ready_scenarios = [
-            _make_scenario(f"{fam}-{t.lower()}", t) for fam, t in active
-        ]
+        planning.ready_scenarios = [_make_scenario(f"{fam}-{t.lower()}", t) for fam, t in active]
         _write_scenario_input_format_map(planning, tmp_path)
 
         evidence = json.loads((tmp_path / "latest" / "scenario-input-format-map.json").read_text())

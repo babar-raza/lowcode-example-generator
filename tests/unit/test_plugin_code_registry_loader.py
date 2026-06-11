@@ -1,4 +1,5 @@
 """Unit tests for plugin-code registry loader."""
+
 import pytest
 from pathlib import Path
 from src.plugin_examples.plugin_code_registry.loader import PluginCodeRegistryLoader
@@ -18,7 +19,9 @@ def test_loader_loads_families(loader):
 def test_loader_excludes_protected_families(loader):
     non_protected = loader.non_protected_families()
     protected = {"cells", "words", "pdf", "slides", "email", "diagram"}
-    assert not any(f in non_protected for f in protected), "Protected families must not appear in non_protected_families()"
+    assert not any(
+        f in non_protected for f in protected
+    ), "Protected families must not appear in non_protected_families()"
 
 
 def test_ready_entries_non_empty(loader):
@@ -93,14 +96,19 @@ def test_family_registry_ready_plugins(loader):
     barcode = loader.all_families().get("barcode")
     assert barcode is not None
     # Count READY + TRANSFORMED + CANONICAL_PACKAGE_PROVEN (W18 advanced 1d/2d readers to PROVEN)
-    active = [p for p in barcode.plugins if p.registry_status in (
-        "READY_FOR_TRANSFORMATION", "TRANSFORMED_TO_EXAMPLE_DRYRUN", "CANONICAL_PACKAGE_PROVEN")]
+    active = [
+        p
+        for p in barcode.plugins
+        if p.registry_status
+        in ("READY_FOR_TRANSFORMATION", "TRANSFORMED_TO_EXAMPLE_DRYRUN", "CANONICAL_PACKAGE_PROVEN")
+    ]
     assert len(active) >= 4, "barcode should have at least 4 active entries (READY/TRANSFORMED/PROVEN)"
 
 
 def test_plugin_entry_is_fixture_free_for_barcode():
     entry = PluginEntry(
-        family="barcode", plugin_slug="generate-qr-code",
+        family="barcode",
+        plugin_slug="generate-qr-code",
         registry_status="READY_FOR_TRANSFORMATION",
         implementation_model="STATIC_CONVERTER_CLASS",
     )
@@ -110,7 +118,8 @@ def test_plugin_entry_is_fixture_free_for_barcode():
 def test_plugin_entry_readiness_score_increases_with_evidence():
     low = PluginEntry(family="test", plugin_slug="x", registry_status="CODE_HARVESTED")
     high = PluginEntry(
-        family="barcode", plugin_slug="y",
+        family="barcode",
+        plugin_slug="y",
         registry_status="READY_FOR_TRANSFORMATION",
         canonical_url="https://example.com",
         implementation_model="STATIC_CONVERTER_CLASS",

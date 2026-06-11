@@ -1,4 +1,5 @@
 """Unit tests for the example factory."""
+
 import json
 import pytest
 import tempfile
@@ -53,7 +54,7 @@ def test_template_map_has_required_fields(template_registry):
 
 def test_generator_scaffold_creates_required_files(entry, tmp_path):
     gen = ExamplePackageGenerator(tmp_path)
-    program_cs = "// test\nusing System;\nConsole.WriteLine(\"test\");\n"
+    program_cs = '// test\nusing System;\nConsole.WriteLine("test");\n'
     pkg_dir = gen.generate_scaffold(entry, program_cs)
 
     assert (pkg_dir / "Program.cs").exists()
@@ -65,7 +66,7 @@ def test_generator_scaffold_creates_required_files(entry, tmp_path):
 
 def test_generator_provenance_has_canonical_url(entry, tmp_path):
     gen = ExamplePackageGenerator(tmp_path)
-    program_cs = "Console.WriteLine(\"hi\");\n"
+    program_cs = 'Console.WriteLine("hi");\n'
     pkg_dir = gen.generate_scaffold(entry, program_cs)
 
     provenance = json.loads((pkg_dir / "source-provenance.json").read_text())
@@ -76,7 +77,7 @@ def test_generator_provenance_has_canonical_url(entry, tmp_path):
 
 def test_generator_readme_has_run_instructions(entry, tmp_path):
     gen = ExamplePackageGenerator(tmp_path)
-    pkg_dir = gen.generate_scaffold(entry, "Console.WriteLine(\"hi\");\n")
+    pkg_dir = gen.generate_scaffold(entry, 'Console.WriteLine("hi");\n')
     readme = (pkg_dir / "README.md").read_text()
     assert "dotnet run" in readme
     assert "dotnet restore" in readme
@@ -84,7 +85,7 @@ def test_generator_readme_has_run_instructions(entry, tmp_path):
 
 def test_generator_csproj_has_correct_package(entry, tmp_path):
     gen = ExamplePackageGenerator(tmp_path)
-    pkg_dir = gen.generate_scaffold(entry, "Console.WriteLine(\"hi\");\n")
+    pkg_dir = gen.generate_scaffold(entry, 'Console.WriteLine("hi");\n')
     csproj = (pkg_dir / "barcode-test-barcode.csproj").read_text()
     assert "Aspose.BarCode" in csproj
     assert "net8.0" in csproj
@@ -93,7 +94,8 @@ def test_generator_csproj_has_correct_package(entry, tmp_path):
 def test_generator_raises_for_unknown_family(tmp_path):
     gen = ExamplePackageGenerator(tmp_path)
     unknown_entry = PluginEntry(
-        family="unknownfamily", plugin_slug="test",
+        family="unknownfamily",
+        plugin_slug="test",
         registry_status="READY_FOR_TRANSFORMATION",
     )
     with pytest.raises(ValueError, match="No template for family"):
@@ -103,5 +105,5 @@ def test_generator_raises_for_unknown_family(tmp_path):
 def test_generator_package_dir_structure(entry, tmp_path):
     gen = ExamplePackageGenerator(tmp_path)
     expected_dir = tmp_path / "barcode" / "test-barcode"
-    pkg_dir = gen.generate_scaffold(entry, "Console.WriteLine(\"hi\");\n")
+    pkg_dir = gen.generate_scaffold(entry, 'Console.WriteLine("hi");\n')
     assert pkg_dir == expected_dir

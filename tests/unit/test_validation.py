@@ -45,8 +45,7 @@ class TestDotnetRunner:
         mock_result.stdout = "Build succeeded"
         mock_result.stderr = ""
 
-        with patch("plugin_examples.verifier_bridge.dotnet_runner.subprocess.run",
-                    return_value=mock_result):
+        with patch("plugin_examples.verifier_bridge.dotnet_runner.subprocess.run", return_value=mock_result):
             result = run_dotnet_validation(project_dir, "test-scenario")
 
         assert result.passed
@@ -58,6 +57,7 @@ class TestDotnetRunner:
         project_dir.mkdir()
 
         call_count = 0
+
         def mock_run(cmd, **kwargs):
             nonlocal call_count
             call_count += 1
@@ -72,8 +72,7 @@ class TestDotnetRunner:
                 r.stderr = "Build failed: CS1234"
             return r
 
-        with patch("plugin_examples.verifier_bridge.dotnet_runner.subprocess.run",
-                    side_effect=mock_run):
+        with patch("plugin_examples.verifier_bridge.dotnet_runner.subprocess.run", side_effect=mock_run):
             result = run_dotnet_validation(project_dir, "test-scenario")
 
         assert not result.passed
@@ -88,8 +87,7 @@ class TestDotnetRunner:
         mock_result.stdout = "Success"
         mock_result.stderr = ""
 
-        with patch("plugin_examples.verifier_bridge.dotnet_runner.subprocess.run",
-                    return_value=mock_result):
+        with patch("plugin_examples.verifier_bridge.dotnet_runner.subprocess.run", return_value=mock_result):
             result = run_dotnet_validation(project_dir, "test", skip_run=True)
 
         assert result.passed
@@ -97,12 +95,16 @@ class TestDotnetRunner:
 
     def test_write_validation_results(self, tmp_path):
         results = [
-            ValidationResult(scenario_id="s1", passed=True,
-                             restore=DotnetResult("restore", True),
-                             build=DotnetResult("build", True)),
-            ValidationResult(scenario_id="s2", passed=False, failure_stage="build",
-                             restore=DotnetResult("restore", True),
-                             build=DotnetResult("build", False)),
+            ValidationResult(
+                scenario_id="s1", passed=True, restore=DotnetResult("restore", True), build=DotnetResult("build", True)
+            ),
+            ValidationResult(
+                scenario_id="s2",
+                passed=False,
+                failure_stage="build",
+                restore=DotnetResult("restore", True),
+                build=DotnetResult("build", False),
+            ),
         ]
         path = write_validation_results(results, tmp_path / "workspace" / "verification")
         assert path.exists()
@@ -294,8 +296,7 @@ class TestBridge:
         assert not check_reviewer_availability(Path("/nonexistent/reviewer"))
 
     def test_write_reviewer_results(self, tmp_path):
-        result = ReviewerResult(available=False, passed=False,
-                                error="Not available")
+        result = ReviewerResult(available=False, passed=False, error="Not available")
         path = write_reviewer_results(result, tmp_path / "workspace" / "verification")
         assert path.exists()
         with open(path) as f:

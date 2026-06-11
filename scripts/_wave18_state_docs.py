@@ -1,4 +1,5 @@
-import json, os
+import json
+import os
 
 REPORT = "reports/lowcode-plugin-canonical-package-wave18-20260606"
 os.makedirs(f"{REPORT}/state-docs", exist_ok=True)

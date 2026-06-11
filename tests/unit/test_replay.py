@@ -12,6 +12,7 @@ Covers:
 - write_replay_manifest: written with correct fields, restored-artifacts-report.json
 - Runner integration: skipped_replayed status, scenario_planning never in skip set
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -39,6 +40,7 @@ from plugin_examples.replay import (
 # Fixtures
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture()
 def tmp_repo(tmp_path: pathlib.Path) -> pathlib.Path:
     """Minimal repo structure with workspace/runs/ and pipeline/configs/."""
@@ -60,9 +62,7 @@ def _write_catalog(run_dir: pathlib.Path, family: str, content: dict | None = No
     """Write a minimal api-catalog.json."""
     if content is None:
         content = {"package_id": "Aspose.Words", "package_version": "26.5.0", "namespaces": [], "types": []}
-    (run_dir / "evidence" / "latest" / "api-catalog.json").write_text(
-        json.dumps(content), encoding="utf-8"
-    )
+    (run_dir / "evidence" / "latest" / "api-catalog.json").write_text(json.dumps(content), encoding="utf-8")
 
 
 def _write_example_index(run_dir: pathlib.Path, family: str, examples: list | None = None) -> None:
@@ -72,19 +72,21 @@ def _write_example_index(run_dir: pathlib.Path, family: str, examples: list | No
         proj_dir = run_dir / "generated" / family / f"{family}-converter"
         proj_dir.mkdir(parents=True, exist_ok=True)
         (proj_dir / "Program.cs").write_text("// code", encoding="utf-8")
-        examples = [{
-            "scenario_id": f"{family}-converter",
-            "project_dir": str(proj_dir),
-            "csproj_path": str(proj_dir / f"{family}-converter.csproj"),
-            "program_path": str(proj_dir / "Program.cs"),
-            "package_id": "Aspose.Words",
-            "status": "generated",
-            "input_strategy": "programmatic_input",
-            "input_files": [],
-            "placed_fixtures": [],
-            "claimed_symbols": [],
-            "target_framework": "net8.0",
-        }]
+        examples = [
+            {
+                "scenario_id": f"{family}-converter",
+                "project_dir": str(proj_dir),
+                "csproj_path": str(proj_dir / f"{family}-converter.csproj"),
+                "program_path": str(proj_dir / "Program.cs"),
+                "package_id": "Aspose.Words",
+                "status": "generated",
+                "input_strategy": "programmatic_input",
+                "input_files": [],
+                "placed_fixtures": [],
+                "claimed_symbols": [],
+                "target_framework": "net8.0",
+            }
+        ]
     (run_dir / "evidence" / "example-index.json").write_text(
         json.dumps({"total_examples": len(examples), "examples": examples}),
         encoding="utf-8",
@@ -94,17 +96,25 @@ def _write_example_index(run_dir: pathlib.Path, family: str, examples: list | No
 def _write_validation_results(run_dir: pathlib.Path, results: list | None = None) -> None:
     """Write validation-results.json."""
     if results is None:
-        results = [{
-            "scenario_id": "words-converter",
-            "passed": True,
-            "failure_stage": None,
-            "restore": {"operation": "restore", "success": True, "exit_code": 0, "duration_ms": 100.0},
-            "build": {"operation": "build", "success": True, "exit_code": 0, "duration_ms": 200.0},
-            "run": {"operation": "run", "success": True, "exit_code": 0, "duration_ms": 300.0},
-        }]
+        results = [
+            {
+                "scenario_id": "words-converter",
+                "passed": True,
+                "failure_stage": None,
+                "restore": {"operation": "restore", "success": True, "exit_code": 0, "duration_ms": 100.0},
+                "build": {"operation": "build", "success": True, "exit_code": 0, "duration_ms": 200.0},
+                "run": {"operation": "run", "success": True, "exit_code": 0, "duration_ms": 300.0},
+            }
+        ]
     (run_dir / "evidence" / "latest" / "validation-results.json").write_text(
-        json.dumps({"total": len(results), "passed": sum(1 for r in results if r["passed"]),
-                    "failed": sum(1 for r in results if not r["passed"]), "results": results}),
+        json.dumps(
+            {
+                "total": len(results),
+                "passed": sum(1 for r in results if r["passed"]),
+                "failed": sum(1 for r in results if not r["passed"]),
+                "results": results,
+            }
+        ),
         encoding="utf-8",
     )
 
@@ -133,8 +143,16 @@ def _write_pilot_report(run_dir: pathlib.Path, stages_artifacts: dict | None = N
     stages = []
     if stages_artifacts:
         for stage_name, arts in stages_artifacts.items():
-            stages.append({"name": stage_name, "order": 1, "status": "success",
-                           "duration_ms": 100.0, "error": None, "artifacts": arts})
+            stages.append(
+                {
+                    "name": stage_name,
+                    "order": 1,
+                    "status": "success",
+                    "duration_ms": 100.0,
+                    "error": None,
+                    "artifacts": arts,
+                }
+            )
     (run_dir / "pilot-report.json").write_text(
         json.dumps({"meta": {}, "stages": stages, "gate_summary": {}, "verdict": "PR_DRY_RUN_READY"}),
         encoding="utf-8",
@@ -144,6 +162,7 @@ def _write_pilot_report(run_dir: pathlib.Path, stages_artifacts: dict | None = N
 # ---------------------------------------------------------------------------
 # find_prior_run tests
 # ---------------------------------------------------------------------------
+
 
 class TestFindPriorRun:
     def test_no_runs_returns_none(self, tmp_repo):
@@ -181,6 +200,7 @@ class TestFindPriorRun:
 # stages_to_skip tests
 # ---------------------------------------------------------------------------
 
+
 class TestStagesToSkip:
     INFRA = {"nuget_fetch", "dependency_resolution", "extraction", "reflection"}
 
@@ -217,17 +237,20 @@ class TestStagesToSkip:
 # check_replay_integrity tests
 # ---------------------------------------------------------------------------
 
+
 class TestCheckReplayIntegrity:
     def test_missing_catalog_raises(self, tmp_repo):
         run_dir = _make_run(tmp_repo, "pilot-words-20260513-180040")
         with pytest.raises(ReplayIntegrityError, match="api-catalog.json not found"):
             from plugin_examples.replay import check_replay_integrity
+
             check_replay_integrity("words", "generation", run_dir, tmp_repo)
 
     def test_stale_check_written_on_missing_catalog(self, tmp_repo):
         run_dir = _make_run(tmp_repo, "pilot-words-20260513-180040")
         with pytest.raises(ReplayIntegrityError):
             from plugin_examples.replay import check_replay_integrity
+
             check_replay_integrity("words", "generation", run_dir, tmp_repo)
         stale = run_dir / "evidence" / "latest" / "stale-artifact-check.json"
         assert stale.exists()
@@ -246,6 +269,7 @@ class TestCheckReplayIntegrity:
         )
 
         from plugin_examples.replay import check_replay_integrity
+
         with pytest.raises(ReplayIntegrityError, match="catalog_hash|SHA256|hash"):
             check_replay_integrity("words", "generation", run_dir, tmp_repo)
 
@@ -261,6 +285,7 @@ class TestCheckReplayIntegrity:
         )
 
         from plugin_examples.replay import check_replay_integrity
+
         result = check_replay_integrity("words", "generation", run_dir, tmp_repo)
         check = next(c for c in result["checks"] if c["check_id"] == "catalog_hash")
         assert check["status"] == "pass"
@@ -274,6 +299,7 @@ class TestCheckReplayIntegrity:
         (tmp_repo / "pipeline" / "configs" / "families" / "words.yml").write_text(yml, encoding="utf-8")
 
         from plugin_examples.replay import check_replay_integrity
+
         with pytest.raises(ReplayIntegrityError, match="[Pp]ackage version"):
             check_replay_integrity("words", "generation", run_dir, tmp_repo)
 
@@ -284,6 +310,7 @@ class TestCheckReplayIntegrity:
         _write_pilot_report(run_dir, {"load_config": {"constraints_hash": "old_hash_" + "a" * 55}})
 
         from plugin_examples.replay import check_replay_integrity
+
         # Should NOT raise (warn only for generation mode)
         result = check_replay_integrity("words", "generation", run_dir, tmp_repo)
         check = next((c for c in result["checks"] if c["check_id"] == "constraints_hash"), None)
@@ -301,15 +328,19 @@ class TestCheckReplayIntegrity:
         (tmp_repo / "pipeline" / "configs" / "families" / "words.yml").write_text(yml, encoding="utf-8")
 
         # Store a DIFFERENT constraints hash in pilot-report (simulating changed constraints)
-        _write_pilot_report(run_dir, {
-            "load_config": {
-                "constraints_hash": hashlib.sha256(b"different constraints content").hexdigest(),
-                "config_hash": hashlib.sha256(b"some old config").hexdigest(),
-            }
-        })
+        _write_pilot_report(
+            run_dir,
+            {
+                "load_config": {
+                    "constraints_hash": hashlib.sha256(b"different constraints content").hexdigest(),
+                    "config_hash": hashlib.sha256(b"some old config").hexdigest(),
+                }
+            },
+        )
         _write_example_index(run_dir, "words")
 
         from plugin_examples.replay import check_replay_integrity
+
         with pytest.raises(ReplayIntegrityError, match="[Cc]onstraints"):
             check_replay_integrity("words", "validation", run_dir, tmp_repo)
 
@@ -323,6 +354,7 @@ class TestCheckReplayIntegrity:
         _write_pr_manifest(run_dir, 2)
 
         from plugin_examples.replay import check_replay_integrity
+
         with pytest.raises(ReplayIntegrityError, match="[Rr]eviewer.*available|available.*false"):
             check_replay_integrity("words", "publisher", run_dir, tmp_repo)
 
@@ -336,6 +368,7 @@ class TestCheckReplayIntegrity:
         _write_pr_manifest(run_dir, 2)
 
         from plugin_examples.replay import check_replay_integrity
+
         with pytest.raises(ReplayIntegrityError, match="[Vv]erdict.*not.*publishable|[Vv]erdict.*publishable"):
             check_replay_integrity("words", "publisher", run_dir, tmp_repo)
 
@@ -349,6 +382,7 @@ class TestCheckReplayIntegrity:
         _write_pr_manifest(run_dir, 0)  # no candidates!
 
         from plugin_examples.replay import check_replay_integrity
+
         with pytest.raises(ReplayIntegrityError, match="[Cc]andidate|publishable_candidate_count"):
             check_replay_integrity("words", "publisher", run_dir, tmp_repo)
 
@@ -358,6 +392,7 @@ class TestCheckReplayIntegrity:
         _write_catalog(run_dir, "words")
 
         from plugin_examples.replay import check_replay_integrity
+
         check_replay_integrity("words", "generation", run_dir, tmp_repo)
         stale = run_dir / "evidence" / "latest" / "stale-artifact-check.json"
         assert stale.exists()
@@ -369,6 +404,7 @@ class TestCheckReplayIntegrity:
 # ---------------------------------------------------------------------------
 # restore_generated_projects tests
 # ---------------------------------------------------------------------------
+
 
 class TestRestoreGeneratedProjects:
     def test_valid_paths_returned(self, tmp_repo):
@@ -396,19 +432,21 @@ class TestRestoreGeneratedProjects:
         outside.mkdir()
         (outside / "Program.cs").write_text("// code", encoding="utf-8")
 
-        examples = [{
-            "scenario_id": "words-converter",
-            "project_dir": str(outside.resolve()),  # exists but escapes repo_root
-            "program_path": str(outside / "Program.cs"),
-            "csproj_path": str(outside / "words-converter.csproj"),
-            "package_id": "Aspose.Words",
-            "status": "generated",
-            "input_strategy": "none",
-            "input_files": [],
-            "placed_fixtures": [],
-            "claimed_symbols": [],
-            "target_framework": "net8.0",
-        }]
+        examples = [
+            {
+                "scenario_id": "words-converter",
+                "project_dir": str(outside.resolve()),  # exists but escapes repo_root
+                "program_path": str(outside / "Program.cs"),
+                "csproj_path": str(outside / "words-converter.csproj"),
+                "package_id": "Aspose.Words",
+                "status": "generated",
+                "input_strategy": "none",
+                "input_files": [],
+                "placed_fixtures": [],
+                "claimed_symbols": [],
+                "target_framework": "net8.0",
+            }
+        ]
         (run_dir / "evidence" / "example-index.json").write_text(
             json.dumps({"total_examples": 1, "examples": examples}), encoding="utf-8"
         )
@@ -422,19 +460,21 @@ class TestRestoreGeneratedProjects:
         proj_dir.mkdir(parents=True)
         # Note: NOT creating Program.cs
 
-        examples = [{
-            "scenario_id": "words-converter",
-            "project_dir": str(proj_dir),
-            "program_path": str(proj_dir / "Program.cs"),
-            "csproj_path": str(proj_dir / "words-converter.csproj"),
-            "package_id": "Aspose.Words",
-            "status": "generated",
-            "input_strategy": "none",
-            "input_files": [],
-            "placed_fixtures": [],
-            "claimed_symbols": [],
-            "target_framework": "net8.0",
-        }]
+        examples = [
+            {
+                "scenario_id": "words-converter",
+                "project_dir": str(proj_dir),
+                "program_path": str(proj_dir / "Program.cs"),
+                "csproj_path": str(proj_dir / "words-converter.csproj"),
+                "package_id": "Aspose.Words",
+                "status": "generated",
+                "input_strategy": "none",
+                "input_files": [],
+                "placed_fixtures": [],
+                "claimed_symbols": [],
+                "target_framework": "net8.0",
+            }
+        ]
         (run_dir / "evidence" / "example-index.json").write_text(
             json.dumps({"total_examples": 1, "examples": examples}), encoding="utf-8"
         )
@@ -455,19 +495,21 @@ class TestRestoreGeneratedProjects:
         (proj_dir / "Program.cs").write_text("// code", encoding="utf-8")
 
         # Index points at a stale path in a different run
-        examples = [{
-            "scenario_id": "words-converter",
-            "project_dir": "/nonexistent/path/words-converter",
-            "program_path": "/nonexistent/path/words-converter/Program.cs",
-            "csproj_path": "/nonexistent/path/words-converter/words-converter.csproj",
-            "package_id": "Aspose.Words",
-            "status": "generated",
-            "input_strategy": "none",
-            "input_files": [],
-            "placed_fixtures": [],
-            "claimed_symbols": [],
-            "target_framework": "net8.0",
-        }]
+        examples = [
+            {
+                "scenario_id": "words-converter",
+                "project_dir": "/nonexistent/path/words-converter",
+                "program_path": "/nonexistent/path/words-converter/Program.cs",
+                "csproj_path": "/nonexistent/path/words-converter/words-converter.csproj",
+                "package_id": "Aspose.Words",
+                "status": "generated",
+                "input_strategy": "none",
+                "input_files": [],
+                "placed_fixtures": [],
+                "claimed_symbols": [],
+                "target_framework": "net8.0",
+            }
+        ]
         (run_dir / "evidence" / "example-index.json").write_text(
             json.dumps({"total_examples": 1, "examples": examples}), encoding="utf-8"
         )
@@ -480,6 +522,7 @@ class TestRestoreGeneratedProjects:
 # ---------------------------------------------------------------------------
 # restore_validation_results tests
 # ---------------------------------------------------------------------------
+
 
 class TestRestoreValidationResults:
     def test_returns_typed_validation_results(self, tmp_repo):
@@ -531,15 +574,27 @@ class TestRestoreValidationResults:
         from plugin_examples.verifier_bridge.dotnet_runner import ValidationResult
 
         run_dir = _make_run(tmp_repo, "pilot-words-20260513-180040")
-        _write_validation_results(run_dir, results=[
-            {"scenario_id": "words-converter", "passed": True, "failure_stage": None,
-             "build": {"operation": "build", "success": True, "exit_code": 0, "duration_ms": 100.0},
-             "run": {"operation": "run", "success": True, "exit_code": 0, "duration_ms": 200.0},
-             "restore": None},
-            {"scenario_id": "words-splitter", "passed": False, "failure_stage": "build",
-             "build": {"operation": "build", "success": False, "exit_code": 1, "duration_ms": 150.0},
-             "run": None, "restore": None},
-        ])
+        _write_validation_results(
+            run_dir,
+            results=[
+                {
+                    "scenario_id": "words-converter",
+                    "passed": True,
+                    "failure_stage": None,
+                    "build": {"operation": "build", "success": True, "exit_code": 0, "duration_ms": 100.0},
+                    "run": {"operation": "run", "success": True, "exit_code": 0, "duration_ms": 200.0},
+                    "restore": None,
+                },
+                {
+                    "scenario_id": "words-splitter",
+                    "passed": False,
+                    "failure_stage": "build",
+                    "build": {"operation": "build", "success": False, "exit_code": 1, "duration_ms": 150.0},
+                    "run": None,
+                    "restore": None,
+                },
+            ],
+        )
         results = restore_validation_results(run_dir)
         assert len(results) == 2
         assert all(isinstance(r, ValidationResult) for r in results)
@@ -552,6 +607,7 @@ class TestRestoreValidationResults:
 # write_replay_manifest tests
 # ---------------------------------------------------------------------------
 
+
 class TestWriteReplayManifest:
     def test_writes_replay_manifest(self, tmp_path):
         evidence_dir = tmp_path / "evidence"
@@ -563,7 +619,9 @@ class TestWriteReplayManifest:
             reuse_run_id="pilot-words-20260513-180040",
             new_run_id="pilot-words-20260514-091523",
             family="words",
-            skipped_stages=frozenset({"nuget_fetch", "dependency_resolution", "extraction", "reflection", "generation"}),
+            skipped_stages=frozenset(
+                {"nuget_fetch", "dependency_resolution", "extraction", "reflection", "generation"}
+            ),
             integrity_result={"checks": [], "overall": "pass"},
         )
 
@@ -625,14 +683,15 @@ class TestWriteReplayManifest:
 # Runner integration tests (stage status)
 # ---------------------------------------------------------------------------
 
+
 class TestRunnerReplayIntegration:
     def test_stages_to_skip_excludes_scenario_planning(self):
         """scenario_planning must never appear in skip sets — it enforces denominator governance."""
         for mode in VALID_REPLAY_STEPS:
             skip = stages_to_skip(mode)
-            assert "scenario_planning" not in skip, (
-                f"scenario_planning must never be skipped; found in skip set for mode '{mode}'"
-            )
+            assert (
+                "scenario_planning" not in skip
+            ), f"scenario_planning must never be skipped; found in skip set for mode '{mode}'"
 
     def test_stages_to_skip_excludes_load_config(self):
         for mode in VALID_REPLAY_STEPS:
@@ -658,6 +717,7 @@ class TestRunnerReplayIntegration:
 # ---------------------------------------------------------------------------
 # copy_reviewer_evidence tests
 # ---------------------------------------------------------------------------
+
 
 class TestCopyReviewerEvidence:
     def test_copies_reviewer_file(self, tmp_repo):
@@ -695,6 +755,7 @@ class TestCopyReviewerEvidence:
 # ---------------------------------------------------------------------------
 # restore_catalog tests
 # ---------------------------------------------------------------------------
+
 
 class TestRestoreCatalog:
     def test_loads_catalog_from_evidence_latest(self, tmp_repo):

@@ -1,5 +1,8 @@
 """Build W18 evidence bundle, then write external sidecar + attestation."""
-import hashlib, json, os, zipfile
+import hashlib
+import json
+import os
+import zipfile
 from pathlib import Path
 
 REPO = Path("c:/Users/prora/OneDrive/Documents/GitHub/lowcode-example-generator-gitlab")

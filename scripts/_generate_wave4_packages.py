@@ -3,7 +3,12 @@ Wave 4 dry-run package generator.
 Targets: ocr, html, tasks, svg, barcode, imaging, page families.
 All packages built under reports/lowcode-plugin-example-factory-parallel-wave-20260605/dryrun/examples/
 """
-import json, pathlib, subprocess, sys, hashlib, datetime
+import json
+import pathlib
+import subprocess
+import sys
+import hashlib
+import datetime
 sys.path.insert(0, str(pathlib.Path(__file__).parents[1] / "src"))
 
 from plugin_examples.plugin_code_registry.loader import PluginCodeRegistryLoader

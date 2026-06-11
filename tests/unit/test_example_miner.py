@@ -45,12 +45,22 @@ def _make_catalog() -> dict:
                         "kind": "class",
                         "is_obsolete": False,
                         "methods": [
-                            {"name": "Process", "return_type": "void",
-                             "is_static": True, "is_obsolete": False, "parameters": []},
+                            {
+                                "name": "Process",
+                                "return_type": "void",
+                                "is_static": True,
+                                "is_obsolete": False,
+                                "parameters": [],
+                            },
                         ],
                         "properties": [
-                            {"name": "Password", "type": "string", "can_read": True,
-                             "can_write": True, "is_obsolete": False},
+                            {
+                                "name": "Password",
+                                "type": "string",
+                                "can_read": True,
+                                "can_write": True,
+                                "is_obsolete": False,
+                            },
                         ],
                         "constructors": [],
                     },

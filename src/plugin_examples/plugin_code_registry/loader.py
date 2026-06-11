@@ -1,4 +1,5 @@
 """Load plugin-code registry from YAML files."""
+
 import os
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -115,10 +116,7 @@ class PluginCodeRegistryLoader:
     def select_wave(self, exclude_slugs: Optional[set] = None, limit: int = 15) -> List["PluginEntry"]:
         """Select top candidates for the next transformation wave."""
         exclude = exclude_slugs or set()
-        candidates = [
-            e for e in self.ready_entries()
-            if f"{e.family}/{e.plugin_slug}" not in exclude
-        ]
+        candidates = [e for e in self.ready_entries() if f"{e.family}/{e.plugin_slug}" not in exclude]
         return candidates[:limit]
 
     def validate_entry(self, entry: PluginEntry) -> List[str]:

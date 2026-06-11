@@ -15,11 +15,14 @@ Usage:
 from __future__ import annotations
 
 import json
+import logging
 import re
 import zipfile
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Sequence
+
+logger = logging.getLogger(__name__)
 
 
 # ---------------------------------------------------------------------------
@@ -113,6 +116,7 @@ MIN_CATEGORIES_REQUIRED = len(REQUIRED_CATEGORIES)
 # Result type
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class ContractResult:
     passed: bool
@@ -136,6 +140,7 @@ class ContractResult:
 # ---------------------------------------------------------------------------
 # Contract validator
 # ---------------------------------------------------------------------------
+
 
 class StrictEvidenceContract:
     """
@@ -168,9 +173,7 @@ class StrictEvidenceContract:
             return result
 
         if not zip_path.is_absolute():
-            result.warnings.append(
-                "ZIP path is relative; contract requires absolute path in final response."
-            )
+            result.warnings.append("ZIP path is relative; contract requires absolute path in final response.")
 
         try:
             with zipfile.ZipFile(zip_path, "r") as zf:
@@ -184,10 +187,7 @@ class StrictEvidenceContract:
                         result.categories_found.append(category)
                     else:
                         result.categories_missing.append(category)
-                        result.failures.append(
-                            f"Missing category '{category}' — "
-                            f"expected one of: {patterns}"
-                        )
+                        result.failures.append(f"Missing category '{category}' — " f"expected one of: {patterns}")
 
                 # Scan text files for secrets
                 for name in names:
@@ -200,7 +200,7 @@ class StrictEvidenceContract:
                                     result.secret_violations.append(violation)
                                     result.failures.append(violation)
                         except Exception:
-                            pass  # Binary file — skip
+                            logger.debug("Skipping ZIP entry %s in secret scan (likely binary)", name)
 
         except zipfile.BadZipFile as e:
             result.failures.append(f"ZIP is invalid/corrupt: {e}")
@@ -243,9 +243,7 @@ class StrictEvidenceContract:
                 result.categories_found.append(category)
             else:
                 result.categories_missing.append(category)
-                result.failures.append(
-                    f"Missing category '{category}' — expected one of: {patterns}"
-                )
+                result.failures.append(f"Missing category '{category}' — expected one of: {patterns}")
 
         result.passed = not result.failures
         result.verdict = "BUNDLE_CONTRACT_PASSED" if result.passed else "BUNDLE_CONTRACT_FAILED"
@@ -258,9 +256,7 @@ def contract_definition() -> dict:
         "contract_version": "1.0.0",
         "sprint": "sprint28+",
         "description": "Strict evidence contract for LowCode sprint bundles. Every category must be satisfied.",
-        "required_categories": {
-            cat: patterns for cat, patterns in REQUIRED_CATEGORIES.items()
-        },
+        "required_categories": {cat: patterns for cat, patterns in REQUIRED_CATEGORIES.items()},
         "min_categories_required": MIN_CATEGORIES_REQUIRED,
         "secret_scanning_enabled": True,
         "secret_patterns": [p.pattern for p in SECRET_PATTERNS],
@@ -314,14 +310,16 @@ COMBINED_CATEGORIES_V2: dict[str, list[str]] = {
 MIN_CATEGORIES_REQUIRED_V2: int = len(COMBINED_CATEGORIES_V2)
 
 #: Allowed final verdicts for Sprint 29 bundles.
-ALLOWED_VERDICTS_V2: frozenset[str] = frozenset({
-    "SPRINT29_PUBLISHED_AND_EVIDENCE_CONTRACT_V2_COMPLETE",
-    "SPRINT29_APPROVAL_BLOCKED_EVIDENCE_CONTRACT_V2_COMPLETE",
-    "SPRINT29_PUBLICATION_PARTIAL_CONTRACT_V2_COMPLETE",
-    "SPRINT29_BLOCKED_EVIDENCE_CONTRACT_V2_FAILED",
-    "SPRINT29_BLOCKED_SOURCE_STATE",
-    "SPRINT29_REJECTED_UNSAFE_TO_PUBLISH",
-})
+ALLOWED_VERDICTS_V2: frozenset[str] = frozenset(
+    {
+        "SPRINT29_PUBLISHED_AND_EVIDENCE_CONTRACT_V2_COMPLETE",
+        "SPRINT29_APPROVAL_BLOCKED_EVIDENCE_CONTRACT_V2_COMPLETE",
+        "SPRINT29_PUBLICATION_PARTIAL_CONTRACT_V2_COMPLETE",
+        "SPRINT29_BLOCKED_EVIDENCE_CONTRACT_V2_FAILED",
+        "SPRINT29_BLOCKED_SOURCE_STATE",
+        "SPRINT29_REJECTED_UNSAFE_TO_PUBLISH",
+    }
+)
 
 #: git status line prefixes indicating STAGED source/test/config files (must not appear post-commit).
 _STAGED_SOURCE_PATTERN = re.compile(
@@ -358,9 +356,7 @@ class StrictEvidenceContractV2(StrictEvidenceContract):
             return result
 
         if not zip_path.is_absolute():
-            result.failures.append(
-                f"v2: ZIP path must be absolute for evidence completeness, got: {zip_path}"
-            )
+            result.failures.append(f"v2: ZIP path must be absolute for evidence completeness, got: {zip_path}")
 
         try:
             with zipfile.ZipFile(zip_path, "r") as zf:
@@ -374,10 +370,7 @@ class StrictEvidenceContractV2(StrictEvidenceContract):
                         result.categories_found.append(category)
                     else:
                         result.categories_missing.append(category)
-                        result.failures.append(
-                            f"Missing category '{category}' — "
-                            f"expected one of: {patterns}"
-                        )
+                        result.failures.append(f"Missing category '{category}' — " f"expected one of: {patterns}")
 
                 # Secret scan (all text files)
                 for name in names:
@@ -386,14 +379,11 @@ class StrictEvidenceContractV2(StrictEvidenceContract):
                             content = zf.read(name).decode("utf-8", errors="replace")
                             for pattern in SECRET_PATTERNS:
                                 if pattern.search(content):
-                                    violation = (
-                                        f"v2: Possible secret in {name}: "
-                                        f"pattern {pattern.pattern}"
-                                    )
+                                    violation = f"v2: Possible secret in {name}: " f"pattern {pattern.pattern}"
                                     result.secret_violations.append(violation)
                                     result.failures.append(violation)
                         except Exception:
-                            pass
+                            logger.debug("Skipping binary ZIP entry in secret scan")
 
                 # v2 content-level checks
                 self._validate_content_v2(zf, names, result)
@@ -434,7 +424,8 @@ class StrictEvidenceContractV2(StrictEvidenceContract):
             return None
         try:
             return zf.read(name_map[basename]).decode("utf-8", errors="replace")
-        except Exception:
+        except Exception as exc:
+            logger.debug("Could not read ZIP entry %s: %s", basename, exc)
             return None
 
     def _check_git_status_final(
@@ -481,9 +472,7 @@ class StrictEvidenceContractV2(StrictEvidenceContract):
         if content is None:
             return
         if "IN_PROGRESS" in content.upper():
-            result.failures.append(
-                "v2: final-verdict.md contains 'IN_PROGRESS' — sprint is not complete."
-            )
+            result.failures.append("v2: final-verdict.md contains 'IN_PROGRESS' — sprint is not complete.")
             return
         if not any(v in content for v in ALLOWED_VERDICTS_V2):
             result.failures.append(
@@ -502,20 +491,16 @@ class StrictEvidenceContractV2(StrictEvidenceContract):
             return
         try:
             data = json.loads(content)
-        except Exception:
+        except (json.JSONDecodeError, ValueError):
             result.failures.append("v2: test-summary.json is not valid JSON.")
             return
         if isinstance(data, dict):
             failed = int(data.get("failed", data.get("errors", 0)))
             passed = int(data.get("passed", data.get("total", 0)))
             if failed > 0:
-                result.failures.append(
-                    f"v2: test-summary.json reports {failed} failed tests — must be 0."
-                )
+                result.failures.append(f"v2: test-summary.json reports {failed} failed tests — must be 0.")
             if passed == 0:
-                result.failures.append(
-                    "v2: test-summary.json reports 0 passed tests — test suite did not run."
-                )
+                result.failures.append("v2: test-summary.json reports 0 passed tests — test suite did not run.")
 
     def _check_bundle_contract_report(
         self,
@@ -528,10 +513,8 @@ class StrictEvidenceContractV2(StrictEvidenceContract):
             return
         try:
             data = json.loads(content)
-        except Exception:
-            result.failures.append(
-                "v2: bundle-contract-validation-report.json is not valid JSON."
-            )
+        except (json.JSONDecodeError, ValueError):
+            result.failures.append("v2: bundle-contract-validation-report.json is not valid JSON.")
             return
         if not data.get("passed", False):
             result.failures.append(
@@ -540,9 +523,7 @@ class StrictEvidenceContractV2(StrictEvidenceContract):
             )
         missing = data.get("categories_missing", [])
         if missing:
-            result.failures.append(
-                f"v2: bundle-contract-validation-report.json reports categories_missing: {missing}"
-            )
+            result.failures.append(f"v2: bundle-contract-validation-report.json reports categories_missing: {missing}")
 
 
 def contract_definition_v2() -> dict:
@@ -556,9 +537,7 @@ def contract_definition_v2() -> dict:
             "Requires post-commit git status (no staged source files), "
             "prior sprint commit in git log, and valid final verdict."
         ),
-        "required_categories": {
-            cat: patterns for cat, patterns in COMBINED_CATEGORIES_V2.items()
-        },
+        "required_categories": {cat: patterns for cat, patterns in COMBINED_CATEGORIES_V2.items()},
         "min_categories_required": MIN_CATEGORIES_REQUIRED_V2,
         "content_checks_enabled": True,
         "content_checks": [
@@ -582,10 +561,12 @@ def contract_definition_v2() -> dict:
 # ---------------------------------------------------------------------------
 
 #: Categories removed from v2 (renamed to reflect sprint29 content).
-_REQUIRED_CATEGORIES_V3_REMOVED: frozenset[str] = frozenset({
-    "sprint28_commit_proof",
-    "sprint28_reconciliation",
-})
+_REQUIRED_CATEGORIES_V3_REMOVED: frozenset[str] = frozenset(
+    {
+        "sprint28_commit_proof",
+        "sprint28_reconciliation",
+    }
+)
 
 #: Pattern updates for v3 (key kept, patterns updated).
 _REQUIRED_CATEGORIES_V3_UPDATES: dict[str, list[str]] = {
@@ -613,15 +594,17 @@ COMBINED_CATEGORIES_V3: dict[str, list[str]] = {
 MIN_CATEGORIES_REQUIRED_V3: int = len(COMBINED_CATEGORIES_V3)
 
 #: Allowed final verdicts for Sprint 30 bundles.
-ALLOWED_VERDICTS_V3: frozenset[str] = frozenset({
-    "SPRINT30_ALL_PRS_PUBLISHED_EVIDENCE_V3_COMPLETE",
-    "SPRINT30_PARTIAL_PUBLICATION_EVIDENCE_V3_COMPLETE",
-    "SPRINT30_APPROVAL_BLOCKED_PACKAGES_CLEAN_EVIDENCE_V3_COMPLETE",
-    "SPRINT30_BLOCKED_PACKAGE_AUDIT_FAILURES",
-    "SPRINT30_BLOCKED_SOURCE_STATE",
-    "SPRINT30_BLOCKED_EVIDENCE_CONTRACT_V3_FAILED",
-    "SPRINT30_REJECTED_UNSAFE_TO_PUBLISH",
-})
+ALLOWED_VERDICTS_V3: frozenset[str] = frozenset(
+    {
+        "SPRINT30_ALL_PRS_PUBLISHED_EVIDENCE_V3_COMPLETE",
+        "SPRINT30_PARTIAL_PUBLICATION_EVIDENCE_V3_COMPLETE",
+        "SPRINT30_APPROVAL_BLOCKED_PACKAGES_CLEAN_EVIDENCE_V3_COMPLETE",
+        "SPRINT30_BLOCKED_PACKAGE_AUDIT_FAILURES",
+        "SPRINT30_BLOCKED_SOURCE_STATE",
+        "SPRINT30_BLOCKED_EVIDENCE_CONTRACT_V3_FAILED",
+        "SPRINT30_REJECTED_UNSAFE_TO_PUBLISH",
+    }
+)
 
 #: Sprint 29 HEAD commit SHA (short) — must appear in git-log-proof.txt for Sprint 30.
 _SPRINT29_HEAD_COMMIT = "ef74d9b"
@@ -649,9 +632,7 @@ class StrictEvidenceContractV3(StrictEvidenceContractV2):
             return result
 
         if not zip_path.is_absolute():
-            result.failures.append(
-                f"v3: ZIP path must be absolute for evidence completeness, got: {zip_path}"
-            )
+            result.failures.append(f"v3: ZIP path must be absolute for evidence completeness, got: {zip_path}")
 
         try:
             with zipfile.ZipFile(zip_path, "r") as zf:
@@ -665,10 +646,7 @@ class StrictEvidenceContractV3(StrictEvidenceContractV2):
                         result.categories_found.append(category)
                     else:
                         result.categories_missing.append(category)
-                        result.failures.append(
-                            f"Missing category '{category}' — "
-                            f"expected one of: {patterns}"
-                        )
+                        result.failures.append(f"Missing category '{category}' — " f"expected one of: {patterns}")
 
                 # Secret scan (all text files)
                 for name in names:
@@ -677,14 +655,11 @@ class StrictEvidenceContractV3(StrictEvidenceContractV2):
                             content = zf.read(name).decode("utf-8", errors="replace")
                             for pattern in SECRET_PATTERNS:
                                 if pattern.search(content):
-                                    violation = (
-                                        f"v3: Possible secret in {name}: "
-                                        f"pattern {pattern.pattern}"
-                                    )
+                                    violation = f"v3: Possible secret in {name}: " f"pattern {pattern.pattern}"
                                     result.secret_violations.append(violation)
                                     result.failures.append(violation)
                         except Exception:
-                            pass
+                            logger.debug("Skipping binary ZIP entry in secret scan")
 
                 # v3 content-level checks
                 self._validate_content_v3(zf, names, result)
@@ -709,11 +684,11 @@ class StrictEvidenceContractV3(StrictEvidenceContractV2):
         result: ContractResult,
     ) -> None:
         name_map: dict[str, str] = {Path(n).name: n for n in names}
-        self._check_git_status_final(zf, name_map, result)      # from v2 (unchanged)
-        self._check_git_log_proof(zf, name_map, result)          # overridden below
-        self._check_final_verdict(zf, name_map, result)          # overridden below
-        self._check_test_summary(zf, name_map, result)           # from v2 (unchanged)
-        self._check_bundle_contract_report(zf, name_map, result) # from v2 (unchanged)
+        self._check_git_status_final(zf, name_map, result)  # from v2 (unchanged)
+        self._check_git_log_proof(zf, name_map, result)  # overridden below
+        self._check_final_verdict(zf, name_map, result)  # overridden below
+        self._check_test_summary(zf, name_map, result)  # from v2 (unchanged)
+        self._check_bundle_contract_report(zf, name_map, result)  # from v2 (unchanged)
         self._check_source_state_sprint30_clean(zf, name_map, result)
         self._check_package_audit_no_blocking_flags(zf, name_map, result)
 
@@ -748,9 +723,7 @@ class StrictEvidenceContractV3(StrictEvidenceContractV2):
         if content is None:
             return
         if "IN_PROGRESS" in content.upper():
-            result.failures.append(
-                "v3: final-verdict.md contains 'IN_PROGRESS' — sprint is not complete."
-            )
+            result.failures.append("v3: final-verdict.md contains 'IN_PROGRESS' — sprint is not complete.")
             return
         if not any(v in content for v in ALLOWED_VERDICTS_V3):
             result.failures.append(
@@ -770,7 +743,7 @@ class StrictEvidenceContractV3(StrictEvidenceContractV2):
             return
         try:
             data = json.loads(content)
-        except Exception:
+        except (json.JSONDecodeError, ValueError):
             result.failures.append("v3: source-state-classification.json is not valid JSON.")
             return
         state = data.get("sprint30_start_state", "")
@@ -792,10 +765,8 @@ class StrictEvidenceContractV3(StrictEvidenceContractV2):
             return
         try:
             data = json.loads(content)
-        except Exception:
-            result.failures.append(
-                "v3: all-pr-packages-audit-post-cleanup.json is not valid JSON."
-            )
+        except (json.JSONDecodeError, ValueError):
+            result.failures.append("v3: all-pr-packages-audit-post-cleanup.json is not valid JSON.")
             return
         blocking = data.get("summary", {}).get("packages_with_blocking_flags", -1)
         if blocking != 0:
@@ -817,9 +788,7 @@ def contract_definition_v3() -> dict:
             "45 categories (reconciles 44-vs-45 discrepancy from v2). "
             "Sprint 30 verdicts required."
         ),
-        "required_categories": {
-            cat: patterns for cat, patterns in COMBINED_CATEGORIES_V3.items()
-        },
+        "required_categories": {cat: patterns for cat, patterns in COMBINED_CATEGORIES_V3.items()},
         "min_categories_required": MIN_CATEGORIES_REQUIRED_V3,
         "content_checks_enabled": True,
         "content_checks": [
@@ -852,10 +821,12 @@ def contract_definition_v3() -> dict:
 # ---------------------------------------------------------------------------
 
 #: Categories removed from v3 (renamed to reflect sprint30 content).
-_REQUIRED_CATEGORIES_V4_REMOVED: frozenset[str] = frozenset({
-    "sprint29_commit_proof",
-    "sprint29_reconciliation",
-})
+_REQUIRED_CATEGORIES_V4_REMOVED: frozenset[str] = frozenset(
+    {
+        "sprint29_commit_proof",
+        "sprint29_reconciliation",
+    }
+)
 
 #: Pattern updates for v4 (key kept, patterns updated).
 _REQUIRED_CATEGORIES_V4_UPDATES: dict[str, list[str]] = {
@@ -887,15 +858,17 @@ COMBINED_CATEGORIES_V4: dict[str, list[str]] = {
 MIN_CATEGORIES_REQUIRED_V4: int = len(COMBINED_CATEGORIES_V4)
 
 #: Allowed final verdicts for Sprint 31 bundles.
-ALLOWED_VERDICTS_V4: frozenset[str] = frozenset({
-    "SPRINT31_ALL_PRS_PUBLISHED_EVIDENCE_V4_COMPLETE",
-    "SPRINT31_PARTIAL_PUBLICATION_EVIDENCE_V4_COMPLETE",
-    "SPRINT31_APPROVAL_BLOCKED_SECURITY_RECONCILED_EVIDENCE_V4_COMPLETE",
-    "SPRINT31_BLOCKED_PR_COUNT_INCONSISTENCY",
-    "SPRINT31_BLOCKED_SECURITY_INVENTORY_UNRESOLVED",
-    "SPRINT31_BLOCKED_EVIDENCE_CONTRACT_V4_FAILED",
-    "SPRINT31_REJECTED_UNSAFE_TO_PUBLISH",
-})
+ALLOWED_VERDICTS_V4: frozenset[str] = frozenset(
+    {
+        "SPRINT31_ALL_PRS_PUBLISHED_EVIDENCE_V4_COMPLETE",
+        "SPRINT31_PARTIAL_PUBLICATION_EVIDENCE_V4_COMPLETE",
+        "SPRINT31_APPROVAL_BLOCKED_SECURITY_RECONCILED_EVIDENCE_V4_COMPLETE",
+        "SPRINT31_BLOCKED_PR_COUNT_INCONSISTENCY",
+        "SPRINT31_BLOCKED_SECURITY_INVENTORY_UNRESOLVED",
+        "SPRINT31_BLOCKED_EVIDENCE_CONTRACT_V4_FAILED",
+        "SPRINT31_REJECTED_UNSAFE_TO_PUBLISH",
+    }
+)
 
 #: Sprint 30 HEAD commit SHA (short) — must appear in git-log-proof.txt for Sprint 31.
 _SPRINT30_HEAD_COMMIT = "e379cdf"
@@ -931,9 +904,7 @@ class StrictEvidenceContractV4(StrictEvidenceContractV3):
             return result
 
         if not zip_path.is_absolute():
-            result.failures.append(
-                f"v4: ZIP path must be absolute for evidence completeness, got: {zip_path}"
-            )
+            result.failures.append(f"v4: ZIP path must be absolute for evidence completeness, got: {zip_path}")
 
         try:
             with zipfile.ZipFile(zip_path, "r") as zf:
@@ -947,10 +918,7 @@ class StrictEvidenceContractV4(StrictEvidenceContractV3):
                         result.categories_found.append(category)
                     else:
                         result.categories_missing.append(category)
-                        result.failures.append(
-                            f"Missing category '{category}' — "
-                            f"expected one of: {patterns}"
-                        )
+                        result.failures.append(f"Missing category '{category}' — " f"expected one of: {patterns}")
 
                 # Secret scan (all text files)
                 for name in names:
@@ -959,14 +927,11 @@ class StrictEvidenceContractV4(StrictEvidenceContractV3):
                             content = zf.read(name).decode("utf-8", errors="replace")
                             for pattern in SECRET_PATTERNS:
                                 if pattern.search(content):
-                                    violation = (
-                                        f"v4: Possible secret in {name}: "
-                                        f"pattern {pattern.pattern}"
-                                    )
+                                    violation = f"v4: Possible secret in {name}: " f"pattern {pattern.pattern}"
                                     result.secret_violations.append(violation)
                                     result.failures.append(violation)
                         except Exception:
-                            pass
+                            logger.debug("Skipping binary ZIP entry in secret scan")
 
                 # v4 content-level checks
                 self._validate_content_v4(zf, names, result)
@@ -991,15 +956,15 @@ class StrictEvidenceContractV4(StrictEvidenceContractV3):
         result: ContractResult,
     ) -> None:
         name_map: dict[str, str] = {Path(n).name: n for n in names}
-        self._check_git_status_final(zf, name_map, result)            # from v2 (unchanged)
-        self._check_staged_package_deletions(zf, name_map, result)    # new v4
-        self._check_git_log_proof(zf, name_map, result)                # overridden below
-        self._check_final_verdict(zf, name_map, result)                # overridden below
-        self._check_test_summary(zf, name_map, result)                 # from v2 (unchanged)
-        self._check_bundle_contract_report(zf, name_map, result)       # from v2 (unchanged)
+        self._check_git_status_final(zf, name_map, result)  # from v2 (unchanged)
+        self._check_staged_package_deletions(zf, name_map, result)  # new v4
+        self._check_git_log_proof(zf, name_map, result)  # overridden below
+        self._check_final_verdict(zf, name_map, result)  # overridden below
+        self._check_test_summary(zf, name_map, result)  # from v2 (unchanged)
+        self._check_bundle_contract_report(zf, name_map, result)  # from v2 (unchanged)
         self._check_source_state_sprint31_clean(zf, name_map, result)  # new v4
-        self._check_package_audit_no_blocking_flags(zf, name_map, result)   # from v3 (unchanged)
-        self._check_pr_package_count_consistency(zf, name_map, result)      # new v4
+        self._check_package_audit_no_blocking_flags(zf, name_map, result)  # from v3 (unchanged)
+        self._check_pr_package_count_consistency(zf, name_map, result)  # new v4
 
     def _check_git_log_proof(
         self,
@@ -1032,9 +997,7 @@ class StrictEvidenceContractV4(StrictEvidenceContractV3):
         if content is None:
             return
         if "IN_PROGRESS" in content.upper():
-            result.failures.append(
-                "v4: final-verdict.md contains 'IN_PROGRESS' — sprint is not complete."
-            )
+            result.failures.append("v4: final-verdict.md contains 'IN_PROGRESS' — sprint is not complete.")
             return
         if not any(v in content for v in ALLOWED_VERDICTS_V4):
             result.failures.append(
@@ -1054,7 +1017,7 @@ class StrictEvidenceContractV4(StrictEvidenceContractV3):
             return
         try:
             data = json.loads(content)
-        except Exception:
+        except (json.JSONDecodeError, ValueError):
             result.failures.append("v4: source-state-classification.json is not valid JSON.")
             return
         state = data.get("sprint31_start_state", "")
@@ -1076,16 +1039,10 @@ class StrictEvidenceContractV4(StrictEvidenceContractV3):
             return
         try:
             data = json.loads(content)
-        except Exception:
-            result.failures.append(
-                "v4: pdf-pr-package-count-reconciliation.json is not valid JSON."
-            )
+        except (json.JSONDecodeError, ValueError):
+            result.failures.append("v4: pdf-pr-package-count-reconciliation.json is not valid JSON.")
             return
-        count = data.get(
-            "total_pr_ready",
-            data.get("pr_ready_count",
-            data.get("totals", {}).get("total_examples", -1))
-        )
+        count = data.get("total_pr_ready", data.get("pr_ready_count", data.get("totals", {}).get("total_examples", -1)))
         if count != 14:
             result.failures.append(
                 f"v4: pdf-pr-package-count-reconciliation.json total_pr_ready={count} — "
@@ -1122,9 +1079,7 @@ def contract_definition_v4() -> dict:
             "49 categories (v3 had 45: removes 2 sprint29 entries, adds 6 sprint31 entries). "
             "Sprint 31 verdicts required."
         ),
-        "required_categories": {
-            cat: patterns for cat, patterns in COMBINED_CATEGORIES_V4.items()
-        },
+        "required_categories": {cat: patterns for cat, patterns in COMBINED_CATEGORIES_V4.items()},
         "min_categories_required": MIN_CATEGORIES_REQUIRED_V4,
         "content_checks_enabled": True,
         "content_checks": [
@@ -1160,10 +1115,12 @@ def contract_definition_v4() -> dict:
 # ---------------------------------------------------------------------------
 
 #: Categories removed from v4 (renamed to reflect sprint31 content).
-_REQUIRED_CATEGORIES_V5_REMOVED: frozenset[str] = frozenset({
-    "sprint30_commit_proof",
-    "sprint30_reconciliation",
-})
+_REQUIRED_CATEGORIES_V5_REMOVED: frozenset[str] = frozenset(
+    {
+        "sprint30_commit_proof",
+        "sprint30_reconciliation",
+    }
+)
 
 #: Pattern updates for v5 (key kept, patterns updated).
 _REQUIRED_CATEGORIES_V5_UPDATES: dict[str, list[str]] = {
@@ -1195,14 +1152,16 @@ COMBINED_CATEGORIES_V5: dict[str, list[str]] = {
 MIN_CATEGORIES_REQUIRED_V5: int = len(COMBINED_CATEGORIES_V5)
 
 #: Allowed final verdicts for Sprint 32 bundles.
-ALLOWED_VERDICTS_V5: frozenset[str] = frozenset({
-    "SPRINT32_PUBLISHED_RELEASE_CANDIDATE_AND_CONTRACT_V5_COMPLETE",
-    "SPRINT32_APPROVAL_BLOCKED_RELEASE_CANDIDATE_AND_CONTRACT_V5_COMPLETE",
-    "SPRINT32_PARTIAL_PUBLICATION_RELEASE_CANDIDATE_COMPLETE",
-    "SPRINT32_BLOCKED_EVIDENCE_CONTRACT_V5_FAILED",
-    "SPRINT32_BLOCKED_SOURCE_STATE",
-    "SPRINT32_REJECTED_UNSAFE_TO_PUBLISH",
-})
+ALLOWED_VERDICTS_V5: frozenset[str] = frozenset(
+    {
+        "SPRINT32_PUBLISHED_RELEASE_CANDIDATE_AND_CONTRACT_V5_COMPLETE",
+        "SPRINT32_APPROVAL_BLOCKED_RELEASE_CANDIDATE_AND_CONTRACT_V5_COMPLETE",
+        "SPRINT32_PARTIAL_PUBLICATION_RELEASE_CANDIDATE_COMPLETE",
+        "SPRINT32_BLOCKED_EVIDENCE_CONTRACT_V5_FAILED",
+        "SPRINT32_BLOCKED_SOURCE_STATE",
+        "SPRINT32_REJECTED_UNSAFE_TO_PUBLISH",
+    }
+)
 
 #: Sprint 31 HEAD commit SHA (short) — must appear in git-log-proof.txt for Sprint 32.
 _SPRINT31_HEAD_COMMIT = "0f44886"
@@ -1242,9 +1201,7 @@ class StrictEvidenceContractV5(StrictEvidenceContractV4):
             return result
 
         if not zip_path.is_absolute():
-            result.failures.append(
-                f"v5: ZIP path must be absolute for evidence completeness, got: {zip_path}"
-            )
+            result.failures.append(f"v5: ZIP path must be absolute for evidence completeness, got: {zip_path}")
 
         try:
             with zipfile.ZipFile(zip_path, "r") as zf:
@@ -1258,10 +1215,7 @@ class StrictEvidenceContractV5(StrictEvidenceContractV4):
                         result.categories_found.append(category)
                     else:
                         result.categories_missing.append(category)
-                        result.failures.append(
-                            f"Missing category '{category}' — "
-                            f"expected one of: {patterns}"
-                        )
+                        result.failures.append(f"Missing category '{category}' — " f"expected one of: {patterns}")
 
                 # Secret scan (all text files)
                 for name in names:
@@ -1270,14 +1224,11 @@ class StrictEvidenceContractV5(StrictEvidenceContractV4):
                             content = zf.read(name).decode("utf-8", errors="replace")
                             for pattern in SECRET_PATTERNS:
                                 if pattern.search(content):
-                                    violation = (
-                                        f"v5: Possible secret in {name}: "
-                                        f"pattern {pattern.pattern}"
-                                    )
+                                    violation = f"v5: Possible secret in {name}: " f"pattern {pattern.pattern}"
                                     result.secret_violations.append(violation)
                                     result.failures.append(violation)
                         except Exception:
-                            pass
+                            logger.debug("Skipping binary ZIP entry in secret scan")
 
                 # v5 content-level checks
                 self._validate_content_v5(zf, names, result)
@@ -1302,15 +1253,15 @@ class StrictEvidenceContractV5(StrictEvidenceContractV4):
         result: ContractResult,
     ) -> None:
         name_map: dict[str, str] = {Path(n).name: n for n in names}
-        self._check_git_status_no_modified_source(zf, name_map, result)   # new v5 (replaces v4 staged check)
-        self._check_staged_package_deletions(zf, name_map, result)         # from v4 (unchanged)
-        self._check_git_log_proof(zf, name_map, result)                     # overridden below
-        self._check_final_verdict(zf, name_map, result)                     # overridden below
-        self._check_test_summary(zf, name_map, result)                      # from v2 (unchanged)
-        self._check_bundle_contract_report(zf, name_map, result)            # from v2 (unchanged)
-        self._check_source_state_sprint32_clean(zf, name_map, result)       # new v5
-        self._check_package_audit_no_blocking_flags(zf, name_map, result)   # from v3 (unchanged)
-        self._check_pr_package_count_consistency(zf, name_map, result)      # from v4 (unchanged)
+        self._check_git_status_no_modified_source(zf, name_map, result)  # new v5 (replaces v4 staged check)
+        self._check_staged_package_deletions(zf, name_map, result)  # from v4 (unchanged)
+        self._check_git_log_proof(zf, name_map, result)  # overridden below
+        self._check_final_verdict(zf, name_map, result)  # overridden below
+        self._check_test_summary(zf, name_map, result)  # from v2 (unchanged)
+        self._check_bundle_contract_report(zf, name_map, result)  # from v2 (unchanged)
+        self._check_source_state_sprint32_clean(zf, name_map, result)  # new v5
+        self._check_package_audit_no_blocking_flags(zf, name_map, result)  # from v3 (unchanged)
+        self._check_pr_package_count_consistency(zf, name_map, result)  # from v4 (unchanged)
 
     def _check_git_status_no_modified_source(
         self,
@@ -1368,9 +1319,7 @@ class StrictEvidenceContractV5(StrictEvidenceContractV4):
         if content is None:
             return
         if "IN_PROGRESS" in content.upper():
-            result.failures.append(
-                "v5: final-verdict.md contains 'IN_PROGRESS' — sprint is not complete."
-            )
+            result.failures.append("v5: final-verdict.md contains 'IN_PROGRESS' — sprint is not complete.")
             return
         if not any(v in content for v in ALLOWED_VERDICTS_V5):
             result.failures.append(
@@ -1390,7 +1339,7 @@ class StrictEvidenceContractV5(StrictEvidenceContractV4):
             return
         try:
             data = json.loads(content)
-        except Exception:
+        except (json.JSONDecodeError, ValueError):
             result.failures.append("v5: source-state-classification.json is not valid JSON.")
             return
         state = data.get("sprint32_start_state", "")
@@ -1413,9 +1362,7 @@ def contract_definition_v5() -> dict:
             "53 categories (v4 had 49: removes 2 sprint30 entries, adds 6 sprint32 entries). "
             "Sprint 32 verdicts required."
         ),
-        "required_categories": {
-            cat: patterns for cat, patterns in COMBINED_CATEGORIES_V5.items()
-        },
+        "required_categories": {cat: patterns for cat, patterns in COMBINED_CATEGORIES_V5.items()},
         "min_categories_required": MIN_CATEGORIES_REQUIRED_V5,
         "content_checks_enabled": True,
         "content_checks": [
@@ -1452,9 +1399,11 @@ def contract_definition_v5() -> dict:
 # ---------------------------------------------------------------------------
 
 #: Categories removed from v5 (sprint31 reconciliation replaced by sprint32 reconciliation).
-_REQUIRED_CATEGORIES_V6_REMOVED: frozenset[str] = frozenset({
-    "sprint31_state_reconciliation",
-})
+_REQUIRED_CATEGORIES_V6_REMOVED: frozenset[str] = frozenset(
+    {
+        "sprint31_state_reconciliation",
+    }
+)
 
 #: Pattern updates for v6 (key kept, patterns updated).
 _REQUIRED_CATEGORIES_V6_UPDATES: dict[str, list[str]] = {
@@ -1496,47 +1445,49 @@ COMBINED_CATEGORIES_V6: dict[str, list[str]] = {
 MIN_CATEGORIES_REQUIRED_V6: int = len(COMBINED_CATEGORIES_V6)
 
 #: Allowed final verdicts for Sprint 33 bundles.
-ALLOWED_VERDICTS_V6: frozenset[str] = frozenset({
-    # Sprint 33 verdicts
-    "SPRINT33_PUBLISHED_MERGED_AND_PORTFOLIO_RELEASE_CANDIDATE_COMPLETE",
-    "SPRINT33_PUBLISHED_RELEASE_CANDIDATE_COMPLETE_MERGE_BLOCKED",
-    "SPRINT33_APPROVAL_BLOCKED_BUT_PORTFOLIO_RELEASE_CANDIDATE_ADVANCED",
-    "SPRINT33_PARTIAL_PUBLICATION_AND_PORTFOLIO_ADVANCED",
-    "SPRINT33_BLOCKED_EVIDENCE_CONTRACT_V6_FAILED",
-    "SPRINT33_BLOCKED_SOURCE_STATE",
-    "SPRINT33_REJECTED_UNSAFE_TO_PUBLISH",
-    # Sprint 34 verdicts (V6 contract extended to cover Sprint 34 bundles)
-    "SPRINT34_APPROVAL_BLOCKED_MEGA_SWARM_SYSTEM_BACKLOG_RESOLVED_NEW_FAMILY_DISCOVERY_COMPLETE",
-    "SPRINT34_PUBLISHED_MERGED_AND_PORTFOLIO_RELEASE_CANDIDATE_COMPLETE",
-    "SPRINT34_APPROVAL_BLOCKED_ALL_PACKAGES_VERIFIED",
-    "SPRINT34_BLOCKED_EVIDENCE_CONTRACT_V6_FAILED",
-    "SPRINT34_BLOCKED_SOURCE_STATE",
-    # Sprint 35 verdicts (V6 contract extended to cover Sprint 35 bundles)
-    "SPRINT35_ALL_LOWCODE_FAMILIES_LAUNCHED_AND_VERIFIED",
-    "SPRINT35_PUBLICATION_DONE_MERGE_BLOCKED_PORTFOLIO_ADVANCED",
-    "SPRINT35_APPROVAL_BLOCKED_ALL_FAMILIES_RELEASE_READY",
-    "SPRINT35_NEW_FAMILY_DISCOVERED_AND_PREPARED",
-    "SPRINT35_PARTIAL_MEGA_SWARM_ADVANCED_WITH_BLOCKERS",
-    "SPRINT35_BLOCKED_EVIDENCE_BUNDLE_FAILED",
-    "SPRINT35_BLOCKED_SOURCE_STATE",
-    "SPRINT35_REJECTED_UNSAFE_TO_PUBLISH",
-    # Sprint 36 verdicts (V6 contract extended to cover Sprint 36 bundles)
-    "SPRINT36_ALL_LOWCODE_FAMILIES_PUBLISHED_MERGED_AND_VERIFIED",
-    "SPRINT36_PUBLICATION_DONE_MERGE_BLOCKED_PORTFOLIO_HARDENED",
-    "SPRINT36_APPROVAL_BLOCKED_PORTFOLIO_HARDENED_AND_OPERATOR_READY",
-    "SPRINT36_PARTIAL_LAUNCH_EXECUTION_WITH_EXACT_BLOCKERS",
-    "SPRINT36_BLOCKED_EVIDENCE_BUNDLE_FAILED",
-    "SPRINT36_BLOCKED_SOURCE_STATE",
-    "SPRINT36_REJECTED_UNSAFE_TO_PUBLISH",
-    # Sprint 37 verdicts (V6 contract extended to cover Sprint 37 bundles)
-    "SPRINT37_ALL_LOWCODE_FAMILIES_PUBLISHED_MERGED_AND_VERIFIED",
-    "SPRINT37_PUBLICATION_DONE_MERGE_BLOCKED_PORTFOLIO_ADVANCED",
-    "SPRINT37_APPROVAL_BLOCKED_PORTFOLIO_ADVANCED_VERSION_DRIFT_PILOTED",
-    "SPRINT37_PARTIAL_LAUNCH_EXECUTION_WITH_EXACT_BLOCKERS",
-    "SPRINT37_BLOCKED_EVIDENCE_BUNDLE_FAILED",
-    "SPRINT37_BLOCKED_SOURCE_STATE",
-    "SPRINT37_REJECTED_UNSAFE_TO_PUBLISH",
-})
+ALLOWED_VERDICTS_V6: frozenset[str] = frozenset(
+    {
+        # Sprint 33 verdicts
+        "SPRINT33_PUBLISHED_MERGED_AND_PORTFOLIO_RELEASE_CANDIDATE_COMPLETE",
+        "SPRINT33_PUBLISHED_RELEASE_CANDIDATE_COMPLETE_MERGE_BLOCKED",
+        "SPRINT33_APPROVAL_BLOCKED_BUT_PORTFOLIO_RELEASE_CANDIDATE_ADVANCED",
+        "SPRINT33_PARTIAL_PUBLICATION_AND_PORTFOLIO_ADVANCED",
+        "SPRINT33_BLOCKED_EVIDENCE_CONTRACT_V6_FAILED",
+        "SPRINT33_BLOCKED_SOURCE_STATE",
+        "SPRINT33_REJECTED_UNSAFE_TO_PUBLISH",
+        # Sprint 34 verdicts (V6 contract extended to cover Sprint 34 bundles)
+        "SPRINT34_APPROVAL_BLOCKED_MEGA_SWARM_SYSTEM_BACKLOG_RESOLVED_NEW_FAMILY_DISCOVERY_COMPLETE",
+        "SPRINT34_PUBLISHED_MERGED_AND_PORTFOLIO_RELEASE_CANDIDATE_COMPLETE",
+        "SPRINT34_APPROVAL_BLOCKED_ALL_PACKAGES_VERIFIED",
+        "SPRINT34_BLOCKED_EVIDENCE_CONTRACT_V6_FAILED",
+        "SPRINT34_BLOCKED_SOURCE_STATE",
+        # Sprint 35 verdicts (V6 contract extended to cover Sprint 35 bundles)
+        "SPRINT35_ALL_LOWCODE_FAMILIES_LAUNCHED_AND_VERIFIED",
+        "SPRINT35_PUBLICATION_DONE_MERGE_BLOCKED_PORTFOLIO_ADVANCED",
+        "SPRINT35_APPROVAL_BLOCKED_ALL_FAMILIES_RELEASE_READY",
+        "SPRINT35_NEW_FAMILY_DISCOVERED_AND_PREPARED",
+        "SPRINT35_PARTIAL_MEGA_SWARM_ADVANCED_WITH_BLOCKERS",
+        "SPRINT35_BLOCKED_EVIDENCE_BUNDLE_FAILED",
+        "SPRINT35_BLOCKED_SOURCE_STATE",
+        "SPRINT35_REJECTED_UNSAFE_TO_PUBLISH",
+        # Sprint 36 verdicts (V6 contract extended to cover Sprint 36 bundles)
+        "SPRINT36_ALL_LOWCODE_FAMILIES_PUBLISHED_MERGED_AND_VERIFIED",
+        "SPRINT36_PUBLICATION_DONE_MERGE_BLOCKED_PORTFOLIO_HARDENED",
+        "SPRINT36_APPROVAL_BLOCKED_PORTFOLIO_HARDENED_AND_OPERATOR_READY",
+        "SPRINT36_PARTIAL_LAUNCH_EXECUTION_WITH_EXACT_BLOCKERS",
+        "SPRINT36_BLOCKED_EVIDENCE_BUNDLE_FAILED",
+        "SPRINT36_BLOCKED_SOURCE_STATE",
+        "SPRINT36_REJECTED_UNSAFE_TO_PUBLISH",
+        # Sprint 37 verdicts (V6 contract extended to cover Sprint 37 bundles)
+        "SPRINT37_ALL_LOWCODE_FAMILIES_PUBLISHED_MERGED_AND_VERIFIED",
+        "SPRINT37_PUBLICATION_DONE_MERGE_BLOCKED_PORTFOLIO_ADVANCED",
+        "SPRINT37_APPROVAL_BLOCKED_PORTFOLIO_ADVANCED_VERSION_DRIFT_PILOTED",
+        "SPRINT37_PARTIAL_LAUNCH_EXECUTION_WITH_EXACT_BLOCKERS",
+        "SPRINT37_BLOCKED_EVIDENCE_BUNDLE_FAILED",
+        "SPRINT37_BLOCKED_SOURCE_STATE",
+        "SPRINT37_REJECTED_UNSAFE_TO_PUBLISH",
+    }
+)
 
 #: Sprint 32 HEAD commit SHA (short) — must appear in git-log-proof.txt for Sprint 33.
 _SPRINT32_HEAD_COMMIT = "b7665d4"
@@ -1574,9 +1525,7 @@ class StrictEvidenceContractV6(StrictEvidenceContractV5):
             return result
 
         if not zip_path.is_absolute():
-            result.failures.append(
-                f"v6: ZIP path must be absolute for evidence completeness, got: {zip_path}"
-            )
+            result.failures.append(f"v6: ZIP path must be absolute for evidence completeness, got: {zip_path}")
 
         try:
             with zipfile.ZipFile(zip_path, "r") as zf:
@@ -1590,10 +1539,7 @@ class StrictEvidenceContractV6(StrictEvidenceContractV5):
                         result.categories_found.append(category)
                     else:
                         result.categories_missing.append(category)
-                        result.failures.append(
-                            f"Missing category '{category}' — "
-                            f"expected one of: {patterns}"
-                        )
+                        result.failures.append(f"Missing category '{category}' — " f"expected one of: {patterns}")
 
                 # Secret scan (all text files)
                 for name in names:
@@ -1602,14 +1548,11 @@ class StrictEvidenceContractV6(StrictEvidenceContractV5):
                             content = zf.read(name).decode("utf-8", errors="replace")
                             for pattern in SECRET_PATTERNS:
                                 if pattern.search(content):
-                                    violation = (
-                                        f"v6: Possible secret in {name}: "
-                                        f"pattern {pattern.pattern}"
-                                    )
+                                    violation = f"v6: Possible secret in {name}: " f"pattern {pattern.pattern}"
                                     result.secret_violations.append(violation)
                                     result.failures.append(violation)
                         except Exception:
-                            pass
+                            logger.debug("Skipping binary ZIP entry in secret scan")
 
                 # v6 content-level checks
                 self._validate_content_v6(zf, names, result, zip_path)
@@ -1635,15 +1578,15 @@ class StrictEvidenceContractV6(StrictEvidenceContractV5):
         zip_path: Path,
     ) -> None:
         name_map: dict[str, str] = {Path(n).name: n for n in names}
-        self._check_git_status_no_modified_source(zf, name_map, result)   # from v5
-        self._check_staged_package_deletions(zf, name_map, result)         # from v4
-        self._check_git_log_proof(zf, name_map, result)                     # overridden below
-        self._check_final_verdict(zf, name_map, result)                     # overridden below
-        self._check_test_summary(zf, name_map, result)                      # from v2
-        self._check_bundle_contract_report(zf, name_map, result)            # from v2
-        self._check_source_state_sprint33_clean(zf, name_map, result)       # new v6
-        self._check_package_audit_no_blocking_flags(zf, name_map, result)   # from v3
-        self._check_pr_package_count_consistency(zf, name_map, result)      # from v4
+        self._check_git_status_no_modified_source(zf, name_map, result)  # from v5
+        self._check_staged_package_deletions(zf, name_map, result)  # from v4
+        self._check_git_log_proof(zf, name_map, result)  # overridden below
+        self._check_final_verdict(zf, name_map, result)  # overridden below
+        self._check_test_summary(zf, name_map, result)  # from v2
+        self._check_bundle_contract_report(zf, name_map, result)  # from v2
+        self._check_source_state_sprint33_clean(zf, name_map, result)  # new v6
+        self._check_package_audit_no_blocking_flags(zf, name_map, result)  # from v3
+        self._check_pr_package_count_consistency(zf, name_map, result)  # from v4
         # V6 new checks
         self._check_v6_bundle_identity(zf, name_map, result, zip_path)
         self._check_v6_cross_file_verdict(zf, name_map, result)
@@ -1684,9 +1627,7 @@ class StrictEvidenceContractV6(StrictEvidenceContractV5):
         if content is None:
             return
         if "IN_PROGRESS" in content.upper():
-            result.failures.append(
-                "v6: final-verdict.md contains 'IN_PROGRESS' — sprint is not complete."
-            )
+            result.failures.append("v6: final-verdict.md contains 'IN_PROGRESS' — sprint is not complete.")
             return
         if not any(v in content for v in ALLOWED_VERDICTS_V6):
             result.failures.append(
@@ -1706,7 +1647,7 @@ class StrictEvidenceContractV6(StrictEvidenceContractV5):
             return
         try:
             data = json.loads(content)
-        except Exception:
+        except (json.JSONDecodeError, ValueError):
             result.failures.append("v6: source-state-classification.json is not valid JSON.")
             return
         state = data.get("sprint33_start_state", "")
@@ -1730,10 +1671,8 @@ class StrictEvidenceContractV6(StrictEvidenceContractV5):
             return
         try:
             data = json.loads(content)
-        except Exception:
-            result.failures.append(
-                "v6: bundle-contract-validation-report.json is not valid JSON."
-            )
+        except (json.JSONDecodeError, ValueError):
+            result.failures.append("v6: bundle-contract-validation-report.json is not valid JSON.")
             return
         bundle_bytes = data.get("bundle_bytes", 0)
         if not isinstance(bundle_bytes, (int, float)) or bundle_bytes <= 0:
@@ -1797,19 +1736,14 @@ class StrictEvidenceContractV6(StrictEvidenceContractV5):
             return
         try:
             data = json.loads(content)
-        except Exception:
-            result.failures.append(
-                "v6: families-needing-launch-work.json is not valid JSON."
-            )
+        except (json.JSONDecodeError, ValueError):
+            result.failures.append("v6: families-needing-launch-work.json is not valid JSON.")
             return
         # Accept list or dict with families_needing_work key
         if isinstance(data, list):
             families = [str(f).lower() for f in data]
         elif isinstance(data, dict):
-            families = [
-                str(f).lower()
-                for f in data.get("families_needing_work", data.get("families", []))
-            ]
+            families = [str(f).lower() for f in data.get("families_needing_work", data.get("families", []))]
         else:
             families = []
         stale = [f for f in families if f in ("email", "slides")]
@@ -1832,10 +1766,8 @@ class StrictEvidenceContractV6(StrictEvidenceContractV5):
             return
         try:
             data = json.loads(content)
-        except Exception:
-            result.failures.append(
-                "v6: words-full-sot-classification-report.json is not valid JSON."
-            )
+        except (json.JSONDecodeError, ValueError):
+            result.failures.append("v6: words-full-sot-classification-report.json is not valid JSON.")
             return
         wrc = data.get("workflow_root_count")
         if wrc is None:
@@ -1858,25 +1790,17 @@ class StrictEvidenceContractV6(StrictEvidenceContractV5):
     ) -> None:
         """v6: all-family-launch-scoreboard.json total_published_examples must match
         release-state-reconciliation-report.json published total."""
-        scoreboard_content = self._read_text(
-            zf, name_map, "all-family-launch-scoreboard.json"
-        )
-        release_content = self._read_text(
-            zf, name_map, "release-state-reconciliation-report.json"
-        )
+        scoreboard_content = self._read_text(zf, name_map, "all-family-launch-scoreboard.json")
+        release_content = self._read_text(zf, name_map, "release-state-reconciliation-report.json")
         if scoreboard_content is None or release_content is None:
             return
         try:
             scoreboard = json.loads(scoreboard_content)
             release = json.loads(release_content)
-        except Exception:
+        except (json.JSONDecodeError, ValueError):
             return
-        sb_total = (
-            scoreboard.get("portfolio_summary", {}).get("total_published_examples")
-        )
-        rc_total = (
-            release.get("published_count_reconciliation", {}).get("total")
-        )
+        sb_total = scoreboard.get("portfolio_summary", {}).get("total_published_examples")
+        rc_total = release.get("published_count_reconciliation", {}).get("total")
         if sb_total is None or rc_total is None:
             return
         if sb_total != rc_total:
@@ -1895,24 +1819,18 @@ class StrictEvidenceContractV6(StrictEvidenceContractV5):
     ) -> None:
         """v6: pdf-release-candidate-publication-packet-v2.json PR#7 must declare
         Security and FormFlattener examples."""
-        content = self._read_text(
-            zf, name_map, "pdf-release-candidate-publication-packet-v2.json"
-        )
+        content = self._read_text(zf, name_map, "pdf-release-candidate-publication-packet-v2.json")
         if content is None:
             return
         try:
             data = json.loads(content)
-        except Exception:
-            result.failures.append(
-                "v6: pdf-release-candidate-publication-packet-v2.json is not valid JSON."
-            )
+        except (json.JSONDecodeError, ValueError):
+            result.failures.append("v6: pdf-release-candidate-publication-packet-v2.json is not valid JSON.")
             return
         pr_packages = data.get("pr_packages", [])
         pr7 = next((p for p in pr_packages if p.get("pr_number") == 7), None)
         if pr7 is None:
-            result.failures.append(
-                "v6: pdf-release-candidate-publication-packet-v2.json has no PR#7 entry."
-            )
+            result.failures.append("v6: pdf-release-candidate-publication-packet-v2.json has no PR#7 entry.")
             return
         examples = [str(e).lower() for e in pr7.get("examples", [])]
         missing = []
@@ -1939,17 +1857,14 @@ class StrictEvidenceContractV6(StrictEvidenceContractV5):
             return
         try:
             data = json.loads(content)
-        except Exception:
-            result.failures.append(
-                "v6: dirty-artifact-policy-report.json is not valid JSON."
-            )
+        except (json.JSONDecodeError, ValueError):
+            result.failures.append("v6: dirty-artifact-policy-report.json is not valid JSON.")
             return
         verdict = data.get("verdict", "")
         allowed = {"DIRTY_ARTIFACT_POLICY_FORMALIZED", "DIRTY_ARTIFACT_POLICY_CLEAN"}
         if verdict not in allowed:
             result.failures.append(
-                f"v6: dirty-artifact-policy-report.json verdict='{verdict}' — "
-                f"must be one of {sorted(allowed)}."
+                f"v6: dirty-artifact-policy-report.json verdict='{verdict}' — " f"must be one of {sorted(allowed)}."
             )
 
 
@@ -1968,9 +1883,7 @@ def contract_definition_v6() -> dict:
             "67 categories (v5 had 53: removes 1 sprint31 entry, adds 15 sprint33 entries). "
             "Sprint 33 verdicts required."
         ),
-        "required_categories": {
-            cat: patterns for cat, patterns in COMBINED_CATEGORIES_V6.items()
-        },
+        "required_categories": {cat: patterns for cat, patterns in COMBINED_CATEGORIES_V6.items()},
         "min_categories_required": MIN_CATEGORIES_REQUIRED_V6,
         "content_checks_enabled": True,
         "content_checks": [
@@ -2025,19 +1938,21 @@ COMBINED_CATEGORIES_V7: dict[str, list[str]] = {
 MIN_CATEGORIES_REQUIRED_V7: int = len(COMBINED_CATEGORIES_V7)
 
 #: Allowed final verdicts for Sprint 34 bundles.
-ALLOWED_VERDICTS_V7: frozenset[str] = frozenset({
-    "SPRINT34_README_HEALING_COMPLETE",
-    "SPRINT34_README_HEALING_BLOCKED_WITH_EVIDENCE",
-    "SPRINT34_PARTIAL_README_HEALING_WITH_EVIDENCE",
-    # Sprint 37 verdicts (V7 contract extended to cover Sprint 37 bundles)
-    "SPRINT37_ALL_LOWCODE_FAMILIES_PUBLISHED_MERGED_AND_VERIFIED",
-    "SPRINT37_PUBLICATION_DONE_MERGE_BLOCKED_PORTFOLIO_ADVANCED",
-    "SPRINT37_APPROVAL_BLOCKED_PORTFOLIO_ADVANCED_VERSION_DRIFT_PILOTED",
-    "SPRINT37_PARTIAL_LAUNCH_EXECUTION_WITH_EXACT_BLOCKERS",
-    "SPRINT37_BLOCKED_EVIDENCE_BUNDLE_FAILED",
-    "SPRINT37_BLOCKED_SOURCE_STATE",
-    "SPRINT37_REJECTED_UNSAFE_TO_PUBLISH",
-})
+ALLOWED_VERDICTS_V7: frozenset[str] = frozenset(
+    {
+        "SPRINT34_README_HEALING_COMPLETE",
+        "SPRINT34_README_HEALING_BLOCKED_WITH_EVIDENCE",
+        "SPRINT34_PARTIAL_README_HEALING_WITH_EVIDENCE",
+        # Sprint 37 verdicts (V7 contract extended to cover Sprint 37 bundles)
+        "SPRINT37_ALL_LOWCODE_FAMILIES_PUBLISHED_MERGED_AND_VERIFIED",
+        "SPRINT37_PUBLICATION_DONE_MERGE_BLOCKED_PORTFOLIO_ADVANCED",
+        "SPRINT37_APPROVAL_BLOCKED_PORTFOLIO_ADVANCED_VERSION_DRIFT_PILOTED",
+        "SPRINT37_PARTIAL_LAUNCH_EXECUTION_WITH_EXACT_BLOCKERS",
+        "SPRINT37_BLOCKED_EVIDENCE_BUNDLE_FAILED",
+        "SPRINT37_BLOCKED_SOURCE_STATE",
+        "SPRINT37_REJECTED_UNSAFE_TO_PUBLISH",
+    }
+)
 
 
 class StrictEvidenceContractV7(StrictEvidenceContractV6):
@@ -2061,9 +1976,7 @@ class StrictEvidenceContractV7(StrictEvidenceContractV6):
             return result
 
         if not zip_path.is_absolute():
-            result.failures.append(
-                f"v7: ZIP path must be absolute for evidence completeness, got: {zip_path}"
-            )
+            result.failures.append(f"v7: ZIP path must be absolute for evidence completeness, got: {zip_path}")
 
         try:
             with zipfile.ZipFile(zip_path, "r") as zf:
@@ -2077,10 +1990,7 @@ class StrictEvidenceContractV7(StrictEvidenceContractV6):
                         result.categories_found.append(category)
                     else:
                         result.categories_missing.append(category)
-                        result.failures.append(
-                            f"Missing category '{category}' — "
-                            f"expected one of {patterns}"
-                        )
+                        result.failures.append(f"Missing category '{category}' — " f"expected one of {patterns}")
 
                 # categories_expected not tracked in ContractResult — skip
 
@@ -2092,14 +2002,10 @@ class StrictEvidenceContractV7(StrictEvidenceContractV6):
                         try:
                             data = json.loads(zf.read(n).decode("utf-8"))
                             if not data.get("all_families_in_sync", False):
-                                result.failures.append(
-                                    "readme-sync-audit.json: all_families_in_sync is not true"
-                                )
+                                result.failures.append("readme-sync-audit.json: all_families_in_sync is not true")
                             pass  # content check tracked via failures list
                         except (json.JSONDecodeError, KeyError):
-                            result.failures.append(
-                                "readme-sync-audit.json: cannot parse JSON"
-                            )
+                            result.failures.append("readme-sync-audit.json: cannot parse JSON")
                         break
 
                 # 2. Final verdict check for Sprint 34
@@ -2119,12 +2025,11 @@ class StrictEvidenceContractV7(StrictEvidenceContractV6):
                     try:
                         raw = zf.read(n).decode("utf-8", errors="replace")
                     except Exception:
+                        logger.debug("Skipping undecodable ZIP entry in secret scan")
                         continue
                     for pat in SECRET_PATTERNS:
                         if pat.search(raw):
-                            result.failures.append(
-                                f"Secret detected in {n}: pattern '{pat.pattern}'"
-                            )
+                            result.failures.append(f"Secret detected in {n}: pattern '{pat.pattern}'")
 
                 # Determine result
                 if not result.failures:
@@ -2148,9 +2053,7 @@ class StrictEvidenceContractV7(StrictEvidenceContractV6):
                 "69 categories (67 from v6 + 2 README). "
                 "Validates README sync audit + coverage audit."
             ),
-            "required_categories": {
-                cat: patterns for cat, patterns in COMBINED_CATEGORIES_V7.items()
-            },
+            "required_categories": {cat: patterns for cat, patterns in COMBINED_CATEGORIES_V7.items()},
             "min_categories_required": MIN_CATEGORIES_REQUIRED_V7,
             "content_checks": [
                 "readme-sync-audit.json: all_families_in_sync must be true",
@@ -2193,13 +2096,15 @@ COMBINED_CATEGORIES_V8: dict[str, list[str]] = {
 MIN_CATEGORIES_REQUIRED_V8: int = len(COMBINED_CATEGORIES_V8)
 
 #: Allowed final verdicts for V8 bundles.
-ALLOWED_VERDICTS_V8: frozenset[str] = frozenset({
-    "FORMAT_LIFECYCLE_V8_AUDITOR_VERIFIED",
-    "FORMAT_LIFECYCLE_V8_AUDITOR_PARTIAL_WITH_BLOCKERS",
-    "FORMAT_LIFECYCLE_V8_AUDITOR_BLOCKED",
-    # V7 verdicts remain valid for backward compatibility
-    *ALLOWED_VERDICTS_V7,
-})
+ALLOWED_VERDICTS_V8: frozenset[str] = frozenset(
+    {
+        "FORMAT_LIFECYCLE_V8_AUDITOR_VERIFIED",
+        "FORMAT_LIFECYCLE_V8_AUDITOR_PARTIAL_WITH_BLOCKERS",
+        "FORMAT_LIFECYCLE_V8_AUDITOR_BLOCKED",
+        # V7 verdicts remain valid for backward compatibility
+        *ALLOWED_VERDICTS_V7,
+    }
+)
 
 
 class StrictEvidenceContractV8(StrictEvidenceContractV7):
@@ -2222,9 +2127,7 @@ class StrictEvidenceContractV8(StrictEvidenceContractV7):
             return result
 
         if not zip_path.is_absolute():
-            result.failures.append(
-                f"v8: ZIP path must be absolute for evidence completeness, got: {zip_path}"
-            )
+            result.failures.append(f"v8: ZIP path must be absolute for evidence completeness, got: {zip_path}")
 
         try:
             with zipfile.ZipFile(zip_path, "r") as zf:
@@ -2238,10 +2141,7 @@ class StrictEvidenceContractV8(StrictEvidenceContractV7):
                         result.categories_found.append(category)
                     else:
                         result.categories_missing.append(category)
-                        result.failures.append(
-                            f"Missing category '{category}' — "
-                            f"expected one of {patterns}"
-                        )
+                        result.failures.append(f"Missing category '{category}' — " f"expected one of {patterns}")
 
                 # --- V8 Content Checks ---
 
@@ -2251,13 +2151,9 @@ class StrictEvidenceContractV8(StrictEvidenceContractV7):
                         try:
                             data = json.loads(zf.read(n).decode("utf-8"))
                             if not data.get("all_families_in_sync", False):
-                                result.failures.append(
-                                    "readme-sync-audit.json: all_families_in_sync is not true"
-                                )
+                                result.failures.append("readme-sync-audit.json: all_families_in_sync is not true")
                         except (json.JSONDecodeError, KeyError):
-                            result.failures.append(
-                                "readme-sync-audit.json: cannot parse JSON"
-                            )
+                            result.failures.append("readme-sync-audit.json: cannot parse JSON")
                         break
 
                 # 2. Final verdict check (V8 verdicts)
@@ -2266,8 +2162,7 @@ class StrictEvidenceContractV8(StrictEvidenceContractV7):
                         content = zf.read(n).decode("utf-8", errors="replace")
                         if not any(v in content for v in ALLOWED_VERDICTS_V8):
                             result.failures.append(
-                                "final-verdict.md: missing allowed verdict. "
-                                f"Allowed: {sorted(ALLOWED_VERDICTS_V8)}"
+                                "final-verdict.md: missing allowed verdict. " f"Allowed: {sorted(ALLOWED_VERDICTS_V8)}"
                             )
                         break
 
@@ -2293,12 +2188,11 @@ class StrictEvidenceContractV8(StrictEvidenceContractV7):
                     try:
                         raw = zf.read(n).decode("utf-8", errors="replace")
                     except Exception:
+                        logger.debug("Skipping undecodable ZIP entry in secret scan")
                         continue
                     for pat in SECRET_PATTERNS:
                         if pat.search(raw):
-                            result.failures.append(
-                                f"Secret detected in {n}: pattern '{pat.pattern}'"
-                            )
+                            result.failures.append(f"Secret detected in {n}: pattern '{pat.pattern}'")
 
                 # Determine result
                 if not result.failures:
@@ -2322,9 +2216,7 @@ class StrictEvidenceContractV8(StrictEvidenceContractV7):
                 "70 categories (69 from v7 + 1 format_capability_manifest). "
                 "Validates format-capability manifests contain valid JSON."
             ),
-            "required_categories": {
-                cat: patterns for cat, patterns in COMBINED_CATEGORIES_V8.items()
-            },
+            "required_categories": {cat: patterns for cat, patterns in COMBINED_CATEGORIES_V8.items()},
             "min_categories_required": MIN_CATEGORIES_REQUIRED_V8,
             "content_checks": [
                 "readme-sync-audit.json: all_families_in_sync must be true",
@@ -2374,17 +2266,19 @@ PLANNER_SPRINT_CATEGORIES: dict[str, list[str]] = {
 
 MIN_PLANNER_CATEGORIES_REQUIRED: int = len(PLANNER_SPRINT_CATEGORIES)
 
-ALLOWED_PLANNER_VERDICTS: frozenset[str] = frozenset({
-    "SPRINT46_COMPLETE_LOOP_IDEMPOTENT_AND_RECOVERY_PACKET_READY",
-    "SPRINT46_COMPLETE_PDF_CONFLICTS_RESOLVED_MERGE_APPROVAL_BLOCKED",
-    "SPRINT46_COMPLETE_PDF_CONFLICTS_RESOLVED_AND_MERGED",
-    "SPRINT46_COMPLETE_EVIDENCE_CONTRACT_MODERNIZED",
-    "SPRINT46_PARTIAL_PDF_PACKAGE_MAP_BLOCKED",
-    "SPRINT46_PARTIAL_LOOP_IDEMPOTENCY_BLOCKED",
-    "SPRINT46_PARTIAL_EVIDENCE_CONTRACT_BLOCKED",
-    "SPRINT46_EVIDENCE_BUNDLE_BLOCKED",
-    "SPRINT46_FAILED_REQUIRES_OPERATOR_REVIEW",
-})
+ALLOWED_PLANNER_VERDICTS: frozenset[str] = frozenset(
+    {
+        "SPRINT46_COMPLETE_LOOP_IDEMPOTENT_AND_RECOVERY_PACKET_READY",
+        "SPRINT46_COMPLETE_PDF_CONFLICTS_RESOLVED_MERGE_APPROVAL_BLOCKED",
+        "SPRINT46_COMPLETE_PDF_CONFLICTS_RESOLVED_AND_MERGED",
+        "SPRINT46_COMPLETE_EVIDENCE_CONTRACT_MODERNIZED",
+        "SPRINT46_PARTIAL_PDF_PACKAGE_MAP_BLOCKED",
+        "SPRINT46_PARTIAL_LOOP_IDEMPOTENCY_BLOCKED",
+        "SPRINT46_PARTIAL_EVIDENCE_CONTRACT_BLOCKED",
+        "SPRINT46_EVIDENCE_BUNDLE_BLOCKED",
+        "SPRINT46_FAILED_REQUIRES_OPERATOR_REVIEW",
+    }
+)
 
 
 class PlannerSprintEvidenceContract:
@@ -2415,10 +2309,7 @@ class PlannerSprintEvidenceContract:
                         result.categories_found.append(category)
                     else:
                         result.categories_missing.append(category)
-                        result.failures.append(
-                            f"Missing category '{category}' — "
-                            f"expected one of {patterns}"
-                        )
+                        result.failures.append(f"Missing category '{category}' — " f"expected one of {patterns}")
 
                 # Content checks
                 for n in names:
@@ -2428,37 +2319,25 @@ class PlannerSprintEvidenceContract:
                             data = json.loads(zf.read(n))
                             head = data.get("head", "")
                             if not head:
-                                result.failures.append(
-                                    "final-state-summary.json: missing 'head' field"
-                                )
+                                result.failures.append("final-state-summary.json: missing 'head' field")
                         except (json.JSONDecodeError, KeyError):
-                            result.failures.append(
-                                "final-state-summary.json: invalid JSON"
-                            )
+                            result.failures.append("final-state-summary.json: invalid JSON")
                     if bn == "final-next-actions.json":
                         try:
                             data = json.loads(zf.read(n))
                             head = data.get("generated_from_head", "")
                             if not head:
-                                result.failures.append(
-                                    "final-next-actions.json: missing 'generated_from_head'"
-                                )
+                                result.failures.append("final-next-actions.json: missing 'generated_from_head'")
                         except (json.JSONDecodeError, KeyError):
-                            result.failures.append(
-                                "final-next-actions.json: invalid JSON"
-                            )
+                            result.failures.append("final-next-actions.json: invalid JSON")
                     if bn == "bundle-manifest.json":
                         try:
                             data = json.loads(zf.read(n))
                             files = data.get("files", [])
                             if not all("sha256" in f for f in files):
-                                result.failures.append(
-                                    "bundle-manifest.json: not all files have sha256"
-                                )
+                                result.failures.append("bundle-manifest.json: not all files have sha256")
                         except (json.JSONDecodeError, KeyError):
-                            result.failures.append(
-                                "bundle-manifest.json: invalid JSON"
-                            )
+                            result.failures.append("bundle-manifest.json: invalid JSON")
 
                 # Secret scanning
                 for n in names:
@@ -2468,11 +2347,9 @@ class PlannerSprintEvidenceContract:
                             content = zf.read(n).decode("utf-8", errors="replace")
                             for pat in SECRET_PATTERNS:
                                 if pat.search(content):
-                                    result.secret_violations.append(
-                                        f"Secret detected in {n}: pattern '{pat.pattern}'"
-                                    )
+                                    result.secret_violations.append(f"Secret detected in {n}: pattern '{pat.pattern}'")
                         except Exception:
-                            pass
+                            logger.debug("Skipping binary ZIP entry in secret scan")
 
                 if result.secret_violations:
                     result.failures.extend(result.secret_violations)
@@ -2573,7 +2450,8 @@ def generate_validation_proof(
         output_path = Path(output_path)
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_text(
-            json.dumps(proof, indent=2), encoding="utf-8",
+            json.dumps(proof, indent=2),
+            encoding="utf-8",
         )
 
     return proof
@@ -2622,10 +2500,15 @@ def build_evidence_bundle(
 
     files_to_add: list[tuple[str, bytes]] = []
     for f in sorted(evidence_dir.rglob("*")):
-        if f.is_file() and f.name not in (
-            "sha256-manifest.txt",
-            "evidence-contract-validation.json",
-        ) and not f.name.endswith((".zip", ".zip.validation.json")):
+        if (
+            f.is_file()
+            and f.name
+            not in (
+                "sha256-manifest.txt",
+                "evidence-contract-validation.json",
+            )
+            and not f.name.endswith((".zip", ".zip.validation.json"))
+        ):
             arcname = str(f.relative_to(evidence_dir)).replace("\\", "/")
             files_to_add.append((arcname, f.read_bytes()))
 
@@ -2662,7 +2545,8 @@ def build_evidence_bundle(
 
     companion_path = zip_path.parent / "evidence-contract-validation.json"
     companion_path.write_text(
-        json.dumps(validation_proof, indent=2), encoding="utf-8",
+        json.dumps(validation_proof, indent=2),
+        encoding="utf-8",
     )
 
     return {

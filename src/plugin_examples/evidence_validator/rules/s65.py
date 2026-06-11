@@ -12,7 +12,6 @@ from plugin_examples.evidence_validator.models import RuleResult
 logger = logging.getLogger(__name__)
 
 
-
 class ContentAuditRules:
     """Rule mixin for evidence validation."""
 
@@ -35,7 +34,8 @@ class ContentAuditRules:
                 return RuleResult(
                     rule_id=rule_id,
                     description="Content audit final must have required fields",
-                    severity="FAILURE", passed=False,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail=f"Cannot read {fname}: {exc}",
                 )
 
@@ -54,21 +54,24 @@ class ContentAuditRules:
                 return RuleResult(
                     rule_id=rule_id,
                     description="Content audit final must have required fields per record",
-                    severity="FAILURE", passed=False,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail=f"{fname}: records missing required fields: {details}",
                 )
 
             return RuleResult(
                 rule_id=rule_id,
                 description="Content audit final must have required fields per record",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence=f"{fname}: {len(records)} records, all required fields present",
             )
 
         return RuleResult(
             rule_id=rule_id,
             description="Content audit final must have required fields per record",
-            severity="FAILURE", passed=False,
+            severity="FAILURE",
+            passed=False,
             failure_detail="No destination/content-audit-final.json or content-audit-deep.json found",
         )
 
@@ -87,7 +90,8 @@ class ContentAuditRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Content audit count fields must not contradict each other",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="No destination content audit file found",
             )
 
@@ -97,7 +101,8 @@ class ContentAuditRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Content audit count fields must not contradict each other",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Cannot read audit: {exc}",
             )
 
@@ -108,9 +113,7 @@ class ContentAuditRules:
 
         contradictions = []
         if total_claimed is not None and len(records) != total_claimed:
-            contradictions.append(
-                f"total_publication_artifacts={total_claimed} but len(records)={len(records)}"
-            )
+            contradictions.append(f"total_publication_artifacts={total_claimed} but len(records)={len(records)}")
         if std is not None and special is not None and total_claimed is not None:
             if std + special != total_claimed:
                 contradictions.append(
@@ -121,14 +124,16 @@ class ContentAuditRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Content audit count fields must not contradict each other",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="; ".join(contradictions),
             )
 
         return RuleResult(
             rule_id=rule_id,
             description="Content audit count fields must not contradict each other",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"records={len(records)}, total_claimed={total_claimed}, std={std}, special={special}",
         )
 
@@ -143,7 +148,8 @@ class ContentAuditRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Content audit final must show all 42 records READY",
-                severity="WARNING", passed=True,
+                severity="WARNING",
+                passed=True,
                 evidence="destination/content-audit-final.json not found (older sprint format)",
             )
 
@@ -153,13 +159,15 @@ class ContentAuditRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Content audit final must show all 42 records READY",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Cannot read content-audit-final.json: {exc}",
             )
 
         records = data.get("records", [])
         not_ready = [
-            r.get("scenario_id", "?") for r in records
+            r.get("scenario_id", "?")
+            for r in records
             if r.get("final_readiness") not in ("READY", "SPECIAL_CASE_READY")
         ]
         records_ready = data.get("records_ready", len(records) - len(not_ready))
@@ -168,14 +176,16 @@ class ContentAuditRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Content audit final must show all 42 records READY",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"{len(not_ready)} records not READY: {not_ready[:5]}",
             )
 
         return RuleResult(
             rule_id=rule_id,
             description="Content audit final must show all 42 records READY",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"records_ready={records_ready}/{len(records)}, all READY",
         )
 
@@ -193,7 +203,8 @@ class ContentAuditRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Root README artifacts must exist for all 6 families",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="root-readme/per-family/ directory not found",
             )
 
@@ -202,14 +213,16 @@ class ContentAuditRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Root README artifacts must exist for all 6 families",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Missing root README artifacts for: {missing}",
             )
 
         return RuleResult(
             rule_id=rule_id,
             description="Root README artifacts must exist for all 6 families",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="All 6 family root READMEs present in root-readme/per-family/",
         )
 
@@ -226,7 +239,8 @@ class ContentAuditRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Special-case publication map must exist (placement proof)",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "special-cases/special-case-publication-map.json not found. "
                     "Must prove destination path for pdf-pdfa-converter and pdf-text-extractor."
@@ -239,7 +253,8 @@ class ContentAuditRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Special-case publication map must be readable",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Cannot read special-case-publication-map.json: {exc}",
             )
 
@@ -248,17 +263,18 @@ class ContentAuditRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Special-case publication map must document both PDF special cases",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
-                    f"Only {len(cases)} special cases documented "
-                    "(expected 2: pdfa-converter, text-extractor)"
+                    f"Only {len(cases)} special cases documented " "(expected 2: pdfa-converter, text-extractor)"
                 ),
             )
 
         return RuleResult(
             rule_id=rule_id,
             description="Special-case publication map must document both PDF special cases",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"special-case-publication-map.json: {len(cases)} cases documented",
         )
 
@@ -291,31 +307,33 @@ class ContentAuditRules:
             if unresolved is None:
                 families = data.get("families", {})
                 unresolved = sum(
-                    1 for f in families.values()
-                    if isinstance(f, dict)
-                    and not f.get("version_match")
-                    and f.get("policy") not in _ALLOWED_POLICIES
+                    1
+                    for f in families.values()
+                    if isinstance(f, dict) and not f.get("version_match") and f.get("policy") not in _ALLOWED_POLICIES
                 )
 
             if unresolved > 0:
                 return RuleResult(
                     rule_id=rule_id,
                     description="Version policy must show 0 unresolved drift families",
-                    severity="FAILURE", passed=False,
+                    severity="FAILURE",
+                    passed=False,
                     failure_detail=f"{rel}: total_drift_unresolved={unresolved}",
                 )
 
             return RuleResult(
                 rule_id=rule_id,
                 description="Version policy must show 0 unresolved drift families",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence=f"{rel}: total_drift_unresolved=0",
             )
 
         return RuleResult(
             rule_id=rule_id,
             description="Version policy must show 0 unresolved drift families",
-            severity="WARNING", passed=True,
+            severity="WARNING",
+            passed=True,
             evidence="No version policy file found (not required for older sprints)",
         )
 
@@ -333,13 +351,16 @@ class ContentAuditRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Final verdict must not overclaim publication without proof",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="final-verdict.md not found",
             )
 
         verdict = verdict_path.read_text(encoding="utf-8", errors="replace")
         publication_claim_keywords = [
-            "PUBLICATION_VERIFIED", "FULLY_PUBLISHED", "ALL_PUBLISHED",
+            "PUBLICATION_VERIFIED",
+            "FULLY_PUBLISHED",
+            "ALL_PUBLISHED",
             "LIVE_PUBLICATION_COMPLETE",
         ]
         claims_publication = any(kw in verdict for kw in publication_claim_keywords)
@@ -348,7 +369,8 @@ class ContentAuditRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Final verdict must not overclaim publication without proof",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="Verdict does not contain strong publication completion keywords",
             )
 
@@ -357,7 +379,8 @@ class ContentAuditRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Final verdict must not overclaim publication without proof",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "Verdict contains publication completion keyword but "
                     "publication/remote-proof-index.json is missing. "
@@ -368,7 +391,8 @@ class ContentAuditRules:
         return RuleResult(
             rule_id=rule_id,
             description="Final verdict must not overclaim publication without proof",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="Verdict claims publication and remote-proof-index.json is present",
         )
 
@@ -386,14 +410,20 @@ class ContentAuditRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Remote proof index must exist if publication is claimed",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="final-verdict.md not found",
             )
 
         verdict = verdict_path.read_text(encoding="utf-8", errors="replace")
         broad_pub_keywords = [
-            "PUBLISHED", "HANDOFF", "PUBLICATION", "REMOTE_PROOF", "PR_MERGED",
-            "DRY_RUN", "APPROVAL_BLOCKED",
+            "PUBLISHED",
+            "HANDOFF",
+            "PUBLICATION",
+            "REMOTE_PROOF",
+            "PR_MERGED",
+            "DRY_RUN",
+            "APPROVAL_BLOCKED",
         ]
         mentions_publication = any(kw in verdict for kw in broad_pub_keywords)
         remote_proof = self.bundle_dir / "publication" / "remote-proof-index.json"
@@ -402,7 +432,8 @@ class ContentAuditRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Remote proof index must exist if publication is mentioned",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "final-verdict.md mentions publication/PR activity but "
                     "publication/remote-proof-index.json is absent. "
@@ -413,10 +444,10 @@ class ContentAuditRules:
         return RuleResult(
             rule_id=rule_id,
             description="Remote proof index must exist if publication is mentioned",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=(
-                f"verdict_mentions_publication={mentions_publication}, "
-                f"remote_proof_present={remote_proof.exists()}"
+                f"verdict_mentions_publication={mentions_publication}, " f"remote_proof_present={remote_proof.exists()}"
             ),
         )
 
@@ -432,7 +463,8 @@ class ContentAuditRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Content audit must show >=40/42 README I/O coverage",
-                severity="WARNING", passed=True,
+                severity="WARNING",
+                passed=True,
                 evidence="destination/content-audit-final.json not found (older sprint format)",
             )
 
@@ -442,7 +474,8 @@ class ContentAuditRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Content audit must show >=40/42 README I/O coverage",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Cannot read content-audit-final.json: {exc}",
             )
 
@@ -455,7 +488,8 @@ class ContentAuditRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Content audit must show >=40/42 README I/O coverage",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"Only {io_doc_count}/{total} records have readme_status=IO_DOC "
                     f"(threshold={threshold}). README corrections may not have been applied."
@@ -465,7 +499,8 @@ class ContentAuditRules:
         return RuleResult(
             rule_id=rule_id,
             description="Content audit must show >=40/42 README I/O coverage",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"io_doc_count={io_doc_count}/{total} >= {threshold}",
         )
 
@@ -482,7 +517,8 @@ class ContentAuditRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Prior sprint revalidation must show overall_valid=false",
-                severity="WARNING", passed=True,
+                severity="WARNING",
+                passed=True,
                 evidence="evidence/ directory not found (older sprint format)",
             )
 
@@ -491,7 +527,8 @@ class ContentAuditRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Prior sprint revalidation must show overall_valid=false",
-                severity="WARNING", passed=True,
+                severity="WARNING",
+                passed=True,
                 evidence="No *revalidation*.json found (not required for older sprints)",
             )
 
@@ -502,7 +539,8 @@ class ContentAuditRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Prior sprint revalidation must show overall_valid=false",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Cannot read {revalidation_path.name}: {exc}",
             )
 
@@ -512,7 +550,8 @@ class ContentAuditRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Prior sprint revalidation must show overall_valid=false",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"{revalidation_path.name}: overall_valid=true — new semantic rules "
                     f"did not detect defects in prior sprint ({sprint_id}). "
@@ -523,7 +562,8 @@ class ContentAuditRules:
         return RuleResult(
             rule_id=rule_id,
             description="Prior sprint revalidation must show overall_valid=false",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"{revalidation_path.name}: overall_valid=false (prior sprint correctly flagged)",
         )
 

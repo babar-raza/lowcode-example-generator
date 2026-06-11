@@ -49,10 +49,8 @@ class TestPacketContractInjection:
 
     def test_spreadsheetconverter_contract_injected(self):
         """SpreadsheetConverter packet has format_contract dict with canonical .csv."""
-        scenario = _minimal_scenario("cells", "SpreadsheetConverter",
-                                     "Aspose.Cells.LowCode", "Process")
-        catalog = _minimal_catalog("cells", "SpreadsheetConverter",
-                                   "Aspose.Cells.LowCode", "Process")
+        scenario = _minimal_scenario("cells", "SpreadsheetConverter", "Aspose.Cells.LowCode", "Process")
+        catalog = _minimal_catalog("cells", "SpreadsheetConverter", "Aspose.Cells.LowCode", "Process")
         packet = build_packet(scenario, catalog)
         fc = packet.format_contract
         assert fc, "format_contract should not be empty for SpreadsheetConverter"
@@ -61,20 +59,16 @@ class TestPacketContractInjection:
 
     def test_formexporter_contract_injected(self):
         """FormExporter packet has format_contract dict with canonical .json."""
-        scenario = _minimal_scenario("pdf", "FormExporter",
-                                     "Aspose.Pdf.LowCode", "Process")
-        catalog = _minimal_catalog("pdf", "FormExporter",
-                                   "Aspose.Pdf.LowCode", "Process")
+        scenario = _minimal_scenario("pdf", "FormExporter", "Aspose.Pdf.LowCode", "Process")
+        catalog = _minimal_catalog("pdf", "FormExporter", "Aspose.Pdf.LowCode", "Process")
         packet = build_packet(scenario, catalog)
         fc = packet.format_contract
         assert fc.get("canonical_output_format") == ".json"
 
     def test_constraints_include_contract_format(self):
         """Constraints list includes FORMAT CONTRACT with canonical output extension."""
-        scenario = _minimal_scenario("cells", "SpreadsheetConverter",
-                                     "Aspose.Cells.LowCode", "Process")
-        catalog = _minimal_catalog("cells", "SpreadsheetConverter",
-                                   "Aspose.Cells.LowCode", "Process")
+        scenario = _minimal_scenario("cells", "SpreadsheetConverter", "Aspose.Cells.LowCode", "Process")
+        catalog = _minimal_catalog("cells", "SpreadsheetConverter", "Aspose.Cells.LowCode", "Process")
         packet = build_packet(scenario, catalog)
         contract_constraints = [c for c in packet.constraints if "FORMAT CONTRACT" in c]
         assert contract_constraints, "No FORMAT CONTRACT in constraints"
@@ -83,20 +77,16 @@ class TestPacketContractInjection:
 
     def test_no_dot_out_in_constraints(self):
         """Constraints should not reference .out as valid format."""
-        scenario = _minimal_scenario("pdf", "FormExporter",
-                                     "Aspose.Pdf.LowCode", "Process")
-        catalog = _minimal_catalog("pdf", "FormExporter",
-                                   "Aspose.Pdf.LowCode", "Process")
+        scenario = _minimal_scenario("pdf", "FormExporter", "Aspose.Pdf.LowCode", "Process")
+        catalog = _minimal_catalog("pdf", "FormExporter", "Aspose.Pdf.LowCode", "Process")
         packet = build_packet(scenario, catalog)
         all_constraints = " ".join(packet.constraints)
         assert "output.out" not in all_constraints
 
     def test_stdout_type_gets_no_addoutput_constraint(self):
         """TextExtractor (stdout) constraint says do NOT use AddOutput."""
-        scenario = _minimal_scenario("pdf", "TextExtractor",
-                                     "Aspose.Pdf.LowCode", "Process")
-        catalog = _minimal_catalog("pdf", "TextExtractor",
-                                   "Aspose.Pdf.LowCode", "Process")
+        scenario = _minimal_scenario("pdf", "TextExtractor", "Aspose.Pdf.LowCode", "Process")
+        catalog = _minimal_catalog("pdf", "TextExtractor", "Aspose.Pdf.LowCode", "Process")
         packet = build_packet(scenario, catalog)
         contract_constraints = " ".join(c for c in packet.constraints if "FORMAT CONTRACT" in c)
         assert "stdout" in contract_constraints.lower() or "AddOutput" in contract_constraints

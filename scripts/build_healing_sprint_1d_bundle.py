@@ -1,5 +1,6 @@
 """Build Healing Sprint 1D final archive evidence ZIP bundle."""
-import json, zipfile
+import json
+import zipfile
 from pathlib import Path
 
 repo_root = Path(__file__).resolve().parents[1]

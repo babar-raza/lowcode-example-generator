@@ -24,13 +24,27 @@ from plugin_examples.healing_intelligence.loader import HealingIntelligenceLoade
 REGISTRY_DIR = Path("workspace/verification/latest/healing-intelligence")
 
 EXPECTED_FAILURE_PATTERN_IDS = {
-    "FP-001", "FP-002", "FP-003", "FP-004", "FP-005",
-    "FP-006", "FP-007", "FP-008", "FP-009",
+    "FP-001",
+    "FP-002",
+    "FP-003",
+    "FP-004",
+    "FP-005",
+    "FP-006",
+    "FP-007",
+    "FP-008",
+    "FP-009",
 }
 
 EXPECTED_REPAIR_PATTERN_IDS = {
-    "RP-001", "RP-002", "RP-003", "RP-004", "RP-005",
-    "RP-006", "RP-007", "RP-008", "RP-009",
+    "RP-001",
+    "RP-002",
+    "RP-003",
+    "RP-004",
+    "RP-005",
+    "RP-006",
+    "RP-007",
+    "RP-008",
+    "RP-009",
 }
 
 EXPECTED_FAMILIES_WITH_STEERING = {"pdf", "words", "cells", "diagram", "email", "slides"}
@@ -38,24 +52,23 @@ EXPECTED_FAMILIES_WITH_STEERING = {"pdf", "words", "cells", "diagram", "email", 
 
 class TestRegistryFilesPresent:
     def test_failure_pattern_registry_exists(self):
-        assert (REGISTRY_DIR / "failure-pattern-registry.json").exists(), \
-            "failure-pattern-registry.json must exist (committed in healing-intelligence sprint)"
+        assert (
+            REGISTRY_DIR / "failure-pattern-registry.json"
+        ).exists(), "failure-pattern-registry.json must exist (committed in healing-intelligence sprint)"
 
     def test_repair_pattern_registry_exists(self):
-        assert (REGISTRY_DIR / "repair-pattern-registry.json").exists(), \
-            "repair-pattern-registry.json must exist"
+        assert (REGISTRY_DIR / "repair-pattern-registry.json").exists(), "repair-pattern-registry.json must exist"
 
     def test_semantic_steering_registry_exists(self):
-        assert (REGISTRY_DIR / "semantic-steering-registry.json").exists(), \
-            "semantic-steering-registry.json must exist"
+        assert (REGISTRY_DIR / "semantic-steering-registry.json").exists(), "semantic-steering-registry.json must exist"
 
     def test_validator_pattern_registry_exists(self):
-        assert (REGISTRY_DIR / "validator-pattern-registry.json").exists(), \
-            "validator-pattern-registry.json must exist"
+        assert (REGISTRY_DIR / "validator-pattern-registry.json").exists(), "validator-pattern-registry.json must exist"
 
     def test_bootstrap_exists(self):
-        assert (REGISTRY_DIR / "healing-intelligence-bootstrap.json").exists(), \
-            "healing-intelligence-bootstrap.json must exist"
+        assert (
+            REGISTRY_DIR / "healing-intelligence-bootstrap.json"
+        ).exists(), "healing-intelligence-bootstrap.json must exist"
 
     def test_all_registry_json_files_are_valid_json(self):
         for path in REGISTRY_DIR.glob("*.json"):
@@ -79,8 +92,7 @@ class TestLoaderLoadsSuccessfully:
 
     def test_all_core_registries_present(self):
         loader = HealingIntelligenceLoader()
-        assert loader.all_core_registries_present(), \
-            "All 4 core registries must be present on disk"
+        assert loader.all_core_registries_present(), "All 4 core registries must be present on disk"
 
     def test_summary_reports_loaded_state(self):
         loader = HealingIntelligenceLoader()
@@ -96,8 +108,9 @@ class TestLoaderLoadsSuccessfully:
         loader.load()
         s = loader.summary()
         covered = set(s["families_with_steering"])
-        assert EXPECTED_FAMILIES_WITH_STEERING.issubset(covered), \
-            f"Missing families in steering: {EXPECTED_FAMILIES_WITH_STEERING - covered}"
+        assert EXPECTED_FAMILIES_WITH_STEERING.issubset(
+            covered
+        ), f"Missing families in steering: {EXPECTED_FAMILIES_WITH_STEERING - covered}"
 
 
 class TestFailurePatternQueries:
@@ -152,9 +165,11 @@ class TestRepairPatternQueries:
         self._loader.load()
 
     def test_all_expected_repair_patterns_present(self):
-        ids = {self._loader.get_repair_pattern(rid)["id"]
-               for rid in EXPECTED_REPAIR_PATTERN_IDS
-               if self._loader.get_repair_pattern(rid)}
+        ids = {
+            self._loader.get_repair_pattern(rid)["id"]
+            for rid in EXPECTED_REPAIR_PATTERN_IDS
+            if self._loader.get_repair_pattern(rid)
+        }
         missing = EXPECTED_REPAIR_PATTERN_IDS - ids
         assert not missing, f"Missing repair patterns: {missing}"
 
@@ -192,20 +207,17 @@ class TestSemanticSteeringQueries:
     def test_pdf_pdfa_converter_required_includes_options_class(self):
         c = self._loader.get_steering_constraints("pdf", "PdfAConverter")
         required_text = " ".join(c["required"])
-        assert "PdfAConvertOptions" in required_text, \
-            "PdfAConverter REQUIRED must include PdfAConvertOptions"
+        assert "PdfAConvertOptions" in required_text, "PdfAConverter REQUIRED must include PdfAConvertOptions"
 
     def test_pdf_pdfa_converter_forbidden_includes_plugin_options(self):
         c = self._loader.get_steering_constraints("pdf", "PdfAConverter")
         forbidden_text = " ".join(c["forbidden"])
-        assert "PluginOptions" in forbidden_text, \
-            "PdfAConverter FORBIDDEN must include PluginOptions"
+        assert "PluginOptions" in forbidden_text, "PdfAConverter FORBIDDEN must include PluginOptions"
 
     def test_words_mail_merger_has_required_insert_field(self):
         c = self._loader.get_steering_constraints("words", "MailMerger")
         required_text = " ".join(c["required"])
-        assert "InsertField" in required_text, \
-            "MailMerger REQUIRED must include InsertField"
+        assert "InsertField" in required_text, "MailMerger REQUIRED must include InsertField"
 
     def test_global_steering_returns_for_all_active_families(self):
         for family in ["pdf", "words", "cells", "diagram"]:
@@ -232,8 +244,7 @@ class TestValidatorRuleQueries:
     def test_text_extractor_has_add_output_forbidden_rule(self):
         rules = self._loader.get_validator_rules("pdf", "TextExtractor")
         names = [r.get("name") for r in rules]
-        assert "add_output_absent_text_extractor" in names, \
-            "TextExtractor must have rule forbidding AddOutput call"
+        assert "add_output_absent_text_extractor" in names, "TextExtractor must have rule forbidding AddOutput call"
 
     def test_implemented_rules_subset_of_all_rules(self):
         all_rules = self._loader._validator_patterns

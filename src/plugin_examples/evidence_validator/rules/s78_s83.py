@@ -12,7 +12,6 @@ from plugin_examples.evidence_validator.models import RuleResult
 logger = logging.getLogger(__name__)
 
 
-
 class Sprint78to83Rules:
     """Rule mixin for evidence validation."""
 
@@ -31,7 +30,8 @@ class Sprint78to83Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="publication truth matrix must not claim REMOTE_STALE when all_published=true",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="publication-truth-matrix-final.json not found — rule not applicable",
             )
 
@@ -41,7 +41,8 @@ class Sprint78to83Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="publication truth matrix must not claim REMOTE_STALE when all_published=true",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="Could not parse publication-truth-matrix-final.json — skipping",
             )
 
@@ -50,7 +51,8 @@ class Sprint78to83Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="publication truth matrix must not claim REMOTE_STALE when all_published=true",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="publication-truth-matrix-final.json is flat-array format — rule not applicable",
             )
 
@@ -60,7 +62,8 @@ class Sprint78to83Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="publication truth matrix must not claim REMOTE_STALE when all_published=true",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="all_published=False or all_merged=False — rule not applicable",
             )
 
@@ -76,7 +79,8 @@ class Sprint78to83Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="publication truth matrix must not claim REMOTE_STALE when all_published=true",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"publication-truth-matrix-final.json has all_published=true but "
                     f"{len(stale_families)} family/families claim REMOTE_STALE: {stale_families}. "
@@ -87,7 +91,8 @@ class Sprint78to83Rules:
         return RuleResult(
             rule_id=rule_id,
             description="publication truth matrix must not claim REMOTE_STALE when all_published=true",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"all_published=true and no REMOTE_STALE status entries found",
         )
 
@@ -104,7 +109,8 @@ class Sprint78to83Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="handoff-prepublish-validation.json must assert overall_handoff_valid=true",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="handoff-prepublish-validation.json not found — rule not applicable",
             )
 
@@ -114,7 +120,8 @@ class Sprint78to83Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="handoff-prepublish-validation.json must assert overall_handoff_valid=true",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="handoff-prepublish-validation.json exists but is not valid JSON",
             )
 
@@ -123,7 +130,8 @@ class Sprint78to83Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="handoff-prepublish-validation.json must assert overall_handoff_valid=true",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "handoff-prepublish-validation.json is missing 'overall_handoff_valid' field. "
                     "Add overall_handoff_valid: true (or document why false)."
@@ -133,7 +141,8 @@ class Sprint78to83Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="handoff-prepublish-validation.json must assert overall_handoff_valid=true",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"handoff-prepublish-validation.json has overall_handoff_valid={overall_handoff_valid!r}. "
                     f"Must be true to proceed."
@@ -143,7 +152,8 @@ class Sprint78to83Rules:
         return RuleResult(
             rule_id=rule_id,
             description="handoff-prepublish-validation.json must assert overall_handoff_valid=true",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="overall_handoff_valid=true confirmed",
         )
 
@@ -160,7 +170,8 @@ class Sprint78to83Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="remote-repo-state-before.json must exist and show all repos accessible",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="remote-repo-state-before.json not found — rule not applicable",
             )
 
@@ -170,7 +181,8 @@ class Sprint78to83Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="remote-repo-state-before.json must exist and show all repos accessible",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="remote-repo-state-before.json exists but is not valid JSON",
             )
 
@@ -182,7 +194,8 @@ class Sprint78to83Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="remote-repo-state-before.json must exist and show all repos accessible",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="remote-repo-state-before.json has total_checked=0 — no repos were checked",
             )
 
@@ -191,7 +204,8 @@ class Sprint78to83Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="remote-repo-state-before.json must exist and show all repos accessible",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"remote-repo-state-before.json shows {accessible}/{total_checked} accessible. "
                     f"Blocked: {blocked}. Publication requires all repos accessible."
@@ -201,7 +215,8 @@ class Sprint78to83Rules:
         return RuleResult(
             rule_id=rule_id,
             description="remote-repo-state-before.json must exist and show all repos accessible",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"All {accessible}/{total_checked} repos accessible",
         )
 
@@ -221,7 +236,8 @@ class Sprint78to83Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="ECC closure_valid=true is invalid when blocking_failures>0",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="evidence-contract-computed.json not found — rule not applicable",
             )
 
@@ -231,7 +247,8 @@ class Sprint78to83Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="ECC closure_valid=true is invalid when blocking_failures>0",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="evidence-contract-computed.json exists but is not valid JSON",
             )
 
@@ -242,7 +259,8 @@ class Sprint78to83Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="ECC closure_valid=true is invalid when blocking_failures>0",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"evidence-contract-computed.json has closure_valid=true "
                     f"but blocking_failures={blocking_failures}. "
@@ -255,11 +273,9 @@ class Sprint78to83Rules:
         return RuleResult(
             rule_id=rule_id,
             description="ECC closure_valid=true is invalid when blocking_failures>0",
-            severity="FAILURE", passed=True,
-            evidence=(
-                f"ECC consistent: closure_valid={closure_valid}, "
-                f"blocking_failures={blocking_failures}"
-            ),
+            severity="FAILURE",
+            passed=True,
+            evidence=(f"ECC consistent: closure_valid={closure_valid}, " f"blocking_failures={blocking_failures}"),
         )
 
     def _rule_diagnostic_bundle_file_has_nonblocking_label(self) -> RuleResult:
@@ -281,7 +297,8 @@ class Sprint78to83Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Diagnostic bundle files must have diagnostic_rules_are_non_blocking=true",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="evidence/ directory not found — rule not applicable",
             )
 
@@ -290,7 +307,8 @@ class Sprint78to83Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Diagnostic bundle files must have diagnostic_rules_are_non_blocking=true",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="No *-bundle-validation-result.json files found — rule not applicable",
             )
 
@@ -306,15 +324,15 @@ class Sprint78to83Rules:
                 has_label = data.get("diagnostic_rules_are_non_blocking", False)
                 if not has_label:
                     offenders.append(
-                        f"{bf.name}: overall_valid=false but diagnostic_rules_are_non_blocking "
-                        "is missing or false"
+                        f"{bf.name}: overall_valid=false but diagnostic_rules_are_non_blocking " "is missing or false"
                     )
 
         if offenders:
             return RuleResult(
                 rule_id=rule_id,
                 description="Diagnostic bundle files must have diagnostic_rules_are_non_blocking=true",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "S78-E2: bundle-validation-result file(s) with overall_valid=false are "
                     f"missing the diagnostic label: {'; '.join(offenders)}"
@@ -324,7 +342,8 @@ class Sprint78to83Rules:
         return RuleResult(
             rule_id=rule_id,
             description="Diagnostic bundle files must have diagnostic_rules_are_non_blocking=true",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=(
                 f"All {len(bundle_files)} bundle-validation-result file(s) are correctly "
                 "labeled (overall_valid=true or diagnostic_rules_are_non_blocking=true)"
@@ -347,8 +366,10 @@ class Sprint78to83Rules:
 
         if not evidence_dir.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="evidence/ directory not found — rule not applicable",
             )
 
@@ -363,8 +384,10 @@ class Sprint78to83Rules:
 
         if offenders:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"S79-B1: *-validation-result.json file(s) with overall_valid=false "
                     f"lack not_canonical=true: {'; '.join(offenders)}. "
@@ -374,8 +397,10 @@ class Sprint78to83Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence=f"All *-validation-result.json files in evidence/ have unambiguous overall_valid",
         )
 
@@ -392,8 +417,10 @@ class Sprint78to83Rules:
         matrix_path = self.bundle_dir / "publication" / "publication-truth-matrix-final.json"
         if not matrix_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="publication/publication-truth-matrix-final.json not found — rule not applicable",
             )
 
@@ -401,8 +428,10 @@ class Sprint78to83Rules:
             records = json.loads(matrix_path.read_text(encoding="utf-8", errors="replace"))
         except (OSError, ValueError) as exc:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"S82-F1: Could not parse publication-truth-matrix-final.json: {exc}",
             )
 
@@ -410,8 +439,10 @@ class Sprint78to83Rules:
             # Legacy/wrapped format: {"total": N, "records": [...]} — not applicable
             # This rule specifically targets the Sprint 82+ flat-array format
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence=(
                     "publication-truth-matrix-final.json uses wrapped object format — "
                     "rule only applies to Sprint 82+ flat-array format"
@@ -421,8 +452,10 @@ class Sprint78to83Rules:
         total = len(records)
         if total != 42:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"S82-F1: Expected 42 records in publication-truth-matrix-final.json, "
                     f"got {total}. Denominator drift detected."
@@ -430,8 +463,12 @@ class Sprint78to83Rules:
             )
 
         expected_family_counts = {
-            "cells": 9, "words": 8, "pdf": 19,
-            "diagram": 2, "email": 1, "slides": 3,
+            "cells": 9,
+            "words": 8,
+            "pdf": 19,
+            "diagram": 2,
+            "email": 1,
+            "slides": 3,
         }
         actual_counts: dict[str, int] = {}
         for rec in records:
@@ -446,17 +483,20 @@ class Sprint78to83Rules:
 
         if mismatches:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
-                    f"S82-F1: Family count mismatch in publication-truth-matrix-final.json: "
-                    + "; ".join(mismatches)
+                    f"S82-F1: Family count mismatch in publication-truth-matrix-final.json: " + "; ".join(mismatches)
                 ),
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence=(
                 f"publication-truth-matrix-final.json has {total} records with correct "
                 f"per-family counts: cells=9, words=8, pdf=19, diagram=2, email=1, slides=3"
@@ -478,8 +518,10 @@ class Sprint78to83Rules:
         remote_state_path = self.bundle_dir / "remote" / "remote-repo-state-before.json"
         if not remote_state_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="remote/remote-repo-state-before.json not found — rule not applicable",
             )
 
@@ -487,15 +529,19 @@ class Sprint78to83Rules:
             state = json.loads(remote_state_path.read_text(encoding="utf-8", errors="replace"))
         except (OSError, ValueError):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="Could not parse remote-repo-state-before.json — rule not applicable",
             )
 
         if not isinstance(state, dict):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="remote-repo-state-before.json is not a dict — rule not applicable",
             )
 
@@ -507,8 +553,10 @@ class Sprint78to83Rules:
 
         if not families_with_open_prs:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="No open PRs detected in remote-repo-state-before.json — rule not applicable",
             )
 
@@ -518,8 +566,10 @@ class Sprint78to83Rules:
 
         if conflict_check.exists() and conflict_check.stat().st_size > 0:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence=(
                     f"Conflict strategy documented in remote/remote-conflict-check.md "
                     f"(open PRs in: {', '.join(families_with_open_prs)})"
@@ -528,8 +578,10 @@ class Sprint78to83Rules:
 
         if conflict_strategy.exists() and conflict_strategy.stat().st_size > 0:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence=(
                     f"Conflict strategy documented in conflicts/root-readme-pr-conflict-strategy.md "
                     f"(open PRs in: {', '.join(families_with_open_prs)})"
@@ -537,8 +589,10 @@ class Sprint78to83Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=False,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=False,
             failure_detail=(
                 f"S82-F2: Open PRs detected in {', '.join(families_with_open_prs)} but no conflict "
                 f"strategy document found. Expected remote/remote-conflict-check.md or "
@@ -565,8 +619,10 @@ class Sprint78to83Rules:
 
         if not consistency_path.exists() or not proof_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="final-consistency-check.json or final-clean-proof.txt not found — rule not applicable",
             )
 
@@ -574,15 +630,19 @@ class Sprint78to83Rules:
             consistency = json.loads(consistency_path.read_text(encoding="utf-8", errors="replace"))
         except (OSError, ValueError):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="Could not parse final-consistency-check.json — rule not applicable",
             )
 
         if consistency.get("overall") != "PASS_PENDING_COMMIT":
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence=(
                     f"final-consistency-check.json overall={consistency.get('overall')!r} — "
                     f"not PASS_PENDING_COMMIT, no stale label"
@@ -594,8 +654,10 @@ class Sprint78to83Rules:
             proof_text = proof_path.read_text(encoding="utf-8", errors="replace")
         except OSError:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="Could not read final-clean-proof.txt — rule not applicable",
             )
 
@@ -604,14 +666,18 @@ class Sprint78to83Rules:
         if not sha_pattern.search(proof_text):
             # No real SHA in proof yet — PASS_PENDING_COMMIT is legitimate
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="final-clean-proof.txt has no 40-char SHA — PASS_PENDING_COMMIT is acceptable",
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=False,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=False,
             failure_detail=(
                 "S82-F3: final-consistency-check.json has stale overall=PASS_PENDING_COMMIT "
                 "but final-clean-proof.txt already contains a real 40-char commit SHA. "
@@ -630,15 +696,16 @@ class Sprint78to83Rules:
         """
         rule_id = "publication_file_plan_present_if_pr_creation_claimed"
         description = (
-            "publication-file-plan.json must exist if any pr_url is non-null "
-            "in publication-truth-matrix-final.json"
+            "publication-file-plan.json must exist if any pr_url is non-null " "in publication-truth-matrix-final.json"
         )
 
         matrix_path = self.bundle_dir / "publication" / "publication-truth-matrix-final.json"
         if not matrix_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="publication/publication-truth-matrix-final.json not found — rule not applicable",
             )
 
@@ -646,27 +713,30 @@ class Sprint78to83Rules:
             records = json.loads(matrix_path.read_text(encoding="utf-8", errors="replace"))
         except (OSError, ValueError):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="Could not parse publication-truth-matrix-final.json — rule not applicable",
             )
 
         if not isinstance(records, list):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="publication-truth-matrix-final.json is not a JSON array — rule not applicable",
             )
 
-        pr_urls = [
-            rec.get("pr_url") for rec in records
-            if isinstance(rec, dict) and rec.get("pr_url") is not None
-        ]
+        pr_urls = [rec.get("pr_url") for rec in records if isinstance(rec, dict) and rec.get("pr_url") is not None]
 
         if not pr_urls:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="All pr_url values are null in publication-truth-matrix-final.json — rule not applicable",
             )
 
@@ -674,8 +744,10 @@ class Sprint78to83Rules:
         file_plan_path = self.bundle_dir / "publication" / "publication-file-plan.json"
         if not file_plan_path.exists() or file_plan_path.stat().st_size == 0:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"S82-F4: {len(pr_urls)} record(s) in publication-truth-matrix-final.json "
                     f"have non-null pr_url but publication/publication-file-plan.json is missing "
@@ -684,8 +756,10 @@ class Sprint78to83Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence=(
                 f"{len(pr_urls)} record(s) have pr_url set; "
                 f"publication/publication-file-plan.json is present and non-empty"

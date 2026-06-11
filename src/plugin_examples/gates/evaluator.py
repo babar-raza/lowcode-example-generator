@@ -6,10 +6,16 @@ from plugin_examples.gates.models import GateResult, GateVerdict
 
 
 # Hard-stop stage names (pipeline halts on failure).
-_HARD_STOP_STAGES = frozenset({
-    "load_config", "nuget_fetch", "dependency_resolution",
-    "extraction", "reflection", "plugin_detection",
-})
+_HARD_STOP_STAGES = frozenset(
+    {
+        "load_config",
+        "nuget_fetch",
+        "dependency_resolution",
+        "extraction",
+        "reflection",
+        "plugin_detection",
+    }
+)
 
 
 def evaluate_gates(
@@ -41,8 +47,15 @@ def evaluate_gates(
             status="failed",
             required=True,
             failure_reason=f"Hard-stop stage(s) failed: {', '.join(s.name for s in hard_failed)}",
-            downstream_blocked=["gate_scenarios", "gate_generation", "gate_build", "gate_run",
-                                "gate_output_validation", "gate_reviewer", "gate_publish"],
+            downstream_blocked=[
+                "gate_scenarios",
+                "gate_generation",
+                "gate_build",
+                "gate_run",
+                "gate_output_validation",
+                "gate_reviewer",
+                "gate_publish",
+            ],
             stage_name=hard_failed[0].name,
         )
         gates.append(gate)
@@ -198,8 +211,11 @@ def evaluate_gates(
             name="Example Reviewer",
             status=rev_status,
             required=publish_path or ctx.require_reviewer,
-            failure_reason=None if rev_status == "passed" else (
-                "Reviewer unavailable" if not rev_stage.artifacts.get("available", False)
+            failure_reason=None
+            if rev_status == "passed"
+            else (
+                "Reviewer unavailable"
+                if not rev_stage.artifacts.get("available", False)
                 else "Reviewer returned failure"
             ),
             stage_name="reviewer",
@@ -212,9 +228,7 @@ def evaluate_gates(
     # "degraded" counts as satisfying a required gate for partial-pass verdicts:
     # it signals that the gate was not fully passed but is not a hard failure either.
     # This allows PARTIAL_PR_DRY_RUN_READY when gate_run is degraded (some passed).
-    all_required_passed = all(
-        g.status in ("passed", "degraded") for g in gates if g.required
-    )
+    all_required_passed = all(g.status in ("passed", "degraded") for g in gates if g.required)
 
     verdict = _compute_verdict(
         stages=stages,
@@ -304,7 +318,7 @@ def _compute_verdict(
             return "BLOCKED_REVIEWER_FAILED"
 
     # Partitioned verdict: check if ALL or PARTIAL examples passed
-    partial_runtime = (run_passed > 0 and run_passed < build_passed)
+    partial_runtime = run_passed > 0 and run_passed < build_passed
 
     if all_required_passed and gen_mode == "llm" and build_passed > 0 and run_passed > 0:
         if partial_runtime:

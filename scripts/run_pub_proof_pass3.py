@@ -3,7 +3,15 @@ Master sprint script for lowcode-pub-proof-pass3-20260601.
 Fixes: sidecar/IV/final-clean-proof missing from ZIP, CMD-004 failure,
 artifact self-reference policy, command ledger completeness.
 """
-import hashlib, json, os, re, shutil, subprocess, sys, time, zipfile
+import hashlib
+import json
+import os
+import re
+import shutil
+import subprocess
+import sys
+import time
+import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 

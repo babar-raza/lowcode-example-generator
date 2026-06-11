@@ -67,6 +67,7 @@ def run_discovery_sweep(
 
     # Discovery metadata — freshness tracking (Wave 25 Lane C)
     from plugin_examples.website_catalog.drift_detector import make_discovery_metadata
+
     discovery_metadata = make_discovery_metadata()
 
     summary = {
@@ -177,16 +178,10 @@ def _discover_family(
                 family=family,
                 include_all_tfm_groups=True,
             )
-            logger.info(
-                "Discovery resolved %d dependencies for %s", len(deps), family
-            )
+            logger.info("Discovery resolved %d dependencies for %s", len(deps), family)
         result["dependency_count"] = len(deps)
 
-        dep_nupkg_paths = [
-            Path(d["cached_path"])
-            for d in deps
-            if d.get("status") == "ok" and d.get("cached_path")
-        ]
+        dep_nupkg_paths = [Path(d["cached_path"]) for d in deps if d.get("status") == "ok" and d.get("cached_path")]
 
         # Download any extra_packages declared in the family config for reflection.
         # These are packages whose assemblies the primary DLL references but which
@@ -198,6 +193,7 @@ def _discover_family(
                 _download_nupkg,
             )
             from plugin_examples.nuget_fetcher.cache import check_cache
+
             extra_deps_dir = run_dir / "packages" / family / "deps"
             extra_deps_dir.mkdir(parents=True, exist_ok=True)
             for extra_pkg_id in dep_cfg.extra_packages:
@@ -209,19 +205,21 @@ def _discover_family(
                     dep_nupkg_paths.append(extra_path)
                     logger.info(
                         "Extra package for reflection: %s %s",
-                        extra_pkg_id, extra_version,
+                        extra_pkg_id,
+                        extra_version,
                     )
                 except Exception as exc:
                     logger.warning(
                         "Failed to download extra_package %s for %s: %s",
-                        extra_pkg_id, family, exc,
+                        extra_pkg_id,
+                        family,
+                        exc,
                     )
-                    result["error"] = (
-                        f"extra_package download failed: {extra_pkg_id}: {exc}"
-                    )
+                    result["error"] = f"extra_package download failed: {extra_pkg_id}: {exc}"
 
         # Extract DLLs (pass dependency nupkgs so dep DLLs are co-extracted)
         from plugin_examples.nupkg_extractor import extract_package
+
         extraction = extract_package(
             nupkg_path,
             package_id=config.nuget.package_id,
@@ -234,18 +232,19 @@ def _discover_family(
         result["selected_target_framework"] = extraction.get("selected_framework")
 
         # Collect extracted dependency DLL paths for the reflector
-        dep_dll_paths = [
-            Path(p) for p in extraction.get("dependency_dll_paths", []) if p
-        ]
+        dep_dll_paths = [Path(p) for p in extraction.get("dependency_dll_paths", []) if p]
 
         # Deduplicate by assembly simple name — prevents FileLoadException in
         # MetadataLoadContext when two NuGet packages provide the same DLL name.
         from plugin_examples.dependencies.assembly_identity import deduplicate_assemblies
+
         _dedup = deduplicate_assemblies(dep_dll_paths)
         if _dedup.excluded:
             logger.info(
                 "Assembly deduplication: %d kept, %d excluded for %s",
-                len(_dedup.kept), len(_dedup.excluded), family,
+                len(_dedup.kept),
+                len(_dedup.excluded),
+                family,
             )
         dep_dll_paths = _dedup.kept
         result["dependency_paths"] = [str(p) for p in dep_dll_paths]
@@ -265,12 +264,12 @@ def _discover_family(
             "conflicts": _dedup.conflicts,
         }
         import json as _json
-        (latest_dir / f"{family}-dependency-dedup-report.json").write_text(
-            _json.dumps(dedup_report, indent=2)
-        )
+
+        (latest_dir / f"{family}-dependency-dedup-report.json").write_text(_json.dumps(dedup_report, indent=2))
 
         # Build catalog (pass dependency_paths so DllReflector can load them)
         from plugin_examples.reflection_catalog import build_catalog
+
         catalog_dir = run_dir / "catalog" / family
         catalog_dir.mkdir(parents=True, exist_ok=True)
         catalog_path = catalog_dir / "api-catalog.json"
@@ -285,8 +284,10 @@ def _discover_family(
 
         # Detect namespaces
         from plugin_examples.plugin_detector import detect_plugin_namespaces, write_source_of_truth_proof
+
         detection = detect_plugin_namespaces(
-            catalog, config.plugin_detection.namespace_patterns,
+            catalog,
+            config.plugin_detection.namespace_patterns,
         )
 
         matched = [m.namespace for m in detection.matched_namespaces]
@@ -398,14 +399,17 @@ def compute_generation_readiness(
                     catalog = json.load(f)
 
                 from plugin_examples.scenario_planner.type_classifier import (
-                    classify_catalog, WORKFLOW_ROOT, PROVIDER_CALLBACK, OPTIONS,
+                    classify_catalog,
+                    WORKFLOW_ROOT,
+                    PROVIDER_CALLBACK,
+                    OPTIONS,
                 )
+
                 # Load config to get namespace patterns
-                config_path = (
-                    repo_root / "pipeline" / "configs" / "families" / f"{family}.yml"
-                )
+                config_path = repo_root / "pipeline" / "configs" / "families" / f"{family}.yml"
                 if config_path.exists():
                     from plugin_examples.family_config import load_family_config
+
                     config = load_family_config(config_path)
                     ns_patterns = config.plugin_detection.namespace_patterns
                     fixture_sources = config.fixtures.sources
@@ -418,23 +422,15 @@ def compute_generation_readiness(
                     ns_patterns = r.get("lowcode_namespaces", [])
 
                 roles = classify_catalog(catalog, r.get("lowcode_namespaces", []))
-                entry["workflow_root_candidate_count"] = sum(
-                    1 for role in roles if role.role == WORKFLOW_ROOT
-                )
-                entry["provider_callback_count"] = sum(
-                    1 for role in roles if role.role == PROVIDER_CALLBACK
-                )
-                entry["options_type_count"] = sum(
-                    1 for role in roles if role.role == OPTIONS
-                )
+                entry["workflow_root_candidate_count"] = sum(1 for role in roles if role.role == WORKFLOW_ROOT)
+                entry["provider_callback_count"] = sum(1 for role in roles if role.role == PROVIDER_CALLBACK)
+                entry["options_type_count"] = sum(1 for role in roles if role.role == OPTIONS)
 
             except Exception as catalog_err:
                 logger.warning("Could not classify catalog for %s: %s", family, catalog_err)
 
         # Determine output validation support
-        entry["expected_output_validation_supported"] = (
-            entry["workflow_root_candidate_count"] > 0
-        )
+        entry["expected_output_validation_supported"] = entry["workflow_root_candidate_count"] > 0
 
         # Compute generation risk
         wrc = entry["workflow_root_candidate_count"]
@@ -471,6 +467,7 @@ def compute_generation_readiness(
             _cfg_path = repo_root / "pipeline" / "configs" / "families" / f"{family}.yml"
             if _cfg_path.exists():
                 from plugin_examples.family_config import load_family_config as _lcf
+
                 _cfg = _lcf(_cfg_path)
                 _config_status = _cfg.status
                 _allowed_types = list(_cfg.generation.allowed_types or [])
@@ -492,13 +489,11 @@ def compute_generation_readiness(
             _denom_path = repo_root / "pipeline" / "configs" / "denominators" / f"{family}.json"
             if _denom_path.exists():
                 import json as _djson
+
                 _denom = _djson.loads(_denom_path.read_text(encoding="utf-8"))
                 _denominator_published = _denom.get("published_count", 0) or 0
                 _denominator_pilot_count = (
-                    _denom.get("allowed_pilot_count")
-                    or _denom.get("runnable_scenarios")
-                    or len(_allowed_types)
-                    or 0
+                    _denom.get("allowed_pilot_count") or _denom.get("runnable_scenarios") or len(_allowed_types) or 0
                 )
                 if _denominator_published > 0 and _allowed_types:
                     _controlled_pilot_approved = True
@@ -534,8 +529,10 @@ def compute_generation_readiness(
         # classification gaps (e.g. workflow_root_candidate_count=0 due to classifier
         # precision limits). When published_count==allowed_pilot_count, all pilot types are
         # done — expansion requires separate review → leave generation_ready=False.
-        if _controlled_pilot_approved and _pilot_has_remaining and not any(
-            b.startswith("family_status_is_") for b in _generation_blocked_by
+        if (
+            _controlled_pilot_approved
+            and _pilot_has_remaining
+            and not any(b.startswith("family_status_is_") for b in _generation_blocked_by)
         ):
             entry["generation_ready"] = True
         else:
@@ -548,8 +545,13 @@ def compute_generation_readiness(
         readiness_list.append(entry)
 
     # Sort: generate_next first, then medium risk, then blocked
-    priority = {"generate_next": 0, "needs_options_aware_rules": 1,
-                "needs_fixture_strategy": 2, "needs_type_role_rules": 3,
-                "blocked_no_lowcode_namespace": 4, "blocked_reflection_failed": 5}
+    priority = {
+        "generate_next": 0,
+        "needs_options_aware_rules": 1,
+        "needs_fixture_strategy": 2,
+        "needs_type_role_rules": 3,
+        "blocked_no_lowcode_namespace": 4,
+        "blocked_reflection_failed": 5,
+    }
     readiness_list.sort(key=lambda x: priority.get(x.get("recommended_next_action", ""), 6))
     return readiness_list

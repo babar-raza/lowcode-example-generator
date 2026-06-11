@@ -12,7 +12,6 @@ from plugin_examples.evidence_validator.models import RuleResult
 logger = logging.getLogger(__name__)
 
 
-
 class Sprint84to86Rules:
     """Rule mixin for evidence validation."""
 
@@ -24,15 +23,16 @@ class Sprint84to86Rules:
         """
         rule_id = "pr_batching_strategy_present_if_pr_creation_attempted"
         description = (
-            "publication/pr-batching-strategy.md must exist if pr-creation-ledger.json "
-            "shows prs_created > 0"
+            "publication/pr-batching-strategy.md must exist if pr-creation-ledger.json " "shows prs_created > 0"
         )
 
         ledger_path = self.bundle_dir / "publication" / "pr-creation-ledger.json"
         if not ledger_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="publication/pr-creation-ledger.json not found — rule not applicable",
             )
 
@@ -40,24 +40,30 @@ class Sprint84to86Rules:
             ledger = json.loads(ledger_path.read_text(encoding="utf-8", errors="replace"))
         except (OSError, ValueError):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="Could not parse pr-creation-ledger.json — rule not applicable",
             )
 
         prs_created = ledger.get("prs_created", 0) if isinstance(ledger, dict) else 0
         if prs_created == 0:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="pr-creation-ledger.json shows prs_created=0 — rule not applicable",
             )
 
         strategy_path = self.bundle_dir / "publication" / "pr-batching-strategy.md"
         if not strategy_path.exists() or strategy_path.stat().st_size == 0:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"S83-G1: pr-creation-ledger.json shows prs_created={prs_created} but "
                     f"publication/pr-batching-strategy.md is missing or empty. "
@@ -66,8 +72,10 @@ class Sprint84to86Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence=f"prs_created={prs_created}; publication/pr-batching-strategy.md is present",
         )
 
@@ -78,16 +86,15 @@ class Sprint84to86Rules:
         strategy narrative and the structured plan JSON before PRs are created.
         """
         rule_id = "pr_batching_plan_present_if_pr_creation_attempted"
-        description = (
-            "publication/pr-batching-plan.json must exist if pr-creation-ledger.json "
-            "shows prs_created > 0"
-        )
+        description = "publication/pr-batching-plan.json must exist if pr-creation-ledger.json " "shows prs_created > 0"
 
         ledger_path = self.bundle_dir / "publication" / "pr-creation-ledger.json"
         if not ledger_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="publication/pr-creation-ledger.json not found — rule not applicable",
             )
 
@@ -95,24 +102,30 @@ class Sprint84to86Rules:
             ledger = json.loads(ledger_path.read_text(encoding="utf-8", errors="replace"))
         except (OSError, ValueError):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="Could not parse pr-creation-ledger.json — rule not applicable",
             )
 
         prs_created = ledger.get("prs_created", 0) if isinstance(ledger, dict) else 0
         if prs_created == 0:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="pr-creation-ledger.json shows prs_created=0 — rule not applicable",
             )
 
         plan_path = self.bundle_dir / "publication" / "pr-batching-plan.json"
         if not plan_path.exists() or plan_path.stat().st_size == 0:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"S83-G2: pr-creation-ledger.json shows prs_created={prs_created} but "
                     f"publication/pr-batching-plan.json is missing or empty. "
@@ -121,8 +134,10 @@ class Sprint84to86Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence=f"prs_created={prs_created}; publication/pr-batching-plan.json is present",
         )
 
@@ -135,15 +150,16 @@ class Sprint84to86Rules:
         """
         rule_id = "root_readme_file_plan_present_before_pr_creation"
         description = (
-            "conflicts/root-readme-file-plan.json must exist if pr-creation-ledger.json "
-            "shows prs_created > 0"
+            "conflicts/root-readme-file-plan.json must exist if pr-creation-ledger.json " "shows prs_created > 0"
         )
 
         ledger_path = self.bundle_dir / "publication" / "pr-creation-ledger.json"
         if not ledger_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="publication/pr-creation-ledger.json not found — rule not applicable",
             )
 
@@ -151,24 +167,30 @@ class Sprint84to86Rules:
             ledger = json.loads(ledger_path.read_text(encoding="utf-8", errors="replace"))
         except (OSError, ValueError):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="Could not parse pr-creation-ledger.json — rule not applicable",
             )
 
         prs_created = ledger.get("prs_created", 0) if isinstance(ledger, dict) else 0
         if prs_created == 0:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="pr-creation-ledger.json shows prs_created=0 — rule not applicable",
             )
 
         file_plan_path = self.bundle_dir / "conflicts" / "root-readme-file-plan.json"
         if not file_plan_path.exists() or file_plan_path.stat().st_size == 0:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"S83-G3: pr-creation-ledger.json shows prs_created={prs_created} but "
                     f"conflicts/root-readme-file-plan.json is missing or empty. "
@@ -177,8 +199,10 @@ class Sprint84to86Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence=f"prs_created={prs_created}; conflicts/root-readme-file-plan.json is present",
         )
 
@@ -190,16 +214,15 @@ class Sprint84to86Rules:
         The default is 1 PR per family (6 PRs); creating 42 requires documented justification.
         """
         rule_id = "no_bulk_42pr_plan_without_justification"
-        description = (
-            "If pr-batching-plan.json has 42 planned_prs, "
-            "bulk_justification field must be present"
-        )
+        description = "If pr-batching-plan.json has 42 planned_prs, " "bulk_justification field must be present"
 
         plan_path = self.bundle_dir / "publication" / "pr-batching-plan.json"
         if not plan_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="publication/pr-batching-plan.json not found — rule not applicable",
             )
 
@@ -207,23 +230,29 @@ class Sprint84to86Rules:
             plan = json.loads(plan_path.read_text(encoding="utf-8", errors="replace"))
         except (OSError, ValueError):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="Could not parse pr-batching-plan.json — rule not applicable",
             )
 
         if not isinstance(plan, dict):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="pr-batching-plan.json is not a JSON object — rule not applicable",
             )
 
         planned_prs = plan.get("planned_prs", [])
         if not isinstance(planned_prs, list) or len(planned_prs) != 42:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence=f"planned_prs count={len(planned_prs) if isinstance(planned_prs, list) else 'N/A'} (not 42) — rule not applicable",
             )
 
@@ -231,8 +260,10 @@ class Sprint84to86Rules:
         justification = plan.get("bulk_justification")
         if not justification:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "S83-G4: pr-batching-plan.json has 42 planned_prs (one per example) but "
                     "no bulk_justification field. The default is 1 PR per family (6 PRs). "
@@ -241,8 +272,10 @@ class Sprint84to86Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence=f"planned_prs=42; bulk_justification present: {str(justification)[:80]}",
         )
 
@@ -262,8 +295,10 @@ class Sprint84to86Rules:
         manifest_path = self.bundle_dir / "bundle-manifest.json"
         if not manifest_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="bundle-manifest.json not found — rule not applicable",
             )
 
@@ -271,16 +306,20 @@ class Sprint84to86Rules:
             manifest = json.loads(manifest_path.read_text(encoding="utf-8", errors="replace"))
         except (OSError, ValueError):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="Could not parse bundle-manifest.json — rule not applicable",
             )
 
         source_sha = manifest.get("source_sha", "")
         if source_sha == "TBD_AFTER_COMMIT":
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "S84-H1: bundle-manifest.json has source_sha=TBD_AFTER_COMMIT. "
                     "The source_sha must be updated to the actual commit SHA after committing."
@@ -288,8 +327,10 @@ class Sprint84to86Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence=f"source_sha={source_sha!r} (not TBD)",
         )
 
@@ -305,8 +346,10 @@ class Sprint84to86Rules:
         check_path = self.bundle_dir / "review" / "final-consistency-check.json"
         if not check_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="review/final-consistency-check.json not found — rule not applicable",
             )
 
@@ -314,16 +357,20 @@ class Sprint84to86Rules:
             check = json.loads(check_path.read_text(encoding="utf-8", errors="replace"))
         except (OSError, ValueError):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="Could not parse final-consistency-check.json — rule not applicable",
             )
 
         notes = check.get("notes", "")
         if "will be captured" in notes.lower():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "S84-H2: final-consistency-check.json notes contain 'will be captured'. "
                     "Update the notes after all captures are complete."
@@ -331,8 +378,10 @@ class Sprint84to86Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence=f"notes do not contain 'will be captured'",
         )
 
@@ -348,8 +397,10 @@ class Sprint84to86Rules:
         taskcard_path = self.bundle_dir / "tracking" / "taskcard-update-proof.md"
         if not taskcard_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="tracking/taskcard-update-proof.md not found — rule not applicable",
             )
 
@@ -358,8 +409,10 @@ class Sprint84to86Rules:
         pending_lines = re.findall(r"\|[^|]+\|[^|]+\|\s*PENDING\b[^|]*\|", content)
         if pending_lines:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"S84-H3: taskcard-update-proof.md has {len(pending_lines)} lane(s) "
                     f"marked PENDING: {pending_lines[0].strip()!r}. Update to final status."
@@ -367,8 +420,10 @@ class Sprint84to86Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence="No PENDING lane labels found in taskcard-update-proof.md",
         )
 
@@ -384,8 +439,10 @@ class Sprint84to86Rules:
         scoreboard_path = self.bundle_dir / "tracking" / "scoreboard-update-proof.md"
         if not scoreboard_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="tracking/scoreboard-update-proof.md not found — rule not applicable",
             )
 
@@ -393,8 +450,10 @@ class Sprint84to86Rules:
         # Match rows with "EV applicable" and "TBD"
         if re.search(r"EV applicable[^|]*\|[^|]*\|\s*TBD", content, re.IGNORECASE):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "S84-H4: scoreboard-update-proof.md has TBD for EV applicable. "
                     "Update with actual EV applicable count after running the validator."
@@ -402,8 +461,10 @@ class Sprint84to86Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence="EV applicable is not TBD in scoreboard",
         )
 
@@ -422,8 +483,10 @@ class Sprint84to86Rules:
 
         if not manifest_path.exists() or not proof_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="bundle-manifest.json or final-clean-proof.txt not found — rule not applicable",
             )
 
@@ -431,24 +494,30 @@ class Sprint84to86Rules:
             manifest = json.loads(manifest_path.read_text(encoding="utf-8", errors="replace"))
         except (OSError, ValueError):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="Could not parse bundle-manifest.json — rule not applicable",
             )
 
         source_sha = manifest.get("source_sha", "")
         if not source_sha or source_sha == "TBD_AFTER_COMMIT":
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence=f"source_sha={source_sha!r} — rule 120 handles TBD, this rule not applicable",
             )
 
         proof_content = proof_path.read_text(encoding="utf-8", errors="replace")
         if source_sha not in proof_content:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"S84-H5: bundle-manifest.json source_sha={source_sha!r} does not appear "
                     f"in final-clean-proof.txt. The proof must reference the bundle's commit SHA."
@@ -456,8 +525,10 @@ class Sprint84to86Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence=f"source_sha={source_sha!r} found in final-clean-proof.txt",
         )
 
@@ -478,8 +549,10 @@ class Sprint84to86Rules:
         state_path = self.bundle_dir / "sprint-state.json"
         if not state_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="sprint-state.json not found — rule not applicable",
             )
 
@@ -487,24 +560,30 @@ class Sprint84to86Rules:
             state = json.loads(state_path.read_text(encoding="utf-8", errors="replace"))
         except (OSError, ValueError):
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="Could not parse sprint-state.json — rule not applicable",
             )
 
         blocked_count = state.get("sprints_approval_blocked", 0)
         if blocked_count < 14:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence=f"sprints_approval_blocked={blocked_count} (< 14) — freeze not required",
             )
 
         freeze_path = self.bundle_dir / "baseline-freeze" / "publication-baseline-freeze.json"
         if not freeze_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"S85-I1: sprint-state.json shows sprints_approval_blocked={blocked_count} (>= 14) "
                     f"but baseline-freeze/publication-baseline-freeze.json does not exist. "
@@ -513,8 +592,10 @@ class Sprint84to86Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence=f"sprints_approval_blocked={blocked_count}; baseline freeze file exists",
         )
 
@@ -531,16 +612,20 @@ class Sprint84to86Rules:
         freeze_path = self.bundle_dir / "baseline-freeze" / "publication-baseline-freeze.json"
         if not freeze_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="No baseline freeze file — rule not applicable",
             )
 
         verdict_path = self.bundle_dir / "final-verdict.md"
         if not verdict_path.exists():
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=True,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=True,
                 evidence="final-verdict.md not found — rule not applicable",
             )
 
@@ -556,8 +641,10 @@ class Sprint84to86Rules:
 
         if not has_freeze_acknowledgment:
             return RuleResult(
-                rule_id=rule_id, description=description,
-                severity="FAILURE", passed=False,
+                rule_id=rule_id,
+                description=description,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "S85-I2: baseline-freeze/publication-baseline-freeze.json exists but "
                     "final-verdict.md does not acknowledge the freeze. Verdict must contain "
@@ -566,8 +653,10 @@ class Sprint84to86Rules:
             )
 
         return RuleResult(
-            rule_id=rule_id, description=description,
-            severity="FAILURE", passed=True,
+            rule_id=rule_id,
+            description=description,
+            severity="FAILURE",
+            passed=True,
             evidence="Baseline freeze acknowledged in final verdict",
         )
 

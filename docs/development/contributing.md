@@ -20,3 +20,23 @@ Audience: Contributor
 - Publisher: `src/plugin_examples/publisher/`
 
 See [Repository Structure](repo-structure.md) and [Testing and CI](testing.md).
+
+## Developer Setup
+
+After cloning the repo, install dev dependencies and activate git hooks:
+
+```bash
+pip install -e ".[dev]"   # installs pytest, ruff, pre-commit, and all dev deps
+pre-commit install         # activates hooks — runs on every commit
+```
+
+**What the hooks enforce** (scope: `src/` and `tests/` only):
+- **ruff** — lint check (blocking; exits non-zero on violations)
+- **ruff-format** — code formatting (auto-formats on commit)
+- **check-yaml** — YAML syntax validation (all YAML files)
+- **end-of-file-fixer / trailing-whitespace** — file hygiene
+- **compileall** — Python syntax check (`python -m compileall src/`)
+
+`scripts/` and `reports/` are excluded from ruff enforcement (legacy generated files).
+
+To run hooks manually without committing: `pre-commit run --all-files`

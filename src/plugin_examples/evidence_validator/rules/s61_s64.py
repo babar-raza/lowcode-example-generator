@@ -46,7 +46,8 @@ class SemanticRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="final-clean-proof.txt must be nonzero bytes",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="File not found: git/final-clean-proof.txt",
             )
 
@@ -55,7 +56,8 @@ class SemanticRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="final-clean-proof.txt must be nonzero bytes",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "final-clean-proof.txt is 0 bytes. "
                     "Sprint 60 defect SD60-01: git status --short produces no output when clean. "
@@ -66,7 +68,8 @@ class SemanticRules:
         return RuleResult(
             rule_id=rule_id,
             description="final-clean-proof.txt must be nonzero bytes",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"final-clean-proof.txt is {size} bytes",
         )
 
@@ -84,7 +87,8 @@ class SemanticRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="final-clean-proof.txt must contain git status header",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="File not found: git/final-clean-proof.txt",
             )
 
@@ -95,7 +99,8 @@ class SemanticRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="final-clean-proof.txt must contain git status header",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "final-clean-proof.txt does not contain any recognized git status header "
                     f"(expected one of: {_GIT_HEADER_PATTERNS[:3]}...). "
@@ -107,7 +112,8 @@ class SemanticRules:
         return RuleResult(
             rule_id=rule_id,
             description="final-clean-proof.txt must contain git status header",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"Git header found in final-clean-proof.txt: {content[:80].strip()}",
         )
 
@@ -128,7 +134,8 @@ class SemanticRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="README audit must not falsely claim I/O documentation complete",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="readme/example-readme-content-audit.json not found",
             )
 
@@ -138,7 +145,9 @@ class SemanticRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="README audit must not falsely claim I/O documentation complete",
-                severity="FAILURE", passed=False, failure_detail=str(exc),
+                severity="FAILURE",
+                passed=False,
+                failure_detail=str(exc),
             )
 
         records = data.get("records", [])
@@ -146,7 +155,8 @@ class SemanticRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="README audit must not falsely claim I/O documentation complete",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="No records found in README audit",
             )
 
@@ -159,7 +169,8 @@ class SemanticRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="README audit must not falsely claim I/O documentation complete",
-                severity="WARNING", passed=True,
+                severity="WARNING",
+                passed=True,
                 evidence="I/O format fields not tracked in README audit (acceptable if audit scope is basic-only)",
             )
 
@@ -176,7 +187,8 @@ class SemanticRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="README audit must not falsely claim I/O documentation complete",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"README audit claims {claimed_match}/{total} MATCH but "
                     f"{input_false_count}/{total} have input_format_in_readme=false and "
@@ -189,7 +201,8 @@ class SemanticRules:
         return RuleResult(
             rule_id=rule_id,
             description="README audit must not falsely claim I/O documentation complete",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=(
                 f"input_false={input_false_count}/{total}, output_false={output_false_count}/{total}, "
                 f"claimed_match={claimed_match}/{total}"
@@ -218,13 +231,15 @@ class SemanticRules:
                 return RuleResult(
                     rule_id=rule_id,
                     description="README gate must be imported by pipeline source",
-                    severity="FAILURE", passed=True,
+                    severity="FAILURE",
+                    passed=True,
                     evidence=f"readme_audit_gate imported in: {found_in}",
                 )
             return RuleResult(
                 rule_id=rule_id,
                 description="README gate must be imported by pipeline source",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "readme_audit_gate is not imported by any pipeline source file. "
                     "A gate module that is never called is not a gate. "
@@ -238,7 +253,8 @@ class SemanticRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="README gate must be wired into publication flow",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "readme/readme-gate-flow-integration.md not found. "
                     "Either provide source_root for direct scanning, or create flow integration evidence."
@@ -250,7 +266,8 @@ class SemanticRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="README gate must be wired into publication flow",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="readme-gate-flow-integration.md admits gate is not wired or deferred",
                 evidence=content[:200],
             )
@@ -258,7 +275,8 @@ class SemanticRules:
         return RuleResult(
             rule_id=rule_id,
             description="README gate must be wired into publication flow",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="readme-gate-flow-integration.md exists and does not indicate deferred status",
         )
 
@@ -283,13 +301,15 @@ class SemanticRules:
                 return RuleResult(
                     rule_id=rule_id,
                     description="EvidenceValidator must be imported by pipeline source",
-                    severity="FAILURE", passed=True,
+                    severity="FAILURE",
+                    passed=True,
                     evidence=f"evidence_validator imported in: {found_in}",
                 )
             return RuleResult(
                 rule_id=rule_id,
                 description="EvidenceValidator must be imported by pipeline source",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "evidence_validator is not imported by any pipeline source file. "
                     "Wire EvidenceValidator into release-status or run command finalization."
@@ -302,7 +322,8 @@ class SemanticRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="EvidenceValidator must be wired into pipeline",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "evidence/pipeline-integration-proof.md not found. "
                     "Either provide source_root for direct scanning, or create integration evidence."
@@ -314,7 +335,8 @@ class SemanticRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="EvidenceValidator must be wired into pipeline",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="pipeline-integration-proof.md admits validator is not wired or deferred",
                 evidence=content[:200],
             )
@@ -322,7 +344,8 @@ class SemanticRules:
         return RuleResult(
             rule_id=rule_id,
             description="EvidenceValidator must be wired into pipeline",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="pipeline-integration-proof.md exists and does not indicate deferred status",
         )
 
@@ -352,7 +375,8 @@ class SemanticRules:
                     return RuleResult(
                         rule_id=rule_id,
                         description="Destination Program.cs input classification must not be all-null",
-                        severity="FAILURE", passed=False,
+                        severity="FAILURE",
+                        passed=False,
                         failure_detail=(
                             f"{fname} records do not include input_format_in_programcs or "
                             "input_classification fields. Program.cs I/O audit was not performed."
@@ -360,9 +384,9 @@ class SemanticRules:
                     )
 
                 null_count = sum(
-                    1 for e in examples
-                    if e.get("input_format_in_programcs") is None
-                    and e.get("input_classification") is None
+                    1
+                    for e in examples
+                    if e.get("input_format_in_programcs") is None and e.get("input_classification") is None
                 )
                 total = len(examples)
 
@@ -370,7 +394,8 @@ class SemanticRules:
                     return RuleResult(
                         rule_id=rule_id,
                         description="Destination Program.cs input classification must not be all-null",
-                        severity="FAILURE", passed=False,
+                        severity="FAILURE",
+                        passed=False,
                         failure_detail=(
                             f"input_format_in_programcs is null for all {total}/{total} records. "
                             "No Program.cs was inspected for actual input format usage. "
@@ -382,14 +407,16 @@ class SemanticRules:
                 return RuleResult(
                     rule_id=rule_id,
                     description="Destination Program.cs input classification must not be all-null",
-                    severity="FAILURE", passed=True,
+                    severity="FAILURE",
+                    passed=True,
                     evidence=f"{total - null_count}/{total} records have non-null input classification",
                 )
 
         return RuleResult(
             rule_id=rule_id,
             description="Destination Program.cs input classification must not be all-null",
-            severity="FAILURE", passed=False,
+            severity="FAILURE",
+            passed=False,
             failure_detail="No destination audit file found with input_format_in_programcs data",
         )
 
@@ -408,7 +435,8 @@ class SemanticRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="No P1 open items while claiming COMPLETE verdict",
-                severity="WARNING", passed=True,
+                severity="WARNING",
+                passed=True,
                 evidence="process/next-work-register.md not found (no P1 items to check)",
             )
 
@@ -416,7 +444,8 @@ class SemanticRules:
         # Look for P1 items that are not crossed out or marked as completed
         # Pattern: "| ... | P1 |" or "Priority P1" or "| P1 |"
         p1_lines = [
-            line for line in content.splitlines()
+            line
+            for line in content.splitlines()
             if re.search(r"\bP1\b", line) and not re.search(r"~~.*P1.*~~|DONE|COMPLETE|RESOLVED", line, re.IGNORECASE)
         ]
 
@@ -424,7 +453,8 @@ class SemanticRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="No P1 open items while claiming COMPLETE verdict",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="No P1 items found in next-work-register.md",
             )
 
@@ -435,15 +465,20 @@ class SemanticRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="No P1 open items while claiming COMPLETE verdict",
-                severity="WARNING", passed=True,
+                severity="WARNING",
+                passed=True,
                 evidence=f"{len(p1_lines)} P1 items noted but no final-verdict.md to check against",
             )
 
         verdict_content = verdict_path.read_text(encoding="utf-8", errors="replace")
         claims_complete = any(
-            term in verdict_content for term in [
-                "CLOSURE_VERIFIED", "COMPLETE", "GATES_ACTIVE",
-                "README_IO_DOCS_AND_DESTINATION_AUDIT", "FALSE_CLOSURE_KILLED"
+            term in verdict_content
+            for term in [
+                "CLOSURE_VERIFIED",
+                "COMPLETE",
+                "GATES_ACTIVE",
+                "README_IO_DOCS_AND_DESTINATION_AUDIT",
+                "FALSE_CLOSURE_KILLED",
             ]
         )
 
@@ -451,7 +486,8 @@ class SemanticRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="No P1 open items while claiming COMPLETE verdict",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"{len(p1_lines)} P1 open item(s) remain in next-work-register.md while "
                     "final verdict claims COMPLETE/VERIFIED. P1 = blocking; resolve or downgrade to P2."
@@ -462,7 +498,8 @@ class SemanticRules:
         return RuleResult(
             rule_id=rule_id,
             description="No P1 open items while claiming COMPLETE verdict",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"P1 items noted but verdict does not overclaim completion",
         )
 
@@ -484,7 +521,8 @@ class SemanticRules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Required evidence files must not be 0 bytes",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Zero-byte required files: {empty_files}",
             )
 
@@ -492,7 +530,8 @@ class SemanticRules:
         return RuleResult(
             rule_id=rule_id,
             description="Required evidence files must not be 0 bytes",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"{len(present)}/{len(_REQUIRED_NONZERO_FILES)} required files present and nonzero",
         )
 

@@ -23,7 +23,7 @@ class ValidatorHelpers:
         sprint_id = self._read_sprint_id()
         prefix = f"reports/{sprint_id}/"
         if src.startswith(prefix):
-            return self.bundle_dir / src[len(prefix):]
+            return self.bundle_dir / src[len(prefix) :]
         # Fallback: resolve relative to bundle_dir parent (reports/) then repo root
         return self.bundle_dir.parent.parent / src
 
@@ -39,9 +39,7 @@ class ValidatorHelpers:
         stale = sorted(p for p in found_prefixes if p != current_prefix)
         return stale
 
-    def _scan_source_for_import(
-        self, source_root: Path, module_name: str, exclude_self: str = ""
-    ) -> list[str]:
+    def _scan_source_for_import(self, source_root: Path, module_name: str, exclude_self: str = "") -> list[str]:
         """Scan Python source files in source_root for imports of module_name.
 
         Returns list of relative file paths that import the module.

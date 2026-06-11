@@ -84,9 +84,7 @@ class TestMetricsConfigLoading:
     def test_override_dict(self, _metrics_yml):
         from plugin_examples.metrics.config import load_metrics_config
 
-        cfg = load_metrics_config(
-            config_path=_metrics_yml, override={"website": "override.net"}
-        )
+        cfg = load_metrics_config(config_path=_metrics_yml, override={"website": "override.net"})
         assert cfg.website == "override.net"
 
 
@@ -107,9 +105,7 @@ class TestMetricsConfigValidation:
     def test_missing_family_mapping(self, _metrics_yml):
         from plugin_examples.metrics.config import load_metrics_config
 
-        cfg = load_metrics_config(
-            config_path=_metrics_yml, override={"family_to_product": {}}
-        )
+        cfg = load_metrics_config(config_path=_metrics_yml, override={"family_to_product": {}})
         errors = cfg.validate()
         assert any("family_to_product" in e for e in errors)
 
@@ -295,10 +291,11 @@ class TestProductionConfig:
         if not cfg_path.exists():
             pytest.skip("metrics.yml not found")
         import yaml
+
         raw = yaml.safe_load(cfg_path.read_text(encoding="utf-8"))
-        assert raw["metrics"]["api_endpoint"] == "", (
-            "api_endpoint must be empty in metrics.yml — set AGENT_METRICS_ENDPOINT env var instead"
-        )
+        assert (
+            raw["metrics"]["api_endpoint"] == ""
+        ), "api_endpoint must be empty in metrics.yml — set AGENT_METRICS_ENDPOINT env var instead"
 
 
 class TestAgentMetricsEndpointEnvVar:
@@ -307,6 +304,7 @@ class TestAgentMetricsEndpointEnvVar:
         from plugin_examples.metrics.config import load_metrics_config
 
         import yaml
+
         data = yaml.safe_load(_metrics_yml.read_text(encoding="utf-8"))
         data["metrics"]["api_endpoint"] = ""
         _metrics_yml.write_text(yaml.dump(data), encoding="utf-8")
@@ -320,6 +318,7 @@ class TestAgentMetricsEndpointEnvVar:
         from plugin_examples.metrics.config import load_metrics_config
 
         import yaml
+
         data = yaml.safe_load(_metrics_yml.read_text(encoding="utf-8"))
         data["metrics"]["api_endpoint"] = ""
         _metrics_yml.write_text(yaml.dump(data), encoding="utf-8")

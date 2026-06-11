@@ -11,8 +11,7 @@ class TestCodegenContractConsumption:
 
     def test_spreadsheetconverter_returns_csv_from_contract(self):
         """SpreadsheetConverter output is .csv from contract, not .xlsx from legacy map."""
-        result = _infer_output_extension("SpreadsheetConverter",
-                                          hints={"family": "cells"})
+        result = _infer_output_extension("SpreadsheetConverter", hints={"family": "cells"})
         assert result == ".csv", (
             f"SpreadsheetConverter should return .csv from contract, got {result}. "
             "Legacy map 'spreadsheet': '.xlsx' must NOT override contract."
@@ -20,22 +19,19 @@ class TestCodegenContractConsumption:
 
     def test_formexporter_returns_json_from_contract(self):
         """FormExporter output is .json from contract, not .xml from old planner map."""
-        result = _infer_output_extension("FormExporter",
-                                          hints={"family": "pdf"})
+        result = _infer_output_extension("FormExporter", hints={"family": "pdf"})
         # FormExporter output_kind=file, canonical=.json — _infer_output_extension may return "" for stdout
         # but FormExporter is file output
         assert result in (".json", ""), f"FormExporter expected .json, got {result}"
 
     def test_textconverter_returns_txt_from_contract(self):
         """TextConverter output is .txt from contract."""
-        result = _infer_output_extension("TextConverter",
-                                          hints={"family": "cells"})
+        result = _infer_output_extension("TextConverter", hints={"family": "cells"})
         assert result == ".txt"
 
     def test_words_converter_returns_pdf(self):
         """Words Converter output is .pdf from contract."""
-        result = _infer_output_extension("Converter",
-                                          hints={"family": "words"})
+        result = _infer_output_extension("Converter", hints={"family": "words"})
         assert result == ".pdf"
 
 
@@ -45,15 +41,13 @@ class TestCodegenLegacyMapDeprecated:
     def test_legacy_map_not_overriding_contract(self):
         """When family hint is available, contract takes precedence over _FORMAT_NAME_TO_EXT."""
         # The legacy map has "spreadsheet": ".xlsx" but contract says .csv
-        result = _infer_output_extension("SpreadsheetConverter",
-                                          hints={"family": "cells"})
-        assert result != ".xlsx", (
-            "_FORMAT_NAME_TO_EXT 'spreadsheet' -> '.xlsx' must not override FormatContract"
-        )
+        result = _infer_output_extension("SpreadsheetConverter", hints={"family": "cells"})
+        assert result != ".xlsx", "_FORMAT_NAME_TO_EXT 'spreadsheet' -> '.xlsx' must not override FormatContract"
 
     def test_no_dot_out_from_active_type(self):
         """No active type should produce .out through codegen."""
         from plugin_examples.format_authority.store import get_all_contracts
+
         contracts = get_all_contracts()
         for (family, type_name), contract in contracts.items():
             result = _infer_output_extension(type_name, hints={"family": family})

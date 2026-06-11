@@ -12,7 +12,6 @@ from plugin_examples.evidence_validator.models import RuleResult
 logger = logging.getLogger(__name__)
 
 
-
 class Sprint76to77Rules:
     """Rule mixin for evidence validation."""
 
@@ -30,7 +29,8 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Post-merge matrix: post_merge_validated=true requires output_confirmed=true",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="No post-merge-validation-matrix.json — rule not applicable",
             )
 
@@ -40,7 +40,8 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Post-merge matrix must be readable",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Cannot read post-merge-validation-matrix.json: {exc}",
             )
 
@@ -53,7 +54,8 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="post_merge_validated=true requires output_confirmed=true",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"Records with post_merge_validated=true but output_confirmed!=true: {violations}. "
                     "Graceful-exit-only (e.g. RUNTIME_VALIDATED_NO_INPUT_FIXTURE) does not count as validated."
@@ -63,7 +65,8 @@ class Sprint76to77Rules:
         return RuleResult(
             rule_id=rule_id,
             description="All post_merge_validated=true records also have output_confirmed=true",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"Checked {len(data.get('records', []))} records — all validated records confirmed output",
         )
 
@@ -81,7 +84,8 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="No post-merge matrix — rule not applicable",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="No post-merge-validation-matrix.json found",
             )
 
@@ -91,21 +95,22 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Post-merge matrix must be readable",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=f"Cannot read post-merge-validation-matrix.json: {exc}",
             )
 
         violations = [
             r.get("scenario_id", "?")
             for r in data.get("records", [])
-            if r.get("post_merge_validated") is True
-            and "NO_INPUT_FIXTURE" in str(r.get("runtime_result", ""))
+            if r.get("post_merge_validated") is True and "NO_INPUT_FIXTURE" in str(r.get("runtime_result", ""))
         ]
         if violations:
             return RuleResult(
                 rule_id=rule_id,
                 description="post_merge_validated=true with NO_INPUT_FIXTURE runtime_result is invalid",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"Graceful-exit-only examples marked as validated: {violations}. "
                     "Must provide real fixture and confirm output before setting post_merge_validated=true."
@@ -115,7 +120,8 @@ class Sprint76to77Rules:
         return RuleResult(
             rule_id=rule_id,
             description="No post-merge record combines post_merge_validated=true with NO_INPUT_FIXTURE",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="All validated records use real end-to-end execution",
         )
 
@@ -137,7 +143,8 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="dirty-state-after.txt or dirty-file-classification.md missing — skipping consistency check",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="One or both files absent — not applicable",
             )
 
@@ -158,7 +165,8 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="dirty-state-after.txt shows no src/tests modifications — consistent",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="No src/ or tests/ files shown as modified in dirty-state-after.txt",
             )
 
@@ -168,7 +176,8 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="dirty-file-classification.md contradicts dirty-state-after.txt",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "dirty-state-after.txt shows src/ or tests/ files as modified, but "
                     "dirty-file-classification.md says 'No Source or Test Files Are Dirty'. "
@@ -180,7 +189,8 @@ class Sprint76to77Rules:
         return RuleResult(
             rule_id=rule_id,
             description="dirty-file-classification.md is consistent with dirty-state-after.txt",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="dirty-state-after.txt shows src/tests modified and classification acknowledges it",
         )
 
@@ -198,7 +208,8 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="final-clean-proof.txt must exist with commit SHA",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="git/final-clean-proof.txt not found",
             )
 
@@ -210,7 +221,8 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="final-clean-proof.txt must contain a commit SHA",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "No commit SHA (7+ hex chars) found in final-clean-proof.txt. "
                     "Must include the commit hash so the final state can be independently verified."
@@ -220,7 +232,8 @@ class Sprint76to77Rules:
         return RuleResult(
             rule_id=rule_id,
             description="final-clean-proof.txt contains commit SHA",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"Found SHA(s): {shas[:3]}",
         )
 
@@ -239,7 +252,8 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="dirty-state-after.txt or final-clean-proof.txt missing — skipping",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="One or both files absent",
             )
 
@@ -254,22 +268,27 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="No workspace/verification/latest dirty files — rule not applicable",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="workspace/verification/latest/ not shown as modified in dirty-state-after.txt",
             )
 
         # workspace/latest dirty — proof must document this exception
-        has_exception_doc = any(kw in proof_content for kw in [
-            "workspace/verification/latest",
-            "GENERATED_WORKSPACE_STATE",
-            "governance exception",
-            "pre-existing runtime",
-        ])
+        has_exception_doc = any(
+            kw in proof_content
+            for kw in [
+                "workspace/verification/latest",
+                "GENERATED_WORKSPACE_STATE",
+                "governance exception",
+                "pre-existing runtime",
+            ]
+        )
         if not has_exception_doc:
             return RuleResult(
                 rule_id=rule_id,
                 description="final-clean-proof.txt must document workspace/verification/latest/ governance exception",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "dirty-state-after.txt shows workspace/verification/latest/ files modified, "
                     "but final-clean-proof.txt does not document this as a governance exception. "
@@ -280,7 +299,8 @@ class Sprint76to77Rules:
         return RuleResult(
             rule_id=rule_id,
             description="final-clean-proof.txt documents workspace/verification/latest/ governance exception",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="proof mentions workspace/verification/latest or governance exception",
         )
 
@@ -299,7 +319,8 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Post-merge matrix or weekly review matrix absent — not applicable",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="One or both files absent",
             )
 
@@ -309,21 +330,21 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Cannot read post-merge-validation-matrix.json",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="Skipping due to parse error",
             )
 
         unconfirmed = [
-            r.get("scenario_id", "?")
-            for r in data.get("records", [])
-            if r.get("output_confirmed") is not True
+            r.get("scenario_id", "?") for r in data.get("records", []) if r.get("output_confirmed") is not True
         ]
 
         if not unconfirmed:
             return RuleResult(
                 rule_id=rule_id,
                 description="All post-merge examples have output_confirmed=true — REPAIRED claim valid",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="No unconfirmed output records",
             )
 
@@ -339,7 +360,8 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Weekly review claims REPAIRED but runtime matrix has output_confirmed=false",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"output_confirmed=false for: {unconfirmed}. "
                     "Weekly review matrix says 'REPAIRED' without acknowledging partial validation. "
@@ -350,7 +372,8 @@ class Sprint76to77Rules:
         return RuleResult(
             rule_id=rule_id,
             description="Weekly review matrix appropriately qualifies partial runtime validation",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"Unconfirmed examples: {unconfirmed} — matrix does not overclaim REPAIRED",
         )
 
@@ -368,7 +391,8 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="dirty-state-after.txt not found",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="git/dirty-state-after.txt must be present",
             )
 
@@ -376,16 +400,17 @@ class Sprint76to77Rules:
 
         # Detect src/ or tests/ in modified lines
         src_test_lines = [
-            line.strip() for line in content.splitlines()
-            if ("modified:" in line or "\tM " in line or " M " in line)
-            and ("src/" in line or "tests/" in line)
+            line.strip()
+            for line in content.splitlines()
+            if ("modified:" in line or "\tM " in line or " M " in line) and ("src/" in line or "tests/" in line)
         ]
 
         if src_test_lines:
             return RuleResult(
                 rule_id=rule_id,
                 description="dirty-state-after.txt must not show src/ or tests/ as modified",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"Source/test files shown as modified in dirty-state-after.txt: {src_test_lines[:5]}. "
                     "dirty-state-after.txt must be captured AFTER the final bundle commit. "
@@ -396,7 +421,8 @@ class Sprint76to77Rules:
         return RuleResult(
             rule_id=rule_id,
             description="dirty-state-after.txt shows no uncommitted src/ or tests/ files",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="No src/ or tests/ modifications in dirty-state-after.txt",
         )
 
@@ -415,7 +441,8 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="dirty-state-after.txt or final-verdict.md missing — skipping",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="One or both files absent",
             )
 
@@ -430,7 +457,8 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="No workspace/verification/latest files dirty — verdict qualifier not required",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="dirty-state-after.txt does not show workspace/verification/latest as modified",
             )
 
@@ -448,7 +476,8 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Final verdict must acknowledge dirty workspace/verification/latest/ files",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "dirty-state-after.txt shows workspace/verification/latest/ as modified, "
                     "but final-verdict.md does not contain any of: "
@@ -460,7 +489,8 @@ class Sprint76to77Rules:
         return RuleResult(
             rule_id=rule_id,
             description="Final verdict explicitly acknowledges workspace/verification/latest/ governance exception",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="verdict contains workspace exception qualifier",
         )
 
@@ -477,31 +507,32 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="commands.log must not contain PENDING entries",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="commands.log not found",
             )
 
         content = log_path.read_text(encoding="utf-8", errors="replace")
         # Check for PENDING as a status value (e.g. "Exit: PENDING"), not narrative mentions
         pending_lines = [
-            line.strip() for line in content.splitlines()
-            if re.search(r"(?:Exit|Status):\s*PENDING\b", line)
+            line.strip() for line in content.splitlines() if re.search(r"(?:Exit|Status):\s*PENDING\b", line)
         ]
         if pending_lines:
             return RuleResult(
                 rule_id=rule_id,
                 description="commands.log must not contain PENDING entries",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
-                    f"commands.log has {len(pending_lines)} PENDING status line(s): "
-                    + "; ".join(pending_lines[:3])
+                    f"commands.log has {len(pending_lines)} PENDING status line(s): " + "; ".join(pending_lines[:3])
                 ),
             )
 
         return RuleResult(
             rule_id=rule_id,
             description="commands.log must not contain PENDING entries",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="commands.log present with no PENDING entries",
         )
 
@@ -522,7 +553,8 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="final-clean-proof.txt must contain raw git status output",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail="git/final-clean-proof.txt not found",
             )
 
@@ -540,7 +572,8 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="final-clean-proof.txt must contain raw git status output",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     "final-clean-proof.txt is narrative-only — no raw git status lines found. "
                     "Must embed actual 'git status --short' or 'git status' output, or include "
@@ -551,7 +584,8 @@ class Sprint76to77Rules:
         return RuleResult(
             rule_id=rule_id,
             description="final-clean-proof.txt must contain raw git status output",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence="final-clean-proof.txt contains embedded raw git status output",
         )
 
@@ -574,7 +608,8 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="dirty-state-after.txt must show no untracked files after final commit",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="dirty-state-after.txt not present — skip",
             )
 
@@ -613,14 +648,16 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="dirty-state-after.txt must show no untracked files after final commit",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="No untracked files in dirty-state-after.txt — clean state confirmed",
             )
 
         return RuleResult(
             rule_id=rule_id,
             description="dirty-state-after.txt must show no untracked files after final commit",
-            severity="FAILURE", passed=False,
+            severity="FAILURE",
+            passed=False,
             failure_detail=(
                 f"dirty-state-after.txt shows {len(untracked)} untracked file(s): {untracked}. "
                 f"Untracked files must be committed or removed before final bundle closure. "
@@ -642,7 +679,8 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Validation result files must not be ambiguously false",
-                severity="FAILURE", passed=True,
+                severity="FAILURE",
+                passed=True,
                 evidence="No evidence/ directory — nothing to check",
             )
 
@@ -665,7 +703,8 @@ class Sprint76to77Rules:
             return RuleResult(
                 rule_id=rule_id,
                 description="Validation result files must not be ambiguously false",
-                severity="FAILURE", passed=False,
+                severity="FAILURE",
+                passed=False,
                 failure_detail=(
                     f"Validation result file(s) with overall_valid=false but no "
                     f"canonical_overall_valid or bundle_type field: {ambiguous_files}. "
@@ -677,7 +716,8 @@ class Sprint76to77Rules:
         return RuleResult(
             rule_id=rule_id,
             description="Validation result files must not be ambiguously false",
-            severity="FAILURE", passed=True,
+            severity="FAILURE",
+            passed=True,
             evidence=f"All validation result files in evidence/ are unambiguous",
         )
 

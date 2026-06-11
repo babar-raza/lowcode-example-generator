@@ -13,6 +13,7 @@ Relationship to PIV validators:
 - CPV-01..CPV-12 validate system-level invariants across all packages
   and the registry as a whole
 """
+
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -118,21 +119,27 @@ def run_canonical_primary_validators(
     for key in canonical_candidates:
         family, slug = key.split("/", 1) if "/" in key else ("", key)
         if family == "barcode" and slug in GENERIC_BARCODE_SLUGS:
-            result.violations.append(CpvViolation(
-                "CPV-01", "ERROR",
-                f"Publication candidate '{key}' uses a legacy generic slug — must use canonical slug",
-                key,
-            ))
+            result.violations.append(
+                CpvViolation(
+                    "CPV-01",
+                    "ERROR",
+                    f"Publication candidate '{key}' uses a legacy generic slug — must use canonical slug",
+                    key,
+                )
+            )
         # Check against package info
         pkg = packages.get(key, {})
         legacy = pkg.get("legacy_slug")
         canon = pkg.get("canonical_plugin_slug")
         if legacy and not canon:
-            result.violations.append(CpvViolation(
-                "CPV-01", "ERROR",
-                f"Publication candidate '{key}' has legacy_slug '{legacy}' but no canonical_plugin_slug",
-                key,
-            ))
+            result.violations.append(
+                CpvViolation(
+                    "CPV-01",
+                    "ERROR",
+                    f"Publication candidate '{key}' has legacy_slug '{legacy}' but no canonical_plugin_slug",
+                    key,
+                )
+            )
 
     # -------------------------------------------------------------------
     # CPV-02: Canonical registry entry must have canonical_plugin_slug
@@ -141,11 +148,14 @@ def run_canonical_primary_validators(
         if entry.get("identity_status") == "CANONICAL_IDENTITY_VERIFIED":
             if not entry.get("canonical_plugin_slug"):
                 fslug = f"{entry.get('family', '?')}/{entry.get('plugin_slug', '?')}"
-                result.violations.append(CpvViolation(
-                    "CPV-02", "ERROR",
-                    f"Registry entry '{fslug}' has identity_status=CANONICAL_IDENTITY_VERIFIED but no canonical_plugin_slug",
-                    fslug,
-                ))
+                result.violations.append(
+                    CpvViolation(
+                        "CPV-02",
+                        "ERROR",
+                        f"Registry entry '{fslug}' has identity_status=CANONICAL_IDENTITY_VERIFIED but no canonical_plugin_slug",
+                        fslug,
+                    )
+                )
 
     # -------------------------------------------------------------------
     # CPV-03: Canonical registry entry must have display_plugin_name
@@ -154,11 +164,14 @@ def run_canonical_primary_validators(
         if entry.get("identity_status") == "CANONICAL_IDENTITY_VERIFIED":
             if not entry.get("display_plugin_name"):
                 fslug = f"{entry.get('family', '?')}/{entry.get('plugin_slug', '?')}"
-                result.violations.append(CpvViolation(
-                    "CPV-03", "WARNING",
-                    f"Registry entry '{fslug}' has CANONICAL_IDENTITY_VERIFIED but missing display_plugin_name",
-                    fslug,
-                ))
+                result.violations.append(
+                    CpvViolation(
+                        "CPV-03",
+                        "WARNING",
+                        f"Registry entry '{fslug}' has CANONICAL_IDENTITY_VERIFIED but missing display_plugin_name",
+                        fslug,
+                    )
+                )
 
     # -------------------------------------------------------------------
     # CPV-04: Legacy alias must not be counted as a separate canonical example
@@ -169,11 +182,14 @@ def run_canonical_primary_validators(
     canonical_candidate_keys = set(canonical_candidates)
     double_counted = legacy_alias_keys & canonical_candidate_keys
     for key in double_counted:
-        result.violations.append(CpvViolation(
-            "CPV-04", "ERROR",
-            f"'{key}' appears in both legacy_aliases and canonical_candidates — double-counted",
-            key,
-        ))
+        result.violations.append(
+            CpvViolation(
+                "CPV-04",
+                "ERROR",
+                f"'{key}' appears in both legacy_aliases and canonical_candidates — double-counted",
+                key,
+            )
+        )
 
     # -------------------------------------------------------------------
     # CPV-05: Dryrun path must use canonical slug, not generic slug
@@ -186,11 +202,14 @@ def run_canonical_primary_validators(
             # Only an error if no legacy_slug / migrated_from in source-provenance
             sp_canon = pkg.get("canonical_plugin_slug")
             if not sp_canon:
-                result.violations.append(CpvViolation(
-                    "CPV-05", "ERROR",
-                    f"Dryrun package '{key}' at path '{path_str}' uses generic slug with no alias record in source-provenance",
-                    key,
-                ))
+                result.violations.append(
+                    CpvViolation(
+                        "CPV-05",
+                        "ERROR",
+                        f"Dryrun package '{key}' at path '{path_str}' uses generic slug with no alias record in source-provenance",
+                        key,
+                    )
+                )
 
     # -------------------------------------------------------------------
     # CPV-06: source-provenance canonical_url must match registry canonical_url
@@ -217,11 +236,14 @@ def run_canonical_primary_validators(
             sp_data = _read_json(sp_path) or {}
             sp_url = sp_data.get("canonical_url", "")
             if sp_url and reg_url and sp_url.rstrip("/") != reg_url.rstrip("/"):
-                result.violations.append(CpvViolation(
-                    "CPV-06", "WARNING",
-                    f"'{key}' source-provenance canonical_url '{sp_url}' differs from registry '{reg_url}'",
-                    key,
-                ))
+                result.violations.append(
+                    CpvViolation(
+                        "CPV-06",
+                        "WARNING",
+                        f"'{key}' source-provenance canonical_url '{sp_url}' differs from registry '{reg_url}'",
+                        key,
+                    )
+                )
 
     # -------------------------------------------------------------------
     # CPV-07: README title must not use generic operation name
@@ -239,11 +261,14 @@ def run_canonical_primary_validators(
                     readable = generic.replace("-", " ")
                     family = key.split("/")[0] if "/" in key else ""
                     if family == "barcode" and readable in first_line:
-                        result.violations.append(CpvViolation(
-                            "CPV-07", "WARNING",
-                            f"'{key}' README title contains generic operation name '{generic}' — use display_plugin_name",
-                            str(readme),
-                        ))
+                        result.violations.append(
+                            CpvViolation(
+                                "CPV-07",
+                                "WARNING",
+                                f"'{key}' README title contains generic operation name '{generic}' — use display_plugin_name",
+                                str(readme),
+                            )
+                        )
                         break
             except Exception:
                 pass
@@ -254,11 +279,14 @@ def run_canonical_primary_validators(
     for key in canonical_candidate_keys:
         family, slug = key.split("/", 1) if "/" in key else ("", key)
         if family == "barcode" and slug in GENERIC_BARCODE_SLUGS:
-            result.violations.append(CpvViolation(
-                "CPV-08", "ERROR",
-                f"Publication candidate list contains BarCode generic name '{key}' — must not be PUBLICATION_CANDIDATE_LOCAL_CLEAN",
-                key,
-            ))
+            result.violations.append(
+                CpvViolation(
+                    "CPV-08",
+                    "ERROR",
+                    f"Publication candidate list contains BarCode generic name '{key}' — must not be PUBLICATION_CANDIDATE_LOCAL_CLEAN",
+                    key,
+                )
+            )
 
     # -------------------------------------------------------------------
     # CPV-09: Publication matrix must not include IDENTITY_REVIEW_REQUIRED as clean
@@ -266,11 +294,14 @@ def run_canonical_primary_validators(
     review_required = set(publication_matrix.get("identity_review_required", []))
     contamination = review_required & canonical_candidate_keys
     for key in contamination:
-        result.violations.append(CpvViolation(
-            "CPV-09", "ERROR",
-            f"'{key}' is in both identity_review_required and canonical_candidates — matrix contaminated",
-            key,
-        ))
+        result.violations.append(
+            CpvViolation(
+                "CPV-09",
+                "ERROR",
+                f"'{key}' is in both identity_review_required and canonical_candidates — matrix contaminated",
+                key,
+            )
+        )
 
     # -------------------------------------------------------------------
     # CPV-10: Family-level probe must not be counted as plugin-level coverage
@@ -282,11 +313,14 @@ def run_canonical_primary_validators(
         if len(parts) == 2:
             family, slug = parts
             if slug == family:
-                result.violations.append(CpvViolation(
-                    "CPV-10", "WARNING",
-                    f"'{key}' appears to be a family-level probe (slug == family), not plugin-level coverage",
-                    key,
-                ))
+                result.violations.append(
+                    CpvViolation(
+                        "CPV-10",
+                        "WARNING",
+                        f"'{key}' appears to be a family-level probe (slug == family), not plugin-level coverage",
+                        key,
+                    )
+                )
 
     # -------------------------------------------------------------------
     # CPV-11: Canonical identity map must include family plugin list
@@ -301,11 +335,14 @@ def run_canonical_primary_validators(
 
     for fam in sorted(verified_families):
         if fam not in family_plugin_lists:
-            result.violations.append(CpvViolation(
-                "CPV-11", "WARNING",
-                f"Family '{fam}' has CANONICAL_IDENTITY_VERIFIED entries but no entry in family_plugin_lists",
-                fam,
-            ))
+            result.violations.append(
+                CpvViolation(
+                    "CPV-11",
+                    "WARNING",
+                    f"Family '{fam}' has CANONICAL_IDENTITY_VERIFIED entries but no entry in family_plugin_lists",
+                    fam,
+                )
+            )
 
     # -------------------------------------------------------------------
     # CPV-12: Final summary must not count canonical entries and legacy aliases together
@@ -314,20 +351,19 @@ def run_canonical_primary_validators(
     # -------------------------------------------------------------------
     total_declared = publication_matrix.get("total")
     if total_declared is not None:
-        bucket_sum = (
-            len(canonical_candidate_keys)
-            + len(legacy_alias_keys)
-            + len(review_required)
-        )
+        bucket_sum = len(canonical_candidate_keys) + len(legacy_alias_keys) + len(review_required)
         other_buckets = publication_matrix.get("other_buckets", [])
         for bucket in other_buckets:
             bucket_sum += len(bucket)
         if bucket_sum != total_declared:
-            result.violations.append(CpvViolation(
-                "CPV-12", "WARNING",
-                f"Publication matrix total={total_declared} but sum of buckets={bucket_sum} — "
-                "canonical and legacy aliases may be conflated",
-                f"total={total_declared}, bucket_sum={bucket_sum}",
-            ))
+            result.violations.append(
+                CpvViolation(
+                    "CPV-12",
+                    "WARNING",
+                    f"Publication matrix total={total_declared} but sum of buckets={bucket_sum} — "
+                    "canonical and legacy aliases may be conflated",
+                    f"total={total_declared}, bucket_sum={bucket_sum}",
+                )
+            )
 
     return result

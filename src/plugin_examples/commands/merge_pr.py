@@ -15,25 +15,29 @@ def add_parser(subparsers):
         help="Verify preconditions and simulate (or execute) PR merge for a family",
     )
     parser.add_argument("--family", required=True, help="Family name (e.g., cells, words)")
-    parser.add_argument("--pr-number", required=True, type=int, metavar="N",
-                                  help="PR number to merge (e.g., 1)")
+    parser.add_argument("--pr-number", required=True, type=int, metavar="N", help="PR number to merge (e.g., 1)")
     merge_pr_mode = parser.add_mutually_exclusive_group()
     merge_pr_mode.add_argument(
-        "--dry-run", action="store_true", default=False,
+        "--dry-run",
+        action="store_true",
+        default=False,
         help="Verify preconditions and simulate merge without performing any remote mutation",
     )
     merge_pr_mode.add_argument(
-        "--merge", action="store_true",
+        "--merge",
+        action="store_true",
         help="Perform live merge (blocked; requires APPROVE_MERGE_PR + future sprint enablement)",
     )
     parser.add_argument(
-        "--approval-token", metavar="VALUE",
+        "--approval-token",
+        metavar="VALUE",
         help="Merge approval token. Must equal 'APPROVE_MERGE_PR'. "
-             "Must NOT equal 'APPROVE_LIVE_PR'. "
-             "Also readable from PLUGIN_EXAMPLES_MERGE_PR_APPROVAL env var.",
+        "Must NOT equal 'APPROVE_LIVE_PR'. "
+        "Also readable from PLUGIN_EXAMPLES_MERGE_PR_APPROVAL env var.",
     )
     parser.add_argument(
-        "--promote-latest", action="store_true",
+        "--promote-latest",
+        action="store_true",
         help="Write report to workspace/verification/latest/",
     )
 
@@ -56,7 +60,10 @@ def handle(args) -> int:
 
     repo_root = _Path(__file__).resolve().parents[3]
     msession, mcollector = _create_metrics_session(
-        args, command="merge-pr", family=args.family, repo_root=repo_root,
+        args,
+        command="merge-pr",
+        family=args.family,
+        repo_root=repo_root,
     )
     config_dir = repo_root / "pipeline" / "configs" / "families"
     verification_dir = repo_root / "workspace" / "verification"
@@ -180,9 +187,7 @@ def handle(args) -> int:
             "approval_gate_passed": approved,
             "approval_blocked_reason": approval_blocked if not approved else None,
             "blocked_reasons": ["no_github_token_for_remote_verification"],
-            "preconditions": {
-                "github_token_present": {"result": "FAIL", "detail": "GITHUB_TOKEN not set"}
-            },
+            "preconditions": {"github_token_present": {"result": "FAIL", "detail": "GITHUB_TOKEN not set"}},
             "note": "No GITHUB_TOKEN — cannot verify PR state. Set GITHUB_TOKEN and re-run.",
         }
     else:
@@ -205,10 +210,7 @@ def handle(args) -> int:
             "live_merge_performed": False,
             "approval_gate_passed": approved,
             "approval_blocked_reason": approval_blocked if not approved else None,
-            "blocked_reasons": (
-                simulation["blocked_reasons"]
-                + ([] if approved else [approval_blocked])
-            ),
+            "blocked_reasons": (simulation["blocked_reasons"] + ([] if approved else [approval_blocked])),
             "preconditions": simulation["preconditions"],
             "pr_data": simulation.get("pr_data", {}),
             "note": simulation["note"],
@@ -220,8 +222,11 @@ def handle(args) -> int:
     with open(output_path, "w") as _f:
         _json.dump(simulation_result, _f, indent=2)
 
-    sim_status = "SIMULATION_PASSED" if simulation_result["simulation_passed"] else \
-        f"SIMULATION_BLOCKED ({', '.join(simulation_result['blocked_reasons'])})"
+    sim_status = (
+        "SIMULATION_PASSED"
+        if simulation_result["simulation_passed"]
+        else f"SIMULATION_BLOCKED ({', '.join(simulation_result['blocked_reasons'])})"
+    )
     print(f"merge-pr simulation: {family} PR #{pr_number} — {sim_status}")
     print(f"  Target: {target_owner}/{target_repo_name}")
     print(f"  Approval gate: {'PASSED' if approved else f'BLOCKED ({approval_blocked})'}")
@@ -229,9 +234,9 @@ def handle(args) -> int:
     print(f"Report: {output_path}")
     _sim_ok = simulation_result["simulation_passed"]
     _finalize_metrics_session(
-        msession, items_discovered=1,
+        msession,
+        items_discovered=1,
         items_succeeded=1 if _sim_ok else 0,
         items_failed=0 if _sim_ok else 1,
     )
     return 0 if _sim_ok else 1
-

@@ -44,13 +44,17 @@ def shv_01_no_pfx_untracked_or_staged(git_status_text: str) -> SHVResult:
     """Fail if any .pfx file appears as untracked or staged."""
     entries = _parse_git_status_lines(git_status_text)
     violations = [
-        (code, fname) for code, fname in entries
+        (code, fname)
+        for code, fname in entries
         if fname.lower().endswith(".pfx") and ("?" in code or code not in {"!!", "  "})
     ]
     if violations:
-        return SHVResult("SHV-01", False,
+        return SHVResult(
+            "SHV-01",
+            False,
             f"{len(violations)} .pfx file(s) untracked or staged: {[f for _, f in violations]}",
-            {"violations": [{"status": c, "file": f} for c, f in violations]})
+            {"violations": [{"status": c, "file": f} for c, f in violations]},
+        )
     return SHVResult("SHV-01", True, "No .pfx files untracked or staged")
 
 
@@ -58,14 +62,19 @@ def shv_02_no_pem_key_p12_untracked_or_staged(git_status_text: str) -> SHVResult
     """Fail if any .pem, .key, or .p12 files appear as untracked or staged."""
     entries = _parse_git_status_lines(git_status_text)
     violations = [
-        (code, fname) for code, fname in entries
-        if SECRET_PATTERNS.search(fname) and not fname.lower().endswith(".pfx")
+        (code, fname)
+        for code, fname in entries
+        if SECRET_PATTERNS.search(fname)
+        and not fname.lower().endswith(".pfx")
         and ("?" in code or code not in {"!!", "  "})
     ]
     if violations:
-        return SHVResult("SHV-02", False,
+        return SHVResult(
+            "SHV-02",
+            False,
             f"{len(violations)} secret file(s) untracked or staged: {[f for _, f in violations]}",
-            {"violations": [{"status": c, "file": f} for c, f in violations]})
+            {"violations": [{"status": c, "file": f} for c, f in violations]},
+        )
     return SHVResult("SHV-02", True, "No .pem/.key/.p12 files untracked or staged")
 
 
@@ -73,13 +82,15 @@ def shv_03_no_credential_filenames_staged(git_status_text: str) -> SHVResult:
     """Fail if any staged file name matches credential/token patterns."""
     entries = _parse_git_status_lines(git_status_text)
     staged = [
-        (code, fname) for code, fname in entries
-        if code and code[0] in {"A", "M"} and CREDENTIAL_PATTERNS.search(fname)
+        (code, fname) for code, fname in entries if code and code[0] in {"A", "M"} and CREDENTIAL_PATTERNS.search(fname)
     ]
     if staged:
-        return SHVResult("SHV-03", False,
+        return SHVResult(
+            "SHV-03",
+            False,
             f"{len(staged)} possibly-sensitive file(s) staged: {[f for _, f in staged]}",
-            {"staged": [{"status": c, "file": f} for c, f in staged]})
+            {"staged": [{"status": c, "file": f} for c, f in staged]},
+        )
     return SHVResult("SHV-03", True, "No credential-pattern filenames staged")
 
 

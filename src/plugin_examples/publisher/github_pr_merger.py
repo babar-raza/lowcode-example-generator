@@ -29,16 +29,25 @@ logger = logging.getLogger(__name__)
 GITHUB_API_BASE = "https://api.github.com"
 
 # Files that should NOT appear in a valid PR (same exclusion list as publisher)
-_UNEXPECTED_FILENAMES: frozenset[str] = frozenset({
-    "PR_SUMMARY.md",
-    ".gitkeep",
-    ".DS_Store",
-    "Thumbs.db",
-})
+_UNEXPECTED_FILENAMES: frozenset[str] = frozenset(
+    {
+        "PR_SUMMARY.md",
+        ".gitkeep",
+        ".DS_Store",
+        "Thumbs.db",
+    }
+)
 
-_UNEXPECTED_DIRS: frozenset[str] = frozenset({
-    "bin", "obj", ".git", "__pycache__", ".vs", ".vscode",
-})
+_UNEXPECTED_DIRS: frozenset[str] = frozenset(
+    {
+        "bin",
+        "obj",
+        ".git",
+        "__pycache__",
+        ".vs",
+        ".vscode",
+    }
+)
 
 
 class MergeError(Exception):
@@ -173,9 +182,9 @@ def check_merge_preconditions(
         files_data = _api_get(files_url, headers)
         file_names = [f.get("filename", "") for f in files_data]
         unexpected = [
-            fn for fn in file_names
-            if Path(fn).name in _UNEXPECTED_FILENAMES
-            or any(part in _UNEXPECTED_DIRS for part in Path(fn).parts)
+            fn
+            for fn in file_names
+            if Path(fn).name in _UNEXPECTED_FILENAMES or any(part in _UNEXPECTED_DIRS for part in Path(fn).parts)
         ]
         if unexpected:
             checks["no_unexpected_files"] = {"result": "FAIL", "detail": str(unexpected)}
@@ -278,8 +287,7 @@ def simulate_merge(
         "blocked_reasons": preconditions["blocked_reasons"],
         "pr_data": preconditions["pr_data"],
         "note": (
-            "Dry-run only. No merge performed. "
-            "Live merge requires additional human approval: APPROVE_MERGE_PR."
+            "Dry-run only. No merge performed. " "Live merge requires additional human approval: APPROVE_MERGE_PR."
         ),
     }
 
@@ -437,7 +445,9 @@ def delete_branch_after_merge(
     delete_url = f"{GITHUB_API_BASE}/repos/{owner}/{repo}/git/refs/heads/{branch_ref}"
     logger.info(
         "Deleting branch '%s' in %s/%s after merge — token not logged",
-        branch_ref, owner, repo,
+        branch_ref,
+        owner,
+        repo,
     )
     try:
         _api_delete(delete_url, headers)

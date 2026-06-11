@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class FixtureEntry:
     """A single fixture file entry."""
+
     filename: str
     source_type: str  # github, generated, local
     source_path: str
@@ -25,14 +26,12 @@ class FixtureEntry:
 @dataclass
 class FixtureRegistry:
     """Registry of available fixture files for a family."""
+
     family: str
     fixtures: list[FixtureEntry] = field(default_factory=list)
 
     def has_fixture(self, filename: str) -> bool:
-        return any(
-            f.filename == filename and f.available
-            for f in self.fixtures
-        )
+        return any(f.filename == filename and f.available for f in self.fixtures)
 
     def get_available_fixtures(self) -> list[FixtureEntry]:
         return [f for f in self.fixtures if f.available]
@@ -73,37 +72,46 @@ def build_fixture_registry(
                 files, failure_reason = _fetch_github_file_listing(owner, repo, branch, path)
                 if files is not None:
                     for fname in files:
-                        registry.add_fixture(FixtureEntry(
-                            filename=fname,
-                            source_type=source_type,
-                            source_path=f"{provenance}:{path}/{fname}",
-                            provenance=provenance,
-                            available=True,
-                        ))
+                        registry.add_fixture(
+                            FixtureEntry(
+                                filename=fname,
+                                source_type=source_type,
+                                source_path=f"{provenance}:{path}/{fname}",
+                                provenance=provenance,
+                                available=True,
+                            )
+                        )
                     continue
                 # API failed — register path as degraded entry so callers know the source is unavailable
                 logger.warning(
                     "GitHub API unavailable for %s/%s:%s — reason: %s. "
                     "Set GITHUB_TOKEN to avoid rate limits. Registering path as unavailable.",
-                    owner, repo, path, failure_reason or "unknown",
+                    owner,
+                    repo,
+                    path,
+                    failure_reason or "unknown",
                 )
-                registry.add_fixture(FixtureEntry(
+                registry.add_fixture(
+                    FixtureEntry(
+                        filename=path,
+                        source_type=source_type,
+                        source_path=f"{provenance}:{path}",
+                        provenance=provenance,
+                        available=False,
+                        unavailable_reason=failure_reason or "github_api_unavailable",
+                    )
+                )
+                continue
+
+            registry.add_fixture(
+                FixtureEntry(
                     filename=path,
                     source_type=source_type,
                     source_path=f"{provenance}:{path}",
                     provenance=provenance,
-                    available=False,
-                    unavailable_reason=failure_reason or "github_api_unavailable",
-                ))
-                continue
-
-            registry.add_fixture(FixtureEntry(
-                filename=path,
-                source_type=source_type,
-                source_path=f"{provenance}:{path}",
-                provenance=provenance,
-                available=source_type != "github",
-            ))
+                    available=source_type != "github",
+                )
+            )
 
     logger.info("Fixture registry built for %s: %d entries", family, len(registry.fixtures))
     return registry
@@ -140,7 +148,10 @@ def write_fixture_registry(
 
 
 def _fetch_github_file_listing(
-    owner: str, repo: str, branch: str, path: str,
+    owner: str,
+    repo: str,
+    branch: str,
+    path: str,
 ) -> tuple[list[str] | None, str | None]:
     """Fetch file listing from GitHub API with fallback chain.
 
@@ -193,24 +204,26 @@ def _fetch_github_file_listing(
 
 
 def _try_contents_api(
-    owner: str, repo: str, branch: str, path: str, headers: dict,
+    owner: str,
+    repo: str,
+    branch: str,
+    path: str,
+    headers: dict,
 ) -> tuple[list[str] | None, str | None]:
     """Try GitHub Contents API. Returns (files, failure_reason)."""
     import requests
+
     url = f"https://api.github.com/repos/{owner}/{repo}/contents/{path}?ref={branch}"
     try:
         resp = requests.get(url, headers=headers, timeout=15)
         if resp.status_code == 403:
             token_present = "Authorization" in headers
-            reason = (
-                "github_api_403_rate_limited"
-                if not token_present
-                else "github_api_403_forbidden"
-            )
+            reason = "github_api_403_rate_limited" if not token_present else "github_api_403_forbidden"
             logger.warning(
                 "GitHub Contents API returned 403 for %s — %s.",
                 url,
-                "no GITHUB_TOKEN set (rate limited)" if not token_present
+                "no GITHUB_TOKEN set (rate limited)"
+                if not token_present
                 else "access forbidden (check token permissions)",
             )
             return None, reason
@@ -227,10 +240,15 @@ def _try_contents_api(
 
 
 def _try_trees_api(
-    owner: str, repo: str, branch: str, path: str, headers: dict,
+    owner: str,
+    repo: str,
+    branch: str,
+    path: str,
+    headers: dict,
 ) -> tuple[list[str] | None, str | None]:
     """Try GitHub Trees API (recursive) and filter to path prefix. Returns (files, failure_reason)."""
     import requests
+
     url = f"https://api.github.com/repos/{owner}/{repo}/git/trees/{branch}?recursive=1"
     try:
         resp = requests.get(url, headers=headers, timeout=30)
@@ -246,7 +264,7 @@ def _try_trees_api(
         files = []
         for item in tree:
             if item.get("type") == "blob" and item.get("path", "").startswith(prefix):
-                rel = item["path"][len(prefix):]
+                rel = item["path"][len(prefix) :]
                 if "/" not in rel:  # Only direct children
                     files.append(rel)
         return (files if files else None), None
@@ -295,13 +313,15 @@ def load_fixture_registry(manifests_dir: Path) -> FixtureRegistry | None:
 
     registry = FixtureRegistry(family=data.get("family", "unknown"))
     for entry in data.get("fixtures", []):
-        registry.add_fixture(FixtureEntry(
-            filename=entry["filename"],
-            source_type=entry["source_type"],
-            source_path=entry["source_path"],
-            provenance=entry["provenance"],
-            available=entry.get("available", True),
-            unavailable_reason=entry.get("unavailable_reason"),
-        ))
+        registry.add_fixture(
+            FixtureEntry(
+                filename=entry["filename"],
+                source_type=entry["source_type"],
+                source_path=entry["source_path"],
+                provenance=entry["provenance"],
+                available=entry.get("available", True),
+                unavailable_reason=entry.get("unavailable_reason"),
+            )
+        )
 
     return registry

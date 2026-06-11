@@ -7,12 +7,7 @@ from pathlib import Path
 
 import jsonschema
 
-_SCHEMA_PATH = (
-    Path(__file__).resolve().parents[3]
-    / "pipeline"
-    / "schemas"
-    / "family-config.schema.json"
-)
+_SCHEMA_PATH = Path(__file__).resolve().parents[3] / "pipeline" / "schemas" / "family-config.schema.json"
 
 _schema_cache: dict | None = None
 

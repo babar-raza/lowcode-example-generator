@@ -1,4 +1,5 @@
 """Family-specific template definitions for dry-run example generation."""
+
 from dataclasses import dataclass, field
 from typing import Optional
 

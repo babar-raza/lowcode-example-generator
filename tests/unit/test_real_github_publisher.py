@@ -35,6 +35,7 @@ from plugin_examples.publisher.publisher import PublishResult, publish_examples
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _make_evidence_dir(tmp_path: Path, family: str = "cells") -> Path:
     """Create minimal evidence files so _verify_evidence passes."""
     latest = tmp_path / "verification" / "latest"
@@ -75,6 +76,7 @@ def _examples():
 # Test 1: rejects without approval token
 # ---------------------------------------------------------------------------
 
+
 class TestRealPublisherRejectsWithoutApproval:
     def test_real_publisher_rejects_without_approval(self, tmp_path):
         """publish_examples must return blocked_live_pr_approval_required when no token."""
@@ -100,6 +102,7 @@ class TestRealPublisherRejectsWithoutApproval:
 # Test 2: dry-run returns dry_run status (not published)
 # ---------------------------------------------------------------------------
 
+
 class TestRealPublisherDryRunStatus:
     def test_real_publisher_dry_run_returns_dry_run_status(self, tmp_path):
         """publish_examples with dry_run=True must return status='dry_run', never 'published'."""
@@ -124,6 +127,7 @@ class TestRealPublisherDryRunStatus:
 # Test 3: rejects main branch
 # ---------------------------------------------------------------------------
 
+
 class TestRealPublisherRejectsMainBranch:
     def test_real_publisher_rejects_main_branch(self, tmp_path):
         """create_github_pr must raise PublishingError when branch_name == base_branch."""
@@ -147,6 +151,7 @@ class TestRealPublisherRejectsMainBranch:
 # ---------------------------------------------------------------------------
 # Test 4: requires family-specific target
 # ---------------------------------------------------------------------------
+
 
 class TestRealPublisherFamilySpecificTarget:
     def test_real_publisher_requires_family_specific_target(self, tmp_path):
@@ -178,6 +183,7 @@ class TestRealPublisherFamilySpecificTarget:
 # Test 5: requires validation evidence
 # ---------------------------------------------------------------------------
 
+
 class TestRealPublisherRequiresEvidence:
     def test_real_publisher_requires_validation_evidence(self, tmp_path):
         """publish_examples must block when evidence files are missing."""
@@ -208,6 +214,7 @@ class TestRealPublisherRequiresEvidence:
 # Test 6: branch name format
 # ---------------------------------------------------------------------------
 
+
 class TestRealPublisherBranchName:
     def test_real_publisher_builds_branch_name(self):
         """build_pr must generate branch name in 'plugin-examples/{family}/{run_id}' format."""
@@ -225,6 +232,7 @@ class TestRealPublisherBranchName:
 # ---------------------------------------------------------------------------
 # Test 7: PR body contains required sections
 # ---------------------------------------------------------------------------
+
 
 class TestRealPublisherPRBody:
     def test_real_publisher_builds_pr_body_with_evidence(self):
@@ -264,6 +272,7 @@ class TestRealPublisherPRBody:
 # Test 8: dry-run performs no remote writes
 # ---------------------------------------------------------------------------
 
+
 class TestRealPublisherDryRunNoWrites:
     def test_real_publisher_dry_run_performs_no_remote_writes(self, tmp_path):
         """publish_examples dry_run=True must not call _api_request at all."""
@@ -288,6 +297,7 @@ class TestRealPublisherDryRunNoWrites:
 # ---------------------------------------------------------------------------
 # Test 9: live mode calls API steps in correct order
 # ---------------------------------------------------------------------------
+
 
 class TestRealPublisherAPICallOrder:
     def test_real_publisher_live_calls_create_branch_commit_push_pr_in_order(self, tmp_path):
@@ -344,15 +354,12 @@ class TestRealPublisherAPICallOrder:
 
         # Verify ordering: GET ref, GET commit, POST blobs..., POST tree, POST commit, POST ref, POST pulls
         methods = [s.split(":")[0] for s in call_sequence]
-        assert methods[0] == "GET"   # get base branch ref
-        assert methods[1] == "GET"   # get commit tree SHA
+        assert methods[0] == "GET"  # get base branch ref
+        assert methods[1] == "GET"  # get commit tree SHA
         # All blobs must precede the tree creation
         blob_indices = [i for i, s in enumerate(call_sequence) if "git/blobs" in s]
         tree_indices = [i for i, s in enumerate(call_sequence) if "git/trees" in s]
-        commit_post_indices = [
-            i for i, s in enumerate(call_sequence)
-            if "git/commits" in s and s.startswith("POST")
-        ]
+        commit_post_indices = [i for i, s in enumerate(call_sequence) if "git/commits" in s and s.startswith("POST")]
         ref_post_indices = [i for i, s in enumerate(call_sequence) if "git/refs" in s and s.startswith("POST")]
         pr_indices = [i for i, s in enumerate(call_sequence) if "/pulls" in s]
 
@@ -375,6 +382,7 @@ class TestRealPublisherAPICallOrder:
 # ---------------------------------------------------------------------------
 # Test 10: token never serialized
 # ---------------------------------------------------------------------------
+
 
 class TestRealPublisherTokenSafety:
     def test_real_publisher_never_serializes_token(self, tmp_path):
@@ -423,6 +431,7 @@ class TestRealPublisherTokenSafety:
 # Test 11: stub removed — publish_examples blocks without package_path
 # ---------------------------------------------------------------------------
 
+
 class TestStubRemoved:
     def test_stub_published_status_removed(self, tmp_path):
         """publish_examples must not return status='published' when package_path is None.
@@ -450,6 +459,5 @@ class TestStubRemoved:
         )
         assert result.status == "blocked"
         assert "blocked_real_publisher_not_implemented" in (result.blocked_reason or ""), (
-            f"Expected 'blocked_real_publisher_not_implemented' in blocked_reason, "
-            f"got: {result.blocked_reason!r}"
+            f"Expected 'blocked_real_publisher_not_implemented' in blocked_reason, " f"got: {result.blocked_reason!r}"
         )

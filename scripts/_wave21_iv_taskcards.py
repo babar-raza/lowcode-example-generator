@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 # _wave21_iv_taskcards.py — Lane N (IV + adversarial review) + taskcards + closeout
 
-import json, pathlib, subprocess, hashlib, zipfile, datetime, sys
+import json
+import pathlib
+import subprocess
+import hashlib
+import zipfile
+import datetime
+import sys
 
 SPRINT_ID = "lowcode-plugin-canonical-package-wave21-20260608"
 SPRINT_ID_LONG = "LOWCODE-PLUGIN-CANONICAL-PACKAGE-WAVE21-NONLOWCODE-PIPELINE-PARITY-HEAL-EXECUTION-VERIFICATION-MEGA-TRAIN-001"

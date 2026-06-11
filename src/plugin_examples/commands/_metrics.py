@@ -9,30 +9,24 @@ from pathlib import Path
 
 def _add_metrics_flags(parser: argparse.ArgumentParser) -> None:
     """Add shared metrics flags to any subparser."""
-    parser.add_argument("--metrics", action="store_true",
-                        help="Enable metrics collection (dry-run by default)")
-    parser.add_argument("--metrics-post", action="store_true",
-                        help="POST metrics to API (requires AGENT_METRICS_TOKEN)")
-    parser.add_argument("--metrics-job-type", metavar="TYPE",
-                        help="Override job_type (e.g., 'Test' for test rows)")
-    parser.add_argument("--metrics-strict", action="store_true",
-                        help="Fail pipeline on metrics errors")
-    parser.add_argument("--metrics-force-repost", action="store_true",
-                        help="Bypass ledger duplicate check")
-    parser.add_argument("--metrics-config", metavar="PATH",
-                        help="Override metrics config path (default: pipeline/configs/metrics.yml)")
+    parser.add_argument("--metrics", action="store_true", help="Enable metrics collection (dry-run by default)")
+    parser.add_argument(
+        "--metrics-post", action="store_true", help="POST metrics to API (requires AGENT_METRICS_TOKEN)"
+    )
+    parser.add_argument("--metrics-job-type", metavar="TYPE", help="Override job_type (e.g., 'Test' for test rows)")
+    parser.add_argument("--metrics-strict", action="store_true", help="Fail pipeline on metrics errors")
+    parser.add_argument("--metrics-force-repost", action="store_true", help="Bypass ledger duplicate check")
+    parser.add_argument(
+        "--metrics-config", metavar="PATH", help="Override metrics config path (default: pipeline/configs/metrics.yml)"
+    )
 
 
-def _create_metrics_session(args, *, command: str, family: str = "",
-                             repo_root: Path | None = None):
+def _create_metrics_session(args, *, command: str, family: str = "", repo_root: Path | None = None):
     """Create a MetricsSession from CLI args if metrics are enabled.
 
     Returns (session, collector) or (None, None).
     """
-    metrics_enabled = (
-        getattr(args, "metrics", False)
-        or os.environ.get("AGENT_METRICS_ENABLED", "").lower() == "true"
-    )
+    metrics_enabled = getattr(args, "metrics", False) or os.environ.get("AGENT_METRICS_ENABLED", "").lower() == "true"
     if not metrics_enabled:
         return None, None
 
@@ -50,6 +44,7 @@ def _create_metrics_session(args, *, command: str, family: str = "",
         repo_root = Path(__file__).resolve().parents[3]
 
     from datetime import datetime, timezone
+
     ts = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
     run_id = f"metrics-{command}-{family or 'global'}-{ts}"
 

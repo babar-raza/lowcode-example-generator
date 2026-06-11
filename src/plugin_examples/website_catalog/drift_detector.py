@@ -39,19 +39,19 @@ class DriftDetector:
 
 # ── Catalog-level drift ────────────────────────────────────────────────────────
 
+
 @dataclass
 class DriftReport:
     """Comparison between a prior discovery evidence run and the current catalog."""
-    added: list[str]         # new plugin page URLs not in prior run
-    removed: list[str]       # URLs that existed in prior run but not current
-    changed: list[str]       # URLs where page_hash changed
-    unchanged: list[str]     # URLs with matching page_hash
+
+    added: list[str]  # new plugin page URLs not in prior run
+    removed: list[str]  # URLs that existed in prior run but not current
+    changed: list[str]  # URLs where page_hash changed
+    unchanged: list[str]  # URLs with matching page_hash
     has_drift: bool
     run_id: str
-    compared_against: str    # run_id of prior evidence, or "NONE" if no prior
-    generated_at: str = field(
-        default_factory=lambda: datetime.now(timezone.utc).isoformat(timespec="seconds")
-    )
+    compared_against: str  # run_id of prior evidence, or "NONE" if no prior
+    generated_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat(timespec="seconds"))
 
     def to_dict(self) -> dict:
         return {
@@ -103,21 +103,15 @@ def detect_catalog_drift(
             pass
 
     current_hashes: dict[str, str] = {
-        plugin.get("url", ""): plugin.get("page_hash", "")
-        for plugin in current_plugins
-        if plugin.get("url")
+        plugin.get("url", ""): plugin.get("page_hash", "") for plugin in current_plugins if plugin.get("url")
     }
 
     added = [u for u in current_hashes if u not in prior_hashes]
     removed = [u for u in prior_hashes if u not in current_hashes]
     changed = [
-        u for u, h in current_hashes.items()
-        if u in prior_hashes and prior_hashes[u] and h and prior_hashes[u] != h
+        u for u, h in current_hashes.items() if u in prior_hashes and prior_hashes[u] and h and prior_hashes[u] != h
     ]
-    unchanged = [
-        u for u in current_hashes
-        if u in prior_hashes and prior_hashes.get(u) == current_hashes[u]
-    ]
+    unchanged = [u for u in current_hashes if u in prior_hashes and prior_hashes.get(u) == current_hashes[u]]
 
     return DriftReport(
         added=added,

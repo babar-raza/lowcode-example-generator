@@ -317,5 +317,3 @@ class EvidenceValidator(
         to confirm rule 21 also passes.
         """
         return self.validate(exclude_rule_ids={self.SELF_REFERENCE_RULE_ID})
-
-

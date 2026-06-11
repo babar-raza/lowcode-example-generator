@@ -13,7 +13,8 @@ def add_parser(subparsers):
         help="Generate docs/development/open-taskcard-closure-matrix.md from JSON matrix (read-only)",
     )
     parser.add_argument(
-        "--promote-latest", action="store_true",
+        "--promote-latest",
+        action="store_true",
         help="No-op (included for CLI consistency; output always written to docs/development/)",
     )
 
@@ -29,7 +30,9 @@ def handle(args) -> int:
 
     repo_root = _Path(__file__).resolve().parents[3]
     msession, mcollector = _create_metrics_session(
-        args, command="sync-taskcard-docs", repo_root=repo_root,
+        args,
+        command="sync-taskcard-docs",
+        repo_root=repo_root,
     )
     matrix_path = repo_root / "workspace" / "verification" / "latest" / "open-taskcard-closure-matrix.json"
     output_path = repo_root / "docs" / "development" / "open-taskcard-closure-matrix.md"
@@ -102,7 +105,9 @@ def handle(args) -> int:
     print(f"  Source: {matrix_path}")
     print(f"  Output: {output_path}")
     _finalize_metrics_session(
-        msession, items_discovered=total, items_succeeded=total, items_failed=0,
+        msession,
+        items_discovered=total,
+        items_succeeded=total,
+        items_failed=0,
     )
     return 0
-

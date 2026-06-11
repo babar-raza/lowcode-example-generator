@@ -27,21 +27,25 @@ class TestInferFormatFromCode:
     def test_output_docx(self):
         class FakeExample:
             code = 'options.AddOutput(new FileDataSource("output.docx"));'
+
         assert _infer_manifest_format_from_code(FakeExample()) == ".docx"
 
     def test_output_pdf(self):
         class FakeExample:
             code = 'Converter.Process(input, "output.pdf");'
+
         assert _infer_manifest_format_from_code(FakeExample()) == ".pdf"
 
     def test_no_output_returns_none(self):
         class FakeExample:
             code = "Console.WriteLine('Hello');"
+
         assert _infer_manifest_format_from_code(FakeExample()) is None
 
     def test_no_code_returns_none(self):
         class FakeExample:
             code = ""
+
         assert _infer_manifest_format_from_code(FakeExample()) is None
 
 

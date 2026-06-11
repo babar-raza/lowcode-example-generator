@@ -12,6 +12,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class NamespaceMatch:
     """A single matched namespace with counts."""
+
     namespace: str
     matched_by_pattern: str
     public_type_count: int
@@ -21,6 +22,7 @@ class NamespaceMatch:
 @dataclass
 class DetectionResult:
     """Result of plugin namespace detection."""
+
     matched_namespaces: list[NamespaceMatch] = field(default_factory=list)
     unmatched_patterns: list[dict] = field(default_factory=list)
     public_plugin_type_count: int = 0
@@ -46,9 +48,7 @@ def detect_plugin_namespaces(
     Returns:
         DetectionResult with matched namespaces, counts, and unmatched patterns.
     """
-    catalog_namespaces = {
-        ns["namespace"]: ns for ns in catalog.get("namespaces", [])
-    }
+    catalog_namespaces = {ns["namespace"]: ns for ns in catalog.get("namespaces", [])}
 
     result = DetectionResult()
     matched_ns_names: set[str] = set()
@@ -73,14 +73,15 @@ def detect_plugin_namespaces(
                 pattern_matched = True
 
         if not pattern_matched:
-            result.unmatched_patterns.append({
-                "pattern": pattern,
-                "reason": f"No namespace in catalog matches pattern '{pattern}'",
-            })
+            result.unmatched_patterns.append(
+                {
+                    "pattern": pattern,
+                    "reason": f"No namespace in catalog matches pattern '{pattern}'",
+                }
+            )
 
     logger.info(
-        "Plugin detection: %d matched namespaces, %d unmatched patterns, "
-        "%d plugin types, %d plugin methods",
+        "Plugin detection: %d matched namespaces, %d unmatched patterns, " "%d plugin types, %d plugin methods",
         len(result.matched_namespaces),
         len(result.unmatched_patterns),
         result.public_plugin_type_count,

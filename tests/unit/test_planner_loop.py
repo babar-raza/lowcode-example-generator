@@ -27,9 +27,15 @@ _REPO_ROOT = Path(__file__).resolve().parents[2]
 
 class TestCycleResultModel:
     def test_cycle_result_to_dict(self):
-        cr = CycleResult(cycle=1, generated_from_head="abc1234",
-                         action_count=5, safe_count=3, blocked_count=2,
-                         executed=["A", "B"], verdict="EXECUTED_2_ACTIONS")
+        cr = CycleResult(
+            cycle=1,
+            generated_from_head="abc1234",
+            action_count=5,
+            safe_count=3,
+            blocked_count=2,
+            executed=["A", "B"],
+            verdict="EXECUTED_2_ACTIONS",
+        )
         d = cr.to_dict()
         assert d["cycle"] == 1
         assert d["executed"] == ["A", "B"]
@@ -48,7 +54,10 @@ class TestExecutionLoop:
         with tempfile.TemporaryDirectory() as tmpdir:
             evidence_dir = Path(tmpdir) / "evidence"
             result = run_execution_loop(
-                _REPO_ROOT, evidence_dir, max_cycles=2, dry_run_remote=True,
+                _REPO_ROOT,
+                evidence_dir,
+                max_cycles=2,
+                dry_run_remote=True,
             )
             assert len(result.cycles) >= 1
             assert result.total_executed >= 1
@@ -58,7 +67,10 @@ class TestExecutionLoop:
         with tempfile.TemporaryDirectory() as tmpdir:
             evidence_dir = Path(tmpdir) / "evidence"
             result = run_execution_loop(
-                _REPO_ROOT, evidence_dir, max_cycles=1, dry_run_remote=True,
+                _REPO_ROOT,
+                evidence_dir,
+                max_cycles=1,
+                dry_run_remote=True,
             )
             cycle_json = evidence_dir / "planner-cycle-01.json"
             cycle_md = evidence_dir / "planner-cycle-01.md"
@@ -71,7 +83,10 @@ class TestExecutionLoop:
         with tempfile.TemporaryDirectory() as tmpdir:
             evidence_dir = Path(tmpdir) / "evidence"
             result = run_execution_loop(
-                _REPO_ROOT, evidence_dir, max_cycles=1, dry_run_remote=True,
+                _REPO_ROOT,
+                evidence_dir,
+                max_cycles=1,
+                dry_run_remote=True,
             )
             # PDF_MERGE_PRS and PDF_PR_CONFLICT_RECOVERY should be deferred
             all_deferred_ids = []
@@ -88,7 +103,10 @@ class TestExecutionLoop:
         with tempfile.TemporaryDirectory() as tmpdir:
             evidence_dir = Path(tmpdir) / "evidence"
             result = run_execution_loop(
-                _REPO_ROOT, evidence_dir, max_cycles=5, dry_run_remote=True,
+                _REPO_ROOT,
+                evidence_dir,
+                max_cycles=5,
+                dry_run_remote=True,
             )
             assert result.stop_reason in (
                 "exhausted_safe_actions",
@@ -104,7 +122,10 @@ class TestExecutionLoop:
             with tempfile.TemporaryDirectory() as tmpdir:
                 evidence_dir = Path(tmpdir) / "evidence"
                 result = run_execution_loop(
-                    _REPO_ROOT, evidence_dir, max_cycles=1, dry_run_remote=True,
+                    _REPO_ROOT,
+                    evidence_dir,
+                    max_cycles=1,
+                    dry_run_remote=True,
                 )
                 all_executed = []
                 for c in result.cycles:
@@ -115,7 +136,10 @@ class TestExecutionLoop:
         with tempfile.TemporaryDirectory() as tmpdir:
             evidence_dir = Path(tmpdir) / "evidence"
             result = run_execution_loop(
-                _REPO_ROOT, evidence_dir, max_cycles=1, dry_run_remote=True,
+                _REPO_ROOT,
+                evidence_dir,
+                max_cycles=1,
+                dry_run_remote=True,
             )
             assert result.final_board is not None
             assert result.final_board.generated_from_head != ""
@@ -126,7 +150,10 @@ class TestExecutionLoop:
         with tempfile.TemporaryDirectory() as tmpdir:
             evidence_dir = Path(tmpdir) / "evidence"
             result = run_execution_loop(
-                _REPO_ROOT, evidence_dir, max_cycles=1, dry_run_remote=True,
+                _REPO_ROOT,
+                evidence_dir,
+                max_cycles=1,
+                dry_run_remote=True,
             )
             all_deferred = []
             for c in result.cycles:
@@ -158,27 +185,36 @@ class TestBoardFingerprint:
             generated_from_head="abc123",
             git_dirty_summary="clean",
             actions=[
-                Action(id="A", family="x", type="T", current_state="s", desired_state="d",
-                       safe_to_execute_now=True, gate_present=True),
+                Action(
+                    id="A",
+                    family="x",
+                    type="T",
+                    current_state="s",
+                    desired_state="d",
+                    safe_to_execute_now=True,
+                    gate_present=True,
+                ),
             ],
         )
         assert board_fingerprint(board) == board_fingerprint(board)
 
     def test_different_generated_at_same_fingerprint(self):
         """Volatile fields like generated_at must not affect fingerprint."""
-        b1 = ActionBoard(generated_at="2026-01-01", generated_from_head="abc",
-                         git_dirty_summary="clean", actions=[])
-        b2 = ActionBoard(generated_at="2026-12-31", generated_from_head="abc",
-                         git_dirty_summary="clean", actions=[])
+        b1 = ActionBoard(generated_at="2026-01-01", generated_from_head="abc", git_dirty_summary="clean", actions=[])
+        b2 = ActionBoard(generated_at="2026-12-31", generated_from_head="abc", git_dirty_summary="clean", actions=[])
         assert board_fingerprint(b1) == board_fingerprint(b2)
 
     def test_different_actions_different_fingerprint(self):
-        b1 = ActionBoard(generated_from_head="abc", git_dirty_summary="clean",
-                         actions=[Action(id="A", family="x", type="T",
-                                         current_state="s1", desired_state="d")])
-        b2 = ActionBoard(generated_from_head="abc", git_dirty_summary="clean",
-                         actions=[Action(id="A", family="x", type="T",
-                                         current_state="s2", desired_state="d")])
+        b1 = ActionBoard(
+            generated_from_head="abc",
+            git_dirty_summary="clean",
+            actions=[Action(id="A", family="x", type="T", current_state="s1", desired_state="d")],
+        )
+        b2 = ActionBoard(
+            generated_from_head="abc",
+            git_dirty_summary="clean",
+            actions=[Action(id="A", family="x", type="T", current_state="s2", desired_state="d")],
+        )
         assert board_fingerprint(b1) != board_fingerprint(b2)
 
     def test_fingerprint_is_hex_string(self):
@@ -194,7 +230,10 @@ class TestIdempotencyStop:
         with tempfile.TemporaryDirectory() as tmpdir:
             evidence_dir = Path(tmpdir) / "evidence"
             result = run_execution_loop(
-                _REPO_ROOT, evidence_dir, max_cycles=5, dry_run_remote=True,
+                _REPO_ROOT,
+                evidence_dir,
+                max_cycles=5,
+                dry_run_remote=True,
             )
             # With current read-only handlers, loop should stop at cycle 2
             # because cycle 2's fingerprint matches cycle 1 and no handler changed state
@@ -206,7 +245,10 @@ class TestIdempotencyStop:
         with tempfile.TemporaryDirectory() as tmpdir:
             evidence_dir = Path(tmpdir) / "evidence"
             result = run_execution_loop(
-                _REPO_ROOT, evidence_dir, max_cycles=5, dry_run_remote=True,
+                _REPO_ROOT,
+                evidence_dir,
+                max_cycles=5,
+                dry_run_remote=True,
             )
             # Should execute actions in cycle 1, detect no-change in cycle 2, stop
             assert len(result.cycles) <= 3
@@ -216,7 +258,10 @@ class TestIdempotencyStop:
         with tempfile.TemporaryDirectory() as tmpdir:
             evidence_dir = Path(tmpdir) / "evidence"
             result = run_execution_loop(
-                _REPO_ROOT, evidence_dir, max_cycles=5, dry_run_remote=True,
+                _REPO_ROOT,
+                evidence_dir,
+                max_cycles=5,
+                dry_run_remote=True,
             )
             if len(result.cycles) >= 2:
                 cycle2 = result.cycles[1]
@@ -230,7 +275,10 @@ class TestIdempotencyStop:
         with tempfile.TemporaryDirectory() as tmpdir:
             evidence_dir = Path(tmpdir) / "evidence"
             result = run_execution_loop(
-                _REPO_ROOT, evidence_dir, max_cycles=5, dry_run_remote=True,
+                _REPO_ROOT,
+                evidence_dir,
+                max_cycles=5,
+                dry_run_remote=True,
             )
             # Even though PDF_MERGE_PRS is blocked, loop should stop
             assert result.stop_reason in ("stopped_no_change", "exhausted_safe_actions")
@@ -239,7 +287,10 @@ class TestIdempotencyStop:
         with tempfile.TemporaryDirectory() as tmpdir:
             evidence_dir = Path(tmpdir) / "evidence"
             result = run_execution_loop(
-                _REPO_ROOT, evidence_dir, max_cycles=2, dry_run_remote=True,
+                _REPO_ROOT,
+                evidence_dir,
+                max_cycles=2,
+                dry_run_remote=True,
             )
             for cycle in result.cycles:
                 d = cycle.to_dict()
@@ -250,7 +301,10 @@ class TestIdempotencyStop:
         with tempfile.TemporaryDirectory() as tmpdir:
             evidence_dir = Path(tmpdir) / "evidence"
             result = run_execution_loop(
-                _REPO_ROOT, evidence_dir, max_cycles=2, dry_run_remote=True,
+                _REPO_ROOT,
+                evidence_dir,
+                max_cycles=2,
+                dry_run_remote=True,
             )
             for cycle in result.cycles:
                 d = cycle.to_dict()
@@ -268,12 +322,20 @@ class TestIdempotencyStop:
 
     def test_stop_reason_values(self):
         """Stop reason must be one of the defined values."""
-        valid = {"exhausted_safe_actions", "stopped_no_change", "max_cycles reached",
-                 "loop completed normally", "blocked_by_approval_only"}
+        valid = {
+            "exhausted_safe_actions",
+            "stopped_no_change",
+            "max_cycles reached",
+            "loop completed normally",
+            "blocked_by_approval_only",
+        }
         with tempfile.TemporaryDirectory() as tmpdir:
             evidence_dir = Path(tmpdir) / "evidence"
             result = run_execution_loop(
-                _REPO_ROOT, evidence_dir, max_cycles=5, dry_run_remote=True,
+                _REPO_ROOT,
+                evidence_dir,
+                max_cycles=5,
+                dry_run_remote=True,
             )
             assert result.stop_reason in valid
 
@@ -285,7 +347,10 @@ class TestDirtyStateConsistency:
         with tempfile.TemporaryDirectory() as tmpdir:
             evidence_dir = Path(tmpdir) / "evidence"
             result = run_execution_loop(
-                _REPO_ROOT, evidence_dir, max_cycles=2, dry_run_remote=True,
+                _REPO_ROOT,
+                evidence_dir,
+                max_cycles=2,
+                dry_run_remote=True,
             )
             d = result.to_dict()
             assert "final_dirty_state" in d
@@ -297,7 +362,10 @@ class TestDirtyStateConsistency:
         with tempfile.TemporaryDirectory() as tmpdir:
             evidence_dir = Path(tmpdir) / "evidence"
             result = run_execution_loop(
-                _REPO_ROOT, evidence_dir, max_cycles=2, dry_run_remote=True,
+                _REPO_ROOT,
+                evidence_dir,
+                max_cycles=2,
+                dry_run_remote=True,
             )
             loop_ds = result.to_dict()["final_dirty_state"]
             board_ds = result.final_board.dirty_categories
@@ -305,16 +373,19 @@ class TestDirtyStateConsistency:
 
     def test_evidence_only_dirty_is_non_actionable(self):
         from plugin_examples.portfolio_action_planner import DirtyState
+
         ds = DirtyState(evidence=["workspace/foo.json", "workspace/bar.md"])
         assert ds.actionable_count == 0
 
     def test_test_dirty_is_actionable(self):
         from plugin_examples.portfolio_action_planner import DirtyState
+
         ds = DirtyState(test=["tests/unit/test_foo.py"])
         assert ds.actionable_count == 1
 
     def test_dirty_state_summary_matches_dict(self):
         from plugin_examples.portfolio_action_planner import DirtyState
+
         ds = DirtyState(source=["src/a.py"], evidence=["workspace/b.json"])
         d = ds.to_dict()
         assert d["source_dirty_count"] == 1
@@ -324,38 +395,86 @@ class TestDirtyStateConsistency:
 
 class TestBlockedActionsReport:
     def test_report_excludes_safe_actions(self):
-        board = ActionBoard(actions=[
-            Action(id="SAFE_ONE", family="cells", type="PORTFOLIO_CONSERVATION_CHECK",
-                   current_state="pending", desired_state="done", safe_to_execute_now=True),
-            Action(id="BLOCKED_ONE", family="pdf", type="MERGE_READY_PR",
-                   current_state="pending", desired_state="done", safe_to_execute_now=False,
-                   blocker="merge approval gate absent", taskcard_id="TC-PDF-MERGE"),
-        ])
+        board = ActionBoard(
+            actions=[
+                Action(
+                    id="SAFE_ONE",
+                    family="cells",
+                    type="PORTFOLIO_CONSERVATION_CHECK",
+                    current_state="pending",
+                    desired_state="done",
+                    safe_to_execute_now=True,
+                ),
+                Action(
+                    id="BLOCKED_ONE",
+                    family="pdf",
+                    type="MERGE_READY_PR",
+                    current_state="pending",
+                    desired_state="done",
+                    safe_to_execute_now=False,
+                    blocker="merge approval gate absent",
+                    taskcard_id="TC-PDF-MERGE",
+                ),
+            ]
+        )
         report = generate_blocked_actions_report(board)
         assert len(report) == 1
         assert report[0]["action_id"] == "BLOCKED_ONE"
 
     def test_report_has_required_fields(self):
-        board = ActionBoard(actions=[
-            Action(id="FORMIMPORTER_RETEST", family="pdf", type="FORMIMPORTER_RETEST",
-                   current_state="blocked", desired_state="retested", safe_to_execute_now=False,
-                   blocker="requires Aspose.PDF > 26.5.0", taskcard_id="TC-PDF-FORMIMPORTER-RETEST"),
-        ])
+        board = ActionBoard(
+            actions=[
+                Action(
+                    id="FORMIMPORTER_RETEST",
+                    family="pdf",
+                    type="FORMIMPORTER_RETEST",
+                    current_state="blocked",
+                    desired_state="retested",
+                    safe_to_execute_now=False,
+                    blocker="requires Aspose.PDF > 26.5.0",
+                    taskcard_id="TC-PDF-FORMIMPORTER-RETEST",
+                ),
+            ]
+        )
         report = generate_blocked_actions_report(board)
         entry = report[0]
-        required_keys = {"action_id", "action_type", "family", "safe", "blocker",
-                         "approval_env", "taskcard_id", "retry_condition"}
+        required_keys = {
+            "action_id",
+            "action_type",
+            "family",
+            "safe",
+            "blocker",
+            "approval_env",
+            "taskcard_id",
+            "retry_condition",
+        }
         assert required_keys <= set(entry.keys())
 
     def test_report_no_unknown_labels(self):
-        board = ActionBoard(actions=[
-            Action(id="FORMIMPORTER_RETEST", family="pdf", type="FORMIMPORTER_RETEST",
-                   current_state="blocked", desired_state="retested", safe_to_execute_now=False,
-                   blocker="requires Aspose.PDF > 26.5.0", taskcard_id="TC-PDF-FORMIMPORTER-RETEST"),
-            Action(id="OCR_DEPENDENCY_RECHECK", family="ocr", type="OCR_DEPENDENCY_RECHECK",
-                   current_state="blocked", desired_state="retested", safe_to_execute_now=False,
-                   blocker="internal Aspose assembly", taskcard_id="TC-OCR-REFLECTION"),
-        ])
+        board = ActionBoard(
+            actions=[
+                Action(
+                    id="FORMIMPORTER_RETEST",
+                    family="pdf",
+                    type="FORMIMPORTER_RETEST",
+                    current_state="blocked",
+                    desired_state="retested",
+                    safe_to_execute_now=False,
+                    blocker="requires Aspose.PDF > 26.5.0",
+                    taskcard_id="TC-PDF-FORMIMPORTER-RETEST",
+                ),
+                Action(
+                    id="OCR_DEPENDENCY_RECHECK",
+                    family="ocr",
+                    type="OCR_DEPENDENCY_RECHECK",
+                    current_state="blocked",
+                    desired_state="retested",
+                    safe_to_execute_now=False,
+                    blocker="internal Aspose assembly",
+                    taskcard_id="TC-OCR-REFLECTION",
+                ),
+            ]
+        )
         report = generate_blocked_actions_report(board)
         for entry in report:
             assert entry["blocker"] != "unknown"
@@ -365,15 +484,21 @@ class TestBlockedActionsReport:
     def test_retry_conditions_cover_all_known_actions(self):
         known_actions = set(_ACTION_HANDLERS.keys()) | _APPROVAL_GATED_TYPES
         for action_id in known_actions:
-            assert action_id in _RETRY_CONDITIONS, (
-                f"Missing retry condition for {action_id}"
-            )
+            assert action_id in _RETRY_CONDITIONS, f"Missing retry condition for {action_id}"
 
     def test_report_generates_taskcard_id_if_missing(self):
-        board = ActionBoard(actions=[
-            Action(id="SOME_NEW_ACTION", family="test", type="UNKNOWN",
-                   current_state="blocked", desired_state="done", safe_to_execute_now=False,
-                   blocker="something"),
-        ])
+        board = ActionBoard(
+            actions=[
+                Action(
+                    id="SOME_NEW_ACTION",
+                    family="test",
+                    type="UNKNOWN",
+                    current_state="blocked",
+                    desired_state="done",
+                    safe_to_execute_now=False,
+                    blocker="something",
+                ),
+            ]
+        )
         report = generate_blocked_actions_report(board)
         assert report[0]["taskcard_id"] == "TC-SOME-NEW-ACTION"

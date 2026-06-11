@@ -60,6 +60,7 @@ from src.plugin_examples.fixture_factory.final_git_status_validator import (
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _make_taskcard(id_: str, status: str, evidence: str) -> dict:
     return {"id": id_, "status": status, "evidence": evidence}
 
@@ -85,6 +86,7 @@ def _write_bundle(tmp_path: str, entries: dict[str, bytes]) -> str:
 # ===========================================================================
 # TCV Tests
 # ===========================================================================
+
 
 class TestTCV01:
     def test_pass_when_total_matches(self):
@@ -147,6 +149,7 @@ class TestTCV03:
 # ===========================================================================
 # PEV Tests
 # ===========================================================================
+
 
 class TestPEV01:
     def test_pass_when_no_pending_in_complete(self):
@@ -220,6 +223,7 @@ class TestPEV03:
 # BAV Tests
 # ===========================================================================
 
+
 class TestBAV:
     @pytest.fixture
     def bundle_file(self, tmp_path):
@@ -270,15 +274,14 @@ class TestBAV:
         assert r.status == "FAIL"
 
     def test_bav_01_missing_file(self, tmp_path):
-        r = bav_01_bundle_sha_matches_attestation(
-            str(tmp_path / "nonexistent.zip"), {"sha256": "abc"}
-        )
+        r = bav_01_bundle_sha_matches_attestation(str(tmp_path / "nonexistent.zip"), {"sha256": "abc"})
         assert r.status == "FAIL"
 
 
 # ===========================================================================
 # PRC Tests
 # ===========================================================================
+
 
 class TestPRC:
     @pytest.fixture
@@ -326,6 +329,7 @@ class TestPRC:
 # ===========================================================================
 # PPL Tests
 # ===========================================================================
+
 
 class TestPPL:
     @pytest.fixture
@@ -382,6 +386,7 @@ class TestPPL:
 # FGS Tests
 # ===========================================================================
 
+
 class TestFGS:
     @pytest.fixture
     def bundle_with_final_status(self, tmp_path):
@@ -434,6 +439,7 @@ class TestFGS:
 # ===========================================================================
 # Run_all integration tests
 # ===========================================================================
+
 
 class TestRunAll:
     def test_run_all_tcv_pass(self):

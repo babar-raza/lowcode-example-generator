@@ -106,9 +106,7 @@ def find_platform_path_errors(markdown: str, family_slug: str) -> list[str]:
         List of offending URL strings, empty if none found.
     """
     slug = re.escape(family_slug)
-    pattern = re.compile(
-        rf"https?://(?:products|docs|reference|kb)\.aspose\.net/{slug}/net[^\s)\]]*"
-    )
+    pattern = re.compile(rf"https?://(?:products|docs|reference|kb)\.aspose\.net/{slug}/net[^\s)\]]*")
     return pattern.findall(markdown)
 
 

@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class UpdateCheck:
     """Result of checking for package updates."""
+
     family: str
     package_id: str
     current_version: str | None
@@ -50,14 +51,16 @@ def check_for_updates(
         status = family_cfg.get("status", "disabled")
 
         if not enabled or status == "disabled":
-            results.append(UpdateCheck(
-                family=family,
-                package_id=family_cfg.get("nuget", {}).get("package_id", ""),
-                current_version=None,
-                latest_version=None,
-                skipped=True,
-                skip_reason="Family is disabled",
-            ))
+            results.append(
+                UpdateCheck(
+                    family=family,
+                    package_id=family_cfg.get("nuget", {}).get("package_id", ""),
+                    current_version=None,
+                    latest_version=None,
+                    skipped=True,
+                    skip_reason="Family is disabled",
+                )
+            )
             continue
 
         package_id = family_cfg.get("nuget", {}).get("package_id", "")
@@ -66,13 +69,15 @@ def check_for_updates(
         latest = _resolve_latest_nuget_version(package_id)
         has_update = bool(latest and current and latest != current)
 
-        results.append(UpdateCheck(
-            family=family,
-            package_id=package_id,
-            current_version=current,
-            latest_version=latest,
-            has_update=has_update,
-        ))
+        results.append(
+            UpdateCheck(
+                family=family,
+                package_id=package_id,
+                current_version=current,
+                latest_version=latest,
+                has_update=has_update,
+            )
+        )
 
     logger.info("Update check: %d families checked", len(results))
     return results

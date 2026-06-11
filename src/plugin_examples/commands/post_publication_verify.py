@@ -12,7 +12,8 @@ def add_parser(subparsers):
     )
     parser.add_argument("--family", required=True, help="Family name (e.g., pdf)")
     parser.add_argument(
-        "--output", metavar="PATH",
+        "--output",
+        metavar="PATH",
         help="Write verification report to this path",
     )
     parser.set_defaults(func=handle)
@@ -24,7 +25,8 @@ def handle(args) -> int:
     from pathlib import Path as _Path
     from plugin_examples.publisher.batch_publisher import PDF_PR_PACKAGES
     from plugin_examples.publisher.post_publication_verifier import (
-        run_post_publication_verification, write_verification_report,
+        run_post_publication_verification,
+        write_verification_report,
     )
 
     repo_root = _Path(__file__).resolve().parents[3]

@@ -38,6 +38,7 @@ PDF_PR_PACKAGES: list[tuple[int, str]] = [
 @dataclass
 class PackagePublishResult:
     """Result of publishing a single PR package."""
+
     pr_number: int
     package_name: str
     exit_code: int
@@ -51,6 +52,7 @@ class PackagePublishResult:
 @dataclass
 class BatchPublishResult:
     """Aggregated result of a batch publish run."""
+
     started_at: str
     finished_at: str
     family: str
@@ -106,11 +108,9 @@ def run_batch_publish(
 
     # Determine approval gate status
     import os
+
     gate_value = os.environ.get("PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL", "")
-    approval_gate_set = (
-        gate_value == "APPROVE_LIVE_PR"
-        or approval_token == "APPROVE_LIVE_PR"
-    )
+    approval_gate_set = gate_value == "APPROVE_LIVE_PR" or approval_token == "APPROVE_LIVE_PR"
 
     packages = _get_packages_for_family(family)
     results: list[PackagePublishResult] = []
@@ -120,10 +120,14 @@ def run_batch_publish(
 
         # Build command
         cmd = [
-            py, "-m", "plugin_examples",
+            py,
+            "-m",
+            "plugin_examples",
             "publish-pr",
-            "--family", family,
-            "--package-path", pkg_path,
+            "--family",
+            family,
+            "--package-path",
+            pkg_path,
         ]
         if live_mode and approval_gate_set:
             cmd += ["--publish", "--approval-token", "APPROVE_LIVE_PR"]
@@ -134,7 +138,9 @@ def run_batch_publish(
 
         logger.info(
             "Running publish-pr for PR#%d (%s): %s",
-            pr_number, package_name, " ".join(cmd),
+            pr_number,
+            package_name,
+            " ".join(cmd),
         )
 
         try:
@@ -157,35 +163,41 @@ def run_batch_publish(
                         live_pr_url = parts[1].strip()
                         break
 
-            results.append(PackagePublishResult(
-                pr_number=pr_number,
-                package_name=package_name,
-                exit_code=proc.returncode,
-                stdout=proc.stdout[:3000],
-                stderr=proc.stderr[:1000],
-                simulation_passed=simulation_passed,
-                live_pr_url=live_pr_url,
-            ))
+            results.append(
+                PackagePublishResult(
+                    pr_number=pr_number,
+                    package_name=package_name,
+                    exit_code=proc.returncode,
+                    stdout=proc.stdout[:3000],
+                    stderr=proc.stderr[:1000],
+                    simulation_passed=simulation_passed,
+                    live_pr_url=live_pr_url,
+                )
+            )
         except subprocess.TimeoutExpired:
-            results.append(PackagePublishResult(
-                pr_number=pr_number,
-                package_name=package_name,
-                exit_code=-1,
-                stdout="",
-                stderr="",
-                simulation_passed=False,
-                error="Timeout after 300s",
-            ))
+            results.append(
+                PackagePublishResult(
+                    pr_number=pr_number,
+                    package_name=package_name,
+                    exit_code=-1,
+                    stdout="",
+                    stderr="",
+                    simulation_passed=False,
+                    error="Timeout after 300s",
+                )
+            )
         except Exception as e:
-            results.append(PackagePublishResult(
-                pr_number=pr_number,
-                package_name=package_name,
-                exit_code=-1,
-                stdout="",
-                stderr="",
-                simulation_passed=False,
-                error=str(e),
-            ))
+            results.append(
+                PackagePublishResult(
+                    pr_number=pr_number,
+                    package_name=package_name,
+                    exit_code=-1,
+                    stdout="",
+                    stderr="",
+                    simulation_passed=False,
+                    error=str(e),
+                )
+            )
 
     finished_at = datetime.now(timezone.utc).isoformat()
     total = len(results)

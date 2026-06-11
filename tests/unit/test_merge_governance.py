@@ -70,8 +70,11 @@ class TestMergeRejectsLivePublishApprovalToken(unittest.TestCase):
         """APPROVE_LIVE_PR must be explicitly rejected for merge — separate intent required."""
         approved, reason = check_merge_approval("APPROVE_LIVE_PR")
         self.assertFalse(approved)
-        self.assertEqual(reason, BLOCKED_MERGE_REUSED_LIVE_PUBLISH_TOKEN,
-                         "Expected APPROVE_LIVE_PR to be explicitly rejected with reused-token error")
+        self.assertEqual(
+            reason,
+            BLOCKED_MERGE_REUSED_LIVE_PUBLISH_TOKEN,
+            "Expected APPROVE_LIVE_PR to be explicitly rejected with reused-token error",
+        )
 
     def test_merge_rejects_live_publish_token_from_env(self):
         """APPROVE_LIVE_PR from env var is also rejected."""
@@ -87,15 +90,16 @@ class TestMergeRequiresFamilyAndPrNumber(unittest.TestCase):
     def test_merge_requires_family_and_pr_number(self):
         """merge-pr CLI requires both --family and --pr-number arguments."""
         import subprocess
+
         result = subprocess.run(
             [sys.executable, "-m", "plugin_examples", "merge-pr"],
-            capture_output=True, text=True,
+            capture_output=True,
+            text=True,
             cwd=str(Path(__file__).resolve().parents[2]),
             env={**os.environ, "PYTHONPATH": "src"},
         )
         # Should fail with missing required args error
-        self.assertNotEqual(result.returncode, 0,
-                            "Expected non-zero exit when --family and --pr-number are missing")
+        self.assertNotEqual(result.returncode, 0, "Expected non-zero exit when --family and --pr-number are missing")
         # argparse error message should mention the missing args
         combined = result.stdout + result.stderr
         self.assertIn("--family", combined)
@@ -103,14 +107,15 @@ class TestMergeRequiresFamilyAndPrNumber(unittest.TestCase):
     def test_merge_requires_pr_number(self):
         """merge-pr requires --pr-number even when --family is provided."""
         import subprocess
+
         result = subprocess.run(
             [sys.executable, "-m", "plugin_examples", "merge-pr", "--family", "words"],
-            capture_output=True, text=True,
+            capture_output=True,
+            text=True,
             cwd=str(Path(__file__).resolve().parents[2]),
             env={**os.environ, "PYTHONPATH": "src"},
         )
-        self.assertNotEqual(result.returncode, 0,
-                            "Expected non-zero exit when --pr-number is missing")
+        self.assertNotEqual(result.returncode, 0, "Expected non-zero exit when --pr-number is missing")
 
 
 class TestMergeRejectsWrongTargetRepo(unittest.TestCase):
@@ -265,8 +270,7 @@ class TestMergeDryRunPerformsNoRemoteMutation(unittest.TestCase):
                 github_token="dummy_token",
             )
 
-        self.assertFalse(result["live_merge_performed"],
-                         "simulate_merge must never set live_merge_performed=True")
+        self.assertFalse(result["live_merge_performed"], "simulate_merge must never set live_merge_performed=True")
 
     def test_merge_dry_run_does_not_call_put_merge_endpoint(self):
         """Dry-run must not call PUT /pulls/{n}/merge."""
@@ -287,8 +291,10 @@ class TestMergeDryRunPerformsNoRemoteMutation(unittest.TestCase):
         }
         mock_files: list = []
 
-        with patch("urllib.request.urlopen") as mock_urlopen, \
-             patch("plugin_examples.publisher.github_pr_merger._api_get") as mock_get:
+        with (
+            patch("urllib.request.urlopen") as mock_urlopen,
+            patch("plugin_examples.publisher.github_pr_merger._api_get") as mock_get,
+        ):
             mock_get.side_effect = [mock_pr_data, mock_files]
             simulate_merge(
                 owner="aspose-words-net",
@@ -301,8 +307,7 @@ class TestMergeDryRunPerformsNoRemoteMutation(unittest.TestCase):
             # urlopen should not be called for PUT — all reads go via _api_get mock
             for call in mock_urlopen.call_args_list:
                 url = str(call)
-                self.assertNotIn("/merge", url.lower(),
-                                 "Dry-run must not call PUT /merge endpoint")
+                self.assertNotIn("/merge", url.lower(), "Dry-run must not call PUT /merge endpoint")
 
 
 class TestMergeLiveModeRequiresApproveMergePr(unittest.TestCase):
@@ -323,26 +328,32 @@ class TestMergeLiveModeRequiresApproveMergePr(unittest.TestCase):
     def test_merge_live_mode_requires_github_token(self):
         """merge-pr --merge without GITHUB_TOKEN exits 1 with clear error."""
         import subprocess
+
         # Run without GITHUB_TOKEN — should fail with token missing error
         env_without_token = {k: v for k, v in os.environ.items() if k != "GITHUB_TOKEN"}
         env_without_token["PYTHONPATH"] = "src"
         result = subprocess.run(
             [
-                sys.executable, "-m", "plugin_examples", "merge-pr",
-                "--family", "words",
-                "--pr-number", "1",
+                sys.executable,
+                "-m",
+                "plugin_examples",
+                "merge-pr",
+                "--family",
+                "words",
+                "--pr-number",
+                "1",
                 "--merge",
-                "--approval-token", "APPROVE_MERGE_PR",
+                "--approval-token",
+                "APPROVE_MERGE_PR",
             ],
-            capture_output=True, text=True,
+            capture_output=True,
+            text=True,
             cwd=str(Path(__file__).resolve().parents[2]),
             env=env_without_token,
         )
-        self.assertNotEqual(result.returncode, 0,
-                            "merge-pr --merge without GITHUB_TOKEN must exit non-zero")
+        self.assertNotEqual(result.returncode, 0, "merge-pr --merge without GITHUB_TOKEN must exit non-zero")
         combined = result.stdout + result.stderr
-        self.assertIn("GITHUB_TOKEN", combined,
-                      "Expected GITHUB_TOKEN error in output when token is missing")
+        self.assertIn("GITHUB_TOKEN", combined, "Expected GITHUB_TOKEN error in output when token is missing")
 
 
 class TestPostMergePlanWritten(unittest.TestCase):
@@ -352,7 +363,9 @@ class TestPostMergePlanWritten(unittest.TestCase):
         """post-merge-verification-plan.json exists and has required fields."""
         plan_path = (
             Path(__file__).resolve().parents[2]
-            / "workspace" / "verification" / "latest"
+            / "workspace"
+            / "verification"
+            / "latest"
             / "post-merge-verification-plan.json"
         )
         self.assertTrue(plan_path.exists(), f"Expected {plan_path} to exist")
@@ -375,8 +388,7 @@ class TestPostMergePlanWritten(unittest.TestCase):
     def test_post_merge_runbook_written(self):
         """post-merge-verification-runbook.md exists."""
         runbook_path = (
-            Path(__file__).resolve().parents[2]
-            / "docs" / "publishing" / "post-merge-verification-runbook.md"
+            Path(__file__).resolve().parents[2] / "docs" / "publishing" / "post-merge-verification-runbook.md"
         )
         self.assertTrue(runbook_path.exists(), f"Expected {runbook_path} to exist")
         content = runbook_path.read_text()
@@ -397,6 +409,7 @@ class TestBranchAutoDelete(unittest.TestCase):
 
     def _import_delete_fn(self):
         from plugin_examples.publisher.github_pr_merger import delete_branch_after_merge
+
         return delete_branch_after_merge
 
     def test_dry_run_by_default(self):

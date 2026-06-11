@@ -1,4 +1,5 @@
-import json, os
+import json
+import os
 
 SPRINT = "lowcode-plugin-canonical-package-wave19-20260606"
 SPRINT_ID = "LOWCODE-PLUGIN-CANONICAL-PACKAGE-WAVE19-TRUE-FINISH-LINE-DWG-TARGET-REPO-PUBLICATION-MEGA-TRAIN-001"

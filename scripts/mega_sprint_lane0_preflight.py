@@ -1,5 +1,9 @@
 """Lane 0: Preflight — environment, venv, DllReflector, sprint structure documentation."""
-import json, os, pathlib, subprocess, sys
+import json
+import os
+import pathlib
+import subprocess
+import sys
 from datetime import datetime, timezone
 
 REPO_ROOT = pathlib.Path(__file__).parent.parent

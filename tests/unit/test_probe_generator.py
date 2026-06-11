@@ -149,10 +149,9 @@ class TestProbeRunnerTaxonomy:
             result = runner.run(tmp_path, tmp_path / "Probe.csproj")
         assert result.failure_taxonomy == "PROBE_FAILED_TIMEOUT"
 
-    def test_runner_zero_output_with_license_keyword_classified_as_probe_failed_license(
-        self, tmp_path
-    ):
+    def test_runner_zero_output_with_license_keyword_classified_as_probe_failed_license(self, tmp_path):
         """Zero-byte output + license keyword in run stderr → PROBE_FAILED_LICENSE."""
+
         # Simulate restore OK, build OK, run OK but output file is empty
         def fake_run(cmd, **kwargs):
             return _mock_completed(0, stdout="ok", stderr="trial license expired")

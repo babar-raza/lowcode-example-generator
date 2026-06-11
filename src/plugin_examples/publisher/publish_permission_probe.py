@@ -54,49 +54,55 @@ def probe_publish_permissions(
 
     for family, config, config_path in families:
         if config is None:
-            probe_records.append({
-                "family": family,
-                "config_path": config_path,
-                "probe_status": "skipped",
-                "skip_reason": "family_config is None",
-                "can_read": False,
-                "can_push": None,
-                "repo_access_ready": False,
-                "pr_permission_ready": False,
-                "safe_to_publish": False,
-            })
+            probe_records.append(
+                {
+                    "family": family,
+                    "config_path": config_path,
+                    "probe_status": "skipped",
+                    "skip_reason": "family_config is None",
+                    "can_read": False,
+                    "can_push": None,
+                    "repo_access_ready": False,
+                    "pr_permission_ready": False,
+                    "safe_to_publish": False,
+                }
+            )
             continue
 
         status = getattr(config, "status", "unknown")
         if status not in {"active"}:
-            probe_records.append({
-                "family": family,
-                "config_path": config_path,
-                "probe_status": "skipped",
-                "skip_reason": f"family_status={status} is not active",
-                "can_read": False,
-                "can_push": None,
-                "repo_access_ready": False,
-                "pr_permission_ready": False,
-                "safe_to_publish": False,
-            })
+            probe_records.append(
+                {
+                    "family": family,
+                    "config_path": config_path,
+                    "probe_status": "skipped",
+                    "skip_reason": f"family_status={status} is not active",
+                    "can_read": False,
+                    "can_push": None,
+                    "repo_access_ready": False,
+                    "pr_permission_ready": False,
+                    "safe_to_publish": False,
+                }
+            )
             continue
 
         github_cfg = getattr(config, "github", None)
         pub_repo = getattr(github_cfg, "published_plugin_examples_repo", None) if github_cfg else None
 
         if pub_repo is None:
-            probe_records.append({
-                "family": family,
-                "config_path": config_path,
-                "probe_status": "skipped",
-                "skip_reason": "no published_plugin_examples_repo in config",
-                "can_read": False,
-                "can_push": None,
-                "repo_access_ready": False,
-                "pr_permission_ready": False,
-                "safe_to_publish": False,
-            })
+            probe_records.append(
+                {
+                    "family": family,
+                    "config_path": config_path,
+                    "probe_status": "skipped",
+                    "skip_reason": "no published_plugin_examples_repo in config",
+                    "can_read": False,
+                    "can_push": None,
+                    "repo_access_ready": False,
+                    "pr_permission_ready": False,
+                    "safe_to_publish": False,
+                }
+            )
             continue
 
         owner = getattr(pub_repo, "owner", "") or ""
@@ -105,25 +111,27 @@ def probe_publish_permissions(
 
         access = check_repo_access(owner, repo, branch, headers=headers)
 
-        probe_records.append({
-            "family": family,
-            "owner": owner,
-            "repo": repo,
-            "branch": branch,
-            "config_path": config_path,
-            "probe_status": "completed",
-            "error_classification": access["error_classification"],
-            "can_read": access["can_read"],
-            "can_push": access["can_push"],
-            "http_status": access["http_status"],
-            "visibility": access["visibility"],
-            "default_branch": access["default_branch"],
-            "branch_exists": access["branch_exists"],
-            "repo_access_ready": access["repo_access_ready"],
-            "pr_permission_ready": access["pr_permission_ready"],
-            "safe_to_publish": False,  # always False — probe never authorizes live publish
-            "interpretation": access["interpretation"],
-        })
+        probe_records.append(
+            {
+                "family": family,
+                "owner": owner,
+                "repo": repo,
+                "branch": branch,
+                "config_path": config_path,
+                "probe_status": "completed",
+                "error_classification": access["error_classification"],
+                "can_read": access["can_read"],
+                "can_push": access["can_push"],
+                "http_status": access["http_status"],
+                "visibility": access["visibility"],
+                "default_branch": access["default_branch"],
+                "branch_exists": access["branch_exists"],
+                "repo_access_ready": access["repo_access_ready"],
+                "pr_permission_ready": access["pr_permission_ready"],
+                "safe_to_publish": False,  # always False — probe never authorizes live publish
+                "interpretation": access["interpretation"],
+            }
+        )
 
     ready = [r for r in probe_records if r.get("pr_permission_ready")]
     not_ready = [r for r in probe_records if not r.get("pr_permission_ready")]

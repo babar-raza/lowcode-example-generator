@@ -19,6 +19,7 @@ class PublishingError(Exception):
 @dataclass
 class PublishResult:
     """Result of publishing operation."""
+
     dry_run: bool = True
     branch_name: str | None = None
     pr_url: str | None = None
@@ -166,9 +167,7 @@ def publish_examples(
     # Block live publish when family_config is absent — cannot verify target
     if family_config is None:
         result.status = "blocked"
-        result.blocked_reason = (
-            "blocked_missing_family_config: family_config must be provided for live publishing"
-        )
+        result.blocked_reason = "blocked_missing_family_config: family_config must be provided for live publishing"
         logger.warning("Publishing blocked: %s", result.blocked_reason)
         return result
 
@@ -296,7 +295,9 @@ def _load_excluded_scenario_summaries(
     from plugin_examples.evidence_layout import resolve_family_evidence_path
 
     blocked_path = resolve_family_evidence_path(
-        verification_dir, family, "blocked-scenarios.json",
+        verification_dir,
+        family,
+        "blocked-scenarios.json",
     )
     if blocked_path is None or not blocked_path.exists():
         return []
@@ -349,27 +350,18 @@ def _verify_evidence(
     # is not provided (e.g., standalone calls in tests or external tools).
     verdict_ok = False
     if gate_verdict is not None:
-        verdict_ok = (
-            getattr(gate_verdict, "all_required_passed", False)
-            or getattr(gate_verdict, "publishable", False)
-        )
+        verdict_ok = getattr(gate_verdict, "all_required_passed", False) or getattr(gate_verdict, "publishable", False)
         if not verdict_ok:
-            missing.append(
-                f"gate verdict not publishable: {getattr(gate_verdict, 'verdict', 'UNKNOWN')}"
-            )
+            missing.append(f"gate verdict not publishable: {getattr(gate_verdict, 'verdict', 'UNKNOWN')}")
     else:
         gate_path = resolve_family_evidence_path(verification_dir, family, "gate-results.json")
         if gate_path.exists():
             try:
                 with open(gate_path) as f:
                     gate_data = json.load(f)
-                verdict_ok = gate_data.get("publishable", False) or gate_data.get(
-                    "all_required_passed", False
-                )
+                verdict_ok = gate_data.get("publishable", False) or gate_data.get("all_required_passed", False)
                 if not verdict_ok:
-                    missing.append(
-                        f"gate verdict not publishable: {gate_data.get('verdict', 'UNKNOWN')}"
-                    )
+                    missing.append(f"gate verdict not publishable: {gate_data.get('verdict', 'UNKNOWN')}")
             except (json.JSONDecodeError, OSError):
                 missing.append("gate-results.json unreadable")
         else:

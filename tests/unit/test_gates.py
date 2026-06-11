@@ -53,11 +53,22 @@ class _FakeCtx:
 def _make_stages(overrides: dict | None = None) -> list[_FakeStage]:
     """Create a default list of successful stages."""
     names = [
-        "load_config", "nuget_fetch", "dependency_resolution",
-        "extraction", "reflection", "plugin_detection",
-        "api_delta", "impact_mapping", "fixture_registry",
-        "example_mining", "scenario_planning", "llm_preflight",
-        "generation", "validation", "reviewer", "publisher",
+        "load_config",
+        "nuget_fetch",
+        "dependency_resolution",
+        "extraction",
+        "reflection",
+        "plugin_detection",
+        "api_delta",
+        "impact_mapping",
+        "fixture_registry",
+        "example_mining",
+        "scenario_planning",
+        "llm_preflight",
+        "generation",
+        "validation",
+        "reviewer",
+        "publisher",
     ]
     stages = []
     for i, name in enumerate(names):
@@ -95,8 +106,7 @@ class TestGateResult:
 
     def test_all_statuses_in_canonical_set(self):
         for status in GATE_STATUSES:
-            g = GateResult(gate_id="test", name="test", status=status,
-                           required=False, stage_name="test")
+            g = GateResult(gate_id="test", name="test", status=status, required=False, stage_name="test")
             assert g.status in GATE_STATUSES
 
 
@@ -129,61 +139,73 @@ class TestEvaluateGates:
 
     def test_no_ready_scenarios_produces_source_of_truth_proven(self):
         ctx = _FakeCtx()
-        stages = _make_stages({
-            "scenario_planning": {"artifacts": {"ready_count": 0, "blocked_count": 5}},
-        })
+        stages = _make_stages(
+            {
+                "scenario_planning": {"artifacts": {"ready_count": 0, "blocked_count": 5}},
+            }
+        )
         verdict = evaluate_gates(stages, ctx)
         assert verdict.verdict == "SOURCE_OF_TRUTH_PROVEN_ONLY"
 
     def test_template_mode_produces_data_flow_prototype(self):
         ctx = _FakeCtx(template_mode=True)
-        stages = _make_stages({
-            "scenario_planning": {"artifacts": {"ready_count": 3, "blocked_count": 0}},
-            "generation": {"artifacts": {"examples_generated": 3, "generation_mode": "template"}},
-            "validation": {"artifacts": {"passed": 0, "failed": 3, "total": 3}},
-        })
+        stages = _make_stages(
+            {
+                "scenario_planning": {"artifacts": {"ready_count": 3, "blocked_count": 0}},
+                "generation": {"artifacts": {"examples_generated": 3, "generation_mode": "template"}},
+                "validation": {"artifacts": {"passed": 0, "failed": 3, "total": 3}},
+            }
+        )
         verdict = evaluate_gates(stages, ctx)
         assert verdict.verdict == "DATA_FLOW_PROTOTYPE_ONLY"
         assert not verdict.publishable
 
     def test_skip_run_produces_data_flow_prototype(self):
         ctx = _FakeCtx(template_mode=False, skip_run=True)
-        stages = _make_stages({
-            "scenario_planning": {"artifacts": {"ready_count": 3, "blocked_count": 0}},
-            "generation": {"artifacts": {"examples_generated": 3, "generation_mode": "llm"}},
-            "validation": {"artifacts": {"passed": 3, "failed": 0, "total": 3}},
-        })
+        stages = _make_stages(
+            {
+                "scenario_planning": {"artifacts": {"ready_count": 3, "blocked_count": 0}},
+                "generation": {"artifacts": {"examples_generated": 3, "generation_mode": "llm"}},
+                "validation": {"artifacts": {"passed": 3, "failed": 0, "total": 3}},
+            }
+        )
         verdict = evaluate_gates(stages, ctx)
         assert verdict.verdict == "DATA_FLOW_PROTOTYPE_ONLY"
 
     def test_build_failure_produces_blocked_build(self):
         ctx = _FakeCtx(template_mode=False, skip_run=False)
-        stages = _make_stages({
-            "scenario_planning": {"artifacts": {"ready_count": 3, "blocked_count": 0}},
-            "generation": {"artifacts": {"examples_generated": 3, "generation_mode": "llm"}},
-            "validation": {"artifacts": {"passed": 0, "failed": 3, "total": 3}},
-        })
+        stages = _make_stages(
+            {
+                "scenario_planning": {"artifacts": {"ready_count": 3, "blocked_count": 0}},
+                "generation": {"artifacts": {"examples_generated": 3, "generation_mode": "llm"}},
+                "validation": {"artifacts": {"passed": 0, "failed": 3, "total": 3}},
+            }
+        )
         verdict = evaluate_gates(stages, ctx)
         assert verdict.verdict == "BLOCKED_BUILD_FAILED"
         assert not verdict.publishable
 
     def test_generation_zero_produces_blocked_generation(self):
         ctx = _FakeCtx()
-        stages = _make_stages({
-            "scenario_planning": {"artifacts": {"ready_count": 3, "blocked_count": 0}},
-            "generation": {"artifacts": {"examples_generated": 0}},
-        })
+        stages = _make_stages(
+            {
+                "scenario_planning": {"artifacts": {"ready_count": 3, "blocked_count": 0}},
+                "generation": {"artifacts": {"examples_generated": 0}},
+            }
+        )
         verdict = evaluate_gates(stages, ctx)
         assert verdict.verdict == "BLOCKED_GENERATION"
 
     def test_template_mode_with_build_pass_produces_canonical_template_pass(self):
         # B1: template_mode + skip_run=False + build passed → CANONICAL_TEMPLATE_GENERATION_PASS
         ctx = _FakeCtx(template_mode=True, skip_run=False)
-        stages = _make_stages({
-            "scenario_planning": {"artifacts": {"ready_count": 9, "blocked_count": 0}},
-            "generation": {"artifacts": {"examples_generated": 9, "generation_mode": "template"}},
-            "validation": {"artifacts": {"build_passed": 9, "passed": 9, "total": 9}},
-        })
+        stages = _make_stages(
+            {
+                "scenario_planning": {"artifacts": {"ready_count": 9, "blocked_count": 0}},
+                "generation": {"artifacts": {"examples_generated": 9, "generation_mode": "template"}},
+                "validation": {"artifacts": {"build_passed": 9, "passed": 9, "total": 9}},
+            }
+        )
         verdict = evaluate_gates(stages, ctx)
         assert verdict.verdict == "CANONICAL_TEMPLATE_GENERATION_PASS"
         assert verdict.publishable
@@ -191,11 +213,13 @@ class TestEvaluateGates:
     def test_template_mode_skip_run_true_stays_data_flow_prototype(self):
         # B1: template_mode + skip_run=True must remain DATA_FLOW_PROTOTYPE_ONLY
         ctx = _FakeCtx(template_mode=True, skip_run=True)
-        stages = _make_stages({
-            "scenario_planning": {"artifacts": {"ready_count": 9, "blocked_count": 0}},
-            "generation": {"artifacts": {"examples_generated": 9, "generation_mode": "template"}},
-            "validation": {"artifacts": {"build_passed": 9, "passed": 9, "total": 9}},
-        })
+        stages = _make_stages(
+            {
+                "scenario_planning": {"artifacts": {"ready_count": 9, "blocked_count": 0}},
+                "generation": {"artifacts": {"examples_generated": 9, "generation_mode": "template"}},
+                "validation": {"artifacts": {"build_passed": 9, "passed": 9, "total": 9}},
+            }
+        )
         verdict = evaluate_gates(stages, ctx)
         assert verdict.verdict == "DATA_FLOW_PROTOTYPE_ONLY"
         assert not verdict.publishable
@@ -203,17 +227,20 @@ class TestEvaluateGates:
     def test_template_mode_with_build_fail_stays_data_flow_prototype(self):
         # B1: template_mode + skip_run=False + build failed → DATA_FLOW_PROTOTYPE_ONLY
         ctx = _FakeCtx(template_mode=True, skip_run=False)
-        stages = _make_stages({
-            "scenario_planning": {"artifacts": {"ready_count": 3, "blocked_count": 0}},
-            "generation": {"artifacts": {"examples_generated": 3, "generation_mode": "template"}},
-            "validation": {"artifacts": {"build_passed": 0, "passed": 0, "failed": 3, "total": 3}},
-        })
+        stages = _make_stages(
+            {
+                "scenario_planning": {"artifacts": {"ready_count": 3, "blocked_count": 0}},
+                "generation": {"artifacts": {"examples_generated": 3, "generation_mode": "template"}},
+                "validation": {"artifacts": {"build_passed": 0, "passed": 0, "failed": 3, "total": 3}},
+            }
+        )
         verdict = evaluate_gates(stages, ctx)
         assert verdict.verdict == "DATA_FLOW_PROTOTYPE_ONLY"
         assert not verdict.publishable
 
     def test_canonical_template_pass_is_publishable(self):
         from plugin_examples.gates.evaluator import is_publishable_verdict
+
         assert is_publishable_verdict("CANONICAL_TEMPLATE_GENERATION_PASS")
         assert is_publishable_verdict("CANONICAL_LLM_GENERATION_PASS")
         assert not is_publishable_verdict("DATA_FLOW_PROTOTYPE_ONLY")
@@ -227,10 +254,12 @@ class TestEvaluateGates:
 class TestDetermineVerdict:
     def test_delegates_to_evaluator(self):
         ctx = _FakeCtx(template_mode=True)
-        stages = _make_stages({
-            "scenario_planning": {"artifacts": {"ready_count": 3}},
-            "generation": {"artifacts": {"examples_generated": 3, "generation_mode": "template"}},
-        })
+        stages = _make_stages(
+            {
+                "scenario_planning": {"artifacts": {"ready_count": 3}},
+                "generation": {"artifacts": {"examples_generated": 3, "generation_mode": "template"}},
+            }
+        )
         verdict = determine_verdict(stages, ctx)
         assert verdict in VERDICTS
 
@@ -325,7 +354,9 @@ from plugin_examples.gates.completeness_gate import (
 from plugin_examples.scenario_planner.planner import PlanningResult, Scenario
 
 
-def _make_scenario(scenario_id: str, target_type: str, status: str = "ready", blocked_reason: str | None = None) -> Scenario:
+def _make_scenario(
+    scenario_id: str, target_type: str, status: str = "ready", blocked_reason: str | None = None
+) -> Scenario:
     return Scenario(
         scenario_id=scenario_id,
         title=f"Use {target_type}",
@@ -339,9 +370,7 @@ def _make_scenario(scenario_id: str, target_type: str, status: str = "ready", bl
 def _make_planning_result(family: str, ready: int, blocked: int) -> PlanningResult:
     result = PlanningResult(family=family)
     for i in range(ready):
-        result.ready_scenarios.append(
-            _make_scenario(f"{family}-ready-{i}", f"Aspose.{family}.LowCode.Type{i}")
-        )
+        result.ready_scenarios.append(_make_scenario(f"{family}-ready-{i}", f"Aspose.{family}.LowCode.Type{i}"))
     for i in range(blocked):
         result.blocked_scenarios.append(
             _make_scenario(
@@ -451,18 +480,29 @@ class TestCompletenessGateWrite:
 class TestDenominatorLedger:
     def test_write_denominator_ledger_basic(self, tmp_path):
         from plugin_examples.scenario_planner.type_classifier import TypeRole
+
         denominator = {
             "denominator_basis": "PILOT_ALLOWED",
             "allowed_pilot_types": ["Merger"],
         }
         planning = _make_planning_result("pdf", ready=1, blocked=0)
         # Override the ready scenario's target_type to match type_roles
-        planning.ready_scenarios[0] = _make_scenario(
-            "pdf-ready-0", "Aspose.Pdf.LowCode.Merger"
-        )
+        planning.ready_scenarios[0] = _make_scenario("pdf-ready-0", "Aspose.Pdf.LowCode.Merger")
         type_roles = [
-            TypeRole(full_name="Aspose.Pdf.LowCode.Merger", name="Merger", role="workflow_root", confidence=1.0, reason="test"),
-            TypeRole(full_name="Aspose.Pdf.LowCode.MergeOptions", name="MergeOptions", role="options", confidence=1.0, reason="test"),
+            TypeRole(
+                full_name="Aspose.Pdf.LowCode.Merger",
+                name="Merger",
+                role="workflow_root",
+                confidence=1.0,
+                reason="test",
+            ),
+            TypeRole(
+                full_name="Aspose.Pdf.LowCode.MergeOptions",
+                name="MergeOptions",
+                role="options",
+                confidence=1.0,
+                reason="test",
+            ),
         ]
         path = write_denominator_ledger("pdf", denominator, planning, type_roles, tmp_path)
         assert path.exists()
@@ -512,8 +552,7 @@ class TestCompletenessGateEquation:
         """unknown_type_count=0 adds no violation."""
         denominator = {"denominator_basis": "FULL_SOT", "workflow_root_types": 3}
         planning = _make_planning_result("cells", ready=3, blocked=0)
-        result = check_completeness("cells", denominator, planning, dry_run=True,
-                                    unknown_type_count=0)
+        result = check_completeness("cells", denominator, planning, dry_run=True, unknown_type_count=0)
         assert result.status == "pass"
         assert result.unknown_type_count == 0
 
@@ -521,8 +560,7 @@ class TestCompletenessGateEquation:
         """unknown_type_count > 0 always adds a warning violation."""
         denominator = {"denominator_basis": "FULL_SOT", "workflow_root_types": 3}
         planning = _make_planning_result("cells", ready=3, blocked=0)
-        result = check_completeness("cells", denominator, planning, dry_run=True,
-                                    unknown_type_count=2)
+        result = check_completeness("cells", denominator, planning, dry_run=True, unknown_type_count=2)
         # Should warn even though equation holds (3 == 3)
         assert result.status == "warn"
         assert result.unknown_type_count == 2
@@ -533,8 +571,7 @@ class TestCompletenessGateEquation:
         denominator = {"denominator_basis": "FULL_SOT", "workflow_root_types": 3}
         planning = _make_planning_result("cells", ready=3, blocked=0)
         # Should NOT raise — unknown types are a soft warning
-        result = check_completeness("cells", denominator, planning, dry_run=False,
-                                    unknown_type_count=2)
+        result = check_completeness("cells", denominator, planning, dry_run=False, unknown_type_count=2)
         assert result.status == "warn"
 
     def test_pilot_allowed_full_wrt_count_reported(self):
@@ -557,8 +594,7 @@ class TestCompletenessGateEquation:
             "workflow_root_types": 10,
         }
         planning = _make_planning_result("words", ready=4, blocked=0)
-        result = check_completeness("words", denominator, planning, dry_run=True,
-                                    unknown_type_count=1)
+        result = check_completeness("words", denominator, planning, dry_run=True, unknown_type_count=1)
         path = write_completeness_gate_result(result, tmp_path)
         data = json.loads(path.read_text())
         assert "unknown_type_count" in data
@@ -573,11 +609,8 @@ class TestCompletenessGateRunnerIntegration:
     def test_real_denominator_loads_and_validates(self):
         """Load real denominator file and call check_completeness — no crash expected."""
         import json
-        from pathlib import Path
-        denom_path = (
-            Path(__file__).resolve().parents[2]
-            / "pipeline" / "configs" / "denominators" / "cells.json"
-        )
+
+        denom_path = Path(__file__).resolve().parents[2] / "pipeline" / "configs" / "denominators" / "cells.json"
         if not denom_path.exists():
             pytest.skip("cells.json denominator not found")
         denominator = json.loads(denom_path.read_text(encoding="utf-8"))
@@ -591,17 +624,18 @@ class TestCompletenessGateRunnerIntegration:
         """runner._stage_scenario_planning must import and call check_completeness."""
         import inspect
         from plugin_examples import runner
+
         source = inspect.getsource(runner._stage_scenario_planning)
         assert "check_completeness" in source, (
             "_stage_scenario_planning must call check_completeness(). "
             "The completeness gate is not integrated — Gap 1 fix incomplete."
         )
-        assert "write_completeness_gate_result" in source, (
-            "_stage_scenario_planning must call write_completeness_gate_result()."
-        )
-        assert "completeness_gate_status" in source, (
-            "_stage_scenario_planning must return completeness_gate_status in stage artifacts."
-        )
+        assert (
+            "write_completeness_gate_result" in source
+        ), "_stage_scenario_planning must call write_completeness_gate_result()."
+        assert (
+            "completeness_gate_status" in source
+        ), "_stage_scenario_planning must return completeness_gate_status in stage artifacts."
 
 
 # ---------------------------------------------------------------------------
@@ -666,18 +700,18 @@ class TestMergePrCandidateManifestsDemotionAware:
 
     def test_non_demoted_older_candidate_preserved(self):
         """A scenario from an older run that failed generation (not demoted) is preserved."""
-        existing = self._make_manifest([
-            _make_candidate("pdf-doc-converter", "run-old"),
-            _make_candidate("pdf-png", "run-old"),
-        ])
+        existing = self._make_manifest(
+            [
+                _make_candidate("pdf-doc-converter", "run-old"),
+                _make_candidate("pdf-png", "run-old"),
+            ]
+        )
         # New run: pdf-doc-converter generation failed, pdf-png demoted
         new_run = self._make_manifest(
             included=[_make_candidate("pdf-merger", "run-new")],
             excluded=[_make_excluded("pdf-doc-converter"), _make_excluded("pdf-png")],
         )
-        result = merge_pr_candidate_manifests(
-            existing, new_run, demoted_scenario_ids={"pdf-png"}
-        )
+        result = merge_pr_candidate_manifests(existing, new_run, demoted_scenario_ids={"pdf-png"})
         included_ids = {e["scenario_id"] for e in result["included_examples"]}
         assert "pdf-doc-converter" in included_ids, "Non-demoted regression-protected candidate preserved"
         assert "pdf-png" not in included_ids, "Demoted candidate quarantined"
@@ -731,9 +765,7 @@ class TestMergePrCandidateManifestsDemotionAware:
             "blocked_candidate_count": 0,
         }
         (tmp_path / "latest").mkdir()
-        (tmp_path / "latest" / "pr-candidate-manifest.json").write_text(
-            json.dumps(existing_manifest), encoding="utf-8"
-        )
+        (tmp_path / "latest" / "pr-candidate-manifest.json").write_text(json.dumps(existing_manifest), encoding="utf-8")
 
         new_manifest = {
             "included_examples": [_make_candidate("pdf-merger", "run-new")],
@@ -757,9 +789,7 @@ class TestMergePrCandidateManifestsDemotionAware:
             ],
         }
 
-        write_pr_candidate_manifest(
-            new_manifest, tmp_path, scenario_feedback=scenario_feedback
-        )
+        write_pr_candidate_manifest(new_manifest, tmp_path, scenario_feedback=scenario_feedback)
 
         result = json.loads((tmp_path / "latest" / "pr-candidate-manifest.json").read_text())
         included_ids = {e["scenario_id"] for e in result["included_examples"]}
@@ -802,13 +832,11 @@ class TestMergePrCandidateManifestsDemotionAware:
         included_ids = {e["scenario_id"] for e in result["included_examples"]}
         excluded_ids = {e["scenario_id"] for e in result["excluded_examples"]}
 
-        assert "pdf-png" not in included_ids, (
-            "Persisted quarantine must survive even when current run emits no demotion"
-        )
+        assert (
+            "pdf-png" not in included_ids
+        ), "Persisted quarantine must survive even when current run emits no demotion"
         assert "pdf-png" in excluded_ids, "Quarantined scenario must remain in excluded_examples"
-        quarantine_entry = next(
-            e for e in result["excluded_examples"] if e["scenario_id"] == "pdf-png"
-        )
+        quarantine_entry = next(e for e in result["excluded_examples"] if e["scenario_id"] == "pdf-png")
         assert quarantine_entry.get("candidate_integrity_status") == "demoted_quarantined"
 
     def test_persisted_quarantine_cleared_by_current_run_pass(self):
@@ -843,9 +871,7 @@ class TestMergePrCandidateManifestsDemotionAware:
         result = merge_pr_candidate_manifests(existing, new_run, demoted_scenario_ids=None)
 
         included_ids = {e["scenario_id"] for e in result["included_examples"]}
-        assert "pdf-png" in included_ids, (
-            "A current_run PASS must clear the prior quarantine"
-        )
+        assert "pdf-png" in included_ids, "A current_run PASS must clear the prior quarantine"
         png_entry = next(e for e in result["included_examples"] if e["scenario_id"] == "pdf-png")
         assert png_entry.get("candidate_integrity_status") == "current_run"
 
@@ -878,9 +904,9 @@ class TestMergePrCandidateManifestsDemotionAware:
         }
         result = merge_pr_candidate_manifests(existing, new_run, demoted_scenario_ids=None)
 
-        assert result["publishable_candidate_count"] == 1, (
-            "Only non-quarantined candidates count toward publishable_candidate_count"
-        )
+        assert (
+            result["publishable_candidate_count"] == 1
+        ), "Only non-quarantined candidates count toward publishable_candidate_count"
 
 
 # ---------------------------------------------------------------------------
@@ -936,8 +962,14 @@ class TestGateSemanticsDegradedPartialRun:
             GateResult(gate_id="gate_scenarios", name="Scenarios", status="passed", required=True, stage_name="s"),
             GateResult(gate_id="gate_generation", name="Generation", status="passed", required=True, stage_name="g"),
             GateResult(gate_id="gate_build", name="Build", status="passed", required=True, stage_name="b"),
-            GateResult(gate_id="gate_run", name="Runtime", status="degraded", required=True, stage_name="v",
-                       failure_reason="5/6 examples passed runtime"),
+            GateResult(
+                gate_id="gate_run",
+                name="Runtime",
+                status="degraded",
+                required=True,
+                stage_name="v",
+                failure_reason="5/6 examples passed runtime",
+            ),
         ]
         all_required_passed = all(g.status in ("passed", "degraded") for g in gates if g.required)
         assert all_required_passed is True
@@ -955,6 +987,7 @@ class TestGateSemanticsDegradedPartialRun:
         """The runner's evaluator must produce gate_run=degraded when partial runtime."""
         import inspect
         from plugin_examples.gates import evaluator
+
         source = inspect.getsource(evaluator.evaluate_gates)
         assert "degraded" in source, (
             "evaluator.evaluate_gates must use 'degraded' status for partial runtime. "
@@ -965,9 +998,9 @@ class TestGateSemanticsDegradedPartialRun:
         """A degraded gate_run must not be added to blocking gates (partial pass is not a hard block)."""
         import inspect
         from plugin_examples.gates import evaluator
+
         source = inspect.getsource(evaluator.evaluate_gates)
         # Verify the fix: blocking only happens for "failed" not "degraded"
-        assert 'gate.status == "failed"' in source or "status == \"failed\"" in source, (
-            "evaluator.evaluate_gates must only add gate_run to blocking when status == 'failed', "
-            "not when degraded."
+        assert 'gate.status == "failed"' in source or 'status == "failed"' in source, (
+            "evaluator.evaluate_gates must only add gate_run to blocking when status == 'failed', " "not when degraded."
         )

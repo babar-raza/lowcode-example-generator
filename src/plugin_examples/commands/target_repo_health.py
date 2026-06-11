@@ -11,15 +11,21 @@ def add_parser(subparsers):
         help="Verify target repos for all confirmed LowCode families",
     )
     parser.add_argument(
-        "--family", metavar="FAMILY", default=None,
+        "--family",
+        metavar="FAMILY",
+        default=None,
         help="Limit check to one family",
     )
     parser.add_argument(
-        "--output", metavar="PATH", default=None,
+        "--output",
+        metavar="PATH",
+        default=None,
         help="Write health report JSON to this path",
     )
     parser.add_argument(
-        "--json", dest="json_output", action="store_true",
+        "--json",
+        dest="json_output",
+        action="store_true",
         help="Print report as JSON to stdout",
     )
     parser.set_defaults(func=handle)
@@ -47,6 +53,8 @@ def handle(args) -> int:
         print(f"target-repo-health: {report.overall_verdict}")
         for r in report.families:
             print(f"  {r.family}: {r.status} (method={r.verification_method}, expected={r.expected_examples})")
-        print(f"Healthy: {report.healthy_count} | Evidence-based: {report.evidence_based_count} | Inaccessible: {report.inaccessible_count}")
+        print(
+            f"Healthy: {report.healthy_count} | Evidence-based: {report.evidence_based_count} | Inaccessible: {report.inaccessible_count}"
+        )
 
     return 0 if report.overall_verdict in ("ALL_VERIFIED", "PARTIAL_VERIFICATION") else 1

@@ -1,5 +1,8 @@
 """Wave 19 preflight docs, coordinator docs, Lane A (W18 repair), Lane B (DWG docs)."""
-import json, os, hashlib, zipfile
+import json
+import os
+import hashlib
+import zipfile
 from pathlib import Path
 
 REPO = Path("c:/Users/prora/OneDrive/Documents/GitHub/lowcode-example-generator-gitlab")

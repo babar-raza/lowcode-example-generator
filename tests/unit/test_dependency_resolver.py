@@ -140,6 +140,7 @@ class TestFindNuspec:
         nupkg.write_bytes(buf.getvalue())
 
         from plugin_examples.nuget_fetcher.fetcher import NuGetFetchError
+
         with pytest.raises(NuGetFetchError, match="No .nuspec found"):
             _find_nuspec(nupkg)
 
@@ -317,11 +318,9 @@ class TestUpdatePackageLock:
     def test_updates_existing_package_lock(self, tmp_path):
         """Subsequent calls merge into existing package-lock."""
         lock_path = tmp_path / "package-lock.json"
-        lock_path.write_text(json.dumps({
-            "packages": {
-                "Existing": {"version": "0.1.0", "sha256": "aaa", "source_url": ""}
-            }
-        }))
+        lock_path.write_text(
+            json.dumps({"packages": {"Existing": {"version": "0.1.0", "sha256": "aaa", "source_url": ""}}})
+        )
 
         download = {
             "package_id": "NewPkg",
@@ -482,9 +481,7 @@ class TestResolveWithAllTfmGroups:
         assert "Newtonsoft.Json" not in dep_ids
 
     @patch("plugin_examples.nuget_fetcher.dependency_resolver._download_nupkg")
-    def test_include_all_tfm_groups_transitive_uses_normal_resolution(
-        self, mock_dl, tmp_path
-    ):
+    def test_include_all_tfm_groups_transitive_uses_normal_resolution(self, mock_dl, tmp_path):
         """Transitive deps at depth=2 always use normal TFM matching (not all-TFM)."""
         # Primary uses multi-TFM nuspec; transitive dep uses a normal ns2.0 nuspec
         transitive_nuspec = """\

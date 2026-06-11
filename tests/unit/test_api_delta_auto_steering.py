@@ -2,6 +2,7 @@
 
 Wave 25 Lane D: auto-promote is explicitly forbidden.
 """
+
 from __future__ import annotations
 
 import json
@@ -19,13 +20,18 @@ from plugin_examples.api_delta.delta_engine import (
 def _make_delta(removed_type_names: list[str], family: str = "barcode") -> DeltaResult:
     delta = DeltaResult(initial_run=False, old_version="25.0.0", new_version="26.0.0")
     for name in removed_type_names:
-        delta.removed_types.append(TypeDelta(
-            full_name=name, namespace="Aspose.BarCode", change_type="removed",
-        ))
+        delta.removed_types.append(
+            TypeDelta(
+                full_name=name,
+                namespace="Aspose.BarCode",
+                change_type="removed",
+            )
+        )
     return delta
 
 
 # ── Candidates are added ──────────────────────────────────────────────────────
+
 
 def test_removed_type_added_as_candidate():
     delta = _make_delta(["Aspose.BarCode.OldClass"])
@@ -48,13 +54,12 @@ def test_multiple_removed_types_all_become_candidates():
 
 # ── Status is never auto-promoted to CONFIRMED ───────────────────────────────
 
+
 def test_candidates_never_auto_confirmed():
     delta = _make_delta(["TypeA", "TypeB"])
     result = apply_auto_steering_candidates(delta, "barcode")
     for entry in result["forbidden_symbols"]:
-        assert entry["status"] != "CONFIRMED", (
-            f"Auto-promotion forbidden: {entry['symbol']} has status CONFIRMED"
-        )
+        assert entry["status"] != "CONFIRMED", f"Auto-promotion forbidden: {entry['symbol']} has status CONFIRMED"
 
 
 def test_existing_confirmed_entries_not_mutated():
@@ -74,6 +79,7 @@ def test_existing_confirmed_entries_not_mutated():
 
 
 # ── Deduplication ─────────────────────────────────────────────────────────────
+
 
 def test_existing_candidate_not_duplicated():
     existing = {
@@ -103,6 +109,7 @@ def test_existing_candidate_occurrence_count_incremented():
 
 # ── No removed types → no changes ────────────────────────────────────────────
 
+
 def test_no_removed_types_leaves_steering_unchanged():
     existing = {"forbidden_symbols": [{"symbol": "X", "status": "CONFIRMED"}]}
     delta = DeltaResult(initial_run=False, old_version="1.0", new_version="2.0")
@@ -111,6 +118,7 @@ def test_no_removed_types_leaves_steering_unchanged():
 
 
 # ── Output file written when path provided ────────────────────────────────────
+
 
 def test_output_file_written(tmp_path):
     delta = _make_delta(["TypeToRemove"])
@@ -124,6 +132,7 @@ def test_output_file_written(tmp_path):
 
 
 # ── Source field ──────────────────────────────────────────────────────────────
+
 
 def test_candidate_source_is_auto_delta():
     delta = _make_delta(["Aspose.BarCode.SomeType"])

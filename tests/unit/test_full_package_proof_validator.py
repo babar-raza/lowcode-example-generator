@@ -2,6 +2,7 @@
 Tests for Full Package Proof Validator (FPP-01..FPP-12)
 Sprint: lowcode-plugin-canonical-package-wave9-20260605
 """
+
 import json
 import pytest
 from pathlib import Path
@@ -24,31 +25,43 @@ def full_pkg(tmp_path):
     (pkg / "Program.cs").write_text("// test program")
     (pkg / "test-plugin.csproj").write_text("<Project></Project>")
     (pkg / "README.md").write_text("# Test Plugin for .NET")
-    (pkg / "source-provenance.json").write_text(json.dumps({
-        "family": "test-family",
-        "plugin_slug": "test-plugin",
-        "canonical_plugin_slug": "test-plugin",
-        "canonical_url": "https://products.aspose.net/test-family/test-plugin/",
-        "display_plugin_name": "Test Plugin for .NET",
-        "identity_status": "CANONICAL_IDENTITY_VERIFIED",
-    }))
-    (pkg / "package-manifest.json").write_text(json.dumps({
-        "package_key": "test-family/test-plugin",
-        "proof_type": "MIGRATED_FULL_PACKAGE",
-    }))
+    (pkg / "source-provenance.json").write_text(
+        json.dumps(
+            {
+                "family": "test-family",
+                "plugin_slug": "test-plugin",
+                "canonical_plugin_slug": "test-plugin",
+                "canonical_url": "https://products.aspose.net/test-family/test-plugin/",
+                "display_plugin_name": "Test Plugin for .NET",
+                "identity_status": "CANONICAL_IDENTITY_VERIFIED",
+            }
+        )
+    )
+    (pkg / "package-manifest.json").write_text(
+        json.dumps(
+            {
+                "package_key": "test-family/test-plugin",
+                "proof_type": "MIGRATED_FULL_PACKAGE",
+            }
+        )
+    )
     (pkg / "restore.log").write_text("restore output")
     (pkg / "build.log").write_text("build output")
     (pkg / "run.log").write_text("run output")
     out = pkg / "output"
     out.mkdir()
     (out / "result.pdf").write_bytes(b"PDF content here")
-    (pkg / "output-validation.json").write_text(json.dumps({
-        "package_key": "test-family/test-plugin",
-        "verdict": "PASS",
-        "restore_status": "SUCCESS",
-        "build_status": "SUCCESS",
-        "run_status": "SUCCESS",
-    }))
+    (pkg / "output-validation.json").write_text(
+        json.dumps(
+            {
+                "package_key": "test-family/test-plugin",
+                "verdict": "PASS",
+                "restore_status": "SUCCESS",
+                "build_status": "SUCCESS",
+                "run_status": "SUCCESS",
+            }
+        )
+    )
     return pkg
 
 
@@ -185,7 +198,8 @@ def test_proof_result_to_dict(full_pkg):
 
 def test_metadata_only_package_fails_fpp():
     """A package with only metadata files must fail FPP-01 and FPP-02."""
-    import tempfile, os
+    import os
+
     with tempfile.TemporaryDirectory() as tmp:
         pkg = Path(tmp) / "family" / "slug"
         pkg.mkdir(parents=True)

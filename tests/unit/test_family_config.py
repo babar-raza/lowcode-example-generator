@@ -203,14 +203,14 @@ class TestDuplicateConfigCleanup:
     """Verify stale disabled/ configs for words and pdf have been removed."""
 
     def test_disabled_words_config_does_not_exist(self):
-        assert not (DISABLED_DIR / "words.yml").exists(), (
-            "disabled/words.yml must be deleted — it was superseded by the active words.yml"
-        )
+        assert not (
+            DISABLED_DIR / "words.yml"
+        ).exists(), "disabled/words.yml must be deleted — it was superseded by the active words.yml"
 
     def test_disabled_pdf_config_does_not_exist(self):
-        assert not (DISABLED_DIR / "pdf.yml").exists(), (
-            "disabled/pdf.yml must be deleted — it was superseded by the active pdf.yml"
-        )
+        assert not (
+            DISABLED_DIR / "pdf.yml"
+        ).exists(), "disabled/pdf.yml must be deleted — it was superseded by the active pdf.yml"
 
     def test_active_words_config_loads_as_active(self):
         """Words was promoted from discovery_only to active for the controlled pilot."""
@@ -263,20 +263,22 @@ class TestFamilyPublishingTarget:
     def test_cells_publish_target_is_family_specific(self):
         """cells.yml published_plugin_examples_repo must be family-specific (owner or repo contains 'cells')."""
         from plugin_examples.publisher.publisher import _is_central_repo
+
         config = load_family_config(CELLS_CONFIG)
         pub = config.github.published_plugin_examples_repo
-        assert not _is_central_repo(pub.owner, pub.repo, "cells"), (
-            f"Cells publish target {pub.owner}/{pub.repo} must be family-specific, not central"
-        )
+        assert not _is_central_repo(
+            pub.owner, pub.repo, "cells"
+        ), f"Cells publish target {pub.owner}/{pub.repo} must be family-specific, not central"
 
     def test_words_publish_target_is_family_specific(self):
         """words.yml published_plugin_examples_repo must be family-specific (owner or repo contains 'words')."""
         from plugin_examples.publisher.publisher import _is_central_repo
+
         config = load_family_config(WORDS_CONFIG)
         pub = config.github.published_plugin_examples_repo
-        assert not _is_central_repo(pub.owner, pub.repo, "words"), (
-            f"Words publish target {pub.owner}/{pub.repo} must be family-specific, not central"
-        )
+        assert not _is_central_repo(
+            pub.owner, pub.repo, "words"
+        ), f"Words publish target {pub.owner}/{pub.repo} must be family-specific, not central"
 
     def test_central_repo_not_used_for_cells_or_words(self):
         """Neither cells.yml nor words.yml may use aspose/aspose-plugins-examples-dotnet as publish target."""
@@ -284,35 +286,35 @@ class TestFamilyPublishingTarget:
         for family, config_path in [("cells", CELLS_CONFIG), ("words", WORDS_CONFIG)]:
             config = load_family_config(config_path)
             pub = config.github.published_plugin_examples_repo
-            assert (pub.owner, pub.repo) != _CENTRAL, (
-                f"{family} must not use central placeholder {_CENTRAL[0]}/{_CENTRAL[1]} as publish target"
-            )
+            assert (
+                pub.owner,
+                pub.repo,
+            ) != _CENTRAL, f"{family} must not use central placeholder {_CENTRAL[0]}/{_CENTRAL[1]} as publish target"
 
     def test_pdf_config_is_active_for_controlled_pilot(self):
         """PDF must be active now that reflection dedup and publish target are resolved."""
         pdf_config_path = REPO_ROOT / "pipeline" / "configs" / "families" / "pdf.yml"
         config = load_family_config(pdf_config_path)
-        assert config.status == "active", (
-            "PDF must be active after controlled-pilot enablement"
-        )
+        assert config.status == "active", "PDF must be active after controlled-pilot enablement"
 
     def test_central_repo_allowed_defaults_false(self):
         """central_repo_allowed must default to False for all active families."""
         for config_path in [CELLS_CONFIG, WORDS_CONFIG]:
             config = load_family_config(config_path)
-            assert config.github.central_repo_allowed is False, (
-                f"{config.family} central_repo_allowed must default to False"
-            )
+            assert (
+                config.github.central_repo_allowed is False
+            ), f"{config.family} central_repo_allowed must default to False"
 
     def test_pdf_publish_target_is_family_specific(self):
         """pdf.yml published_plugin_examples_repo must be family-specific (aspose-pdf-net), not central placeholder."""
         from plugin_examples.publisher.publisher import _is_central_repo
+
         pdf_config_path = REPO_ROOT / "pipeline" / "configs" / "families" / "pdf.yml"
         config = load_family_config(pdf_config_path)
         pub = config.github.published_plugin_examples_repo
-        assert not _is_central_repo(pub.owner, pub.repo, "pdf"), (
-            f"PDF publish target {pub.owner}/{pub.repo} must be family-specific, not central placeholder"
-        )
+        assert not _is_central_repo(
+            pub.owner, pub.repo, "pdf"
+        ), f"PDF publish target {pub.owner}/{pub.repo} must be family-specific, not central placeholder"
 
     def test_pdf_publish_target_owner_is_aspose_pdf_net(self):
         """pdf.yml published_plugin_examples_repo.owner must be aspose-pdf-net."""
@@ -329,9 +331,9 @@ class TestFamilyPublishingTarget:
         pdf_config_path = REPO_ROOT / "pipeline" / "configs" / "families" / "pdf.yml"
         config = load_family_config(pdf_config_path)
         pub = config.github.published_plugin_examples_repo
-        assert pub.repo == "Aspose.PDF.LowCode-for-.NET-Examples", (
-            f"Expected repo='Aspose.PDF.LowCode-for-.NET-Examples' but got '{pub.repo}'."
-        )
+        assert (
+            pub.repo == "Aspose.PDF.LowCode-for-.NET-Examples"
+        ), f"Expected repo='Aspose.PDF.LowCode-for-.NET-Examples' but got '{pub.repo}'."
 
     def test_pdf_central_repo_not_used(self):
         """pdf.yml must not use aspose/aspose-plugins-examples-dotnet as publish target."""
@@ -339,9 +341,10 @@ class TestFamilyPublishingTarget:
         pdf_config_path = REPO_ROOT / "pipeline" / "configs" / "families" / "pdf.yml"
         config = load_family_config(pdf_config_path)
         pub = config.github.published_plugin_examples_repo
-        assert (pub.owner, pub.repo) != _CENTRAL, (
-            "pdf.yml must not use the central placeholder aspose/aspose-plugins-examples-dotnet"
-        )
+        assert (
+            pub.owner,
+            pub.repo,
+        ) != _CENTRAL, "pdf.yml must not use the central placeholder aspose/aspose-plugins-examples-dotnet"
 
 
 class TestExtraPackagesConfig:
@@ -410,12 +413,12 @@ class TestPerTypeConstraints:
         config = load_family_config(self.PDF_CONFIG)
         merger = config.per_type_constraints["Merger"]
         required = merger.get("required", [])
-        assert any("MergeOptions" in r for r in required), (
-            "Merger per_type_constraints must include REQUIRED: new MergeOptions("
-        )
-        assert any("Merger().Process" in r for r in required), (
-            "Merger per_type_constraints must include REQUIRED: new Merger().Process(options)"
-        )
+        assert any(
+            "MergeOptions" in r for r in required
+        ), "Merger per_type_constraints must include REQUIRED: new MergeOptions("
+        assert any(
+            "Merger().Process" in r for r in required
+        ), "Merger per_type_constraints must include REQUIRED: new Merger().Process(options)"
 
     def test_pdf_merger_forbidden_includes_pdffileeditor(self):
         config = load_family_config(self.PDF_CONFIG)
@@ -454,9 +457,9 @@ class TestPerTypeConstraints:
     def test_pdf_toc_generator_in_per_type_constraints(self):
         """Sprint 16: TocGenerator must have per_type_constraints defined in pdf.yml."""
         config = load_family_config(self.PDF_CONFIG)
-        assert "TocGenerator" in config.per_type_constraints, (
-            "TocGenerator must have per_type_constraints in pdf.yml (Sprint 16 next-wave)"
-        )
+        assert (
+            "TocGenerator" in config.per_type_constraints
+        ), "TocGenerator must have per_type_constraints in pdf.yml (Sprint 16 next-wave)"
         toc = config.per_type_constraints["TocGenerator"]
         required = toc.get("required", [])
         assert any("TocOptions" in r for r in required), "TocGenerator constraints must require TocOptions"
@@ -472,9 +475,9 @@ class TestPerTypeConstraints:
     def test_pdf_image_extractor_in_per_type_constraints(self):
         """Sprint 16: ImageExtractor must have per_type_constraints defined in pdf.yml."""
         config = load_family_config(self.PDF_CONFIG)
-        assert "ImageExtractor" in config.per_type_constraints, (
-            "ImageExtractor must have per_type_constraints in pdf.yml (Sprint 16 next-wave)"
-        )
+        assert (
+            "ImageExtractor" in config.per_type_constraints
+        ), "ImageExtractor must have per_type_constraints in pdf.yml (Sprint 16 next-wave)"
         ie = config.per_type_constraints["ImageExtractor"]
         required = ie.get("required", [])
         assert any("ImageExtractorOptions" in r for r in required), "ImageExtractor must require ImageExtractorOptions"
@@ -485,9 +488,7 @@ class TestPerTypeConstraints:
         config = load_family_config(self.PDF_CONFIG)
         ie = config.per_type_constraints["ImageExtractor"]
         forbidden = ie.get("forbidden", [])
-        assert any("AddOutput" in f for f in forbidden), (
-            "ImageExtractor is an extractor — AddOutput must be forbidden"
-        )
+        assert any("AddOutput" in f for f in forbidden), "ImageExtractor is an extractor — AddOutput must be forbidden"
 
     def test_pdf_allowed_types_includes_toc_and_image_extractor(self):
         """Sprint 16: TocGenerator and ImageExtractor must appear in allowed_types."""

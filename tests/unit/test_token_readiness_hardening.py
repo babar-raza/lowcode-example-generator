@@ -88,23 +88,25 @@ class TestCheckClassicToken:
 
     def test_fine_grained_error_message_mentions_classic_pat(self):
         _, reason = check_classic_token("github_pat_SomeToken")
-        assert "Classic PAT" in reason or "classic" in reason.lower(), \
-            "Error message must mention classic PAT requirement"
+        assert (
+            "Classic PAT" in reason or "classic" in reason.lower()
+        ), "Error message must mention classic PAT requirement"
 
     def test_fine_grained_error_message_mentions_repo_scope(self):
         _, reason = check_classic_token("github_pat_SomeToken")
-        assert "repo scope" in reason or "repo" in reason.lower(), \
-            "Error message must mention repo scope"
+        assert "repo scope" in reason or "repo" in reason.lower(), "Error message must mention repo scope"
 
     def test_fine_grained_error_message_not_accepted(self):
         _, reason = check_classic_token("github_pat_SomeToken")
-        assert "not accepted" in reason or "rejected" in reason.lower() or "fine-grained" in reason.lower(), \
-            "Error message must indicate fine-grained token is not accepted"
+        assert (
+            "not accepted" in reason or "rejected" in reason.lower() or "fine-grained" in reason.lower()
+        ), "Error message must indicate fine-grained token is not accepted"
 
     def test_fine_grained_error_message_contains_remediation(self):
         _, reason = check_classic_token("github_pat_SomeToken")
-        assert "GH_TOKEN" in reason or "ghp_" in reason, \
-            "Error message must contain remediation guidance (GH_TOKEN or ghp_ prefix)"
+        assert (
+            "GH_TOKEN" in reason or "ghp_" in reason
+        ), "Error message must contain remediation guidance (GH_TOKEN or ghp_ prefix)"
 
     def test_missing_token_returns_false_token_missing_reason(self):
         ok, reason = check_classic_token("")
@@ -118,8 +120,9 @@ class TestCheckClassicToken:
 
     def test_check_classic_uses_fine_grained_token_error_message(self):
         _, reason = check_classic_token("github_pat_Token")
-        assert reason == FINE_GRAINED_TOKEN_ERROR_MESSAGE, \
-            "check_classic_token must return the canonical FINE_GRAINED_TOKEN_ERROR_MESSAGE"
+        assert (
+            reason == FINE_GRAINED_TOKEN_ERROR_MESSAGE
+        ), "check_classic_token must return the canonical FINE_GRAINED_TOKEN_ERROR_MESSAGE"
 
 
 class TestFineGrainedTokenErrorMessageContent:
@@ -130,8 +133,7 @@ class TestFineGrainedTokenErrorMessageContent:
         assert "github_pat_" in FINE_GRAINED_TOKEN_ERROR_MESSAGE
 
     def test_error_message_mentions_git_data_api(self):
-        assert "Git Data API" in FINE_GRAINED_TOKEN_ERROR_MESSAGE or \
-               "git/blobs" in FINE_GRAINED_TOKEN_ERROR_MESSAGE
+        assert "Git Data API" in FINE_GRAINED_TOKEN_ERROR_MESSAGE or "git/blobs" in FINE_GRAINED_TOKEN_ERROR_MESSAGE
 
     def test_error_message_mentions_gh_token_mapping(self):
         assert "GH_TOKEN" in FINE_GRAINED_TOKEN_ERROR_MESSAGE
@@ -161,6 +163,7 @@ class TestTokenHardeningIntegration:
         # If these functions make network calls, they would be slow or fail offline.
         # They must complete instantly and deterministically.
         import time
+
         start = time.monotonic()
         for _ in range(1000):
             classify_token_type("ghp_abc")
@@ -171,6 +174,7 @@ class TestTokenHardeningIntegration:
     def test_repo_access_resolver_exports_all_new_constants(self):
         """All new token readiness constants must be importable from repo_access_resolver."""
         from plugin_examples.publisher import repo_access_resolver as rar
+
         assert hasattr(rar, "classify_token_type")
         assert hasattr(rar, "check_classic_token")
         assert hasattr(rar, "TOKEN_TYPE_CLASSIC_PAT")

@@ -123,22 +123,31 @@ class TestClassifyDocumentationHit:
 
 class TestIsDirectOpenaiConstruction:
     def test_approved_path_allowed(self):
-        assert is_direct_openai_construction(
-            "client = OpenAI(api_key=k)",
-            "src/plugin_examples/llm_router/providers/professionalize.py",
-        ) is False
+        assert (
+            is_direct_openai_construction(
+                "client = OpenAI(api_key=k)",
+                "src/plugin_examples/llm_router/providers/professionalize.py",
+            )
+            is False
+        )
 
     def test_unapproved_path_forbidden(self):
-        assert is_direct_openai_construction(
-            "client = OpenAI(api_key=k)",
-            "src/plugin_examples/generator/code_generator.py",
-        ) is True
+        assert (
+            is_direct_openai_construction(
+                "client = OpenAI(api_key=k)",
+                "src/plugin_examples/generator/code_generator.py",
+            )
+            is True
+        )
 
     def test_no_openai_call(self):
-        assert is_direct_openai_construction(
-            "import openai",
-            "src/any.py",
-        ) is False
+        assert (
+            is_direct_openai_construction(
+                "import openai",
+                "src/any.py",
+            )
+            is False
+        )
 
 
 class TestValidateProviderFamily:

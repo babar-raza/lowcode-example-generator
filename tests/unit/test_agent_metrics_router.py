@@ -20,8 +20,10 @@ class TestOpenAICompatibleMetrics:
 
         with patch("plugin_examples.llm_router.router.requests.post", return_value=mock_resp):
             result = _call_openai_compatible(
-                "http://fake/chat/completions", "test prompt",
-                metrics_collector=mc, metrics_provider="llm_professionalize",
+                "http://fake/chat/completions",
+                "test prompt",
+                metrics_collector=mc,
+                metrics_provider="llm_professionalize",
                 metrics_model="recommended",
             )
 
@@ -45,8 +47,10 @@ class TestOpenAICompatibleMetrics:
 
         with patch("plugin_examples.llm_router.router.requests.post", return_value=mock_resp):
             result = _call_openai_compatible(
-                "http://fake/v1", "p",
-                metrics_collector=mc, metrics_provider="test",
+                "http://fake/v1",
+                "p",
+                metrics_collector=mc,
+                metrics_provider="test",
             )
 
         assert result == "hi"
@@ -66,8 +70,10 @@ class TestOpenAICompatibleMetrics:
         with patch("plugin_examples.llm_router.router.requests.post", return_value=mock_resp):
             with pytest.raises(Exception, match="Server error"):
                 _call_openai_compatible(
-                    "http://fake/v1", "p",
-                    metrics_collector=mc, metrics_provider="test",
+                    "http://fake/v1",
+                    "p",
+                    metrics_collector=mc,
+                    metrics_provider="test",
                 )
 
         assert mc.api_calls_count == 1

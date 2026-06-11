@@ -1,0 +1,26 @@
+# Code ownership for lowcode-example-generator-gitlab
+# GitLab CODEOWNERS — read from project root by GitLab
+# Syntax: pattern @group/subgroup or @username
+# See: https://docs.gitlab.com/ee/user/project/codeowners/
+
+# Default owner for all files
+* @sialkot/cantt-smallize
+
+# Pipeline source code
+/src/plugin_examples/ @sialkot/cantt-smallize
+
+# Tests
+/tests/ @sialkot/cantt-smallize
+
+# CI/CD workflows
+/.github/workflows/ @sialkot/cantt-smallize
+/.gitlab-ci.yml @sialkot/cantt-smallize
+
+# Pipeline configuration and contracts
+/pipeline/ @sialkot/cantt-smallize
+
+# .NET reflection tool
+/tools/DllReflector/ @sialkot/cantt-smallize
+
+# Documentation
+/docs/ @sialkot/cantt-smallize

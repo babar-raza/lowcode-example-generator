@@ -5,6 +5,7 @@ produces the correct artifact structure when run with dry_run=True.
 
 Does NOT require GITHUB_TOKEN.
 """
+
 from __future__ import annotations
 
 import json
@@ -19,9 +20,11 @@ import pytest
 # Fixtures
 # ---------------------------------------------------------------------------
 
+
 def _make_probe_confirmed_registry(tmp_path: Path, family: str) -> None:
     """Write a capability registry with one PROBE_CONFIRMED entry."""
     import yaml
+
     registry_dir = tmp_path / "pipeline" / "plugin-capability-registry"
     registry_dir.mkdir(parents=True, exist_ok=True)
     entry = {
@@ -42,6 +45,7 @@ def _make_probe_confirmed_registry(tmp_path: Path, family: str) -> None:
 # ---------------------------------------------------------------------------
 # Tests
 # ---------------------------------------------------------------------------
+
 
 def test_nonlowcode_fallback_candidates_populated(tmp_path):
     """After _stage_fallback_registry_lookup, ctx.fallback_candidates must be non-empty."""
@@ -89,7 +93,9 @@ def test_shared_downstream_executor_called_for_nonlowcode(tmp_path):
         )
     ]
 
-    with patch.object(SharedDownstreamExecutor, "execute_batch", wraps=SharedDownstreamExecutor(strict=False).execute_batch) as mock_exec:
+    with patch.object(
+        SharedDownstreamExecutor, "execute_batch", wraps=SharedDownstreamExecutor(strict=False).execute_batch
+    ) as mock_exec:
         result = _generate_nonlowcode_examples(ctx)
 
     assert result["generation_mode"] == "nonlowcode_executor"
@@ -158,11 +164,17 @@ def test_probe_candidate_not_in_generation_candidates(tmp_path):
 
     # Override with a registry that has only PROBE_CANDIDATE
     import yaml
+
     registry_dir = tmp_path / "pipeline" / "plugin-capability-registry"
     (registry_dir / "cad.yaml").write_text(
-        yaml.dump({"family": "cad", "entries": [
-            {"plugin_slug": "not-validated", "status": "PROBE_CANDIDATE"},
-        ]}),
+        yaml.dump(
+            {
+                "family": "cad",
+                "entries": [
+                    {"plugin_slug": "not-validated", "status": "PROBE_CANDIDATE"},
+                ],
+            }
+        ),
         encoding="utf-8",
     )
 

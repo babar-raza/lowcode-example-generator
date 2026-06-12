@@ -35,11 +35,11 @@ COPY --from=dotnet-build /app/DllReflector ./DllReflector/
 
 # Install Python dependencies
 COPY pyproject.toml ./
+COPY src/ ./src/
 RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -e ".[dev]"
 
-# Copy application source
-COPY src/ ./src/
+# Copy pipeline definitions
 COPY pipeline/ ./pipeline/
 
 # Environment

@@ -23,7 +23,7 @@ ruff-lint:
     paths:
       - .pip-cache/
   before_script:
-    - python -m venv .pip-cache/venv
+    - python -m venv --clear .pip-cache/venv
     - source .pip-cache/venv/Scripts/activate
     - pip install "ruff>=0.4"
   script:
@@ -86,13 +86,15 @@ pip-audit:
 
 .test-base:
   # Shell executor: venv in .pip-cache/ persists between jobs (excluded from git clean).
+  # --clear recreates the venv on every job to prevent stale/corrupted venv from blocking tests.
+  # Wheels are still cached via PIP_CACHE_DIR so reinstall is fast.
   stage: test
   cache:
     key: pip-test
     paths:
       - .pip-cache/
   before_script:
-    - python -m venv .pip-cache/venv
+    - python -m venv --clear .pip-cache/venv
     - source .pip-cache/venv/Scripts/activate
     - pip install -e ".[dev]"
   artifacts:

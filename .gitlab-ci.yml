@@ -16,15 +16,16 @@ variables:
 ruff-lint:
   # Blocking gate: ruff check src/ tests/ exits 0 after TC-H09 fixes.
   # Scope matches CI: src/ and tests/ only (scripts/ and reports/ are legacy generated files).
+  # Shell executor: pip install --user to avoid admin requirement; invoke via python -m.
   stage: lint
-  image: python:3.13-slim
   cache:
     key: pip-lint
     paths:
       - .pip-cache/
+  before_script:
+    - pip install --user "ruff>=0.4"
   script:
-    - pip install "ruff>=0.4"
-    - ruff check src/ tests/
+    - python -m ruff check src/ tests/
   rules:
     - if: '$CI_PIPELINE_SOURCE == "push"'
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
@@ -59,18 +60,18 @@ gate-isolation:
 
 pip-audit:
   # TC-H04: Advisory dependency vulnerability scan. Never blocks the pipeline.
+  # Shell executor: --user installs to avoid admin requirement.
   stage: lint
-  image: python:3.13-slim
   allow_failure: true
   cache:
     key: pip-lint
     paths:
       - .pip-cache/
   before_script:
-    - pip install pip-audit
-    - pip install -e ".[dev]"
+    - pip install --user pip-audit
+    - pip install --user -e ".[dev]"
   script:
-    - pip-audit --strict
+    - python -m pip_audit --strict
   rules:
     - if: '$CI_PIPELINE_SOURCE == "push"'
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
@@ -78,14 +79,14 @@ pip-audit:
 # ── Tests ────────────────────────────────────────────────────
 
 .test-base:
+  # Shell executor: --user installs to avoid admin requirement on system Python.
   stage: test
   cache:
-    key: "pip-${PYTHON_VERSION}"
+    key: pip-test
     paths:
       - .pip-cache/
   before_script:
-    - pip install --upgrade pip
-    - pip install -e ".[dev]"
+    - pip install --user -e ".[dev]"
   artifacts:
     when: always
     reports:

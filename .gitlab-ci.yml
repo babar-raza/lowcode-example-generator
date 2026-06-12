@@ -188,8 +188,8 @@ weekly-discovery:
   script:
     - python -m plugin_examples discover-lowcode --all-families
     - git add workspace/verification/latest/
-    - git diff --cached --quiet || git commit -m "chore(discovery): weekly sweep $(date -u +%Y-%m-%d)"
-    - git diff HEAD~1..HEAD --quiet || git push origin HEAD:${CI_COMMIT_BRANCH}
+    - 'git diff --cached --quiet || git commit -m "chore(discovery): weekly sweep $(date -u +%Y-%m-%d)"'
+    - 'git diff HEAD~1..HEAD --quiet || git push origin HEAD:${CI_COMMIT_BRANCH}'
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_TYPE == "weekly-discovery"'
     - if: '$CI_PIPELINE_SOURCE == "web"'

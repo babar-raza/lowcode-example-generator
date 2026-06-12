@@ -62,16 +62,17 @@ gate-isolation:
 
 pip-audit:
   # TC-H04: Advisory dependency vulnerability scan. Never blocks the pipeline.
-  # Shell executor: venv in .pip-cache/ shared with ruff-lint (same cache key).
+  # Shell executor: isolated venv at .pip-cache/audit-venv so pip upgrade
+  # doesn't corrupt the shared venv used by ruff-lint and test jobs.
   stage: lint
   allow_failure: true
   cache:
-    key: pip-lint
+    key: pip-audit
     paths:
       - .pip-cache/
   before_script:
-    - python -m venv .pip-cache/venv
-    - source .pip-cache/venv/Scripts/activate
+    - python -m venv .pip-cache/audit-venv
+    - source .pip-cache/audit-venv/Scripts/activate
     - python -m pip install --upgrade pip
     - pip install pip-audit
     - pip install -e ".[dev]"

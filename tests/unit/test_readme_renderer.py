@@ -636,7 +636,7 @@ class TestPublishReadmeCommand:
 
         result = subprocess.run(
             [
-                str(_REPO_ROOT / ".venv" / "Scripts" / "python.exe"),
+                sys.executable,
                 "-m",
                 "plugin_examples",
                 "publish-readme",
@@ -662,7 +662,7 @@ class TestPublishReadmeCommand:
 
         result = subprocess.run(
             [
-                str(_REPO_ROOT / ".venv" / "Scripts" / "python.exe"),
+                sys.executable,
                 "-m",
                 "plugin_examples",
                 "publish-readme",
@@ -705,7 +705,7 @@ class TestPublishReadmeCommand:
         env_no_token["PYTHONPATH"] = str(_REPO_ROOT / "src")
         result = subprocess.run(
             [
-                str(_REPO_ROOT / ".venv" / "Scripts" / "python.exe"),
+                sys.executable,
                 "-m",
                 "plugin_examples",
                 "publish-readme",
@@ -732,7 +732,7 @@ class TestPublishReadmeCommand:
 
         result = subprocess.run(
             [
-                str(_REPO_ROOT / ".venv" / "Scripts" / "python.exe"),
+                sys.executable,
                 "-m",
                 "plugin_examples",
                 "publish-readme",

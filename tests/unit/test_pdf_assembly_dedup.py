@@ -33,6 +33,7 @@ _REFLECTOR_DLL = (
 
 
 class TestReadAssemblyIdentity:
+    @pytest.mark.skipif(not _REFLECTOR_DLL.exists(), reason="DllReflector.dll not built — run dotnet build first")
     def test_read_assembly_identity_extracts_name_version(self):
         """read_assembly_identity() reads a real .NET DLL and returns name from PE metadata."""
         pytest.importorskip("struct")  # always available; guards against misconfiguration

@@ -6,6 +6,8 @@ stages:
 
 variables:
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.pip-cache"
+  GIT_DEPTH: "1"
+  GIT_CLEAN_FLAGS: "-ffdx --exclude=.pip-cache"
 
 # ── Lint ─────────────────────────────────────────────────────
 

@@ -72,6 +72,7 @@ pip-audit:
   before_script:
     - python -m venv .pip-cache/venv
     - source .pip-cache/venv/Scripts/activate
+    - pip install --upgrade pip
     - pip install pip-audit
     - pip install -e ".[dev]"
   script:

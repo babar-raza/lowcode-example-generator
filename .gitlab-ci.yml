@@ -75,7 +75,7 @@ pip-audit:
     - pip install pip-audit
     - pip install -e ".[dev]"
   script:
-    - pip-audit --strict
+    - pip-audit --strict --skip-editable
   rules:
     - if: '$CI_PIPELINE_SOURCE == "push"'
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'

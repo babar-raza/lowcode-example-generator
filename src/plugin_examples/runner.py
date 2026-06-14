@@ -742,6 +742,13 @@ def _stage_fallback_registry_lookup(ctx: PipelineContext) -> dict:
     - No registry YAML file exists for this family
 
     Never hard-stops. Never writes to format-authority.
+
+    .. note:: Data flow clarification
+        This stage populates ``ctx.fallback_candidates`` for evidence/audit
+        purposes. The live generation path in ``_stage_generation`` uses
+        ``ctx.planning.ready_scenarios`` (from ``_stage_scenario_planning``)
+        and does NOT read ``ctx.fallback_candidates``. The candidates JSON
+        written here serves as an evidence artifact only.
     Writes fallback_candidates.json to ctx.run_dir as a dry-run artifact.
     """
     import json
@@ -2270,6 +2277,13 @@ def run_pipeline(
     family_config_path: str | None = None,
 ) -> dict:
     """Run the full pipeline and return a structured report dict."""
+    # Verify stage I/O contracts are consistent at startup (advisory — logs warnings only)
+    from plugin_examples.contracts.stage_contracts import check_contract_consistency
+    _contract_errors = check_contract_consistency()
+    if _contract_errors:
+        for _err in _contract_errors:
+            logger.warning("stage_contract_violation", extra={"error": _err})
+
     if repo_root is None:
         repo_root = Path(__file__).resolve().parents[2]
 

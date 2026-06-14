@@ -15,11 +15,20 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from plugin_examples.compliance.audit_trail import AuditEntry, AuditTrail
+from plugin_examples.compliance.reporter import compute_compliance_trend, generate_compliance_report
+from plugin_examples.observability import get_logger
+from plugin_examples.policy.loader import load_gate_policy, load_slos
 from plugin_examples.portfolio_action_planner import (
     ActionBoard,
     compute_action_board,
     render_markdown,
 )
+from plugin_examples.reliability.sli_emitter import HandlerTimer, compute_slis_from_loop_metrics
+from plugin_examples.reliability.slo_monitor import check_slos, slo_summary
+from plugin_examples.reliability.slo_remediator import apply_remediations, compute_remediations
+
+logger = get_logger(__name__)
 
 
 def board_fingerprint(board: ActionBoard) -> str:
@@ -79,12 +88,39 @@ class CycleResult:
 
 
 @dataclass
+class LoopMetrics:
+    """Observable metrics for the agent execution loop."""
+
+    total_cycles: int = 0
+    total_duration_ms: int = 0
+    actions_executed: int = 0
+    actions_deferred: int = 0
+    handler_errors: int = 0
+    deprioritized_count: int = 0
+    fingerprint_changes: int = 0
+    idempotent_stops: int = 0
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "total_cycles": self.total_cycles,
+            "total_duration_ms": self.total_duration_ms,
+            "actions_executed": self.actions_executed,
+            "actions_deferred": self.actions_deferred,
+            "handler_errors": self.handler_errors,
+            "deprioritized_count": self.deprioritized_count,
+            "fingerprint_changes": self.fingerprint_changes,
+            "idempotent_stops": self.idempotent_stops,
+        }
+
+
+@dataclass
 class LoopResult:
     cycles: list[CycleResult] = field(default_factory=list)
     final_board: ActionBoard | None = None
     total_executed: int = 0
     total_deferred: int = 0
     stop_reason: str = ""
+    metrics: LoopMetrics = field(default_factory=LoopMetrics)
 
     def to_dict(self) -> dict[str, Any]:
         d: dict[str, Any] = {
@@ -92,6 +128,7 @@ class LoopResult:
             "total_executed": self.total_executed,
             "total_deferred": self.total_deferred,
             "stop_reason": self.stop_reason,
+            "metrics": self.metrics.to_dict(),
             "cycles": [c.to_dict() for c in self.cycles],
         }
         if self.final_board and self.final_board.dirty_categories:
@@ -244,8 +281,16 @@ def run_execution_loop(
     import time
 
     result = LoopResult()
+    loop_start = time.monotonic()
     evidence_dir.mkdir(parents=True, exist_ok=True)
     prev_fingerprint: str | None = None
+
+    # Load policy-as-code definitions (falls back to defaults if YAML missing)
+    gate_policy = load_gate_policy(repo_root)
+    slo_defs = load_slos(repo_root)
+
+    # Initialize audit trail for action-to-policy-rule traceability
+    audit = AuditTrail()
 
     # Load cross-run history for adaptive deprioritization (lazy import — optional feature)
     history = None
@@ -281,6 +326,7 @@ def run_execution_loop(
             if prev_cycle and not prev_cycle.changed_actions:
                 cycle.verdict = "IDEMPOTENT_NO_CHANGE"
                 cycle.duration_ms = int((time.monotonic() - t0) * 1000)
+                result.metrics.idempotent_stops += 1
                 result.cycles.append(cycle)
                 result.stop_reason = "stopped_no_change"
                 break
@@ -292,7 +338,7 @@ def run_execution_loop(
         deferred_this_cycle: list[dict[str, str]] = []
 
         for action in board.safe_actions():
-            if action.type in _APPROVAL_GATED_TYPES:
+            if action.type in gate_policy.approval_gated_types:
                 if dry_run_remote or not action.gate_present:
                     deferred_this_cycle.append(
                         {
@@ -301,10 +347,16 @@ def run_execution_loop(
                             "taskcard_id": action.taskcard_id or "",
                         }
                     )
+                    audit.record(AuditEntry(
+                        action_id=action.id, decision="DEFER",
+                        policy_rule="approval_gated_type",
+                        detail=f"type={action.type}",
+                    ))
                     continue
 
             # Adaptive deprioritization: skip families with repeated failures
             if history is not None and action.family and history.should_deprioritize(action.family):
+                result.metrics.deprioritized_count += 1
                 deferred_this_cycle.append(
                     {
                         "id": action.id,
@@ -313,34 +365,53 @@ def run_execution_loop(
                         "taskcard_id": action.taskcard_id or "",
                     }
                 )
+                audit.record(AuditEntry(
+                    action_id=action.id, decision="DEFER",
+                    policy_rule="deprioritization_threshold",
+                    detail=f"family={action.family}",
+                ))
                 continue
 
             handler = _ACTION_HANDLERS.get(action.id)
             if handler:
                 try:
-                    handler_result = handler(
-                        repo_root,
-                        evidence_dir,
-                        action_id=action.id,
-                    )
+                    with HandlerTimer(action.id) as timer:
+                        handler_result = handler(
+                            repo_root,
+                            evidence_dir,
+                            action_id=action.id,
+                        )
                     executed_this_cycle.append(action.id)
                     if handler_result.get("changed", False):
                         changed_this_cycle.append(action.id)
                     else:
                         noop_this_cycle.append(action.id)
-                    # Save handler result
+                    # Save handler result with SLI data
+                    handler_result["sli_duration_ms"] = timer.duration_ms
                     handler_path = evidence_dir / f"handler-{action.id.lower()}-cycle{cycle_num:02d}.json"
                     handler_path.write_text(
                         json.dumps(handler_result, indent=2),
                         encoding="utf-8",
                     )
+                    audit.record(AuditEntry(
+                        action_id=action.id, decision="EXECUTE",
+                        policy_rule="handler_dispatch",
+                        goal_relevance=[action.type],
+                        evidence_ref=str(handler_path),
+                    ))
                 except Exception as e:
+                    result.metrics.handler_errors += 1
                     deferred_this_cycle.append(
                         {
                             "id": action.id,
                             "reason": f"handler error: {e}",
                         }
                     )
+                    audit.record(AuditEntry(
+                        action_id=action.id, decision="BLOCK",
+                        policy_rule="handler_error",
+                        detail=str(e),
+                    ))
             else:
                 # No handler — defer with taskcard
                 deferred_this_cycle.append(
@@ -350,6 +421,11 @@ def run_execution_loop(
                         "taskcard_id": action.taskcard_id or "",
                     }
                 )
+                audit.record(AuditEntry(
+                    action_id=action.id, decision="BLOCK",
+                    policy_rule="no_registered_handler",
+                    detail=f"type={action.type}",
+                ))
 
         cycle.executed = executed_this_cycle
         cycle.changed_actions = changed_this_cycle
@@ -371,6 +447,9 @@ def run_execution_loop(
 
         cycle.verdict = f"EXECUTED_{len(executed_this_cycle)}_ACTIONS"
         result.cycles.append(cycle)
+        _save_checkpoint(evidence_dir, cycle_num, result)
+        if prev_fingerprint is not None and fp != prev_fingerprint:
+            result.metrics.fingerprint_changes += 1
         prev_fingerprint = fp
 
         if cycle_num >= max_cycles:
@@ -400,7 +479,90 @@ def run_execution_loop(
     final_path = evidence_dir / "planner-loop-final-board.json"
     final_path.write_text(result.final_board.to_json(), encoding="utf-8")
 
+    # Finalize loop metrics
+    result.metrics.total_cycles = len(result.cycles)
+    result.metrics.total_duration_ms = int((time.monotonic() - loop_start) * 1000)
+    result.metrics.actions_executed = result.total_executed
+    result.metrics.actions_deferred = result.total_deferred
+
+    # Emit structured metrics log
+    logger.info("loop_metrics", extra={"loop_metrics": result.metrics.to_dict()})
+
+    # Emit SLI events derived from loop metrics
+    compute_slis_from_loop_metrics(result.metrics)
+
+    # Evaluate SLO compliance and persist results
+    slo_results = None
+    if slo_defs:
+        slo_results = check_slos(slo_defs, history, current_metrics=result.metrics)
+        slo_path = evidence_dir / "slo-check-results.json"
+        slo_path.write_text(
+            json.dumps(slo_summary(slo_results), indent=2),
+            encoding="utf-8",
+        )
+        logger.info("slo_evaluation", extra={"slo_summary": slo_summary(slo_results)})
+
+        # Auto-remediation: respond to SLO violations with concrete actions
+        if slo_results and not all(r.passed for r in slo_results):
+            remediations = compute_remediations(slo_results, gate_policy)
+            if remediations:
+                loop_config: dict[str, Any] = {"max_cycles": max_cycles}
+                apply_remediations(remediations, loop_config, audit=audit)
+                remediation_path = evidence_dir / "slo-remediations.json"
+                remediation_path.write_text(
+                    json.dumps([r.to_dict() for r in remediations], indent=2),
+                    encoding="utf-8",
+                )
+                logger.info("slo_remediation_applied", extra={"count": len(remediations)})
+
+    # Compute compliance trend and generate report
+    if history is not None:
+        trend = compute_compliance_trend(history, slo_results=slo_results)
+        generate_compliance_report(trend, evidence_dir)
+        logger.info("compliance_trend", extra={"trend": trend.to_dict()})
+
+    # Persist audit trail
+    audit.save(evidence_dir / "audit-trail.json")
+
+    # Persist metrics to evidence directory
+    metrics_path = evidence_dir / "planner-loop-metrics.json"
+    metrics_path.write_text(
+        json.dumps(result.metrics.to_dict(), indent=2),
+        encoding="utf-8",
+    )
+
     return result
+
+
+# ---------------------------------------------------------------------------
+# Checkpoint persistence for resume-from-failure
+# ---------------------------------------------------------------------------
+
+
+def _save_checkpoint(evidence_dir: Path, cycle_num: int, result: LoopResult) -> None:
+    """Save loop state checkpoint for resume-from-failure (atomic write)."""
+    checkpoint = {
+        "cycle": cycle_num,
+        "total_executed": result.total_executed,
+        "total_deferred": result.total_deferred,
+        "metrics": result.metrics.to_dict(),
+        "cycles": [c.to_dict() for c in result.cycles],
+    }
+    path = evidence_dir / "loop-checkpoint.json"
+    tmp = path.with_suffix(".tmp")
+    tmp.write_text(json.dumps(checkpoint, indent=2), encoding="utf-8")
+    tmp.replace(path)
+
+
+def _load_checkpoint(evidence_dir: Path) -> dict[str, Any] | None:
+    """Load checkpoint if it exists."""
+    path = evidence_dir / "loop-checkpoint.json"
+    if path.exists():
+        try:
+            return json.loads(path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            return None
+    return None
 
 
 # ---------------------------------------------------------------------------

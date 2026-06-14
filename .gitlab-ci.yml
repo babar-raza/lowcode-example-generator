@@ -60,6 +60,47 @@ gate-isolation:
     - if: '$CI_PIPELINE_SOURCE == "push"'
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
+bandit-sast:
+  # Blocking SAST gate: bandit scans src/ for security issues.
+  # Skips configured in pyproject.toml [tool.bandit] section.
+  stage: lint
+  cache:
+    key: pip-bandit
+    paths:
+      - .pip-cache/
+  before_script:
+    - python -m venv --clear .pip-cache/bandit-venv
+    - source .pip-cache/bandit-venv/Scripts/activate
+    - pip install "bandit[toml]>=1.7"
+  script:
+    - bandit -c pyproject.toml -r src/ -f json -o bandit-report.json || true
+    - bandit -c pyproject.toml -r src/
+  artifacts:
+    when: always
+    paths:
+      - bandit-report.json
+    expire_in: 7 days
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+license-check:
+  # Blocking gate: dependency licenses must be in the approved allowlist.
+  stage: lint
+  cache:
+    key: pip-license
+    paths:
+      - .pip-cache/
+  before_script:
+    - python -m venv --clear .pip-cache/license-venv
+    - source .pip-cache/license-venv/Scripts/activate
+    - pip install pip-licenses -e .
+  script:
+    - pip-licenses --allow-only="MIT License;BSD License;BSD;Apache Software License;ISC License;ISC;Python Software Foundation License;Mozilla Public License 2.0 (MPL 2.0);Public Domain;The Unlicense (Unlicense)"
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
 pip-audit:
   # TC-H04: Advisory dependency vulnerability scan. Never blocks the pipeline.
   # Shell executor: isolated venv at .pip-cache/audit-venv so pip upgrade
@@ -152,6 +193,76 @@ integration-tests-py313:
     - >
       python -m pytest tests/integration -v --timeout=120
       --junitxml=report-integration-py313.xml
+
+mutation-testing:
+  # Mutation testing — tracks mutation score trend for the critical-path modules.
+  # PLATFORM NOTE: mutmut does not support Windows natively (issue #397).
+  # This CI runner uses a Windows shell executor; mutmut is therefore manual-only.
+  # To run: trigger manually on a Linux runner or use WSL2.
+  # Scope: gates/, policy/loader, slo_monitor, compliance/reporter, slo_remediator, stage_contracts
+  # Target threshold: 70% mutation score (to be validated when Linux runner is available)
+  stage: test
+  allow_failure: true
+  cache:
+    key: pip-mutmut
+    paths:
+      - .pip-cache/
+  before_script:
+    - python -m venv --clear .pip-cache/mutmut-venv
+    - source .pip-cache/mutmut-venv/Scripts/activate
+    - pip install -e ".[dev]"
+  script:
+    - >
+      mutmut run
+      --paths-to-mutate src/plugin_examples/gates/,src/plugin_examples/policy/loader.py,src/plugin_examples/reliability/slo_monitor.py,src/plugin_examples/compliance/reporter.py,src/plugin_examples/reliability/slo_remediator.py,src/plugin_examples/contracts/stage_contracts.py
+      --runner "python -m pytest tests/unit/ -x -q --timeout=30"
+    - mutmut results
+    - |
+      python -c "
+      import subprocess, sys, re
+      out = subprocess.run(['mutmut', 'results'], capture_output=True, text=True).stdout
+      killed = len(re.findall(r'Mutant .+ killed', out)) + len(re.findall(r'Mutant .+ timeout', out))
+      survived = len(re.findall(r'Mutant .+ survived', out))
+      total = killed + survived
+      if total == 0:
+          print('No mutants found or mutmut unsupported on this platform'); sys.exit(0)
+      score = killed / total * 100
+      print(f'Mutation score: {score:.1f}% ({killed}/{total} killed)')
+      if score < 70:
+          print(f'WARN: mutation score {score:.1f}% < 70% threshold'); sys.exit(0)
+      print('PASS: mutation score meets threshold')
+      "
+  artifacts:
+    when: always
+    paths:
+      - .mutmut-cache/
+    expire_in: 7 days
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+      when: manual
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: manual
+
+compliance-gate:
+  # Policy-as-code compliance gate: runs doctor health checks including
+  # SLO compliance, gate policy, and all EHV validators.
+  extends: .test-base
+  script:
+    - python -m plugin_examples doctor --format json > doctor-report.json
+    - |
+      python -c "
+      import sys, json
+      d = json.load(open('doctor-report.json'))
+      f = d['summary']['failed']
+      t = d['summary']['total']
+      print('Doctor: ' + str(t) + ' checks, ' + str(f) + ' failed')
+      sys.exit(1 if f > 0 else 0)
+      "
+  artifacts:
+    when: always
+    paths:
+      - doctor-report.json
+    expire_in: 7 days
 
 # ── .NET Build ───────────────────────────────────────────────
 

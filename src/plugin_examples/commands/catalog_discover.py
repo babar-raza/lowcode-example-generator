@@ -129,6 +129,11 @@ def add_parser(subparsers):
         default=1000,
         help="Delay between HTTP requests in milliseconds (default: 1000)",
     )
+    parser.add_argument(
+        "--enrich-registry",
+        action="store_true",
+        help="Write plugin_page_hash back into registry YAMLs",
+    )
     parser.set_defaults(func=handle)
     return parser
 
@@ -223,6 +228,11 @@ def handle(args) -> int:
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(catalog, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"Catalog written: {output_path} ({catalog['total_entries']} entries)")
+
+    if getattr(args, "enrich_registry", False):
+        enriched = _enrich_registry_hashes(repo_root, families_map)
+        print(f"Registry enrichment: {enriched} entries updated with plugin_page_hash")
+
     return 0
 
 
@@ -445,3 +455,65 @@ def _enrich_entry(base_entry, html: str, family_slug: str, timestamp: str) -> di
         "marketing_only": True,
         "extraction_timestamp": timestamp,
     }
+
+
+def _enrich_registry_hashes(
+    repo_root: Path, families_map: dict[str, list[dict]]
+) -> int:
+    """Write plugin_page_hash from catalog discovery back into registry YAMLs.
+
+    For each family in families_map, look up the corresponding registry YAML
+    and update the plugin_page_hash field on entries whose plugin_slug matches.
+    """
+    import yaml
+
+    registry_dir = repo_root / "pipeline" / "plugin-capability-registry"
+    updated_count = 0
+
+    # Build slug → content_hash lookup from catalog discovery results
+    hash_by_slug: dict[str, str] = {}
+    for fam_entries in families_map.values():
+        for entry in fam_entries:
+            slug = entry.get("plugin_slug") or entry.get("slug", "")
+            content_hash = entry.get("content_hash") or entry.get("page_hash")
+            if slug and content_hash:
+                hash_by_slug[slug] = content_hash
+
+    # Also build family-level hash (hash of index page) for entries without
+    # a direct slug match
+    family_hash: dict[str, str] = {}
+    for fam_slug, fam_entries in families_map.items():
+        for entry in fam_entries:
+            ch = entry.get("content_hash") or entry.get("page_hash")
+            if ch:
+                family_hash.setdefault(fam_slug, ch)
+
+    for registry_file in sorted(registry_dir.glob("*.yaml")):
+        if registry_file.name == "schema.yaml":
+            continue
+        family_slug = registry_file.stem
+
+        with open(registry_file, encoding="utf-8") as fh:
+            raw = fh.read()
+
+        data = yaml.safe_load(raw) or {}
+        entries = data.get("entries", []) or []
+        modified = False
+
+        for entry in entries:
+            if not isinstance(entry, dict):
+                continue
+            slug = entry.get("plugin_slug", "")
+            # Try exact slug match first, then family-level fallback
+            new_hash = hash_by_slug.get(slug) or family_hash.get(family_slug)
+            if new_hash and entry.get("plugin_page_hash") != new_hash:
+                entry["plugin_page_hash"] = new_hash
+                modified = True
+                updated_count += 1
+
+        if modified:
+            with open(registry_file, "w", encoding="utf-8") as fh:
+                yaml.dump(data, fh, default_flow_style=False, allow_unicode=True, sort_keys=False)
+            logger.info("Updated %s with plugin_page_hash", registry_file.name)
+
+    return updated_count

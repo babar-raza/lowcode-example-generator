@@ -96,7 +96,7 @@ license-check:
     - source .pip-cache/license-venv/Scripts/activate
     - pip install pip-licenses -e .
   script:
-    - pip-licenses --allow-only="MIT License;BSD License;BSD;Apache Software License;ISC License;ISC;Python Software Foundation License;Mozilla Public License 2.0 (MPL 2.0);Public Domain;The Unlicense (Unlicense)"
+    - pip-licenses --allow-only="MIT License;MIT;BSD License;BSD;Apache Software License;ISC License;ISC;Python Software Foundation License;Mozilla Public License 2.0 (MPL 2.0);Public Domain;The Unlicense (Unlicense)"
   rules:
     - if: '$CI_PIPELINE_SOURCE == "push"'
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
@@ -197,53 +197,41 @@ integration-tests-py313:
       --cov=src/plugin_examples --cov-report=term-missing
 
 mutation-testing:
-  # Mutation testing — tracks mutation score trend for the critical-path modules.
-  # PLATFORM NOTE: mutmut does not support Windows natively (issue #397).
-  # This CI runner uses a Windows shell executor; mutmut is therefore manual-only.
-  # To run: trigger manually on a Linux runner or use WSL2.
+  # Mutation testing via WSL — runs mutmut inside Ubuntu 22.04 on the Windows shell executor.
   # Scope: gates/, policy/loader, slo_monitor, compliance/reporter, slo_remediator, stage_contracts
-  # Target threshold: 70% mutation score (to be validated when Linux runner is available)
+  # Target threshold: 70% mutation score (advisory until baseline established)
   stage: test
   allow_failure: true
-  cache:
-    key: pip-mutmut
-    paths:
-      - .pip-cache/
-  before_script:
-    - python -m venv --clear .pip-cache/mutmut-venv
-    - source .pip-cache/mutmut-venv/Scripts/activate
-    - pip install -e ".[dev]"
   script:
-    - >
-      mutmut run
-      --paths-to-mutate src/plugin_examples/gates/,src/plugin_examples/policy/loader.py,src/plugin_examples/reliability/slo_monitor.py,src/plugin_examples/compliance/reporter.py,src/plugin_examples/reliability/slo_remediator.py,src/plugin_examples/contracts/stage_contracts.py
-      --runner "python -m pytest tests/unit/ -x -q --timeout=30"
-    - mutmut results
+    # Start WSL if stopped and verify Python3 available
+    - wsl.exe -d Ubuntu-22.04 -- echo "WSL ready"
+    - wsl.exe -d Ubuntu-22.04 -- bash -c "which python3 || (sudo apt-get update -qq && sudo apt-get install -y -qq python3 python3-pip python3-venv)"
+    # Convert build path to WSL-compatible path
+    - WSL_DIR=$(wsl.exe -d Ubuntu-22.04 -- wslpath -u "$(pwd -W)" | tr -d '\r')
+    # Run mutation testing inside WSL
+    - wsl.exe -d Ubuntu-22.04 -- bash "$WSL_DIR/scripts/wsl-mutmut.sh" "$WSL_DIR"
+    # Parse results on Windows side
     - |
       python -c "
-      import subprocess, sys, re
-      out = subprocess.run(['mutmut', 'results'], capture_output=True, text=True).stdout
-      killed = len(re.findall(r'Mutant .+ killed', out)) + len(re.findall(r'Mutant .+ timeout', out))
-      survived = len(re.findall(r'Mutant .+ survived', out))
-      total = killed + survived
-      if total == 0:
-          print('No mutants found or mutmut unsupported on this platform'); sys.exit(0)
-      score = killed / total * 100
-      print(f'Mutation score: {score:.1f}% ({killed}/{total} killed)')
-      if score < 70:
-          print(f'WARN: mutation score {score:.1f}% < 70% threshold'); sys.exit(0)
+      import json, sys
+      try:
+          d = json.load(open('mutmut-summary.json'))
+      except FileNotFoundError:
+          print('No mutmut-summary.json found'); sys.exit(0)
+      print(f'Mutation score: {d[\"score\"]}% ({d[\"killed\"]}/{d[\"total\"]} killed)')
+      if d['score'] < 70:
+          print(f'WARN: mutation score {d[\"score\"]}% < 70% threshold'); sys.exit(0)
       print('PASS: mutation score meets threshold')
       "
   artifacts:
     when: always
     paths:
       - .mutmut-cache/
+      - mutmut-summary.json
     expire_in: 7 days
   rules:
     - if: '$CI_PIPELINE_SOURCE == "push"'
-      when: manual
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-      when: manual
 
 compliance-gate:
   # Policy-as-code compliance gate: runs doctor health checks including

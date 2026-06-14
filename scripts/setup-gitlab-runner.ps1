@@ -1,226 +1,234 @@
 #!/usr/bin/env pwsh
 # setup-gitlab-runner.ps1
-# Fully automatic GitLab Runner registration for this project.
+# Automatic GitLab Runner registration for this project.
 #
-# What it does:
-#   1. Reads gl_pat from the system environment
-#   2. Resolves the GitLab project ID via API
-#   3. Creates a runner authentication token via the GitLab API (no UI needed)
-#   4. Detects whether gitlab-runner is a Docker container or a system binary
-#   5. Registers the runner against this project
-#   6. Adds gl_pat as a masked CI/CD variable in the project (for scheduled jobs)
-#   7. Verifies and prints the pipeline URL
+# Steps:
+#   1. Reads gl_pat from system/user/session environment
+#   2. Resolves project ID via GitLab API
+#   3. Creates runner auth token via GitLab API (no browser needed)
+#   4. Detects Docker container or binary installation
+#   5. Registers runner with Docker executor
+#   6. Adds gl_pat as masked CI/CD variable
+#   7. Verifies and prints links
 #
-# Prerequisites:
-#   - gl_pat set as a Windows system environment variable (write_repository + api scopes)
-#   - Docker Desktop running (or gitlab-runner.exe in PATH)
-#   - gitlab/gitlab-runner Docker container OR gitlab-runner.exe installed
-#
-# Usage (from repo root):
+# Usage:
 #   .\scripts\setup-gitlab-runner.ps1
-#   .\scripts\setup-gitlab-runner.ps1 -Force          # re-register if already exists
-#   .\scripts\setup-gitlab-runner.ps1 -SkipCiVar      # skip adding gl_pat CI variable
-#   .\scripts\setup-gitlab-runner.ps1 -DryRun         # print steps without executing
+#   .\scripts\setup-gitlab-runner.ps1 -Force       # re-register if already exists
+#   .\scripts\setup-gitlab-runner.ps1 -SkipCiVar   # skip adding gl_pat variable
+#   .\scripts\setup-gitlab-runner.ps1 -DryRun      # preview without executing
 
 param(
     [string]$RunnerDescription = "local-docker-lowcode",
-    [string]$DefaultImage = "python:3.13-slim",
+    [string]$DefaultImage      = "python:3.13-slim",
     [switch]$Force,
     [switch]$SkipCiVar,
     [switch]$DryRun
 )
 
-Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
-# ── Config ────────────────────────────────────────────────────────────────────
-$GITLAB_URL  = "https://gitlab.recruitize.ai"
+# --- Config ------------------------------------------------------------------
+$GITLAB_URL   = "https://gitlab.recruitize.ai"
 $PROJECT_PATH = "sialkot/cantt-smallize/lowcode-example-generator"
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
-function Write-Step([string]$msg) { Write-Host "`n=== $msg ===" -ForegroundColor Cyan }
-function Write-Ok([string]$msg)   { Write-Host "  OK  $msg" -ForegroundColor Green }
-function Write-Warn([string]$msg) { Write-Host "  WARN $msg" -ForegroundColor Yellow }
-function Write-Fail([string]$msg) { Write-Host "  FAIL $msg" -ForegroundColor Red }
+# Pre-initialize all variables
+$Pat              = ""
+$ProjectId        = 0
+$RunnerToken      = ""
+$skipRegistration = $false
+$runnerContainer  = ""
+$runnerBinary     = $false
 
-function Invoke-GL {
-    param([string]$Method = "GET", [string]$Path, [hashtable]$Body = @{})
-    $uri = "$GITLAB_URL/api/v4$Path"
+# --- Helpers -----------------------------------------------------------------
+function Write-Step([string]$msg) { Write-Host "`n=== $msg ===" -ForegroundColor Cyan }
+function Write-Ok([string]$msg)   { Write-Host "  [OK]   $msg" -ForegroundColor Green }
+function Write-Warn([string]$msg) { Write-Host "  [WARN] $msg" -ForegroundColor Yellow }
+function Write-Fail([string]$msg) { Write-Host "  [FAIL] $msg" -ForegroundColor Red }
+
+function Invoke-GL([string]$Method = "GET", [string]$Path, [string]$JsonBody = "") {
     $headers = @{ "PRIVATE-TOKEN" = $Pat }
-    $params = @{ Uri = $uri; Headers = $headers; Method = $Method; ErrorAction = "Stop" }
-    if ($Method -ne "GET" -and $Body.Count -gt 0) {
-        $params["Body"] = ($Body | ConvertTo-Json -Depth 5)
-        $params["ContentType"] = "application/json"
+    $uri = "$GITLAB_URL/api/v4$Path"
+    if ($Method -eq "GET" -or $JsonBody -eq "") {
+        return Invoke-RestMethod -Uri $uri -Headers $headers -Method $Method
     }
-    return Invoke-RestMethod @params
+    return Invoke-RestMethod -Uri $uri -Headers $headers -Method $Method `
+        -Body $JsonBody -ContentType "application/json"
 }
 
-# ── Step 0: Read gl_pat ───────────────────────────────────────────────────────
-Write-Step "Reading gl_pat"
+# --- Step 0: Read gl_pat -----------------------------------------------------
+Write-Step "Step 0 - Reading gl_pat"
 $Pat = [System.Environment]::GetEnvironmentVariable("gl_pat", "Machine")
+if (-not $Pat) { $Pat = [System.Environment]::GetEnvironmentVariable("gl_pat", "User") }
 if (-not $Pat) { $Pat = $env:gl_pat }
 if (-not $Pat) {
-    Write-Fail "gl_pat not found in system or user environment variables."
-    Write-Host "  Set it with: [System.Environment]::SetEnvironmentVariable('gl_pat','<value>','Machine')"
+    Write-Fail "gl_pat not found in Machine, User, or session environment."
+    Write-Host "  Set it: [System.Environment]::SetEnvironmentVariable('gl_pat','YOUR_PAT','Machine')"
     exit 1
 }
 Write-Ok "gl_pat found (length=$($Pat.Length))"
+if ($DryRun) { Write-Warn "DRY RUN - API calls and registrations will be skipped." }
 
-if ($DryRun) { Write-Warn "DRY RUN mode — API calls and registrations will be skipped." }
+# --- Step 1: Resolve project ID ----------------------------------------------
+Write-Step "Step 1 - Resolving project ID"
+$encodedPath = [Uri]::EscapeDataString($PROJECT_PATH)
+try {
+    $project   = Invoke-GL -Path "/projects/$encodedPath"
+    $ProjectId = $project.id
+    Write-Ok "Project: $($project.name_with_namespace) (id=$ProjectId)"
+} catch {
+    Write-Fail "API call failed: $_"
+    Write-Host "  Check: network, SSL cert, and that gl_pat has 'api' scope."
+    exit 1
+}
 
-# ── Step 1: Resolve project ID ────────────────────────────────────────────────
-Write-Step "Resolving project ID"
-$encodedPath = [System.Uri]::EscapeDataString($PROJECT_PATH)
-$project = Invoke-GL -Path "/projects/$encodedPath"
-$ProjectId = $project.id
-Write-Ok "Project: $($project.name_with_namespace) (id=$ProjectId)"
-
-# ── Step 2: Check for existing runner with same description ───────────────────
-Write-Step "Checking for existing runners"
-$existingRunners = Invoke-GL -Path "/projects/$ProjectId/runners"
-$existing = $existingRunners | Where-Object { $_.description -eq $RunnerDescription }
+# --- Step 2: Check for existing runner ---------------------------------------
+Write-Step "Step 2 - Checking existing runners"
+try {
+    $allRunners = Invoke-GL -Path "/projects/$ProjectId/runners"
+    $existing   = $allRunners | Where-Object { $_.description -eq $RunnerDescription } |
+                  Select-Object -First 1
+} catch {
+    $existing = $null
+}
 
 if ($existing -and -not $Force) {
     Write-Warn "Runner '$RunnerDescription' already registered (id=$($existing.id)). Use -Force to re-register."
-    Write-Ok "Skipping registration."
     $skipRegistration = $true
 } else {
-    if ($existing -and $Force) {
-        Write-Warn "Force mode: will create new registration alongside existing runner id=$($existing.id)"
-    } else {
-        Write-Ok "No existing runner named '$RunnerDescription' — proceeding."
-    }
+    if ($existing) { Write-Warn "Force: adding new registration alongside existing id=$($existing.id)" }
+    Write-Ok "Proceeding with registration."
     $skipRegistration = $false
 }
 
-# ── Step 3: Create runner auth token via API ──────────────────────────────────
-$RunnerToken = $null
+# --- Step 3: Create runner token via API -------------------------------------
 if (-not $skipRegistration) {
-    Write-Step "Creating runner authentication token via GitLab API"
+    Write-Step "Step 3 - Creating runner token via GitLab API"
     if ($DryRun) {
         Write-Warn "DRY RUN: would POST /api/v4/user/runners"
     } else {
+        $body = '{"runner_type":"project_type","project_id":' + $ProjectId +
+                ',"description":"' + $RunnerDescription + '","run_untagged":true}'
         try {
-            $body = @{
-                runner_type = "project_type"
-                project_id  = $ProjectId
-                description = $RunnerDescription
-                run_untagged = $true
-            }
-            $result = Invoke-GL -Method "POST" -Path "/user/runners" -Body $body
+            $result      = Invoke-GL -Method "POST" -Path "/user/runners" -JsonBody $body
             $RunnerToken = $result.token
-            Write-Ok "Runner token obtained: $($RunnerToken.Substring(0,[Math]::Min(12,$RunnerToken.Length)))..."
+            Write-Ok "Token: $($RunnerToken.Substring(0,[Math]::Min(12,$RunnerToken.Length)))..."
         } catch {
-            Write-Fail "GitLab API /user/runners failed: $_"
-            Write-Host ""
-            Write-Host "  Fallback: get a token manually from:" -ForegroundColor Yellow
-            Write-Host "  $GITLAB_URL/$PROJECT_PATH/-/settings/ci_cd" -ForegroundColor Yellow
-            Write-Host "  Then re-run: .\scripts\setup-gitlab-runner.ps1 -RunnerToken <token>" -ForegroundColor Yellow
+            Write-Fail "POST /user/runners failed: $_"
+            Write-Host "  Requires GitLab >= 15.10."
+            Write-Host "  Fallback: get token from $GITLAB_URL/$PROJECT_PATH/-/settings/ci_cd"
             exit 1
         }
     }
 }
 
-# ── Step 4: Detect runner installation ────────────────────────────────────────
-Write-Step "Detecting gitlab-runner installation"
-$runnerContainer = $null
-$runnerBinary    = $false
-
-# Docker container?
+# --- Step 4: Detect runner installation --------------------------------------
+Write-Step "Step 4 - Detecting gitlab-runner"
 try {
     $containers = docker ps --format "{{.Names}}" 2>$null
-    $runnerContainer = $containers | Where-Object { $_ -match "gitlab-runner" } | Select-Object -First 1
-} catch {}
+    if ($containers) {
+        $runnerContainer = ($containers |
+            Where-Object { $_ -match "gitlab-runner" } |
+            Select-Object -First 1)
+        if ($null -eq $runnerContainer) { $runnerContainer = "" }
+    }
+} catch {
+    $runnerContainer = ""
+}
 
-# Binary in PATH?
 if (-not $runnerContainer) {
     if (Get-Command "gitlab-runner" -ErrorAction SilentlyContinue) {
-        $runnerBinary = $true
-    } elseif (Get-Command "gitlab-runner.exe" -ErrorAction SilentlyContinue) {
         $runnerBinary = $true
     }
 }
 
 if ($runnerContainer) {
-    Write-Ok "Using Docker container: $runnerContainer"
+    Write-Ok "Docker container: $runnerContainer"
 } elseif ($runnerBinary) {
-    Write-Ok "Using gitlab-runner binary in PATH"
+    Write-Ok "gitlab-runner binary found in PATH"
 } else {
     Write-Fail "gitlab-runner not found."
-    Write-Host "  Start it with: docker run -d --name gitlab-runner --restart always -v /var/run/docker.sock:/var/run/docker.sock -v gitlab-runner-config:/etc/gitlab-runner gitlab/gitlab-runner:latest"
+    Write-Host "  Start: docker run -d --name gitlab-runner --restart always -v /var/run/docker.sock:/var/run/docker.sock -v gitlab-runner-config:/etc/gitlab-runner gitlab/gitlab-runner:latest"
     exit 1
 }
 
-# ── Step 5: Register ──────────────────────────────────────────────────────────
-if (-not $skipRegistration -and -not $DryRun -and $RunnerToken) {
-    Write-Step "Registering runner"
-
-    $registerArgs = @(
-        "register",
-        "--non-interactive",
-        "--url", $GITLAB_URL,
-        "--token", $RunnerToken,
-        "--executor", "docker",
-        "--docker-image", $DefaultImage,
-        "--description", $RunnerDescription
-    )
-
-    if ($runnerContainer) {
-        docker exec $runnerContainer gitlab-runner @registerArgs
-    } else {
-        & gitlab-runner @registerArgs
-    }
-    Write-Ok "Runner registered."
+# --- Step 5: Register --------------------------------------------------------
+Write-Step "Step 5 - Registering runner"
+if ($skipRegistration) {
+    Write-Warn "Skipped (already registered)."
 } elseif ($DryRun) {
-    Write-Warn "DRY RUN: would run gitlab-runner register --url $GITLAB_URL --executor docker --docker-image $DefaultImage"
+    Write-Warn "DRY RUN: would register --executor docker --docker-image $DefaultImage"
+} elseif ($RunnerToken) {
+    $regArgs = @(
+        "register", "--non-interactive",
+        "--url",          $GITLAB_URL,
+        "--token",        $RunnerToken,
+        "--executor",     "docker",
+        "--docker-image", $DefaultImage,
+        "--description",  $RunnerDescription
+    )
+    try {
+        if ($runnerContainer) {
+            docker exec $runnerContainer gitlab-runner @regArgs
+        } else {
+            & gitlab-runner @regArgs
+        }
+        Write-Ok "Registered successfully."
+    } catch {
+        Write-Fail "Registration failed: $_"
+        exit 1
+    }
 }
 
-# ── Step 6: Add gl_pat as CI/CD variable ──────────────────────────────────────
-if (-not $SkipCiVar) {
-    Write-Step "Adding gl_pat as GitLab CI/CD variable"
-    if ($DryRun) {
-        Write-Warn "DRY RUN: would POST /api/v4/projects/$ProjectId/variables key=gl_pat masked=true protected=true"
-    } else {
-        # Check if variable already exists
+# --- Step 6: Add gl_pat as CI/CD variable ------------------------------------
+Write-Step "Step 6 - Upserting gl_pat CI/CD variable"
+if ($SkipCiVar) {
+    Write-Warn "Skipped (-SkipCiVar)."
+} elseif ($DryRun) {
+    Write-Warn "DRY RUN: would upsert gl_pat (masked + protected) via API."
+} else {
+    $updateBody = '{"value":"' + $Pat + '","masked":true,"protected":true}'
+    $createBody = '{"key":"gl_pat","value":"' + $Pat +
+                  '","variable_type":"env_var","masked":true,"protected":true}'
+    try {
+        $null = Invoke-GL -Method "PUT" -Path "/projects/$ProjectId/variables/gl_pat" `
+                          -JsonBody $updateBody
+        Write-Ok "gl_pat updated (masked + protected)."
+    } catch {
         try {
-            $existingVar = Invoke-GL -Path "/projects/$ProjectId/variables/gl_pat" -ErrorAction SilentlyContinue
-            Write-Warn "Variable gl_pat already exists — updating value."
-            $null = Invoke-GL -Method "PUT" -Path "/projects/$ProjectId/variables/gl_pat" -Body @{
-                value     = $Pat
-                masked    = $true
-                protected = $true
-            }
-            Write-Ok "gl_pat variable updated."
+            $null = Invoke-GL -Method "POST" -Path "/projects/$ProjectId/variables" `
+                              -JsonBody $createBody
+            Write-Ok "gl_pat created (masked + protected)."
         } catch {
-            # Variable doesn't exist yet — create it
-            $null = Invoke-GL -Method "POST" -Path "/projects/$ProjectId/variables" -Body @{
-                key       = "gl_pat"
-                value     = $Pat
-                variable_type = "env_var"
-                masked    = $true
-                protected = $true
-            }
-            Write-Ok "gl_pat variable created (masked + protected)."
+            Write-Warn "Could not upsert gl_pat: $_ (needs Maintainer role)"
         }
     }
 }
 
-# ── Step 7: Verify ────────────────────────────────────────────────────────────
-Write-Step "Verifying runner"
-if (-not $DryRun) {
-    if ($runnerContainer) {
-        docker exec $runnerContainer gitlab-runner verify 2>&1 | Select-String -Pattern "(Verifying|alive|error)"
-    } else {
-        gitlab-runner verify 2>&1 | Select-String -Pattern "(Verifying|alive|error)"
+# --- Step 7: Verify ----------------------------------------------------------
+Write-Step "Step 7 - Verifying runner"
+if ($DryRun) {
+    Write-Warn "DRY RUN: would run gitlab-runner verify"
+} else {
+    try {
+        if ($runnerContainer) {
+            docker exec $runnerContainer gitlab-runner verify 2>&1 |
+                Select-String -Pattern "(Verifying|alive|ERROR)" |
+                ForEach-Object { Write-Host "  $_" }
+        } else {
+            gitlab-runner verify 2>&1 |
+                Select-String -Pattern "(Verifying|alive|ERROR)" |
+                ForEach-Object { Write-Host "  $_" }
+        }
+    } catch {
+        Write-Warn "Verify failed: $_ (runner may still work)"
     }
 }
 
-# ── Done ──────────────────────────────────────────────────────────────────────
+# --- Done --------------------------------------------------------------------
 Write-Host ""
-Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Green
+Write-Host "=============================================" -ForegroundColor Green
 Write-Host " Setup complete." -ForegroundColor Green
 Write-Host ""
 Write-Host " Runner settings : $GITLAB_URL/$PROJECT_PATH/-/settings/ci_cd"
 Write-Host " Pipelines       : $GITLAB_URL/$PROJECT_PATH/-/pipelines"
-Write-Host " Trigger pipeline: git push origin main"
-Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Green
+Write-Host "=============================================" -ForegroundColor Green

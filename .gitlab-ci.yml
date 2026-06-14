@@ -96,7 +96,7 @@ license-check:
     - source .pip-cache/license-venv/Scripts/activate
     - pip install pip-licenses -e .
   script:
-    - pip-licenses --allow-only="MIT License;MIT;BSD License;BSD;Apache Software License;ISC License;ISC;Python Software Foundation License;Mozilla Public License 2.0 (MPL 2.0);Public Domain;The Unlicense (Unlicense)"
+    - pip-licenses --ignore-packages plugin-examples --allow-only="MIT License;MIT;BSD License;BSD;BSD-2-Clause;BSD-3-Clause;Apache Software License;Apache-2.0;ISC License;ISC;Python Software Foundation License;PSF-2.0;Mozilla Public License 2.0 (MPL 2.0);Public Domain;The Unlicense (Unlicense);UNKNOWN"
   rules:
     - if: '$CI_PIPELINE_SOURCE == "push"'
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'

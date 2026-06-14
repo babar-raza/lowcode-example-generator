@@ -299,6 +299,30 @@ def run_execution_loop(
 
         history = RunHistory.load(history_path)
 
+    # A6 — Multi-agent coordination: registry, context, dispatcher
+    from plugin_examples.agents.builtin import BlockerRecheckAgent, ConservationCheckAgent, VersionDriftAgent
+    from plugin_examples.agents.context import SharedContext
+    from plugin_examples.agents.dispatcher import AgentDispatcher
+    from plugin_examples.agents.registry import AgentRegistry
+
+    shared_context = SharedContext(
+        repo_root=repo_root,
+        evidence_dir=evidence_dir,
+        dry_run_remote=dry_run_remote,
+        gate_policy=gate_policy,
+        slo_defs=slo_defs,
+        history=history,
+        audit=audit,
+    )
+    registry = AgentRegistry()
+    registry.register(ConservationCheckAgent())
+    registry.register(VersionDriftAgent())
+    registry.register(BlockerRecheckAgent())
+    dispatcher = AgentDispatcher(registry, shared_context)
+
+    # Save agent catalog as evidence artifact
+    dispatcher.save_catalog(evidence_dir)
+
     for cycle_num in range(1, max_cycles + 1):
         t0 = time.monotonic()
         board = compute_action_board(repo_root)
@@ -371,60 +395,68 @@ def run_execution_loop(
                 ))
                 continue
 
-            handler = _ACTION_HANDLERS.get(action.id)
-            if handler:
-                try:
-                    with HandlerTimer(action.id) as timer:
-                        handler_result = handler(
-                            repo_root,
-                            evidence_dir,
-                            action_id=action.id,
+            # A6 agent dispatch — try registry first, fallback to legacy handlers
+            agent_result = dispatcher.dispatch(action.id, action.type, cycle_num=cycle_num)
+            if agent_result is not None:
+                executed_this_cycle.append(action.id)
+                if agent_result.changed:
+                    changed_this_cycle.append(action.id)
+                else:
+                    noop_this_cycle.append(action.id)
+            else:
+                # Legacy fallback for any handlers not yet migrated to agents
+                handler = _ACTION_HANDLERS.get(action.id)
+                if handler:
+                    try:
+                        with HandlerTimer(action.id) as timer:
+                            handler_result = handler(
+                                repo_root,
+                                evidence_dir,
+                                action_id=action.id,
+                            )
+                        executed_this_cycle.append(action.id)
+                        if handler_result.get("changed", False):
+                            changed_this_cycle.append(action.id)
+                        else:
+                            noop_this_cycle.append(action.id)
+                        handler_result["sli_duration_ms"] = timer.duration_ms
+                        handler_path = evidence_dir / f"handler-{action.id.lower()}-cycle{cycle_num:02d}.json"
+                        handler_path.write_text(
+                            json.dumps(handler_result, indent=2),
+                            encoding="utf-8",
                         )
-                    executed_this_cycle.append(action.id)
-                    if handler_result.get("changed", False):
-                        changed_this_cycle.append(action.id)
-                    else:
-                        noop_this_cycle.append(action.id)
-                    # Save handler result with SLI data
-                    handler_result["sli_duration_ms"] = timer.duration_ms
-                    handler_path = evidence_dir / f"handler-{action.id.lower()}-cycle{cycle_num:02d}.json"
-                    handler_path.write_text(
-                        json.dumps(handler_result, indent=2),
-                        encoding="utf-8",
-                    )
-                    audit.record(AuditEntry(
-                        action_id=action.id, decision="EXECUTE",
-                        policy_rule="handler_dispatch",
-                        goal_relevance=[action.type],
-                        evidence_ref=str(handler_path),
-                    ))
-                except Exception as e:
-                    result.metrics.handler_errors += 1
+                        audit.record(AuditEntry(
+                            action_id=action.id, decision="EXECUTE",
+                            policy_rule="legacy_handler_dispatch",
+                            goal_relevance=[action.type],
+                            evidence_ref=str(handler_path),
+                        ))
+                    except Exception as e:
+                        result.metrics.handler_errors += 1
+                        deferred_this_cycle.append(
+                            {
+                                "id": action.id,
+                                "reason": f"handler error: {e}",
+                            }
+                        )
+                        audit.record(AuditEntry(
+                            action_id=action.id, decision="BLOCK",
+                            policy_rule="handler_error",
+                            detail=str(e),
+                        ))
+                else:
                     deferred_this_cycle.append(
                         {
                             "id": action.id,
-                            "reason": f"handler error: {e}",
+                            "reason": "no handler implemented",
+                            "taskcard_id": action.taskcard_id or "",
                         }
                     )
                     audit.record(AuditEntry(
                         action_id=action.id, decision="BLOCK",
-                        policy_rule="handler_error",
-                        detail=str(e),
+                        policy_rule="no_registered_handler",
+                        detail=f"type={action.type}",
                     ))
-            else:
-                # No handler — defer with taskcard
-                deferred_this_cycle.append(
-                    {
-                        "id": action.id,
-                        "reason": "no handler implemented",
-                        "taskcard_id": action.taskcard_id or "",
-                    }
-                )
-                audit.record(AuditEntry(
-                    action_id=action.id, decision="BLOCK",
-                    policy_rule="no_registered_handler",
-                    detail=f"type={action.type}",
-                ))
 
         cycle.executed = executed_this_cycle
         cycle.changed_actions = changed_this_cycle

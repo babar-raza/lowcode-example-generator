@@ -215,3 +215,130 @@ def test_nonlowcode_parity_pr_title_prefix():
     assert "barcode" in pr.title.lower()
     assert pr.branch == "lowcode/wave25/barcode-plugin-examples"
     assert "4 packages" in pr.title or "4" in pr.title
+
+
+# ---------------------------------------------------------------------------
+# TC-H09: Stage chaining integration test (live pipeline path)
+# ---------------------------------------------------------------------------
+
+
+def test_nonlowcode_stage_chaining_sot_to_planning(tmp_path):
+    """TC-H09: SOT proof + scenario planning chain correctly for non-LowCode.
+
+    Verifies:
+    1. _stage_plugin_detection writes nonlowcode SOT proof and passes gate
+    2. _stage_scenario_planning returns REGISTRY_PLANNED with ready_count >= 1
+    3. ctx.nonlowcode_proof_path is set and file exists
+    4. ctx.planning has real Scenario objects from registry
+    """
+    import dataclasses
+    from types import SimpleNamespace
+
+    import yaml
+
+    from plugin_examples.runner import (
+        PipelineContext,
+        _stage_plugin_detection,
+        _stage_scenario_planning,
+    )
+
+    # Build minimal PipelineContext
+    ctx = object.__new__(PipelineContext)
+    for f in dataclasses.fields(PipelineContext):
+        if f.default_factory is not dataclasses.MISSING:
+            object.__setattr__(ctx, f.name, f.default_factory())
+        elif f.default is not dataclasses.MISSING:
+            object.__setattr__(ctx, f.name, f.default)
+        else:
+            object.__setattr__(ctx, f.name, None)
+
+    object.__setattr__(ctx, "family", "barcode")
+    object.__setattr__(ctx, "run_id", "test-chain-001")
+    object.__setattr__(ctx, "dry_run", True)
+    object.__setattr__(ctx, "skip_run", False)
+    object.__setattr__(ctx, "template_mode", True)
+    object.__setattr__(ctx, "require_llm", False)
+    object.__setattr__(ctx, "require_validation", False)
+    object.__setattr__(ctx, "require_reviewer", False)
+    object.__setattr__(ctx, "repo_root", tmp_path / "repo")
+    object.__setattr__(ctx, "run_dir", tmp_path)
+    object.__setattr__(ctx, "evidence_dir", tmp_path / "evidence")
+
+    (tmp_path / "repo").mkdir(exist_ok=True)
+    (tmp_path / "evidence").mkdir(exist_ok=True)
+
+    # Write a registry YAML with PROBE_CONFIRMED entry
+    reg_dir = tmp_path / "repo" / "pipeline" / "plugin-capability-registry"
+    reg_dir.mkdir(parents=True)
+    entry = {
+        "plugin_slug": "generate-barcode",
+        "status": "PROBE_CONFIRMED",
+        "type_name": "BarcodeGenerator",
+        "namespace": "Aspose.BarCode.Generation",
+        "method_name": "Save",
+        "operation_kind": "BARCODE_GENERATION",
+        "candidate_methods": ["Save"],
+        "selected_api_mapping": {
+            "type_name": "BarcodeGenerator",
+            "namespace": "Aspose.BarCode.Generation",
+            "constructor": "BarcodeGenerator(EncodeTypes, string)",
+            "method_name": "Save",
+            "output_format_enum": "BarCodeImageFormat",
+        },
+    }
+    (reg_dir / "barcode.yaml").write_text(
+        yaml.dump({"entries": [entry]}), encoding="utf-8",
+    )
+
+    # Set up config as discovery_only with fallback
+    ctx.config = SimpleNamespace(
+        family="barcode",
+        display_name="Aspose.BarCode for .NET",
+        enabled=True,
+        status="discovery_only",
+        plugin_detection=SimpleNamespace(
+            namespace_patterns=["Aspose.BarCode.LowCode"],
+            fallback_strategy="capability_registry",
+        ),
+        nuget=SimpleNamespace(package_id="Aspose.BarCode", version_policy="latest-stable"),
+    )
+
+    # Set up detection result (not eligible = non-LowCode)
+    ctx.detection = SimpleNamespace(
+        matched_namespaces=[],
+        is_eligible=False,
+        public_plugin_type_count=0,
+        public_plugin_method_count=0,
+    )
+    ctx.download_manifest = {"version": "26.5.0", "sha256": "abc123"}
+    ctx.extraction = {"selected_framework": "net8.0", "dll_path": "/fake/dll", "xml_path": None}
+    ctx.catalog = {"namespaces": []}
+    ctx.catalog_path = tmp_path / "catalog.json"
+    ctx.deps = []
+
+    # Stage 1: Plugin detection (SOT gate)
+    with patch("plugin_examples.plugin_detector.detect_plugin_namespaces", return_value=ctx.detection), \
+         patch("plugin_examples.plugin_detector.write_product_inventory"), \
+         patch("plugin_examples.plugin_detector.write_source_of_truth_proof", return_value=tmp_path / "proof.json"), \
+         patch("plugin_examples.plugin_detector.assert_source_of_truth_eligible") as mock_lowcode_assert:
+        detection_result = _stage_plugin_detection(ctx)
+
+    # LowCode gate NOT called; non-LowCode gate ran instead
+    mock_lowcode_assert.assert_not_called()
+    assert detection_result["eligible"] is False
+    assert hasattr(ctx, "nonlowcode_proof_path")
+    assert ctx.nonlowcode_proof_path.exists()
+
+    # Stage 2: Scenario planning (REGISTRY_PLANNED)
+    planning_result = _stage_scenario_planning(ctx)
+
+    assert planning_result["status"] == "REGISTRY_PLANNED"
+    assert planning_result["ready_count"] >= 1
+    assert planning_result["planning_source"] == "capability_registry"
+    assert ctx.planning is not None
+    assert ctx.planning.ready_count >= 1
+
+    # Verify scenario fields
+    scenario = ctx.planning.ready_scenarios[0]
+    assert scenario.scenario_id == "barcode-generate-barcode"
+    assert scenario.target_type == "Aspose.BarCode.Generation.BarcodeGenerator"

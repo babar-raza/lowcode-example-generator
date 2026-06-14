@@ -184,6 +184,51 @@ def check_evidence_chain(repo_root: Path | None = None) -> HealthCheck:
     )
 
 
+def check_slo_compliance(repo_root: Path | None = None) -> HealthCheck:
+    """Check SLO compliance — verifies SLO definitions load and parse correctly."""
+    if repo_root is None:
+        repo_root = Path(__file__).resolve().parents[3]
+    try:
+        from plugin_examples.policy.loader import load_slos
+        slos = load_slos(repo_root)
+        if not slos:
+            return HealthCheck(
+                "slo_compliance", "SKIP",
+                "No SLO definitions found (pipeline/configs/slo.yml missing or empty)",
+                False,
+            )
+        return HealthCheck(
+            "slo_compliance", "PASS",
+            f"SLO definitions loaded: {len(slos)} SLOs ({', '.join(s.id for s in slos)})",
+            False,
+        )
+    except Exception as exc:
+        return HealthCheck("slo_compliance", "WARN", f"SLO check failed: {exc}", False)
+
+
+def check_gate_policy(repo_root: Path | None = None) -> HealthCheck:
+    """Check gate policy — verifies gates.yml loads and parse correctly."""
+    if repo_root is None:
+        repo_root = Path(__file__).resolve().parents[3]
+    try:
+        from plugin_examples.policy.loader import load_gate_policy
+        policy = load_gate_policy(repo_root)
+        if not policy.approval_gated_types:
+            return HealthCheck(
+                "gate_policy", "WARN",
+                "Gate policy loaded but approval_gated_types is empty",
+                False,
+            )
+        return HealthCheck(
+            "gate_policy", "PASS",
+            f"Gate policy loaded: {len(policy.hard_stop_stages)} hard stops, "
+            f"{len(policy.approval_gated_types)} approval gates",
+            False,
+        )
+    except Exception as exc:
+        return HealthCheck("gate_policy", "WARN", f"Gate policy check failed: {exc}", False)
+
+
 def _ehv_result_to_health_check(ehv_result: object) -> HealthCheck:
     """Convert a single EHVResult to a HealthCheck entry."""
     status = "PASS" if ehv_result.passed else "WARN"  # type: ignore[attr-defined]
@@ -228,10 +273,47 @@ def check_engineering_hygiene(repo_root: Path | None = None) -> HealthCheck:
     )
 
 
+def check_audit_trail(repo_root: Path | None = None) -> HealthCheck:
+    """Check that audit trail evidence exists from recent planner loop runs."""
+    if repo_root is None:
+        repo_root = Path(__file__).resolve().parents[3]
+    evidence_dirs = [
+        repo_root / "workspace" / "runs",
+        repo_root / ".local" / "evidence-chain",
+    ]
+    for base in evidence_dirs:
+        if not base.is_dir():
+            continue
+        trails = list(base.rglob("audit-trail.json"))
+        if trails:
+            latest = max(trails, key=lambda p: p.stat().st_mtime)
+            try:
+                data = json.loads(latest.read_text(encoding="utf-8"))
+                count = len(data.get("audit_trail", []))
+                if count > 0:
+                    return HealthCheck(
+                        "audit_trail", "PASS",
+                        f"Audit trail found: {count} entries in {latest.relative_to(repo_root)}",
+                        False,
+                    )
+                return HealthCheck(
+                    "audit_trail", "WARN",
+                    f"Audit trail exists but is empty: {latest.relative_to(repo_root)}",
+                    False,
+                )
+            except (json.JSONDecodeError, OSError, ValueError):
+                pass
+    return HealthCheck(
+        "audit_trail", "SKIP",
+        "No audit-trail.json found in evidence directories",
+        False,
+    )
+
+
 def run_all_checks(repo_root: Path | None = None) -> list[HealthCheck]:
     """Run all health checks and return results.
 
-    Returns 8 core checks + 5 individual EHV checks = 13 total (≥ 12 per plan).
+    Returns 11 core checks + individual EHV checks (≥ 21 total).
     """
     checks = [
         check_python_version(),
@@ -242,6 +324,9 @@ def run_all_checks(repo_root: Path | None = None) -> list[HealthCheck]:
         check_family_configs(repo_root),
         check_format_authority(repo_root),
         check_evidence_chain(repo_root),
+        check_slo_compliance(repo_root),
+        check_gate_policy(repo_root),
+        check_audit_trail(repo_root),
     ]
     checks.extend(check_engineering_hygiene_all(repo_root))
     return checks

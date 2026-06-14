@@ -167,3 +167,156 @@ def assert_source_of_truth_eligible(path: str) -> None:
         )
 
     logger.info("Source-of-truth gate PASSED: %s", path)
+
+
+# ---------------------------------------------------------------------------
+# Non-LowCode source-of-truth proof and gate
+# ---------------------------------------------------------------------------
+
+_GENERATION_READY_STATUSES = frozenset({"PROBE_CONFIRMED", "VERIFIED_PUBLISHABLE"})
+
+
+def write_nonlowcode_source_of_truth_proof(
+    *,
+    family: str,
+    registry_entries: list[dict],
+    verification_dir: Path,
+) -> Path:
+    """Write source-of-truth proof for a non-LowCode family.
+
+    Non-LowCode families derive authority from the capability registry
+    (PROBE_CONFIRMED / VERIFIED_PUBLISHABLE entries) and optionally
+    from plugin page hashes on products.aspose.net.
+
+    Returns:
+        Path to the written proof file.
+    """
+    latest_dir = verification_dir / "latest"
+    latest_dir.mkdir(parents=True, exist_ok=True)
+
+    proof_path = latest_dir / f"{family}-nonlowcode-source-of-truth-proof.json"
+
+    generation_ready = [
+        e for e in registry_entries
+        if isinstance(e, dict) and e.get("status") in _GENERATION_READY_STATUSES
+    ]
+
+    # Collect page hashes (may be null)
+    page_hashes = [
+        e.get("plugin_page_hash") for e in generation_ready
+        if e.get("plugin_page_hash")
+    ]
+
+    eligible = len(generation_ready) >= 1
+    eligibility_status = "eligible" if eligible else "not_eligible"
+
+    if eligible:
+        slugs = [e.get("plugin_slug", "unknown") for e in generation_ready]
+        eligibility_reason = (
+            f"{len(generation_ready)} PROBE_CONFIRMED/VERIFIED_PUBLISHABLE entries: "
+            + ", ".join(slugs)
+        )
+    else:
+        eligibility_reason = (
+            "No PROBE_CONFIRMED or VERIFIED_PUBLISHABLE entries in capability registry"
+        )
+
+    proof = {
+        "proof_type": "nonlowcode_registry",
+        "family": family,
+        "registry_entry_count": len(generation_ready),
+        "total_registry_entries": len(registry_entries),
+        "registry_entry_statuses": [
+            {
+                "plugin_slug": e.get("plugin_slug", "unknown"),
+                "status": e.get("status"),
+                "confidence_score": e.get("confidence_score"),
+                "probe_evidence": e.get("probe_evidence"),
+                "assembly_fingerprint": e.get("assembly_fingerprint"),
+            }
+            for e in generation_ready
+        ],
+        "plugin_page_hash_count": len(page_hashes),
+        "page_hash_source": "website_catalog" if page_hashes else "NOT_POPULATED",
+        "eligibility_status": eligibility_status,
+        "eligibility_reason": eligibility_reason,
+    }
+
+    with open(proof_path, "w") as f:
+        json.dump(proof, f, indent=2)
+
+    logger.info(
+        "Non-LowCode SOT proof written: %s (status: %s, entries: %d)",
+        proof_path,
+        eligibility_status,
+        len(generation_ready),
+    )
+    return proof_path
+
+
+def assert_nonlowcode_source_of_truth_eligible(path: str) -> None:
+    """Downstream gate: assert non-LowCode source-of-truth proof shows eligibility.
+
+    Checks:
+        1. Proof file exists and is valid JSON
+        2. proof_type == "nonlowcode_registry"
+        3. eligibility_status == "eligible"
+        4. registry_entry_count >= 1
+
+    Warns (not fails) when plugin_page_hash is not populated.
+
+    Raises:
+        SourceOfTruthGateError: If the gate check fails.
+    """
+    proof_path = Path(path)
+
+    if not proof_path.exists():
+        raise SourceOfTruthGateError(
+            f"Non-LowCode SOT proof file not found: {path}"
+        )
+
+    try:
+        with open(proof_path) as f:
+            proof = json.load(f)
+    except json.JSONDecodeError as e:
+        raise SourceOfTruthGateError(
+            f"Non-LowCode SOT proof contains invalid JSON: {e}"
+        ) from e
+
+    proof_type = proof.get("proof_type")
+    if proof_type != "nonlowcode_registry":
+        raise SourceOfTruthGateError(
+            f"Non-LowCode SOT proof has wrong proof_type: '{proof_type}' "
+            f"(expected 'nonlowcode_registry')"
+        )
+
+    status = proof.get("eligibility_status")
+    if status is None:
+        raise SourceOfTruthGateError(
+            "Non-LowCode SOT proof missing 'eligibility_status' field"
+        )
+
+    if status != "eligible":
+        reason = proof.get("eligibility_reason", "no reason provided")
+        raise SourceOfTruthGateError(
+            f"Non-LowCode SOT gate failed: eligibility_status='{status}', "
+            f"reason: {reason}"
+        )
+
+    entry_count = proof.get("registry_entry_count", 0)
+    if entry_count < 1:
+        raise SourceOfTruthGateError(
+            f"Non-LowCode SOT gate failed: registry_entry_count={entry_count} "
+            f"(need >= 1 PROBE_CONFIRMED/VERIFIED_PUBLISHABLE)"
+        )
+
+    # Warn (not fail) when page hashes are not populated
+    page_hash_source = proof.get("page_hash_source", "NOT_POPULATED")
+    if page_hash_source == "NOT_POPULATED":
+        logger.warning(
+            "Non-LowCode SOT: plugin_page_hash not populated for '%s' — "
+            "run 'catalog-discover' to enrich registry with page hashes",
+            proof.get("family", "unknown"),
+        )
+
+    logger.info("Non-LowCode SOT gate PASSED: %s", path)

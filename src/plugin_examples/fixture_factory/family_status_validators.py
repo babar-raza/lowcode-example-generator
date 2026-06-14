@@ -136,6 +136,103 @@ def fsv_06_no_orphan_references(configs: list[dict], contracts_dir: Path) -> lis
     return results
 
 
+def fsv_07_fallback_has_generation_ready_entries(
+    configs: list[dict], registry_dir: Path,
+) -> list[FsvResult]:
+    """FSV-07: discovery_only families with fallback_strategy must have PROBE_CONFIRMED entries.
+
+    Prevents running the pipeline for families where the fallback path would
+    produce zero generation-ready candidates.
+    """
+    results = []
+    generation_ready_statuses = {"PROBE_CONFIRMED", "VERIFIED_PUBLISHABLE"}
+    for cfg in configs:
+        status = cfg.get("status", "")
+        pd = cfg.get("plugin_detection", {}) or {}
+        fallback = pd.get("fallback_strategy")
+        if status != "discovery_only" or not fallback:
+            continue
+
+        family = cfg.get("_family_name", cfg.get("family", "unknown"))
+        registry_path = registry_dir / f"{family}.yaml"
+        if not registry_path.exists():
+            results.append(FsvResult(
+                rule_id="FSV-07",
+                passed=False,
+                detail=f"{family}: discovery_only with fallback_strategy={fallback} "
+                       f"but no registry file at {registry_path.name}",
+            ))
+            continue
+
+        with open(registry_path, encoding="utf-8") as fh:
+            reg_data = yaml.safe_load(fh) or {}
+        entries = reg_data.get("entries", []) or []
+        ready = [e for e in entries if isinstance(e, dict) and e.get("status") in generation_ready_statuses]
+        passed = len(ready) > 0
+        results.append(FsvResult(
+            rule_id="FSV-07",
+            passed=passed,
+            detail=f"{family}: fallback_strategy={fallback}, "
+                   f"generation_ready_entries={len(ready)} "
+                   f"({'OK' if passed else 'NO PROBE_CONFIRMED — pipeline will produce zero results'})",
+        ))
+    return results
+
+
+def fsv_08_no_skip_stages_for_fallback(
+    configs: list[dict], registry_dir: Path,
+) -> list[FsvResult]:
+    """FSV-08: fallback families must have registry entries sufficient for all pipeline stages.
+
+    Ensures that every discovery_only family with fallback_strategy has at least
+    one PROBE_CONFIRMED/VERIFIED_PUBLISHABLE entry with the fields needed for
+    SOT proof, scenario planning, and code generation (type_name, namespace,
+    method_name). This prevents silent stage skips at runtime.
+    """
+    results = []
+    generation_ready_statuses = {"PROBE_CONFIRMED", "VERIFIED_PUBLISHABLE"}
+    required_fields = {"type_name", "namespace", "method_name"}
+    for cfg in configs:
+        status = cfg.get("status", "")
+        pd = cfg.get("plugin_detection", {}) or {}
+        fallback = pd.get("fallback_strategy")
+        if status != "discovery_only" or not fallback:
+            continue
+
+        family = cfg.get("_family_name", cfg.get("family", "unknown"))
+        registry_path = registry_dir / f"{family}.yaml"
+        if not registry_path.exists():
+            results.append(FsvResult(
+                rule_id="FSV-08",
+                passed=False,
+                detail=f"{family}: no registry file — all stages would skip",
+            ))
+            continue
+
+        with open(registry_path, encoding="utf-8") as fh:
+            reg_data = yaml.safe_load(fh) or {}
+        entries = reg_data.get("entries", []) or []
+        ready = [
+            e for e in entries
+            if isinstance(e, dict)
+            and e.get("status") in generation_ready_statuses
+        ]
+        # Check at least one entry has all required fields for generation
+        complete = [
+            e for e in ready
+            if all(e.get(f) for f in required_fields)
+        ]
+        passed = len(complete) > 0
+        results.append(FsvResult(
+            rule_id="FSV-08",
+            passed=passed,
+            detail=f"{family}: generation-complete entries={len(complete)} "
+                   f"(ready={len(ready)}, total={len(entries)}) — "
+                   f"{'no skip stages' if passed else 'MISSING required fields for stage parity'}",
+        ))
+    return results
+
+
 def validate_all(
     repo_root: Path | None = None,
 ) -> list[FsvResult]:
@@ -144,6 +241,7 @@ def validate_all(
         repo_root = Path(__file__).resolve().parents[3]
     families_dir = repo_root / "pipeline" / "configs" / "families"
     contracts_dir = repo_root / "pipeline" / "contracts"
+    registry_dir = repo_root / "pipeline" / "plugin-capability-registry"
 
     if not families_dir.is_dir():
         return [FsvResult(rule_id="FSV-00", passed=False, detail=f"families dir not found: {families_dir}")]
@@ -156,4 +254,6 @@ def validate_all(
     results.extend(fsv_04_discovery_not_published(configs))
     results.extend(fsv_05_active_count_matches_contracts(configs, contracts_dir))
     results.extend(fsv_06_no_orphan_references(configs, contracts_dir))
+    results.extend(fsv_07_fallback_has_generation_ready_entries(configs, registry_dir))
+    results.extend(fsv_08_no_skip_stages_for_fallback(configs, registry_dir))
     return results

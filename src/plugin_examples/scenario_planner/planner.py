@@ -72,6 +72,119 @@ class PlanningResult:
         return len(self.blocked_scenarios)
 
 
+_REGISTRY_GENERATION_READY = frozenset({"PROBE_CONFIRMED", "VERIFIED_PUBLISHABLE"})
+
+
+def plan_scenarios_from_registry(
+    *,
+    family: str,
+    registry_entries: list[dict],
+    source_of_truth_proof_path: str | None = None,
+) -> PlanningResult:
+    """Plan example scenarios from capability registry entries.
+
+    Non-LowCode families use registry entries (PROBE_CONFIRMED, VERIFIED_PUBLISHABLE)
+    instead of DllReflector catalogs. Each generation-ready entry becomes a ready
+    scenario; non-ready entries become blocked scenarios.
+
+    Args:
+        family: Family name.
+        registry_entries: List of registry entry dicts from YAML.
+        source_of_truth_proof_path: Path to non-LowCode SOT proof (gate check).
+
+    Returns:
+        PlanningResult with ready and blocked scenarios.
+
+    Raises:
+        SourceOfTruthGateError: If proof is missing or not eligible.
+    """
+    from plugin_examples.plugin_detector.proof_reporter import (
+        assert_nonlowcode_source_of_truth_eligible,
+    )
+
+    if source_of_truth_proof_path:
+        assert_nonlowcode_source_of_truth_eligible(source_of_truth_proof_path)
+
+    result = PlanningResult(family=family)
+
+    for entry in registry_entries:
+        if not isinstance(entry, dict):
+            continue
+
+        plugin_slug = entry.get("plugin_slug") or entry.get("slug", "unknown")
+        status = entry.get("status", "UNKNOWN")
+        type_name = entry.get("type_name", "")
+        namespace = entry.get("namespace", "")
+        method_name = entry.get("method_name", "")
+        operation_kind = entry.get("operation_kind", "")
+
+        scenario_id = f"{family}-{plugin_slug}"
+        target_type = f"{namespace}.{type_name}" if namespace and type_name else type_name
+        title = f"Use {type_name} from {namespace}" if namespace else f"Use {plugin_slug}"
+
+        # Collect methods
+        target_methods = []
+        if method_name:
+            target_methods.append(method_name)
+        for cm in entry.get("candidate_methods", []):
+            if cm and cm not in target_methods:
+                target_methods.append(cm)
+
+        # Derive input/output from selected_api_mapping
+        api_mapping = entry.get("selected_api_mapping") or {}
+        constructor = api_mapping.get("constructor", "")
+        output_format = (
+            api_mapping.get("output_format")
+            or api_mapping.get("output_format_enum")
+            or ""
+        )
+
+        # Determine input strategy from constructor hint
+        input_strategy = "programmatic_input"
+        if "string" in constructor.lower() or "stream" in constructor.lower():
+            input_strategy = "programmatic_input"
+
+        # Determine output plan
+        output_plan = f"{operation_kind}: {type_name}.{method_name}" if method_name else operation_kind
+
+        if status in _REGISTRY_GENERATION_READY:
+            scenario = Scenario(
+                scenario_id=scenario_id,
+                title=title,
+                target_type=target_type,
+                target_namespace=namespace,
+                target_methods=target_methods,
+                required_symbols=[target_type],
+                output_plan=output_plan,
+                validation_plan=f"Build succeeds, runs without exception, produces output",
+                status="ready",
+                input_strategy=input_strategy,
+            )
+            result.ready_scenarios.append(scenario)
+        else:
+            scenario = Scenario(
+                scenario_id=scenario_id,
+                title=title,
+                target_type=target_type,
+                target_namespace=namespace,
+                target_methods=target_methods,
+                status="blocked_probe_pending",
+                blocked_reason=(
+                    f"Registry status '{status}' is not generation-ready "
+                    f"(need PROBE_CONFIRMED or VERIFIED_PUBLISHABLE)"
+                ),
+            )
+            result.blocked_scenarios.append(scenario)
+
+    logger.info(
+        "Registry planning for %s: %d ready, %d blocked",
+        family,
+        result.ready_count,
+        result.blocked_count,
+    )
+    return result
+
+
 def plan_scenarios(
     *,
     family: str,

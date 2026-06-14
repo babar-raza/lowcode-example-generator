@@ -27,12 +27,14 @@ def write_generation_decision_audit(ctx) -> Path | None:
 
     records = []
     for proj in ctx.generated_projects:
+        strategy = proj.get("generation_strategy", "unknown")
         record = {
             "scenario_id": proj.get("scenario_id", ""),
             "family": ctx.family,
             "type_name": proj.get("type_name", proj.get("target_type", "")),
             "operation_kind": proj.get("operation_kind", ""),
-            "generation_strategy": proj.get("generation_strategy", "unknown"),
+            "generation_strategy": strategy,
+            "generation_quality_tier": _strategy_to_tier(strategy),
             "template_first_eligible": proj.get("template_first_eligible", False),
             "llm_available": ctx.llm_available,
             "status": proj.get("status", ""),
@@ -55,6 +57,19 @@ def write_generation_decision_audit(ctx) -> Path | None:
     output_path.write_text(json.dumps(audit, indent=2), encoding="utf-8")
     logger.info("Generation decision audit written to %s (%d records)", output_path, len(records))
     return output_path
+
+
+_STRATEGY_TIER_MAP = {
+    "registry_template": "TEMPLATE_REGISTRY",
+    "registry_llm": "LLM_REGISTRY",
+    "llm": "LLM_CATALOG",
+    "template": "TEMPLATE_CATALOG",
+}
+
+
+def _strategy_to_tier(strategy: str) -> str:
+    """Map generation_strategy to a quality tier label."""
+    return _STRATEGY_TIER_MAP.get(strategy, strategy.upper() if strategy else "UNKNOWN")
 
 
 def _count_strategies(records: list[dict]) -> dict[str, int]:

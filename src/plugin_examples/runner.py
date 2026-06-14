@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import logging
 import os
 import platform
 import sys
@@ -14,15 +13,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 
+from plugin_examples.observability import bind_context as _bind_obs_context, get_logger  # noqa: E402
+
 
 def _now_utc() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
-logger = logging.getLogger(__name__)
-
-# Bind pipeline context to structured log records for this run
-from plugin_examples.observability import bind_context as _bind_obs_context  # noqa: E402
+logger = get_logger(__name__)
 
 
 # ---------------------------------------------------------------------------
@@ -366,10 +364,17 @@ def _stage_load_config(ctx: PipelineContext) -> dict:
             f"Family '{ctx.family}' is experimental. " "Use --allow-experimental to run experimental families."
         )
     if ctx.config.status == "discovery_only":
-        raise RuntimeError(
-            f"Family '{ctx.family}' is discovery_only. "
-            "Use 'discover-lowcode' to run source-of-truth discovery. "
-            "Generation is not allowed for discovery_only families."
+        has_fallback = getattr(ctx.config.plugin_detection, "fallback_strategy", None)
+        if not has_fallback:
+            raise RuntimeError(
+                f"Family '{ctx.family}' is discovery_only. "
+                "Use 'discover-lowcode' to run source-of-truth discovery. "
+                "Generation is not allowed for discovery_only families without fallback_strategy."
+            )
+        logger.info(
+            "Family '%s' is discovery_only with fallback_strategy=%s — proceeding via non-LowCode path",
+            ctx.family,
+            has_fallback,
         )
     # Compute config/constraints hashes for replay integrity checks (non-fatal if unavailable)
     artifacts: dict = {"family": ctx.config.family, "package_id": ctx.config.nuget.package_id}
@@ -380,8 +385,8 @@ def _stage_load_config(ctx: PipelineContext) -> dict:
             m = _re.search(r"per_type_constraints\s*:(.+?)(?=\n\S|\Z)", raw_text, _re.DOTALL)
             constraints_text = m.group(1) if m else ""
             artifacts["constraints_hash"] = _hashlib.sha256(constraints_text.encode("utf-8")).hexdigest()
-    except Exception:
-        pass  # Non-fatal; integrity checks will report "skipped"
+    except (OSError, ValueError):
+        logger.debug("Config hash computation skipped (non-fatal)", exc_info=True)
 
     # Discovery freshness gate (Wave 25 Lane C) — mode-aware
     try:
@@ -411,8 +416,8 @@ def _stage_load_config(ctx: PipelineContext) -> dict:
                 artifacts["discovery_freshness"] = "FRESH"
     except RuntimeError:
         raise
-    except Exception:
-        pass  # Non-fatal — freshness check best-effort
+    except (OSError, json.JSONDecodeError, KeyError, ImportError):
+        logger.debug("Freshness check skipped (non-fatal)", exc_info=True)
 
     return artifacts
 
@@ -460,8 +465,8 @@ def _stage_version_drift_preflight(ctx: PipelineContext) -> dict:
         try:
             denom = _json.loads(denom_path.read_text(encoding="utf-8"))
             denominator_version = denom.get("source_version")
-        except Exception:
-            pass
+        except (OSError, json.JSONDecodeError, KeyError):
+            logger.debug("Failed to read denominator version for %s", ctx.family, exc_info=True)
 
     drift = bool(fetched and denominator_version and fetched != denominator_version)
     action = (
@@ -487,8 +492,8 @@ def _stage_version_drift_preflight(ctx: PipelineContext) -> dict:
 
             _mismatch_path = ctx.run_dir / "version-mismatch-alert.json"
             _mismatch_path.write_text(_json2.dumps(mismatch_evidence, indent=2), encoding="utf-8")
-        except Exception:
-            pass
+        except OSError:
+            logger.debug("Failed to write mismatch alert (non-fatal)", exc_info=True)
 
         if discovery_mode == "publication":
             accept_drift = os.environ.get("ACCEPT_VERSION_DRIFT") == "1"
@@ -513,8 +518,8 @@ def _stage_version_drift_preflight(ctx: PipelineContext) -> dict:
                     (ctx.run_dir / "drift-acceptance-record.json").write_text(
                         _json3.dumps(acceptance, indent=2), encoding="utf-8"
                     )
-                except Exception:
-                    pass
+                except OSError:
+                    logger.debug("Failed to write drift acceptance record (non-fatal)", exc_info=True)
                 logger.warning(
                     "VERSION DRIFT ACCEPTED via ACCEPT_VERSION_DRIFT=1 for family '%s': " "pinned=%s, live=%s",
                     ctx.family,
@@ -615,6 +620,10 @@ def _stage_plugin_detection(ctx: PipelineContext) -> dict:
         write_product_inventory,
         assert_source_of_truth_eligible,
     )
+    from plugin_examples.plugin_detector.proof_reporter import (
+        write_nonlowcode_source_of_truth_proof,
+        assert_nonlowcode_source_of_truth_eligible,
+    )
 
     ctx.detection = detect_plugin_namespaces(
         ctx.catalog,
@@ -647,8 +656,20 @@ def _stage_plugin_detection(ctx: PipelineContext) -> dict:
         verification_dir=ctx.evidence_dir,
     )
 
-    # Gate: assert eligible
-    assert_source_of_truth_eligible(str(ctx.proof_path))
+    # Gate: assert source-of-truth eligible
+    has_fallback = getattr(ctx.config.plugin_detection, "fallback_strategy", None)
+    if has_fallback and not ctx.detection.is_eligible:
+        # Non-LowCode: write and assert non-LowCode SOT proof from registry
+        registry_entries = _load_registry_entries(ctx)
+        ctx.nonlowcode_proof_path = write_nonlowcode_source_of_truth_proof(
+            family=ctx.family,
+            registry_entries=registry_entries,
+            verification_dir=ctx.evidence_dir,
+        )
+        assert_nonlowcode_source_of_truth_eligible(str(ctx.nonlowcode_proof_path))
+        logger.info("Non-LowCode SOT gate passed for '%s'", ctx.family)
+    else:
+        assert_source_of_truth_eligible(str(ctx.proof_path))
 
     matched_ns = [m.namespace for m in ctx.detection.matched_namespaces]
     return {
@@ -680,6 +701,33 @@ _FALLBACK_EXCLUDED_STATUSES = frozenset(
         "AI_DRAFT",
     }
 )
+
+
+def _load_registry_entries(ctx: PipelineContext) -> list[dict]:
+    """Load all entries from the capability registry YAML for this family.
+
+    Shared helper used by SOT proof, scenario planning, and fallback lookup.
+    Returns empty list if no registry file exists or on load error.
+    """
+    import yaml
+
+    registry_path = ctx.repo_root / "pipeline" / "plugin-capability-registry" / f"{ctx.family}.yaml"
+    if not registry_path.exists():
+        logger.debug("No capability registry file for '%s'", ctx.family)
+        return []
+
+    try:
+        with open(registry_path, encoding="utf-8") as fh:
+            registry_data = yaml.safe_load(fh)
+    except Exception:  # noqa: BLE001
+        logger.warning("Failed to load capability registry for '%s'", ctx.family, exc_info=True)
+        return []
+
+    if not isinstance(registry_data, dict):
+        return []
+
+    entries = registry_data.get("entries", [])
+    return [e for e in entries if isinstance(e, dict)]
 
 
 def _stage_fallback_registry_lookup(ctx: PipelineContext) -> dict:
@@ -842,6 +890,36 @@ def _stage_example_mining(ctx: PipelineContext) -> dict:
 
 
 def _stage_scenario_planning(ctx: PipelineContext) -> dict:
+    # Non-LowCode: plan scenarios from capability registry entries
+    has_fallback = getattr(ctx.config.plugin_detection, "fallback_strategy", None)
+    if has_fallback and not ctx.detection.is_eligible:
+        from plugin_examples.scenario_planner import (
+            plan_scenarios_from_registry,
+            write_scenario_catalog,
+            write_blocked_scenarios,
+        )
+
+        registry_entries = _load_registry_entries(ctx)
+        nonlowcode_proof_path = getattr(ctx, "nonlowcode_proof_path", None)
+        ctx.planning = plan_scenarios_from_registry(
+            family=ctx.family,
+            registry_entries=registry_entries,
+            source_of_truth_proof_path=str(nonlowcode_proof_path) if nonlowcode_proof_path else None,
+        )
+        write_scenario_catalog(ctx.planning, ctx.evidence_dir)
+        if ctx.planning.blocked_scenarios:
+            write_blocked_scenarios(ctx.planning, ctx.evidence_dir)
+
+        return {
+            "status": "REGISTRY_PLANNED",
+            "ready_count": ctx.planning.ready_count,
+            "blocked_count": ctx.planning.blocked_count,
+            "planning_source": "capability_registry",
+            "total_types_classified": ctx.planning.ready_count + ctx.planning.blocked_count,
+            "standalone_types": ctx.planning.ready_count,
+            "completeness_gate_status": "registry_planned",
+        }
+
     from plugin_examples.scenario_planner import (
         plan_scenarios,
         write_scenario_catalog,
@@ -1004,7 +1082,16 @@ def _stage_llm_preflight(ctx: PipelineContext) -> dict:
 
 
 def _generate_nonlowcode_examples(ctx: PipelineContext) -> dict:
-    """Non-LowCode generation path: runs SharedDownstreamExecutor for fallback candidates."""
+    """LEGACY: Non-LowCode generation path via SharedDownstreamExecutor.
+
+    .. deprecated::
+        This function is no longer called by the main pipeline. Non-LowCode
+        generation now goes through _stage_generation with registry-based
+        scenario planning (plan_scenarios_from_registry) and template code
+        generation (generate_code_from_registry). Retained for backward
+        compatibility with existing integration tests and artifact-contract
+        validation use cases.
+    """
     import json as _json
     from plugin_examples.fixture_factory.shared_downstream_executor import SharedDownstreamExecutor
 
@@ -1081,11 +1168,8 @@ def _stage_generation(ctx: PipelineContext) -> dict:
             rec.mark_excluded(reason)
             rec.final_verdict = "EXCLUDED_BY_SCOPE"
 
-    # Non-LowCode routing: if fallback candidates are present and no LowCode scenarios are
-    # ready, delegate entirely to the shared downstream executor.
+    # If no scenarios are ready (including from registry planning), nothing to generate
     if not ctx.planning or ctx.planning.ready_count == 0:
-        if ctx.fallback_candidates:
-            return _generate_nonlowcode_examples(ctx)
         return {"examples_generated": 0, "reason": "no ready scenarios"}
 
     # Load healing intelligence registries (advisory layer — does not override config)
@@ -1110,8 +1194,26 @@ def _stage_generation(ctx: PipelineContext) -> dict:
     if ctx.llm_available and not ctx.template_mode:
         llm_fn = lambda p, s: ctx.llm_router.generate(p, system_prompt=s)
 
+    # Determine generation mode
+    _is_nonlowcode = bool(
+        getattr(ctx.config.plugin_detection, "fallback_strategy", None)
+        and ctx.detection
+        and not ctx.detection.is_eligible
+    )
     gen_mode = "llm" if llm_fn else "template"
+    if _is_nonlowcode:
+        gen_mode = "registry_llm" if llm_fn else "registry_template"
     output_dir = ctx.run_dir / "generated" / ctx.family
+
+    # Pre-load registry entries for non-LowCode code generation
+    _registry_entries_by_slug: dict[str, dict] = {}
+    if _is_nonlowcode:
+        from plugin_examples.generator.registry_code_generator import generate_code_from_registry
+
+        for entry in _load_registry_entries(ctx):
+            slug = entry.get("plugin_slug") or entry.get("slug", "")
+            if slug:
+                _registry_entries_by_slug[slug] = entry
 
     for scenario in ctx.planning.ready_scenarios:
         scenario_dict = scenario_to_dict(scenario)
@@ -1119,53 +1221,73 @@ def _stage_generation(ctx: PipelineContext) -> dict:
         lifecycle_rec = ctx.lifecycle_registry.create_record(scenario.scenario_id)
         lifecycle_rec.update_stage("generation_attempted")
         try:
-            hints = {}
-            if ctx.config and hasattr(ctx.config, "template_hints"):
-                from dataclasses import asdict as _asdict
+            # Non-LowCode: use registry code generator
+            if _is_nonlowcode:
+                # Find matching registry entry for this scenario
+                _slug = scenario.scenario_id.replace(f"{ctx.family}-", "", 1)
+                _reg_entry = _registry_entries_by_slug.get(_slug, {})
+                _pkg_id = ctx.config.nuget.package_id
 
-                hints = _asdict(ctx.config.template_hints)
-            # Inject family into hints for FormatContract lookup in codegen
-            hints["family"] = ctx.family
-            _ptc = getattr(ctx.config, "per_type_constraints", {}) if ctx.config else {}
+                if llm_fn and not ctx.template_mode:
+                    # LLM with registry metadata as prompt context
+                    hints = {"family": ctx.family}
+                    _ptc = getattr(ctx.config, "per_type_constraints", {}) if ctx.config else {}
+                    packet = build_packet(
+                        scenario_dict,
+                        ctx.catalog or {},
+                        template_hints=hints,
+                        per_type_constraints=_ptc,
+                    )
+                    example = generate_example(packet, llm_generate=llm_fn)
+                else:
+                    # Template mode: generate from registry selected_api_mapping
+                    example = generate_code_from_registry(scenario, _reg_entry, _pkg_id)
+            else:
+                # LowCode path: existing behavior
+                hints = {}
+                if ctx.config and hasattr(ctx.config, "template_hints"):
+                    from dataclasses import asdict as _asdict
 
-            # Merge healing intelligence advisory constraints (additive only)
-            if ctx.healing_intelligence and ctx.healing_intelligence.is_loaded():
-                type_short = scenario_dict.get("target_type", "").split(".")[-1]
-                hi_constraints = ctx.healing_intelligence.get_steering_constraints(
-                    ctx.family,
-                    type_short,
+                    hints = _asdict(ctx.config.template_hints)
+                # Inject family into hints for FormatContract lookup in codegen
+                hints["family"] = ctx.family
+                _ptc = getattr(ctx.config, "per_type_constraints", {}) if ctx.config else {}
+
+                # Merge healing intelligence advisory constraints (additive only)
+                if ctx.healing_intelligence and ctx.healing_intelligence.is_loaded():
+                    type_short = scenario_dict.get("target_type", "").split(".")[-1]
+                    hi_constraints = ctx.healing_intelligence.get_steering_constraints(
+                        ctx.family,
+                        type_short,
+                    )
+                    hi_required = hi_constraints.get("required", []) + hi_constraints.get("global_required", [])
+                    hi_forbidden = hi_constraints.get("forbidden", []) + hi_constraints.get("global_forbidden", [])
+                    if hi_required or hi_forbidden:
+                        existing = dict(_ptc.get(type_short, {}))
+                        existing.setdefault("REQUIRED", []).extend(
+                            r for r in hi_required if r not in existing.get("REQUIRED", [])
+                        )
+                        existing.setdefault("FORBIDDEN", []).extend(
+                            f for f in hi_forbidden if f not in existing.get("FORBIDDEN", [])
+                        )
+                        _ptc = dict(_ptc)
+                        _ptc[type_short] = existing
+                        healing_evidence["constraints_applied"].append(
+                            {
+                                "scenario_id": scenario.scenario_id,
+                                "type": type_short,
+                                "hi_required": hi_required,
+                                "hi_forbidden": hi_forbidden,
+                            }
+                        )
+
+                packet = build_packet(
+                    scenario_dict,
+                    ctx.catalog,
+                    template_hints=hints,
+                    per_type_constraints=_ptc,
                 )
-                # Advisory constraints from healing intelligence are merged
-                # into per_type_constraints.  Config constraints are authoritative
-                # and always preserved; HI constraints are additive.
-                hi_required = hi_constraints.get("required", []) + hi_constraints.get("global_required", [])
-                hi_forbidden = hi_constraints.get("forbidden", []) + hi_constraints.get("global_forbidden", [])
-                if hi_required or hi_forbidden:
-                    existing = dict(_ptc.get(type_short, {}))
-                    existing.setdefault("REQUIRED", []).extend(
-                        r for r in hi_required if r not in existing.get("REQUIRED", [])
-                    )
-                    existing.setdefault("FORBIDDEN", []).extend(
-                        f for f in hi_forbidden if f not in existing.get("FORBIDDEN", [])
-                    )
-                    _ptc = dict(_ptc)
-                    _ptc[type_short] = existing
-                    healing_evidence["constraints_applied"].append(
-                        {
-                            "scenario_id": scenario.scenario_id,
-                            "type": type_short,
-                            "hi_required": hi_required,
-                            "hi_forbidden": hi_forbidden,
-                        }
-                    )
-
-            packet = build_packet(
-                scenario_dict,
-                ctx.catalog,
-                template_hints=hints,
-                per_type_constraints=_ptc,
-            )
-            example = generate_example(packet, llm_generate=llm_fn)
+                example = generate_example(packet, llm_generate=llm_fn)
             if example.status == "failed" or not example.code.strip():
                 reason = example.failure_reason or "empty code"
                 logger.warning("Generation failed for %s: %s", scenario.scenario_id, reason)
@@ -1243,9 +1365,18 @@ def _stage_generation(ctx: PipelineContext) -> dict:
     except Exception:
         logger.debug("Generation decision audit skipped (non-critical)", exc_info=True)
 
+    # TC-P5-02: Map generation mode to explicit quality tier label
+    _tier_map = {
+        "registry_template": "TEMPLATE_REGISTRY",
+        "registry_llm": "LLM_REGISTRY",
+        "llm": "LLM_CATALOG",
+        "template": "TEMPLATE_CATALOG",
+    }
+
     return {
         "examples_generated": len(ctx.generated_projects),
         "generation_mode": gen_mode,
+        "generation_quality_tier": _tier_map.get(gen_mode, gen_mode.upper()),
         "fixtures_generated": len(all_fixtures),
         "healing_intelligence_loaded": healing_evidence.get("loaded", False),
     }
@@ -1253,11 +1384,22 @@ def _stage_generation(ctx: PipelineContext) -> dict:
 
 def _stage_validation(ctx: PipelineContext) -> dict:
     from plugin_examples.verifier_bridge import run_dotnet_validation
-    from plugin_examples.verifier_bridge.dotnet_runner import write_validation_results
+    from plugin_examples.verifier_bridge.dotnet_runner import ValidationResult, write_validation_results
     from plugin_examples.generator.code_generator import _extract_code, _validate_code, _validate_code_from_constraints
 
     if not ctx.generated_projects:
         return {"validated": 0, "reason": "no generated projects"}
+
+    # TC-P5-01: Dotnet SDK preflight — detect once, label degradation explicitly
+    from plugin_examples.health.doctor import check_dotnet_sdk
+    _sdk_check = check_dotnet_sdk()
+    _sdk_available = _sdk_check.status == "PASS"
+    if not _sdk_available:
+        logger.warning(
+            "Dotnet SDK not available (%s) — validation will degrade to "
+            "artifact-contract-only for projects without --skip-run",
+            _sdk_check.detail,
+        )
 
     max_build_repairs = 2 if (ctx.llm_available and not ctx.template_mode) else 0
     max_runtime_repairs = 1 if (ctx.llm_available and not ctx.template_mode) else 0
@@ -1284,6 +1426,8 @@ def _stage_validation(ctx: PipelineContext) -> dict:
     hi_repair_hints: dict[str, str] = {}  # scenario_id -> repair guidance
     if ctx.healing_intelligence and ctx.healing_intelligence.is_loaded():
         for proj in ctx.generated_projects:
+            if "scenario_id" not in proj:
+                continue
             type_short = proj.get("type_short", "")
             failures = ctx.healing_intelligence.get_failures_for_type(ctx.family, type_short)
             if failures:
@@ -1295,7 +1439,44 @@ def _stage_validation(ctx: PipelineContext) -> dict:
                         hi_repair_hints[proj["scenario_id"]] = rp["strategy"]
                         break
 
+    nonlowcode_limited = 0
+    sdk_degraded = 0
     for proj in ctx.generated_projects:
+        # Safety net: projects without project_dir get LIMITED_VALIDATION
+        # (artifact contract only). With Phase 3 routing, non-LowCode projects
+        # SHOULD have project_dir and flow through normal dotnet validation.
+        if "project_dir" not in proj:
+            _proj_id = proj.get("slug", proj.get("scenario_id", "unknown"))
+            logger.warning(
+                "Project '%s' has no project_dir — LIMITED_VALIDATION "
+                "(artifact contract only)",
+                _proj_id,
+            )
+            ctx.validation_results.append(ValidationResult(
+                scenario_id=_proj_id,
+                passed=False,
+                failure_stage="no_project_dir",
+            ))
+            nonlowcode_limited += 1
+            continue
+
+        # TC-P5-01: If dotnet SDK not available, skip dotnet validation with
+        # explicit VALIDATION_DEGRADED_NO_SDK label (never a silent skip).
+        if not _sdk_available and not ctx.skip_run:
+            _proj_id = proj.get("scenario_id", "unknown")
+            logger.warning(
+                "Project '%s' — VALIDATION_DEGRADED_NO_SDK "
+                "(dotnet SDK not found, skipping restore/build/run)",
+                _proj_id,
+            )
+            ctx.validation_results.append(ValidationResult(
+                scenario_id=_proj_id,
+                passed=False,
+                failure_stage="no_sdk",
+            ))
+            sdk_degraded += 1
+            continue
+
         vr = run_dotnet_validation(
             Path(proj["project_dir"]),
             proj["scenario_id"],
@@ -1704,6 +1885,9 @@ def _stage_validation(ctx: PipelineContext) -> dict:
         "build_repairs": repairs_done,
         "runtime_repairs": runtime_repairs_done,
         "runtime_failures_classified": runtime_classified,
+        "nonlowcode_limited": nonlowcode_limited,
+        "sdk_available": _sdk_available,
+        "sdk_degraded": sdk_degraded,
     }
 
 

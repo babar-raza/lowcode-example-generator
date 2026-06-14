@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 import json
-import pytest
 from pathlib import Path
+
+import pytest
 
 
 class TestManifestContractFields:
@@ -12,8 +13,8 @@ class TestManifestContractFields:
 
     def test_manifest_has_contract_fields_when_contract_available(self, tmp_path):
         """Manifest should contain contract_* fields when FormatContract is found."""
-        from plugin_examples.generator.project_generator import generate_project, GeneratedExample
         from plugin_examples.format_authority.store import get_contract, reset_store
+        from plugin_examples.generator.project_generator import GeneratedExample, generate_project
 
         reset_store()
         fc = get_contract("cells", "SpreadsheetConverter")
@@ -44,8 +45,8 @@ class TestManifestContractFields:
 
     def test_expected_output_has_contract_extension(self, tmp_path):
         """expected-output.json should contain expected_output_extension from contract."""
-        from plugin_examples.generator.project_generator import generate_project, GeneratedExample
         from plugin_examples.format_authority.store import get_contract, reset_store
+        from plugin_examples.generator.project_generator import GeneratedExample, generate_project
 
         reset_store()
         fc = get_contract("cells", "SpreadsheetConverter")
@@ -73,8 +74,8 @@ class TestManifestContractFields:
 
     def test_manifest_without_contract_has_no_stale_dot_out(self, tmp_path):
         """Manifest written without any contract should not have .out in output_format."""
-        from plugin_examples.generator.project_generator import generate_project, GeneratedExample
         from plugin_examples.format_authority.store import reset_store
+        from plugin_examples.generator.project_generator import GeneratedExample, generate_project
 
         reset_store()
 

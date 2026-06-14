@@ -3,8 +3,8 @@
 import pytest
 
 from plugin_examples.gates.code_contract_validator import (
-    validate_code_against_contract,
     ContractValidationResult,
+    validate_code_against_contract,
 )
 
 

@@ -5,14 +5,15 @@ Uses repo-local authority at pipeline/format-authority/.
 No workspace run artifacts. No skips for missing authority files.
 """
 
-import pytest
 from pathlib import Path
 
+import pytest
+
 from plugin_examples.format_authority.store import (
-    get_contract,
-    get_all_contracts,
-    reset_store,
     MissingFormatContractError,
+    get_all_contracts,
+    get_contract,
+    reset_store,
 )
 from plugin_examples.scenario_planner.planner import (
     _infer_input_format,

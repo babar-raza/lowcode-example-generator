@@ -15,7 +15,6 @@ import yaml
 
 from plugin_examples.evidence_validator.rules.non_lowcode import NonLowCodeValidatorRules
 
-
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------

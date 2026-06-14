@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import pytest
+
 from plugin_examples.generator.code_generator import _infer_output_extension
 
 

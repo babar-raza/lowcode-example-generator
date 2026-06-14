@@ -6,6 +6,7 @@ for multi-input and multi-output types (merger, splitter, extractor).
 
 import re
 from pathlib import Path
+
 import pytest
 
 REPO = Path(__file__).resolve().parents[2]

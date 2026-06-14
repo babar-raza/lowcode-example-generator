@@ -16,6 +16,7 @@ Wave 13 defects that motivated this module:
 """
 
 from __future__ import annotations
+
 from typing import Any
 
 
@@ -324,9 +325,7 @@ def evc_08_sprint_verdict_consistent_across_artifacts(
     # Determine expected consistency
     if closeout_verdict == "SPRINT_COMPLETE":
         # Lane ledger must also show SPRINT_COMPLETE or equivalent
-        if lane_ledger_verdict and lane_ledger_verdict not in ("SPRINT_COMPLETE",):
-            # Allow partial strings like "LANE_H_COMPLETE" or prefixes
-            if "COMPLETE" not in lane_ledger_verdict.upper():
+        if lane_ledger_verdict and lane_ledger_verdict not in ("SPRINT_COMPLETE",) and "COMPLETE" not in lane_ledger_verdict.upper():
                 return {
                     "rule": "EVC-08",
                     "status": "FAIL",

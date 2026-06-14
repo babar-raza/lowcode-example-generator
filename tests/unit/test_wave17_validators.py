@@ -12,36 +12,25 @@ Tests for:
 Includes regression tests for Wave 16 defect patterns (W16-DEF-01..07).
 """
 
+import hashlib
 import io
 import json
 import os
 import tempfile
 import zipfile
-import hashlib
+
 import pytest
 
-from src.plugin_examples.fixture_factory.taskcard_count_validator import (
-    tcv_01_total_matches_array_length,
-    tcv_02_complete_plus_pending_equals_total,
-    tcv_03_pending_zero_at_sprint_close,
-    run_all_tcv,
-)
-from src.plugin_examples.fixture_factory.pending_evidence_validator import (
-    pev_01_no_pending_in_complete_evidence,
-    pev_02_no_deferred_in_complete_evidence,
-    pev_03_no_empty_evidence_on_complete,
-    run_all_pev,
-)
 from src.plugin_examples.fixture_factory.bundle_attestation_validator import (
     bav_01_bundle_sha_matches_attestation,
     bav_02_bundle_entry_count_matches_attestation,
     bav_03_bundle_size_matches_attestation,
     run_all_bav,
 )
-from src.plugin_examples.fixture_factory.pr_packet_count_validator import (
-    prc_01_bundle_pr_packet_count_gte_pclc_total,
-    prc_02_each_pclc_package_has_pr_packet_in_bundle,
-    run_all_prc,
+from src.plugin_examples.fixture_factory.final_git_status_validator import (
+    fgs_01_final_git_status_present_in_bundle,
+    fgs_02_no_pfx_in_final_git_status,
+    run_all_fgs,
 )
 from src.plugin_examples.fixture_factory.package_proof_log_validator import (
     ppl_01_restore_log_present,
@@ -49,12 +38,23 @@ from src.plugin_examples.fixture_factory.package_proof_log_validator import (
     ppl_03_run_log_present,
     run_all_ppl,
 )
-from src.plugin_examples.fixture_factory.final_git_status_validator import (
-    fgs_01_final_git_status_present_in_bundle,
-    fgs_02_no_pfx_in_final_git_status,
-    run_all_fgs,
+from src.plugin_examples.fixture_factory.pending_evidence_validator import (
+    pev_01_no_pending_in_complete_evidence,
+    pev_02_no_deferred_in_complete_evidence,
+    pev_03_no_empty_evidence_on_complete,
+    run_all_pev,
 )
-
+from src.plugin_examples.fixture_factory.pr_packet_count_validator import (
+    prc_01_bundle_pr_packet_count_gte_pclc_total,
+    prc_02_each_pclc_package_has_pr_packet_in_bundle,
+    run_all_prc,
+)
+from src.plugin_examples.fixture_factory.taskcard_count_validator import (
+    run_all_tcv,
+    tcv_01_total_matches_array_length,
+    tcv_02_complete_plus_pending_equals_total,
+    tcv_03_pending_zero_at_sprint_close,
+)
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -233,7 +233,8 @@ class TestBAV:
             "sprint/preflight/git-status.txt": b"M file.py",
         }
         bundle_path = _write_bundle(path, entries)
-        sha = hashlib.sha256(open(bundle_path, "rb").read()).hexdigest()
+        with open(bundle_path, "rb") as f:
+            sha = hashlib.sha256(f.read()).hexdigest()
         size = os.path.getsize(bundle_path)
         entry_count = 2
         attestation = {"sha256": sha, "size_bytes": size, "entry_count": entry_count}

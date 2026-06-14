@@ -9,7 +9,7 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
-from unittest.mock import MagicMock, patch, PropertyMock
+from unittest.mock import MagicMock, PropertyMock, patch
 
 import pytest
 
@@ -25,7 +25,6 @@ from plugin_examples.runner import (
     run_pipeline,
     scenario_to_dict,
 )
-
 
 # ---------------------------------------------------------------------------
 # Helpers — minimal fakes for dataclasses used by the runner
@@ -630,8 +629,9 @@ class TestMainWiring:
                 "gate_summary": {"passed": 10, "degraded": 0, "failed": 0, "hard_stopped": False},
                 "verdict": "DATA_FLOW_PROTOTYPE_ONLY",
             }
-            from plugin_examples.__main__ import main
             import sys
+
+            from plugin_examples.__main__ import main
 
             with patch.object(sys, "argv", ["plugin-examples", "run", "--family", "cells"]):
                 exit_code = main()
@@ -815,6 +815,7 @@ class TestGenerationFramework:
     def test_generation_uses_net8_not_extraction_framework(self):
         """Runner must pass net8.0 to generate_project, not extraction framework."""
         import inspect
+
         from plugin_examples.runner import _stage_generation
 
         source = inspect.getsource(_stage_generation)
@@ -832,6 +833,9 @@ class TestDiscoveryOnlySafetyGuard:
         mock_cfg.family = family
         mock_cfg.nuget = MagicMock()
         mock_cfg.nuget.package_id = "Aspose.Words"
+        # Explicitly set fallback_strategy=None so discovery_only tests
+        # correctly test the "no fallback" case (MagicMock would be truthy)
+        mock_cfg.plugin_detection.fallback_strategy = None
         return mock_cfg
 
     @patch("plugin_examples.family_config.load_family_config")

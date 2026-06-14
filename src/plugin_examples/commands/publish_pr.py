@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from datetime import UTC
 
 from plugin_examples.commands._metrics import _add_metrics_flags, _create_metrics_session, _finalize_metrics_session
 
@@ -56,11 +57,12 @@ def handle(args) -> int:
     """Handle the publish-pr command."""
     import json as _json
     import re as _re
-    from plugin_examples.family_config import load_family_config, DisabledFamilyError
-    from plugin_examples.publisher.pr_builder import build_pr
-    from plugin_examples.publisher.approval_gate import check_approval
     from datetime import datetime, timezone
     from pathlib import Path as _Path
+
+    from plugin_examples.family_config import DisabledFamilyError, load_family_config
+    from plugin_examples.publisher.approval_gate import check_approval
+    from plugin_examples.publisher.pr_builder import build_pr
 
     repo_root = _Path(__file__).resolve().parents[3]
     msession, mcollector = _create_metrics_session(
@@ -160,21 +162,32 @@ def handle(args) -> int:
     # so the README lists all examples that will exist in the repo after merge.
     if package_exists and len(example_dirs) > 0:
         try:
-            from plugin_examples.publisher.readme_renderer import (
-                build_readme_context as _build_readme_ctx,
-                render_readme as _render_readme,
-                write_readme as _write_readme,
-            )
+            import json as _json_r
+
             from plugin_examples.publisher.readme_auditor import (
                 audit_readme as _audit_readme,
+            )
+            from plugin_examples.publisher.readme_auditor import (
                 audit_readme_staleness as _audit_staleness,
             )
             from plugin_examples.publisher.readme_inventory import (
-                discover_family_inventory as _discover_inv,
                 build_cumulative_examples_meta as _build_cum_meta,
+            )
+            from plugin_examples.publisher.readme_inventory import (
                 build_package_path_map as _build_pkg_map,
             )
-            import json as _json_r
+            from plugin_examples.publisher.readme_inventory import (
+                discover_family_inventory as _discover_inv,
+            )
+            from plugin_examples.publisher.readme_renderer import (
+                build_readme_context as _build_readme_ctx,
+            )
+            from plugin_examples.publisher.readme_renderer import (
+                render_readme as _render_readme,
+            )
+            from plugin_examples.publisher.readme_renderer import (
+                write_readme as _write_readme,
+            )
 
             # Discover cumulative inventory: repo base + this package
             _inv_entries, _inv_trail = _discover_inv(
@@ -186,7 +199,7 @@ def handle(args) -> int:
             _examples_meta = _build_cum_meta(_inv_entries)
             _pkg_path_map = _build_pkg_map(_inv_entries)
 
-            _gen_date = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+            _gen_date = datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC")
             _readme_ctx = _build_readme_ctx(
                 family=family,
                 family_config=cfg,
@@ -237,7 +250,7 @@ def handle(args) -> int:
                 print(f"WARNING: README render failed (non-blocking in dry-run): {_readme_exc}")
 
     # Build run_id for branch name
-    run_ts = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
+    run_ts = datetime.now(UTC).strftime("%Y%m%d-%H%M%S")
     run_id = run_ts  # used in branch: plugin-examples/{family}/{run_id}
 
     # Load excluded scenario summaries for PR body
@@ -297,9 +310,13 @@ def handle(args) -> int:
 
         # README audit gate — must have a content-based, passing audit before live publish
         from plugin_examples.publisher.readme_audit_gate import (
-            check_readme_audit_gate as _check_readme_gate,
             README_AUDIT_ENV_VAR as _README_ENV,
+        )
+        from plugin_examples.publisher.readme_audit_gate import (
             README_AUDIT_EXPECTED_VALUE as _README_EXPECTED,
+        )
+        from plugin_examples.publisher.readme_audit_gate import (
+            check_readme_audit_gate as _check_readme_gate,
         )
 
         _readme_push_approval = os.environ.get(_README_ENV, getattr(args, "approval_token", None))
@@ -315,8 +332,10 @@ def handle(args) -> int:
             return 1
 
         from plugin_examples.publisher.github_pr_publisher import (
-            create_github_pr,
             PublishingError as _GHError,
+        )
+        from plugin_examples.publisher.github_pr_publisher import (
+            create_github_pr,
         )
 
         branch_name = pr_content.branch  # plugin-examples/{family}/{run_id}
@@ -355,7 +374,7 @@ def handle(args) -> int:
 
         live_result = {
             "simulation_type": "publish_pr_live_result",
-            "publish_date": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00"),
+            "publish_date": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%S+00:00"),
             "family": family,
             "dry_run": False,
             "live_pr_created": True,
@@ -420,7 +439,7 @@ def handle(args) -> int:
 
     simulation_result = {
         "simulation_type": "publish_pr_dry_run_simulation",
-        "simulation_date": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00"),
+        "simulation_date": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%S+00:00"),
         "family": family,
         "dry_run": True,
         "simulation_passed": simulation_passed,

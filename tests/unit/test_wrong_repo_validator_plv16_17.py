@@ -7,13 +7,12 @@ from __future__ import annotations
 import pytest
 
 from plugin_examples.fixture_factory.publication_lifecycle_validators import (
-    PlvResult,
     _APPROVED_PUBLICATION_REPOS,
     _FIXTURE_SOURCE_REPO_OWNERS,
+    PlvResult,
     check_plv_16_fixture_source_not_publication_target,
     check_plv_17_pr_url_allowlist,
 )
-
 
 # ── PLV-16 ─────────────────────────────────────────────────────────────────────
 
@@ -33,7 +32,7 @@ def test_plv16_fail_when_fixture_source_repo_referenced():
     assert result.failed == 1
     check = result.checks[0]
     assert check["status"] == "FAIL"
-    assert "PLV-16" == check["code"]
+    assert check["code"] == "PLV-16"
     assert "aspose-barcode/Aspose.BarCode-for-.NET" in check["detail"]
 
 

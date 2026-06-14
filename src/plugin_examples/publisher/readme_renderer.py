@@ -9,7 +9,7 @@ from __future__ import annotations
 import json
 import logging
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 
 from plugin_examples.publisher.aspose_links import build_aspose_net_links
@@ -194,7 +194,7 @@ def _compute_display_fields(
     if op_kind == "splitter":
         return (input_fmt, f"{output_fmt} (1→N)" if output_fmt else output_fmt)
     if op_kind == "extractor":
-        return (input_fmt, "text (stdout)" if not output_fmt else output_fmt)
+        return (input_fmt, output_fmt if output_fmt else "text (stdout)")
     if op_kind == "image_extractor":
         return (input_fmt, f"{output_fmt} (N files)" if output_fmt else output_fmt)
     if op_kind == "directory_output":
@@ -262,7 +262,7 @@ def build_readme_context(
         ValueError: If required fields are missing from family_config.
     """
     if not generation_date:
-        generation_date = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+        generation_date = datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC")
 
     # --- Pull fields from family config ---
     display_name: str = getattr(family_config, "display_name", None)

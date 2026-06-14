@@ -9,29 +9,29 @@ class PluginEntry:
     family: str
     plugin_slug: str
     registry_status: str
-    canonical_url: Optional[str] = None
-    plugin_url: Optional[str] = None
-    page_source_status: Optional[str] = None
-    implementation_model: Optional[str] = None
-    transformation_readiness_reason: Optional[str] = None
+    canonical_url: str | None = None
+    plugin_url: str | None = None
+    page_source_status: str | None = None
+    implementation_model: str | None = None
+    transformation_readiness_reason: str | None = None
     classes_used: list = field(default_factory=list)
     methods_used: list = field(default_factory=list)
     namespaces_used: list = field(default_factory=list)
     code_hashes: list = field(default_factory=list)
     github_links: list = field(default_factory=list)
-    next_action: Optional[str] = None
-    blocker_type: Optional[str] = None
-    dryrun_package_path: Optional[str] = None
-    dryrun_validation_status: Optional[str] = None
-    publication_candidate_status: Optional[str] = None
+    next_action: str | None = None
+    blocker_type: str | None = None
+    dryrun_package_path: str | None = None
+    dryrun_validation_status: str | None = None
+    publication_candidate_status: str | None = None
     # Canonical identity fields (added Sprint lowcode-plugin-canonical-identity-wave7-20260605)
-    canonical_plugin_slug: Optional[str] = None
-    identity_status: Optional[str] = None
+    canonical_plugin_slug: str | None = None
+    identity_status: str | None = None
     # Canonical-primary fields (added Sprint lowcode-plugin-canonical-primary-wave8-20260605)
     legacy_aliases: list = field(default_factory=list)
-    display_plugin_name: Optional[str] = None
-    migration_status: Optional[str] = None
-    migrated_from: Optional[str] = None
+    display_plugin_name: str | None = None
+    migration_status: str | None = None
+    migrated_from: str | None = None
 
     @property
     def effective_canonical_slug(self) -> str:
@@ -102,8 +102,8 @@ class PluginEntry:
 class FamilyRegistry:
     family: str
     package_id: str
-    github_repo: Optional[str]
-    implementation_model: Optional[str]
+    github_repo: str | None
+    implementation_model: str | None
     plugins: list = field(default_factory=list)
 
     @property

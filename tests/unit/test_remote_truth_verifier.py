@@ -84,9 +84,7 @@ class TestRunRemoteTruthCheck:
                 resp.status_code = 200
                 resp.json = lambda: {"state": "closed", "merged_at": "2026-06-01T00:00:00Z"}
                 resp.raise_for_status = MagicMock()
-            elif "/branches/" in url:
-                resp.status_code = 200
-            elif "/contents/" in url:
+            elif "/branches/" in url or "/contents/" in url:
                 resp.status_code = 200
             return resp
 

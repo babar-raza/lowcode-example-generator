@@ -7,8 +7,7 @@ from pathlib import Path
 from typing import Optional
 
 from ..plugin_code_registry.models import PluginEntry
-from .templates import FamilyTemplateRegistry, FamilyTemplate
-
+from .templates import FamilyTemplate, FamilyTemplateRegistry
 
 CSPROJ_TEMPLATE = """\
 <Project Sdk="Microsoft.NET.Sdk">
@@ -112,7 +111,7 @@ class ExamplePackageGenerator:
     def __init__(
         self,
         output_root: Path,
-        template_registry: Optional[FamilyTemplateRegistry] = None,
+        template_registry: FamilyTemplateRegistry | None = None,
         sprint: str = SPRINT,
         generated_at: str = GENERATED_AT,
     ):

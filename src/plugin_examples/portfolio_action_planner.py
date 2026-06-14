@@ -17,10 +17,10 @@ from __future__ import annotations
 import json
 import os
 import subprocess
-from dataclasses import dataclass, field, asdict
+from dataclasses import asdict, dataclass, field
+from datetime import UTC
 from pathlib import Path
 from typing import Any
-
 
 # ---------------------------------------------------------------------------
 # Action types
@@ -586,7 +586,7 @@ def compute_action_board(repo_root: Path) -> ActionBoard:
     dirty = _check_dirty_state(repo_root)
 
     board = ActionBoard(
-        generated_at=datetime.now(timezone.utc).isoformat(),
+        generated_at=datetime.now(UTC).isoformat(),
         generated_from_head=head_sha,
         git_dirty_summary=dirty.summary(),
         dirty_categories=dirty.to_dict(),

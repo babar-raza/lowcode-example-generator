@@ -10,8 +10,8 @@ import pytest
 from plugin_examples.llm_router.decision_audit import (
     DecisionAuditLog,
     DecisionAuditRecord,
-    init_global_audit_log,
     get_global_audit_log,
+    init_global_audit_log,
     record_decision,
 )
 

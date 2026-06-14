@@ -1,13 +1,14 @@
 """Unit tests for the example factory."""
 
 import json
-import pytest
 import tempfile
 from pathlib import Path
 
-from src.plugin_examples.plugin_code_registry.models import PluginEntry
-from src.plugin_examples.example_factory.templates import FamilyTemplateRegistry
+import pytest
+
 from src.plugin_examples.example_factory.generator import ExamplePackageGenerator
+from src.plugin_examples.example_factory.templates import FamilyTemplateRegistry
+from src.plugin_examples.plugin_code_registry.models import PluginEntry
 
 
 @pytest.fixture

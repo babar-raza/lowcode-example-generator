@@ -17,8 +17,8 @@ import pytest
 import yaml
 
 from plugin_examples.scenario_planner.planner import (
-    plan_scenarios_from_registry,
     PlanningResult,
+    plan_scenarios_from_registry,
 )
 
 

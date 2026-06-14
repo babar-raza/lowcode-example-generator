@@ -41,12 +41,13 @@ def add_parser(subparsers):
 
 def handle(args) -> int:
     """Handle the release-status command."""
+    from pathlib import Path as _Path
+
     from plugin_examples.publisher.release_status import (
         ALL_RELEASE_FAMILIES,
         compute_release_status,
         write_release_status_report,
     )
-    from pathlib import Path as _Path
 
     repo_root = _Path(__file__).resolve().parents[3]
     msession, mcollector = _create_metrics_session(

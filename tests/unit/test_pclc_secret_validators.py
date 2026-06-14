@@ -11,12 +11,11 @@ from src.plugin_examples.fixture_factory.pclc_consistency_validators import (
     run_all_pclv,
 )
 from src.plugin_examples.fixture_factory.secret_hygiene_validators import (
+    run_all_shv,
     shv_01_no_pfx_untracked_or_staged,
     shv_02_no_pem_key_p12_untracked_or_staged,
     shv_03_no_credential_filenames_staged,
-    run_all_shv,
 )
-
 
 # ============================================================
 # PCLV-01

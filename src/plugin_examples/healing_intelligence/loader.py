@@ -15,11 +15,13 @@ All loads are read-only — this module never writes to the registries.
 from __future__ import annotations
 
 import json
-import logging
+from datetime import UTC
 from pathlib import Path
 from typing import Any
 
-logger = logging.getLogger(__name__)
+from plugin_examples.observability import get_logger
+
+logger = get_logger(__name__)
 
 # Default location relative to the project root.
 _DEFAULT_REGISTRY_DIR = Path("workspace/verification/latest/healing-intelligence")
@@ -64,7 +66,7 @@ class HealingIntelligenceLoader:
     # Public loading API
     # ------------------------------------------------------------------
 
-    def load(self) -> "HealingIntelligenceLoader":
+    def load(self) -> HealingIntelligenceLoader:
         """Load all healing intelligence registries from disk.
 
         Returns self for chaining. Idempotent — safe to call multiple times.
@@ -285,7 +287,7 @@ def auto_learn_from_run(
     from datetime import datetime, timezone
 
     def _utcnow() -> str:
-        return datetime.now(timezone.utc).isoformat(timespec="seconds")
+        return datetime.now(UTC).isoformat(timespec="seconds")
 
     # Load existing registry
     if registry_path.exists():
@@ -388,8 +390,8 @@ def _load_run_failures(run_dir: Path) -> list[dict]:
                 for v in data.values():
                     if isinstance(v, list):
                         failures.extend(f for f in v if isinstance(f, dict) and not f.get("passed", True))
-        except Exception:  # noqa: BLE001
-            pass
+        except (OSError, json.JSONDecodeError, KeyError):  # noqa: BLE001
+            logger.debug("Failed to parse failure record from %s", path, exc_info=True)
     return failures
 
 

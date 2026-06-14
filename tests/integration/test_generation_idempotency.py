@@ -5,9 +5,10 @@ when run twice with identical input.
 """
 
 import json
-import pytest
 from pathlib import Path
 from types import SimpleNamespace
+
+import pytest
 
 
 @pytest.fixture
@@ -32,7 +33,7 @@ class TestGenerationIdempotency:
     def test_board_fingerprint_is_stable(self):
         """Same action board state produces same fingerprint twice."""
         from plugin_examples.planner_loop import board_fingerprint
-        from plugin_examples.portfolio_action_planner import ActionBoard, Action
+        from plugin_examples.portfolio_action_planner import Action, ActionBoard
 
         action = Action(
             id="TEST_ACTION",

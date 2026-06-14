@@ -16,7 +16,6 @@ from plugin_examples.fixture_factory.shared_downstream_executor import (
     discover_nonlowcode_candidates,
 )
 
-
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------

@@ -5,16 +5,17 @@ No workspace run artifacts. No skips for missing files.
 """
 
 import json
-import pytest
 from pathlib import Path
+
+import pytest
 
 from plugin_examples.format_authority.contracts import FormatContract
 from plugin_examples.format_authority.store import (
-    get_contract,
+    MissingFormatContractError,
     get_all_contracts,
+    get_contract,
     load_contracts_from_json,
     reset_store,
-    MissingFormatContractError,
 )
 
 REPO_ROOT = Path(__file__).resolve().parents[2]

@@ -8,8 +8,8 @@ import pytest
 
 class TestEvidenceWriter:
     def test_write_llm_calls_jsonl(self, tmp_path):
-        from plugin_examples.metrics.models import MetricsCollector
         from plugin_examples.metrics.evidence import write_llm_calls_jsonl
+        from plugin_examples.metrics.models import MetricsCollector
 
         mc = MetricsCollector()
         mc.record_call(provider="test", total_tokens=10, token_usage_available=True)

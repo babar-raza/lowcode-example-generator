@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import logging
 from dataclasses import asdict, dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -95,13 +95,13 @@ class ExampleLifecycleRecord:
     regression_reason: str | None = None
 
     # Metadata
-    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
-    last_updated: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    created_at: str = field(default_factory=lambda: datetime.now(UTC).isoformat())
+    last_updated: str = field(default_factory=lambda: datetime.now(UTC).isoformat())
 
     def update_stage(self, stage: str) -> None:
         """Update current_stage and last_updated."""
         self.current_stage = stage
-        self.last_updated = datetime.now(timezone.utc).isoformat()
+        self.last_updated = datetime.now(UTC).isoformat()
 
     def mark_generation_failed(self, reason: str) -> None:
         self.generation_status = "failed"
@@ -279,8 +279,8 @@ class FamilyBacklogEntry:
     recommended_fix: str
     priority: str = "medium"
     attempt_count: int = 1
-    first_seen: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
-    last_seen: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    first_seen: str = field(default_factory=lambda: datetime.now(UTC).isoformat())
+    last_seen: str = field(default_factory=lambda: datetime.now(UTC).isoformat())
     resolved: bool = False
     resolved_in_run: str | None = None
 
@@ -307,7 +307,7 @@ def save_family_backlog(family: str, entries: list[FamilyBacklogEntry], backlog_
     path.parent.mkdir(parents=True, exist_ok=True)
     data = {
         "family": family,
-        "updated_at": datetime.now(timezone.utc).isoformat(),
+        "updated_at": datetime.now(UTC).isoformat(),
         "total_entries": len(entries),
         "open_entries": sum(1 for e in entries if not e.resolved),
         "resolved_entries": sum(1 for e in entries if e.resolved),
@@ -339,7 +339,7 @@ def update_backlog_from_lifecycle(
             if existing and not existing.resolved:
                 existing.resolved = True
                 existing.resolved_in_run = registry.run_id
-                existing.last_seen = datetime.now(timezone.utc).isoformat()
+                existing.last_seen = datetime.now(UTC).isoformat()
         elif record.backlogged:
             # Example failed — add or update backlog entry
             if existing:
@@ -349,7 +349,7 @@ def update_backlog_from_lifecycle(
                 existing.recommended_fix = record.backlog_recommended_fix or existing.recommended_fix
                 existing.priority = record.backlog_priority
                 existing.attempt_count += 1
-                existing.last_seen = datetime.now(timezone.utc).isoformat()
+                existing.last_seen = datetime.now(UTC).isoformat()
             else:
                 new_entry = FamilyBacklogEntry(
                     scenario_id=record.scenario_id,
@@ -440,7 +440,7 @@ class RunToRunComparisonResult:
     current_run_id: str
     prior_run_id: str
     family: str
-    generated_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    generated_at: str = field(default_factory=lambda: datetime.now(UTC).isoformat())
     total_prior_scenarios: int = 0
     total_current_scenarios: int = 0
     unchanged_count: int = 0

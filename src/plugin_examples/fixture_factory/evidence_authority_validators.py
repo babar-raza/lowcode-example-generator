@@ -20,7 +20,6 @@ import zipfile
 from dataclasses import dataclass, field
 from typing import Any
 
-
 REQUIRED_ATTESTATION_FIELDS = [
     "path",
     "sha256",

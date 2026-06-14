@@ -180,7 +180,7 @@ def handle(args) -> int:
         except (json.JSONDecodeError, KeyError, TypeError):
             pass
 
-    timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    timestamp = datetime.datetime.now(datetime.UTC).isoformat()
     all_entries: list[dict] = []
     total_errors: list[str] = []
 
@@ -242,8 +242,8 @@ def _discover_family(
     """Discover all plugin pages for a family. Returns (entries, errors)."""
     from plugin_examples.website_catalog.crawler import (
         WebsiteCatalog,
-        normalize_url,
         _fetch_url,  # noqa: WPS437 — internal helper, acceptable here
+        normalize_url,
     )
 
     index_url = _FAMILY_INDEX_URLS.get(family_slug)
@@ -339,13 +339,14 @@ def _extract_plugin_links(html: str, base_url: str, family_slug: str) -> list[st
 
 def _get_page_html(url: str, replay: bool) -> str | None:
     """Get page HTML from cache (replay) or live fetch."""
-    import time as _time
     import re as _re
+    import time as _time
+
     from plugin_examples.website_catalog.crawler import (
         _cache_path,
+        _fetch_url,
         _is_cache_fresh,
         _read_cache,
-        _fetch_url,
         normalize_url,
     )
 

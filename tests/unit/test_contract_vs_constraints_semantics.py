@@ -7,8 +7,10 @@ the per_type_constraints check because they are never code substrings.
 """
 
 from __future__ import annotations
+
 import re
 from pathlib import Path
+
 import pytest
 
 REPO = Path(__file__).resolve().parents[2]
@@ -43,10 +45,7 @@ def _is_instruction_text(constraint: str) -> bool:
         r" — ",  # em-dash separator (instruction explanation)
         r" \(",  # parenthetical note
     ]
-    for pat in instruction_patterns:
-        if re.search(pat, constraint):
-            return True
-    return False
+    return any(re.search(pat, constraint) for pat in instruction_patterns)
 
 
 def _looks_like_code_token(constraint: str) -> bool:
@@ -66,9 +65,7 @@ def _looks_like_code_token(constraint: str) -> bool:
         if re.search(pat, constraint):
             return True
     # A single alphanumeric token with no spaces is likely a code identifier
-    if re.match(r'^[\w.\/\(\)\[\]"\']+$', constraint) and len(constraint) < 80:
-        return True
-    return False
+    return bool(re.match(r'^[\w.\/\(\)\[\]"\']+$', constraint) and len(constraint) < 80)
 
 
 FAMILIES_WITH_CONSTRAINTS = ["cells", "words", "pdf", "diagram", "email", "slides"]

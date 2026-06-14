@@ -236,18 +236,17 @@ class Sprint70to71Rules:
             )
 
         # If old index exists, there must be a superseded marker or authority README
-        if old_index.exists():
-            if not superseded_marker.exists() and not authority_readme.exists():
-                return RuleResult(
-                    rule_id=rule_id,
-                    description="Old legacy-plan-reconciliation/reconciliation-index.md must be marked superseded",
-                    severity="FAILURE",
-                    passed=False,
-                    failure_detail=(
-                        "legacy-plan-reconciliation/reconciliation-index.md exists without superseded marker. "
-                        "Create history/legacy-plan-reconciliation-superseded.md or legacy-reconciliation/README.md"
-                    ),
-                )
+        if old_index.exists() and not superseded_marker.exists() and not authority_readme.exists():
+            return RuleResult(
+                rule_id=rule_id,
+                description="Old legacy-plan-reconciliation/reconciliation-index.md must be marked superseded",
+                severity="FAILURE",
+                passed=False,
+                failure_detail=(
+                    "legacy-plan-reconciliation/reconciliation-index.md exists without superseded marker. "
+                    "Create history/legacy-plan-reconciliation-superseded.md or legacy-reconciliation/README.md"
+                ),
+            )
 
         return RuleResult(
             rule_id=rule_id,

@@ -10,7 +10,6 @@ import pytest
 
 from plugin_examples.fixture_registry.fixture_fetcher import _copy_with_provenance
 
-
 REQUIRED_SIDECAR_FIELDS = [
     "filename",
     "source_repo",

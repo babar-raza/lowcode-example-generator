@@ -20,25 +20,32 @@ from pathlib import Path
 import pytest
 
 from plugin_examples.evidence_contract import (
+    ALLOWED_PLANNER_VERDICTS,
     ALLOWED_VERDICTS_V2,
     ALLOWED_VERDICTS_V3,
     ALLOWED_VERDICTS_V4,
     ALLOWED_VERDICTS_V5,
     ALLOWED_VERDICTS_V6,
     ALLOWED_VERDICTS_V7,
+    ALLOWED_VERDICTS_V8,
     COMBINED_CATEGORIES_V2,
     COMBINED_CATEGORIES_V3,
     COMBINED_CATEGORIES_V4,
     COMBINED_CATEGORIES_V5,
     COMBINED_CATEGORIES_V6,
     COMBINED_CATEGORIES_V7,
+    COMBINED_CATEGORIES_V8,
     MIN_CATEGORIES_REQUIRED_V2,
     MIN_CATEGORIES_REQUIRED_V3,
     MIN_CATEGORIES_REQUIRED_V4,
     MIN_CATEGORIES_REQUIRED_V5,
     MIN_CATEGORIES_REQUIRED_V6,
     MIN_CATEGORIES_REQUIRED_V7,
+    MIN_CATEGORIES_REQUIRED_V8,
+    MIN_PLANNER_CATEGORIES_REQUIRED,
+    PLANNER_SPRINT_CATEGORIES,
     REQUIRED_CATEGORIES,
+    PlannerSprintEvidenceContract,
     StrictEvidenceContract,
     StrictEvidenceContractV2,
     StrictEvidenceContractV3,
@@ -46,16 +53,7 @@ from plugin_examples.evidence_contract import (
     StrictEvidenceContractV5,
     StrictEvidenceContractV6,
     StrictEvidenceContractV7,
-    ALLOWED_VERDICTS_V8,
-    COMBINED_CATEGORIES_V8,
-    MIN_CATEGORIES_REQUIRED_V8,
     StrictEvidenceContractV8,
-    PLANNER_SPRINT_CATEGORIES,
-    MIN_PLANNER_CATEGORIES_REQUIRED,
-    ALLOWED_PLANNER_VERDICTS,
-    PlannerSprintEvidenceContract,
-    generate_validation_proof,
-    generate_companion_proof,
     build_evidence_bundle,
     check_head_consistency,
     contract_definition,
@@ -64,8 +62,9 @@ from plugin_examples.evidence_contract import (
     contract_definition_v4,
     contract_definition_v5,
     contract_definition_v6,
+    generate_companion_proof,
+    generate_validation_proof,
 )
-
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -566,13 +565,13 @@ class TestStrictEvidenceContractV2Rejects:
 
     def test_v2_requires_more_categories_than_v1(self):
         """v2 must require more categories than v1 (stricter)."""
-        assert MIN_CATEGORIES_REQUIRED_V2 > len(
+        assert len(
             REQUIRED_CATEGORIES
-        ), f"v2 ({MIN_CATEGORIES_REQUIRED_V2}) must have more categories than v1 ({len(REQUIRED_CATEGORIES)})"
+        ) < MIN_CATEGORIES_REQUIRED_V2, f"v2 ({MIN_CATEGORIES_REQUIRED_V2}) must have more categories than v1 ({len(REQUIRED_CATEGORIES)})"
 
     def test_v2_min_categories_matches_combined(self):
         """MIN_CATEGORIES_REQUIRED_V2 must equal len(COMBINED_CATEGORIES_V2)."""
-        assert MIN_CATEGORIES_REQUIRED_V2 == len(COMBINED_CATEGORIES_V2)
+        assert len(COMBINED_CATEGORIES_V2) == MIN_CATEGORIES_REQUIRED_V2
 
     def test_v2_rejects_relative_zip_path(self, tmp_path):
         """v2 validate_zip must fail if given a relative path."""
@@ -872,7 +871,7 @@ class TestStrictEvidenceContractV3Rejects:
 
     def test_v3_min_categories_matches_combined(self):
         """MIN_CATEGORIES_REQUIRED_V3 must equal len(COMBINED_CATEGORIES_V3)."""
-        assert MIN_CATEGORIES_REQUIRED_V3 == len(COMBINED_CATEGORIES_V3)
+        assert len(COMBINED_CATEGORIES_V3) == MIN_CATEGORIES_REQUIRED_V3
 
     def test_v3_has_exactly_45_categories(self):
         """v3 must have exactly 45 categories (resolves 44-vs-45 discrepancy)."""
@@ -1132,7 +1131,7 @@ class TestStrictEvidenceContractV4Rejects:
 
     def test_v4_min_categories_matches_combined(self):
         """MIN_CATEGORIES_REQUIRED_V4 must equal len(COMBINED_CATEGORIES_V4)."""
-        assert MIN_CATEGORIES_REQUIRED_V4 == len(COMBINED_CATEGORIES_V4)
+        assert len(COMBINED_CATEGORIES_V4) == MIN_CATEGORIES_REQUIRED_V4
 
     def test_v4_has_exactly_49_categories(self):
         """v4 must have exactly 49 categories (45 v3 - 2 removed + 6 added)."""
@@ -1407,7 +1406,7 @@ class TestStrictEvidenceContractV5Rejects:
 
     def test_v5_min_categories_matches_combined(self):
         """MIN_CATEGORIES_REQUIRED_V5 must equal len(COMBINED_CATEGORIES_V5)."""
-        assert MIN_CATEGORIES_REQUIRED_V5 == len(COMBINED_CATEGORIES_V5)
+        assert len(COMBINED_CATEGORIES_V5) == MIN_CATEGORIES_REQUIRED_V5
 
     def test_v5_has_exactly_53_categories(self):
         """v5 must have exactly 53 categories (49 v4 - 2 removed + 6 added)."""

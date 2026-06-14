@@ -10,9 +10,12 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import uuid
+
+logger = logging.getLogger(__name__)
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta, timezone
 from pathlib import Path
 
 
@@ -51,7 +54,7 @@ class DriftReport:
     has_drift: bool
     run_id: str
     compared_against: str  # run_id of prior evidence, or "NONE" if no prior
-    generated_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat(timespec="seconds"))
+    generated_at: str = field(default_factory=lambda: datetime.now(UTC).isoformat(timespec="seconds"))
 
     def to_dict(self) -> dict:
         return {
@@ -99,8 +102,8 @@ def detect_catalog_drift(
                 page_hash = plugin.get("page_hash", "")
                 if url:
                     prior_hashes[url] = page_hash
-        except Exception:
-            pass
+        except (OSError, json.JSONDecodeError, KeyError):
+            logger.debug("Failed to load prior evidence for drift detection", exc_info=True)
 
     current_hashes: dict[str, str] = {
         plugin.get("url", ""): plugin.get("page_hash", "") for plugin in current_plugins if plugin.get("url")
@@ -130,7 +133,7 @@ def make_discovery_metadata(
     catalog_version: str = "1",
 ) -> dict:
     """Build a ``discovery_metadata`` dict to embed in discovery evidence files."""
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     run_id = run_id or _make_run_id("discovery")
     expires = now + timedelta(seconds=ttl_seconds)
     return {
@@ -149,11 +152,11 @@ def is_discovery_stale(metadata: dict) -> bool:
         return True  # no expiry info = treat as stale
     try:
         expires = datetime.fromisoformat(expires_at)
-        return expires < datetime.now(timezone.utc)
+        return expires < datetime.now(UTC)
     except Exception:
         return True
 
 
 def _make_run_id(prefix: str = "run") -> str:
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     return f"{prefix}-{now.strftime('%Y%m%d-%H%M%S')}-{str(uuid.uuid4())[:8]}"

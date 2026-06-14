@@ -23,7 +23,6 @@ from plugin_examples.nuget_fetcher.fetcher import (
     resolve_latest_stable,
 )
 
-
 # --- Fixtures ---
 
 

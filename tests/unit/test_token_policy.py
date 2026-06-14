@@ -18,7 +18,6 @@ from unittest.mock import patch
 
 import pytest
 
-
 # ---------------------------------------------------------------------------
 # Test: pipeline source reads only GITHUB_TOKEN, not GH_TOKEN
 # ---------------------------------------------------------------------------
@@ -127,6 +126,7 @@ class TestTokenValueNotWrittenToEvidence:
     def test_probe_report_does_not_store_token_value(self, tmp_path):
         """publish-permission-probe.json must not contain the GITHUB_TOKEN value."""
         from types import SimpleNamespace
+
         from plugin_examples.publisher.publish_permission_probe import probe_publish_permissions
 
         pub_repo = SimpleNamespace(
@@ -220,8 +220,8 @@ class TestLivePublishBlocksWhenGithubTokenAbsent:
 
     def test_live_publish_falls_back_to_dry_run_when_token_absent(self, tmp_path):
         """When GITHUB_TOKEN is empty, publisher returns dry_run (no error, but no live push)."""
-        from plugin_examples.publisher.publisher import publish_examples
         from plugin_examples.publisher.approval_gate import APPROVAL_EXPECTED_VALUE
+        from plugin_examples.publisher.publisher import publish_examples
 
         latest = tmp_path / "verification" / "latest"
         self._setup_evidence(latest, "words")
@@ -255,8 +255,8 @@ class TestTokenCapabilityPreflightReportsRepoScopeFailure:
     def test_preflight_reports_token_missing_when_no_github_token(self):
         """When GITHUB_TOKEN is absent, check_repo_access reports token_missing."""
         from plugin_examples.publisher.repo_access_resolver import (
-            check_repo_access,
             TOKEN_MISSING,
+            check_repo_access,
         )
 
         result = check_repo_access(
@@ -272,8 +272,8 @@ class TestTokenCapabilityPreflightReportsRepoScopeFailure:
     def test_preflight_reports_not_found_on_404(self):
         """When API returns 404, check_repo_access reports repo_not_found classification."""
         from plugin_examples.publisher.repo_access_resolver import (
-            check_repo_access,
             REPO_NOT_FOUND,
+            check_repo_access,
         )
 
         with patch(
@@ -322,6 +322,7 @@ class TestTokenCapabilityPreflightReportsRepoScopeFailure:
     def test_probe_reports_token_present_true_without_exposing_value(self, tmp_path):
         """probe_publish_permissions sets token_present=True but never stores token value."""
         from types import SimpleNamespace
+
         from plugin_examples.publisher.publish_permission_probe import probe_publish_permissions
 
         fake_token = "ghp_CANARY_TOKEN_MUST_NOT_APPEAR"

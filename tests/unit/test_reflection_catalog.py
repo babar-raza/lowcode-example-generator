@@ -11,9 +11,9 @@ import pytest
 
 from plugin_examples.reflection_catalog.catalog_builder import (
     CatalogBuildError,
-    build_catalog,
     _normalize,
     _normalize_type,
+    build_catalog,
 )
 from plugin_examples.reflection_catalog.reflector import (
     ReflectorError,
@@ -23,7 +23,6 @@ from plugin_examples.reflection_catalog.reflector import (
 from plugin_examples.reflection_catalog.schema_validator import (
     validate_catalog,
 )
-
 
 # --- Fixtures ---
 
@@ -241,13 +240,12 @@ class TestRunReflector:
         mock_result.stdout = ""
         mock_result.stderr = "DLL not found"
 
-        with patch("plugin_examples.reflection_catalog.reflector.subprocess.run", return_value=mock_result):
-            with pytest.raises(ReflectorError, match="exited with code 2"):
-                run_reflector(
-                    dll_path=dll,
-                    output_path=tmp_path / "out.json",
-                    reflector_dir=tmp_path,
-                )
+        with patch("plugin_examples.reflection_catalog.reflector.subprocess.run", return_value=mock_result), pytest.raises(ReflectorError, match="exited with code 2"):
+            run_reflector(
+                dll_path=dll,
+                output_path=tmp_path / "out.json",
+                reflector_dir=tmp_path,
+            )
 
     def test_timeout_raises(self, tmp_path):
         exe = tmp_path / "bin" / "Release" / "net8.0" / "DllReflector.dll"
@@ -259,13 +257,12 @@ class TestRunReflector:
         with patch(
             "plugin_examples.reflection_catalog.reflector.subprocess.run",
             side_effect=subprocess.TimeoutExpired(cmd="dotnet", timeout=120),
-        ):
-            with pytest.raises(ReflectorError, match="timed out"):
-                run_reflector(
-                    dll_path=dll,
-                    output_path=tmp_path / "out.json",
-                    reflector_dir=tmp_path,
-                )
+        ), pytest.raises(ReflectorError, match="timed out"):
+            run_reflector(
+                dll_path=dll,
+                output_path=tmp_path / "out.json",
+                reflector_dir=tmp_path,
+            )
 
     def test_xml_and_deps_passed_to_cli(self, tmp_path):
         exe = tmp_path / "bin" / "Release" / "net8.0" / "DllReflector.dll"
@@ -414,6 +411,5 @@ class TestBuildCatalog:
         with patch(
             "plugin_examples.reflection_catalog.catalog_builder.run_reflector",
             return_value=bad_catalog,
-        ):
-            with pytest.raises(CatalogBuildError, match="validation failed"):
-                build_catalog(dll_path=dll, output_path=output)
+        ), pytest.raises(CatalogBuildError, match="validation failed"):
+            build_catalog(dll_path=dll, output_path=output)

@@ -153,7 +153,7 @@ class NonLowCodeValidatorRules:
     # Rules NL-V01 through NL-V15
     # ------------------------------------------------------------------
 
-    def rule_nl_v01(self) -> "RuleResult":
+    def rule_nl_v01(self) -> RuleResult:
         """NL-V01: Registry file must exist for families with fallback_strategy set.
 
         Uses narrower skip: only skips when registry dir absent OR fallback_strategy is None.
@@ -198,7 +198,7 @@ class NonLowCodeValidatorRules:
             failure_detail=f"NL-V01: Registry file missing for family '{family}'",
         )
 
-    def rule_nl_v02(self) -> "RuleResult":
+    def rule_nl_v02(self) -> RuleResult:
         """NL-V02: Every registry entry must have a status from the 12-value enum."""
         rule_id, description = "NL-V02", "All registry entries must use authoritative 12-value status"
         skip = self._nl_skip_check(rule_id, description)
@@ -222,7 +222,7 @@ class NonLowCodeValidatorRules:
             failure_detail=f"NL-V02: Invalid status values found: {invalid}",
         )
 
-    def rule_nl_v03(self) -> "RuleResult":
+    def rule_nl_v03(self) -> RuleResult:
         """NL-V03: confidence_score must be in [0.0, 1.05] for all entries."""
         rule_id, description = "NL-V03", "confidence_score must be in [0.0, 1.05]"
         skip = self._nl_skip_check(rule_id, description)
@@ -251,7 +251,7 @@ class NonLowCodeValidatorRules:
             failure_detail=f"NL-V03: confidence_score out of range: {violations}",
         )
 
-    def rule_nl_v04(self) -> "RuleResult":
+    def rule_nl_v04(self) -> RuleResult:
         """NL-V04: package_id must not be inferred from slug (must use alias table)."""
         rule_id, description = "NL-V04", "package_id must be explicit (never slug-inferred)"
         skip = self._nl_skip_check(rule_id, description)
@@ -274,8 +274,8 @@ class NonLowCodeValidatorRules:
                         expected = aliases.get("families", {}).get(family)
                         if expected and pkg != expected:
                             violations.append(f"Expected '{expected}' got '{pkg}'")
-                    except Exception:  # noqa: BLE001
-                        pass
+                    except (OSError, json.JSONDecodeError, KeyError):
+                        logger.debug("Failed to read package-aliases.json", exc_info=True)
         if not violations:
             return _RuleResult(
                 rule_id=rule_id,
@@ -292,7 +292,7 @@ class NonLowCodeValidatorRules:
             failure_detail=f"NL-V04: Mismatched package_id: {violations}",
         )
 
-    def rule_nl_v05(self) -> "RuleResult":
+    def rule_nl_v05(self) -> RuleResult:
         """NL-V05: PROBE_CONFIRMED entries must have probe_evidence field."""
         rule_id, description = "NL-V05", "PROBE_CONFIRMED requires probe_evidence"
         skip = self._nl_skip_check(rule_id, description)
@@ -318,7 +318,7 @@ class NonLowCodeValidatorRules:
             failure_detail=f"NL-V05: PROBE_CONFIRMED missing probe_evidence: {violations}",
         )
 
-    def rule_nl_v06(self) -> "RuleResult":
+    def rule_nl_v06(self) -> RuleResult:
         """NL-V06: VERIFIED_PUBLISHABLE entries must have probe_evidence field."""
         rule_id, description = "NL-V06", "VERIFIED_PUBLISHABLE requires probe_evidence"
         skip = self._nl_skip_check(rule_id, description)
@@ -346,7 +346,7 @@ class NonLowCodeValidatorRules:
             failure_detail=f"NL-V06: VERIFIED_PUBLISHABLE missing probe_evidence: {violations}",
         )
 
-    def rule_nl_v07(self) -> "RuleResult":
+    def rule_nl_v07(self) -> RuleResult:
         """NL-V07: PROBE_FAILED entries must have failure_taxonomy from 5-code enum."""
         rule_id, description = "NL-V07", "PROBE_FAILED requires valid failure_taxonomy"
         skip = self._nl_skip_check(rule_id, description)
@@ -374,7 +374,7 @@ class NonLowCodeValidatorRules:
             failure_detail=f"NL-V07: Invalid failure_taxonomy: {violations}",
         )
 
-    def rule_nl_v08(self) -> "RuleResult":
+    def rule_nl_v08(self) -> RuleResult:
         """NL-V08: REJECTED_BY_VALIDATOR entries must have rejection_reason."""
         rule_id, description = "NL-V08", "REJECTED_BY_VALIDATOR requires rejection_reason"
         skip = self._nl_skip_check(rule_id, description)
@@ -402,7 +402,7 @@ class NonLowCodeValidatorRules:
             failure_detail=f"NL-V08: REJECTED_BY_VALIDATOR missing rejection_reason: {violations}",
         )
 
-    def rule_nl_v09(self) -> "RuleResult":
+    def rule_nl_v09(self) -> RuleResult:
         """NL-V09: assembly_fingerprint must be a 64-char hex string if present."""
         rule_id, description = "NL-V09", "assembly_fingerprint must be valid SHA-256 if set"
         skip = self._nl_skip_check(rule_id, description)
@@ -430,7 +430,7 @@ class NonLowCodeValidatorRules:
             failure_detail=f"NL-V09: Invalid fingerprints: {violations}",
         )
 
-    def rule_nl_v10(self) -> "RuleResult":
+    def rule_nl_v10(self) -> RuleResult:
         """NL-V10: PROBE_CONFIRMED entries must have a last_validated timestamp."""
         rule_id, description = "NL-V10", "PROBE_CONFIRMED requires last_validated timestamp"
         skip = self._nl_skip_check(rule_id, description)
@@ -456,7 +456,7 @@ class NonLowCodeValidatorRules:
             failure_detail=f"NL-V10: PROBE_CONFIRMED missing last_validated: {violations}",
         )
 
-    def rule_nl_v11(self) -> "RuleResult":
+    def rule_nl_v11(self) -> RuleResult:
         """NL-V11: entries must not have status=PROBE_UNKNOWN (forbidden unclassified status)."""
         rule_id, description = "NL-V11", "PROBE_UNKNOWN status is forbidden (always classify)"
         skip = self._nl_skip_check(rule_id, description)
@@ -480,7 +480,7 @@ class NonLowCodeValidatorRules:
             failure_detail=f"NL-V11: Forbidden PROBE_UNKNOWN status: {violations}",
         )
 
-    def rule_nl_v12(self) -> "RuleResult":
+    def rule_nl_v12(self) -> RuleResult:
         """NL-V12: AI-sourced entries (ai_source_flag=True) must not be VERIFIED_PUBLISHABLE."""
         rule_id, description = "NL-V12", "AI-sourced entries cannot be VERIFIED_PUBLISHABLE"
         skip = self._nl_skip_check(rule_id, description)
@@ -508,7 +508,7 @@ class NonLowCodeValidatorRules:
             failure_detail=f"NL-V12: AI entries must not be VERIFIED_PUBLISHABLE: {violations}",
         )
 
-    def rule_nl_v13(self) -> "RuleResult":
+    def rule_nl_v13(self) -> RuleResult:
         """NL-V13: registry entries must not reference format-authority paths."""
         rule_id, description = "NL-V13", "Registry entries must not reference format-authority/"
         skip = self._nl_skip_check(rule_id, description)
@@ -536,7 +536,7 @@ class NonLowCodeValidatorRules:
             failure_detail=f"NL-V13: format-authority referenced: {violations}",
         )
 
-    def rule_nl_v14(self) -> "RuleResult":
+    def rule_nl_v14(self) -> RuleResult:
         """NL-V14: type_name and method_name must be non-empty in all entries."""
         rule_id, description = "NL-V14", "type_name and method_name must be non-empty"
         skip = self._nl_skip_check(rule_id, description)
@@ -560,7 +560,7 @@ class NonLowCodeValidatorRules:
             failure_detail=f"NL-V14: Missing type_name or method_name at indices: {violations}",
         )
 
-    def rule_nl_v15(self) -> "RuleResult":
+    def rule_nl_v15(self) -> RuleResult:
         """NL-V15: When fallback_strategy is capability_registry and namespace_patterns is empty,
         at least one entry must have status=PROBE_CONFIRMED.
 

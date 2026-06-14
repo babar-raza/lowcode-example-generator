@@ -152,7 +152,7 @@ _APPROVAL_GATED_TYPES = {
 
 def _handle_conservation_check(repo_root: Path, evidence_dir: Path, **_kw: Any) -> dict:
     """Execute portfolio conservation check. Always read-only, never changes state."""
-    from plugin_examples.portfolio_action_planner import _load_denominators, _count_contracts, ACTIVE_FAMILIES
+    from plugin_examples.portfolio_action_planner import ACTIVE_FAMILIES, _count_contracts, _load_denominators
 
     denoms = _load_denominators(repo_root)
     contracts = _count_contracts(repo_root)
@@ -171,7 +171,7 @@ def _handle_conservation_check(repo_root: Path, evidence_dir: Path, **_kw: Any) 
 
 def _handle_version_drift_check(repo_root: Path, evidence_dir: Path, **_kw: Any) -> dict:
     """Execute version drift check. Always read-only, never changes state."""
-    from plugin_examples.portfolio_action_planner import _load_denominators, ACTIVE_FAMILIES
+    from plugin_examples.portfolio_action_planner import ACTIVE_FAMILIES, _load_denominators
 
     denoms = _load_denominators(repo_root)
     versions = {f: denoms.get(f, {}).get("source_version", "?") for f in ACTIVE_FAMILIES}
@@ -338,8 +338,7 @@ def run_execution_loop(
         deferred_this_cycle: list[dict[str, str]] = []
 
         for action in board.safe_actions():
-            if action.type in gate_policy.approval_gated_types:
-                if dry_run_remote or not action.gate_present:
+            if action.type in gate_policy.approval_gated_types and (dry_run_remote or not action.gate_present):
                     deferred_this_cycle.append(
                         {
                             "id": action.id,

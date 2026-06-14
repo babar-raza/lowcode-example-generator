@@ -35,7 +35,6 @@ from plugin_examples.replay import (
     write_replay_manifest,
 )
 
-
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------
@@ -526,7 +525,7 @@ class TestRestoreGeneratedProjects:
 
 class TestRestoreValidationResults:
     def test_returns_typed_validation_results(self, tmp_repo):
-        from plugin_examples.verifier_bridge.dotnet_runner import ValidationResult, DotnetResult
+        from plugin_examples.verifier_bridge.dotnet_runner import DotnetResult, ValidationResult
 
         run_dir = _make_run(tmp_repo, "pilot-words-20260513-180040")
         _write_validation_results(run_dir)
@@ -711,7 +710,7 @@ class TestRunnerReplayIntegration:
         assert "generation" not in skip
 
     def test_valid_replay_steps_constant(self):
-        assert VALID_REPLAY_STEPS == {"generation", "validation", "reviewer", "publisher"}
+        assert {"generation", "validation", "reviewer", "publisher"} == VALID_REPLAY_STEPS
 
 
 # ---------------------------------------------------------------------------

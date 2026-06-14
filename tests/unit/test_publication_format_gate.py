@@ -1,15 +1,16 @@
 """Tests for publication format gate — repo-local authority."""
 
 import json
-import pytest
 from pathlib import Path
+
+import pytest
 
 from plugin_examples.format_authority.store import reset_store
 from plugin_examples.gates.publication_gate import (
-    evaluate_publication_gate,
+    PublicationGateResult,
     check_repo_local_authority_exists,
     check_unfreeze_criteria,
-    PublicationGateResult,
+    evaluate_publication_gate,
 )
 
 

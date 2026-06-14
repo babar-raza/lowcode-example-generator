@@ -13,20 +13,19 @@ from pathlib import Path
 import pytest
 
 from plugin_examples.gates.example_gates import (
-    ExampleGateResult,
     AggregateGateResult,
-    evaluate_example_gates,
-    compute_aggregate_gates,
-    compute_partitioned_verdict,
+    ExampleGateResult,
     build_pr_candidate_manifest,
     build_scenario_feedback,
-    write_example_gate_results,
+    compute_aggregate_gates,
+    compute_partitioned_verdict,
+    evaluate_example_gates,
+    merge_pr_candidate_manifests,
     write_aggregate_gate_results,
+    write_example_gate_results,
     write_pr_candidate_manifest,
     write_scenario_feedback,
-    merge_pr_candidate_manifests,
 )
-
 
 # --- Helpers ---
 

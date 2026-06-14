@@ -66,10 +66,11 @@ class TestCLIFlags:
 class TestPipelineHook:
     def test_finalize_dry_run(self, tmp_path):
         """finalize_metrics in dry-run mode writes evidence but does not POST."""
-        from plugin_examples.metrics.pipeline_hook import finalize_metrics
+        import yaml
+
         from plugin_examples.metrics.config import load_metrics_config
         from plugin_examples.metrics.models import MetricsCollector
-        import yaml
+        from plugin_examples.metrics.pipeline_hook import finalize_metrics
 
         cfg_data = {
             "metrics": {
@@ -122,10 +123,11 @@ class TestPipelineHook:
 
     def test_finalize_writes_evidence_files(self, tmp_path):
         """finalize_metrics writes all evidence files."""
-        from plugin_examples.metrics.pipeline_hook import finalize_metrics
+        import yaml
+
         from plugin_examples.metrics.config import load_metrics_config
         from plugin_examples.metrics.models import MetricsCollector
-        import yaml
+        from plugin_examples.metrics.pipeline_hook import finalize_metrics
 
         cfg_data = {
             "metrics": {
@@ -195,9 +197,10 @@ class TestPipelineHook:
 
     def test_finalize_strict_raises_on_invalid(self, tmp_path):
         """strict=True raises ValueError on validation failure."""
-        from plugin_examples.metrics.pipeline_hook import finalize_metrics
-        from plugin_examples.metrics.config import load_metrics_config
         import yaml
+
+        from plugin_examples.metrics.config import load_metrics_config
+        from plugin_examples.metrics.pipeline_hook import finalize_metrics
 
         cfg_data = {
             "metrics": {
@@ -244,9 +247,10 @@ class TestPipelineHook:
 
     def test_finalize_non_strict_does_not_raise(self, tmp_path):
         """strict=False (default) does not raise on errors."""
-        from plugin_examples.metrics.pipeline_hook import finalize_metrics
-        from plugin_examples.metrics.config import load_metrics_config
         import yaml
+
+        from plugin_examples.metrics.config import load_metrics_config
+        from plugin_examples.metrics.pipeline_hook import finalize_metrics
 
         cfg_data = {
             "metrics": {
@@ -297,6 +301,7 @@ class TestRunPipelineMetricsParam:
     def test_run_pipeline_accepts_metrics_params(self):
         """Verify run_pipeline signature accepts metrics parameters."""
         import inspect
+
         from plugin_examples.runner import run_pipeline
 
         sig = inspect.signature(run_pipeline)
@@ -311,6 +316,7 @@ class TestRunPipelineMetricsParam:
     def test_default_no_metrics(self):
         """Without metrics_collector, no metrics code runs."""
         import inspect
+
         from plugin_examples.runner import run_pipeline
 
         sig = inspect.signature(run_pipeline)

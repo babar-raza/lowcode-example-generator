@@ -2,7 +2,12 @@
 
 from __future__ import annotations
 
+import logging
 import os
+
+logger = logging.getLogger(__name__)
+
+from datetime import UTC
 
 from plugin_examples.commands._metrics import _add_metrics_flags, _create_metrics_session, _finalize_metrics_session
 
@@ -41,12 +46,13 @@ def handle(args) -> int:
     import json as _json
     import re as _re
     import tempfile as _tempfile
-    from plugin_examples.family_config import load_family_config, DisabledFamilyError
-    from plugin_examples.publisher.readme_renderer import build_readme_context, render_readme, write_readme
-    from plugin_examples.publisher.readme_auditor import audit_readme
-    from plugin_examples.publisher.approval_gate import check_approval
     from datetime import datetime, timezone
     from pathlib import Path as _Path
+
+    from plugin_examples.family_config import DisabledFamilyError, load_family_config
+    from plugin_examples.publisher.approval_gate import check_approval
+    from plugin_examples.publisher.readme_auditor import audit_readme
+    from plugin_examples.publisher.readme_renderer import build_readme_context, render_readme, write_readme
 
     repo_root = _Path(__file__).resolve().parents[3]
     verification_dir = repo_root / "workspace" / "verification"
@@ -59,8 +65,8 @@ def handle(args) -> int:
     )
     live_mode = getattr(args, "publish", False)
     dry_run = not live_mode
-    generation_date = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
-    run_ts = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
+    generation_date = datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC")
+    run_ts = datetime.now(UTC).strftime("%Y%m%d-%H%M%S")
 
     # --- Load family config ---
     config_path = repo_root / "pipeline" / "configs" / "families" / f"{family}.yml"
@@ -81,9 +87,13 @@ def handle(args) -> int:
 
     # --- Cumulative example discovery via readme_inventory ---
     from plugin_examples.publisher.readme_inventory import (
-        discover_family_inventory as _discover_inv_pr,
         build_cumulative_examples_meta as _build_cum_meta_pr,
+    )
+    from plugin_examples.publisher.readme_inventory import (
         build_package_path_map as _build_pkg_map_pr,
+    )
+    from plugin_examples.publisher.readme_inventory import (
+        discover_family_inventory as _discover_inv_pr,
     )
 
     _inv_entries_pr, _inv_trail_pr = _discover_inv_pr(
@@ -152,8 +162,9 @@ def handle(args) -> int:
         return 1
 
     # --- NO_CHANGE detection via GitHub API ---
-    import hashlib as _hashlib
     import base64 as _base64
+    import hashlib as _hashlib
+
     import requests as _requests
 
     remote_readme_sha: str | None = None
@@ -180,8 +191,8 @@ def handle(args) -> int:
         elif _resp.status_code == 404:
             remote_readme_sha = None
             remote_readme_content = None
-    except Exception:
-        pass  # proceed without NO_CHANGE detection if network unavailable
+    except (OSError, ValueError, KeyError):
+        logger.debug("NO_CHANGE detection skipped (network unavailable)", exc_info=True)
 
     if no_change:
         print(f"publish-readme: {family} — NO_CHANGE (remote README matches pipeline-generated content)")
@@ -263,8 +274,10 @@ def handle(args) -> int:
         return 1
 
     from plugin_examples.publisher.github_pr_publisher import (
-        create_github_pr,
         PublishingError as _GHError,
+    )
+    from plugin_examples.publisher.github_pr_publisher import (
+        create_github_pr,
     )
 
     # Create a temp dir containing only README.md

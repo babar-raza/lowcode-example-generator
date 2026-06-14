@@ -1,16 +1,17 @@
 """Tests for evidence chain validators (ECV-01..04)."""
 
 import json
-import pytest
-from datetime import datetime, timezone, timedelta
+from datetime import UTC, datetime, timedelta, timezone
 from pathlib import Path
 
+import pytest
+
 from plugin_examples.fixture_factory.evidence_chain_validators import (
+    run_all_ecv_validators,
     validate_ecv01_non_null_evidence_paths,
     validate_ecv02_evidence_files_exist,
     validate_ecv03_timestamps_within_window,
     validate_ecv04_gate_evidence_consistency,
-    run_all_ecv_validators,
 )
 
 
@@ -71,13 +72,13 @@ class TestECV02:
 
 class TestECV03:
     def test_pass_recent_timestamp(self):
-        now = datetime.now(timezone.utc).isoformat()
+        now = datetime.now(UTC).isoformat()
         gates = [{"gate_id": "G1", "timestamp": now}]
         results = validate_ecv03_timestamps_within_window(gates, max_age_hours=1.0)
         assert results[0].passed
 
     def test_fail_stale_timestamp(self):
-        old = (datetime.now(timezone.utc) - timedelta(hours=100)).isoformat()
+        old = (datetime.now(UTC) - timedelta(hours=100)).isoformat()
         gates = [{"gate_id": "G1", "timestamp": old}]
         results = validate_ecv03_timestamps_within_window(gates, max_age_hours=72.0)
         assert not results[0].passed
@@ -135,7 +136,7 @@ class TestRunAll:
     def test_combined(self, evidence_dir: Path):
         evidence = {"verdict": "PASS"}
         (evidence_dir / "g1.json").write_text(json.dumps(evidence), encoding="utf-8")
-        now = datetime.now(timezone.utc).isoformat()
+        now = datetime.now(UTC).isoformat()
         gates = [{"gate_id": "G1", "evidence_path": "g1.json", "verdict": "PASS", "timestamp": now}]
         results = run_all_ecv_validators(gates, evidence_dir)
         assert len(results) >= 4  # at least one result per validator

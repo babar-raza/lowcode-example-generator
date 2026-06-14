@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import sys
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
 
 import pytest
 
@@ -28,9 +28,8 @@ class TestCLIDefaults:
                 "verdict": "DATA_FLOW_PROTOTYPE_ONLY",
             }
 
-        with patch("plugin_examples.runner.run_pipeline", side_effect=fake_run_pipeline):
-            with patch.object(sys, "argv", args_list):
-                main()
+        with patch("plugin_examples.runner.run_pipeline", side_effect=fake_run_pipeline), patch.object(sys, "argv", args_list):
+            main()
 
         return captured
 
@@ -122,9 +121,8 @@ class TestCLIDefaults:
             os.environ.pop("GITHUB_TOKEN", None)
             from plugin_examples.__main__ import main
 
-            with patch.object(sys, "argv", ["plugin-examples", "run", "--family", "cells", "--publish"]):
-                with patch("plugin_examples.runner.run_pipeline") as mock_rp:
-                    exit_code = main()
+            with patch.object(sys, "argv", ["plugin-examples", "run", "--family", "cells", "--publish"]), patch("plugin_examples.runner.run_pipeline") as mock_rp:
+                exit_code = main()
             assert exit_code == 1
             mock_rp.assert_not_called()
 

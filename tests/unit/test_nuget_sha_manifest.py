@@ -4,19 +4,19 @@ from __future__ import annotations
 
 import hashlib
 import json
+from datetime import UTC
 from pathlib import Path
 from unittest.mock import patch
 
 import pytest
 
 from plugin_examples.nuget_fetcher.fetcher import (
+    _SHA_MANIFEST_PATH,
     _load_sha_manifest,
     _record_sha_manifest,
     _revalidate_sha_manifest,
     _save_sha_manifest,
-    _SHA_MANIFEST_PATH,
 )
-
 
 # ── Helper ─────────────────────────────────────────────────────────────────────
 
@@ -118,7 +118,7 @@ def test_revalidate_skips_within_ttl(tmp_path):
 
     from datetime import datetime, timezone
 
-    now_iso = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    now_iso = datetime.now(UTC).isoformat(timespec="seconds")
 
     manifest_path = tmp_path / "sha-manifest.json"
     manifest_data = {

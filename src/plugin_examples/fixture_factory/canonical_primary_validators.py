@@ -15,9 +15,11 @@ Relationship to PIV validators:
 """
 
 import json
+import logging
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, List, Optional
+
+logger = logging.getLogger(__name__)
 
 GENERIC_BARCODE_SLUGS = {
     "generate-barcode",
@@ -46,7 +48,7 @@ class CpvViolation:
 
 @dataclass
 class CpvResult:
-    violations: List[CpvViolation] = field(default_factory=list)
+    violations: list[CpvViolation] = field(default_factory=list)
 
     @property
     def passes(self) -> bool:
@@ -72,7 +74,7 @@ class CpvResult:
         }
 
 
-def _read_json(path: Path) -> Optional[dict]:
+def _read_json(path: Path) -> dict | None:
     if path.exists():
         try:
             return json.loads(path.read_text(encoding="utf-8"))
@@ -82,10 +84,10 @@ def _read_json(path: Path) -> Optional[dict]:
 
 
 def run_canonical_primary_validators(
-    packages: Dict[str, dict],
-    registry_entries: Optional[List[dict]] = None,
-    publication_matrix: Optional[dict] = None,
-    family_plugin_lists: Optional[dict] = None,
+    packages: dict[str, dict],
+    registry_entries: list[dict] | None = None,
+    publication_matrix: dict | None = None,
+    family_plugin_lists: dict | None = None,
 ) -> CpvResult:
     """
     Run all 12 canonical-primary invariant rules.
@@ -145,24 +147,22 @@ def run_canonical_primary_validators(
     # CPV-02: Canonical registry entry must have canonical_plugin_slug
     # -------------------------------------------------------------------
     for entry in registry_entries:
-        if entry.get("identity_status") == "CANONICAL_IDENTITY_VERIFIED":
-            if not entry.get("canonical_plugin_slug"):
-                fslug = f"{entry.get('family', '?')}/{entry.get('plugin_slug', '?')}"
-                result.violations.append(
-                    CpvViolation(
-                        "CPV-02",
-                        "ERROR",
-                        f"Registry entry '{fslug}' has identity_status=CANONICAL_IDENTITY_VERIFIED but no canonical_plugin_slug",
-                        fslug,
-                    )
+        if entry.get("identity_status") == "CANONICAL_IDENTITY_VERIFIED" and not entry.get("canonical_plugin_slug"):
+            fslug = f"{entry.get('family', '?')}/{entry.get('plugin_slug', '?')}"
+            result.violations.append(
+                CpvViolation(
+                    "CPV-02",
+                    "ERROR",
+                    f"Registry entry '{fslug}' has identity_status=CANONICAL_IDENTITY_VERIFIED but no canonical_plugin_slug",
+                    fslug,
                 )
+            )
 
     # -------------------------------------------------------------------
     # CPV-03: Canonical registry entry must have display_plugin_name
     # -------------------------------------------------------------------
     for entry in registry_entries:
-        if entry.get("identity_status") == "CANONICAL_IDENTITY_VERIFIED":
-            if not entry.get("display_plugin_name"):
+        if entry.get("identity_status") == "CANONICAL_IDENTITY_VERIFIED" and not entry.get("display_plugin_name"):
                 fslug = f"{entry.get('family', '?')}/{entry.get('plugin_slug', '?')}"
                 result.violations.append(
                     CpvViolation(
@@ -215,7 +215,7 @@ def run_canonical_primary_validators(
     # CPV-06: source-provenance canonical_url must match registry canonical_url
     # For packages that have canonical_plugin_slug, check against registry
     # -------------------------------------------------------------------
-    registry_url_map: Dict[str, str] = {}
+    registry_url_map: dict[str, str] = {}
     for entry in registry_entries:
         slug = f"{entry.get('family', '')}/{entry.get('canonical_plugin_slug', '') or entry.get('plugin_slug', '')}"
         url = entry.get("canonical_url", "")
@@ -270,8 +270,8 @@ def run_canonical_primary_validators(
                             )
                         )
                         break
-            except Exception:
-                pass
+            except (OSError, json.JSONDecodeError, KeyError):
+                logger.debug("Failed to parse README for generic-name check on %s", key, exc_info=True)
 
     # -------------------------------------------------------------------
     # CPV-08: BarCode generic names must not appear in publication candidate list

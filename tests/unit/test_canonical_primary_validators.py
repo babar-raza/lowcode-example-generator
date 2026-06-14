@@ -4,13 +4,14 @@ Sprint: lowcode-plugin-canonical-primary-wave8-20260605
 """
 
 import json
-import pytest
 from pathlib import Path
 
+import pytest
+
 from src.plugin_examples.fixture_factory.canonical_primary_validators import (
-    run_canonical_primary_validators,
     CpvResult,
     CpvViolation,
+    run_canonical_primary_validators,
 )
 
 

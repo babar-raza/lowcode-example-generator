@@ -11,30 +11,30 @@ from pathlib import Path
 
 import pytest
 
-from plugin_examples.scenario_planner.type_classifier import (
-    STANDALONE_ROLES,
-    NON_STANDALONE_ROLES,
-    WORKFLOW_ROOT,
-    OPERATION_FACADE,
-    PROVIDER_CALLBACK,
-    OPTIONS,
-    ABSTRACT_BASE,
-    INTERFACE_CONTRACT,
-    ENUM,
-    UNKNOWN,
-    classify_type,
-    classify_catalog,
-)
 from plugin_examples.scenario_planner.consumer_mapper import build_consumer_map
 from plugin_examples.scenario_planner.entrypoint_scorer import (
-    score_entrypoint,
     EntrypointScore,
+    score_entrypoint,
 )
+from plugin_examples.scenario_planner.planner import Scenario, plan_scenarios
 from plugin_examples.scenario_planner.runtime_feedback import (
-    classify_runtime_failure,
     RuntimeFailureClassification,
+    classify_runtime_failure,
 )
-from plugin_examples.scenario_planner.planner import plan_scenarios, Scenario
+from plugin_examples.scenario_planner.type_classifier import (
+    ABSTRACT_BASE,
+    ENUM,
+    INTERFACE_CONTRACT,
+    NON_STANDALONE_ROLES,
+    OPERATION_FACADE,
+    OPTIONS,
+    PROVIDER_CALLBACK,
+    STANDALONE_ROLES,
+    UNKNOWN,
+    WORKFLOW_ROOT,
+    classify_catalog,
+    classify_type,
+)
 
 
 def _make_proof(tmp_path: Path, eligible: bool = True) -> str:
@@ -219,7 +219,7 @@ class TestEntrypointScorer:
     def test_operation_facade_with_inherited_process_is_runnable(self):
         """OPERATION_FACADE with 0 reflected methods but constructors must be runnable.
         Handles TextExtractor pattern where Process() is inherited from IPlugin."""
-        from plugin_examples.scenario_planner.type_classifier import TypeRole, OPERATION_FACADE
+        from plugin_examples.scenario_planner.type_classifier import OPERATION_FACADE, TypeRole
 
         t = {
             "name": "TextExtractor",
@@ -250,7 +250,7 @@ class TestEntrypointScorer:
 
     def test_operation_facade_no_methods_no_ctor_not_runnable(self):
         """OPERATION_FACADE with 0 methods AND 0 constructors is NOT runnable."""
-        from plugin_examples.scenario_planner.type_classifier import TypeRole, OPERATION_FACADE
+        from plugin_examples.scenario_planner.type_classifier import OPERATION_FACADE, TypeRole
 
         t = {
             "name": "SomeFacade",

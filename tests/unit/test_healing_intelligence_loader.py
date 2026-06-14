@@ -8,8 +8,8 @@ from pathlib import Path
 import pytest
 
 from plugin_examples.healing_intelligence.loader import (
-    HealingIntelligenceLoader,
     _REGISTRY_FILES,
+    HealingIntelligenceLoader,
 )
 
 

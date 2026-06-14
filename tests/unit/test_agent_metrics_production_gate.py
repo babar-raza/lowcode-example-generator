@@ -7,7 +7,6 @@ from unittest.mock import MagicMock, patch
 import pytest
 import yaml
 
-
 # ---------------------------------------------------------------------------
 # Shared fixture
 # ---------------------------------------------------------------------------
@@ -135,7 +134,7 @@ class TestProductionGateDoesNotBypassOtherGates:
 
     def test_production_gate_does_not_bypass_external_command_allowlist(self):
         """Non-run commands cannot POST externally regardless of production gate."""
-        from plugin_examples.metrics.session import MetricsSession, EXTERNAL_POST_COMMANDS
+        from plugin_examples.metrics.session import EXTERNAL_POST_COMMANDS, MetricsSession
 
         assert "discover-lowcode" not in EXTERNAL_POST_COMMANDS
         assert "publish-pr" not in EXTERNAL_POST_COMMANDS

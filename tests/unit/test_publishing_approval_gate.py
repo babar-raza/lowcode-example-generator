@@ -7,18 +7,18 @@ from pathlib import Path
 
 import pytest
 
-from plugin_examples.publisher.publisher import publish_examples
+from plugin_examples.gates.models import GateVerdict
 from plugin_examples.publisher.approval_gate import (
     APPROVAL_EXPECTED_VALUE,
-    BLOCKED_LIVE_PR_APPROVAL_REQUIRED,
     BLOCKED_INVALID_LIVE_PR_APPROVAL,
+    BLOCKED_LIVE_PR_APPROVAL_REQUIRED,
+    BLOCKED_PR_PERMISSION_NOT_READY,
     BLOCKED_PUBLISH_DRY_RUN_CONFLICT,
     BLOCKED_PUBLISH_TO_MAIN,
     BLOCKED_REPO_ACCESS_NOT_READY,
-    BLOCKED_PR_PERMISSION_NOT_READY,
     check_approval,
 )
-from plugin_examples.gates.models import GateVerdict
+from plugin_examples.publisher.publisher import publish_examples
 
 
 def _make_passing_verdict() -> GateVerdict:
@@ -194,9 +194,10 @@ class TestLivePRApprovalGate:
     def test_live_publish_blocks_discovery_only_family(self):
         """discovery_only family must be blocked at publish_readiness level."""
         from types import SimpleNamespace
+
         from plugin_examples.publisher.publish_readiness import (
-            check_family_publish_readiness,
             BLOCKED_FAMILY_NOT_ACTIVE,
+            check_family_publish_readiness,
         )
 
         cfg = SimpleNamespace(status="discovery_only", github=None)
@@ -206,8 +207,9 @@ class TestLivePRApprovalGate:
 
     def test_probe_publish_permissions_does_not_push_content(self, tmp_path):
         """probe_publish_permissions must be read-only and never push content."""
-        from plugin_examples.publisher.publish_permission_probe import probe_publish_permissions
         from unittest.mock import patch
+
+        from plugin_examples.publisher.publish_permission_probe import probe_publish_permissions
 
         fake_body = {
             "default_branch": "main",

@@ -17,13 +17,12 @@ from dataclasses import dataclass, field
 
 import pytest
 
-from plugin_examples.gates.models import GateResult, GateVerdict, VERDICTS
 from plugin_examples.gates.evaluator import (
     evaluate_gates,
     is_publishable,
     is_publishable_verdict,
 )
-
+from plugin_examples.gates.models import VERDICTS, GateResult, GateVerdict
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -255,8 +254,8 @@ class TestScenarioMissingFixtureIsBlocked:
         """A type with no format contract raises MissingFormatContractError (fail-closed).
         Sprint 57: types without contracts cannot proceed — they propagate a typed error
         rather than silently returning blocked_no_fixture."""
-        from plugin_examples.scenario_planner.planner import _build_scenario
         from plugin_examples.format_authority.store import MissingFormatContractError
+        from plugin_examples.scenario_planner.planner import _build_scenario
 
         type_info = {
             "full_name": "Aspose.Cells.LowCode.CustomProcessor",
@@ -310,9 +309,10 @@ class TestOutputValidatorReadsExpectedOutputJson:
     def test_output_validator_reads_expected_output_json(self, tmp_path):
         """Output validator must honour expected-output.json constraints."""
         import json
+
         from plugin_examples.verifier_bridge.output_validator import (
-            validate_output,
             load_expected_output,
+            validate_output,
         )
 
         # Write expected-output.json
@@ -344,6 +344,7 @@ class TestPackageWatcherDetectsNoChange:
     def test_package_watcher_detects_no_change(self, tmp_path, monkeypatch):
         """Same version = no update detected."""
         import json
+
         from plugin_examples.package_watcher.watcher import check_for_updates
 
         monkeypatch.setattr(
@@ -369,6 +370,7 @@ class TestPackageWatcherDetectsChangedVersion:
     def test_package_watcher_detects_changed_version(self, tmp_path, monkeypatch):
         """Different version = update detected."""
         import json
+
         from plugin_examples.package_watcher.watcher import check_for_updates
 
         monkeypatch.setattr(

@@ -198,7 +198,4 @@ def _is_content_based_audit(records: list[dict]) -> bool:
     """
     if not records:
         return False
-    for record in records:
-        if any(field in record for field in _SHALLOW_DETECTION_FIELDS):
-            return True
-    return False
+    return any(any(field in record for field in _SHALLOW_DETECTION_FIELDS) for record in records)

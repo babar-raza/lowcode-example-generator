@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from datetime import UTC
+
 from plugin_examples.commands._metrics import _add_metrics_flags, _create_metrics_session, _finalize_metrics_session
 
 
@@ -38,11 +40,12 @@ def handle(args) -> int:
     """Handle the render-root-readme command."""
     import json as _json
     import re as _re
-    from plugin_examples.family_config import load_family_config, DisabledFamilyError
-    from plugin_examples.publisher.readme_renderer import build_readme_context, render_readme, write_readme
-    from plugin_examples.publisher.readme_auditor import audit_readme
     from datetime import datetime, timezone
     from pathlib import Path as _Path
+
+    from plugin_examples.family_config import DisabledFamilyError, load_family_config
+    from plugin_examples.publisher.readme_auditor import audit_readme
+    from plugin_examples.publisher.readme_renderer import build_readme_context, render_readme, write_readme
 
     repo_root = _Path(__file__).resolve().parents[3]
     verification_dir = repo_root / "workspace" / "verification"
@@ -77,9 +80,13 @@ def handle(args) -> int:
 
     # --- Cumulative example discovery via readme_inventory ---
     from plugin_examples.publisher.readme_inventory import (
-        discover_family_inventory as _discover_inv_rr,
         build_cumulative_examples_meta as _build_cum_meta_rr,
+    )
+    from plugin_examples.publisher.readme_inventory import (
         build_package_path_map as _build_pkg_map_rr,
+    )
+    from plugin_examples.publisher.readme_inventory import (
+        discover_family_inventory as _discover_inv_rr,
     )
 
     _cumulative = getattr(args, "cumulative", False)
@@ -126,7 +133,7 @@ def handle(args) -> int:
                 pass
 
     # --- Build context ---
-    generation_date = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    generation_date = datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC")
     try:
         ctx = build_readme_context(
             family=family,

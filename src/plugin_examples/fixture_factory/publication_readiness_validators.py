@@ -4,6 +4,7 @@ Wave 16: verify that PCLC packages in readiness files have proper PR packet entr
 """
 
 from __future__ import annotations
+
 import re
 from dataclasses import dataclass
 
@@ -86,7 +87,7 @@ def prv_03_no_duplicate_pr_branches(readiness: dict) -> PRVResult:
 
 def prv_04_pclc_total_matches_packages_length(readiness: dict) -> PRVResult:
     """PRV-04: pclc_total must equal the number of packages listed."""
-    declared = readiness.get("pclc_total", None)
+    declared = readiness.get("pclc_total")
     actual = len(readiness.get("packages", []))
     if declared is None:
         return PRVResult(

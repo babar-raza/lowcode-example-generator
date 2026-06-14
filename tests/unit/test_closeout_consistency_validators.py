@@ -4,11 +4,13 @@ Sprint: lowcode-plugin-canonical-package-wave10-20260605
 """
 
 import json
-import pytest
 from pathlib import Path
 
+import pytest
+
 from src.plugin_examples.fixture_factory.closeout_consistency_validators import (
-    run_closeout_consistency_validators,
+    CcvResult,
+    CcvViolation,
     check_ccv_01_evidence_bundle_not_pending,
     check_ccv_02_lane_ledger_lanes_complete,
     check_ccv_03_taskcards_complete,
@@ -27,10 +29,8 @@ from src.plugin_examples.fixture_factory.closeout_consistency_validators import 
     check_ccv_16_registry_count_matches_claimed,
     check_ccv_17_no_errors_with_complete_verdict,
     check_ccv_18_bundle_entry_count_positive,
-    CcvResult,
-    CcvViolation,
+    run_closeout_consistency_validators,
 )
-
 
 # ---------------------------------------------------------------------------
 # Helpers

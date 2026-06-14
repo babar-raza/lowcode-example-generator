@@ -20,14 +20,14 @@ from unittest.mock import patch
 import pytest
 
 from plugin_examples.publisher.repo_access_resolver import (
-    classify_token_type,
-    check_classic_token,
+    FINE_GRAINED_TOKEN_ERROR_MESSAGE,
+    FINE_GRAINED_TOKEN_REJECTED,
     TOKEN_TYPE_CLASSIC_PAT,
     TOKEN_TYPE_FINE_GRAINED,
     TOKEN_TYPE_MISSING,
     TOKEN_TYPE_UNKNOWN,
-    FINE_GRAINED_TOKEN_ERROR_MESSAGE,
-    FINE_GRAINED_TOKEN_REJECTED,
+    check_classic_token,
+    classify_token_type,
 )
 
 

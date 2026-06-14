@@ -9,6 +9,7 @@ These validators prevent the Wave 11/12 closeout defects from recurring:
 """
 
 from __future__ import annotations
+
 import pathlib
 from typing import Any
 
@@ -232,7 +233,7 @@ def bmv_05_pytest_passed_count_positive(closeout: dict) -> dict[str, Any]:
     }
 
 
-def bmv_06_sidecar_sha_exists(closeout: dict, root: "pathlib.Path | None" = None) -> dict[str, Any]:
+def bmv_06_sidecar_sha_exists(closeout: dict, root: pathlib.Path | None = None) -> dict[str, Any]:
     """BMV-06: If sidecar_path is in closeout, verify the sidecar file exists and contains a valid SHA-256.
 
     Implements the Wave 13+ external sidecar proof protocol:
@@ -302,7 +303,7 @@ def run_all_tcc_validators(
     }
 
 
-def run_all_bmv_validators(closeout: dict, root: "pathlib.Path | None" = None) -> dict[str, Any]:
+def run_all_bmv_validators(closeout: dict, root: pathlib.Path | None = None) -> dict[str, Any]:
     """Run all BMV-01..BMV-06 validators and return aggregate result."""
     results = [
         bmv_01_bundle_sha_not_pending(closeout),

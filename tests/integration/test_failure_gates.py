@@ -4,8 +4,9 @@ Verifies that the pipeline correctly blocks on invalid input and
 missing prerequisites, producing clear error signals.
 """
 
-import pytest
 from pathlib import Path
+
+import pytest
 
 
 class TestFailureGates:

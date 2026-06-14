@@ -23,6 +23,7 @@ def add_parser(subparsers):
 def handle(args) -> int:
     """Handle the post-publication-verify command."""
     from pathlib import Path as _Path
+
     from plugin_examples.publisher.batch_publisher import PDF_PR_PACKAGES
     from plugin_examples.publisher.post_publication_verifier import (
         run_post_publication_verification,
@@ -39,11 +40,7 @@ def handle(args) -> int:
     )
 
     # Resolve packages for family
-    if family == "pdf":
-        packages = PDF_PR_PACKAGES
-    else:
-        # Single-package family
-        packages = [(1, f"{family}-controlled-pilot")]
+    packages = PDF_PR_PACKAGES if family == "pdf" else [(1, f"{family}-controlled-pilot")]
 
     packages_base = repo_root / "workspace" / "pr-dry-run"
     report = run_post_publication_verification(family, packages, packages_base)

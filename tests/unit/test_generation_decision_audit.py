@@ -9,8 +9,8 @@ from types import SimpleNamespace
 import pytest
 
 from plugin_examples.generator.decision_audit import (
-    write_generation_decision_audit,
     _count_strategies,
+    write_generation_decision_audit,
 )
 
 

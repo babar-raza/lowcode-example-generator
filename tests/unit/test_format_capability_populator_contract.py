@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import pytest
+
 from plugin_examples.format_authority.store import reset_store
 
 

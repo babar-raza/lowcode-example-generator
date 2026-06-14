@@ -20,7 +20,6 @@ from validate_published_examples_build import (
     discover_published_families,
 )
 
-
 # ---------------------------------------------------------------------------
 # Report building
 # ---------------------------------------------------------------------------

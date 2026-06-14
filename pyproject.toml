@@ -18,7 +18,7 @@ dev = [
     "pytest>=8.0",
     "pytest-cov>=5.0",
     "pytest-timeout>=2.3",
-    "ruff>=0.4",
+    "ruff>=0.15",
     "pre-commit>=3.7",
     "mutmut>=2.4",
 ]
@@ -34,7 +34,7 @@ target-version = "py312"
 line-length = 120
 
 [tool.ruff.lint]
-select = ["E", "F", "W", "I", "UP"]
+select = ["E", "F", "W", "I", "UP", "SIM"]
 ignore = [
     "E501",  # line too long — existing code exceeds 120 chars in many places
     "E701",  # multiple statements on one line (colon) — intentional in binary parsing

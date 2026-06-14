@@ -8,9 +8,9 @@ from pathlib import Path
 import pytest
 
 from plugin_examples.fixture_registry.fixture_fetcher import (
+    _DEFAULT_EXTENSION_ALLOWLIST,
     FetchResult,
     FixtureBlockedError,
-    _DEFAULT_EXTENSION_ALLOWLIST,
     _synthetic_fallback,
     fetch_fixtures,
 )
@@ -162,20 +162,20 @@ def test_cache_hit_skips_download(tmp_path):
 
     # Patch _list_github_files to return the fake file
     from unittest.mock import patch
+
     from plugin_examples.fixture_registry import fixture_fetcher as ff
 
     fake_listing = [{"path": "Examples/Data/test.dwg", "sha": "abc", "size": len(fake_content)}]
     import os
 
-    with patch.dict(os.environ, {"GITHUB_TOKEN": "fake_token"}):
-        with patch.object(ff, "_list_github_files", return_value=fake_listing):
-            result = fetch_fixtures(
-                "cad",
-                _GOOD_REPO_CONFIG,
-                [".dwg"],
-                dest_dir,
-                cache_root=tmp_path / "cache",
-            )
+    with patch.dict(os.environ, {"GITHUB_TOKEN": "fake_token"}), patch.object(ff, "_list_github_files", return_value=fake_listing):
+        result = fetch_fixtures(
+            "cad",
+            _GOOD_REPO_CONFIG,
+            [".dwg"],
+            dest_dir,
+            cache_root=tmp_path / "cache",
+        )
 
     assert result.cache_hits == 1
     assert result.cache_misses == 0

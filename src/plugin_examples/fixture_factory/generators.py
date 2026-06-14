@@ -15,7 +15,6 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
 
-
 # ── Minimal valid PNG (1x1 white pixel) embedded as base64 ──────────────────
 # Generated from PNG spec: signature + IHDR + IDAT + IEND chunks
 _MINIMAL_1x1_WHITE_PNG_B64 = (
@@ -31,12 +30,12 @@ _MINIMAL_40x12_WHITE_PNG_B64 = (
 @dataclass
 class FixtureResult:
     fixture_type: str
-    path: Optional[Path] = None
+    path: Path | None = None
     size_bytes: int = 0
     strategy: str = "programmatic"
     description: str = ""
     provenance: dict = field(default_factory=dict)
-    error: Optional[str] = None
+    error: str | None = None
 
     @property
     def success(self) -> bool:
@@ -102,7 +101,7 @@ def generate_bmp_fixture(
     )
 
 
-def generate_svg_fixture(dest: Optional[Path] = None, title: str = "Test SVG") -> FixtureResult:
+def generate_svg_fixture(dest: Path | None = None, title: str = "Test SVG") -> FixtureResult:
     """Generate a minimal SVG string or file."""
     svg = (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="200" height="150">'
@@ -126,7 +125,7 @@ def generate_svg_fixture(dest: Optional[Path] = None, title: str = "Test SVG") -
     )
 
 
-def generate_html_fixture(dest: Optional[Path] = None, title: str = "Test Page") -> FixtureResult:
+def generate_html_fixture(dest: Path | None = None, title: str = "Test Page") -> FixtureResult:
     """Generate a minimal HTML string or file."""
     html = (
         f"<!DOCTYPE html><html><head><title>{title}</title>"
@@ -149,7 +148,7 @@ def generate_html_fixture(dest: Optional[Path] = None, title: str = "Test Page")
     )
 
 
-def generate_geojson_fixture(dest: Optional[Path] = None) -> FixtureResult:
+def generate_geojson_fixture(dest: Path | None = None) -> FixtureResult:
     """Generate a minimal GeoJSON FeatureCollection (point + polygon)."""
     geojson = (
         "{\n"
@@ -186,7 +185,7 @@ def generate_geojson_fixture(dest: Optional[Path] = None) -> FixtureResult:
     )
 
 
-def generate_obj_fixture(dest: Optional[Path] = None, name: str = "unit_cube") -> FixtureResult:
+def generate_obj_fixture(dest: Path | None = None, name: str = "unit_cube") -> FixtureResult:
     """Generate a minimal Wavefront OBJ file (unit cube, 8 vertices, 6 faces)."""
     obj = (
         f"# Minimal Wavefront OBJ — {name}\n"
@@ -222,7 +221,7 @@ def generate_obj_fixture(dest: Optional[Path] = None, name: str = "unit_cube") -
     )
 
 
-def generate_xbrl_fixture(dest: Optional[Path] = None) -> FixtureResult:
+def generate_xbrl_fixture(dest: Path | None = None) -> FixtureResult:
     """Generate a minimal XBRL instance document."""
     xbrl = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -257,7 +256,7 @@ def generate_xbrl_fixture(dest: Optional[Path] = None) -> FixtureResult:
     )
 
 
-def generate_ps_fixture(dest: Optional[Path] = None, title: str = "Test Document") -> FixtureResult:
+def generate_ps_fixture(dest: Path | None = None, title: str = "Test Document") -> FixtureResult:
     """Generate a minimal PostScript document."""
     ps = (
         "%!PS-Adobe-3.0\n"
@@ -293,7 +292,7 @@ def generate_ps_fixture(dest: Optional[Path] = None, title: str = "Test Document
     )
 
 
-def generate_note_xml_fixture(dest: Optional[Path] = None, title: str = "Test Note") -> FixtureResult:
+def generate_note_xml_fixture(dest: Path | None = None, title: str = "Test Note") -> FixtureResult:
     """Generate a minimal OneNote-compatible XML document fixture."""
     xml = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -328,7 +327,7 @@ def generate_note_xml_fixture(dest: Optional[Path] = None, title: str = "Test No
     )
 
 
-def generate_drawing_xml_fixture(dest: Optional[Path] = None) -> FixtureResult:
+def generate_drawing_xml_fixture(dest: Path | None = None) -> FixtureResult:
     """Generate a minimal Visio-compatible XML drawing fixture."""
     xml = (
         '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
@@ -369,7 +368,7 @@ def generate_drawing_xml_fixture(dest: Optional[Path] = None) -> FixtureResult:
     )
 
 
-def generate_zip_fixture(dest: Path, entries: Optional[list] = None) -> FixtureResult:
+def generate_zip_fixture(dest: Path, entries: list | None = None) -> FixtureResult:
     """Generate a minimal ZIP archive containing text entries."""
     import zipfile
 
@@ -391,7 +390,7 @@ def generate_zip_fixture(dest: Path, entries: Optional[list] = None) -> FixtureR
     )
 
 
-def generate_eps_fixture(dest: Optional[Path] = None, title: str = "Aspose.Page EPS Demo") -> FixtureResult:
+def generate_eps_fixture(dest: Path | None = None, title: str = "Aspose.Page EPS Demo") -> FixtureResult:
     """Generate a minimal valid EPS (Encapsulated PostScript) file."""
     eps_content = (
         f"%!PS-Adobe-3.0 EPSF-3.0\n"
@@ -433,7 +432,7 @@ def generate_eps_fixture(dest: Optional[Path] = None, title: str = "Aspose.Page 
     )
 
 
-def generate_psd_fixture(dest: Optional[Path] = None, width: int = 8, height: int = 8) -> FixtureResult:
+def generate_psd_fixture(dest: Path | None = None, width: int = 8, height: int = 8) -> FixtureResult:
     """Generate a minimal valid PSD (Photoshop Document) file from binary spec.
 
     Structure: Header + Color Mode Data (empty) + Image Resources (empty)
@@ -476,7 +475,7 @@ def generate_psd_fixture(dest: Optional[Path] = None, width: int = 8, height: in
     )
 
 
-def generate_rich_geojson_fixture(dest: Optional[Path] = None) -> FixtureResult:
+def generate_rich_geojson_fixture(dest: Path | None = None) -> FixtureResult:
     """Generate a richer GeoJSON FeatureCollection with 5 features and attributes.
 
     Includes Point, LineString, Polygon, MultiPoint, and MultiPolygon geometry types.
@@ -559,7 +558,7 @@ def generate_rich_geojson_fixture(dest: Optional[Path] = None) -> FixtureResult:
     )
 
 
-def generate_latex_fixture(dest: Optional[Path] = None, title: str = "Aspose.TeX Demo") -> FixtureResult:
+def generate_latex_fixture(dest: Path | None = None, title: str = "Aspose.TeX Demo") -> FixtureResult:
     """Generate a minimal valid LaTeX source file (.tex)."""
     latex_content = (
         r"\documentclass{minimal}" + "\n"

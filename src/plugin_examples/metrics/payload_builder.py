@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from typing import Any
 
 
@@ -27,10 +27,7 @@ def build_payload(
     All values come from config or explicit parameters — nothing hardcoded.
     """
     # Derive job_type
-    if job_type_override:
-        job_type = job_type_override
-    else:
-        job_type = config.command_to_job_type.get(command, "")
+    job_type = job_type_override or config.command_to_job_type.get(command, "")
 
     # Derive agent_name — stable identity, not command-specific
     agent_name = config.agent_name
@@ -57,7 +54,7 @@ def build_payload(
         effective_run_id = f"test-{run_id}"
 
     return {
-        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "timestamp": datetime.now(UTC).isoformat(),
         "agent_name": agent_name,
         "agent_owner": config.agent_owner,
         "job_type": job_type,

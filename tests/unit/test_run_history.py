@@ -1,8 +1,9 @@
 """Tests for cross-run state persistence (run_history.py)."""
 
 import json
-import pytest
 from pathlib import Path
+
+import pytest
 
 from plugin_examples.state.run_history import RunHistory, RunRecord
 

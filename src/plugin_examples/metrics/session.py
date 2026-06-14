@@ -89,16 +89,16 @@ class MetricsSession:
         if not self._active:
             return {"metrics_enabled": False}
 
-        from plugin_examples.metrics.payload_builder import build_payload
-        from plugin_examples.metrics.validator import validate_payload
         from plugin_examples.metrics.evidence import (
             write_llm_calls_jsonl,
-            write_run_summary,
             write_payload,
-            write_validation_result,
             write_post_result,
+            write_run_summary,
+            write_validation_result,
         )
+        from plugin_examples.metrics.payload_builder import build_payload
         from plugin_examples.metrics.poster import post_metrics
+        from plugin_examples.metrics.validator import validate_payload
 
         result: dict[str, Any] = {"metrics_enabled": True}
         duration_ms = int((time.time() - self._start_time) * 1000)

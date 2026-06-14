@@ -11,16 +11,16 @@ from unittest import mock
 import pytest
 
 from plugin_examples.planner_loop import (
+    _ACTION_HANDLERS,
+    _APPROVAL_GATED_TYPES,
+    _RETRY_CONDITIONS,
     CycleResult,
     LoopResult,
     board_fingerprint,
-    run_execution_loop,
-    _ACTION_HANDLERS,
-    _APPROVAL_GATED_TYPES,
     generate_blocked_actions_report,
-    _RETRY_CONDITIONS,
+    run_execution_loop,
 )
-from plugin_examples.portfolio_action_planner import ActionBoard, Action
+from plugin_examples.portfolio_action_planner import Action, ActionBoard
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
 

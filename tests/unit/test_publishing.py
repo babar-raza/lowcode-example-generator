@@ -7,29 +7,28 @@ from pathlib import Path
 
 import pytest
 
+from plugin_examples.gates.models import GateResult, GateVerdict
+from plugin_examples.package_watcher.watcher import (
+    check_for_updates,
+    write_monthly_report,
+)
+from plugin_examples.publisher.approval_gate import (
+    APPROVAL_EXPECTED_VALUE,
+    BLOCKED_INVALID_LIVE_PR_APPROVAL,
+    BLOCKED_LIVE_PR_APPROVAL_REQUIRED,
+    BLOCKED_PR_PERMISSION_NOT_READY,
+    BLOCKED_PUBLISH_DRY_RUN_CONFLICT,
+    BLOCKED_PUBLISH_TO_MAIN,
+    BLOCKED_REPO_ACCESS_NOT_READY,
+    check_approval,
+)
+from plugin_examples.publisher.pr_builder import build_pr
 from plugin_examples.publisher.publisher import (
     PublishResult,
     _is_central_repo,
     publish_examples,
     write_publishing_report,
 )
-from plugin_examples.publisher.pr_builder import build_pr
-from plugin_examples.publisher.approval_gate import (
-    APPROVAL_EXPECTED_VALUE,
-    BLOCKED_LIVE_PR_APPROVAL_REQUIRED,
-    BLOCKED_INVALID_LIVE_PR_APPROVAL,
-    BLOCKED_PUBLISH_DRY_RUN_CONFLICT,
-    BLOCKED_PUBLISH_TO_MAIN,
-    BLOCKED_REPO_ACCESS_NOT_READY,
-    BLOCKED_PR_PERMISSION_NOT_READY,
-    check_approval,
-)
-from plugin_examples.package_watcher.watcher import (
-    check_for_updates,
-    write_monthly_report,
-)
-from plugin_examples.gates.models import GateVerdict, GateResult
-
 
 # --- Tests: publisher ---
 
@@ -305,7 +304,7 @@ class TestComputePRScopeType:
     """Tests for compute_pr_scope_type() helper."""
 
     def test_family_complete_when_all_published(self):
-        from plugin_examples.publisher.pr_builder import compute_pr_scope_type, PR_SCOPE_FAMILY_COMPLETE
+        from plugin_examples.publisher.pr_builder import PR_SCOPE_FAMILY_COMPLETE, compute_pr_scope_type
 
         denominator = {"workflow_root_types": 4, "allowed_pilot_count": None}
         result = compute_pr_scope_type("cells", denominator, 4)
@@ -319,7 +318,7 @@ class TestComputePRScopeType:
         assert result == "PILOT_COMPLETE"
 
     def test_partial_canary_when_not_all_published(self):
-        from plugin_examples.publisher.pr_builder import compute_pr_scope_type, PR_SCOPE_PARTIAL_CANARY
+        from plugin_examples.publisher.pr_builder import PR_SCOPE_PARTIAL_CANARY, compute_pr_scope_type
 
         denominator = {"workflow_root_types": 25, "allowed_pilot_count": 4}
         result = compute_pr_scope_type("words", denominator, 2)
@@ -327,7 +326,7 @@ class TestComputePRScopeType:
 
     def test_words_guard_null_workflow_root_count_prevents_family_complete(self):
         """Words guard: FAMILY_COMPLETE cannot be returned when workflow_root_types is null."""
-        from plugin_examples.publisher.pr_builder import compute_pr_scope_type, PR_SCOPE_FAMILY_COMPLETE
+        from plugin_examples.publisher.pr_builder import PR_SCOPE_FAMILY_COMPLETE, compute_pr_scope_type
 
         denominator = {"workflow_root_types": None, "allowed_pilot_count": 4}
         result = compute_pr_scope_type("words", denominator, 4)
@@ -335,7 +334,7 @@ class TestComputePRScopeType:
         assert result == "PILOT_COMPLETE"
 
     def test_partial_canary_when_zero_published(self):
-        from plugin_examples.publisher.pr_builder import compute_pr_scope_type, PR_SCOPE_PARTIAL_CANARY
+        from plugin_examples.publisher.pr_builder import PR_SCOPE_PARTIAL_CANARY, compute_pr_scope_type
 
         denominator = {"workflow_root_types": 5, "allowed_pilot_count": 2}
         result = compute_pr_scope_type("diagram", denominator, 0)
@@ -343,7 +342,7 @@ class TestComputePRScopeType:
 
     def test_family_complete_requires_nonzero_denominator(self):
         """No denominator → PARTIAL_CANARY fallback."""
-        from plugin_examples.publisher.pr_builder import compute_pr_scope_type, PR_SCOPE_PARTIAL_CANARY
+        from plugin_examples.publisher.pr_builder import PR_SCOPE_PARTIAL_CANARY, compute_pr_scope_type
 
         result = compute_pr_scope_type("cells", {}, 3)
         assert result == PR_SCOPE_PARTIAL_CANARY
@@ -608,13 +607,13 @@ class TestFamilySpecificPublisherTarget:
 
 
 from plugin_examples.publisher.publish_readiness import (
+    BLOCKED_CENTRAL_REPO_TARGET_NOT_ALLOWED,
+    BLOCKED_FAMILY_NOT_ACTIVE,
+    BLOCKED_MISSING_FAMILY_CONFIG,
+    BLOCKED_MISSING_FAMILY_PUBLISH_TARGET,
     check_family_publish_readiness,
     check_publish_readiness,
     write_publish_readiness_report,
-    BLOCKED_MISSING_FAMILY_CONFIG,
-    BLOCKED_MISSING_FAMILY_PUBLISH_TARGET,
-    BLOCKED_CENTRAL_REPO_TARGET_NOT_ALLOWED,
-    BLOCKED_FAMILY_NOT_ACTIVE,
 )
 
 
@@ -843,11 +842,12 @@ class TestRepoAccessResolver:
 
     def test_repo_not_found_blocks_repo_access_ready(self):
         """When GitHub API returns 404, repo_access_ready must be False."""
-        from plugin_examples.publisher.repo_access_resolver import (
-            check_repo_access,
-            REPO_NOT_FOUND,
-        )
         from unittest.mock import patch
+
+        from plugin_examples.publisher.repo_access_resolver import (
+            REPO_NOT_FOUND,
+            check_repo_access,
+        )
 
         with patch(
             "plugin_examples.publisher.repo_access_resolver._github_get",
@@ -866,11 +866,12 @@ class TestRepoAccessResolver:
 
     def test_repo_200_sets_repo_access_ready(self):
         """When GitHub API returns 200, repo_access_ready must be True."""
-        from plugin_examples.publisher.repo_access_resolver import (
-            check_repo_access,
-            ACCESS_OK,
-        )
         from unittest.mock import patch
+
+        from plugin_examples.publisher.repo_access_resolver import (
+            ACCESS_OK,
+            check_repo_access,
+        )
 
         fake_body = {
             "default_branch": "main",
@@ -901,10 +902,11 @@ class TestRepoAccessResolver:
 
     def test_live_publish_requires_repo_access_ready(self):
         """live_publish_ready must remain False even when config_ready=True and repo accessible."""
-        from plugin_examples.publisher.repo_access_resolver import resolve_repo_access
-        from unittest.mock import patch
-        from types import SimpleNamespace
         import tempfile
+        from types import SimpleNamespace
+        from unittest.mock import patch
+
+        from plugin_examples.publisher.repo_access_resolver import resolve_repo_access
 
         pub_repo = SimpleNamespace(
             owner="aspose-cells-net",
@@ -951,8 +953,9 @@ class TestRepoAccessResolver:
 
     def test_live_publish_requires_pr_permission_ready(self):
         """When can_push=False, pr_permission_ready must be False."""
-        from plugin_examples.publisher.repo_access_resolver import check_repo_access
         from unittest.mock import patch
+
+        from plugin_examples.publisher.repo_access_resolver import check_repo_access
 
         fake_body = {
             "default_branch": "main",
@@ -983,8 +986,8 @@ class TestRepoAccessResolver:
     def test_missing_token_blocks_repo_access_resolution(self):
         """When GITHUB_TOKEN is not set, error_classification must be token_missing."""
         from plugin_examples.publisher.repo_access_resolver import (
-            check_repo_access,
             TOKEN_MISSING,
+            check_repo_access,
         )
 
         result = check_repo_access(

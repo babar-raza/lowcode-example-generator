@@ -7,8 +7,8 @@ BAV-03: bundle size_bytes in attestation must match actual ZIP file size
 """
 
 import hashlib
-import zipfile
 import os
+import zipfile
 from dataclasses import dataclass, field
 
 

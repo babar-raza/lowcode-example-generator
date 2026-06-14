@@ -18,7 +18,6 @@ from unittest.mock import patch
 import pytest
 
 import plugin_examples.family_config  # noqa: F401 — ensure module loaded for patch()
-
 from plugin_examples.runner import (
     PipelineContext,
     _stage_load_config,
@@ -123,9 +122,8 @@ class TestDiscoveryOnlyFallbackGuard:
         config_dir.mkdir(parents=True)
         (config_dir / "testfam.yml").write_text("family: testfam\n")
 
-        with patch("plugin_examples.family_config.load_family_config", return_value=config):
-            with pytest.raises(RuntimeError, match="discovery_only"):
-                _stage_load_config(ctx)
+        with patch("plugin_examples.family_config.load_family_config", return_value=config), pytest.raises(RuntimeError, match="discovery_only"):
+            _stage_load_config(ctx)
 
     def test_active_status_still_works(self, tmp_path: Path) -> None:
         config = _make_config("cells", "active", None)

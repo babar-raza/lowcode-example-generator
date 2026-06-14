@@ -11,14 +11,14 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
 
 import pytest
 
 from plugin_examples.llm_router.decision_audit import (
     DecisionAuditLog,
-    init_global_audit_log,
     get_global_audit_log,
+    init_global_audit_log,
     record_decision,
 )
 from plugin_examples.llm_router.router import LLMRouter
@@ -73,8 +73,7 @@ class TestDecisionAuditIntegration:
             router = LLMRouter(provider_order=["llm_professionalize"])
             router.selected_provider = "llm_professionalize"
 
-            with patch("plugin_examples.llm_router.router.requests.post", side_effect=ConnectionError("refused")):
-                with pytest.raises(Exception):
+            with patch("plugin_examples.llm_router.router.requests.post", side_effect=ConnectionError("refused")), pytest.raises(Exception):
                     router.generate("Test prompt")
 
             records = audit_log.read_all()

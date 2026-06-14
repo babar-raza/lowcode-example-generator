@@ -20,7 +20,6 @@ import pytest
 
 from plugin_examples.healing_intelligence.loader import HealingIntelligenceLoader
 
-
 REGISTRY_DIR = Path("workspace/verification/latest/healing-intelligence")
 
 EXPECTED_FAILURE_PATTERN_IDS = {

@@ -13,6 +13,7 @@ import zipfile
 import pytest
 
 from src.plugin_examples.fixture_factory.evidence_authority_validators import (
+    REQUIRED_ATTESTATION_FIELDS,
     eav_01_iv_not_final_pass_with_pending_taskcards,
     eav_02_ar_not_final_pass_with_pending_taskcards,
     eav_03_external_sidecar_exists_and_valid,
@@ -20,9 +21,7 @@ from src.plugin_examples.fixture_factory.evidence_authority_validators import (
     eav_05_prebundle_closeout_not_claiming_final_authority,
     eav_06_bundle_entry_count_matches_attestation,
     run_all_eav,
-    REQUIRED_ATTESTATION_FIELDS,
 )
-
 
 # ============================================================
 # Fixtures

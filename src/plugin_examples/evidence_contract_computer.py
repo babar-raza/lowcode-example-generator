@@ -34,8 +34,8 @@ from __future__ import annotations
 import json
 import re
 from dataclasses import dataclass, field
+from datetime import UTC
 from pathlib import Path
-
 
 # Semantic validators keyed by partial string match on the semantic field
 _SEMANTIC_IN_PROGRESS_PATTERN = re.compile(r"IN_PROGRESS")
@@ -125,7 +125,7 @@ class EvidenceContractComputer:
 
         from datetime import datetime, timezone
 
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        now = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
         # Support both "required_evidence_categories" (legacy) and "categories" (new format)
         cat_list = contract.get("required_evidence_categories") or contract.get("categories", [])
@@ -218,9 +218,8 @@ class EvidenceContractComputer:
             return f"Cannot read file: {exc}"
 
         # "must not contain IN_PROGRESS at closure"
-        if "IN_PROGRESS" in semantic.upper() and "NOT" in semantic.upper():
-            if "IN_PROGRESS" in text:
-                return "File contains IN_PROGRESS marker"
+        if "IN_PROGRESS" in semantic.upper() and "NOT" in semantic.upper() and "IN_PROGRESS" in text:
+            return "File contains IN_PROGRESS marker"
 
         # "must have no unchecked [ ] items"
         if "unchecked" in semantic.lower() or "[ ]" in semantic:

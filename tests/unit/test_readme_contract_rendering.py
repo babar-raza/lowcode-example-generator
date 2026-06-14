@@ -3,8 +3,10 @@ and auditor populates contract_format_mismatches."""
 
 from __future__ import annotations
 
-import pytest
 from unittest.mock import MagicMock
+
+import pytest
+
 from plugin_examples.format_authority.store import reset_store
 
 
@@ -113,8 +115,8 @@ class TestReadmeAuditorContractCrossCheck:
     """TC-MEGA-F02: Verify readme_auditor populates contract_format_mismatches."""
 
     def _render_and_audit(self, family: str, examples: list[dict]) -> object:
-        from plugin_examples.publisher.readme_renderer import build_readme_context, render_readme
         from plugin_examples.publisher.readme_auditor import audit_readme
+        from plugin_examples.publisher.readme_renderer import build_readme_context, render_readme
 
         cfg = _make_family_config(family)
         ctx = build_readme_context(

@@ -8,10 +8,11 @@ generating any examples.
 from __future__ import annotations
 
 import json
-import logging
 from pathlib import Path
 
-logger = logging.getLogger(__name__)
+from plugin_examples.observability import get_logger
+
+logger = get_logger(__name__)
 
 # Families with this status are always included in the discovery sweep without
 # requiring --allow-experimental. They are excluded from the generation pipeline.
@@ -147,8 +148,9 @@ def _discover_family(
         result["package_id"] = config.nuget.package_id
 
         # Resolve NuGet package
-        from plugin_examples.nuget_fetcher import fetch_package, resolve_dependencies
         from datetime import datetime
+
+        from plugin_examples.nuget_fetcher import fetch_package, resolve_dependencies
 
         run_dir = repo_root / "workspace" / "runs" / f"discovery-{family}-{datetime.now().strftime('%Y%m%d-%H%M%S')}"
         run_dir.mkdir(parents=True, exist_ok=True)
@@ -188,11 +190,11 @@ def _discover_family(
         # are not declared in any nuspec TFM group (e.g. Aspose.Drawing.Common for
         # Aspose.OCR).  We download the latest stable version of each.
         if dep_cfg.extra_packages:
-            from plugin_examples.nuget_fetcher.fetcher import (
-                resolve_latest_stable,
-                _download_nupkg,
-            )
             from plugin_examples.nuget_fetcher.cache import check_cache
+            from plugin_examples.nuget_fetcher.fetcher import (
+                _download_nupkg,
+                resolve_latest_stable,
+            )
 
             extra_deps_dir = run_dir / "packages" / family / "deps"
             extra_deps_dir.mkdir(parents=True, exist_ok=True)
@@ -399,10 +401,10 @@ def compute_generation_readiness(
                     catalog = json.load(f)
 
                 from plugin_examples.scenario_planner.type_classifier import (
-                    classify_catalog,
-                    WORKFLOW_ROOT,
-                    PROVIDER_CALLBACK,
                     OPTIONS,
+                    PROVIDER_CALLBACK,
+                    WORKFLOW_ROOT,
+                    classify_catalog,
                 )
 
                 # Load config to get namespace patterns
@@ -471,8 +473,8 @@ def compute_generation_readiness(
                 _cfg = _lcf(_cfg_path)
                 _config_status = _cfg.status
                 _allowed_types = list(_cfg.generation.allowed_types or [])
-        except Exception:
-            pass
+        except (OSError, KeyError, AttributeError, ValueError):
+            logger.debug("Failed to load family config for %s", family, exc_info=True)
 
         # Check denominator for controlled pilot approval state.
         # Rules:
@@ -499,8 +501,8 @@ def compute_generation_readiness(
                     _controlled_pilot_approved = True
                     # Remaining pilot types = those approved but not yet published
                     _pilot_has_remaining = _denominator_published < _denominator_pilot_count
-        except Exception:
-            pass
+        except (OSError, json.JSONDecodeError, KeyError, TypeError):
+            logger.debug("Failed to load denominator for %s", family, exc_info=True)
 
         if _config_status == "discovery_only":
             _generation_blocked_by.append("family_status_is_discovery_only")

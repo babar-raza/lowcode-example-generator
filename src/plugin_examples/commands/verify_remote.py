@@ -27,6 +27,7 @@ def add_parser(subparsers):
 def handle(args) -> int:
     """Handle the verify-remote command."""
     from pathlib import Path
+
     from plugin_examples.publisher.remote_truth_verifier import (
         run_remote_truth_check,
         write_remote_truth_report,

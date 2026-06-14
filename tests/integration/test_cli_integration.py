@@ -9,7 +9,6 @@ import pytest
 
 from plugin_examples.commands import register_all
 
-
 EXPECTED_SUBCOMMANDS = [
     "status", "run", "discover-lowcode", "validate-publish-targets",
     "resolve-repo-access", "probe-publish-permissions", "publish-pr",

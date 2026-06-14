@@ -8,15 +8,15 @@ from unittest.mock import patch
 
 import pytest
 
+from plugin_examples.gates.publication_gate import (
+    check_repo_local_authority_exists,
+    evaluate_publication_gate,
+)
 from plugin_examples.publisher.approval_gate import (
     APPROVAL_EXPECTED_VALUE,
     BLOCKED_INVALID_LIVE_PR_APPROVAL,
     BLOCKED_LIVE_PR_APPROVAL_REQUIRED,
     check_approval,
-)
-from plugin_examples.gates.publication_gate import (
-    check_repo_local_authority_exists,
-    evaluate_publication_gate,
 )
 
 

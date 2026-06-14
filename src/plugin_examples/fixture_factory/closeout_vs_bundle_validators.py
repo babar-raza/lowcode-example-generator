@@ -19,6 +19,7 @@ with SHA/size/entries from the frozen bundle. Never rebuild closeout after bundl
 """
 
 from __future__ import annotations
+
 from typing import Any
 
 

@@ -9,12 +9,12 @@ from __future__ import annotations
 
 import pytest
 
+from plugin_examples.generator.code_generator import _validate_code
 from plugin_examples.generator.packet_builder import (
     PromptPacket,
-    build_packet,
     _build_fewshot_snippet,
+    build_packet,
 )
-from plugin_examples.generator.code_generator import _validate_code
 from plugin_examples.scenario_planner.planner import (
     _build_scenario,
     _infer_input_format,
@@ -23,7 +23,6 @@ from plugin_examples.scenario_planner.planner import (
 from plugin_examples.scenario_planner.runtime_feedback import (
     classify_runtime_failure,
 )
-
 
 # --- Helpers ---
 

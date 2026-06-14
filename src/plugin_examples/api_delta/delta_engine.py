@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import logging
 from dataclasses import dataclass, field
+from datetime import UTC
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
@@ -192,7 +193,7 @@ def apply_auto_steering_candidates(
     """
     from datetime import datetime, timezone
 
-    now = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    now = datetime.now(UTC).isoformat(timespec="seconds")
     steering = existing_steering or {}
     forbidden = list(steering.get("forbidden_symbols", []))
     existing_sigs = {e.get("symbol") for e in forbidden}

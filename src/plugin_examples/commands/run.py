@@ -110,8 +110,8 @@ def handle(args) -> int:
     metrics_enabled = getattr(args, "metrics", False) or os.environ.get("AGENT_METRICS_ENABLED", "").lower() == "true"
 
     if metrics_enabled:
-        from plugin_examples.metrics.models import MetricsCollector
         from plugin_examples.metrics.config import load_metrics_config
+        from plugin_examples.metrics.models import MetricsCollector
 
         metrics_collector = MetricsCollector()
         config_path = None

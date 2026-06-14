@@ -40,9 +40,10 @@ def add_parser(subparsers):
 
 def handle(args) -> int:
     """Handle the execute-next-actions command."""
-    from pathlib import Path as _Path
-    from plugin_examples.planner_loop import run_execution_loop
     import json as _json
+    from pathlib import Path as _Path
+
+    from plugin_examples.planner_loop import run_execution_loop
 
     repo_root = _Path(__file__).resolve().parents[3]
     evidence_dir = (

@@ -15,7 +15,7 @@ from __future__ import annotations
 
 import json
 import logging
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -42,9 +42,9 @@ def probe_publish_permissions(
         Probe result dict.
     """
     from plugin_examples.publisher.repo_access_resolver import (
-        check_repo_access,
-        _get_headers,
         ACCESS_OK,
+        _get_headers,
+        check_repo_access,
     )
 
     headers = _get_headers()
@@ -138,7 +138,7 @@ def probe_publish_permissions(
 
     result = {
         "probe_type": "publish_permission_probe",
-        "probe_date": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00"),
+        "probe_date": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%S+00:00"),
         "sprint": "Live PR Approval Gate and Safe Branch Probe Sprint",
         "token_present": token_present,
         "dry_run": dry_run,

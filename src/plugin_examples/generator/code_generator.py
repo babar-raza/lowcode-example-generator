@@ -977,34 +977,33 @@ def _generate_deterministic_template_for_scenario(packet: PromptPacket) -> str:
     # ---------------------------------------------------------------------------
     # Cells family deterministic templates
     # ---------------------------------------------------------------------------
-    if "aspose.cells" in _ns:
-        if t == "spreadsheetmerger":
-            return (
-                "using System;\n"
-                "using System.IO;\n"
-                "using Aspose.Cells.LowCode;\n"
-                "\n"
-                "namespace PluginExample\n"
-                "{\n"
-                "    class Program\n"
-                "    {\n"
-                "        static void Main(string[] args)\n"
-                "        {\n"
-                '            Console.WriteLine("Example: cells-spreadsheet-merger");\n'
-                "\n"
-                '            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");\n'
-                '            string input1Path = Path.Combine(AppContext.BaseDirectory, "input1.xlsx");\n'
-                '            string input2Path = Path.Combine(AppContext.BaseDirectory, "input2.xlsx");\n'
-                "            File.Copy(inputPath, input1Path, overwrite: true);\n"
-                "            File.Copy(inputPath, input2Path, overwrite: true);\n"
-                "\n"
-                '            SpreadsheetMerger.Process(new string[] { input1Path, input2Path }, "output.xlsx");\n'
-                "\n"
-                '            Console.WriteLine("Done.");\n'
-                "        }\n"
-                "    }\n"
-                "}\n"
-            )
+    if "aspose.cells" in _ns and t == "spreadsheetmerger":
+        return (
+            "using System;\n"
+            "using System.IO;\n"
+            "using Aspose.Cells.LowCode;\n"
+            "\n"
+            "namespace PluginExample\n"
+            "{\n"
+            "    class Program\n"
+            "    {\n"
+            "        static void Main(string[] args)\n"
+            "        {\n"
+            '            Console.WriteLine("Example: cells-spreadsheet-merger");\n'
+            "\n"
+            '            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");\n'
+            '            string input1Path = Path.Combine(AppContext.BaseDirectory, "input1.xlsx");\n'
+            '            string input2Path = Path.Combine(AppContext.BaseDirectory, "input2.xlsx");\n'
+            "            File.Copy(inputPath, input1Path, overwrite: true);\n"
+            "            File.Copy(inputPath, input2Path, overwrite: true);\n"
+            "\n"
+            '            SpreadsheetMerger.Process(new string[] { input1Path, input2Path }, "output.xlsx");\n'
+            "\n"
+            '            Console.WriteLine("Done.");\n'
+            "        }\n"
+            "    }\n"
+            "}\n"
+        )
 
     # ---------------------------------------------------------------------------
     # Words family deterministic templates
@@ -1273,46 +1272,45 @@ def _generate_deterministic_template_for_scenario(packet: PromptPacket) -> str:
     # ---------------------------------------------------------------------------
     # Email family deterministic templates
     # ---------------------------------------------------------------------------
-    if "aspose.email" in _ns:
-        if t == "converter":
-            return (
-                "using System;\n"
-                "using System.IO;\n"
-                "using System.Threading.Tasks;\n"
-                "using Aspose.Email.LowCode;\n"
-                "\n"
-                "namespace PluginExample\n"
-                "{\n"
-                "    class Program\n"
-                "    {\n"
-                "        static async Task Main(string[] args)\n"
-                "        {\n"
-                '            Console.WriteLine("Example: email-converter");\n'
-                "\n"
-                '            string inputPath = "input.eml";\n'
-                "            File.WriteAllText(inputPath,\n"
-                '                "From: sender@example.com\\r\\n" +\n'
-                '                "To: recipient@example.com\\r\\n" +\n'
-                '                "Subject: LowCode Converter Test\\r\\n" +\n'
-                '                "MIME-Version: 1.0\\r\\n" +\n'
-                '                "Content-Type: text/plain\\r\\n\\r\\n" +\n'
-                '                "Hello, this is a test email for LowCode conversion.");\n'
-                "\n"
-                '            string outputDir = "output_html";\n'
-                "            Directory.CreateDirectory(outputDir);\n"
-                "\n"
-                "            using var stream = new MemoryStream(File.ReadAllBytes(inputPath));\n"
-                "            string fileName = Path.GetFileName(inputPath);\n"
-                "            var outputHandler = new FolderOutputHandler(outputDir);\n"
-                "            await Converter.ConvertToHtml(stream, fileName, outputHandler);\n"
-                "\n"
-                "            Console.WriteLine(Directory.Exists(outputDir) && Directory.GetFiles(outputDir).Length > 0\n"
-                '                ? $"Conversion succeeded: {outputDir}"\n'
-                '                : "Conversion failed: no output files found.");\n'
-                "        }\n"
-                "    }\n"
-                "}\n"
-            )
+    if "aspose.email" in _ns and t == "converter":
+        return (
+            "using System;\n"
+            "using System.IO;\n"
+            "using System.Threading.Tasks;\n"
+            "using Aspose.Email.LowCode;\n"
+            "\n"
+            "namespace PluginExample\n"
+            "{\n"
+            "    class Program\n"
+            "    {\n"
+            "        static async Task Main(string[] args)\n"
+            "        {\n"
+            '            Console.WriteLine("Example: email-converter");\n'
+            "\n"
+            '            string inputPath = "input.eml";\n'
+            "            File.WriteAllText(inputPath,\n"
+            '                "From: sender@example.com\\r\\n" +\n'
+            '                "To: recipient@example.com\\r\\n" +\n'
+            '                "Subject: LowCode Converter Test\\r\\n" +\n'
+            '                "MIME-Version: 1.0\\r\\n" +\n'
+            '                "Content-Type: text/plain\\r\\n\\r\\n" +\n'
+            '                "Hello, this is a test email for LowCode conversion.");\n'
+            "\n"
+            '            string outputDir = "output_html";\n'
+            "            Directory.CreateDirectory(outputDir);\n"
+            "\n"
+            "            using var stream = new MemoryStream(File.ReadAllBytes(inputPath));\n"
+            "            string fileName = Path.GetFileName(inputPath);\n"
+            "            var outputHandler = new FolderOutputHandler(outputDir);\n"
+            "            await Converter.ConvertToHtml(stream, fileName, outputHandler);\n"
+            "\n"
+            "            Console.WriteLine(Directory.Exists(outputDir) && Directory.GetFiles(outputDir).Length > 0\n"
+            '                ? $"Conversion succeeded: {outputDir}"\n'
+            '                : "Conversion failed: no output files found.");\n'
+            "        }\n"
+            "    }\n"
+            "}\n"
+        )
 
     # Unrecognised type — fall back to the generic catalog-driven template
     return _generate_template(packet)
@@ -1428,10 +1426,7 @@ def _is_string_like(param: dict) -> bool:
 
 def _can_generate_args(method: dict) -> bool:
     """Check if we can generate safe arguments for all parameters."""
-    for p in method.get("parameters", []):
-        if not _is_string_like(p):
-            return False
-    return True
+    return all(_is_string_like(p) for p in method.get("parameters", []))
 
 
 def _generate_smart_args(
@@ -1689,8 +1684,7 @@ def _validate_code(code: str, family: str = "", type_short: str = "") -> list[st
         )
 
     # Detect empty LowCodeLoadOptions without InputFile assignment
-    if re.search(r"new\s+LowCodeLoadOptions\s*\(\s*\)", code):
-        if ".InputFile" not in code and ".InputStream" not in code:
+    if re.search(r"new\s+LowCodeLoadOptions\s*\(\s*\)", code) and ".InputFile" not in code and ".InputStream" not in code:
             issues.append(
                 "Creates LowCodeLoadOptions without setting InputFile or InputStream. "
                 "You MUST set InputFile before passing to Process(), or use the simple "
@@ -1698,8 +1692,7 @@ def _validate_code(code: str, family: str = "", type_short: str = "") -> list[st
             )
 
     # Detect empty LowCodeSaveOptions without OutputFile assignment
-    if re.search(r"new\s+LowCodeSaveOptions\s*\(\s*\)", code):
-        if ".OutputFile" not in code and ".OutputStream" not in code:
+    if re.search(r"new\s+LowCodeSaveOptions\s*\(\s*\)", code) and ".OutputFile" not in code and ".OutputStream" not in code:
             issues.append(
                 "Creates LowCodeSaveOptions without setting OutputFile or OutputStream. "
                 "You MUST set OutputFile before passing to Process(), or use the simple "
@@ -1756,9 +1749,7 @@ def _validate_code(code: str, family: str = "", type_short: str = "") -> list[st
                 'Create input with: File.WriteAllText("input.html", "<html><body><h1>Hello</h1></body></html>");'
             )
         # Html plugin: must not use input.pdf as input
-        if type_short.lower() == "html" and "input.pdf" in code and "output.pdf" not in code.replace("input.pdf", ""):
-            # allow output.pdf but not input.pdf as input
-            if re.search(r'FileDataSource\s*\(\s*"input\.pdf"', code):
+        if type_short.lower() == "html" and "input.pdf" in code and "output.pdf" not in code.replace("input.pdf", "") and re.search(r'FileDataSource\s*\(\s*"input\.pdf"', code):
                 issues.append(
                     "HTML plugin: AddInput must receive 'input.html', NOT 'input.pdf'. "
                     "Html plugin takes HTML file as input, not PDF."
@@ -1793,11 +1784,10 @@ def _validate_code(code: str, family: str = "", type_short: str = "") -> list[st
                 "Use the concrete options class: MergeOptions, SplitOptions, OptimizeOptions, or TextExtractorOptions."
             )
         # Detect AddInput/AddOutput called with plain string (must use FileDataSource)
-        if re.search(r"\.AddInput\s*\(\s*[a-zA-Z_][a-zA-Z0-9_]*\s*\)", code) or re.search(
-            r'\.AddInput\s*\(\s*"[^"]*"\s*\)', code
-        ):
-            # Only flag if FileDataSource is absent — string-arg form doesn't exist in PDF LowCode
-            if "FileDataSource" not in code:
+        if (
+            re.search(r"\.AddInput\s*\(\s*[a-zA-Z_][a-zA-Z0-9_]*\s*\)", code)
+            or re.search(r'\.AddInput\s*\(\s*"[^"]*"\s*\)', code)
+        ) and "FileDataSource" not in code:
                 issues.append(
                     "PDF: AddInput() called with a plain string — must use FileDataSource: "
                     'AddInput(new FileDataSource("input.pdf")). The string overload does not exist.'

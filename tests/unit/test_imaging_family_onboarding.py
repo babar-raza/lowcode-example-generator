@@ -5,8 +5,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import yaml
 import pytest
+import yaml
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 IMAGING_CONFIG = REPO_ROOT / "pipeline" / "configs" / "families" / "imaging.yml"

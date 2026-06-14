@@ -26,8 +26,8 @@ class TestPipelineContextMetrics:
         assert ctx.metrics_collector is None
 
     def test_context_accepts_metrics_collector(self):
-        from plugin_examples.runner import PipelineContext
         from plugin_examples.metrics.models import MetricsCollector
+        from plugin_examples.runner import PipelineContext
 
         mc = MetricsCollector()
         ctx = PipelineContext(

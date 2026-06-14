@@ -5,12 +5,11 @@ from __future__ import annotations
 import pytest
 
 from plugin_examples.generator.packet_builder import (
-    PromptPacket,
-    build_packet,
     _PROGRAMMATIC_FIXTURE_GUIDANCE,
+    PromptPacket,
     _build_programmatic_fixture_guidance,
+    build_packet,
 )
-
 
 # ---------------------------------------------------------------------------
 # Helpers

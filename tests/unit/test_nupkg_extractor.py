@@ -18,7 +18,6 @@ from plugin_examples.nupkg_extractor.framework_selector import (
     select_framework,
 )
 
-
 # --- Helpers ---
 
 

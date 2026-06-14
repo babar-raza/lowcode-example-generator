@@ -18,7 +18,6 @@ from plugin_examples.plugin_detector.proof_reporter import (
     write_source_of_truth_proof,
 )
 
-
 # --- Fixtures ---
 
 

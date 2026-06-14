@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from datetime import UTC
 from pathlib import Path
 
 import pytest
@@ -14,7 +15,6 @@ from plugin_examples.website_catalog.drift_detector import (
     is_discovery_stale,
     make_discovery_metadata,
 )
-
 
 # ── detect_catalog_drift ───────────────────────────────────────────────────────
 
@@ -163,9 +163,9 @@ def test_discovery_metadata_not_stale_immediately():
 
 
 def test_discovery_metadata_stale_when_expired():
-    from datetime import datetime, timezone, timedelta
+    from datetime import datetime, timedelta, timezone
 
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     past = (now - timedelta(hours=2)).isoformat(timespec="seconds")
     meta = {
         "validated_at": past,

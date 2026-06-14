@@ -15,34 +15,33 @@ import pytest
 from plugin_examples.fixture_registry.fixture_factory import (
     SUPPORTED_FORMATS,
     GeneratedFixture,
+    generate_csv,
+    generate_docx,
     generate_fixture,
     generate_fixtures_for_scenario,
-    generate_xlsx,
-    generate_csv,
-    generate_txt,
-    generate_json,
     generate_html,
-    generate_docx,
+    generate_json,
+    generate_txt,
+    generate_xlsx,
     write_generated_fixtures_evidence,
+)
+from plugin_examples.format_authority.contracts import FormatContract
+from plugin_examples.format_authority.store import MissingFormatContractError
+from plugin_examples.generator.code_generator import GeneratedExample
+from plugin_examples.generator.packet_builder import (
+    PromptPacket,
+    _build_fixture_instruction,
+    build_packet,
+)
+from plugin_examples.generator.project_generator import (
+    _generate_csproj,
+    generate_project,
 )
 from plugin_examples.scenario_planner.planner import (
     Scenario,
     _build_scenario,
     _needs_fixture,
 )
-from plugin_examples.format_authority.store import MissingFormatContractError
-from plugin_examples.format_authority.contracts import FormatContract
-from plugin_examples.generator.packet_builder import (
-    PromptPacket,
-    build_packet,
-    _build_fixture_instruction,
-)
-from plugin_examples.generator.project_generator import (
-    generate_project,
-    _generate_csproj,
-)
-from plugin_examples.generator.code_generator import GeneratedExample
-
 
 # --- Test 1: Example-reviewer fixture system discovered ---
 
@@ -331,11 +330,12 @@ class TestExpectedOutputRecordsInputDependencies:
 class TestMissingInputFileDemotesScenario:
     def test_missing_input_file_demotes_scenario(self):
         """Scenarios that fail runtime with FileNotFoundException must be demoted."""
-        from plugin_examples.gates.example_gates import (
-            evaluate_example_gates,
-            build_scenario_feedback,
-        )
         from dataclasses import dataclass
+
+        from plugin_examples.gates.example_gates import (
+            build_scenario_feedback,
+            evaluate_example_gates,
+        )
 
         @dataclass
         class _MockDotnetResult:

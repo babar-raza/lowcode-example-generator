@@ -17,10 +17,10 @@ import json
 import logging
 import subprocess
 import sys
+from collections.abc import Sequence
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
-from typing import Sequence
 
 logger = logging.getLogger(__name__)
 
@@ -103,7 +103,7 @@ def run_batch_publish(
     Returns:
         BatchPublishResult with per-package and aggregate results.
     """
-    started_at = datetime.now(timezone.utc).isoformat()
+    started_at = datetime.now(UTC).isoformat()
     py = python_exe or sys.executable
 
     # Determine approval gate status
@@ -199,7 +199,7 @@ def run_batch_publish(
                 )
             )
 
-    finished_at = datetime.now(timezone.utc).isoformat()
+    finished_at = datetime.now(UTC).isoformat()
     total = len(results)
     succeeded = sum(1 for r in results if r.simulation_passed)
     failed = sum(1 for r in results if not r.simulation_passed and r.error)

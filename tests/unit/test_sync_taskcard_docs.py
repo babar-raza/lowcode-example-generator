@@ -8,7 +8,6 @@ from pathlib import Path
 
 import pytest
 
-
 _SAMPLE_MATRIX = {
     "matrix_date": "2026-05-04",
     "sprint": "Test Sprint",

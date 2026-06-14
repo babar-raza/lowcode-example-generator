@@ -3,10 +3,9 @@
 import pytest
 
 from plugin_examples.publisher.readme_auditor import (
-    audit_readme_staleness,
     ReadmeStalenessResult,
+    audit_readme_staleness,
 )
-
 
 # ---------------------------------------------------------------------------
 # Helpers

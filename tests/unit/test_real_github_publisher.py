@@ -30,7 +30,6 @@ from plugin_examples.publisher.github_pr_publisher import (
 from plugin_examples.publisher.pr_builder import build_pr
 from plugin_examples.publisher.publisher import PublishResult, publish_examples
 
-
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------

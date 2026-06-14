@@ -4,6 +4,8 @@ import argparse
 import logging
 import sys
 
+from plugin_examples.observability import configure_logging
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(
@@ -20,10 +22,7 @@ def main() -> int:
 
     args = parser.parse_args()
 
-    if args.verbose:
-        logging.basicConfig(level=logging.DEBUG)
-    else:
-        logging.basicConfig(level=logging.INFO)
+    configure_logging(level=logging.DEBUG if args.verbose else logging.INFO)
 
     if args.command is None:
         parser.print_help()

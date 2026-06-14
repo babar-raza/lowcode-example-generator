@@ -2,18 +2,17 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 
+from plugin_examples.format_capability.classifier import classify_operation_kind
 from plugin_examples.format_capability.manifest import (
     FormatCapabilityManifest,
     TypeFormatCapability,
 )
-from plugin_examples.format_capability.classifier import classify_operation_kind
 from plugin_examples.scenario_planner.planner import (
     _infer_input_format,
     _infer_output_format,
 )
-
 
 # Family defaults from pipeline configs
 _FAMILY_DEFAULTS: dict[str, str] = {
@@ -172,6 +171,6 @@ def populate_manifest(family: str) -> FormatCapabilityManifest:
 
     return FormatCapabilityManifest(
         family=family,
-        generation_date=datetime.now(timezone.utc).isoformat(),
+        generation_date=datetime.now(UTC).isoformat(),
         types=types,
     )

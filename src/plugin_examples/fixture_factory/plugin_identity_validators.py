@@ -14,7 +14,6 @@ import json
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import List, Optional
 
 # Known internal/generic name patterns that must not appear as canonical slugs
 GENERIC_BARCODE_SLUGS = {
@@ -46,7 +45,7 @@ class PivViolation:
 @dataclass
 class PivResult:
     package_key: str
-    violations: List[PivViolation] = field(default_factory=list)
+    violations: list[PivViolation] = field(default_factory=list)
     identity_status: str = "UNKNOWN"
 
     @property
@@ -62,7 +61,7 @@ class PivResult:
         return sum(1 for v in self.violations if v.severity == "WARNING")
 
 
-def _read_json(path: Path) -> Optional[dict]:
+def _read_json(path: Path) -> dict | None:
     if path.exists():
         try:
             return json.loads(path.read_text(encoding="utf-8"))
@@ -285,7 +284,7 @@ def run_plugin_identity_validators(pkg_dir: Path, package_key: str) -> PivResult
 
 def run_all_plugin_identity_validators(
     examples_base: Path,
-    alias_map: Optional[dict] = None,
+    alias_map: dict | None = None,
 ) -> dict:
     """
     Run PIV validators on all packages in examples_base/{family}/{slug}/.

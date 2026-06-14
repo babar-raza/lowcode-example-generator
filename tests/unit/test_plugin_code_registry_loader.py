@@ -1,9 +1,11 @@
 """Unit tests for plugin-code registry loader."""
 
-import pytest
 from pathlib import Path
+
+import pytest
+
 from src.plugin_examples.plugin_code_registry.loader import PluginCodeRegistryLoader
-from src.plugin_examples.plugin_code_registry.models import PluginEntry, FamilyRegistry
+from src.plugin_examples.plugin_code_registry.models import FamilyRegistry, PluginEntry
 
 
 @pytest.fixture

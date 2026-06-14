@@ -11,7 +11,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 
 # Import the stage function directly — no need to run the full pipeline
-from plugin_examples.runner import _stage_fallback_registry_lookup, PipelineContext
+from plugin_examples.runner import PipelineContext, _stage_fallback_registry_lookup
 
 
 def _make_ctx(
@@ -32,8 +32,8 @@ def _make_ctx(
     config = SimpleNamespace(plugin_detection=plugin_detection)
     detection = SimpleNamespace(is_eligible=detection_is_eligible)
 
-    from dataclasses import fields
     import dataclasses
+    from dataclasses import fields
 
     # Build a PipelineContext with just the fields we need
     ctx = object.__new__(PipelineContext)

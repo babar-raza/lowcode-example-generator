@@ -34,9 +34,10 @@ def add_parser(subparsers):
 
 def handle(args) -> int:
     """Handle the next-actions command."""
-    from pathlib import Path as _Path
-    from plugin_examples.portfolio_action_planner import compute_action_board, render_markdown
     import json as _json
+    from pathlib import Path as _Path
+
+    from plugin_examples.portfolio_action_planner import compute_action_board, render_markdown
 
     repo_root = _Path(__file__).resolve().parents[3]
     board = compute_action_board(repo_root)

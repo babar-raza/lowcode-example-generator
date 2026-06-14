@@ -14,7 +14,7 @@ from __future__ import annotations
 import json
 import logging
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
@@ -154,7 +154,7 @@ def build_portfolio_dashboard(
     Returns:
         PortfolioDashboard ready for serialization.
     """
-    generated_at = datetime.now(timezone.utc).isoformat()
+    generated_at = datetime.now(UTC).isoformat()
     data = {**_FAMILY_STATUS}
     if family_overrides:
         for fam, override in family_overrides.items():

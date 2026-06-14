@@ -4,11 +4,11 @@ Tests checks 16-19: same-format converter, splitter cardinality,
 merger cardinality, and extractor output kind validation.
 """
 
-import pytest
 from unittest.mock import patch
 
-from plugin_examples.publisher.readme_auditor import audit_readme, ReadmeAuditResult
+import pytest
 
+from plugin_examples.publisher.readme_auditor import ReadmeAuditResult, audit_readme
 
 # Minimal README template that passes the 15 existing checks
 _MINIMAL_README = """# Aspose.Cells LowCode Examples

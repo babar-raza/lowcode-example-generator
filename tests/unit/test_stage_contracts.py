@@ -14,7 +14,6 @@ from plugin_examples.contracts.stage_contracts import (
     get_cumulative_produces,
 )
 
-
 # ---------------------------------------------------------------------------
 # Contract consistency tests
 # ---------------------------------------------------------------------------

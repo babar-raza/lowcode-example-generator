@@ -159,9 +159,8 @@ def validate_output_file(path: Path, is_required: bool = True) -> OutputValidati
     notes = []
 
     # PDF: check it's a real PDF
-    if fmt == "PDF":
-        if b"%EOF" not in data and b"%%EOF" not in data and b"endobj" not in data:
-            notes.append("PDF structure incomplete (no %%EOF marker)")
+    if fmt == "PDF" and b"%EOF" not in data and b"%%EOF" not in data and b"endobj" not in data:
+        notes.append("PDF structure incomplete (no %%EOF marker)")
             # Still pass if it's non-zero PDF-like
     # PNG: basic structure check
     if fmt == "PNG" and len(data) < 32:

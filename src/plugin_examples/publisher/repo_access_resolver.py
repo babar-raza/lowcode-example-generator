@@ -16,7 +16,7 @@ from __future__ import annotations
 import json
 import logging
 import os
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -87,8 +87,8 @@ def _get_headers() -> dict[str, str] | None:
 def _github_get(url: str, headers: dict[str, str]) -> tuple[int, dict | list | None]:
     """Execute a GET request to the GitHub API. Returns (status_code, body_or_none)."""
     try:
-        import urllib.request
         import urllib.error
+        import urllib.request
 
         req = urllib.request.Request(url, headers=headers)
         with urllib.request.urlopen(req, timeout=15) as resp:
@@ -379,7 +379,7 @@ def resolve_repo_access(
 
     result = {
         "resolution_type": "github_repo_access_resolution",
-        "resolution_date": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00"),
+        "resolution_date": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%S+00:00"),
         "sprint": "Repo Access Resolution and Repeatable Target Provisioning Sprint",
         "token_present": token_present,
         "families": resolution_records,

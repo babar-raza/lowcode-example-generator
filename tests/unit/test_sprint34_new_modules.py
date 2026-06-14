@@ -17,7 +17,6 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-
 # ---------------------------------------------------------------------------
 # FormImporter version-watch tests
 # ---------------------------------------------------------------------------
@@ -291,8 +290,8 @@ class TestPortfolioDashboard:
 
     def test_dashboard_all_families_present(self):
         from plugin_examples.publisher.portfolio_dashboard import (
-            build_portfolio_dashboard,
             FAMILIES,
+            build_portfolio_dashboard,
         )
 
         dashboard = build_portfolio_dashboard("sprint34")
@@ -322,7 +321,7 @@ class TestPortfolioDashboard:
 
 class TestBatchPublisher:
     def test_get_packages_for_pdf(self):
-        from plugin_examples.publisher.batch_publisher import _get_packages_for_family, PDF_PR_PACKAGES
+        from plugin_examples.publisher.batch_publisher import PDF_PR_PACKAGES, _get_packages_for_family
 
         result = _get_packages_for_family("pdf")
         assert result == PDF_PR_PACKAGES

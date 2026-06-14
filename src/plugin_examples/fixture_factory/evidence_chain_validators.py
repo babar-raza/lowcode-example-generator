@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -104,7 +104,7 @@ def validate_ecv03_timestamps_within_window(
     than max_age_hours from now.
     """
     results: list[ECVResult] = []
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
 
     for gate in gate_results:
         gate_id = gate.get("gate_id", gate.get("id", "unknown"))
@@ -121,7 +121,7 @@ def validate_ecv03_timestamps_within_window(
         try:
             ts = datetime.fromisoformat(timestamp_str.replace("Z", "+00:00"))
             if ts.tzinfo is None:
-                ts = ts.replace(tzinfo=timezone.utc)
+                ts = ts.replace(tzinfo=UTC)
         except (ValueError, AttributeError):
             results.append(ECVResult(
                 rule_id="ECV-03",
@@ -136,9 +136,9 @@ def validate_ecv03_timestamps_within_window(
                 start = datetime.fromisoformat(run_start.replace("Z", "+00:00"))
                 end = datetime.fromisoformat(run_end.replace("Z", "+00:00"))
                 if start.tzinfo is None:
-                    start = start.replace(tzinfo=timezone.utc)
+                    start = start.replace(tzinfo=UTC)
                 if end.tzinfo is None:
-                    end = end.replace(tzinfo=timezone.utc)
+                    end = end.replace(tzinfo=UTC)
                 in_window = start <= ts <= end
             except ValueError:
                 in_window = False

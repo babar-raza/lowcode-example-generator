@@ -1,22 +1,24 @@
-"""Unit tests for engineering hygiene validators EHV-01..05."""
+"""Unit tests for engineering hygiene validators EHV-01..10."""
 
 from __future__ import annotations
 
-from pathlib import Path
 import textwrap
+from pathlib import Path
 
 import pytest
 
 from plugin_examples.fixture_factory.engineering_hygiene_validators import (
-    check_silent_bare_excepts,
-    check_bare_excepts,
-    check_integration_test_count,
-    check_bandit_config,
-    check_codeowners,
-    run_all_ehv_validators,
-    _find_silent_bare_excepts,
-    _find_bare_excepts,
     _count_integration_test_functions,
+    _find_bare_excepts,
+    _find_silent_bare_excepts,
+    check_bandit_config,
+    check_bare_excepts,
+    check_codeowners,
+    check_contributing_guide,
+    check_integration_test_count,
+    check_security_policy,
+    check_silent_bare_excepts,
+    run_all_ehv_validators,
 )
 
 
@@ -187,11 +189,59 @@ class TestEHV05Codeowners:
         assert not result.passed
 
 
+class TestEHV09SecurityPolicy:
+    def test_passes_when_security_md_present(self, tmp_path: Path) -> None:
+        security_text = (
+            "# Security Policy\n\n"
+            "## Vulnerability Disclosure\n\n"
+            "Please report vulnerabilities to security@example.com.\n"
+            "We will acknowledge within 72 hours.\n"
+        )
+        (tmp_path / "SECURITY.md").write_text(security_text, encoding="utf-8")
+        result = check_security_policy(repo_root=tmp_path)
+        assert result.passed
+        assert "EHV-09" in result.validator_id
+
+    def test_fails_when_security_md_missing(self, tmp_path: Path) -> None:
+        result = check_security_policy(repo_root=tmp_path)
+        assert not result.passed
+
+    def test_fails_when_security_md_too_short(self, tmp_path: Path) -> None:
+        (tmp_path / "SECURITY.md").write_text("short", encoding="utf-8")
+        result = check_security_policy(repo_root=tmp_path)
+        assert not result.passed
+
+    def test_fails_when_no_disclosure_section(self, tmp_path: Path) -> None:
+        (tmp_path / "SECURITY.md").write_text("x" * 200, encoding="utf-8")
+        result = check_security_policy(repo_root=tmp_path)
+        assert not result.passed
+
+
+class TestEHV10ContributingGuide:
+    def test_passes_when_contributing_md_present(self, tmp_path: Path) -> None:
+        (tmp_path / "CONTRIBUTING.md").write_text(
+            "# Contributing\n\n" + "Development guidelines for this project. " * 10,
+            encoding="utf-8",
+        )
+        result = check_contributing_guide(repo_root=tmp_path)
+        assert result.passed
+        assert "EHV-10" in result.validator_id
+
+    def test_fails_when_missing(self, tmp_path: Path) -> None:
+        result = check_contributing_guide(repo_root=tmp_path)
+        assert not result.passed
+
+    def test_fails_when_too_short(self, tmp_path: Path) -> None:
+        (tmp_path / "CONTRIBUTING.md").write_text("short", encoding="utf-8")
+        result = check_contributing_guide(repo_root=tmp_path)
+        assert not result.passed
+
+
 class TestRunAllEHVValidators:
-    def test_returns_5_results(self, tmp_path: Path) -> None:
-        """run_all_ehv_validators always returns exactly 5 results."""
+    def test_returns_10_results(self, tmp_path: Path) -> None:
+        """run_all_ehv_validators always returns exactly 10 results (EHV-01..10)."""
         results = run_all_ehv_validators(repo_root=tmp_path)
-        assert len(results) == 5
+        assert len(results) == 10
 
     def test_validator_ids_are_unique(self, tmp_path: Path) -> None:
         results = run_all_ehv_validators(repo_root=tmp_path)

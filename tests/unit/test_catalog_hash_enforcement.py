@@ -14,7 +14,6 @@ from plugin_examples.scenario_planner.planner import (
     validate_catalog_hash,
 )
 
-
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------
@@ -212,6 +211,7 @@ class TestRunnerCatalogHashEnforcement:
     def test_runner_raises_on_catalog_hash_mismatch(self, tmp_path):
         """_stage_scenario_planning raises CatalogHashMismatchError on mismatch."""
         from unittest.mock import MagicMock
+
         from plugin_examples.runner import _stage_scenario_planning
 
         ctx = MagicMock()
@@ -234,6 +234,7 @@ class TestRunnerCatalogHashEnforcement:
     def test_runner_writes_evidence_before_raising(self, tmp_path):
         """Evidence file is written even when hash mismatch raises."""
         from unittest.mock import MagicMock
+
         from plugin_examples.runner import _stage_scenario_planning
 
         ctx = MagicMock()
@@ -260,8 +261,9 @@ class TestRunnerCatalogHashEnforcement:
     def test_runner_proceeds_on_hash_match(self, tmp_path, monkeypatch):
         """_stage_scenario_planning does not raise when hash matches."""
         from unittest.mock import MagicMock
-        from plugin_examples.runner import _stage_scenario_planning
+
         import plugin_examples.runner as runner_mod
+        from plugin_examples.runner import _stage_scenario_planning
 
         ctx = MagicMock()
         ctx.family = "cells"

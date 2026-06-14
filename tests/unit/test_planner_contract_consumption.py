@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+from unittest.mock import MagicMock, patch
+
 import pytest
-from unittest.mock import patch, MagicMock
-from plugin_examples.scenario_planner.planner import _infer_input_format, _infer_output_format
+
 from plugin_examples.format_authority.store import MissingFormatContractError
+from plugin_examples.scenario_planner.planner import _infer_input_format, _infer_output_format
 
 
 class TestPlannerContractFirstNoLegacyFallback:

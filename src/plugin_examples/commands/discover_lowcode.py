@@ -25,8 +25,9 @@ def add_parser(subparsers):
 
 def handle(args) -> int:
     """Handle the discover-lowcode command."""
-    from plugin_examples.discovery_sweep import run_discovery_sweep, compute_generation_readiness
     from pathlib import Path as _Path
+
+    from plugin_examples.discovery_sweep import compute_generation_readiness, run_discovery_sweep
 
     # Resolve family list: --families list > --family single > --all-families
     families = None

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 
 
 @dataclass
@@ -63,7 +63,7 @@ class MetricsCollector:
         self.calls.append(
             LLMCallRecord(
                 call_index=len(self.calls) + 1,
-                timestamp=datetime.now(timezone.utc).isoformat(),
+                timestamp=datetime.now(UTC).isoformat(),
                 stage=stage,
                 provider=provider,
                 model=model,

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import pytest
+
 from plugin_examples.generator.packet_builder import PromptPacket, build_packet
 
 

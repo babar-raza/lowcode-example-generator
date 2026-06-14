@@ -3,12 +3,13 @@
 from __future__ import annotations
 
 import json
-import logging
 import os
 from dataclasses import dataclass, field
 from pathlib import Path
 
-logger = logging.getLogger(__name__)
+from plugin_examples.observability import get_logger
+
+logger = get_logger(__name__)
 
 
 @dataclass
@@ -287,8 +288,8 @@ def _save_fixture_cache(owner: str, repo: str, branch: str, path: str, files: li
         key.parent.mkdir(parents=True, exist_ok=True)
         with open(key, "w") as f:
             json.dump(files, f)
-    except Exception:
-        pass  # Cache write is best-effort
+    except OSError:
+        logger.debug("Cache write failed (best-effort)", exc_info=True)
 
 
 def _load_fixture_cache(owner: str, repo: str, branch: str, path: str) -> list[str] | None:
@@ -297,8 +298,8 @@ def _load_fixture_cache(owner: str, repo: str, branch: str, path: str) -> list[s
         if key.exists():
             with open(key) as f:
                 return json.load(f)
-    except Exception:
-        pass
+    except (OSError, json.JSONDecodeError):
+        logger.debug("Cache read failed", exc_info=True)
     return None
 
 

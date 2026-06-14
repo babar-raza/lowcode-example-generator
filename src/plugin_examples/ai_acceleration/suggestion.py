@@ -51,7 +51,7 @@ class AiSuggestion:
             raise ValueError(f"confidence must be in [0.0, 1.0], got {self.confidence}")
 
     @classmethod
-    def from_dict(cls, data: dict) -> "AiSuggestion":
+    def from_dict(cls, data: dict) -> AiSuggestion:
         """Construct an AiSuggestion from a raw dict (e.g. parsed from LLM response).
 
         Raises ValueError on schema violations.

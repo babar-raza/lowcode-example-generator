@@ -1,10 +1,11 @@
 """Tests for the release-status command and release_status module."""
 
 import json
-import sys
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
+
 import pytest
 
 
@@ -439,7 +440,7 @@ class TestReleaseStatusAllFamilies:
 
     def test_canonical_release_status_covers_all_six_families(self):
         """compute_release_status with all 6 families must return all 6 (not stale cells/words-only)."""
-        from plugin_examples.publisher.release_status import compute_release_status, ALL_RELEASE_FAMILIES
+        from plugin_examples.publisher.release_status import ALL_RELEASE_FAMILIES, compute_release_status
 
         repo_root = Path(__file__).resolve().parents[2]
         status = compute_release_status(ALL_RELEASE_FAMILIES, repo_root / "workspace" / "verification")
@@ -459,7 +460,7 @@ class TestReleaseStatusTopLevelFields:
     """Verify top-level fields do not imply all examples are published when some are PR-ready."""
 
     def test_top_level_fields_exist(self):
-        from plugin_examples.publisher.release_status import compute_release_status, ALL_RELEASE_FAMILIES
+        from plugin_examples.publisher.release_status import ALL_RELEASE_FAMILIES, compute_release_status
 
         repo_root = Path(__file__).resolve().parents[2]
         status = compute_release_status(ALL_RELEASE_FAMILIES, repo_root / "workspace" / "verification")
@@ -473,7 +474,7 @@ class TestReleaseStatusTopLevelFields:
         assert "families_partial_count" in status
 
     def test_all_contracts_accounted_for(self):
-        from plugin_examples.publisher.release_status import compute_release_status, ALL_RELEASE_FAMILIES
+        from plugin_examples.publisher.release_status import ALL_RELEASE_FAMILIES, compute_release_status
 
         repo_root = Path(__file__).resolve().parents[2]
         status = compute_release_status(ALL_RELEASE_FAMILIES, repo_root / "workspace" / "verification")
@@ -481,7 +482,7 @@ class TestReleaseStatusTopLevelFields:
         assert status["total_contracts"] == 42
 
     def test_published_plus_pr_ready_equals_contracts(self):
-        from plugin_examples.publisher.release_status import compute_release_status, ALL_RELEASE_FAMILIES
+        from plugin_examples.publisher.release_status import ALL_RELEASE_FAMILIES, compute_release_status
 
         repo_root = Path(__file__).resolve().parents[2]
         status = compute_release_status(ALL_RELEASE_FAMILIES, repo_root / "workspace" / "verification")
@@ -489,7 +490,7 @@ class TestReleaseStatusTopLevelFields:
 
     def test_no_top_level_field_implies_all_published_when_pr_ready_exists(self):
         """If pr_ready_count > 0, all_published must be false."""
-        from plugin_examples.publisher.release_status import compute_release_status, ALL_RELEASE_FAMILIES
+        from plugin_examples.publisher.release_status import ALL_RELEASE_FAMILIES, compute_release_status
 
         repo_root = Path(__file__).resolve().parents[2]
         status = compute_release_status(ALL_RELEASE_FAMILIES, repo_root / "workspace" / "verification")
@@ -500,7 +501,7 @@ class TestReleaseStatusTopLevelFields:
 
     def test_release_status_and_portfolio_release_status_agree(self):
         """release-status published_count must match portfolio matrix totals."""
-        from plugin_examples.publisher.release_status import compute_release_status, ALL_RELEASE_FAMILIES
+        from plugin_examples.publisher.release_status import ALL_RELEASE_FAMILIES, compute_release_status
 
         repo_root = Path(__file__).resolve().parents[2]
         status = compute_release_status(ALL_RELEASE_FAMILIES, repo_root / "workspace" / "verification")

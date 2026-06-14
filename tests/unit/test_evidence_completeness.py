@@ -16,6 +16,10 @@ from pathlib import Path
 
 import pytest
 
+from plugin_examples.evidence_layout import (
+    FAMILY_SCOPED_EVIDENCE_FILES,
+    GLOBAL_AGGREGATE_ALLOWLIST,
+)
 from plugin_examples.gates.evidence_completeness import (
     ALWAYS_EXPECTED,
     EXPECTED_FAMILY_EVIDENCE_FILES,
@@ -23,11 +27,6 @@ from plugin_examples.gates.evidence_completeness import (
     check_completeness,
     write_completeness_report,
 )
-from plugin_examples.evidence_layout import (
-    FAMILY_SCOPED_EVIDENCE_FILES,
-    GLOBAL_AGGREGATE_ALLOWLIST,
-)
-
 
 # ---------------------------------------------------------------------------
 # Helper fixtures

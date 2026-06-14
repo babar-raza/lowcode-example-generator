@@ -22,7 +22,6 @@ Required files for a fully-proven package:
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import List, Optional
 
 
 @dataclass
@@ -36,7 +35,7 @@ class ProofViolation:
 @dataclass
 class ProofResult:
     package_key: str
-    violations: List[ProofViolation] = field(default_factory=list)
+    violations: list[ProofViolation] = field(default_factory=list)
     proof_type: str = "UNKNOWN"
 
     @property
@@ -64,7 +63,7 @@ class ProofResult:
         }
 
 
-def _find_log(pkg_dir: Path, name: str) -> Optional[Path]:
+def _find_log(pkg_dir: Path, name: str) -> Path | None:
     """Find a log file in package dir or logs/ subdir."""
     direct = pkg_dir / name
     if direct.exists():
@@ -75,7 +74,7 @@ def _find_log(pkg_dir: Path, name: str) -> Optional[Path]:
     return None
 
 
-def _read_json(path: Path) -> Optional[dict]:
+def _read_json(path: Path) -> dict | None:
     if path and path.exists():
         try:
             return json.loads(path.read_text(encoding="utf-8"))

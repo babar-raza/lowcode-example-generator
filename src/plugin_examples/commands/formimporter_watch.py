@@ -27,6 +27,7 @@ def add_parser(subparsers):
 def handle(args) -> int:
     """Handle the formimporter-watch command."""
     from pathlib import Path as _Path
+
     from plugin_examples.package_watcher.formimporter_watch import (
         check_formimporter,
         write_watch_report,

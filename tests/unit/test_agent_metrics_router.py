@@ -7,8 +7,8 @@ import pytest
 
 class TestOpenAICompatibleMetrics:
     def test_usage_captured(self):
-        from plugin_examples.metrics.models import MetricsCollector
         from plugin_examples.llm_router.router import _call_openai_compatible
+        from plugin_examples.metrics.models import MetricsCollector
 
         mc = MetricsCollector()
         mock_resp = MagicMock()
@@ -35,8 +35,8 @@ class TestOpenAICompatibleMetrics:
         assert mc.calls[0].completion_tokens == 5
 
     def test_missing_usage_handled(self):
-        from plugin_examples.metrics.models import MetricsCollector
         from plugin_examples.llm_router.router import _call_openai_compatible
+        from plugin_examples.metrics.models import MetricsCollector
 
         mc = MetricsCollector()
         mock_resp = MagicMock()
@@ -59,22 +59,21 @@ class TestOpenAICompatibleMetrics:
         assert mc.calls[0].token_usage_available is False
 
     def test_failed_request_counted_after_send(self):
-        from plugin_examples.metrics.models import MetricsCollector
         from plugin_examples.llm_router.router import _call_openai_compatible
+        from plugin_examples.metrics.models import MetricsCollector
 
         mc = MetricsCollector()
         mock_resp = MagicMock()
         mock_resp.status_code = 500
         mock_resp.raise_for_status.side_effect = Exception("Server error")
 
-        with patch("plugin_examples.llm_router.router.requests.post", return_value=mock_resp):
-            with pytest.raises(Exception, match="Server error"):
-                _call_openai_compatible(
-                    "http://fake/v1",
-                    "p",
-                    metrics_collector=mc,
-                    metrics_provider="test",
-                )
+        with patch("plugin_examples.llm_router.router.requests.post", return_value=mock_resp), pytest.raises(Exception, match="Server error"):
+            _call_openai_compatible(
+                "http://fake/v1",
+                "p",
+                metrics_collector=mc,
+                metrics_provider="test",
+            )
 
         assert mc.api_calls_count == 1
         assert mc.calls[0].success is False
@@ -112,9 +111,8 @@ class TestOpenAICompatibleMetrics:
             "usage": {"prompt_tokens": 5, "completion_tokens": 3, "total_tokens": 8},
         }
 
-        with patch("plugin_examples.llm_router.router.requests.post", return_value=mock_resp):
-            with patch("plugin_examples.llm_router.router._resolve_api_key", return_value="fake"):
-                result = router.generate("test prompt")
+        with patch("plugin_examples.llm_router.router.requests.post", return_value=mock_resp), patch("plugin_examples.llm_router.router._resolve_api_key", return_value="fake"):
+            result = router.generate("test prompt")
 
         assert isinstance(result, str)
         assert result == "generated"
@@ -124,8 +122,8 @@ class TestOpenAICompatibleMetrics:
 
 class TestOllamaMetrics:
     def test_ollama_usage_captured(self):
-        from plugin_examples.metrics.models import MetricsCollector
         from plugin_examples.llm_router.router import _call_ollama
+        from plugin_examples.metrics.models import MetricsCollector
 
         mc = MetricsCollector()
         mock_resp = MagicMock()
@@ -145,8 +143,8 @@ class TestOllamaMetrics:
         assert mc.calls[0].token_usage_available is True
 
     def test_ollama_missing_eval_count(self):
-        from plugin_examples.metrics.models import MetricsCollector
         from plugin_examples.llm_router.router import _call_ollama
+        from plugin_examples.metrics.models import MetricsCollector
 
         mc = MetricsCollector()
         mock_resp = MagicMock()
@@ -164,8 +162,8 @@ class TestOllamaMetrics:
 class TestPreflightNotCounted:
     def test_preflight_get_not_counted(self):
         """Preflight uses GET to /models — must not be counted as LLM call."""
-        from plugin_examples.metrics.models import MetricsCollector
         from plugin_examples.llm_router.router import LLMRouter
+        from plugin_examples.metrics.models import MetricsCollector
 
         mc = MetricsCollector()
         router = LLMRouter(
@@ -183,9 +181,8 @@ class TestPreflightNotCounted:
             "choices": [{"message": {"content": "test response"}}],
         }
 
-        with patch("plugin_examples.llm_router.router.requests.get", return_value=mock_get_resp):
-            with patch("plugin_examples.llm_router.router._resolve_api_key", return_value="fake"):
-                router.run_preflight()
+        with patch("plugin_examples.llm_router.router.requests.get", return_value=mock_get_resp), patch("plugin_examples.llm_router.router._resolve_api_key", return_value="fake"):
+            router.run_preflight()
 
         # Preflight should NOT add any calls
         assert mc.api_calls_count == 0
@@ -193,8 +190,8 @@ class TestPreflightNotCounted:
 
 class TestCollectorIsolation:
     def test_two_routers_independent_collectors(self):
-        from plugin_examples.metrics.models import MetricsCollector
         from plugin_examples.llm_router.router import _call_openai_compatible
+        from plugin_examples.metrics.models import MetricsCollector
 
         mc1 = MetricsCollector()
         mc2 = MetricsCollector()

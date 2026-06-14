@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import contextlib
 import json
 import os
 import tempfile
@@ -19,10 +20,8 @@ def _atomic_json_write(path: Path, data: Any) -> None:
             json.dump(data, f, indent=2, default=str)
         os.replace(tmp, str(path))
     except Exception:
-        try:
+        with contextlib.suppress(OSError):
             os.unlink(tmp)
-        except OSError:
-            pass
         raise
 
 

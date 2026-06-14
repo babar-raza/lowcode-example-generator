@@ -21,7 +21,7 @@ import json
 import logging
 import re
 import shutil
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -523,7 +523,7 @@ def restore_validation_results(prior_run_dir: Path) -> list:
     if not isinstance(records, list):
         raise ReplayIntegrityError(f"validation-results.json has unexpected structure in '{prior_run_dir.name}'")
 
-    def _to_dotnet(d: dict | None) -> "DotnetResult | None":
+    def _to_dotnet(d: dict | None) -> DotnetResult | None:
         if not d:
             return None
         return DotnetResult(
@@ -635,7 +635,7 @@ def write_replay_manifest(
         "reuse_run_id": reuse_run_id,
         "new_run_id": new_run_id,
         "family": family,
-        "created_at": datetime.now(timezone.utc).isoformat(),
+        "created_at": datetime.now(UTC).isoformat(),
         "skipped_stages": skipped_list,
         "always_run": ["load_config"],
         "regenerated_stages": regenerated,
@@ -950,7 +950,7 @@ def _build_result(
         "family": family,
         "replay_from": replay_from,
         "reuse_run_id": prior_run_dir.name,
-        "checked_at": datetime.now(timezone.utc).isoformat(),
+        "checked_at": datetime.now(UTC).isoformat(),
         "checks": checks.items,
         "overall": checks.overall,
     }

@@ -10,7 +10,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-
 # ---------------------------------------------------------------------------
 # Catalog input models (minimal — used by this matcher only)
 # ---------------------------------------------------------------------------

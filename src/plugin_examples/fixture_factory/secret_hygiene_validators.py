@@ -13,7 +13,6 @@ import re
 from dataclasses import dataclass, field
 from typing import Any
 
-
 # Secret file extensions that must never be committed/staged/bundled without explicit approval
 SECRET_EXTENSIONS = {".pfx", ".pem", ".key", ".p12"}
 SECRET_PATTERNS = re.compile(r"\.(pfx|pem|key|p12)$", re.IGNORECASE)

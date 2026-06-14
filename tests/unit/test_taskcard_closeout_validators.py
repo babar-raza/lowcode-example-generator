@@ -8,26 +8,27 @@ Wave 13 additions:
 - BMV-06: external sidecar .sha256 verification
 """
 
-import pytest
 import pathlib
 import tempfile
+
+import pytest
+
 from src.plugin_examples.fixture_factory.taskcard_closeout_validators import (
-    tcc_01_no_pending_taskcards,
-    tcc_02_all_taskcards_have_evidence,
-    tcc_03_taskcard_count_matches_lanes,
-    tcc_04_no_duplicate_taskcard_ids,
-    tcc_05_taskcards_before_closeout,
-    tcc_06_closeout_verdict_matches_taskcard_completion,
     bmv_01_bundle_sha_not_pending,
     bmv_02_commit_sha_not_pending,
     bmv_03_bundle_entry_count_positive,
     bmv_04_bundle_size_positive,
     bmv_05_pytest_passed_count_positive,
     bmv_06_sidecar_sha_exists,
-    run_all_tcc_validators,
     run_all_bmv_validators,
+    run_all_tcc_validators,
+    tcc_01_no_pending_taskcards,
+    tcc_02_all_taskcards_have_evidence,
+    tcc_03_taskcard_count_matches_lanes,
+    tcc_04_no_duplicate_taskcard_ids,
+    tcc_05_taskcards_before_closeout,
+    tcc_06_closeout_verdict_matches_taskcard_completion,
 )
-
 
 # ---- Fixtures ----------------------------------------------------------------
 

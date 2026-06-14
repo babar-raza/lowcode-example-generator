@@ -397,10 +397,7 @@ class Sprint68to69Rules:
         try:
             ptm = json.loads(ptm_path.read_text(encoding="utf-8"))
             # Sprint 82+ uses flat-array format; legacy used wrapped {"records": [...]}
-            if isinstance(ptm, list):
-                records = ptm
-            else:
-                records = ptm.get("records", [])
+            records = ptm if isinstance(ptm, list) else ptm.get("records", [])
             mixed = [
                 r.get("scenario_id", r.get("example", "unknown"))
                 for r in records
@@ -617,8 +614,8 @@ class Sprint68to69Rules:
                             f"Verdict claims PUBLISHED but {len(blocked)}/42 records have approval_blocked=true"
                         ),
                     )
-            except Exception:
-                pass
+            except (OSError, json.JSONDecodeError, KeyError, TypeError):
+                logger.debug("Failed to parse verdict for overclaim check", exc_info=True)
         return RuleResult(
             rule_id=rule_id,
             description="final-verdict.md must not claim complete while publication is blocked",

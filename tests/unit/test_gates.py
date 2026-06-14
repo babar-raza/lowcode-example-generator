@@ -8,19 +8,18 @@ from pathlib import Path
 
 import pytest
 
-from plugin_examples.gates.models import GateResult, GateVerdict, VERDICTS, GATE_STATUSES
 from plugin_examples.gates.evaluator import (
-    evaluate_gates,
     determine_verdict,
+    evaluate_gates,
     is_publishable,
     is_publishable_verdict,
 )
-from plugin_examples.gates.writer import write_gate_results
 from plugin_examples.gates.example_gates import (
     merge_pr_candidate_manifests,
     write_pr_candidate_manifest,
 )
-
+from plugin_examples.gates.models import GATE_STATUSES, VERDICTS, GateResult, GateVerdict
+from plugin_examples.gates.writer import write_gate_results
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -346,10 +345,10 @@ class TestWriteGateResults:
 
 
 from plugin_examples.gates.completeness_gate import (
+    CompletenessViolationError,
     check_completeness,
     write_completeness_gate_result,
     write_denominator_ledger,
-    CompletenessViolationError,
 )
 from plugin_examples.scenario_planner.planner import PlanningResult, Scenario
 
@@ -623,6 +622,7 @@ class TestCompletenessGateRunnerIntegration:
     def test_runner_scenario_planning_imports_completeness_gate(self):
         """runner._stage_scenario_planning must import and call check_completeness."""
         import inspect
+
         from plugin_examples import runner
 
         source = inspect.getsource(runner._stage_scenario_planning)
@@ -986,6 +986,7 @@ class TestGateSemanticsDegradedPartialRun:
     def test_runner_produces_degraded_gate_run_for_partial_pass(self):
         """The runner's evaluator must produce gate_run=degraded when partial runtime."""
         import inspect
+
         from plugin_examples.gates import evaluator
 
         source = inspect.getsource(evaluator.evaluate_gates)
@@ -997,6 +998,7 @@ class TestGateSemanticsDegradedPartialRun:
     def test_gate_run_not_in_blocking_when_degraded(self):
         """A degraded gate_run must not be added to blocking gates (partial pass is not a hard block)."""
         import inspect
+
         from plugin_examples.gates import evaluator
 
         source = inspect.getsource(evaluator.evaluate_gates)

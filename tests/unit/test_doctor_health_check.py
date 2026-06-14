@@ -5,22 +5,22 @@ from __future__ import annotations
 import os
 import subprocess
 from pathlib import Path
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
 
 import pytest
 
 from plugin_examples.health.doctor import (
     HealthCheck,
-    check_python_version,
-    check_required_packages,
     check_dotnet_sdk,
-    check_github_token,
-    check_llm_endpoint,
     check_family_configs,
     check_format_authority,
-    run_all_checks,
-    format_results_text,
+    check_github_token,
+    check_llm_endpoint,
+    check_python_version,
+    check_required_packages,
     format_results_json,
+    format_results_text,
+    run_all_checks,
 )
 
 

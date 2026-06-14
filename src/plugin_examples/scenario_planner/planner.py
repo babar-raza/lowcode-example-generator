@@ -7,23 +7,24 @@ import json
 import logging
 import re
 from dataclasses import dataclass, field
+from datetime import UTC
 from pathlib import Path
 
+from plugin_examples.fixture_registry.fixture_factory import SUPPORTED_FORMATS
 from plugin_examples.plugin_detector.proof_reporter import (
     SourceOfTruthGateError,
     assert_source_of_truth_eligible,
 )
-from plugin_examples.scenario_planner.type_classifier import (
-    STANDALONE_ROLES,
-    classify_type,
-    TypeRole,
-)
 from plugin_examples.scenario_planner.consumer_mapper import build_consumer_map
 from plugin_examples.scenario_planner.entrypoint_scorer import (
-    score_entrypoint,
     EntrypointScore,
+    score_entrypoint,
 )
-from plugin_examples.fixture_registry.fixture_factory import SUPPORTED_FORMATS
+from plugin_examples.scenario_planner.type_classifier import (
+    STANDALONE_ROLES,
+    TypeRole,
+    classify_type,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -576,10 +577,7 @@ def _build_scenario(
         # options object, not a raw file path. _needs_fixture() returns False because
         # the method signature has no string/Stream file-path parameter. However, the
         # options object requires an input PDF to be created programmatically first.
-        if family == "pdf":
-            input_strategy = "programmatic_input"
-        else:
-            input_strategy = "none"
+        input_strategy = "programmatic_input" if family == "pdf" else "none"
 
     # Build output and validation plans.
     # allow_legacy_format_inference=False: if contract not found, use family_default (not stale map)
@@ -898,7 +896,7 @@ def build_fixture_resolution_evidence(
 
     return {
         "family": planning_result.family,
-        "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "generated_at": datetime.now(UTC).isoformat(timespec="seconds"),
         "repo_configured": repo_configured,
         "repo_info": {
             "owner": repo_info.get("owner", "") if repo_info else "",

@@ -33,8 +33,8 @@ def _config(tmp_path):
 
 class TestSessionLifecycle:
     def test_session_starts_active(self, _config, tmp_path):
-        from plugin_examples.metrics.session import MetricsSession
         from plugin_examples.metrics.models import MetricsCollector
+        from plugin_examples.metrics.session import MetricsSession
 
         session = MetricsSession(
             command="run",
@@ -49,8 +49,8 @@ class TestSessionLifecycle:
         assert session.active is True
 
     def test_excluded_command_not_active(self, _config, tmp_path):
-        from plugin_examples.metrics.session import MetricsSession
         from plugin_examples.metrics.models import MetricsCollector
+        from plugin_examples.metrics.session import MetricsSession
 
         session = MetricsSession(
             command="status",
@@ -109,8 +109,8 @@ class TestCountSourcePolicy:
 class TestLocalOnlyBlocking:
     def test_local_only_command_blocks_external_post(self, _config, tmp_path):
         """Commands with unverified count formulas write evidence but block POST."""
-        from plugin_examples.metrics.session import MetricsSession
         from plugin_examples.metrics.models import MetricsCollector
+        from plugin_examples.metrics.session import MetricsSession
 
         collector = MetricsCollector()
         collector.record_call(provider="llm_professionalize", total_tokens=100)
@@ -143,8 +143,8 @@ class TestLocalOnlyBlocking:
 
     def test_local_only_command_records_llm_metrics(self, _config, tmp_path):
         """LLM calls are captured even for local-only commands."""
-        from plugin_examples.metrics.session import MetricsSession
         from plugin_examples.metrics.models import MetricsCollector
+        from plugin_examples.metrics.session import MetricsSession
 
         collector = MetricsCollector()
         collector.record_call(provider="llm_professionalize", total_tokens=500, token_usage_available=True)
@@ -167,8 +167,8 @@ class TestLocalOnlyBlocking:
 
     def test_test_job_type_bypasses_local_only(self, _config, tmp_path):
         """Test job_type is allowed even for local-only commands."""
-        from plugin_examples.metrics.session import MetricsSession
         from plugin_examples.metrics.models import MetricsCollector
+        from plugin_examples.metrics.session import MetricsSession
 
         session = MetricsSession(
             command="discover-lowcode",
@@ -193,8 +193,8 @@ class TestLocalOnlyBlocking:
 
 class TestEvidenceWriting:
     def test_session_writes_all_evidence(self, _config, tmp_path):
-        from plugin_examples.metrics.session import MetricsSession
         from plugin_examples.metrics.models import MetricsCollector
+        from plugin_examples.metrics.session import MetricsSession
 
         collector = MetricsCollector()
         collector.record_call(provider="llm_professionalize", total_tokens=200)
@@ -219,8 +219,8 @@ class TestEvidenceWriting:
         assert "agent-metrics-post-result.json" in files
 
     def test_summary_includes_count_policy(self, _config, tmp_path):
-        from plugin_examples.metrics.session import MetricsSession
         from plugin_examples.metrics.models import MetricsCollector
+        from plugin_examples.metrics.session import MetricsSession
 
         session = MetricsSession(
             command="discover-lowcode",
@@ -291,8 +291,8 @@ class TestAgentName:
 class TestAutomaticLLMCapture:
     def test_router_with_collector_records_calls(self):
         """Any LLMRouter with metrics_collector records all LLM calls."""
-        from plugin_examples.metrics.models import MetricsCollector
         from plugin_examples.llm_router.router import LLMRouter
+        from plugin_examples.metrics.models import MetricsCollector
 
         collector = MetricsCollector()
         router = LLMRouter(
@@ -303,8 +303,8 @@ class TestAutomaticLLMCapture:
 
     def test_non_run_command_with_router_records_metrics(self, _config, tmp_path):
         """Simulated non-run command using LLMRouter still records LLM metrics."""
-        from plugin_examples.metrics.session import MetricsSession
         from plugin_examples.metrics.models import MetricsCollector
+        from plugin_examples.metrics.session import MetricsSession
 
         collector = MetricsCollector()
         # Simulate a hypothetical command making 3 LLM calls via router
@@ -344,8 +344,8 @@ class TestAutomaticLLMCapture:
 
 class TestSafetyGates:
     def test_dry_run_session_never_posts(self, _config, tmp_path):
-        from plugin_examples.metrics.session import MetricsSession
         from plugin_examples.metrics.models import MetricsCollector
+        from plugin_examples.metrics.session import MetricsSession
 
         session = MetricsSession(
             command="run",
@@ -368,8 +368,8 @@ class TestSafetyGates:
 
     def test_force_repost_cannot_bypass_production_safety(self, _config, tmp_path):
         """--metrics-force-repost does not bypass test_only_sprint."""
-        from plugin_examples.metrics.session import MetricsSession
         from plugin_examples.metrics.models import MetricsCollector
+        from plugin_examples.metrics.session import MetricsSession
 
         session = MetricsSession(
             command="run",

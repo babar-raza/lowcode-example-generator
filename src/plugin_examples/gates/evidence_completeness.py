@@ -12,7 +12,7 @@ from __future__ import annotations
 import json
 import logging
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
@@ -115,7 +115,7 @@ def check_completeness(
     Returns:
         CompletionResult with completeness summary.
     """
-    checked_at = datetime.now(timezone.utc).isoformat()
+    checked_at = datetime.now(UTC).isoformat()
     expected = expected_files if expected_files is not None else EXPECTED_FAMILY_EVIDENCE_FILES
 
     # Check evidence_dir/latest/ for files

@@ -16,7 +16,6 @@ These validators enforce that sprint closeout documents are internally consisten
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import List, Optional
 
 
 @dataclass
@@ -29,7 +28,7 @@ class CcvViolation:
 
 @dataclass
 class CcvResult:
-    violations: List[CcvViolation] = field(default_factory=list)
+    violations: list[CcvViolation] = field(default_factory=list)
 
     @property
     def passes(self) -> bool:
@@ -65,16 +64,12 @@ def _add(result: CcvResult, rule: str, severity: str, message: str, context: str
 def check_ccv_01_evidence_bundle_not_pending(closeout: dict, result: CcvResult) -> None:
     verdict = closeout.get("verdict", "")
     bundle = closeout.get("evidence_bundle", {})
-    if isinstance(bundle, dict):
-        bundle_status = bundle.get("objective", "")
-    else:
-        bundle_status = str(bundle)
+    bundle_status = bundle.get("objective", "") if isinstance(bundle, dict) else str(bundle)
 
     complete_keywords = ("COMPLETE", "SPRINT_COMPLETE", "DONE", "PASS")
     pending_keywords = ("PENDING", "IN_PROGRESS", "TODO")
 
-    if any(k in verdict.upper() for k in complete_keywords):
-        if any(k in bundle_status.upper() for k in pending_keywords):
+    if any(k in verdict.upper() for k in complete_keywords) and any(k in bundle_status.upper() for k in pending_keywords):
             _add(
                 result,
                 "CCV-01",
@@ -87,7 +82,7 @@ def check_ccv_01_evidence_bundle_not_pending(closeout: dict, result: CcvResult) 
 # ---------------------------------------------------------------------------
 # CCV-02: Lane ledger lanes must not be PENDING when sprint verdict is COMPLETE
 # ---------------------------------------------------------------------------
-def check_ccv_02_lane_ledger_lanes_complete(closeout: dict, lane_ledger: Optional[dict], result: CcvResult) -> None:
+def check_ccv_02_lane_ledger_lanes_complete(closeout: dict, lane_ledger: dict | None, result: CcvResult) -> None:
     verdict = closeout.get("verdict", "")
     complete_keywords = ("COMPLETE", "SPRINT_COMPLETE", "DONE")
     if not any(k in verdict.upper() for k in complete_keywords):
@@ -113,7 +108,7 @@ def check_ccv_02_lane_ledger_lanes_complete(closeout: dict, lane_ledger: Optiona
 # ---------------------------------------------------------------------------
 # CCV-03: Taskcards must not be PENDING when sprint verdict is COMPLETE
 # ---------------------------------------------------------------------------
-def check_ccv_03_taskcards_complete(closeout: dict, taskcards: Optional[List[dict]], result: CcvResult) -> None:
+def check_ccv_03_taskcards_complete(closeout: dict, taskcards: list[dict] | None, result: CcvResult) -> None:
     verdict = closeout.get("verdict", "")
     complete_keywords = ("COMPLETE", "SPRINT_COMPLETE", "DONE")
     if not any(k in verdict.upper() for k in complete_keywords):
@@ -138,7 +133,7 @@ def check_ccv_03_taskcards_complete(closeout: dict, taskcards: Optional[List[dic
 # ---------------------------------------------------------------------------
 # CCV-04: Test log must exist when closeout claims a test count
 # ---------------------------------------------------------------------------
-def check_ccv_04_test_log_exists(closeout: dict, report_dir: Optional[Path], result: CcvResult) -> None:
+def check_ccv_04_test_log_exists(closeout: dict, report_dir: Path | None, result: CcvResult) -> None:
     claimed_count = None
     for key in ("pytest_passed", "test_count", "tests_passed"):
         val = closeout.get(key)
@@ -179,7 +174,7 @@ def check_ccv_04_test_log_exists(closeout: dict, report_dir: Optional[Path], res
 # ---------------------------------------------------------------------------
 # CCV-05: Final git status must be recorded when verdict is COMPLETE
 # ---------------------------------------------------------------------------
-def check_ccv_05_git_status_recorded(closeout: dict, report_dir: Optional[Path], result: CcvResult) -> None:
+def check_ccv_05_git_status_recorded(closeout: dict, report_dir: Path | None, result: CcvResult) -> None:
     verdict = closeout.get("verdict", "")
     complete_keywords = ("COMPLETE", "SPRINT_COMPLETE", "DONE")
     if not any(k in verdict.upper() for k in complete_keywords):
@@ -213,7 +208,7 @@ def check_ccv_06_commit_proof_recorded(closeout: dict, result: CcvResult) -> Non
 # ---------------------------------------------------------------------------
 # CCV-07: CANONICAL_IDENTITY_VERIFIED entries must have canonical_url
 # ---------------------------------------------------------------------------
-def check_ccv_07_canonical_url_for_verified(registry_entries: List[dict], result: CcvResult) -> None:
+def check_ccv_07_canonical_url_for_verified(registry_entries: list[dict], result: CcvResult) -> None:
     for entry in registry_entries:
         if entry.get("identity_status") == "CANONICAL_IDENTITY_VERIFIED":
             url = entry.get("canonical_url") or entry.get("canonical_plugin_url")
@@ -232,7 +227,7 @@ def check_ccv_07_canonical_url_for_verified(registry_entries: List[dict], result
 # ---------------------------------------------------------------------------
 # CCV-08: CANONICAL_IDENTITY_VERIFIED entries must have display_plugin_name
 # ---------------------------------------------------------------------------
-def check_ccv_08_display_name_for_verified(registry_entries: List[dict], result: CcvResult) -> None:
+def check_ccv_08_display_name_for_verified(registry_entries: list[dict], result: CcvResult) -> None:
     for entry in registry_entries:
         if entry.get("identity_status") == "CANONICAL_IDENTITY_VERIFIED":
             name = entry.get("display_plugin_name")
@@ -251,7 +246,7 @@ def check_ccv_08_display_name_for_verified(registry_entries: List[dict], result:
 # ---------------------------------------------------------------------------
 # CCV-09: Publication-clean candidates must have canonical_url
 # ---------------------------------------------------------------------------
-def check_ccv_09_publication_clean_has_canonical_url(matrix_rows: List[dict], result: CcvResult) -> None:
+def check_ccv_09_publication_clean_has_canonical_url(matrix_rows: list[dict], result: CcvResult) -> None:
     clean_statuses = {"PUBLICATION_READY", "PUBLICATION_CLEAN", "CANONICAL_VERIFIED_FULL_PACKAGE"}
     for row in matrix_rows:
         status = row.get("publication_status", row.get("classification", ""))
@@ -266,7 +261,7 @@ def check_ccv_09_publication_clean_has_canonical_url(matrix_rows: List[dict], re
 # CCV-10: Package marked PASS must not be missing Program.cs (no metadata-only PASS)
 # ---------------------------------------------------------------------------
 def check_ccv_10_pass_package_has_program_cs(
-    output_validation: dict, pkg_dir: Optional[Path], result: CcvResult
+    output_validation: dict, pkg_dir: Path | None, result: CcvResult
 ) -> None:
     verdict = output_validation.get("verdict", "")
     if verdict != "PASS":
@@ -289,7 +284,7 @@ def check_ccv_10_pass_package_has_program_cs(
 # ---------------------------------------------------------------------------
 # CCV-11: Package marked PASS must not be missing .csproj
 # ---------------------------------------------------------------------------
-def check_ccv_11_pass_package_has_csproj(output_validation: dict, pkg_dir: Optional[Path], result: CcvResult) -> None:
+def check_ccv_11_pass_package_has_csproj(output_validation: dict, pkg_dir: Path | None, result: CcvResult) -> None:
     verdict = output_validation.get("verdict", "")
     if verdict != "PASS":
         return
@@ -306,7 +301,7 @@ def check_ccv_11_pass_package_has_csproj(output_validation: dict, pkg_dir: Optio
 # ---------------------------------------------------------------------------
 # CCV-12: Package marked PASS must have at least one log file
 # ---------------------------------------------------------------------------
-def check_ccv_12_pass_package_has_logs(output_validation: dict, pkg_dir: Optional[Path], result: CcvResult) -> None:
+def check_ccv_12_pass_package_has_logs(output_validation: dict, pkg_dir: Path | None, result: CcvResult) -> None:
     verdict = output_validation.get("verdict", "")
     if verdict != "PASS":
         return
@@ -326,7 +321,7 @@ def check_ccv_12_pass_package_has_logs(output_validation: dict, pkg_dir: Optiona
 # CCV-13: Legacy alias entries must not appear as publication candidates
 # ---------------------------------------------------------------------------
 def check_ccv_13_no_legacy_alias_as_publication_candidate(
-    matrix_rows: List[dict], registry_entries: List[dict], result: CcvResult
+    matrix_rows: list[dict], registry_entries: list[dict], result: CcvResult
 ) -> None:
     # Build set of legacy alias slugs from registry
     legacy_slugs: set = set()
@@ -353,7 +348,7 @@ def check_ccv_13_no_legacy_alias_as_publication_candidate(
 # ---------------------------------------------------------------------------
 # CCV-14: Publication matrix must include canonical_url per row
 # ---------------------------------------------------------------------------
-def check_ccv_14_matrix_has_canonical_url_column(matrix_rows: List[dict], result: CcvResult) -> None:
+def check_ccv_14_matrix_has_canonical_url_column(matrix_rows: list[dict], result: CcvResult) -> None:
     if not matrix_rows:
         return
 
@@ -383,7 +378,7 @@ def check_ccv_14_matrix_has_canonical_url_column(matrix_rows: List[dict], result
 # CCV-15: Publication-ready candidate must have full package proof (not metadata-only)
 # ---------------------------------------------------------------------------
 def check_ccv_15_publication_ready_has_package_proof(
-    matrix_rows: List[dict], pkg_base_dirs: Optional[List[Path]], result: CcvResult
+    matrix_rows: list[dict], pkg_base_dirs: list[Path] | None, result: CcvResult
 ) -> None:
     """Each PUBLICATION_CANDIDATE row must have a locatable package directory with Program.cs."""
     clean_statuses = {
@@ -424,7 +419,7 @@ def check_ccv_15_publication_ready_has_package_proof(
 # CCV-16: Registry entry count must match claimed total in closeout
 # ---------------------------------------------------------------------------
 def check_ccv_16_registry_count_matches_claimed(
-    closeout: dict, actual_registry_count: Optional[int], result: CcvResult
+    closeout: dict, actual_registry_count: int | None, result: CcvResult
 ) -> None:
     claimed = closeout.get("registry_total") or closeout.get("total_registry_entries")
     if claimed is None or actual_registry_count is None:
@@ -487,13 +482,13 @@ def check_ccv_18_bundle_entry_count_positive(closeout: dict, result: CcvResult) 
 # ---------------------------------------------------------------------------
 def run_closeout_consistency_validators(
     closeout: dict,
-    lane_ledger: Optional[dict] = None,
-    taskcards: Optional[List[dict]] = None,
-    report_dir: Optional[Path] = None,
-    registry_entries: Optional[List[dict]] = None,
-    matrix_rows: Optional[List[dict]] = None,
-    pkg_base_dirs: Optional[List[Path]] = None,
-    actual_registry_count: Optional[int] = None,
+    lane_ledger: dict | None = None,
+    taskcards: list[dict] | None = None,
+    report_dir: Path | None = None,
+    registry_entries: list[dict] | None = None,
+    matrix_rows: list[dict] | None = None,
+    pkg_base_dirs: list[Path] | None = None,
+    actual_registry_count: int | None = None,
 ) -> CcvResult:
     """Run all 18 CCV rules and return aggregated result."""
     result = CcvResult()

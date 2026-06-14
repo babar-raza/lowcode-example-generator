@@ -2,22 +2,21 @@
 
 import pytest
 
+from plugin_examples.format_capability.classifier import classify_operation_kind
 from plugin_examples.format_capability.manifest import (
     FormatCapabilityManifest,
     TypeFormatCapability,
 )
-from plugin_examples.format_capability.classifier import classify_operation_kind
 from plugin_examples.format_capability.populator import (
-    populate_manifest,
     _ACTIVE_TYPES,
     _FAMILY_DEFAULTS,
+    populate_manifest,
+)
+from plugin_examples.format_capability.serializer import (
+    deserialize_manifest,
+    serialize_manifest,
 )
 from plugin_examples.format_capability.validator import validate_manifest
-from plugin_examples.format_capability.serializer import (
-    serialize_manifest,
-    deserialize_manifest,
-)
-
 
 # --- Classifier tests ---
 

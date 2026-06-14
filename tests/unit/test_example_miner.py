@@ -19,7 +19,6 @@ from plugin_examples.example_miner.symbol_validator import (
     validate_symbols,
 )
 
-
 CELLS_SOURCES = [
     {
         "type": "github",

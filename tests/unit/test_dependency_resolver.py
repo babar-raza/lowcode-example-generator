@@ -20,7 +20,6 @@ from plugin_examples.nuget_fetcher.dependency_resolver import (
     write_dependency_manifest,
 )
 
-
 # --- Helpers ---
 
 

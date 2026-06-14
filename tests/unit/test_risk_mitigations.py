@@ -28,6 +28,7 @@ class TestGateIsolation:
     def test_gate_module_source_has_no_ai_imports(self):
         """Grep the gate module source for forbidden imports."""
         import inspect
+
         from plugin_examples.gates import example_gates
 
         source = inspect.getsource(example_gates)

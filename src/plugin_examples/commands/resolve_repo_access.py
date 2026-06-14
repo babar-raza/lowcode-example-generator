@@ -34,9 +34,10 @@ def add_parser(subparsers):
 
 def handle(args) -> int:
     """Handle the resolve-repo-access command."""
-    from plugin_examples.family_config import load_family_config, DisabledFamilyError
-    from plugin_examples.publisher.repo_access_resolver import resolve_repo_access
     from pathlib import Path as _Path
+
+    from plugin_examples.family_config import DisabledFamilyError, load_family_config
+    from plugin_examples.publisher.repo_access_resolver import resolve_repo_access
 
     repo_root = _Path(__file__).resolve().parents[3]
     msession, mcollector = _create_metrics_session(

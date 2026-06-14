@@ -12,7 +12,7 @@ from __future__ import annotations
 import json
 import logging
 import shutil
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
@@ -119,7 +119,7 @@ def promote_family_evidence(
     Returns:
         Dict summarising what was promoted.
     """
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(UTC).isoformat()
 
     # Primary: family-scoped directory
     dst_family = verification_dir / "latest" / "families" / family

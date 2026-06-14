@@ -22,7 +22,6 @@ from plugin_examples.gates.example_lifecycle import (
     write_comparison_evidence,
 )
 
-
 # ---------------------------------------------------------------------------
 # STATE_STRENGTH ordering
 # ---------------------------------------------------------------------------

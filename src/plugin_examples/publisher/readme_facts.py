@@ -11,8 +11,8 @@ import hashlib
 import json
 import logging
 import re
-from dataclasses import dataclass, field, asdict
-from datetime import datetime, timezone
+from dataclasses import asdict, dataclass, field
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
@@ -292,7 +292,7 @@ def extract_example_readme_facts(
     """
     facts = ExampleReadmeFacts(
         family=family,
-        generated_at=datetime.now(timezone.utc).isoformat(),
+        generated_at=datetime.now(UTC).isoformat(),
         source_artifact=str(package_path),
     )
 

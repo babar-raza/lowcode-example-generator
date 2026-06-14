@@ -8,19 +8,18 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from plugin_examples.probe_generator.generator import (
-    CandidateNotReflectedError,
-    ProbeFiles,
-    ProbeGenerator,
-)
-from plugin_examples.probe_generator.runner import ProbeResult, ProbeRunner
 from plugin_examples.plugin_detector.heuristic_matcher import (
     CandidateMapping,
     MethodInfo,
     ReflectionCatalog,
     TypeInfo,
 )
-
+from plugin_examples.probe_generator.generator import (
+    CandidateNotReflectedError,
+    ProbeFiles,
+    ProbeGenerator,
+)
+from plugin_examples.probe_generator.runner import ProbeResult, ProbeRunner
 
 # ---------------------------------------------------------------------------
 # Helpers

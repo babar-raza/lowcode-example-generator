@@ -1,8 +1,8 @@
-"""Engineering hygiene validators — EHV-01..05.
+"""Engineering hygiene validators — EHV-01..08.
 
 Detects recurring code quality regressions that lower the Recruitize Engineering
-Practices (P) score. These validators run as part of the doctor health check and
-can be invoked standalone for CI pre-commit gating.
+Practices (P) and Readiness (R) scores. These validators run as part of the
+doctor health check and can be invoked standalone for CI pre-commit gating.
 
 Validators:
     EHV-01: Silent bare except handlers (except Exception: pass / bare except:)
@@ -10,6 +10,9 @@ Validators:
     EHV-03: Integration test count below minimum threshold
     EHV-04: Bandit security config present in pyproject.toml
     EHV-05: CODEOWNERS present at project root
+    EHV-06: pyproject.toml version matches CHANGELOG.md top entry
+    EHV-07: pyproject.toml version follows semver pattern
+    EHV-08: Dependency licenses are in the approved allowlist
 """
 
 from __future__ import annotations
@@ -58,9 +61,7 @@ def _find_silent_bare_excepts(source_dir: Path) -> list[str]:
             if not isinstance(node, ast.ExceptHandler):
                 continue
             # Check if body is a single Pass statement
-            if len(node.body) == 1 and isinstance(node.body[0], ast.Pass):
-                # EHV-01 fires only when exception type is `Exception` or subclass
-                if node.type is not None:
+            if len(node.body) == 1 and isinstance(node.body[0], ast.Pass) and node.type is not None:
                     type_name = ""
                     if isinstance(node.type, ast.Name):
                         type_name = node.type.id
@@ -163,9 +164,8 @@ def _count_integration_test_functions(tests_dir: Path) -> int:
         except SyntaxError:
             continue
         for node in ast.walk(tree):
-            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
-                if node.name.startswith("test_"):
-                    count += 1
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name.startswith("test_"):
+                count += 1
     return count
 
 
@@ -255,6 +255,218 @@ def check_codeowners(repo_root: Path | None = None) -> EHVResult:
 
 
 # ---------------------------------------------------------------------------
+# EHV-06: pyproject.toml version matches CHANGELOG.md top entry
+# ---------------------------------------------------------------------------
+
+_VERSION_RE = re.compile(r'version\s*=\s*"([^"]+)"')
+_CHANGELOG_VERSION_RE = re.compile(r"^## \[(\d+\.\d+\.\d+)\]", re.MULTILINE)
+
+
+def check_version_changelog_sync(repo_root: Path | None = None) -> EHVResult:
+    """EHV-06: Assert pyproject.toml version matches first CHANGELOG.md version heading."""
+    if repo_root is None:
+        repo_root = Path(__file__).resolve().parents[3]
+
+    pyproject = repo_root / "pyproject.toml"
+    changelog = repo_root / "CHANGELOG.md"
+
+    if not pyproject.exists():
+        return EHVResult("EHV-06", passed=False, message="EHV-06: FAIL — pyproject.toml not found")
+    if not changelog.exists():
+        return EHVResult("EHV-06", passed=False, message="EHV-06: FAIL — CHANGELOG.md not found")
+
+    pyproject_text = pyproject.read_text(encoding="utf-8")
+    m = _VERSION_RE.search(pyproject_text)
+    if not m:
+        return EHVResult("EHV-06", passed=False, message="EHV-06: FAIL — no version found in pyproject.toml")
+    pyproject_version = m.group(1)
+
+    changelog_text = changelog.read_text(encoding="utf-8")
+    cm = _CHANGELOG_VERSION_RE.search(changelog_text)
+    if not cm:
+        return EHVResult("EHV-06", passed=False, message="EHV-06: FAIL — no version heading found in CHANGELOG.md")
+    changelog_version = cm.group(1)
+
+    if pyproject_version != changelog_version:
+        return EHVResult(
+            "EHV-06",
+            passed=False,
+            message=f"EHV-06: FAIL — version mismatch: pyproject.toml={pyproject_version}, CHANGELOG.md={changelog_version}",
+        )
+    return EHVResult(
+        "EHV-06",
+        passed=True,
+        message=f"EHV-06: PASS — version {pyproject_version} matches in pyproject.toml and CHANGELOG.md",
+    )
+
+
+# ---------------------------------------------------------------------------
+# EHV-07: pyproject.toml version follows semver pattern
+# ---------------------------------------------------------------------------
+
+_SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+$")
+
+
+def check_semver_version(repo_root: Path | None = None) -> EHVResult:
+    """EHV-07: Assert pyproject.toml version follows semver (MAJOR.MINOR.PATCH)."""
+    if repo_root is None:
+        repo_root = Path(__file__).resolve().parents[3]
+
+    pyproject = repo_root / "pyproject.toml"
+    if not pyproject.exists():
+        return EHVResult("EHV-07", passed=False, message="EHV-07: FAIL — pyproject.toml not found")
+
+    content = pyproject.read_text(encoding="utf-8")
+    m = _VERSION_RE.search(content)
+    if not m:
+        return EHVResult("EHV-07", passed=False, message="EHV-07: FAIL — no version found in pyproject.toml")
+
+    version = m.group(1)
+    if _SEMVER_RE.match(version):
+        return EHVResult("EHV-07", passed=True, message=f"EHV-07: PASS — version '{version}' follows semver")
+    return EHVResult("EHV-07", passed=False, message=f"EHV-07: FAIL — version '{version}' does not follow semver")
+
+
+# ---------------------------------------------------------------------------
+# EHV-08: Dependency licenses in approved allowlist
+# ---------------------------------------------------------------------------
+
+_ALLOWED_LICENSE_KEYWORDS = frozenset({
+    "mit", "bsd", "apache", "psf", "python software foundation",
+    "isc", "lgpl", "mpl", "public domain", "unlicense", "cc0",
+})
+
+
+def check_dependency_licenses(repo_root: Path | None = None) -> EHVResult:
+    """EHV-08: Check installed dependency licenses against an approved allowlist."""
+    if repo_root is None:
+        repo_root = Path(__file__).resolve().parents[3]
+
+    try:
+        from importlib.metadata import distributions
+    except ImportError:
+        return EHVResult("EHV-08", passed=True, message="EHV-08: SKIP — importlib.metadata not available")
+
+    # Read declared dependencies from pyproject.toml
+    pyproject = repo_root / "pyproject.toml"
+    if not pyproject.exists():
+        return EHVResult("EHV-08", passed=False, message="EHV-08: FAIL — pyproject.toml not found")
+
+    content = pyproject.read_text(encoding="utf-8")
+    # Extract dependency names (simple regex, good enough for top-level deps)
+    dep_section = re.search(r"dependencies\s*=\s*\[(.*?)\]", content, re.DOTALL)
+    if not dep_section:
+        return EHVResult("EHV-08", passed=True, message="EHV-08: SKIP — no dependencies section found")
+
+    dep_names: set[str] = set()
+    for line in dep_section.group(1).splitlines():
+        line = line.strip().strip('"').strip("'").strip(",")
+        if line:
+            # Extract package name (before any version specifier)
+            name = re.split(r"[><=!~\[]", line)[0].strip().lower().replace("-", "_")
+            if name:
+                dep_names.add(name)
+
+    if not dep_names:
+        return EHVResult("EHV-08", passed=True, message="EHV-08: SKIP — no dependencies declared")
+
+    violations: list[str] = []
+    for dist in distributions():
+        dist_name = (dist.metadata.get("Name") or "").lower().replace("-", "_")
+        if dist_name not in dep_names:
+            continue
+        license_str = dist.metadata.get("License") or ""
+        license_expr = dist.metadata.get("License-Expression") or ""
+        classifiers = dist.metadata.get_all("Classifier") or []
+        license_classifiers = [c for c in classifiers if c.startswith("License")]
+
+        # Build combined license text for matching (PEP 639 License-Expression + legacy License + classifiers)
+        combined = (license_str + " " + license_expr + " " + " ".join(license_classifiers)).lower()
+        if not any(kw in combined for kw in _ALLOWED_LICENSE_KEYWORDS):
+            violations.append(f"{dist_name}: '{license_expr or license_str or 'UNKNOWN'}'")
+
+    if violations:
+        return EHVResult(
+            "EHV-08",
+            passed=False,
+            message=f"EHV-08: FAIL — {len(violations)} dependency license(s) not in allowlist",
+            detail="; ".join(violations[:5]),
+        )
+    return EHVResult(
+        "EHV-08",
+        passed=True,
+        message=f"EHV-08: PASS — all {len(dep_names)} declared dependencies have approved licenses",
+    )
+
+
+# ---------------------------------------------------------------------------
+# EHV-09: SECURITY.md presence (policy-as-code)
+# ---------------------------------------------------------------------------
+
+
+def check_security_policy(repo_root: Path | None = None) -> EHVResult:
+    """EHV-09: Assert SECURITY.md exists with vulnerability disclosure process."""
+    if repo_root is None:
+        repo_root = Path(__file__).resolve().parents[3]
+    security_md = repo_root / "SECURITY.md"
+    if not security_md.exists():
+        return EHVResult(
+            "EHV-09",
+            passed=False,
+            message="EHV-09: FAIL — SECURITY.md not found at project root",
+        )
+    content = security_md.read_text(encoding="utf-8")
+    if len(content) < 100:
+        return EHVResult(
+            "EHV-09",
+            passed=False,
+            message="EHV-09: FAIL — SECURITY.md is too short (< 100 chars)",
+        )
+    has_disclosure = "disclosure" in content.lower() or "report" in content.lower()
+    if not has_disclosure:
+        return EHVResult(
+            "EHV-09",
+            passed=False,
+            message="EHV-09: FAIL — SECURITY.md lacks vulnerability disclosure section",
+        )
+    return EHVResult(
+        "EHV-09",
+        passed=True,
+        message=f"EHV-09: PASS — SECURITY.md present ({security_md.stat().st_size} bytes)",
+    )
+
+
+# ---------------------------------------------------------------------------
+# EHV-10: CONTRIBUTING.md presence (policy-as-code)
+# ---------------------------------------------------------------------------
+
+
+def check_contributing_guide(repo_root: Path | None = None) -> EHVResult:
+    """EHV-10: Assert CONTRIBUTING.md exists at the project root."""
+    if repo_root is None:
+        repo_root = Path(__file__).resolve().parents[3]
+    contributing = repo_root / "CONTRIBUTING.md"
+    if not contributing.exists():
+        return EHVResult(
+            "EHV-10",
+            passed=False,
+            message="EHV-10: FAIL — CONTRIBUTING.md not found at project root",
+        )
+    content = contributing.read_text(encoding="utf-8")
+    if len(content) < 200:
+        return EHVResult(
+            "EHV-10",
+            passed=False,
+            message="EHV-10: FAIL — CONTRIBUTING.md is too short (< 200 chars)",
+        )
+    return EHVResult(
+        "EHV-10",
+        passed=True,
+        message=f"EHV-10: PASS — CONTRIBUTING.md present ({contributing.stat().st_size} bytes)",
+    )
+
+
+# ---------------------------------------------------------------------------
 # Run all EHV validators
 # ---------------------------------------------------------------------------
 
@@ -269,4 +481,9 @@ def run_all_ehv_validators(repo_root: Path | None = None) -> list[EHVResult]:
         check_integration_test_count(repo_root),
         check_bandit_config(repo_root),
         check_codeowners(repo_root),
+        check_version_changelog_sync(repo_root),
+        check_semver_version(repo_root),
+        check_dependency_licenses(repo_root),
+        check_security_policy(repo_root),
+        check_contributing_guide(repo_root),
     ]

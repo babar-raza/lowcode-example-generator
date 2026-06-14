@@ -3,12 +3,12 @@
 from __future__ import annotations
 
 import json
-import logging
 from pathlib import Path
 
 from plugin_examples.generator.code_generator import GeneratedExample
+from plugin_examples.observability import get_logger
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 import re as _re
 

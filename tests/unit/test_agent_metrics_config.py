@@ -254,8 +254,8 @@ class TestProductionConfig:
         assert non_endpoint_errors == [], f"Production config has non-endpoint errors: {non_endpoint_errors}"
 
     def test_production_config_has_all_verdicts(self):
-        from plugin_examples.metrics.config import load_metrics_config
         from plugin_examples.gates.models import VERDICTS
+        from plugin_examples.metrics.config import load_metrics_config
 
         repo_root = Path(__file__).resolve().parents[2]
         cfg_path = repo_root / "pipeline" / "configs" / "metrics.yml"
@@ -301,9 +301,9 @@ class TestProductionConfig:
 class TestAgentMetricsEndpointEnvVar:
     def test_agent_metrics_endpoint_overrides_empty_config(self, _metrics_yml, monkeypatch):
         """AGENT_METRICS_ENDPOINT env var populates api_endpoint when config is empty."""
-        from plugin_examples.metrics.config import load_metrics_config
-
         import yaml
+
+        from plugin_examples.metrics.config import load_metrics_config
 
         data = yaml.safe_load(_metrics_yml.read_text(encoding="utf-8"))
         data["metrics"]["api_endpoint"] = ""
@@ -315,9 +315,9 @@ class TestAgentMetricsEndpointEnvVar:
 
     def test_agent_metrics_endpoint_absent_leaves_empty(self, _metrics_yml, monkeypatch):
         """Without AGENT_METRICS_ENDPOINT, api_endpoint stays empty when config is empty."""
-        from plugin_examples.metrics.config import load_metrics_config
-
         import yaml
+
+        from plugin_examples.metrics.config import load_metrics_config
 
         data = yaml.safe_load(_metrics_yml.read_text(encoding="utf-8"))
         data["metrics"]["api_endpoint"] = ""

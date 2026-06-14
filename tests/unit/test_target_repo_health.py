@@ -16,7 +16,6 @@ from plugin_examples.publisher.target_repo_health import (
     run_target_repo_health_check,
 )
 
-
 # ---------------------------------------------------------------------------
 # Unit tests for TARGET_REPOS configuration
 # ---------------------------------------------------------------------------

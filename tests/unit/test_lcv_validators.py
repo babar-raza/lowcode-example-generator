@@ -1,9 +1,11 @@
 """Tests for LowCode Completeness Validators (LCV-01..LCV-15)."""
 
 import json
-import pytest
 from pathlib import Path
-from src.plugin_examples.fixture_factory.lowcode_completeness_validators import run_all_lcv_checks, LcvResult
+
+import pytest
+
+from src.plugin_examples.fixture_factory.lowcode_completeness_validators import LcvResult, run_all_lcv_checks
 
 
 def complete_closeout(**overrides):

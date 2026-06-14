@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import logging
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -97,10 +97,10 @@ def publish_examples(
         PublishResult.
     """
     from plugin_examples.publisher.approval_gate import (
-        check_approval,
+        BLOCKED_PR_PERMISSION_NOT_READY,
         BLOCKED_PUBLISH_TO_MAIN,
         BLOCKED_REPO_ACCESS_NOT_READY,
-        BLOCKED_PR_PERMISSION_NOT_READY,
+        check_approval,
     )
 
     result = PublishResult(dry_run=dry_run)
@@ -125,7 +125,7 @@ def publish_examples(
     result.files_included = [e.get("scenario_id", "") for e in passed]
 
     # Generate branch name: plugin-examples/{family}/{timestamp}
-    ts = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
+    ts = datetime.now(UTC).strftime("%Y%m%d-%H%M%S")
     result.branch_name = f"plugin-examples/{family}/{ts}"
 
     if dry_run:
@@ -205,8 +205,10 @@ def publish_examples(
 
     # --- Real GitHub PR creation ---
     from plugin_examples.publisher.github_pr_publisher import (
-        create_github_pr,
         PublishingError as GitHubError,
+    )
+    from plugin_examples.publisher.github_pr_publisher import (
+        create_github_pr,
     )
     from plugin_examples.publisher.pr_builder import build_pr
 

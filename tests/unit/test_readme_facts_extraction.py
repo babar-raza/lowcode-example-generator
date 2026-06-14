@@ -3,13 +3,13 @@
 import pytest
 
 from plugin_examples.publisher.readme_facts import (
+    _INPUT_EXTENDED_PATTERNS,
+    _INPUT_PATTERN,
+    _OUTPUT_EXTENDED_PATTERNS,
+    _OUTPUT_PATTERN,
+    ExampleFact,
     _extract_all_extensions,
     _extract_extension,
-    _INPUT_PATTERN,
-    _OUTPUT_PATTERN,
-    _INPUT_EXTENDED_PATTERNS,
-    _OUTPUT_EXTENDED_PATTERNS,
-    ExampleFact,
 )
 
 

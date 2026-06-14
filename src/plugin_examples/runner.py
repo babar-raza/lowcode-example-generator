@@ -2465,11 +2465,7 @@ def run_pipeline(
         if result.status == "failed":
             if name in HARD_STOP_STAGES:
                 hard_stopped = True
-            elif name == "llm_preflight" and not ctx.require_llm:
-                result.status = "degraded"
-            elif name == "validation" and not ctx.require_validation:
-                result.status = "degraded"
-            elif name == "reviewer" and not ctx.require_reviewer:
+            elif name == "llm_preflight" and not ctx.require_llm or name == "validation" and not ctx.require_validation or name == "reviewer" and not ctx.require_reviewer:
                 result.status = "degraded"
             # All other failures stay "failed" — no blanket degradation
 

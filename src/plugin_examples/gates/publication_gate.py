@@ -9,18 +9,18 @@ This gate checks that every example in a publication batch has:
 from __future__ import annotations
 
 import json
-import logging
 from dataclasses import dataclass, field
 from pathlib import Path
 
 from plugin_examples.format_authority.store import (
-    get_contract,
-    get_all_contracts,
     MissingFormatContractError,
+    get_all_contracts,
+    get_contract,
 )
 from plugin_examples.gates.code_contract_validator import validate_code_against_contract
+from plugin_examples.observability import get_logger
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 # Repo-local manifest must exist for publication to proceed
 _REPO_ROOT = Path(__file__).resolve().parents[3]

@@ -7,7 +7,7 @@ Date: 2026-05-06
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
 
 import pytest
 
@@ -20,7 +20,6 @@ from plugin_examples.gates.example_lifecycle import (
     update_backlog_from_lifecycle,
     write_lifecycle_evidence,
 )
-
 
 # ---------------------------------------------------------------------------
 # Helpers

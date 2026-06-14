@@ -8,23 +8,23 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
+from plugin_examples.generator.code_generator import (
+    GeneratedExample,
+    generate_example,
+)
+from plugin_examples.generator.manifest_writer import write_example_index
+from plugin_examples.generator.packet_builder import (
+    PromptPacket,
+    UnknownSymbolError,
+    build_packet,
+)
+from plugin_examples.generator.project_generator import generate_project
 from plugin_examples.llm_router.router import (
     LLMProviderError,
     LLMRouter,
     PreflightResult,
     write_preflight_report,
 )
-from plugin_examples.generator.packet_builder import (
-    PromptPacket,
-    UnknownSymbolError,
-    build_packet,
-)
-from plugin_examples.generator.code_generator import (
-    GeneratedExample,
-    generate_example,
-)
-from plugin_examples.generator.project_generator import generate_project
-from plugin_examples.generator.manifest_writer import write_example_index
 
 
 def _make_catalog() -> dict:
@@ -898,6 +898,7 @@ class TestProviderPolicy:
     def test_gpt_4o_mini_replaced_with_env_var(self):
         """Verify gpt-4o-mini hardcode is not present in router source."""
         import inspect
+
         from plugin_examples.llm_router import router
 
         source = inspect.getsource(router)
@@ -906,7 +907,7 @@ class TestProviderPolicy:
     def test_only_professionalize_and_ollama_provider_families_allowed(self):
         from plugin_examples.llm_router.provider_policy import APPROVED_PROVIDERS
 
-        assert APPROVED_PROVIDERS == frozenset({"llm_professionalize", "ollama"})
+        assert frozenset({"llm_professionalize", "ollama"}) == APPROVED_PROVIDERS
         assert "gpt_oss" not in APPROVED_PROVIDERS
         assert "openai" not in APPROVED_PROVIDERS
         assert "azure_openai" not in APPROVED_PROVIDERS
@@ -946,9 +947,9 @@ class TestProviderPolicy:
 
     def test_gpt_oss_allowed_only_as_ollama_model_if_configured_under_ollama(self):
         from plugin_examples.llm_router.provider_policy import (
+            APPROVED_PROVIDERS,
             get_policy_violations,
             validate_model_for_provider,
-            APPROVED_PROVIDERS,
         )
 
         # gpt_oss as a provider family is unapproved
@@ -964,8 +965,8 @@ class TestProviderPolicy:
 
     def test_gpt_oss_rejected_as_provider_family(self):
         from plugin_examples.llm_router.provider_policy import (
-            validate_provider_family,
             UNAPPROVED_PROVIDERS,
+            validate_provider_family,
         )
 
         assert "gpt_oss" in UNAPPROVED_PROVIDERS
@@ -975,8 +976,8 @@ class TestProviderPolicy:
 
     def test_openai_rejected_as_provider_family(self):
         from plugin_examples.llm_router.provider_policy import (
-            validate_provider_family,
             UNAPPROVED_PROVIDERS,
+            validate_provider_family,
         )
 
         assert "openai" in UNAPPROVED_PROVIDERS
@@ -1013,7 +1014,8 @@ class TestProviderPolicy:
         import json
         import tempfile
         from pathlib import Path
-        from plugin_examples.llm_router.router import write_preflight_report, PreflightResult
+
+        from plugin_examples.llm_router.router import PreflightResult, write_preflight_report
 
         with tempfile.TemporaryDirectory() as tmp:
             results = [
@@ -1565,8 +1567,9 @@ class TestPdfAConverterConstraint:
 
     def _load_pdf_per_type_constraints(self) -> dict:
         """Load per_type_constraints from pipeline/configs/families/pdf.yml."""
-        import yaml
         from pathlib import Path
+
+        import yaml
 
         config_path = Path(__file__).resolve().parents[2] / "pipeline" / "configs" / "families" / "pdf.yml"
         with open(config_path, encoding="utf-8") as f:
@@ -1934,8 +1937,10 @@ class TestLLMTimeoutRetry:
 
     def test_openai_compatible_retries_on_timeout_and_succeeds(self):
         """If the first two calls time out, the third should succeed."""
-        import requests as req_mod
         from unittest.mock import MagicMock, call, patch
+
+        import requests as req_mod
+
         import plugin_examples.llm_router.router as router_mod
 
         good_response = MagicMock()
@@ -1977,8 +1982,10 @@ class TestLLMTimeoutRetry:
 
     def test_openai_compatible_raises_after_all_retries_exhausted(self):
         """After max_retries+1 timeout attempts, the Timeout must propagate."""
-        import requests as req_mod
         from unittest.mock import patch
+
+        import requests as req_mod
+
         import plugin_examples.llm_router.router as router_mod
 
         with (
@@ -1986,15 +1993,14 @@ class TestLLMTimeoutRetry:
             patch(
                 "plugin_examples.llm_router.router.requests.post",
                 side_effect=req_mod.exceptions.Timeout("always times out"),
-            ),
+            ),pytest.raises(req_mod.exceptions.Timeout)
         ):
-            with pytest.raises(req_mod.exceptions.Timeout):
-                router_mod._call_openai_compatible(
-                    "http://fake/v1/chat/completions",
-                    "prompt",
-                    model="test-model",
-                    api_key="key",
-                )
+            router_mod._call_openai_compatible(
+                "http://fake/v1/chat/completions",
+                "prompt",
+                model="test-model",
+                api_key="key",
+            )
 
 
 class TestGeneralizedSemanticValidation:
@@ -2274,6 +2280,7 @@ class TestRequiredValidation:
     def test_build_repair_stores_type_constraints_in_project(self):
         """project dict must contain type_constraints for build-repair validation."""
         import inspect
+
         from plugin_examples import runner
 
         source = inspect.getsource(runner._stage_generation)
@@ -2284,6 +2291,7 @@ class TestRequiredValidation:
     def test_build_repair_calls_validate_from_constraints(self):
         """Build repair path must call _validate_code_from_constraints for all families."""
         import inspect
+
         from plugin_examples import runner
 
         source = inspect.getsource(runner._stage_validation)
@@ -2298,6 +2306,7 @@ class TestRequiredValidation:
     def test_runtime_repair_receives_required_constraints(self):
         """REQUIRED: constraints from pdf_constraints must appear in runtime repair prompt."""
         import inspect
+
         from plugin_examples import runner
 
         source = inspect.getsource(runner._stage_validation)
@@ -2318,6 +2327,7 @@ class TestRequiredValidation:
     def test_runtime_repair_receives_forbidden_constraints(self):
         """FORBIDDEN: constraints from type_constraints must appear in runtime repair prompt."""
         import inspect
+
         from plugin_examples import runner
 
         source = inspect.getsource(runner._stage_validation)
@@ -2338,6 +2348,7 @@ class TestRequiredValidation:
     def test_runtime_repair_receives_per_type_constraints(self):
         """Per-type constraints must be re-injected and validated in the runtime repair path."""
         import inspect
+
         from plugin_examples import runner
 
         source = inspect.getsource(runner._stage_validation)
@@ -2505,6 +2516,7 @@ class TestLLMEmptyModelFix:
     def test_call_provider_empty_model_uses_recommended(self, monkeypatch):
         """_call_provider for llm_professionalize uses 'recommended' when GPT_OSS_MODEL=''."""
         import unittest.mock as mock
+
         from plugin_examples.llm_router.router import _call_provider
 
         monkeypatch.setenv("GPT_OSS_MODEL", "")
@@ -2527,6 +2539,7 @@ class TestLLMEmptyModelFix:
     def test_call_provider_absent_model_uses_recommended(self, monkeypatch):
         """_call_provider uses 'recommended' when GPT_OSS_MODEL is completely absent."""
         import unittest.mock as mock
+
         from plugin_examples.llm_router.router import _call_provider
 
         monkeypatch.delenv("GPT_OSS_MODEL", raising=False)
@@ -2547,7 +2560,9 @@ class TestLLMEmptyModelFix:
     def test_model_field_included_in_request_body_when_recommended(self, monkeypatch):
         """When model='recommended', the model field IS included in the JSON body (not omitted)."""
         import unittest.mock as mock
+
         import requests as req_lib
+
         from plugin_examples.llm_router import router
 
         monkeypatch.delenv("GPT_OSS_MODEL", raising=False)
@@ -3027,6 +3042,7 @@ class TestTemplateFIrstGeneration:
     def test_all_template_first_types_work_without_llm(self):
         """All 14 template_first PDF types must produce generated_template_first even when llm_generate=None."""
         from unittest.mock import MagicMock
+
         from plugin_examples.generator.code_generator import _generate_deterministic_template_for_scenario
 
         for type_name in [
@@ -3122,12 +3138,13 @@ class TestTemplateFIrstGeneration:
 
     def test_all_template_first_types_pass_validation_with_utf8_config(self):
         """All template-first types must produce code that passes constraint validation."""
-        from plugin_examples.generator.code_generator import (
-            _validate_code_from_constraints,
-            _generate_deterministic_template_for_scenario,
-        )
-        from plugin_examples.family_config.loader import load_family_config
         from unittest.mock import MagicMock
+
+        from plugin_examples.family_config.loader import load_family_config
+        from plugin_examples.generator.code_generator import (
+            _generate_deterministic_template_for_scenario,
+            _validate_code_from_constraints,
+        )
 
         cfg = load_family_config("pipeline/configs/families/pdf.yml")
         ptc = cfg.per_type_constraints

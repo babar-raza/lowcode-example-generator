@@ -22,7 +22,6 @@ from src.plugin_examples.fixture_factory.evidence_validity_validators import (
     run_all_evc_validators,
 )
 
-
 # ─────────────────────────────────────────────────────────────────
 # EVC-01: Bundled IV must be IV_PASS or have a later IV_PASS
 # ─────────────────────────────────────────────────────────────────

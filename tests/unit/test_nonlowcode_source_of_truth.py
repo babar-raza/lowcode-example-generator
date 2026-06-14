@@ -15,8 +15,8 @@ import pytest
 
 from plugin_examples.plugin_detector.proof_reporter import (
     SourceOfTruthGateError,
-    write_nonlowcode_source_of_truth_proof,
     assert_nonlowcode_source_of_truth_eligible,
+    write_nonlowcode_source_of_truth_proof,
 )
 
 

@@ -21,7 +21,7 @@ import logging
 import subprocess
 import sys
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
@@ -160,7 +160,7 @@ def check_formimporter(
     Returns:
         FormImporterWatchResult with full status.
     """
-    checked_at = datetime.now(timezone.utc).isoformat()
+    checked_at = datetime.now(UTC).isoformat()
     notes: list[str] = []
 
     current = _get_installed_version(repo_root)

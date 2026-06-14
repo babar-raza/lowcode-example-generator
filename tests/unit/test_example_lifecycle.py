@@ -240,8 +240,9 @@ class TestRunnerLifecycleIntegration:
 
     def test_lifecycle_registry_created_during_generation(self):
         """Verify the lifecycle registry field exists on PipelineContext."""
-        from plugin_examples.runner import PipelineContext
         from pathlib import Path as P
+
+        from plugin_examples.runner import PipelineContext
 
         ctx = PipelineContext(
             family="pdf",

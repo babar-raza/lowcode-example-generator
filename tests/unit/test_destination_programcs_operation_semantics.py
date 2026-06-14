@@ -7,6 +7,7 @@ for multi-cardinality types have appropriate cardinality markers.
 
 import json
 from pathlib import Path
+
 import pytest
 
 REPO = Path(__file__).resolve().parents[2]

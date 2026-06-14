@@ -212,9 +212,8 @@ class TestDiscoverySweepDedup:
             ),
             patch("plugin_examples.plugin_detector.write_source_of_truth_proof", return_value=tmp_path / "proof.json"),
             patch("plugin_examples.family_config.load_family_config", return_value=cfg),
+            patch.object(Path, "exists", return_value=True),
         ):
-            # Make config_path appear to exist
-            with patch.object(Path, "exists", return_value=True):
                 ds._discover_family("testfamily", tmp_path, False, verification_dir)
 
         # If build_catalog was called, dep paths must have no name duplicates.
@@ -272,9 +271,9 @@ class TestDiscoverySweepDedup:
             ),
             patch("plugin_examples.plugin_detector.write_source_of_truth_proof", return_value=tmp_path / "proof.json"),
             patch("plugin_examples.family_config.load_family_config", return_value=cfg),
+            patch.object(Path, "exists", return_value=True),
         ):
-            with patch.object(Path, "exists", return_value=True):
-                ds._discover_family("myfamily", tmp_path, False, verification_dir)
+            ds._discover_family("myfamily", tmp_path, False, verification_dir)
 
         report_path = verification_dir / "latest" / "myfamily-dependency-dedup-report.json"
         assert report_path.exists(), "Dedup report was not written"
@@ -292,8 +291,9 @@ class TestPdfGenerationReadiness:
         reflection_status=succeeded does NOT imply generation permission.
         discovery_only family status is an independent blocker.
         """
-        from plugin_examples.discovery_sweep import compute_generation_readiness
         import tempfile
+
+        from plugin_examples.discovery_sweep import compute_generation_readiness
 
         discovery_result = {
             "family": "pdf",

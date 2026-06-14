@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from datetime import UTC
 
 from plugin_examples.commands._metrics import _add_metrics_flags, _create_metrics_session, _finalize_metrics_session
 
@@ -49,14 +50,16 @@ def add_parser(subparsers):
 def handle(args) -> int:
     """Handle the merge-pr command."""
     import json as _json
-    from plugin_examples.family_config import load_family_config, DisabledFamilyError
-    from plugin_examples.publisher.merge_approval_gate import (
-        check_merge_approval,
-        BLOCKED_MERGE_REUSED_LIVE_PUBLISH_TOKEN,
-    )
-    from plugin_examples.publisher.github_pr_merger import simulate_merge, merge_pr, MergeError as _MergeError
     from datetime import datetime, timezone
     from pathlib import Path as _Path
+
+    from plugin_examples.family_config import DisabledFamilyError, load_family_config
+    from plugin_examples.publisher.github_pr_merger import MergeError as _MergeError
+    from plugin_examples.publisher.github_pr_merger import merge_pr, simulate_merge
+    from plugin_examples.publisher.merge_approval_gate import (
+        BLOCKED_MERGE_REUSED_LIVE_PUBLISH_TOKEN,
+        check_merge_approval,
+    )
 
     repo_root = _Path(__file__).resolve().parents[3]
     msession, mcollector = _create_metrics_session(
@@ -134,7 +137,7 @@ def handle(args) -> int:
 
         live_merge_record = {
             "merge_type": "live_pr_merge_result",
-            "merge_date": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00"),
+            "merge_date": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%S+00:00"),
             "family": family,
             "pr_number": pr_number,
             "target_repo": f"{target_owner}/{target_repo_name}",
@@ -177,7 +180,7 @@ def handle(args) -> int:
         print("WARNING: GITHUB_TOKEN not set — skipping remote PR verification in dry-run")
         simulation_result = {
             "simulation_type": "merge_pr_dry_run_simulation",
-            "simulation_date": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00"),
+            "simulation_date": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%S+00:00"),
             "family": family,
             "pr_number": pr_number,
             "target_repo": f"{target_owner}/{target_repo_name}",
@@ -201,7 +204,7 @@ def handle(args) -> int:
         )
         simulation_result = {
             "simulation_type": "merge_pr_dry_run_simulation",
-            "simulation_date": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00"),
+            "simulation_date": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%S+00:00"),
             "family": family,
             "pr_number": pr_number,
             "target_repo": f"{target_owner}/{target_repo_name}",

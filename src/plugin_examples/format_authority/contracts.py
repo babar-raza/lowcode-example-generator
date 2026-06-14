@@ -84,10 +84,8 @@ class FormatContract:
             errors.append(f"output_kind must be one of {valid_output_kinds}, got {self.output_kind!r}")
         if self.canonical_output_format == ".out":
             errors.append("canonical_output_format must not be .out")
-        if self.output_kind == "file" and not self.canonical_output_format:
-            # file output must have an extension (unless multi like ImageExtractor)
-            if self.output_cardinality != "multi":
-                pass  # some multi-output types have canonical
+        if self.output_kind == "file" and not self.canonical_output_format and self.output_cardinality != "multi":
+            pass  # some multi-output types have canonical
         if self.output_kind == "stdout" and self.canonical_output_format:
             errors.append("stdout output should have empty canonical_output_format")
         return errors

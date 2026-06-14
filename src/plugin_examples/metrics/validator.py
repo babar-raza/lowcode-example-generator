@@ -84,9 +84,8 @@ def validate_payload(payload: dict, config: Any) -> dict:
         "api_calls_count",
     ]:
         val = payload.get(f)
-        if val is not None:
-            if not isinstance(val, int) or val < 0:
-                errors.append(f"field '{f}' must be a non-negative integer, got {val!r}")
+        if val is not None and (not isinstance(val, int) or val < 0):
+            errors.append(f"field '{f}' must be a non-negative integer, got {val!r}")
 
     return {
         "valid": len(errors) == 0,

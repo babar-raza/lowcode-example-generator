@@ -16,7 +16,6 @@ from plugin_examples.website_catalog.crawler import WebsiteCatalog, normalize_ur
 from plugin_examples.website_catalog.drift_detector import DriftDetector, compute_page_hash
 from plugin_examples.website_catalog.models import PluginEntry
 
-
 # ---------------------------------------------------------------------------
 # TC-IMPL-003 Tests
 # ---------------------------------------------------------------------------

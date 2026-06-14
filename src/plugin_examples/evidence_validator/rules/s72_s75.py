@@ -157,15 +157,14 @@ class Sprint72to75Rules:
             )
         summary_content = summary_file.read_text(encoding="utf-8")
         # If audit says 0, summary must not claim non-zero
-        if io_doc_count == 0:
-            if "42/42 examples have README I/O sections" in summary_content:
-                return RuleResult(
-                    rule_id=rule_id,
-                    description="remote-proof-summary.md must not contradict audit io_doc_count=0",
-                    severity="FAILURE",
-                    passed=False,
-                    failure_detail=f"Audit io_doc_count=0 but summary claims '42/42 examples have README I/O sections'",
-                )
+        if io_doc_count == 0 and "42/42 examples have README I/O sections" in summary_content:
+            return RuleResult(
+                rule_id=rule_id,
+                description="remote-proof-summary.md must not contradict audit io_doc_count=0",
+                severity="FAILURE",
+                passed=False,
+                failure_detail=f"Audit io_doc_count=0 but summary claims '42/42 examples have README I/O sections'",
+            )
         return RuleResult(
             rule_id=rule_id,
             description=f"remote-proof-summary.md is consistent with audit io_doc_count={io_doc_count}/{total}",

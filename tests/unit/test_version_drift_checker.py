@@ -10,14 +10,13 @@ from unittest.mock import MagicMock, patch
 import pytest
 
 from plugin_examples.publisher.version_drift_checker import (
+    LOWCODE_FAMILIES,
     FamilyDriftResult,
     VersionDriftReport,
     _compare_versions,
     _drift_severity,
     run_version_drift_check,
-    LOWCODE_FAMILIES,
 )
-
 
 # ---------------------------------------------------------------------------
 # Unit tests for helper functions

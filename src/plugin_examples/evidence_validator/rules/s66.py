@@ -362,10 +362,7 @@ class RemoteProofRules:
             )
 
         # Handle both flat-array format (Sprint 82+) and wrapped-object format (Sprint 66-81)
-        if isinstance(data, list):
-            records = data
-        else:
-            records = data.get("records", [])
+        records = data if isinstance(data, list) else data.get("records", [])
         if not records:
             return RuleResult(
                 rule_id=rule_id,

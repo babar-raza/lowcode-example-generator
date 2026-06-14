@@ -8,9 +8,8 @@ at most once per 24 hours. This is NOT reliant on ETag or Content-MD5 from CDN h
 from __future__ import annotations
 
 import json
-import logging
 import re
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 
 import requests
@@ -21,8 +20,9 @@ from plugin_examples.nuget_fetcher.cache import (
     read_manifest,
     write_manifest,
 )
+from plugin_examples.observability import get_logger
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 # SHA manifest location and revalidation TTL
 _SHA_MANIFEST_PATH = Path(".local/nuget-cache/sha-manifest.json")
@@ -33,8 +33,8 @@ def _load_sha_manifest() -> dict:
     if _SHA_MANIFEST_PATH.exists():
         try:
             return json.loads(_SHA_MANIFEST_PATH.read_text(encoding="utf-8"))
-        except Exception:
-            pass
+        except (OSError, json.JSONDecodeError):
+            logger.debug("Failed to load SHA manifest", exc_info=True)
     return {}
 
 
@@ -67,8 +67,8 @@ def _revalidate_sha_manifest(package_id: str, version: str, nupkg_path: Path) ->
             if now - last_ts < _REVALIDATION_TTL_SECONDS:
                 # Not time to revalidate yet
                 return stored_sha
-        except Exception:
-            pass
+        except (ValueError, TypeError):
+            logger.debug("Failed to parse revalidation timestamp", exc_info=True)
 
     # Revalidate
     actual_sha = compute_sha256(nupkg_path)
@@ -84,7 +84,7 @@ def _revalidate_sha_manifest(package_id: str, version: str, nupkg_path: Path) ->
         return None
 
     # Update manifest with revalidated timestamp
-    now_iso = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    now_iso = datetime.now(UTC).isoformat(timespec="seconds")
     manifest[key] = {
         "sha256": actual_sha,
         "downloaded_at": entry.get("downloaded_at", now_iso),
@@ -98,7 +98,7 @@ def _revalidate_sha_manifest(package_id: str, version: str, nupkg_path: Path) ->
 def _record_sha_manifest(package_id: str, version: str, sha256: str, source_url: str) -> None:
     """Record a freshly downloaded package SHA in the global manifest."""
     manifest = _load_sha_manifest()
-    now_iso = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    now_iso = datetime.now(UTC).isoformat(timespec="seconds")
     key = f"{package_id}/{version}"
     manifest[key] = {
         "sha256": sha256,

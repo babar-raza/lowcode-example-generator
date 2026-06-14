@@ -6,14 +6,13 @@ from pathlib import Path
 import pytest
 
 from plugin_examples.publisher.readme_inventory import (
-    InventoryEntry,
     InventoryAuditTrail,
-    discover_family_inventory,
+    InventoryEntry,
     build_cumulative_examples_meta,
     build_package_path_map,
+    discover_family_inventory,
     inventory_to_json,
 )
-
 
 # ---------------------------------------------------------------------------
 # Fixtures

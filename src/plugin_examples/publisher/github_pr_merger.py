@@ -75,8 +75,8 @@ def _api_put(url: str, payload: dict, headers: dict) -> dict:
         body = ""
         try:
             body = exc.read().decode()
-        except Exception:
-            pass
+        except (OSError, ValueError):
+            logger.debug("Failed to read HTTP error body", exc_info=True)
         raise MergeError(f"PUT {url} failed: HTTP {exc.code} {exc.reason} — {body}") from exc
 
 

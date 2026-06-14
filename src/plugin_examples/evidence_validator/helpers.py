@@ -13,7 +13,7 @@ class ValidatorHelpers:
     bundle_dir: Path
     source_root: Path | None
 
-    def _resolve_sprint_relative_path(self, src: str) -> "Path":
+    def _resolve_sprint_relative_path(self, src: str) -> Path:
         """Resolve a repo-relative source path to an absolute Path.
 
         source_path is stored as ``reports/{sprint_id}/handoff/per-family/{family}/README.md``.

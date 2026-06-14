@@ -71,8 +71,9 @@ class TestEvidenceArtifactCompleteness:
 
     def test_example_gate_result_serializable(self):
         """ExampleGateResult must be serializable to JSON."""
-        from plugin_examples.gates.example_gates import ExampleGateResult
         from dataclasses import asdict
+
+        from plugin_examples.gates.example_gates import ExampleGateResult
 
         eg = ExampleGateResult(
             scenario_id="cells-converter",

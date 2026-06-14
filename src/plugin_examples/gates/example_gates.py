@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 import json
-import logging
 from dataclasses import dataclass, field
 from pathlib import Path
 
-logger = logging.getLogger(__name__)
+from plugin_examples.observability import get_logger
+
+logger = get_logger(__name__)
 
 # ── RISK-10: Gate Isolation Guard ─────────────────────────────────────
 # Gate evaluation functions must remain 100% deterministic.
@@ -92,8 +93,8 @@ def _get_contract_output_kind(project_dir: str, scenario_id: str) -> str:
             kind = manifest.get("contract_output_kind", "")
             if kind:
                 return kind
-        except Exception:
-            pass
+        except (OSError, json.JSONDecodeError, KeyError):
+            logger.debug("Failed to read manifest for output kind", exc_info=True)
     # Fallback: infer from scenario_id
     sid_lower = scenario_id.lower()
     if "textextractor" in sid_lower or "text-extractor" in sid_lower:
@@ -189,8 +190,8 @@ def _advisory_code_contract_validation(project_dir: str, scenario_id: str) -> st
                     "operation_kind": manifest.get("contract_operation_kind", ""),
                     "contract_id": manifest.get("contract_id", ""),
                 }
-        except Exception:
-            pass
+        except (OSError, json.JSONDecodeError, KeyError):
+            logger.debug("Failed to load contract from manifest", exc_info=True)
 
     if not contract_dict:
         # Fall back to store lookup by scenario_id
@@ -330,8 +331,7 @@ def evaluate_example_gates(
         eg.code_contract_validation_status = _advisory_code_contract_validation(epath, sid)
 
         # Strict output validation gate (promotes advisory → blocking when strict mode enabled)
-        if strict_output_validation:
-            if eg.output_validation_status in ("advisory_no_output", "advisory_failed"):
+        if strict_output_validation and eg.output_validation_status in ("advisory_no_output", "advisory_failed"):
                 eg.final_example_verdict = "EXAMPLE_BLOCKED_OUTPUT_VALIDATION_FAILED"
                 eg.blocked_reason = f"Output validation {eg.output_validation_status} (strict mode)"
                 results.append(eg)
@@ -410,10 +410,7 @@ def compute_aggregate_gates(
         agg_run = "blocked"
 
     # Aggregate reviewer — all candidates share same reviewer result
-    if candidates > 0:
-        agg_reviewer = "passed_all"
-    else:
-        agg_reviewer = "blocked"
+    agg_reviewer = "passed_all" if candidates > 0 else "blocked"
 
     return AggregateGateResult(
         total_generated=total,

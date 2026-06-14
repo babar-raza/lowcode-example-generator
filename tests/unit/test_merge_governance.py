@@ -25,8 +25,8 @@ from unittest.mock import MagicMock, patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
 from plugin_examples.publisher.merge_approval_gate import (
-    BLOCKED_MERGE_APPROVAL_REQUIRED,
     BLOCKED_INVALID_MERGE_APPROVAL,
+    BLOCKED_MERGE_APPROVAL_REQUIRED,
     BLOCKED_MERGE_REUSED_LIVE_PUBLISH_TOKEN,
     MERGE_APPROVAL_ENV_VAR,
     MERGE_APPROVAL_EXPECTED_VALUE,

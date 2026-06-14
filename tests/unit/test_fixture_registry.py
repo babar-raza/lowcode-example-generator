@@ -8,16 +8,16 @@ from unittest.mock import patch
 
 import pytest
 
+from plugin_examples.fixture_registry.fixture_fetcher import (
+    check_fixture_availability,
+    fetch_fixtures,
+)
 from plugin_examples.fixture_registry.registry import (
     FixtureEntry,
     FixtureRegistry,
     build_fixture_registry,
     load_fixture_registry,
     write_fixture_registry,
-)
-from plugin_examples.fixture_registry.fixture_fetcher import (
-    check_fixture_availability,
-    fetch_fixtures,
 )
 
 
@@ -113,11 +113,10 @@ class TestGitHub403Handling:
         ]
 
         mock_get = MagicMock(return_value=mock_response)
-        with patch.dict(os.environ, {"GITHUB_TOKEN": "test-token-abc"}):
-            with patch("requests.get", mock_get):
-                from plugin_examples.fixture_registry.registry import _try_contents_api
+        with patch.dict(os.environ, {"GITHUB_TOKEN": "test-token-abc"}), patch("requests.get", mock_get):
+            from plugin_examples.fixture_registry.registry import _try_contents_api
 
-                _try_contents_api("owner", "repo", "main", "path", {"Authorization": "token test-token-abc"})
+            _try_contents_api("owner", "repo", "main", "path", {"Authorization": "token test-token-abc"})
 
         call_kwargs = mock_get.call_args
         headers_used = call_kwargs[1].get("headers") or call_kwargs[0][1] if call_kwargs[0] else {}
@@ -126,9 +125,9 @@ class TestGitHub403Handling:
 
     def test_fixture_registry_warns_without_github_token(self, caplog):
         """Without GITHUB_TOKEN, a WARNING is logged before making requests."""
+        import logging
         import os
         from unittest.mock import MagicMock, patch
-        import logging
 
         mock_response = MagicMock()
         mock_response.status_code = 200
@@ -137,11 +136,10 @@ class TestGitHub403Handling:
         with patch.dict(os.environ, {}, clear=True):
             # Remove GITHUB_TOKEN if present
             os.environ.pop("GITHUB_TOKEN", None)
-            with patch("requests.get", MagicMock(return_value=mock_response)):
-                with caplog.at_level(logging.WARNING, logger="plugin_examples.fixture_registry.registry"):
-                    from plugin_examples.fixture_registry.registry import _fetch_github_file_listing
+            with patch("requests.get", MagicMock(return_value=mock_response)), caplog.at_level(logging.WARNING, logger="plugin_examples.fixture_registry.registry"):
+                from plugin_examples.fixture_registry.registry import _fetch_github_file_listing
 
-                    _fetch_github_file_listing("owner", "repo", "main", "path")
+                _fetch_github_file_listing("owner", "repo", "main", "path")
 
         assert any(
             "GITHUB_TOKEN" in r.message for r in caplog.records
@@ -149,8 +147,8 @@ class TestGitHub403Handling:
 
     def test_github_403_marks_source_unavailable(self):
         """When GitHub returns 403, fixture source is marked unavailable with explicit reason."""
-        from unittest.mock import MagicMock, patch
         import os
+        from unittest.mock import MagicMock, patch
 
         mock_response = MagicMock()
         mock_response.status_code = 403
@@ -172,8 +170,8 @@ class TestGitHub403Handling:
 
     def test_github_403_does_not_return_empty_success(self):
         """When GitHub returns 403, the result is not treated as an empty successful listing."""
-        from unittest.mock import MagicMock, patch
         import os
+        from unittest.mock import MagicMock, patch
 
         mock_response = MagicMock()
         mock_response.status_code = 403
@@ -215,7 +213,8 @@ class TestGitHub403Handling:
 class TestFixtureFetcher:
     def test_dry_run_mode(self, tmp_path):
         """New fetch_fixtures API: dry_run=True returns FetchResult with strategy=dry_run_validated."""
-        from plugin_examples.fixture_registry.fixture_fetcher import fetch_fixtures as new_fetch_fixtures, FetchResult
+        from plugin_examples.fixture_registry.fixture_fetcher import FetchResult
+        from plugin_examples.fixture_registry.fixture_fetcher import fetch_fixtures as new_fetch_fixtures
 
         repo_config = {
             "owner": "aspose-cells",

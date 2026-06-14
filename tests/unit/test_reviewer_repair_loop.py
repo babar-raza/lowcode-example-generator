@@ -14,7 +14,6 @@ from unittest import mock
 
 import pytest
 
-
 _REPO_ROOT = Path(__file__).resolve().parents[2]
 _RUNNER_PATH = _REPO_ROOT / "src" / "plugin_examples" / "runner.py"
 

@@ -19,8 +19,8 @@ all excluded duplicates in a structured report.
 
 from __future__ import annotations
 
-import struct
 import logging
+import struct
 from dataclasses import dataclass, field
 from pathlib import Path
 

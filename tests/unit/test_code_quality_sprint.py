@@ -13,13 +13,20 @@ from pathlib import Path
 
 import pytest
 
-from plugin_examples.generator.packet_builder import (
-    PromptPacket,
-    build_packet,
-    _build_fixture_instruction,
-    _build_fewshot_snippet,
+from plugin_examples.fixture_registry.fixture_factory import (
+    generate_csv,
+    generate_html,
+    generate_json,
+    generate_txt,
+    generate_xlsx,
 )
 from plugin_examples.generator.code_generator import _validate_code, generate_example
+from plugin_examples.generator.packet_builder import (
+    PromptPacket,
+    _build_fewshot_snippet,
+    _build_fixture_instruction,
+    build_packet,
+)
 from plugin_examples.scenario_planner.planner import (
     _build_scenario,
     _infer_input_format,
@@ -28,17 +35,9 @@ from plugin_examples.scenario_planner.planner import (
 from plugin_examples.scenario_planner.runtime_feedback import (
     classify_runtime_failure,
 )
-from plugin_examples.fixture_registry.fixture_factory import (
-    generate_xlsx,
-    generate_csv,
-    generate_txt,
-    generate_json,
-    generate_html,
-)
 from plugin_examples.verifier_bridge.output_validator import (
     validate_output_file_semantic,
 )
-
 
 # --- Test 1: Prompt forbids Console.ReadKey ---
 
@@ -240,6 +239,7 @@ class TestBuildRepairReadsStdoutAndStderr:
         # This is a structural test: the repair prompt in runner.py must reference
         # both build_stdout and build_stderr. We verify by checking the code structure.
         import inspect
+
         from plugin_examples.runner import _stage_validation
 
         source = inspect.getsource(_stage_validation)
@@ -359,6 +359,7 @@ class TestDiscoverLowcodeDoesNotGenerateExamples:
     def test_discover_lowcode_does_not_generate_examples(self):
         """Discovery sweep module must not import generator."""
         import inspect
+
         from plugin_examples import discovery_sweep
 
         source = inspect.getsource(discovery_sweep)
@@ -373,6 +374,7 @@ class TestDiscoverLowcodeDoesNotCallLlm:
     def test_discover_lowcode_does_not_call_llm(self):
         """Discovery sweep module must not import LLM router."""
         import inspect
+
         from plugin_examples import discovery_sweep
 
         source = inspect.getsource(discovery_sweep)
@@ -407,6 +409,7 @@ class TestDiscoverySweepDepsResolution:
     def test_discovery_sweep_resolves_dependencies(self):
         """Source must call resolve_dependencies before building the catalog."""
         import inspect
+
         from plugin_examples import discovery_sweep
 
         source = inspect.getsource(discovery_sweep)
@@ -415,6 +418,7 @@ class TestDiscoverySweepDepsResolution:
     def test_discovery_sweep_passes_deps_to_reflector(self):
         """Source must pass dependency_paths to build_catalog."""
         import inspect
+
         from plugin_examples import discovery_sweep
 
         source = inspect.getsource(discovery_sweep)
@@ -478,6 +482,7 @@ class TestMultiFamilyDiscoveryExpansion:
     def test_discover_lowcode_skips_generation_for_words_pdf(self):
         """Discovery sweep source must not import generator or LLM router."""
         import inspect
+
         from plugin_examples import discovery_sweep
 
         source = inspect.getsource(discovery_sweep)
@@ -489,6 +494,7 @@ class TestMultiFamilyDiscoveryExpansion:
     def test_discovery_writes_family_source_of_truth_proofs(self):
         """Discovery sweep source must call write_source_of_truth_proof."""
         import inspect
+
         from plugin_examples import discovery_sweep
 
         source = inspect.getsource(discovery_sweep)

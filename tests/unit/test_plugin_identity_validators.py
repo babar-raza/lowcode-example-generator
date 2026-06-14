@@ -4,14 +4,15 @@ Sprint: lowcode-plugin-canonical-identity-wave7-20260605
 """
 
 import json
-import pytest
 from pathlib import Path
 
+import pytest
+
 from plugin_examples.fixture_factory.plugin_identity_validators import (
-    run_plugin_identity_validators,
-    PivResult,
-    GENERIC_BARCODE_SLUGS,
     CANONICAL_BARCODE_SLUGS,
+    GENERIC_BARCODE_SLUGS,
+    PivResult,
+    run_plugin_identity_validators,
 )
 
 

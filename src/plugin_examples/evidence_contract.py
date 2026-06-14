@@ -15,14 +15,16 @@ Usage:
 from __future__ import annotations
 
 import json
-import logging
 import re
 import zipfile
+from collections.abc import Sequence
 from dataclasses import dataclass, field
+from datetime import UTC
 from pathlib import Path
-from typing import Sequence
 
-logger = logging.getLogger(__name__)
+from plugin_examples.observability import get_logger
+
+logger = get_logger(__name__)
 
 
 # ---------------------------------------------------------------------------
@@ -2408,7 +2410,8 @@ def generate_validation_proof(
     dict with validation proof including zip_path, sha256, and result.
     """
     import hashlib as _hl
-    from datetime import datetime as _dt, timezone as _tz
+    from datetime import datetime as _dt
+    from datetime import timezone as _tz
 
     zip_path = Path(zip_path)
     if not zip_path.exists():
@@ -2425,7 +2428,7 @@ def generate_validation_proof(
         "validated_bundle": str(zip_path),
         "validated_bundle_sha256": sha256,
         "validated_bundle_size_bytes": zip_path.stat().st_size,
-        "validation_timestamp": _dt.now(_tz.utc).isoformat(),
+        "validation_timestamp": _dt.now(UTC).isoformat(),
         "result": {
             "passed": result.passed,
             "verdict": result.verdict,

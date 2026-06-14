@@ -3,18 +3,17 @@
 from __future__ import annotations
 
 import json
-import logging
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from plugin_examples.evidence_validator.models import RuleResult, ValidationReport
 from plugin_examples.evidence_validator.helpers import ValidatorHelpers
+from plugin_examples.evidence_validator.models import RuleResult, ValidationReport
 from plugin_examples.evidence_validator.rules import (
-    CoreRules,
-    SemanticRules,
     ContentAuditRules,
+    CoreRules,
     RemoteProofRules,
+    SemanticRules,
     Sprint67Rules,
     Sprint68to69Rules,
     Sprint70to71Rules,
@@ -25,8 +24,9 @@ from plugin_examples.evidence_validator.rules import (
     Sprint87to88Rules,
     Sprint89Rules,
 )
+from plugin_examples.observability import get_logger
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 _UNCHECKED_TODO_PATTERN = re.compile(r"^- \[ \]", re.MULTILINE)
 _GIT_HEADER_PATTERNS = [
@@ -69,7 +69,7 @@ class EvidenceValidator(
         self.bundle_dir = bundle_dir
         self.source_root = source_root
 
-    def validate(self, exclude_rule_ids: "set[str] | None" = None) -> ValidationReport:
+    def validate(self, exclude_rule_ids: set[str] | None = None) -> ValidationReport:
         """Run all validation rules and return a report.
 
         Args:

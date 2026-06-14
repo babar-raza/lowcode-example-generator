@@ -17,6 +17,7 @@ import logging
 import os
 import subprocess
 from dataclasses import dataclass, field
+from datetime import UTC
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
@@ -179,7 +180,7 @@ def run_target_repo_health_check(
     if families is None:
         families = list(TARGET_REPOS.keys())
 
-    report = TargetRepoHealthReport(generated_at=datetime.now(timezone.utc).isoformat())
+    report = TargetRepoHealthReport(generated_at=datetime.now(UTC).isoformat())
 
     for family in families:
         if family not in TARGET_REPOS:

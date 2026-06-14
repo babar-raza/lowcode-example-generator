@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import os
+from datetime import UTC
 from pathlib import Path
 
 
@@ -30,8 +31,8 @@ def _create_metrics_session(args, *, command: str, family: str = "", repo_root: 
     if not metrics_enabled:
         return None, None
 
-    from plugin_examples.metrics.models import MetricsCollector
     from plugin_examples.metrics.config import load_metrics_config
+    from plugin_examples.metrics.models import MetricsCollector
     from plugin_examples.metrics.session import MetricsSession
 
     collector = MetricsCollector()
@@ -45,7 +46,7 @@ def _create_metrics_session(args, *, command: str, family: str = "", repo_root: 
 
     from datetime import datetime, timezone
 
-    ts = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
+    ts = datetime.now(UTC).strftime("%Y%m%d-%H%M%S")
     run_id = f"metrics-{command}-{family or 'global'}-{ts}"
 
     # Create evidence dir for non-run commands

@@ -42,6 +42,7 @@ def handle(args) -> int:
     """Handle the publish-pr-batch command."""
     import json as _json
     from pathlib import Path as _Path
+
     from plugin_examples.publisher.batch_publisher import run_batch_publish, write_batch_report
 
     repo_root = _Path(__file__).resolve().parents[3]

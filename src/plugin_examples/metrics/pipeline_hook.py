@@ -28,16 +28,16 @@ def finalize_metrics(
     Never raises unless strict=True and an error occurs.
     """
     from plugin_examples.metrics.config import MetricsConfig
-    from plugin_examples.metrics.payload_builder import build_payload
-    from plugin_examples.metrics.validator import validate_payload
     from plugin_examples.metrics.evidence import (
         write_llm_calls_jsonl,
-        write_run_summary,
         write_payload,
-        write_validation_result,
         write_post_result,
+        write_run_summary,
+        write_validation_result,
     )
+    from plugin_examples.metrics.payload_builder import build_payload
     from plugin_examples.metrics.poster import post_metrics
+    from plugin_examples.metrics.validator import validate_payload
 
     result: dict[str, Any] = {"metrics_enabled": True}
     evidence_dir = getattr(ctx, "evidence_dir", None)

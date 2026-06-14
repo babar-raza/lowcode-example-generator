@@ -114,8 +114,7 @@ class ContentAuditRules:
         contradictions = []
         if total_claimed is not None and len(records) != total_claimed:
             contradictions.append(f"total_publication_artifacts={total_claimed} but len(records)={len(records)}")
-        if std is not None and special is not None and total_claimed is not None:
-            if std + special != total_claimed:
+        if std is not None and special is not None and total_claimed is not None and std + special != total_claimed:
                 contradictions.append(
                     f"standard({std}) + special({special}) = {std + special} != total({total_claimed})"
                 )

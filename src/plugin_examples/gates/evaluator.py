@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from plugin_examples.gates.models import GateResult, GateVerdict
 
-
 # Hard-stop stage names (pipeline halts on failure).
 _HARD_STOP_STAGES = frozenset(
     {
@@ -311,11 +310,10 @@ def _compute_verdict(
 
     # Reviewer gate
     rev_gate = next((g for g in gates if g.gate_id == "gate_reviewer"), None)
-    if rev_gate:
-        if rev_gate.status == "failed" and rev_gate.required:
-            if rev_gate.failure_reason and "unavailable" in rev_gate.failure_reason.lower():
-                return "BLOCKED_REVIEWER_UNAVAILABLE"
-            return "BLOCKED_REVIEWER_FAILED"
+    if rev_gate and rev_gate.status == "failed" and rev_gate.required:
+        if rev_gate.failure_reason and "unavailable" in rev_gate.failure_reason.lower():
+            return "BLOCKED_REVIEWER_UNAVAILABLE"
+        return "BLOCKED_REVIEWER_FAILED"
 
     # Partitioned verdict: check if ALL or PARTIAL examples passed
     partial_runtime = run_passed > 0 and run_passed < build_passed

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta, timezone
 from pathlib import Path
 
 import pytest
@@ -12,7 +12,6 @@ from plugin_examples.website_catalog.drift_detector import (
     is_discovery_stale,
     make_discovery_metadata,
 )
-
 
 # ── is_discovery_stale ────────────────────────────────────────────────────────
 
@@ -23,7 +22,7 @@ def test_fresh_metadata_not_stale():
 
 
 def test_expired_metadata_is_stale():
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     meta = {
         "validated_at": (now - timedelta(days=10)).isoformat(timespec="seconds"),
         "expires_at": (now - timedelta(days=3)).isoformat(timespec="seconds"),
@@ -82,7 +81,7 @@ def test_read_only_mode_warns_on_stale_does_not_raise():
     # We test the is_discovery_stale function itself here.
     # The gate in runner.py wraps this; runner.py integration test is not needed
     # since it requires the full pipeline stack.
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     stale_meta = {
         "expires_at": (now - timedelta(hours=1)).isoformat(timespec="seconds"),
         "run_id": "old",
@@ -96,7 +95,7 @@ def test_read_only_mode_warns_on_stale_does_not_raise():
 
 def test_stale_evidence_is_correctly_identified_for_publication_block():
     """Verify that a stale evidence file would trigger a block in publication mode."""
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     stale_meta = {
         "expires_at": (now - timedelta(days=8)).isoformat(timespec="seconds"),
         "run_id": "old-run",

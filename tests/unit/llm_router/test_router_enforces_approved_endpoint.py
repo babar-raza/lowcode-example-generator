@@ -35,7 +35,7 @@ class TestCallProviderEnforcesApprovedFamily:
 
     def test_unapproved_provider_raises_llm_provider_error(self):
         """Calling _call_provider with an unapproved family raises LLMProviderError."""
-        from plugin_examples.llm_router.router import _call_provider, LLMProviderError
+        from plugin_examples.llm_router.router import LLMProviderError, _call_provider
         with pytest.raises(LLMProviderError) as exc_info:
             _call_provider("unapproved_vendor_xyz", "test prompt")
         assert "not approved by policy" in str(exc_info.value)
@@ -43,7 +43,7 @@ class TestCallProviderEnforcesApprovedFamily:
 
     def test_unapproved_provider_error_lists_approved_families(self):
         """Error message from unapproved provider lists the approved families."""
-        from plugin_examples.llm_router.router import _call_provider, LLMProviderError
+        from plugin_examples.llm_router.router import LLMProviderError, _call_provider
         with pytest.raises(LLMProviderError) as exc_info:
             _call_provider("openai_generic", "test prompt")
         # The error should hint at what IS approved

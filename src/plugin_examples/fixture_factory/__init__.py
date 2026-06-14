@@ -1,29 +1,29 @@
 """Fixture factory: programmatic test fixture generation for dry-run packages."""
 
 from .generators import (
+    FixtureResult,
     generate_barcode_png,
-    generate_minimal_png,
     generate_bmp_fixture,
-    generate_svg_fixture,
-    generate_html_fixture,
-    generate_zip_fixture,
-    generate_geojson_fixture,
-    generate_obj_fixture,
-    generate_xbrl_fixture,
-    generate_ps_fixture,
-    generate_note_xml_fixture,
     generate_drawing_xml_fixture,
     generate_eps_fixture,
+    generate_geojson_fixture,
+    generate_html_fixture,
+    generate_latex_fixture,
+    generate_minimal_png,
+    generate_note_xml_fixture,
+    generate_obj_fixture,
+    generate_ps_fixture,
     generate_psd_fixture,
     generate_rich_geojson_fixture,
-    generate_latex_fixture,
-    FixtureResult,
+    generate_svg_fixture,
+    generate_xbrl_fixture,
+    generate_zip_fixture,
 )
 from .validators import (
-    validate_output_file,
-    validate_package_outputs,
     OutputValidationResult,
     PackageValidationResult,
+    validate_output_file,
+    validate_package_outputs,
 )
 
 __all__ = [

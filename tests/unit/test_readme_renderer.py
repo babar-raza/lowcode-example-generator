@@ -8,7 +8,6 @@ from unittest.mock import MagicMock
 
 import pytest
 
-
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -99,7 +98,7 @@ class TestRootReadmeRenderer:
 
     def test_root_readme_renderer_uses_family_config(self):
         """build_readme_context must populate all required fields from family config."""
-        from plugin_examples.publisher.readme_renderer import build_readme_context, ReadmeContext
+        from plugin_examples.publisher.readme_renderer import ReadmeContext, build_readme_context
 
         cfg = _make_family_config(
             family="cells",
@@ -837,8 +836,9 @@ class TestManifestApiSymbolExtraction:
 
     def test_build_readme_context_reads_manifest_when_package_path_given(self, tmp_path):
         """When package_path is set, build_readme_context reads manifest for api_class."""
-        from plugin_examples.publisher.readme_renderer import build_readme_context
         import json
+
+        from plugin_examples.publisher.readme_renderer import build_readme_context
 
         # Create manifest + Program.cs at expected path
         example_dir = tmp_path / "examples" / "cells" / "lowcode" / "html-converter"
@@ -1058,8 +1058,8 @@ class TestReadmeRendererAsposeNetUrls:
 
     def test_rendered_cells_readme_has_no_aspose_com(self):
         """Full render of Cells README must contain no forbidden aspose.com links."""
-        from plugin_examples.publisher.readme_renderer import render_readme
         from plugin_examples.publisher.aspose_links import find_forbidden_aspose_com_links
+        from plugin_examples.publisher.readme_renderer import render_readme
 
         ctx = self._build_ctx("cells")
         rendered = render_readme(ctx)
@@ -1068,8 +1068,8 @@ class TestReadmeRendererAsposeNetUrls:
 
     def test_rendered_words_readme_has_no_aspose_com(self):
         """Full render of Words README must contain no forbidden aspose.com links."""
-        from plugin_examples.publisher.readme_renderer import render_readme
         from plugin_examples.publisher.aspose_links import find_forbidden_aspose_com_links
+        from plugin_examples.publisher.readme_renderer import render_readme
 
         cfg = _make_family_config(
             family="words",

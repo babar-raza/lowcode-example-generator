@@ -21,7 +21,6 @@ from src.plugin_examples.fixture_factory.registry_bundle_completeness_validators
     run_all_rbc_validators,
 )
 
-
 # ─── Helpers ──────────────────────────────────────────────────────────────────
 
 

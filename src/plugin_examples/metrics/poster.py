@@ -6,7 +6,7 @@ import hashlib
 import json
 import logging
 import os
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -113,10 +113,7 @@ def post_metrics(
 
     # Google Apps Script uses token as query parameter
     endpoint = config.api_endpoint
-    if "?" in endpoint:
-        endpoint = f"{endpoint}&token={token}"
-    else:
-        endpoint = f"{endpoint}?token={token}"
+    endpoint = f"{endpoint}&token={token}" if "?" in endpoint else f"{endpoint}?token={token}"
 
     headers = {"Content-Type": "application/json"}
 
@@ -144,7 +141,7 @@ def post_metrics(
             {
                 "run_id": run_id,
                 "job_type": job_type,
-                "posted_at": datetime.now(timezone.utc).isoformat(),
+                "posted_at": datetime.now(UTC).isoformat(),
                 "http_status": http_status,
                 "payload_hash": _payload_hash(payload),
                 "dry_run": False,

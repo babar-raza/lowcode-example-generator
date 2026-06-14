@@ -2,27 +2,14 @@
 
 from __future__ import annotations
 
+import io
 import json
+import zipfile as _zipfile
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 import pytest
 
-from plugin_examples.verifier_bridge.dotnet_runner import (
-    DotnetResult,
-    ValidationResult,
-    run_dotnet_validation,
-    write_validation_results,
-)
-import io
-import zipfile as _zipfile
-
-from plugin_examples.verifier_bridge.output_validator import (
-    OutputValidation,
-    validate_output,
-    validate_output_file_semantic,
-    write_output_validation,
-)
 from plugin_examples.verifier_bridge.bridge import (
     ReviewerResult,
     ReviewerUnavailableError,
@@ -30,7 +17,18 @@ from plugin_examples.verifier_bridge.bridge import (
     run_example_reviewer,
     write_reviewer_results,
 )
-
+from plugin_examples.verifier_bridge.dotnet_runner import (
+    DotnetResult,
+    ValidationResult,
+    run_dotnet_validation,
+    write_validation_results,
+)
+from plugin_examples.verifier_bridge.output_validator import (
+    OutputValidation,
+    validate_output,
+    validate_output_file_semantic,
+    write_output_validation,
+)
 
 # --- Tests: dotnet_runner ---
 

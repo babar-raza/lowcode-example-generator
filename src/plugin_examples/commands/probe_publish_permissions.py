@@ -40,9 +40,10 @@ def add_parser(subparsers):
 
 def handle(args) -> int:
     """Handle the probe-publish-permissions command."""
-    from plugin_examples.family_config import load_family_config, DisabledFamilyError
-    from plugin_examples.publisher.publish_permission_probe import probe_publish_permissions
     from pathlib import Path as _Path
+
+    from plugin_examples.family_config import DisabledFamilyError, load_family_config
+    from plugin_examples.publisher.publish_permission_probe import probe_publish_permissions
 
     repo_root = _Path(__file__).resolve().parents[3]
     msession, mcollector = _create_metrics_session(

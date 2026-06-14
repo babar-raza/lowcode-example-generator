@@ -43,7 +43,7 @@ class AocResult:
 # ── AOC-01..AOC-05: Output File Integrity ─────────────────────────────────
 
 
-def aoc_01_output_dir_exists(pkg_dir: Path, key: str) -> Optional[AocViolation]:
+def aoc_01_output_dir_exists(pkg_dir: Path, key: str) -> AocViolation | None:
     """AOC-01: output/ directory must exist after build+run."""
     if not (pkg_dir / "output").exists():
         return AocViolation("AOC-01", key, "output/ directory missing after run", f"No output/ dir in {pkg_dir}")
@@ -87,7 +87,7 @@ def aoc_02_no_zero_byte_primary_output(pkg_dir: Path, key: str) -> list[AocViola
     return violations
 
 
-def aoc_03_output_validation_verdict_matches_run(pkg_dir: Path, key: str) -> Optional[AocViolation]:
+def aoc_03_output_validation_verdict_matches_run(pkg_dir: Path, key: str) -> AocViolation | None:
     """AOC-03: output-validation.json verdict must match actual output state."""
     ov_path = pkg_dir / "output-validation.json"
     if not ov_path.exists():
@@ -114,7 +114,7 @@ def aoc_03_output_validation_verdict_matches_run(pkg_dir: Path, key: str) -> Opt
     return None
 
 
-def aoc_04_no_fabricated_output(pkg_dir: Path, key: str) -> Optional[AocViolation]:
+def aoc_04_no_fabricated_output(pkg_dir: Path, key: str) -> AocViolation | None:
     """AOC-04: run.log must exist and indicate actual execution."""
     run_log = pkg_dir / "run.log"
     if not run_log.exists():
@@ -140,7 +140,7 @@ def aoc_04_no_fabricated_output(pkg_dir: Path, key: str) -> Optional[AocViolatio
     return None
 
 
-def aoc_05_no_stale_error_snippet_on_pass(pkg_dir: Path, key: str) -> Optional[AocViolation]:
+def aoc_05_no_stale_error_snippet_on_pass(pkg_dir: Path, key: str) -> AocViolation | None:
     """AOC-05: PASS packages must not have build errors in build.log."""
     ov_path = pkg_dir / "output-validation.json"
     build_log = pkg_dir / "build.log"
@@ -166,7 +166,7 @@ def aoc_05_no_stale_error_snippet_on_pass(pkg_dir: Path, key: str) -> Optional[A
 # ── AOC-06..AOC-09: Source Provenance Integrity ───────────────────────────
 
 
-def aoc_06_provenance_json_valid(pkg_dir: Path, key: str) -> Optional[AocViolation]:
+def aoc_06_provenance_json_valid(pkg_dir: Path, key: str) -> AocViolation | None:
     """AOC-06: source-provenance.json must be valid JSON with required fields."""
     sp_path = pkg_dir / "source-provenance.json"
     if not sp_path.exists():
@@ -207,7 +207,7 @@ def aoc_07_no_double_brace_in_json(pkg_dir: Path, key: str) -> list[AocViolation
     return violations
 
 
-def aoc_08_canonical_url_not_placeholder(pkg_dir: Path, key: str) -> Optional[AocViolation]:
+def aoc_08_canonical_url_not_placeholder(pkg_dir: Path, key: str) -> AocViolation | None:
     """AOC-08: canonical_url must not be a placeholder or empty."""
     sp_path = pkg_dir / "source-provenance.json"
     if not sp_path.exists():
@@ -265,21 +265,21 @@ def aoc_09_package_manifest_consistent(pkg_dir: Path, key: str) -> list[AocViola
 # ── AOC-10..AOC-12: Build/Run Log Integrity ───────────────────────────────
 
 
-def aoc_10_restore_log_exists(pkg_dir: Path, key: str) -> Optional[AocViolation]:
+def aoc_10_restore_log_exists(pkg_dir: Path, key: str) -> AocViolation | None:
     """AOC-10: restore.log must exist."""
     if not (pkg_dir / "restore.log").exists():
         return AocViolation("AOC-10", key, "restore.log missing", f"No restore.log in {pkg_dir}")
     return None
 
 
-def aoc_11_build_log_exists(pkg_dir: Path, key: str) -> Optional[AocViolation]:
+def aoc_11_build_log_exists(pkg_dir: Path, key: str) -> AocViolation | None:
     """AOC-11: build.log must exist."""
     if not (pkg_dir / "build.log").exists():
         return AocViolation("AOC-11", key, "build.log missing", f"No build.log in {pkg_dir}")
     return None
 
 
-def aoc_12_no_exception_in_pass_run(pkg_dir: Path, key: str) -> Optional[AocViolation]:
+def aoc_12_no_exception_in_pass_run(pkg_dir: Path, key: str) -> AocViolation | None:
     """AOC-12: PASS packages must not have unhandled exceptions in run.log."""
     ov_path = pkg_dir / "output-validation.json"
     run_log = pkg_dir / "run.log"
@@ -298,8 +298,8 @@ def aoc_12_no_exception_in_pass_run(pkg_dir: Path, key: str) -> Optional[AocViol
 
 
 def aoc_13_dryrun_path_matches_actual(
-    pkg_dir: Path, key: str, registry_path: Optional[Path] = None
-) -> Optional[AocViolation]:
+    pkg_dir: Path, key: str, registry_path: Path | None = None
+) -> AocViolation | None:
     """AOC-13: If registry has dryrun_package_path, it must match actual pkg_dir."""
     if registry_path is None:
         return None
@@ -318,7 +318,7 @@ def aoc_13_dryrun_path_matches_actual(
     return None
 
 
-def aoc_14_no_duplicate_output_files(pkg_dir: Path, key: str) -> Optional[AocViolation]:
+def aoc_14_no_duplicate_output_files(pkg_dir: Path, key: str) -> AocViolation | None:
     """AOC-14: output/ must not contain duplicate files by size (possible copy-paste error)."""
     output_dir = pkg_dir / "output"
     if not output_dir.exists():
@@ -345,7 +345,7 @@ def aoc_14_no_duplicate_output_files(pkg_dir: Path, key: str) -> Optional[AocVio
 # ── AOC-15..AOC-16: Publication Readiness ─────────────────────────────────
 
 
-def aoc_15_readme_present(pkg_dir: Path, key: str) -> Optional[AocViolation]:
+def aoc_15_readme_present(pkg_dir: Path, key: str) -> AocViolation | None:
     """AOC-15: README.md must be present in package root."""
     if not (pkg_dir / "README.md").exists():
         return AocViolation(
@@ -354,7 +354,7 @@ def aoc_15_readme_present(pkg_dir: Path, key: str) -> Optional[AocViolation]:
     return None
 
 
-def aoc_16_program_cs_present(pkg_dir: Path, key: str) -> Optional[AocViolation]:
+def aoc_16_program_cs_present(pkg_dir: Path, key: str) -> AocViolation | None:
     """AOC-16: Program.cs must be present (not just a compiled binary)."""
     if not (pkg_dir / "Program.cs").exists():
         return AocViolation("AOC-16", key, "Program.cs missing — source not provided", f"No Program.cs in {pkg_dir}")
@@ -364,7 +364,7 @@ def aoc_16_program_cs_present(pkg_dir: Path, key: str) -> Optional[AocViolation]
 # ── Main runner ─────────────────────────────────────────────────────────────
 
 
-def run_anti_overclaiming_checks(pkg_dir: Path, key: str, registry_path: Optional[Path] = None) -> AocResult:
+def run_anti_overclaiming_checks(pkg_dir: Path, key: str, registry_path: Path | None = None) -> AocResult:
     """Run all 16 anti-overclaiming rules on a single package."""
     result = AocResult(package_key=key, package_dir=str(pkg_dir))
     violations = []
@@ -426,7 +426,7 @@ def run_anti_overclaiming_checks(pkg_dir: Path, key: str, registry_path: Optiona
     return result
 
 
-def run_all_anti_overclaiming_checks(examples_dir: Path, registry_path: Optional[Path] = None) -> dict:
+def run_all_anti_overclaiming_checks(examples_dir: Path, registry_path: Path | None = None) -> dict:
     """Run all 16 AOC rules on every package in examples_dir."""
     all_results = {}
     for fam_dir in sorted(examples_dir.iterdir()):

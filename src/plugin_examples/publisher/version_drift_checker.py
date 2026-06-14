@@ -14,6 +14,7 @@ import json
 import logging
 import urllib.request
 from dataclasses import dataclass, field
+from datetime import UTC
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
@@ -179,7 +180,7 @@ def run_version_drift_check(
     if families is None:
         families = list(LOWCODE_FAMILIES.keys())
 
-    report = VersionDriftReport(generated_at=datetime.now(timezone.utc).isoformat())
+    report = VersionDriftReport(generated_at=datetime.now(UTC).isoformat())
 
     for family in families:
         if family not in LOWCODE_FAMILIES:

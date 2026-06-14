@@ -28,7 +28,6 @@ Rules:
 
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import List
 
 
 @dataclass
@@ -41,7 +40,7 @@ class LcvViolation:
 
 @dataclass
 class LcvResult:
-    violations: List[LcvViolation] = field(default_factory=list)
+    violations: list[LcvViolation] = field(default_factory=list)
 
     @property
     def passes(self) -> bool:
@@ -107,9 +106,7 @@ def check_lcv_02_no_complete_with_pending_taskcards(closeout: dict, result: LcvR
     complete = int(taskcards.get("complete", 0))
     total = int(taskcards.get("total", 0))
     pending = int(taskcards.get("pending", 0))
-    if total > 0 and pending > 0:
-        # Only error if iv_prerequisite_satisfied is not True
-        if not taskcards.get("iv_prerequisite_satisfied", False):
+    if total > 0 and pending > 0 and not taskcards.get("iv_prerequisite_satisfied", False):
             _add(
                 result,
                 "LCV-02",

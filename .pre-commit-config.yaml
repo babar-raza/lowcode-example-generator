@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.4.10
+    rev: v0.15.17
     hooks:
       - id: ruff
         # Scoped to src/ and tests/ to match CI workflow scope.
@@ -22,6 +22,14 @@ repos:
       - id: trailing-whitespace
       - id: check-merge-conflict
 
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.8.3
+    hooks:
+      - id: bandit
+        args: ["-c", "pyproject.toml", "-r", "src/"]
+        additional_dependencies: ["bandit[toml]"]
+        pass_filenames: false
+
   - repo: local
     hooks:
       - id: compileall
@@ -30,3 +38,9 @@ repos:
         language: system
         pass_filenames: false
         types: [python]
+      - id: version-changelog-sync
+        name: Version/CHANGELOG sync check
+        entry: python -c "import sys; sys.path.insert(0,'src'); from plugin_examples.fixture_factory.engineering_hygiene_validators import check_version_changelog_sync; r=check_version_changelog_sync(); print(r.message); sys.exit(0 if r.passed else 1)"
+        language: system
+        pass_filenames: false
+        files: (pyproject\.toml|CHANGELOG\.md)

@@ -36,7 +36,7 @@ import os
 import shutil
 import subprocess
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -304,8 +304,8 @@ def _list_github_files(
                     for f in cached
                     if Path(f["path"]).suffix.lower() in extensions and f.get("size", 0) <= max_file_size
                 ]
-            except Exception:
-                pass
+            except (OSError, json.JSONDecodeError, KeyError, TypeError):
+                logger.debug("Failed to read fixture listing cache", exc_info=True)
 
     api_url = f"repos/{owner}/{repo}/git/trees/{branch}:{tree_path}?recursive=1"
     env = {**os.environ, "GITHUB_TOKEN": gh_token}
@@ -410,8 +410,8 @@ def _load_manifest(path: Path) -> dict:
     if path.exists():
         try:
             return json.loads(path.read_text(encoding="utf-8"))
-        except Exception:
-            pass
+        except (OSError, json.JSONDecodeError):
+            logger.debug("Failed to load manifest from %s", path, exc_info=True)
     return {}
 
 
@@ -420,4 +420,4 @@ def _save_manifest(path: Path, manifest: dict) -> None:
 
 
 def _utcnow() -> str:
-    return datetime.now(timezone.utc).isoformat(timespec="seconds")
+    return datetime.now(UTC).isoformat(timespec="seconds")

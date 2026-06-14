@@ -14,7 +14,7 @@ import logging
 import threading
 import time
 from dataclasses import asdict, dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
@@ -78,7 +78,7 @@ class DecisionAuditLog:
     ) -> DecisionAuditRecord:
         """Append one audit record to the log file and return it."""
         rec = DecisionAuditRecord(
-            timestamp=datetime.now(timezone.utc).isoformat(timespec="milliseconds"),
+            timestamp=datetime.now(UTC).isoformat(timespec="milliseconds"),
             run_id=self._run_id,
             provider=provider,
             model=model,

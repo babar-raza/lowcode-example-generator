@@ -8,9 +8,9 @@ from pathlib import Path
 import jsonschema
 import pytest
 
+import plugin_examples.family_config.validator as _validator_module
 from plugin_examples.family_config.models import PluginDetection
 from plugin_examples.family_config.validator import validate_family_config
-import plugin_examples.family_config.validator as _validator_module
 
 # ---------------------------------------------------------------------------
 # Paths

@@ -6,8 +6,8 @@ detect stale versions, missing sections, missing/extra examples, and invalid con
 
 from __future__ import annotations
 
-import re
 import logging
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -256,10 +256,9 @@ def audit_readme(readme_content: str, context) -> ReadmeAuditResult:
         if "Aspose.Words" in readme_content or "aspose-words-net" in readme_content:
             result.warnings.append("Words-specific content detected in Cells README")
             failures.append("Words content found in Cells README")
-    elif family == "words":
-        if "Aspose.Cells" in readme_content or "aspose-cells-net" in readme_content:
-            result.warnings.append("Cells-specific content detected in Words README")
-            failures.append("Cells content found in Words README")
+    elif family == "words" and ("Aspose.Cells" in readme_content or "aspose-cells-net" in readme_content):
+        result.warnings.append("Cells-specific content detected in Words README")
+        failures.append("Cells content found in Words README")
 
     # --- 13. Format-claim validation (table columns vs context) ---
     for ex in examples:
@@ -381,17 +380,16 @@ def audit_readme(readme_content: str, context) -> ReadmeAuditResult:
                 result.extractor_output_warnings.append(
                     f"{name}: image extractor output display '{out_display}' missing N-files indicator"
                 )
-        elif op_kind == "directory_output" and out_display:
-            if "dir" not in out_display.lower():
-                result.extractor_output_warnings.append(
-                    f"{name}: directory output display '{out_display}' missing directory indicator"
-                )
+        elif op_kind == "directory_output" and out_display and "dir" not in out_display.lower():
+            result.extractor_output_warnings.append(
+                f"{name}: directory output display '{out_display}' missing directory indicator"
+            )
 
     # --- 20. FormatContract cross-check (advisory, non-fatal) ---
     # Compare each example's rendered format display against contract canonical values
     if family:
         try:
-            from plugin_examples.format_authority.store import get_contract, MissingFormatContractError
+            from plugin_examples.format_authority.store import MissingFormatContractError, get_contract
 
             for ex in examples:
                 if not isinstance(ex, dict):
@@ -419,10 +417,10 @@ def audit_readme(readme_content: str, context) -> ReadmeAuditResult:
     # --- URL domain validation (aspose.net link policy) ---
     from plugin_examples.publisher.aspose_links import (
         find_forbidden_aspose_com_links,
+        find_missing_required_links,
         find_platform_path_errors,
         find_wrong_blog_links,
         find_wrong_contact_links,
-        find_missing_required_links,
     )
 
     # Check 8: Forbidden aspose.com product/docs/ref/blog/forum/purchase/about links

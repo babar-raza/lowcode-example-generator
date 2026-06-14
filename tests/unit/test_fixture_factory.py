@@ -7,22 +7,22 @@ from pathlib import Path
 import pytest
 
 from plugin_examples.fixture_factory.generators import (
-    generate_minimal_png,
-    generate_bmp_fixture,
-    generate_svg_fixture,
-    generate_html_fixture,
-    generate_zip_fixture,
-    _build_png,
     _build_bmp,
-)
-from plugin_examples.fixture_factory.validators import (
-    validate_output_file,
-    validate_package_outputs,
-    detect_format,
-    OutputValidationResult,
-    PackageValidationResult,
+    _build_png,
+    generate_bmp_fixture,
+    generate_html_fixture,
+    generate_minimal_png,
+    generate_svg_fixture,
+    generate_zip_fixture,
 )
 from plugin_examples.fixture_factory.package_invariants import check_package
+from plugin_examples.fixture_factory.validators import (
+    OutputValidationResult,
+    PackageValidationResult,
+    detect_format,
+    validate_output_file,
+    validate_package_outputs,
+)
 
 
 @pytest.fixture

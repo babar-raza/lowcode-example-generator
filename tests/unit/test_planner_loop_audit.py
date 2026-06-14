@@ -75,7 +75,7 @@ class TestAuditTrailWritten:
             entries = data["audit_trail"]
             execute_entries = [e for e in entries if e["decision"] == "EXECUTE"]
             assert len(execute_entries) >= 1
-            assert execute_entries[0]["policy_rule"] == "handler_dispatch"
+            assert execute_entries[0]["policy_rule"].startswith("agent_dispatch:") or execute_entries[0]["policy_rule"] == "legacy_handler_dispatch"
 
     def test_audit_entry_for_approval_gated_defer(self):
         from types import SimpleNamespace

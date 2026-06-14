@@ -230,6 +230,24 @@ def fsv_08_no_skip_stages_for_fallback(
                    f"(ready={len(ready)}, total={len(entries)}) — "
                    f"{'no skip stages' if passed else 'MISSING required fields for stage parity'}",
         ))
+
+        # Advisory: warn if selected_api_mapping sub-fields are incomplete
+        # (generate_code_from_registry depends on constructor/method_name)
+        api_mapping_fields = {"constructor", "method_name"}
+        for e in complete:
+            sam = e.get("selected_api_mapping")
+            if sam is None:
+                continue
+            missing = [f for f in api_mapping_fields if not sam.get(f)]
+            if missing:
+                slug = e.get("plugin_slug", "unknown")
+                results.append(FsvResult(
+                    rule_id="FSV-08",
+                    passed=True,  # advisory — does not fail
+                    detail=f"{family}/{slug}: selected_api_mapping missing "
+                           f"{', '.join(missing)} — code generation will use defaults",
+                ))
+
     return results
 
 

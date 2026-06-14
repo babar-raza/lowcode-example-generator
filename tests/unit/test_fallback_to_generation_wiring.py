@@ -16,7 +16,6 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -208,10 +207,11 @@ def test_fallback_lookup_writes_json_artifact(tmp_path):
 # ---------------------------------------------------------------------------
 
 
+@pytest.mark.legacy
 def test_generation_routes_to_nonlowcode_when_fallback_candidates_set(tmp_path):
     """When ctx.fallback_candidates is non-empty and no LowCode scenarios, use non-LowCode path."""
     from plugin_examples.fixture_factory.shared_downstream_executor import PluginCandidate
-    from plugin_examples.runner import _generate_nonlowcode_examples, PipelineContext
+    from plugin_examples.runner import PipelineContext, _generate_nonlowcode_examples
 
     ctx = MagicMock(spec=PipelineContext)
     ctx.family = "barcode"
@@ -233,9 +233,10 @@ def test_generation_routes_to_nonlowcode_when_fallback_candidates_set(tmp_path):
     assert result.get("examples_generated", 0) >= 1
 
 
+@pytest.mark.legacy
 def test_generation_skips_when_no_scenarios_and_no_fallback_candidates(tmp_path):
     """When no LowCode scenarios and no fallback candidates, skip with no_candidates reason."""
-    from plugin_examples.runner import _generate_nonlowcode_examples, PipelineContext
+    from plugin_examples.runner import PipelineContext, _generate_nonlowcode_examples
 
     ctx = MagicMock(spec=PipelineContext)
     ctx.family = "barcode"

@@ -124,3 +124,162 @@ class TestValidateAll:
         epub_results = [r for r in fsv02_results if "epub" in r.detail]
         if epub_results:
             assert not epub_results[0].passed, "epub.yml has discovery_blocked which is not in schema enum"
+
+
+class TestFsv07FallbackHasGenerationReadyEntries:
+    """FSV-07: discovery_only+fallback families must have PROBE_CONFIRMED entries."""
+
+    def test_passes_with_probe_confirmed(self, tmp_path: Path) -> None:
+        from plugin_examples.fixture_factory.family_status_validators import (
+            fsv_07_fallback_has_generation_ready_entries,
+        )
+
+        registry_dir = tmp_path / "registry"
+        registry_dir.mkdir()
+        (registry_dir / "barcode.yaml").write_text(
+            "entries:\n  - plugin_slug: gen\n    status: PROBE_CONFIRMED\n"
+        )
+        configs = [_cfg("barcode", "discovery_only", plugin_detection={"fallback_strategy": "capability_registry"})]
+        results = fsv_07_fallback_has_generation_ready_entries(configs, registry_dir)
+        assert len(results) == 1
+        assert results[0].passed is True
+
+    def test_fails_with_no_probe_confirmed(self, tmp_path: Path) -> None:
+        from plugin_examples.fixture_factory.family_status_validators import (
+            fsv_07_fallback_has_generation_ready_entries,
+        )
+
+        registry_dir = tmp_path / "registry"
+        registry_dir.mkdir()
+        (registry_dir / "gis.yaml").write_text(
+            "entries:\n  - plugin_slug: convert\n    status: WEBSITE_DISCOVERED\n"
+        )
+        configs = [_cfg("gis", "discovery_only", plugin_detection={"fallback_strategy": "capability_registry"})]
+        results = fsv_07_fallback_has_generation_ready_entries(configs, registry_dir)
+        assert len(results) == 1
+        assert results[0].passed is False
+
+    def test_skips_non_fallback_families(self, tmp_path: Path) -> None:
+        from plugin_examples.fixture_factory.family_status_validators import (
+            fsv_07_fallback_has_generation_ready_entries,
+        )
+
+        registry_dir = tmp_path / "registry"
+        registry_dir.mkdir()
+        configs = [_cfg("cells", "active")]
+        results = fsv_07_fallback_has_generation_ready_entries(configs, registry_dir)
+        assert len(results) == 0
+
+
+class TestFsv08NoSkipStagesForFallback:
+    """FSV-08: fallback families must have complete entries for all stages."""
+
+    def test_passes_with_complete_entry(self, tmp_path: Path) -> None:
+        from plugin_examples.fixture_factory.family_status_validators import (
+            fsv_08_no_skip_stages_for_fallback,
+        )
+
+        registry_dir = tmp_path / "registry"
+        registry_dir.mkdir()
+        (registry_dir / "barcode.yaml").write_text(
+            "entries:\n"
+            "  - plugin_slug: gen\n"
+            "    status: PROBE_CONFIRMED\n"
+            "    type_name: BarcodeGenerator\n"
+            "    namespace: Aspose.BarCode.Generation\n"
+            "    method_name: Save\n"
+        )
+        configs = [_cfg("barcode", "discovery_only", plugin_detection={"fallback_strategy": "capability_registry"})]
+        results = fsv_08_no_skip_stages_for_fallback(configs, registry_dir)
+        assert len(results) == 1
+        assert results[0].passed is True
+        assert "no skip stages" in results[0].detail
+
+    def test_fails_with_incomplete_entry(self, tmp_path: Path) -> None:
+        from plugin_examples.fixture_factory.family_status_validators import (
+            fsv_08_no_skip_stages_for_fallback,
+        )
+
+        registry_dir = tmp_path / "registry"
+        registry_dir.mkdir()
+        # Missing method_name
+        (registry_dir / "barcode.yaml").write_text(
+            "entries:\n"
+            "  - plugin_slug: gen\n"
+            "    status: PROBE_CONFIRMED\n"
+            "    type_name: BarcodeGenerator\n"
+            "    namespace: Aspose.BarCode.Generation\n"
+        )
+        configs = [_cfg("barcode", "discovery_only", plugin_detection={"fallback_strategy": "capability_registry"})]
+        results = fsv_08_no_skip_stages_for_fallback(configs, registry_dir)
+        assert len(results) == 1
+        assert results[0].passed is False
+        assert "MISSING required fields" in results[0].detail
+
+    def test_skips_non_fallback_families(self, tmp_path: Path) -> None:
+        from plugin_examples.fixture_factory.family_status_validators import (
+            fsv_08_no_skip_stages_for_fallback,
+        )
+
+        registry_dir = tmp_path / "registry"
+        registry_dir.mkdir()
+        configs = [_cfg("cells", "active")]
+        results = fsv_08_no_skip_stages_for_fallback(configs, registry_dir)
+        assert len(results) == 0
+
+    def test_warns_missing_selected_api_mapping_constructor(self, tmp_path: Path) -> None:
+        """TC-H08: FSV-08 warns when selected_api_mapping is missing constructor."""
+        from plugin_examples.fixture_factory.family_status_validators import (
+            fsv_08_no_skip_stages_for_fallback,
+        )
+
+        registry_dir = tmp_path / "registry"
+        registry_dir.mkdir()
+        (registry_dir / "barcode.yaml").write_text(
+            "entries:\n"
+            "  - plugin_slug: gen\n"
+            "    status: PROBE_CONFIRMED\n"
+            "    type_name: BarcodeGenerator\n"
+            "    namespace: Aspose.BarCode.Generation\n"
+            "    method_name: Save\n"
+            "    selected_api_mapping:\n"
+            "      type_name: BarcodeGenerator\n"
+            "      namespace: Aspose.BarCode.Generation\n"
+        )
+        configs = [_cfg("barcode", "discovery_only", plugin_detection={"fallback_strategy": "capability_registry"})]
+        results = fsv_08_no_skip_stages_for_fallback(configs, registry_dir)
+        # First result: FSV-08 pass (entry has type_name/namespace/method_name)
+        assert results[0].passed is True
+        # Second result: advisory warning about missing constructor/method_name in selected_api_mapping
+        assert len(results) >= 2
+        advisory = results[1]
+        assert advisory.passed is True  # advisory, not failure
+        assert "selected_api_mapping missing" in advisory.detail
+        assert "constructor" in advisory.detail or "method_name" in advisory.detail
+
+    def test_no_warning_when_selected_api_mapping_complete(self, tmp_path: Path) -> None:
+        """FSV-08 should not warn when selected_api_mapping has all fields."""
+        from plugin_examples.fixture_factory.family_status_validators import (
+            fsv_08_no_skip_stages_for_fallback,
+        )
+
+        registry_dir = tmp_path / "registry"
+        registry_dir.mkdir()
+        (registry_dir / "barcode.yaml").write_text(
+            "entries:\n"
+            "  - plugin_slug: gen\n"
+            "    status: PROBE_CONFIRMED\n"
+            "    type_name: BarcodeGenerator\n"
+            "    namespace: Aspose.BarCode.Generation\n"
+            "    method_name: Save\n"
+            "    selected_api_mapping:\n"
+            "      type_name: BarcodeGenerator\n"
+            "      namespace: Aspose.BarCode.Generation\n"
+            "      constructor: 'BarcodeGenerator(EncodeTypes, string)'\n"
+            "      method_name: Save\n"
+        )
+        configs = [_cfg("barcode", "discovery_only", plugin_detection={"fallback_strategy": "capability_registry"})]
+        results = fsv_08_no_skip_stages_for_fallback(configs, registry_dir)
+        # Only the main FSV-08 pass result, no advisory
+        assert len(results) == 1
+        assert results[0].passed is True

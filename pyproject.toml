@@ -34,7 +34,7 @@ target-version = "py312"
 line-length = 120
 
 [tool.ruff.lint]
-select = ["E", "F", "W"]
+select = ["E", "F", "W", "I", "UP"]
 ignore = [
     "E501",  # line too long — existing code exceeds 120 chars in many places
     "E701",  # multiple statements on one line (colon) — intentional in binary parsing
@@ -52,7 +52,7 @@ source = ["plugin_examples"]
 omit = ["*/tests/*", "*/_wave*"]
 
 [tool.coverage.report]
-fail_under = 60
+fail_under = 70
 show_missing = true
 exclude_lines = [
     "pragma: no cover",

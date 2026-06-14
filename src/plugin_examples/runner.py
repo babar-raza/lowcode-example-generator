@@ -8,16 +8,18 @@ import os
 import platform
 import sys
 import time
+from collections.abc import Callable
 from dataclasses import asdict, dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
 
-from plugin_examples.observability import bind_context as _bind_obs_context, get_logger  # noqa: E402
+from plugin_examples.observability import bind_context as _bind_obs_context  # noqa: E402
+from plugin_examples.observability import get_logger
 
 
 def _now_utc() -> str:
-    return datetime.now(timezone.utc).isoformat(timespec="seconds")
+    return datetime.now(UTC).isoformat(timespec="seconds")
 
 
 logger = get_logger(__name__)
@@ -119,12 +121,12 @@ def scenario_to_dict(s) -> dict:
 def _write_catalog_hash_evidence(result, evidence_dir: Path) -> None:
     """Write catalog-hash-validation.json evidence."""
     import json as _json
-    from datetime import datetime, timezone
+    from datetime import datetime
 
     out = evidence_dir / "latest" / "catalog-hash-validation.json"
     out.parent.mkdir(parents=True, exist_ok=True)
     data = result.to_dict()
-    data["validated_at"] = datetime.now(timezone.utc).isoformat()
+    data["validated_at"] = datetime.now(UTC).isoformat()
     out.write_text(_json.dumps(data, indent=2), encoding="utf-8")
 
 
@@ -345,6 +347,7 @@ def _run_stage(
 def _stage_load_config(ctx: PipelineContext) -> dict:
     import hashlib as _hashlib
     import re as _re
+
     from plugin_examples.family_config import load_family_config
 
     # Allow CLI override via --family-config
@@ -548,8 +551,8 @@ def _stage_version_drift_preflight(ctx: PipelineContext) -> dict:
 def _stage_dependency_resolution(ctx: PipelineContext) -> dict:
     from plugin_examples.nuget_fetcher import resolve_dependencies
     from plugin_examples.nuget_fetcher.dependency_resolver import (
-        write_dependency_manifest,
         update_package_lock,
+        write_dependency_manifest,
     )
 
     cfg = ctx.config.nuget
@@ -615,14 +618,14 @@ def _stage_reflection(ctx: PipelineContext) -> dict:
 
 def _stage_plugin_detection(ctx: PipelineContext) -> dict:
     from plugin_examples.plugin_detector import (
-        detect_plugin_namespaces,
-        write_source_of_truth_proof,
-        write_product_inventory,
         assert_source_of_truth_eligible,
+        detect_plugin_namespaces,
+        write_product_inventory,
+        write_source_of_truth_proof,
     )
     from plugin_examples.plugin_detector.proof_reporter import (
-        write_nonlowcode_source_of_truth_proof,
         assert_nonlowcode_source_of_truth_eligible,
+        write_nonlowcode_source_of_truth_proof,
     )
 
     ctx.detection = detect_plugin_namespaces(
@@ -902,8 +905,8 @@ def _stage_scenario_planning(ctx: PipelineContext) -> dict:
     if has_fallback and not ctx.detection.is_eligible:
         from plugin_examples.scenario_planner import (
             plan_scenarios_from_registry,
-            write_scenario_catalog,
             write_blocked_scenarios,
+            write_scenario_catalog,
         )
 
         registry_entries = _load_registry_entries(ctx)
@@ -929,12 +932,8 @@ def _stage_scenario_planning(ctx: PipelineContext) -> dict:
 
     from plugin_examples.scenario_planner import (
         plan_scenarios,
-        write_scenario_catalog,
         write_blocked_scenarios,
-    )
-    from plugin_examples.scenario_planner.type_classifier import (
-        classify_catalog,
-        write_type_role_classification,
+        write_scenario_catalog,
     )
     from plugin_examples.scenario_planner.consumer_mapper import (
         build_consumer_map,
@@ -943,6 +942,10 @@ def _stage_scenario_planning(ctx: PipelineContext) -> dict:
     from plugin_examples.scenario_planner.entrypoint_scorer import (
         score_entrypoint,
         write_entrypoint_scores,
+    )
+    from plugin_examples.scenario_planner.type_classifier import (
+        classify_catalog,
+        write_type_role_classification,
     )
 
     matched_ns = [m.namespace for m in ctx.detection.matched_namespaces]
@@ -1026,11 +1029,12 @@ def _stage_scenario_planning(ctx: PipelineContext) -> dict:
     logger.info("Fixture resolution evidence written: %s", _fr_path)
 
     # Completeness gate — verify denominator equation after planning
+    import json as _json
+
     from plugin_examples.gates.completeness_gate import (
         check_completeness,
         write_completeness_gate_result,
     )
-    import json as _json
 
     _denom_path = ctx.repo_root / "pipeline" / "configs" / "denominators" / f"{ctx.family}.json"
     _denominator: dict = {}
@@ -1100,6 +1104,7 @@ def _generate_nonlowcode_examples(ctx: PipelineContext) -> dict:
         validation use cases.
     """
     import json as _json
+
     from plugin_examples.fixture_factory.shared_downstream_executor import SharedDownstreamExecutor
 
     candidates = ctx.fallback_candidates or []
@@ -1150,13 +1155,13 @@ def _generate_nonlowcode_examples(ctx: PipelineContext) -> dict:
 
 
 def _stage_generation(ctx: PipelineContext) -> dict:
+    from plugin_examples.gates.example_lifecycle import ExampleLifecycleRegistry
     from plugin_examples.generator import (
         build_packet,
         generate_example,
         generate_project,
         write_example_index,
     )
-    from plugin_examples.gates.example_lifecycle import ExampleLifecycleRegistry
 
     # Initialize lifecycle registry before early return so blocked scenarios are
     # always tracked even when ready_count == 0.
@@ -1312,11 +1317,18 @@ def _stage_generation(ctx: PipelineContext) -> dict:
             )
             # Store constraints for build repair re-injection (all families).
             # The packet is not available in _stage_validation, so we persist here.
-            project["pdf_constraints"] = [c for c in packet.constraints if "REQUIRED:" in c or "FORBIDDEN:" in c]
-            project["family_name"] = ctx.family
-            _type_name_ptc = packet.target_type.split(".")[-1] if packet.target_type else ""
-            project["type_short"] = _type_name_ptc.lower()
-            project["type_constraints"] = _ptc.get(_type_name_ptc, {}) if _ptc else {}
+            # Non-LowCode template path does not create a packet — use empty defaults.
+            if _is_nonlowcode and not llm_fn:
+                project["pdf_constraints"] = []
+                project["family_name"] = ctx.family
+                project["type_short"] = (scenario.target_type or "").split(".")[-1].lower()
+                project["type_constraints"] = {}
+            else:
+                project["pdf_constraints"] = [c for c in packet.constraints if "REQUIRED:" in c or "FORBIDDEN:" in c]
+                project["family_name"] = ctx.family
+                _type_name_ptc = packet.target_type.split(".")[-1] if packet.target_type else ""
+                project["type_short"] = _type_name_ptc.lower()
+                project["type_constraints"] = _ptc.get(_type_name_ptc, {}) if _ptc else {}
             ctx.generated_projects.append(project)
         except Exception as e:
             logger.warning("Generation failed for %s: %s", scenario.scenario_id, e)
@@ -1390,9 +1402,9 @@ def _stage_generation(ctx: PipelineContext) -> dict:
 
 
 def _stage_validation(ctx: PipelineContext) -> dict:
+    from plugin_examples.generator.code_generator import _extract_code, _validate_code, _validate_code_from_constraints
     from plugin_examples.verifier_bridge import run_dotnet_validation
     from plugin_examples.verifier_bridge.dotnet_runner import ValidationResult, write_validation_results
-    from plugin_examples.generator.code_generator import _extract_code, _validate_code, _validate_code_from_constraints
 
     if not ctx.generated_projects:
         return {"validated": 0, "reason": "no generated projects"}
@@ -1939,8 +1951,8 @@ def _is_reviewer_failure_retryable(result) -> bool:
 
 def _stage_reviewer(ctx: PipelineContext) -> dict:
     from plugin_examples.verifier_bridge.bridge import (
-        ReviewerUnavailableError,
         ReviewerResult,
+        ReviewerUnavailableError,
         run_example_reviewer,
         write_reviewer_results,
     )
@@ -2043,9 +2055,9 @@ def _stage_reviewer(ctx: PipelineContext) -> dict:
 
 
 def _stage_publisher(ctx: PipelineContext) -> dict:
+    from plugin_examples.gates.evaluator import evaluate_gates
     from plugin_examples.publisher import publish_examples
     from plugin_examples.publisher.publisher import write_publishing_report
-    from plugin_examples.gates.evaluator import evaluate_gates
 
     # Pre-evaluate gates from stages completed before the publisher runs.
     # The post-loop gate evaluation (which writes gate-results.json) runs after
@@ -2406,7 +2418,7 @@ def run_pipeline(
     # Before snapshot
     before = _snapshot_workspace(manifests_dir, verification_dir)
 
-    start_time = datetime.now(timezone.utc).isoformat()
+    start_time = datetime.now(UTC).isoformat()
     pipeline_start = time.time()
 
     # Tier-to-stage mapping
@@ -2465,7 +2477,7 @@ def run_pipeline(
         ctx._completed_stages = list(stages)
 
     pipeline_end = time.time()
-    end_time = datetime.now(timezone.utc).isoformat()
+    end_time = datetime.now(UTC).isoformat()
     total_ms = (pipeline_end - pipeline_start) * 1000
 
     # Write replay manifest (only when replay mode was active)
@@ -2487,13 +2499,13 @@ def run_pipeline(
 
     # Per-example gate evaluation and partitioning
     from plugin_examples.gates.example_gates import (
-        evaluate_example_gates,
-        compute_aggregate_gates,
-        compute_partitioned_verdict,
         build_pr_candidate_manifest,
         build_scenario_feedback,
-        write_example_gate_results,
+        compute_aggregate_gates,
+        compute_partitioned_verdict,
+        evaluate_example_gates,
         write_aggregate_gate_results,
+        write_example_gate_results,
         write_pr_candidate_manifest,
         write_scenario_feedback,
     )
@@ -2551,8 +2563,8 @@ def run_pipeline(
     # Write lifecycle evidence and update per-family backlog
     if ctx.lifecycle_registry:
         from plugin_examples.gates.example_lifecycle import (
-            write_lifecycle_evidence,
             update_backlog_from_lifecycle,
+            write_lifecycle_evidence,
         )
 
         write_lifecycle_evidence(ctx.lifecycle_registry, evidence_dir)
@@ -2618,6 +2630,7 @@ def run_pipeline(
     # Promote evidence to durable paths if requested
     if promote_latest:
         import shutil
+
         from plugin_examples.evidence_layout import promote_family_evidence
 
         src_latest = evidence_dir / "latest"
@@ -2643,8 +2656,8 @@ def run_pipeline(
     # Metrics finalization (only when metrics_collector is set)
     if metrics_collector and metrics_config:
         try:
-            from plugin_examples.metrics.pipeline_hook import finalize_metrics
             from plugin_examples.metrics.config import is_agent_metrics_production_enabled
+            from plugin_examples.metrics.pipeline_hook import finalize_metrics
 
             metrics_result = finalize_metrics(
                 ctx=ctx,

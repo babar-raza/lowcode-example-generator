@@ -1,0 +1,30 @@
+# Service Level Objective definitions.
+#
+# Each SLO specifies a metric, target value, evaluation window (in runs),
+# and severity level. The SLO monitor evaluates these after each pipeline
+# run and emits compliance results.
+
+slos:
+  - id: slo_build_success
+    metric: build_pass_rate
+    target: 0.95
+    window_runs: 10
+    severity: critical
+
+  - id: slo_run_success
+    metric: run_pass_rate
+    target: 0.80
+    window_runs: 10
+    severity: warning
+
+  - id: slo_handler_reliability
+    metric: handler_error_rate
+    target: 0.05
+    window_runs: 10
+    severity: warning
+
+  - id: slo_cycle_duration
+    metric: avg_cycle_duration_ms
+    target: 30000
+    window_runs: 5
+    severity: info

@@ -1,0 +1,32 @@
+# Gate policy definitions — loaded by policy/loader.py.
+#
+# Externalizes gate rules that were previously hardcoded as Python frozensets
+# in planner_loop.py and runner.py. Changes to gate policies can now be
+# audited via version control diffs without modifying source code.
+
+# Stages where failure triggers a hard stop (no recovery possible).
+hard_stop_stages:
+  - load_config
+  - nuget_fetch
+  - dependency_resolution
+  - extraction
+  - reflection
+  - plugin_detection
+
+# Action types that require explicit approval environment variables.
+approval_gated_types:
+  - MERGE_READY_PR
+  - PDF_PR_CONFLICT_RECOVERY
+  - LIVE_PUBLISH_READY_PACKAGE
+
+# Verdicts that indicate a package is ready for publication.
+publishable_verdicts:
+  - PR_READY
+  - FULL_E2E_PASSED
+  - CANONICAL_TEMPLATE_GENERATION_PASS
+  - CANONICAL_LLM_GENERATION_PASS
+
+# Adaptive deprioritization settings.
+deprioritization:
+  consecutive_failure_threshold: 3
+  cooldown_runs: 2

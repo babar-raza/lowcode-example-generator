@@ -1,13 +1,11 @@
 family: cad
 display_name: Aspose.CAD for .NET
-enabled: false
-status: disabled
+enabled: true
+status: discovery_only
 # CONFIRMED_NO_LOWCODE: All-family discovery run 2026-05-09 found no LowCode namespace.
-# NuGet package resolved successfully; DllReflector found 0 plugin types.
-# Do not re-enable without evidence of a new LowCode namespace release.
-# NOTE: package_id below uses standard Aspose naming convention.
-# Verify exact NuGet package ID at nuget.org before enabling generation.
-# Discovery run will fail gracefully if package does not exist.
+# Enabled for non-LowCode fallback generation (capability_registry).
+# PROBE_CONFIRMED: convert-cad-to-pdf in pipeline/plugin-capability-registry/cad.yaml
+# Re-enabled 2026-06-13 by all-family-recon-healing sprint.
 
 nuget:
   package_id: Aspose.CAD

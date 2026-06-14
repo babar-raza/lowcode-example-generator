@@ -1,0 +1,30 @@
+# Declarative goal specifications for the planner execution loop.
+#
+# Each goal defines a target metric, threshold, and priority weight.
+# The planner loop loads these at startup and uses them to prioritize
+# which actions to execute first (higher-weight goals are favored).
+
+goals:
+  - id: build_pass_rate
+    metric: build_pass_rate
+    threshold: 0.95
+    weight: 3
+    description: "95% of generated examples must build successfully"
+
+  - id: family_breadth
+    metric: families_with_proven_packages
+    threshold: 6
+    weight: 2
+    description: "At least 6 product families have proven packages"
+
+  - id: evidence_completeness
+    metric: evidence_chain_pass_rate
+    threshold: 1.0
+    weight: 1
+    description: "All evidence chain validators must pass"
+
+  - id: handler_reliability
+    metric: handler_success_rate
+    threshold: 0.90
+    weight: 2
+    description: "90% of handler executions must succeed"

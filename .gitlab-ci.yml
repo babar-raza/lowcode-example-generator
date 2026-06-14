@@ -182,7 +182,6 @@ integration-tests-py312:
     - >
       python -m pytest tests/integration -v --timeout=120
       --junitxml=report-integration-py312.xml
-      --cov=src/plugin_examples --cov-report=term-missing
 
 integration-tests-py313:
   extends: .test-base
@@ -194,7 +193,6 @@ integration-tests-py313:
     - >
       python -m pytest tests/integration -v --timeout=120
       --junitxml=report-integration-py313.xml
-      --cov=src/plugin_examples --cov-report=term-missing
 
 mutation-testing:
   # Mutation testing via WSL — runs mutmut inside Ubuntu 22.04 on the Windows shell executor.
@@ -208,8 +206,8 @@ mutation-testing:
     - wsl.exe -d Ubuntu-22.04 -- bash -c "which python3 || (sudo apt-get update -qq && sudo apt-get install -y -qq python3 python3-pip python3-venv)"
     # Convert build path to WSL-compatible path
     - WSL_DIR=$(wsl.exe -d Ubuntu-22.04 -- wslpath -u "$(pwd -W)" | tr -d '\r')
-    # Run mutation testing inside WSL
-    - wsl.exe -d Ubuntu-22.04 -- bash "$WSL_DIR/scripts/wsl-mutmut.sh" "$WSL_DIR"
+    # Run mutation testing inside WSL (MSYS_NO_PATHCONV prevents Git Bash from mangling /mnt/c/... paths)
+    - MSYS_NO_PATHCONV=1 wsl.exe -d Ubuntu-22.04 -- bash "$WSL_DIR/scripts/wsl-mutmut.sh" "$WSL_DIR"
     # Parse results on Windows side
     - |
       python -c "
@@ -238,7 +236,7 @@ compliance-gate:
   # SLO compliance, gate policy, and all EHV validators.
   extends: .test-base
   script:
-    - python -m plugin_examples doctor --format json > doctor-report.json
+    - python -m plugin_examples doctor --json > doctor-report.json
     - |
       python -c "
       import sys, json

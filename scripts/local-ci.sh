@@ -34,7 +34,7 @@ echo ""
 echo "=== Stage: Unit Tests (with coverage) ==="
 if python -m pytest --version &>/dev/null 2>&1; then
   python -m pytest tests/unit -v --timeout=60 \
-    --cov=src/plugin_examples --cov-report=term-missing --cov-fail-under=60
+    --cov=src/plugin_examples --cov-report=term-missing --cov-fail-under=70
 else
   echo "SKIP: pytest not available in current Python (pip install -e '.[dev]' to enable)"
 fi

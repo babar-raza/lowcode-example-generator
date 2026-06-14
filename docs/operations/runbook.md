@@ -147,8 +147,8 @@ Common causes:
 ## Scenario 6: Test Coverage Below Threshold
 
 **Symptom**
-- CI fails: `FAIL Required test coverage of 60% not reached. Total coverage: X%`
-- `pytest --cov=src/plugin_examples --cov-fail-under=60` exits non-zero
+- CI fails: `FAIL Required test coverage of 70% not reached. Total coverage: X%`
+- `pytest --cov=src/plugin_examples --cov-fail-under=70` exits non-zero
 
 **Root Cause**
 New source code added without corresponding tests, or test files moved/deleted.
@@ -163,7 +163,7 @@ New source code added without corresponding tests, or test files moved/deleted.
 **Prevention**
 - Write tests alongside new source modules (test-alongside discipline)
 - Run `PYTHONPATH=src python -m pytest tests/unit --cov=src/plugin_examples --cov-report=html` locally before PR
-- The `fail_under = 60` threshold in `pyproject.toml` is the floor — aim for 70%+
+- The `fail_under = 70` threshold in `pyproject.toml` is the floor — aim for 80%+
 
 ---
 

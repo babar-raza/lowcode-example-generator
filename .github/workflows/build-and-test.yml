@@ -71,7 +71,7 @@ jobs:
       - name: Run unit tests with coverage
         run: |
           PYTHONPATH=src python -m pytest tests/unit -v --timeout=60 \
-            --cov=src/plugin_examples --cov-report=term-missing --cov-fail-under=60
+            --cov=src/plugin_examples --cov-report=term-missing --cov-fail-under=70
 
       - name: Run integration tests
         run: |

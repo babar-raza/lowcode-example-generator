@@ -36,7 +36,7 @@ if (Get-Command pip-audit -ErrorAction SilentlyContinue) {
 Write-Host ""
 Write-Host "=== Stage: Unit Tests (with coverage) ==="
 python -m pytest tests/unit -v --timeout=60 `
-  --cov=src/plugin_examples --cov-report=term-missing --cov-fail-under=60
+  --cov=src/plugin_examples --cov-report=term-missing --cov-fail-under=70
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
 Write-Host ""

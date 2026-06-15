@@ -4,6 +4,8 @@ stages:
   - build
   - schedule
 
+# NOTE: Runner id=154 (local-docker-lowcode) is a shell executor on Windows (Git Bash).
+# All jobs run on the host — image: directives are NOT used.
 default:
   tags:
     - shell

@@ -58,7 +58,7 @@ def _make_json_record(message: str, **extra: object) -> dict:
 class TestJsonFormatterFields:
     def test_required_fields_present(self):
         record = _make_json_record("hello world")
-        for field in ("timestamp", "level", "logger", "run_id", "stage", "family", "message"):
+        for field in ("timestamp", "level", "logger", "trace_id", "run_id", "stage", "family", "message"):
             assert field in record, f"Missing field: {field}"
 
     def test_message_value(self):
@@ -122,6 +122,7 @@ class TestContextBinding:
         bind_context(run_id="r1", stage="s1", family="f1")
         clear_context()
         record = _make_json_record("test")
+        assert record["trace_id"] == ""
         assert record["run_id"] == ""
         assert record["stage"] == ""
         assert record["family"] == ""
@@ -178,3 +179,45 @@ class TestGetLogger:
         configure_logging(level=logging.DEBUG, force_json=True)
         log = get_logger("plugin_examples.smoke")
         log.info("smoke test record")  # should not raise
+
+
+# ---------------------------------------------------------------------------
+# Trace ID tests (TC-RH01)
+# ---------------------------------------------------------------------------
+
+class TestTraceId:
+    def setup_method(self):
+        clear_context()
+
+    def teardown_method(self):
+        clear_context()
+
+    def test_trace_id_auto_generated_on_bind(self):
+        bind_context(run_id="r1")
+        record = _make_json_record("test")
+        assert record["trace_id"] != ""
+        assert len(record["trace_id"]) == 32  # UUID4 hex
+
+    def test_trace_id_explicit(self):
+        bind_context(trace_id="custom-trace-abc")
+        record = _make_json_record("test")
+        assert record["trace_id"] == "custom-trace-abc"
+
+    def test_trace_id_stable_across_binds(self):
+        bind_context(run_id="r1")
+        record1 = _make_json_record("first")
+        tid1 = record1["trace_id"]
+        bind_context(stage="s2")
+        record2 = _make_json_record("second")
+        assert record2["trace_id"] == tid1, "trace_id should be stable across partial binds"
+
+    def test_trace_id_cleared(self):
+        bind_context(run_id="r1")
+        clear_context()
+        record = _make_json_record("test")
+        assert record["trace_id"] == ""
+
+    def test_trace_id_present_in_json_output(self):
+        bind_context(trace_id="t123")
+        record = _make_json_record("test")
+        assert "trace_id" in record

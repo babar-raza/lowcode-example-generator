@@ -1,9 +1,0 @@
-{
-  "type_name": "BarcodeGenerator",
-  "method_name": "Save",
-  "status": "REFLECTION_CONFIRMED",
-  "confidence": 0.95,
-  "model": "MANUAL_MAPPING",
-  "rationale": "BarcodeGenerator.Save confirmed via DllReflector; HallucinationValidator passed",
-  "rejection_reason": null
-}

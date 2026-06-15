@@ -1,9 +1,0 @@
-COMMAND: dotnet run --nologo --no-build -c Release
-CWD: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-pdf-20260529-222233\generated\pdf\pdf-form-editor
-EXIT_CODE: 0
-DURATION_MS: 2650.2
-SUCCESS: True
----STDOUT---
-Form fields removed
----STDERR---
-(empty)

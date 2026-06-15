@@ -1,9 +1,0 @@
-{
-  "example": "splitter",
-  "csproj": "pdf-splitter.csproj",
-  "restore": "OK",
-  "build": "OK",
-  "exit_code": 0,
-  "stdout_tail": "Split into 3 file(s)\n",
-  "stderr_tail": ""
-}

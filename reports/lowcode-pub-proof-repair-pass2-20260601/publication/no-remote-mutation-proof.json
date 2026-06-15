@@ -1,9 +1,0 @@
-{
-  "sprint": "lowcode-pub-proof-repair-pass2-20260601",
-  "push_occurred": false,
-  "pr_created": false,
-  "merge_occurred": false,
-  "publish_gate": "NOT_SET",
-  "merge_gate": "NOT_SET",
-  "reason": "Both approval gates NOT_SET"
-}

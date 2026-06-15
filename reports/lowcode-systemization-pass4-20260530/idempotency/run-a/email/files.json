@@ -1,8 +1,0 @@
-{
-  "family": "email",
-  "file_count": 2,
-  "files": {
-    "email-converter\\Program.cs": "762f4899...",
-    "email-converter\\email-converter.csproj": "9c0a20ef..."
-  }
-}

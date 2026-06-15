@@ -1,9 +1,0 @@
-{
-  "example": "xls-converter",
-  "csproj": "pdf-xls-converter.csproj",
-  "restore": "OK",
-  "build": "OK",
-  "exit_code": 0,
-  "stdout_tail": "Converted to XLSX\n",
-  "stderr_tail": ""
-}

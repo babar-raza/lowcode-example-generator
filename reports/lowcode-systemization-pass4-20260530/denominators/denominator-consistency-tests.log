@@ -1,3 +1,0 @@
-Denominator consistency: generated=42 == build_run_valid=42: CONSISTENT
-pr_candidates=42 - timestamp_excluded=1 = 41: CONSISTENT
-OVERALL: CONSISTENT

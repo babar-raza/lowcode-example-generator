@@ -1,7 +1,0 @@
-dotnet build BarcodeGeneratorProbe.csproj -c Release
-  BarcodeGeneratorProbe -> bin/Release/net8.0/BarcodeGeneratorProbe.dll
-Build succeeded.
-  0 Warning(s)
-  0 Error(s)
-Time Elapsed: 00:00:04.12
-Exit code: 0

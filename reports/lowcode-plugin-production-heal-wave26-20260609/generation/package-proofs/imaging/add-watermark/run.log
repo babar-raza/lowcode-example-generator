@@ -1,8 +1,0 @@
-EXIT=0 DURATION=3.2s
-
-STDOUT:
-Aspose.Imaging - Add Watermark
-Watermark added successfully: output-watermarked.png
-
-
-STDERR:

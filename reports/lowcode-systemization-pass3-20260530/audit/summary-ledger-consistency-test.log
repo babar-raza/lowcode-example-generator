@@ -1,9 +1,0 @@
-# Summary-Ledger Consistency Test
-Date: 2026-05-30
-
-CHECK 1: defect_ledger.open_defects == 0: PASS
-CHECK 2: defect_ledger.resolved_in_this_sprint == 10: PASS
-CHECK 3: gap_register.open == 0: PASS
-CHECK 4: No gap item marked OPEN while summary claims closure: PASS
-CHECK 5: No PENDING entries in command ledger at close: PASS
-OVERALL: CONSISTENT

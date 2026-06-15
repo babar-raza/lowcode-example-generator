@@ -1,3 +1,0 @@
-diagram-converter.csproj
-example.manifest.json
-Program.cs

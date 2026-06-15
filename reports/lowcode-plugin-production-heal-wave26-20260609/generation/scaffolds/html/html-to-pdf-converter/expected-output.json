@@ -1,9 +1,0 @@
-{
-  "expected_files": [
-    "output.pdf"
-  ],
-  "expected_console_contains": [
-    "html to pdf converter"
-  ],
-  "exit_code": 0
-}

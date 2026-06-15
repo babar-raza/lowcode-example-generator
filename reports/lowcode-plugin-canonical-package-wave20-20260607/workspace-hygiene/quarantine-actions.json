@@ -1,7 +1,0 @@
-{
-  "artifact_type": "QUARANTINE_ACTIONS",
-  "sprint": "lowcode-plugin-canonical-package-wave20-20260607",
-  "date": "2026-06-07",
-  "actions": [],
-  "note": "No quarantine required. All dirty files classified as safe (extension work, generated artifacts, earlier sprint reports, shell artifacts)."
-}

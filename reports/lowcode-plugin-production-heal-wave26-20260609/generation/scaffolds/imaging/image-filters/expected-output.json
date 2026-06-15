@@ -1,9 +1,0 @@
-{
-  "expected_files": [
-    "output.png"
-  ],
-  "expected_console_contains": [
-    "image filters"
-  ],
-  "exit_code": 0
-}

@@ -1,9 +1,0 @@
-{
-  "artifact_type": "GATE_DETECTION",
-  "sprint": "lowcode-plugin-canonical-package-wave18-20260606",
-  "date": "2026-06-06",
-  "APPROVE_LIVE_PR": false,
-  "GH_TOKEN": "NOT_SET",
-  "GL_TOKEN": "NOT_SET",
-  "gate_verdict": "NO_LIVE_GATES \u2014 producing dry-run command packets for all 33 PCLC packages"
-}

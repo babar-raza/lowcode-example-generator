@@ -1,5 +1,0 @@
-Traceback (most recent call last):
-  File "<string>", line 1, in <module>
-    from plugin_examples.plugin_detector import loader; print('Discovery module importable')
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-ImportError: cannot import name 'loader' from 'plugin_examples.plugin_detector' (C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\src\plugin_examples\plugin_detector\__init__.py)

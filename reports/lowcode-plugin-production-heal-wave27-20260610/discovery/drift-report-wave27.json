@@ -1,9 +1,0 @@
-{
-  "generated_at": "2026-06-10T02:54:33+00:00",
-  "status": "BASELINE_NO_PRIOR_EVIDENCE",
-  "prior_wave": "wave26",
-  "prior_status": "METADATA_NOT_PRESENT",
-  "current_status": "BASELINE_CREATED",
-  "drift_detected": false,
-  "note": "W26 had no discovery metadata; W27 creates baseline from capability registry"
-}

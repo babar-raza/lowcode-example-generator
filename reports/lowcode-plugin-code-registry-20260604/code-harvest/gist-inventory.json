@@ -1,9 +1,0 @@
-{
-  "generated_at": "2026-06-04",
-  "strategy": "Gist links extracted from plugin page HTML. Page HTML is 403-blocked, so gist links could not be extracted from page content directly.",
-  "blocker": "GIST_FETCH_BLOCKED",
-  "blocker_reason": "products.aspose.net plugin pages return 403 from this environment. Gist links on pages cannot be extracted.",
-  "known_gists": [],
-  "total": 0,
-  "note": "If products.aspose.net pages become accessible, gist extraction should be re-run using skills/products-plugin-page-harvest.md"
-}

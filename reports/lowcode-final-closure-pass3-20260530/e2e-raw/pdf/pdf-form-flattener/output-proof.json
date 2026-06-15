@@ -1,8 +1,0 @@
-{
-  "example_id": "pdf-form-flattener",
-  "all_passed": true,
-  "restore_passed": true,
-  "build_passed": true,
-  "run_passed": true,
-  "run_stdout_snippet": "Form flattened\n"
-}

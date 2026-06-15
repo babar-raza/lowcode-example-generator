@@ -1,9 +1,0 @@
-C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\clones\slides\examples\slides\lowcode\merger\Program.cs(5,7): warning CS0105: The using directive for 'Aspose.Slides.LowCode' appeared previously in this namespace [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\clones\slides\examples\slides\lowcode\merger\slides-merger.csproj]
-
-Build succeeded.
-
-C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\clones\slides\examples\slides\lowcode\merger\Program.cs(5,7): warning CS0105: The using directive for 'Aspose.Slides.LowCode' appeared previously in this namespace [C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\clones\slides\examples\slides\lowcode\merger\slides-merger.csproj]
-    1 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:01.01

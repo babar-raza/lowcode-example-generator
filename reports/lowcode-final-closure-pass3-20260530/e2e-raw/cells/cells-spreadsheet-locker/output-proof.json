@@ -1,8 +1,0 @@
-{
-  "example_id": "cells-spreadsheet-locker",
-  "all_passed": true,
-  "restore_passed": true,
-  "build_passed": true,
-  "run_passed": true,
-  "run_stdout_snippet": "Example: cells-spreadsheet-locker\nDone.\n"
-}

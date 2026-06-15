@@ -1,8 +1,0 @@
-{
-  "timestamp": "2026-06-03",
-  "description": "Post-repair E2E run from fresh clones of post-merge main",
-  "diagram": {"build_ok": 2, "run_ok": 2, "total": 2, "folder_count": 2},
-  "pdf": {"build_ok": 20, "run_ok": 20, "total": 20, "folder_count": 20},
-  "full_e2e": {"build_ok": 44, "run_ok": 44, "total": 44},
-  "verdict": "POST_REPAIR_E2E_PASS"
-}

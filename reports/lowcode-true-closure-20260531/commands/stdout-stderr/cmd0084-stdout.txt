@@ -1,1 +1,0 @@
-MSBUILD : error MSB1011: Specify which project or solution file to use because this folder contains more than one project or solution file.

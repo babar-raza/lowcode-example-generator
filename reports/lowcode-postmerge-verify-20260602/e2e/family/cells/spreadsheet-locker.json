@@ -1,9 +1,0 @@
-{
-  "example": "spreadsheet-locker",
-  "csproj": "cells-spreadsheet-locker.csproj",
-  "restore": "OK",
-  "build": "OK",
-  "exit_code": 0,
-  "stdout_tail": "Example: cells-spreadsheet-locker\nDone.\n",
-  "stderr_tail": ""
-}

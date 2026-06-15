@@ -1,8 +1,0 @@
-{
-  "source": "pipeline/plugin-capability-registry/website-catalog.json",
-  "family": "barcode",
-  "plugin_page": "https://products.aspose.net/barcode",
-  "marketing_only": true,
-  "package_id_resolved_via": "package-aliases.json",
-  "resolved_package_id": "Aspose.BarCode"
-}

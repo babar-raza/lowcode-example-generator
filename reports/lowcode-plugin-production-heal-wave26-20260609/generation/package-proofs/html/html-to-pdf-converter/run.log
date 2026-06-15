@@ -1,8 +1,0 @@
-EXIT=0 DURATION=4.9s
-
-STDOUT:
-Aspose.HTML - HTML to PDF Converter
-HTML converted to PDF successfully: output.pdf
-
-
-STDERR:

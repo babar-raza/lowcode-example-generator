@@ -1,3 +1,0 @@
-Family: Source Code Pro ExtraLight
-Style: Regular
-Glyphs: 1568

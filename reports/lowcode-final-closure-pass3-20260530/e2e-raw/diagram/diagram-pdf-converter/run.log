@@ -1,9 +1,0 @@
-COMMAND: dotnet run --nologo --no-build -c Release
-CWD: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\workspace\runs\pilot-diagram-20260529-221021\generated\diagram\diagram-pdf-converter
-EXIT_CODE: 0
-DURATION_MS: 2270.0
-SUCCESS: True
----STDOUT---
-PDF generated successfully: output.pdf
----STDERR---
-(empty)

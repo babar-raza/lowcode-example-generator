@@ -1,6 +1,0 @@
-# No-Stale-Workspace Validator
-Date: 2026-05-30
-
-CHECK: canonical_packager does not read prior pr-dry-run output: PASS
-CHECK: Each idempotency run starts from source_run: PASS
-OVERALL: PASS

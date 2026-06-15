@@ -1,8 +1,0 @@
-EXIT=0 DURATION=4.0s
-
-STDOUT:
-Aspose.HTML - HTML to DOCX Converter
-HTML converted to DOCX successfully: output.docx
-
-
-STDERR:

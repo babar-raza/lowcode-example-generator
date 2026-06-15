@@ -1,1 +1,0 @@
-DWG: fixtures/Drawing11.dwg, JPG: output/output.jpg, Size: 77073 bytes

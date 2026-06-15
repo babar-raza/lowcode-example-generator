@@ -1,8 +1,0 @@
-{
-  "slug": "cells-spreadsheet-converter",
-  "run_stdout": "",
-  "output_files": [
-    "output.csv"
-  ],
-  "has_output": true
-}

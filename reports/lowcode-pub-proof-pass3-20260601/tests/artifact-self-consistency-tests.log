@@ -1,5 +1,0 @@
-[PASS] self-reference-policy.md exists
-[PASS] artifact-exclusion-list.json lists 3 excluded files
-[PASS] zip-file-list.txt includes itself
-[PASS] per-file-sha256.json documents excluded files
-[PASS] self-contained-bundle-check.json consistent

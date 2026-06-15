@@ -1,8 +1,0 @@
-{
-  "cells": {"has_readme": true, "all_examples_mentioned": true, "paths_correct": true, "verified": true},
-  "diagram": {"has_readme": true, "all_examples_mentioned": true, "paths_correct": true, "verified": true},
-  "email": {"has_readme": true, "all_examples_mentioned": true, "paths_correct": true, "verified": true, "note": "Path corrected from email-converter/ to converter/ via PR #4"},
-  "pdf": {"has_readme": true, "all_examples_mentioned": true, "paths_correct": true, "verified": true, "note": "Complete rewrite listing all 20 examples via PR #24"},
-  "slides": {"has_readme": true, "all_examples_mentioned": true, "paths_correct": true, "verified": true, "note": "Paths corrected from slides-* to actual dirs via PR #4"},
-  "words": {"has_readme": true, "all_examples_mentioned": true, "paths_correct": true, "verified": true}
-}

@@ -1,7 +1,0 @@
-{
-  "sprint_id": "lowcode-full-closure-mega-train-20260529",
-  "generated_at": "2026-05-29T09:08:56Z",
-  "evidence_validator_rules": 145,
-  "ecc_script": "scripts/run_ecc_final_publication.py",
-  "ecc_status": "PENDING_FINAL_COMMIT"
-}

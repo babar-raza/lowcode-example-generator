@@ -1,7 +1,0 @@
-{
-  "sprint_id": "full-system-qualification-repair-20260529",
-  "generated_at": "2026-05-29T00:00:00Z",
-  "readme_io_api_called": false,
-  "dry_run_only": true,
-  "note": "readme.io validation is gated behind PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL which is not set."
-}

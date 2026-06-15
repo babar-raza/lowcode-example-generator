@@ -1,8 +1,0 @@
-{
-  "slug": "cells-text-converter",
-  "run_stdout": "",
-  "output_files": [
-    "output.txt"
-  ],
-  "has_output": true
-}

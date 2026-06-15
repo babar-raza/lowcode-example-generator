@@ -1,8 +1,0 @@
-{
-  "scan_date": "2026-06-03",
-  "extensions_checked": [".pfx", ".p12", ".key", ".pem", ".cer", ".crt"],
-  "repos_checked": ["cells", "diagram", "email", "pdf", "slides", "words"],
-  "certificate_files_in_git": [],
-  "result": "CLEAN",
-  "note": "PDF signature and Words signer both generate self-signed test certs at runtime via System.Security.Cryptography"
-}

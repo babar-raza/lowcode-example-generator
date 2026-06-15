@@ -1,6 +1,0 @@
-Output validation: 49 examples tested.
-44 publishable examples produce output files.
-5 diagnostic examples produce output files.
-Per-example proof: output-validation/per-example-output-proof.json
-Publishable proof: output-validation/publishable-output-proof.json
-Diagnostic proof: output-validation/nonpublication-diagnostic-output-proof.json

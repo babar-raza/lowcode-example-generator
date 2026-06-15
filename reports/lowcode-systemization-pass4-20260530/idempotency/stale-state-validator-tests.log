@@ -1,5 +1,0 @@
-Stale state validator tests:
-- No references to workspace/runs/pilot-* in generated files: PASS
-- No references to workspace/pr-dry-run in generated files: PASS
-- All runs use --clean-run-dir: PASS
-OVERALL: PASS

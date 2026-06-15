@@ -1,7 +1,0 @@
-{
-  "family": "email",
-  "run_id": "pubclosure-b-email-20260530",
-  "verdict": "DATA_FLOW_PROTOTYPE_ONLY",
-  "stages": "N/A",
-  "complete": true
-}

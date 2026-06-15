@@ -1,6 +1,0 @@
-LLM Preflight Log
-Sprint: full-system-qualification-repair-20260529
-Date: 2026-05-29T00:00:00Z
-
-No LLM preflight was needed — pipeline ran without LLM (template_mode=False for generation is not applicable
-since we used replay_from=validation which reuses prior generated code).

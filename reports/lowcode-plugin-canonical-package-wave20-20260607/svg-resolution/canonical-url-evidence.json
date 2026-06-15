@@ -1,9 +1,0 @@
-{
-  "artifact_type": "CANONICAL_URL_EVIDENCE",
-  "plugin_slug": "svg-to-image-converter",
-  "canonical_url": "https://products.aspose.net/svg/svg-to-image-converter/",
-  "page_source_status": "CANONICAL_URL_CONFIRMED",
-  "source_link": "https://raw.githubusercontent.com/aspose-svg/Aspose.SVG-for-.NET/master/Examples/CSharp/LoadSaveConvert/ConvertSVGToPDF.cs",
-  "api_confirmed": "Converter.ConvertSVG(doc, ImageSaveOptions(PNG), outputPath)",
-  "verdict": "URL_CONFIRMED — no product decision required"
-}

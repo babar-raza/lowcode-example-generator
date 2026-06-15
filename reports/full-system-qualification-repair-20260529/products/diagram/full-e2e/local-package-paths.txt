@@ -1,2 +1,0 @@
-workspace/runs/pilot-diagram-final-20260528/generated/diagram/diagram-diagram-converter
-workspace/runs/pilot-diagram-final-20260528/generated/diagram/diagram-pdf-converter

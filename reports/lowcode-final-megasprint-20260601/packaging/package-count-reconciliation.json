@@ -1,9 +1,0 @@
-{
-  "sprint": "lowcode-final-megasprint-20260601",
-  "main": 42,
-  "companion": 1,
-  "env_dep": 1,
-  "total": 44,
-  "expected": 44,
-  "match": true
-}

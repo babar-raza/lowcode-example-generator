@@ -1,2 +1,0 @@
-Status: PASS
-PNG size: 10988 bytes

@@ -1,9 +1,0 @@
-{
-  "family": "pdf",
-  "repo": "aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples",
-  "branch": "lowcode-examples-pdf-readme-io-final",
-  "status": "SUPERSEDED_BY_MERGE",
-  "note": "Branch merged into main and deleted. Post-merge main-branch verification confirms our 20 published examples present (plus 1 pre-existing pdf-aconverter).",
-  "verified_on_main": true,
-  "examples_confirmed": 20
-}

@@ -1,4 +1,0 @@
-Template: fixtures\template.omr
-Image: fixtures\template.png
-CSV size: 19 bytes
-Status: PASS

@@ -1,6 +1,0 @@
-{
-  "sprint": "lowcode-merge-sprint-20260602",
-  "method": "carryforward",
-  "note": "44/44 E2E PASS confirmed from workspace and PR branches in prior sprint. No code changes on main post-merge.",
-  "accepted_sprint_e2e": "44/44 PASS"
-}

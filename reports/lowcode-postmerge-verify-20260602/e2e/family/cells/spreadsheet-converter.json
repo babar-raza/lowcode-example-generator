@@ -1,9 +1,0 @@
-{
-  "example": "spreadsheet-converter",
-  "csproj": "cells-spreadsheet-converter.csproj",
-  "restore": "OK",
-  "build": "OK",
-  "exit_code": 0,
-  "stdout_tail": "Example: cells-spreadsheet-converter\nDone.\n",
-  "stderr_tail": ""
-}

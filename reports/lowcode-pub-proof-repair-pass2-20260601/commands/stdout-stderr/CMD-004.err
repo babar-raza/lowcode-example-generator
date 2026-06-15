@@ -1,4 +1,0 @@
-  File "<string>", line 1
-    import json,pathlib; p=pathlib.Path(r'C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-pub-proof-repair-pass2-20260601')/r'packaging/package-manifest.json'; d=json.loads(p.read_text()); print(f\"Packages: {d['total']}\")
-                                                                                                                                                                                                                                               ^
-SyntaxError: unexpected character after line continuation character

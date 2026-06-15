@@ -1,2 +1,0 @@
-C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-plugin-example-factory-closeout-wave5-20260605\dryrun\examples\drawing\create-drawing\obj\Debug\net8.0\drawing-create-drawing.csproj.AssemblyReference.cache
-C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\reports\lowcode-plugin-example-factory-closeout-wave5-20260605\dryrun\examples\drawing\create-drawing\obj\Debug\net8.0\drawing-create-drawing.GeneratedMSBuildEditorConfig.editorconfig

@@ -1,9 +1,0 @@
-{
-  "example": "merger",
-  "csproj": "pdf-merger.csproj",
-  "restore": "OK",
-  "build": "OK",
-  "exit_code": 0,
-  "stdout_tail": "Merged successfully\n",
-  "stderr_tail": ""
-}

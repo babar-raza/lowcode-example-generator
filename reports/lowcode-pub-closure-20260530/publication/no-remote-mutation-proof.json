@@ -1,8 +1,0 @@
-{
-  "sprint_id": "lowcode-pub-closure-20260530",
-  "push_executed": false,
-  "pr_created": false,
-  "merge_executed": false,
-  "reason": "Approval gates not set",
-  "verification": "git log --oneline shows only local commits; no git push executed"
-}

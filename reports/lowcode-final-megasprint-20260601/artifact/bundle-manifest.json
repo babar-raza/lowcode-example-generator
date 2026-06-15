@@ -1,7 +1,0 @@
-{
-  "sprint": "lowcode-final-megasprint-20260601",
-  "built_at": "2026-06-01T16:02:23.518437+00:00",
-  "protocol": "NON_CIRCULAR_SIDECAR",
-  "self_reference_policy": "DOCUMENTED_EXCLUSION",
-  "note": "No ZIP hash in this manifest. See external sidecar files."
-}

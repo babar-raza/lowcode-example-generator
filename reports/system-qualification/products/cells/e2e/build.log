@@ -1,7 +1,0 @@
-# Build Log: cells
-# Pilot Run: pilot-cells-final-20260528
-# See: workspace/runs/pilot-cells-final-20260528/pilot-report.json
-
-Build stage: NOT RUN (skip_run=True per qualification protocol)
-Reflection: PASSED
-Plugin detection: PASSED

@@ -1,9 +1,0 @@
-{
-  "expected_files": [
-    "output.png"
-  ],
-  "expected_console_contains": [
-    "photo processor"
-  ],
-  "exit_code": 0
-}

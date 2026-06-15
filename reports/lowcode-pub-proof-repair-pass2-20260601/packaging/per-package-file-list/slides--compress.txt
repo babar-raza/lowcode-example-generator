@@ -1,5 +1,0 @@
-Program.cs
-README.md
-compress.csproj
-example.manifest.json
-expected-output.json

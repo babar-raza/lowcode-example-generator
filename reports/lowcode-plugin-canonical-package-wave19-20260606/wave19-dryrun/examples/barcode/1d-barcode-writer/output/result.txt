@@ -1,1 +1,0 @@
-1D barcode generated: output/barcode-1d.png (21937 bytes)

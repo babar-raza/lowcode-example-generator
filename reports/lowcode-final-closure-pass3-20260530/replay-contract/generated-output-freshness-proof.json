@@ -1,8 +1,0 @@
-{
-  "sprint_id": "lowcode-final-closure-pass3-20260530",
-  "total_examples": 42,
-  "hashes_match_ledger": true,
-  "total_match": 42,
-  "total_mismatch": 0,
-  "conclusion": "All 42 Program.cs files match source-hash-ledger.json from prior sprint runs. Generation was fresh from committed templates."
-}

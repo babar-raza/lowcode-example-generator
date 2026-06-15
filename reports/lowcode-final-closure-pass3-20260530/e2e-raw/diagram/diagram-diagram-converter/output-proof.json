@@ -1,8 +1,0 @@
-{
-  "example_id": "diagram-diagram-converter",
-  "all_passed": true,
-  "restore_passed": true,
-  "build_passed": true,
-  "run_passed": true,
-  "run_stdout_snippet": "Conversion succeeded, output file created at 'output.vdx'.\n"
-}

@@ -1,9 +1,0 @@
-{
-  "expected_files": [
-    "output.docx"
-  ],
-  "expected_console_contains": [
-    "html to docx converter"
-  ],
-  "exit_code": 0
-}

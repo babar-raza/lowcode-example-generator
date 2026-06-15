@@ -1,5 +1,0 @@
-6128cec feat(blocker-closure): add words-signer + slides-for-each examples â€” 2 blockers closed
-90a578b feat(final-closure): full A-P evidence â€” 42/42 examples, 3222 pytest pass, 0 failures
-ec18258 feat(pub-closure): full A-N evidence closure â€” 42/42 examples, 3220 pytest pass
-48bc2d1 chore(pub-closure-c1): workspace state refresh from Run-B idempotency generations
-8d2a335 feat(pub-closure-b1): evaluator status model fix + workspace state refresh

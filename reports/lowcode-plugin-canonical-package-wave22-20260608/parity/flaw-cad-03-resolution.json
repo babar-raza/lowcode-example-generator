@@ -1,7 +1,0 @@
-{
-  "flaw": "W22-FLAW-CAD-03",
-  "original_finding": "Missing README.md for 'fixtures'",
-  "resolution": "FALSE_POSITIVE",
-  "reason": "The 'fixtures' path is an input data directory inside each CAD example, not an example slug. It contains DWG/DXF files. No README is required for this subdirectory. Flaw dismissed.",
-  "status": "RESOLVED_FALSE_POSITIVE"
-}

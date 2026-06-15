@@ -1,9 +1,0 @@
-{
-  "example": "form-exporter",
-  "csproj": "form-exporter.csproj",
-  "restore": "OK",
-  "build": "OK",
-  "exit_code": 0,
-  "stdout_tail": "Form exported to JSON\n",
-  "stderr_tail": ""
-}

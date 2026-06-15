@@ -1,5 +1,0 @@
-# Approval Gates
-
-- PUBLISH: NOT_SET
-- MERGE: NOT_SET
-- GH_TOKEN: PRESENT

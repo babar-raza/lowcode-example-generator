@@ -1,6 +1,0 @@
-{
-  "public_test_tsa": "https://freetsa.org/tsr",
-  "env_config_option": "TSA_URL environment variable",
-  "local_mock_feasibility": "Requires running a TSA server (e.g., openssl-based)",
-  "policy_decision": "Use public test TSA for example; document requirement in README"
-}

@@ -1,5 +1,0 @@
-# Raw Commands Log — lowcode-systemization-pass4-20260530
-Started: 2026-05-30T19:45:26.503948
-
-Format: [LANE][CMD_ID] command → result (stdout-stderr/<id>.*)
-

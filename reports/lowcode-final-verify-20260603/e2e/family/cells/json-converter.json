@@ -1,9 +1,0 @@
-{
-  "example": "json-converter",
-  "csproj": "cells-json-converter.csproj",
-  "restore": "OK",
-  "build": "OK",
-  "exit_code": 0,
-  "stdout_tail": "Example: cells-json-converter\nDone.\n",
-  "stderr_tail": ""
-}

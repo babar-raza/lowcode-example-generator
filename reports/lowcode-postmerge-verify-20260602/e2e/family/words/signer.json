@@ -1,9 +1,0 @@
-{
-  "example": "signer",
-  "csproj": "signer.csproj",
-  "restore": "OK",
-  "build": "OK",
-  "exit_code": 0,
-  "stdout_tail": "Example: words-signer\nSigning succeeded: output.docx, Signatures: 1\nDone.\n",
-  "stderr_tail": ""
-}

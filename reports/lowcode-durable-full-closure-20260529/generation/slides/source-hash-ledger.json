@@ -1,9 +1,0 @@
-{
-  "run_id": "pilot-slides-20260529-221814",
-  "family": "slides",
-  "hashes": {
-    "slides-compress/Program.cs": "00bf6fd19d62e175654b005b8936c07fe23a0d9cdd8c902d511c842ef1ec99c4",
-    "slides-convert/Program.cs": "1e8df0c230e4ef5a2ce3aa7668222642b0ff20173de7ded2f31c13332b9472d4",
-    "slides-merger/Program.cs": "06723281d8d77bab98f03d72fa71be84a60d693f94e6101af77395de7fec7557"
-  }
-}

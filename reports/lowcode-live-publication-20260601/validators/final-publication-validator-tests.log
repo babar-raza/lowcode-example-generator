@@ -1,7 +1,0 @@
-[PASS] V01: Accepted state verified
-[PASS] V02: Sidecar SHA match
-[PASS] V03: Package artifacts = 44
-[PASS] V04: Dry-run locked
-[PASS] V05: No static PFX
-[PASS] V06: No unapproved remote mutation -- prs_created=False, gate=
-[PASS] V07: No unapproved merge -- merged=False, gate=

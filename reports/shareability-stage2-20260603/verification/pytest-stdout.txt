@@ -1,5 +1,0 @@
-tests\unit\test_version_drift_checker.py ......................          [ 98%]
-tests\unit\test_words_readiness_review.py .............................. [ 99%]
-..........                                                               [100%]
-
-================ 3222 passed, 18 skipped in 332.22s (0:05:32) =================

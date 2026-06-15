@@ -1,9 +1,0 @@
-{
-  "expected_files": [
-    "output.zip"
-  ],
-  "expected_console_contains": [
-    "compress files"
-  ],
-  "exit_code": 0
-}

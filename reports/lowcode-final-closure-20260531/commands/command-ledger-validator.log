@@ -1,3 +1,0 @@
-command_ledger_validator: PASS
-  total_commands=4
-  all_have_stdout_stderr_paths=True

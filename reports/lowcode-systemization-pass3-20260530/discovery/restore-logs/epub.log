@@ -1,7 +1,0 @@
-# epub — no standalone package
-# Classification: FORMAT_CAPABILITY_OF_OTHER_PRODUCT
-# Sprint: lowcode-systemization-pass3-20260530
-
-No Aspose.Epub NuGet package exists. EPUB is a format supported by:
-- Aspose.Words (SaveFormat.Epub, covered by words LowCode family)
-- Aspose.HTML (epub reading/conversion, no LowCode namespace)

@@ -1,8 +1,0 @@
-{
-  "generated_at": "2026-06-10T02:54:48+00:00",
-  "verdict": "PASS",
-  "secret_findings": [],
-  "pfx_files": 4,
-  "pfx_in_tests": 4,
-  "pfx_note": "All .pfx files are in test directories \u2014 test-only, intentional"
-}

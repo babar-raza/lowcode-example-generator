@@ -1,7 +1,0 @@
-{
-  "class": "Aspose.Pdf.LowCode.FormImporter",
-  "method": "Process(FormImporterJsonOptions)",
-  "exists_in_26_5_0": true,
-  "compiles": true,
-  "runtime_error": "NullReferenceException in Form.ImportJson(Stream)"
-}

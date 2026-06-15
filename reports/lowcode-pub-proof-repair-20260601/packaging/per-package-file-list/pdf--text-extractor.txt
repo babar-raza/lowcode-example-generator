@@ -1,3 +1,0 @@
-example.manifest.json
-Program.cs
-text-extractor.csproj

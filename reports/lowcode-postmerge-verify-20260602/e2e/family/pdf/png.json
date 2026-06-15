@@ -1,9 +1,0 @@
-{
-  "example": "png",
-  "csproj": "pdf-png.csproj",
-  "restore": "OK",
-  "build": "OK",
-  "exit_code": 0,
-  "stdout_tail": "PNG created\n",
-  "stderr_tail": ""
-}

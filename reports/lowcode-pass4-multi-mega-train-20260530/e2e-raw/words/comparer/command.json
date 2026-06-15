@@ -1,1 +1,0 @@
-{"restore":"dotnet restore","build":"dotnet build --nologo -v q --no-restore","run":"dotnet run --no-build --project .","source_dir":"c:/Users/prora/OneDrive/Documents/GitHub/lowcode-example-generator-gitlab/workspace/runs/pilot-words-20260529-220000/generated/words/words-comparer"}

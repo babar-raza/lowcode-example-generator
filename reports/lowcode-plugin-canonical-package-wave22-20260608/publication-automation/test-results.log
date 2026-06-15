@@ -1,8 +1,0 @@
-# Publication Automation Tests
-
-Date: 2026-06-08
-PR templates validated: YES (3 plugin PRs confirmed using feat(plugins): prefix)
-Branch prefix policy: YES (new branches use plugins/ prefix per ADR)
-Legacy branches: lowcode/wave19/* grandfathered until merge
-Merge dry-run: 3 commands prepared, APPROVAL_BLOCKED
-Branch cleanup dry-run: 3 deletion commands prepared, PENDING_MERGE

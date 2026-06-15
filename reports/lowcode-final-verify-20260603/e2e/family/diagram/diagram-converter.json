@@ -1,9 +1,0 @@
-{
-  "example": "diagram-converter",
-  "csproj": "diagram-converter.csproj",
-  "restore": "OK",
-  "build": "OK",
-  "exit_code": 0,
-  "stdout_tail": "Conversion succeeded, output file created at 'output.vdx'.\n",
-  "stderr_tail": ""
-}

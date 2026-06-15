@@ -1,9 +1,0 @@
-Command ledger validation: 8 commands, 8 stdout/stderr files, 0 missing references
-  CMD-001: Build 44 package artifacts [exit=0]
-  CMD-002: E2E publishable 44/44 + diagnostic 5/5 [exit=0]
-  CMD-003: Per-example output validation [exit=0]
-  CMD-004: Run 12 validator rules [exit=0]
-  CMD-005: Decision board lock + consistency [exit=0]
-  CMD-006: Publication dry-run matrix [exit=0]
-  CMD-007: Environment + git + approval gates [exit=0]
-  CMD-008: ZIP build with sidecar protocol [exit=0]

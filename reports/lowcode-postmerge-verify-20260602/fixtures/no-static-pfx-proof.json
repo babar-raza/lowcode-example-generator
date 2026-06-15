@@ -1,8 +1,0 @@
-{
-  "pfx_files_in_git": [],
-  "pfx_files_runtime_only": [
-    "pdf/examples/pdf/lowcode/signature/test.pfx (untracked, created by E2E run)"
-  ],
-  "clean": true,
-  "note": "No static PFX in git. Runtime-generated PFX from E2E run exists in working directory but is untracked."
-}

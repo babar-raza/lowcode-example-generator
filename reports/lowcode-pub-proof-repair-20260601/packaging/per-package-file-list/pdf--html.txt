@@ -1,3 +1,0 @@
-example.manifest.json
-pdf-html.csproj
-Program.cs

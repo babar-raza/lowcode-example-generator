@@ -1,8 +1,0 @@
-EXIT=0 DURATION=2.6s
-
-STDOUT:
-Aspose.Drawing - Create Drawing
-Drawing created successfully: output.png
-
-
-STDERR:

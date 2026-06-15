@@ -1,9 +1,0 @@
-{
-  "example": "tiff",
-  "csproj": "pdf-tiff.csproj",
-  "restore": "OK",
-  "build": "OK",
-  "exit_code": 0,
-  "stdout_tail": "TIFF created\n",
-  "stderr_tail": ""
-}

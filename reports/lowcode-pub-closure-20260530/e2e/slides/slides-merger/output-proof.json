@@ -1,8 +1,0 @@
-{
-  "slug": "slides-merger",
-  "run_stdout": "",
-  "output_files": [
-    "output.pptx"
-  ],
-  "has_output": true
-}

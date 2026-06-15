@@ -1,7 +1,0 @@
-{
-  "sprint_id": "lowcode-systemization-pass3-20260530",
-  "generated_at": "2026-05-30",
-  "template_first_examples": [],
-  "template_mode_status": "SUPPORTED_WITH_CATALOG_HASH_GATE",
-  "note": "Template-first generation requires --template-mode flag. The scenario_planning gate checks catalog hash; if hash differs from denominator, generation is blocked. Pass3 template-mode runs hit this gate. All current publication candidates were LLM-generated (not template-first)."
-}

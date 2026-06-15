@@ -1,8 +1,0 @@
-{
-  "family": "ocr",
-  "slug": "table-to-text",
-  "source": "wave26-scaffold-generator",
-  "generated_at": "2026-06-09T16:12:16+00:00",
-  "template_source": "GENERIC_FALLBACK",
-  "review_status": "SCAFFOLD_GENERATED"
-}

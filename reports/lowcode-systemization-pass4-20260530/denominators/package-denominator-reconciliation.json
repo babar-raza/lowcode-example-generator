@@ -1,9 +1,0 @@
-{
-  "sprint_id": "lowcode-systemization-pass4-20260530",
-  "generated": 42,
-  "build_run_valid": 42,
-  "pr_candidates_per_pilot": 42,
-  "timestamp_excluded": 1,
-  "publication_candidates": 41,
-  "reconciliation": "package-included = pr_candidates = generated (no package-level exclusions except timestamp)"
-}

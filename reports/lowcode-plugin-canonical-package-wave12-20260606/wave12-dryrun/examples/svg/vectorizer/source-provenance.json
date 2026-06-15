@@ -1,9 +1,0 @@
-{
-  "source_sprint": "lowcode-plugin-example-factory-wave6-20260605",
-  "source_path": "reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/svg/vectorizer",
-  "canonical_package_sprint": "lowcode-plugin-canonical-package-wave12-20260606",
-  "migration_type": "CANONICAL_PACKAGE_FROM_DRYRUN_WITH_FIX",
-  "fix_applied": "VECTORIZER_BASE64_FIX — original factory package had invalid 98-char base64 (not divisible by 4) causing FormatException at runtime. Wave 12 uses correct 96-char 1x1 white PNG base64.",
-  "original_run_status": "FAIL (FormatException on Convert.FromBase64String)",
-  "wave12_run_status": "PASS (426-byte SVG output)"
-}

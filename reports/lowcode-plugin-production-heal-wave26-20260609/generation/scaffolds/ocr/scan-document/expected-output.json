@@ -1,9 +1,0 @@
-{
-  "expected_files": [
-    "output.txt"
-  ],
-  "expected_console_contains": [
-    "scan document"
-  ],
-  "exit_code": 0
-}

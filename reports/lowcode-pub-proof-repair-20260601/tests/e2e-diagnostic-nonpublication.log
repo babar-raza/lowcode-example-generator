@@ -1,7 +1,0 @@
-E2E Diagnostic (Non-Publication) Results: 5/5 PASS
-- email/email-converter (EXCLUDE_DUPLICATE): build=0 run=0
-- slides/for-each (EXCLUDE_NON_RUNNABLE_HELPER): build=0 run=0
-- slides/slides-compress (EXCLUDE_DUPLICATE): build=0 run=0
-- slides/slides-convert (EXCLUDE_DUPLICATE): build=0 run=0
-- slides/slides-merger (EXCLUDE_DUPLICATE): build=0 run=0
-These are diagnostic runs only. Not counted as publishable. Not included in packages.

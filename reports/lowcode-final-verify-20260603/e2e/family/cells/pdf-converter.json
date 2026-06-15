@@ -1,9 +1,0 @@
-{
-  "example": "pdf-converter",
-  "csproj": "cells-pdf-converter.csproj",
-  "restore": "OK",
-  "build": "OK",
-  "exit_code": 0,
-  "stdout_tail": "Example: cells-pdf-converter\nDone.\n",
-  "stderr_tail": ""
-}

@@ -1,8 +1,0 @@
-EXIT=0 DURATION=3.5s
-
-STDOUT:
-Aspose.Imaging - Image Filters
-Image filter applied successfully: output-filtered.png
-
-
-STDERR:

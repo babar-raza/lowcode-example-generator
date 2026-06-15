@@ -1,8 +1,0 @@
-{
-  "family": "words",
-  "source_run": "workspace/runs/pilot-words-repair-20260530/generated/words",
-  "example_count": 8,
-  "validated_in_sprint": "systemization-pass2-20260530",
-  "e2e_status": "PASS",
-  "notes": "E2E validated (skip_run=False) in systemization-pass2-20260530"
-}

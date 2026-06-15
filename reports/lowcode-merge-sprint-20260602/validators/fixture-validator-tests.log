@@ -1,5 +1,0 @@
-[PASS] F01: All examples self-contained (no external fixtures)
-[PASS] F02: No static PFX files in git
-[PASS] F03: Runtime crypto policy (words/signer)
-[PASS] F04: Environment-dependent classification (pdf/timestamp)
-[PASS] F05: Fixture registry complete (44 examples, 6 families)

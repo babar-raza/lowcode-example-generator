@@ -1,9 +1,0 @@
-{{
-  "package_key": "ocr/scan-document",
-  "nuget_package": "Aspose.OCR",
-  "nuget_version": "24.12.0",
-  "sprint": "lowcode-plugin-example-factory-closeout-wave5-20260605",
-  "generated_at": "2026-06-05",
-  "canonical_url": "https://products.aspose.net/ocr/scan-document/",
-  "output_files": ["output/scanned.txt"]
-}}

@@ -1,9 +1,0 @@
-{
-  "slug": "words-watermarker",
-  "run_stdout": "",
-  "output_files": [
-    "output_image_watermark.docx",
-    "output_text_watermark.docx"
-  ],
-  "has_output": true
-}

@@ -1,8 +1,0 @@
-{
-  "sprint_id": "lowcode-final-closure-20260531",
-  "generated_at": "2026-05-31T13:33:10",
-  "forbidden_pattern": "no suitable overload found in catalog",
-  "findings_count": 0,
-  "findings": [],
-  "verdict": "PASS \u2014 0 forbidden comments"
-}

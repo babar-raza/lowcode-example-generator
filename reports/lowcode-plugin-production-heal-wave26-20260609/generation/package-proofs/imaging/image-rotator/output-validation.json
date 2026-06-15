@@ -1,9 +1,0 @@
-{
-  "output_files_found": [
-    "output-rotated.png"
-  ],
-  "output_file_count": 1,
-  "run_stdout": "Aspose.Imaging - Image Rotator\nImage rotated successfully: output-rotated.png\n",
-  "run_exit_code": 0,
-  "validated_at": "2026-06-09T16:15:20+00:00"
-}

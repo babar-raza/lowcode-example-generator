@@ -1,8 +1,0 @@
-EXIT=0 DURATION=3.5s
-
-STDOUT:
-Aspose.Imaging - Image Compressor
-Image compressed successfully: output-compressed.jpg
-
-
-STDERR:

@@ -1,8 +1,0 @@
-EXIT=0 DURATION=4.6s
-
-STDOUT:
-Aspose.HTML - HTML to Image Converter
-HTML converted to image successfully: output.png
-
-
-STDERR:

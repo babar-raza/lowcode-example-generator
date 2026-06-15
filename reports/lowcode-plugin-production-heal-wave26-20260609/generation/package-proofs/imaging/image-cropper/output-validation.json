@@ -1,9 +1,0 @@
-{
-  "output_files_found": [
-    "output-cropped.png"
-  ],
-  "output_file_count": 1,
-  "run_stdout": "Aspose.Imaging - Image Cropper\nImage cropped successfully: output-cropped.png\n",
-  "run_exit_code": 0,
-  "validated_at": "2026-06-09T16:14:44+00:00"
-}

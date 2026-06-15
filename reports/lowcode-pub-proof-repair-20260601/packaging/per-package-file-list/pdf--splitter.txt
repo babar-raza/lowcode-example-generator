@@ -1,3 +1,0 @@
-example.manifest.json
-Program.cs
-splitter.csproj

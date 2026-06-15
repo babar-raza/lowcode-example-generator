@@ -1,5 +1,0 @@
-Program.cs
-README.md
-example.manifest.json
-expected-output.json
-spreadsheet-merger.csproj

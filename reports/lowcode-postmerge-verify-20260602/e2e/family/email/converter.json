@@ -1,9 +1,0 @@
-{
-  "example": "converter",
-  "csproj": "email-converter.csproj",
-  "restore": "OK",
-  "build": "OK",
-  "exit_code": 0,
-  "stdout_tail": "Example: email-converter\nConversion succeeded: output_html\n",
-  "stderr_tail": ""
-}

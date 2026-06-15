@@ -1,9 +1,0 @@
-{
-  "artifact_type": "FINAL_VALIDATION_RESULTS",
-  "sprint": "lowcode-plugin-canonical-package-wave19-20260606",
-  "date": "2026-06-06",
-  "pytest_result": "3828 passed, 18 skipped, 0 failures",
-  "test_fix": "test_ready_entries_non_empty: threshold lowered from 30 to 25 (barcode writers promoted from TRANSFORMED_TO_EXAMPLE_DRYRUN to CANONICAL_PACKAGE_PROVEN)",
-  "baseline_maintained": true,
-  "verdict": "VALIDATION_PASS"
-}

@@ -1,1 +1,0 @@
-denominator-tests.log: denominator-consistency-tests.log PASS (pkg=42, pr=41, diff=2 documented)

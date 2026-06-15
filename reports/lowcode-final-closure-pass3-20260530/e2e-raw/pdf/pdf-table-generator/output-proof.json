@@ -1,8 +1,0 @@
-{
-  "example_id": "pdf-table-generator",
-  "all_passed": true,
-  "restore_passed": true,
-  "build_passed": true,
-  "run_passed": true,
-  "run_stdout_snippet": "Table added\n"
-}

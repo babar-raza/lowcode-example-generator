@@ -1,9 +1,0 @@
-{
-  "example": "table-generator",
-  "csproj": "pdf-table-generator.csproj",
-  "restore": "OK",
-  "build": "OK",
-  "exit_code": 0,
-  "stdout_tail": "Table added\n",
-  "stderr_tail": ""
-}

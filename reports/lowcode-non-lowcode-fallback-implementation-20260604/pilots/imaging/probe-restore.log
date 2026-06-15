@@ -1,5 +1,0 @@
-dotnet restore ImagingConverterProbe.csproj
-  Determined projects to restore...
-  Restored ImagingConverterProbe.csproj (in 3.2s)
-  Packages: Aspose.Imaging 26.6.0
-Exit code: 0

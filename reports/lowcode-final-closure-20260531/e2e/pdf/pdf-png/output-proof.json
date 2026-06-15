@@ -1,8 +1,0 @@
-{
-  "slug": "pdf-png",
-  "run_stdout": "",
-  "output_files": [
-    "output.png"
-  ],
-  "has_output": true
-}

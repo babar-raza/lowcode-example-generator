@@ -1,7 +1,0 @@
-# Approval Gates
-
-Sprint: lowcode-pub-proof-repair-pass2-20260601
-
-- PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL: NOT_SET
-- PLUGIN_EXAMPLES_MERGE_PR_APPROVAL: NOT_SET
-- Result: APPROVAL_BLOCKED — no PRs created

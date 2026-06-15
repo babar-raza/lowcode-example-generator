@@ -1,7 +1,0 @@
-dotnet build ImagingConverterProbe.csproj -c Release
-  ImagingConverterProbe -> bin/Release/net8.0/ImagingConverterProbe.dll
-Build succeeded.
-  0 Warning(s)
-  0 Error(s)
-Time Elapsed: 00:00:05.88
-Exit code: 0

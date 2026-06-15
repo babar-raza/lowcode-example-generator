@@ -1,9 +1,0 @@
-{
-  "example": "timestamp",
-  "csproj": "timestamp.csproj",
-  "restore": "OK",
-  "build": "OK",
-  "exit_code": 0,
-  "stdout_tail": "Output: output_timestamped.pdf (exists=True, size=681157 bytes)\nTimestamp applied successfully\nDone.\n",
-  "stderr_tail": ""
-}

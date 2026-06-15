@@ -1,8 +1,0 @@
-{
-  "sprint_id": "full-system-qualification-repair-20260529",
-  "generated_at": "2026-05-29T00:00:00Z",
-  "llm_calls": [],
-  "total_tokens": 0,
-  "total_cost_usd": 0.0,
-  "note": "No LLM calls were made during script execution. All pipeline scripts run without LLM dependency."
-}

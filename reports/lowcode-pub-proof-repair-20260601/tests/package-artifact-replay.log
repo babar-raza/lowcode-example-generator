@@ -1,5 +1,0 @@
-Package artifact replay: 44 packages verified.
-Each package contains Program.cs + .csproj + example.manifest.json.
-Source: workspace/pr-dry-run/{pilot}/examples/{family}/lowcode/{name}/
-Target: reports/lowcode-pub-proof-repair-20260601/package-artifacts/{family}/{name}/
-All 44 packages built from workspace sources. No duplicates/helpers/upstream-bug included.

@@ -1,3 +1,0 @@
-dotnet run --project BarcodeGeneratorProbe.csproj --configuration Release -- probe-output.png
-Probe complete. Output: probe-output.png
-Exit code: 0

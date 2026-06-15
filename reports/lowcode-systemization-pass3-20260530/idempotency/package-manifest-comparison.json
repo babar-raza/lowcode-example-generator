@@ -1,8 +1,0 @@
-{
-  "sprint_id": "lowcode-systemization-pass3-20260530",
-  "verdict": "IDEMPOTENCY_PROVEN",
-  "tested": 12,
-  "excluded": 1,
-  "pass": 12,
-  "fail": 0
-}

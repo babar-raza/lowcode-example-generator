@@ -1,9 +1,0 @@
-{
-  "example": "compress",
-  "csproj": "slides-compress.csproj",
-  "restore": "OK",
-  "build": "OK",
-  "exit_code": 0,
-  "stdout_tail": "Example: slides-compress\nCompression succeeded: output.pptx\n",
-  "stderr_tail": ""
-}

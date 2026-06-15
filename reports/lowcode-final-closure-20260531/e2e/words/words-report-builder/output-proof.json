@@ -1,8 +1,0 @@
-{
-  "slug": "words-report-builder",
-  "run_stdout": "",
-  "output_files": [
-    "output.docx"
-  ],
-  "has_output": true
-}

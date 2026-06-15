@@ -1,8 +1,0 @@
-{
-  "example_id": "words-replacer",
-  "all_passed": true,
-  "restore_passed": true,
-  "build_passed": true,
-  "run_passed": true,
-  "run_stdout_snippet": "Example: words-replacer\nDone.\n"
-}

@@ -7,6 +7,7 @@ No production filesystem access.
 from __future__ import annotations
 
 import json
+from datetime import UTC, datetime
 from pathlib import Path
 
 import pytest
@@ -58,7 +59,7 @@ class TestCheckEvidenceChain:
             "gate_id": "GATE-001",
             "verdict": "PASS",
             "evidence_path": "gate-evidence.json",
-            "timestamp": "2026-06-11T10:00:00+00:00",
+            "timestamp": datetime.now(UTC).isoformat(),
         }
         (ec / "gates.json").write_text(json.dumps([gate_result]), encoding="utf-8")
 
@@ -75,7 +76,7 @@ class TestCheckEvidenceChain:
             "gate_id": "GATE-002",
             "verdict": "PASS",
             "evidence_path": None,  # ECV-01 violation
-            "timestamp": "2026-06-11T10:00:00+00:00",
+            "timestamp": datetime.now(UTC).isoformat(),
         }
         (ec / "gates.json").write_text(json.dumps([gate_result]), encoding="utf-8")
 
@@ -92,7 +93,7 @@ class TestCheckEvidenceChain:
             "gate_id": "GATE-003",
             "verdict": "PASS",
             "evidence_path": "nonexistent-file.json",
-            "timestamp": "2026-06-11T10:00:00+00:00",
+            "timestamp": datetime.now(UTC).isoformat(),
         }
         (ec / "gates.json").write_text(json.dumps([gate_result]), encoding="utf-8")
 

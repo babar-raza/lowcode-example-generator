@@ -1,8 +1,0 @@
-{
-  "sprint": 50,
-  "status": "APPROVAL_BLOCKED",
-  "reason": "PRs #5-#10 CLOSED. 14 types need replacement PRs. APPROVE_LIVE_PR absent.",
-  "types_needing_prs": 14,
-  "local_packages": 6,
-  "gate": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL=APPROVE_LIVE_PR"
-}

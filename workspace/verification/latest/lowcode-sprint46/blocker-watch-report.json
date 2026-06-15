@@ -1,9 +1,0 @@
-{
-  "sprint": 46,
-  "blockers": {
-    "formimporter": {"still_blocked": true, "latest_version": "26.5.0"},
-    "ocr": {"still_blocked": true, "http_status": "404"},
-    "psd": {"still_blocked": true, "http_status": "404"},
-    "permanently_blocked": {"status": "confirmed_unchanged", "roots": ["Timestamp", "Ofd"]}
-  }
-}

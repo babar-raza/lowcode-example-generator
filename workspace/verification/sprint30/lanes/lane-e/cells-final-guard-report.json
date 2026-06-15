@@ -1,1 +1,0 @@
-{"lane": "lane-e", "sprint": "sprint30", "date": "2026-05-17", "family": "cells", "scope": "FAMILY_COMPLETE", "published": 9, "wf_roots": 9, "post_merge_status": "POST_MERGE_VERIFIED", "regression_check": "CLEAN", "denominator_equation": "9 WR + 13 non-runnable = 22 HOLDS", "verdict": "CELLS_REGRESSION_FREE"}

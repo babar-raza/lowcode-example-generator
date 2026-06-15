@@ -1,7 +1,0 @@
- workspace/verification/latest/cells-readme-backfill-simulation.json | 4 ++--
- workspace/verification/latest/cells-root-readme-audit.json          | 2 +-
- workspace/verification/latest/cells-root-readme-render-result.json  | 2 +-
- workspace/verification/latest/words-readme-backfill-simulation.json | 4 ++--
- workspace/verification/latest/words-root-readme-audit.json          | 2 +-
- workspace/verification/latest/words-root-readme-render-result.json  | 2 +-
- 6 files changed, 8 insertions(+), 8 deletions(-)

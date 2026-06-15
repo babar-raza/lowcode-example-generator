@@ -1,9 +1,0 @@
-{
-  "sprint": "sprint36",
-  "generated_at": "2026-05-18",
-  "test_file": "tests/unit/test_target_repo_health.py",
-  "test_count": 18,
-  "passed": 18,
-  "failed": 0,
-  "verdict": "ALL_TESTS_PASS"
-}

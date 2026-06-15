@@ -1,7 +1,0 @@
-{
-  "cycle": 2,
-  "head": "007edb2",
-  "actions_executed": 0,
-  "reason": "stopped_no_change \u2014 fingerprint matches cycle 1",
-  "idempotent": true
-}

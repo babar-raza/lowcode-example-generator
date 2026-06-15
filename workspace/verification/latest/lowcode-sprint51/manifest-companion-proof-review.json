@@ -1,8 +1,0 @@
-{
-  "sprint": 51,
-  "companion_external": true,
-  "companion_sha_matches_zip": true,
-  "manifest_self_marker": "SELF",
-  "bundle_manifest_excludes_itself": true,
-  "verdict": "PASS"
-}

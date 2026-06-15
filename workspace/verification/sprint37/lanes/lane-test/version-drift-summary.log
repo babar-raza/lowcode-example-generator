@@ -1,9 +1,0 @@
-cells: DRIFT 26.4.0->26.5.1 (MAJOR)
-words: CURRENT (26.5.0)
-pdf: CURRENT (26.5.0)
-diagram: DRIFT 26.4.0->26.5.0 (MAJOR)
-email: CURRENT (26.4.0)
-slides: CURRENT (26.5.0)
-Overall: DRIFT_DETECTED (2 families)
-Cells 26.5.1 pilot: BUILD PASS, RUN PASS
-Diagram 26.5.0 pilot: BUILD PASS, RUN PASS

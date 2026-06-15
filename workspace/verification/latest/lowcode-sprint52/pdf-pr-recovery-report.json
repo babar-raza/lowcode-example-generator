@@ -1,9 +1,0 @@
-{
-  "sprint": 52,
-  "subject": "pdf-pr-recovery-report",
-  "status": "APPROVAL_BLOCKED",
-  "approval_gate": "APPROVE_LIVE_PR",
-  "gate_present": false,
-  "prs_created": 0,
-  "local_pr_ready": 14
-}

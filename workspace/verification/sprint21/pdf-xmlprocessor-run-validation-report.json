@@ -1,8 +1,0 @@
-{
-  "sprint": "sprint21",
-  "date": "2026-05-16",
-  "subject": "XmlProcessor run validation",
-  "run_attempted": false,
-  "reason": "XmlProcessor does not exist. No code was generated. No build or run was attempted.",
-  "verdict": "NOT_RUN_TYPE_DOES_NOT_EXIST"
-}

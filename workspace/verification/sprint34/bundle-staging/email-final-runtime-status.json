@@ -1,9 +1,0 @@
-{
-  "sprint": "sprint33",
-  "family": "email",
-  "status": "PILOT_COMPLETE",
-  "published": 1,
-  "runtime_verified_sprint32": true,
-  "merge_sha": "023ad66970d2",
-  "verdict": "EMAIL_RUNTIME_PASS"
-}

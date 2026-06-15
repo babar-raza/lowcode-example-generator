@@ -1,8 +1,0 @@
-{
-  "sprint": 52,
-  "subject": "pdf-pr-merge-report",
-  "status": "NOT_APPLICABLE",
-  "reason": "No open PRs. Approval gate APPROVE_MERGE_PR absent. No PRs created this sprint.",
-  "previously_merged_count": 9,
-  "previously_merged_prs": [1, 2, 4, 11, 17, 18, 19, 20, 21]
-}

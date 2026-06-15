@@ -1,9 +1,0 @@
-{
-  "sprint": 50,
-  "head": "5e66c8b",
-  "sprint49_failures": 6,
-  "current_failures": 0,
-  "all_fixed": true,
-  "fixed_by": "5e66c8b feat(format-authority): make LowCode format contracts repo-local and fail-closed",
-  "classification_summary": "All 6 failures were caused by incomplete format-authority WIP at Sprint 49 close. The format-authority commit completed the work and resolved all failures."
-}

@@ -1,6 +1,0 @@
-{
-  "sprint": 48,
-  "status": "NOT_APPLICABLE",
-  "reason": "APPROVE_MERGE_PR gate absent and PRs are CONFLICTING (must recreate first)",
-  "action_taken": "None"
-}

@@ -1,8 +1,0 @@
-{
-  "sprint": "sprint36",
-  "generated_at": "2026-05-18",
-  "merge_allowed": false,
-  "merge_gate": "APPROVE_MERGE_PR",
-  "merge_gate_set": false,
-  "verdict": "MERGE_BLOCKED_APPROVAL_NOT_SET"
-}

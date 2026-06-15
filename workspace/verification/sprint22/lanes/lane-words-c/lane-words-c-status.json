@@ -1,9 +1,0 @@
-{
-  "lane": "lane-words-c",
-  "sprint": "sprint22",
-  "date": "2026-05-16",
-  "subject": "Words template types (MailMerger, ReportBuilder)",
-  "status": "N/A",
-  "reason": "words-mail-merger and words-report-builder are both POST_MERGE_VERIFIED. Confirmed by lane-words-a truth audit.",
-  "verdict": "LANE_NA_TARGET_ALREADY_PUBLISHED"
-}

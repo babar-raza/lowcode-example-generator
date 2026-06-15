@@ -1,7 +1,0 @@
-pdf-controlled-pilot (PR#3): SIMULATION_PASSED
-pdf-controlled-pilot-pr5 (PR#5): SIMULATION_PASSED
-pdf-controlled-pilot-pr6 (PR#6): SIMULATION_PASSED
-pdf-controlled-pilot-pr7 (PR#7): SIMULATION_PASSED [Security+FormFlattener present]
-pdf-controlled-pilot-pr8 (PR#8): SIMULATION_PASSED
-pdf-controlled-pilot-pr9 (PR#9): SIMULATION_PASSED
-All 6 packages: 0 bin/obj, 0 secrets, APPROVAL_BLOCKED

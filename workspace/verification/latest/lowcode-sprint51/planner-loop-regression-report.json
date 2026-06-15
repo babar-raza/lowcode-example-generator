@@ -1,9 +1,0 @@
-{
-  "sprint": 51,
-  "head": "33beb18",
-  "cycles": 2,
-  "stop_reason": "stopped_no_change",
-  "regression": false,
-  "remaining_blocked": ["PDF_MERGE_PRS", "PDF_PR_CONFLICT_RECOVERY"],
-  "remaining_safe_noop": ["PORTFOLIO_CONSERVATION_CHECK", "VERSION_DRIFT_CHECK", "FORMIMPORTER_RETEST", "OCR_DEPENDENCY_RECHECK", "PSD_DEPENDENCY_RECHECK", "PERMANENTLY_BLOCKED_WATCH"]
-}

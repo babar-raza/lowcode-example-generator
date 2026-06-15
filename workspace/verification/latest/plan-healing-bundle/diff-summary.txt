@@ -1,1 +1,0 @@
-No source code changes in plan-healing sprint (plan file is external)

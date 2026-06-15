@@ -1,7 +1,0 @@
-{
-  "sprint": 48,
-  "parity_pass": true,
-  "total_contracts": 42,
-  "total_pilot": 42,
-  "note": "Every contract has a matching pilot scenario. No orphan contracts."
-}

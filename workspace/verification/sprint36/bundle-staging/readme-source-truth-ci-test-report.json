@@ -1,7 +1,0 @@
-{
-  "sprint": "sprint36",
-  "generated_at": "2026-05-18",
-  "tests_location": "tests/unit/test_readme_auditor.py (existing)",
-  "all_pass": true,
-  "verdict": "README_CI_TESTS_PASS"
-}

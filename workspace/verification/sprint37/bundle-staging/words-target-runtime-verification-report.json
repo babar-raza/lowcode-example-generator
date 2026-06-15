@@ -1,9 +1,0 @@
-{
-  "family": "words",
-  "sprint": "sprint35",
-  "verified_at": "2026-05-18",
-  "merge_sha": "c22788ebda05",
-  "examples_in_target_repo": 8,
-  "runtime_verified": true,
-  "verdict": "POST_MERGE_VERIFIED"
-}

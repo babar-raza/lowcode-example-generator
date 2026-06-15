@@ -1,6 +1,0 @@
-{
-  "sprint": "sprint33",
-  "latest_version_tested": "26.5.0",
-  "still_failing": true,
-  "verdict": "DEFECT_CONFIRMED_RETEST_AT_NEXT_VERSION"
-}

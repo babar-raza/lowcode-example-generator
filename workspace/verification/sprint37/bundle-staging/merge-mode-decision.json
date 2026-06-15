@@ -1,6 +1,0 @@
-{
-  "generated_at": "2026-05-18T19:55:30Z",
-  "merge_allowed": false,
-  "blocker": "PLUGIN_EXAMPLES_MERGE_PR_APPROVAL not set to APPROVE_MERGE_PR",
-  "mode": "MERGE_APPROVAL_BLOCKED"
-}

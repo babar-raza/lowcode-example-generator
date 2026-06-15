@@ -1,9 +1,0 @@
-{
-  "sprint": "sprint23", "date": "2026-05-17", "pr_id": "PR#3",
-  "package_path": "workspace/pr-dry-run/pdf-controlled-pilot/",
-  "examples_present": ["doc-converter", "html", "xls-converter"],
-  "examples_expected": ["doc-converter", "html", "xls-converter"],
-  "audit_result": "PASS — 3/3 expected examples present, no extra files",
-  "stale": false, "quarantine": false,
-  "verdict": "PACKAGE_INTEGRITY_VERIFIED"
-}

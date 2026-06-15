@@ -1,8 +1,0 @@
-{
-  "sprint": 46,
-  "note": "Target repos not queried (no publication this sprint). Last known: all 6 healthy.",
-  "families": {
-    "cells": {"healthy": true}, "words": {"healthy": true}, "pdf": {"healthy": true},
-    "diagram": {"healthy": true}, "email": {"healthy": true}, "slides": {"healthy": true}
-  }
-}

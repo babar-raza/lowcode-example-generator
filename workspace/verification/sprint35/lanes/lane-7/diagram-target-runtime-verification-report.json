@@ -1,9 +1,0 @@
-{
-  "family": "diagram",
-  "sprint": "sprint35",
-  "verified_at": "2026-05-18",
-  "merge_sha": "85651fbaa5844d9c131a05299c36c0623f31e6dd",
-  "examples_in_target_repo": 2,
-  "runtime_verified": true,
-  "verdict": "POST_MERGE_VERIFIED"
-}

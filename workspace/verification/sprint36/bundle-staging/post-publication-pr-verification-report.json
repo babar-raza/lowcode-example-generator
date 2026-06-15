@@ -1,8 +1,0 @@
-{
-  "sprint": "sprint36",
-  "generated_at": "2026-05-18",
-  "status": "NOT_RUN_APPROVAL_BLOCKED",
-  "reason": "PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL not set",
-  "all_dry_runs_passed": true,
-  "verdict": "NOT_RUN_APPROVAL_BLOCKED"
-}

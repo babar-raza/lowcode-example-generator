@@ -202,20 +202,13 @@ integration-tests-py313:
       --junitxml=report-integration-py313.xml
 
 mutation-testing:
-  # Mutation testing via WSL — runs mutmut inside Ubuntu 22.04 on the Windows shell executor.
+  # Docker-based mutation testing — runs mutmut inside python:3.13-slim container.
+  # Replaces WSL approach: no WSL dependency, portable, deterministic Linux environment.
   # Scope: gates/, policy/loader, slo_monitor, compliance/reporter, slo_remediator, stage_contracts
-  # Target threshold: 70% mutation score (advisory until baseline established)
+  # Target threshold: 70% mutation score
   stage: test
-  allow_failure: true
   script:
-    # Start WSL if stopped and verify Python3 available
-    - wsl.exe -d Ubuntu-22.04 -- echo "WSL ready"
-    - wsl.exe -d Ubuntu-22.04 -- bash -c "which python3 || (sudo apt-get update -qq && sudo apt-get install -y -qq python3 python3-pip python3-venv)"
-    # Convert build path to WSL-compatible path
-    - WSL_DIR=$(wsl.exe -d Ubuntu-22.04 -- wslpath -u "$(pwd -W)" | tr -d '\r')
-    # Run mutation testing inside WSL (MSYS_NO_PATHCONV prevents Git Bash from mangling /mnt/c/... paths)
-    - MSYS_NO_PATHCONV=1 wsl.exe -d Ubuntu-22.04 -- bash "$WSL_DIR/scripts/wsl-mutmut.sh" "$WSL_DIR"
-    # Parse results on Windows side
+    - bash scripts/docker-mutmut.sh
     - |
       python -c "
       import json, sys
@@ -225,13 +218,12 @@ mutation-testing:
           print('No mutmut-summary.json found'); sys.exit(0)
       print(f'Mutation score: {d[\"score\"]}% ({d[\"killed\"]}/{d[\"total\"]} killed)')
       if d['score'] < 70:
-          print(f'WARN: mutation score {d[\"score\"]}% < 70% threshold'); sys.exit(0)
+          print(f'WARN: mutation score {d[\"score\"]}% < 70% threshold'); sys.exit(1)
       print('PASS: mutation score meets threshold')
       "
   artifacts:
     when: always
     paths:
-      - .mutmut-cache/
       - mutmut-summary.json
     expire_in: 7 days
   rules:
@@ -265,6 +257,21 @@ dotnet-build:
   stage: build
   script:
     - dotnet build tools/DllReflector/DllReflector.csproj -c Release
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+containerized-build:
+  # Docker-based .NET build — proves the project builds in a clean Linux container.
+  # Eliminates host-dependency assumptions; demonstrates P4 (containerized build) capability.
+  stage: build
+  script:
+    - >
+      MSYS_NO_PATHCONV=1 docker run --rm
+      -v "$(pwd):/app"
+      -w /app
+      mcr.microsoft.com/dotnet/sdk:9.0
+      dotnet build tools/DllReflector/DllReflector.csproj -c Release
   rules:
     - if: '$CI_PIPELINE_SOURCE == "push"'
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'

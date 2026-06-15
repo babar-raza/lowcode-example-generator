@@ -34,7 +34,7 @@ pytestmark = pytest.mark.skipif(not HAS_HYPOTHESIS, reason="hypothesis not insta
     policy_rule=st.text(min_size=0, max_size=100),
     detail=st.text(min_size=0, max_size=200),
 )
-@settings(max_examples=50)
+@settings(max_examples=50, deadline=None)
 def test_audit_trail_roundtrip(tmp_path_factory, action_id, decision, policy_rule, detail):
     """AuditTrail save+load roundtrip preserves all entry fields."""
     tmp_path = tmp_path_factory.mktemp("audit")

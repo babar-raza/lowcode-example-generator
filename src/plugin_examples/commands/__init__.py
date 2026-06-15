@@ -77,3 +77,9 @@ def register_all(subparsers):
     from plugin_examples.commands.metrics_summary import add_parser as _metrics_summary
 
     _metrics_summary(subparsers)
+    from plugin_examples.commands.sprint_governance import add_parser as _sprint_governance
+
+    _sprint_governance(subparsers)
+    from plugin_examples.commands.psal_run import add_parser as _psal_run
+
+    _psal_run(subparsers)

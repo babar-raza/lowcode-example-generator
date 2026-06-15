@@ -89,3 +89,6 @@ fallback_candidates.json
 *output*
 *input*
 *template*
+
+# CI build artifacts (gitlab-runner shell executor)
+/builds

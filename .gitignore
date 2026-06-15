@@ -82,6 +82,7 @@ Thumbs.db
 # Build / runtime artifacts
 /workspace
 /reports
+/reviews
 .coverage
 .runner_system_id
 fallback_candidates.json

@@ -915,6 +915,7 @@ def _stage_scenario_planning(ctx: PipelineContext) -> dict:
             family=ctx.family,
             registry_entries=registry_entries,
             source_of_truth_proof_path=str(nonlowcode_proof_path) if nonlowcode_proof_path else None,
+            min_examples=getattr(getattr(ctx.config, "generation", None), "min_examples_per_family", 3),
         )
         write_scenario_catalog(ctx.planning, ctx.evidence_dir)
         if ctx.planning.blocked_scenarios:

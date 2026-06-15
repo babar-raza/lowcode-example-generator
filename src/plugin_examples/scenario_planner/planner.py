@@ -63,6 +63,9 @@ class PlanningResult:
     family: str
     ready_scenarios: list[Scenario] = field(default_factory=list)
     blocked_scenarios: list[Scenario] = field(default_factory=list)
+    sufficiency_status: str = "UNKNOWN"  # SUFFICIENT, BELOW_MINIMUM, REGISTRY_INCOMPLETE, UNKNOWN
+    min_examples_required: int = 0
+    total_registry_entries: int = 0
 
     @property
     def ready_count(self) -> int:
@@ -81,6 +84,7 @@ def plan_scenarios_from_registry(
     family: str,
     registry_entries: list[dict],
     source_of_truth_proof_path: str | None = None,
+    min_examples: int = 3,
 ) -> PlanningResult:
     """Plan example scenarios from capability registry entries.
 
@@ -92,6 +96,7 @@ def plan_scenarios_from_registry(
         family: Family name.
         registry_entries: List of registry entry dicts from YAML.
         source_of_truth_proof_path: Path to non-LowCode SOT proof (gate check).
+        min_examples: Minimum required ready scenarios for SUFFICIENT status.
 
     Returns:
         PlanningResult with ready and blocked scenarios.
@@ -177,11 +182,41 @@ def plan_scenarios_from_registry(
             )
             result.blocked_scenarios.append(scenario)
 
+    # Sufficiency assessment (TC-PSAL-02)
+    result.total_registry_entries = len(registry_entries)
+    result.min_examples_required = min_examples
+    if result.ready_count >= min_examples:
+        result.sufficiency_status = "SUFFICIENT"
+    elif result.total_registry_entries > result.ready_count:
+        result.sufficiency_status = "REGISTRY_INCOMPLETE"
+        logger.warning(
+            "Registry sufficiency for %s: REGISTRY_INCOMPLETE — "
+            "%d ready of %d entries, min required %d. "
+            "%d entries need probing before generation.",
+            family,
+            result.ready_count,
+            result.total_registry_entries,
+            min_examples,
+            result.blocked_count,
+        )
+    else:
+        result.sufficiency_status = "BELOW_MINIMUM"
+        logger.warning(
+            "Registry sufficiency for %s: BELOW_MINIMUM — "
+            "%d ready, min required %d. "
+            "Registry has only %d total entries.",
+            family,
+            result.ready_count,
+            min_examples,
+            result.total_registry_entries,
+        )
+
     logger.info(
-        "Registry planning for %s: %d ready, %d blocked",
+        "Registry planning for %s: %d ready, %d blocked, sufficiency=%s",
         family,
         result.ready_count,
         result.blocked_count,
+        result.sufficiency_status,
     )
     return result
 

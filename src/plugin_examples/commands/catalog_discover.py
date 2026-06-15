@@ -134,6 +134,11 @@ def add_parser(subparsers):
         action="store_true",
         help="Write plugin_page_hash back into registry YAMLs",
     )
+    parser.add_argument(
+        "--expand-registry",
+        action="store_true",
+        help="Create new capability registry entries for discovered plugins not yet in registry YAMLs",
+    )
     parser.set_defaults(func=handle)
     return parser
 
@@ -232,6 +237,10 @@ def handle(args) -> int:
     if getattr(args, "enrich_registry", False):
         enriched = _enrich_registry_hashes(repo_root, families_map)
         print(f"Registry enrichment: {enriched} entries updated with plugin_page_hash")
+
+    if getattr(args, "expand_registry", False):
+        added = _expand_registry_entries(repo_root, families_map)
+        print(f"Registry expansion: {added} new entries created")
 
     return 0
 
@@ -455,6 +464,226 @@ def _enrich_entry(base_entry, html: str, family_slug: str, timestamp: str) -> di
         "marketing_only": True,
         "extraction_timestamp": timestamp,
     }
+
+
+# ---------------------------------------------------------------------------
+# Known plugin slugs per family — static fallback when WAF blocks crawling
+# Source: products.aspose.net pages fetched 2026-06-15
+# ---------------------------------------------------------------------------
+_KNOWN_PLUGIN_SLUGS: dict[str, list[dict[str, str]]] = {
+    "imaging": [
+        {"slug": "animation-maker", "kind": "IMAGE_ANIMATION"},
+        {"slug": "image-converter", "kind": "IMAGE_CONVERSION"},
+        {"slug": "image-compressor", "kind": "IMAGE_COMPRESSION"},
+        {"slug": "image-merger", "kind": "IMAGE_MERGE"},
+        {"slug": "image-resizer", "kind": "IMAGE_RESIZE"},
+        {"slug": "photo-album-maker", "kind": "IMAGE_ALBUM"},
+        {"slug": "image-cropper", "kind": "IMAGE_CROP"},
+        {"slug": "image-effect-creator", "kind": "IMAGE_EFFECT"},
+        {"slug": "image-deskew", "kind": "IMAGE_DESKEW"},
+        {"slug": "image-rotate-flip", "kind": "IMAGE_ROTATE_FLIP"},
+    ],
+    "zip": [
+        {"slug": "universal-compressor", "kind": "ARCHIVE_COMPRESS"},
+        {"slug": "universal-extractor", "kind": "ARCHIVE_EXTRACT"},
+        {"slug": "rar-extractor", "kind": "RAR_EXTRACT"},
+    ],
+    "barcode": [
+        {"slug": "generate-barcode", "kind": "BARCODE_GENERATION"},
+        {"slug": "recognize-barcode", "kind": "BARCODE_RECOGNITION"},
+        {"slug": "generate-qr-code", "kind": "QR_CODE_GENERATION"},
+        {"slug": "scan-barcode", "kind": "BARCODE_RECOGNITION"},
+    ],
+    "cad": [
+        {"slug": "conversion", "kind": "CAD_CONVERSION"},
+    ],
+}
+
+# Map family slug → NuGet package_id for WEBSITE_DISCOVERED entries
+_FAMILY_PACKAGE_IDS: dict[str, str] = {
+    "barcode": "Aspose.BarCode",
+    "imaging": "Aspose.Imaging",
+    "zip": "Aspose.ZIP",
+    "html": "Aspose.HTML",
+    "cad": "Aspose.CAD",
+    "ocr": "Aspose.OCR",
+    "psd": "Aspose.PSD",
+    "svg": "Aspose.SVG",
+    "omr": "Aspose.OMR",
+    "gis": "Aspose.GIS",
+    "tasks": "Aspose.Tasks",
+    "note": "Aspose.Note",
+    "drawing": "Aspose.Drawing",
+    "font": "Aspose.Font",
+    "finance": "Aspose.Finance",
+    "page": "Aspose.Page",
+    "tex": "Aspose.TeX",
+    "threed": "Aspose.3D",
+}
+
+
+def _expand_registry_entries(
+    repo_root: Path, families_map: dict[str, list[dict]]
+) -> int:
+    """Create new WEBSITE_DISCOVERED entries in capability registry YAMLs.
+
+    For each family in families_map (from catalog discovery), compare discovered
+    plugin slugs against existing registry entries. Create new entries for plugins
+    not yet in the registry. Uses a static fallback map when catalog discovery
+    returned no per-plugin data (e.g. WAF blocked crawling).
+
+    Returns the number of new entries created.
+    """
+    import datetime
+
+    import yaml
+
+    registry_dir = repo_root / "pipeline" / "plugin-capability-registry"
+    added_count = 0
+    timestamp = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    # Build slug → catalog entry lookup from discovery results
+    discovered_by_family: dict[str, list[dict]] = {}
+    for fam_slug, entries in families_map.items():
+        for entry in entries:
+            slug = entry.get("plugin_slug") or entry.get("slug", "")
+            if slug and slug != fam_slug:  # Skip family-level index entries
+                discovered_by_family.setdefault(fam_slug, []).append(entry)
+
+    # Merge with static fallback for families with no per-plugin discovery
+    all_families = set(discovered_by_family.keys()) | set(_KNOWN_PLUGIN_SLUGS.keys())
+
+    for fam_slug in sorted(all_families):
+        registry_file = registry_dir / f"{fam_slug}.yaml"
+        if not registry_file.exists():
+            logger.info("No registry file for %s, skipping expansion", fam_slug)
+            continue
+
+        with open(registry_file, encoding="utf-8") as fh:
+            data = yaml.safe_load(fh.read()) or {}
+
+        entries = data.get("entries", []) or []
+
+        # Collect existing plugin_slugs AND method-based identifiers
+        existing_slugs: set[str] = set()
+        for entry in entries:
+            if not isinstance(entry, dict):
+                continue
+            ps = entry.get("plugin_slug", "")
+            if ps:
+                existing_slugs.add(ps)
+            # Also track type_name.method_name as an identifier
+            tn = entry.get("type_name", "")
+            mn = entry.get("method_name", "")
+            if tn and mn:
+                existing_slugs.add(f"{tn}.{mn}".lower())
+
+        # Build list of slugs to add from discovery + static fallback
+        slugs_to_add: list[dict[str, str]] = []
+        seen_slugs: set[str] = set(existing_slugs)
+
+        # From catalog discovery
+        for disc_entry in discovered_by_family.get(fam_slug, []):
+            slug = disc_entry.get("plugin_slug") or disc_entry.get("slug", "")
+            if slug and slug not in seen_slugs:
+                kind = _guess_operation_kind(slug, fam_slug)
+                slugs_to_add.append({"slug": slug, "kind": kind})
+                seen_slugs.add(slug)
+
+        # From static fallback
+        for known in _KNOWN_PLUGIN_SLUGS.get(fam_slug, []):
+            if known["slug"] not in seen_slugs:
+                slugs_to_add.append(known)
+                seen_slugs.add(known["slug"])
+
+        if not slugs_to_add:
+            continue
+
+        package_id = _FAMILY_PACKAGE_IDS.get(fam_slug, f"Aspose.{fam_slug.title()}")
+
+        for slug_info in slugs_to_add:
+            new_entry = {
+                "family": fam_slug,
+                "plugin_slug": slug_info["slug"],
+                "operation_kind": slug_info["kind"],
+                "package_id": package_id,
+                "type_name": None,
+                "namespace": None,
+                "method_name": None,
+                "candidate_api_types": [],
+                "candidate_methods": [],
+                "selected_api_mapping": None,
+                "status": "WEBSITE_DISCOVERED",
+                "confidence_score": 0.50,
+                "confidence_rationale": (
+                    f"Discovered from products.aspose.net/{fam_slug}/ plugin page. "
+                    "Needs reflection probe to confirm API mapping."
+                ),
+                "probe_evidence": None,
+                "failure_taxonomy": None,
+                "rejection_reason": None,
+                "ai_source_flag": False,
+                "assembly_fingerprint": None,
+                "plugin_page_hash": None,
+                "last_validated": timestamp,
+                "bootstrap_status": "WEBSITE_DISCOVERED",
+                "next_action": "PROBE_PENDING",
+                "blocker_type": None,
+                "last_reflected_package_version": None,
+                "refresh_due": None,
+            }
+            entries.append(new_entry)
+            added_count += 1
+            logger.info("Added WEBSITE_DISCOVERED entry: %s/%s", fam_slug, slug_info["slug"])
+
+        data["entries"] = entries
+        with open(registry_file, "w", encoding="utf-8") as fh:
+            yaml.dump(
+                data, fh,
+                default_flow_style=False,
+                allow_unicode=True,
+                sort_keys=False,
+            )
+        logger.info("Expanded %s: %d new entries", registry_file.name, len(slugs_to_add))
+
+    return added_count
+
+
+def _guess_operation_kind(slug: str, family: str) -> str:
+    """Derive a plausible operation_kind from a plugin slug."""
+    slug_lower = slug.lower().replace("-", "_")
+    family_upper = family.upper()
+
+    verb_map = {
+        "convert": "CONVERSION",
+        "converter": "CONVERSION",
+        "compress": "COMPRESSION",
+        "compressor": "COMPRESSION",
+        "merge": "MERGE",
+        "merger": "MERGE",
+        "resize": "RESIZE",
+        "resizer": "RESIZE",
+        "crop": "CROP",
+        "cropper": "CROP",
+        "extract": "EXTRACT",
+        "extractor": "EXTRACT",
+        "rotate": "ROTATE_FLIP",
+        "flip": "ROTATE_FLIP",
+        "deskew": "DESKEW",
+        "effect": "EFFECT",
+        "animation": "ANIMATION",
+        "album": "ALBUM",
+        "generate": "GENERATION",
+        "recognize": "RECOGNITION",
+        "scan": "RECOGNITION",
+        "read": "READ",
+    }
+
+    for keyword, kind_suffix in verb_map.items():
+        if keyword in slug_lower:
+            return f"{family_upper}_{kind_suffix}"
+
+    return f"{family_upper}_UNKNOWN"
 
 
 def _enrich_registry_hashes(

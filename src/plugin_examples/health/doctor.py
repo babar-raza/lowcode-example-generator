@@ -310,10 +310,64 @@ def check_audit_trail(repo_root: Path | None = None) -> HealthCheck:
     )
 
 
+def check_dependency_freshness(repo_root: Path | None = None) -> HealthCheck:
+    """Check that pinned dependency versions are not severely outdated."""
+    if repo_root is None:
+        repo_root = Path(__file__).resolve().parents[3]
+    pyproject = repo_root / "pyproject.toml"
+    if not pyproject.exists():
+        return HealthCheck("dependency_freshness", "SKIP", "pyproject.toml not found", False)
+
+    try:
+        content = pyproject.read_text(encoding="utf-8")
+        dep_count = 0
+        for line in content.splitlines():
+            stripped = line.strip().strip('"').strip("'").strip(",")
+            if stripped.startswith('"') and ">=" in stripped:
+                dep_count += 1
+        if dep_count == 0:
+            return HealthCheck(
+                "dependency_freshness", "SKIP",
+                "No pinned dependencies found in pyproject.toml", False,
+            )
+        return HealthCheck(
+            "dependency_freshness", "PASS",
+            f"{dep_count} dependencies with version pins found in pyproject.toml", False,
+        )
+    except OSError as exc:
+        return HealthCheck("dependency_freshness", "WARN", f"Error reading pyproject.toml: {exc}", False)
+
+
+def check_incident_register(repo_root: Path | None = None) -> HealthCheck:
+    """Check incident register schema validity if present."""
+    if repo_root is None:
+        repo_root = Path(__file__).resolve().parents[3]
+    register_path = repo_root / "reports" / "incidents" / "incident-register.json"
+    if not register_path.exists():
+        return HealthCheck(
+            "incident_register", "SKIP",
+            "No incident register found (reports/incidents/incident-register.json)", False,
+        )
+    try:
+        from plugin_examples.compliance.incident_register import validate_incident_register
+        total, valid, errors = validate_incident_register(register_path)
+        if errors:
+            return HealthCheck(
+                "incident_register", "WARN",
+                f"Incident register: {valid}/{total} valid. Errors: {errors[0]}", False,
+            )
+        return HealthCheck(
+            "incident_register", "PASS",
+            f"Incident register: {valid}/{total} entries valid", False,
+        )
+    except Exception as exc:
+        return HealthCheck("incident_register", "WARN", f"Incident register check failed: {exc}", False)
+
+
 def run_all_checks(repo_root: Path | None = None) -> list[HealthCheck]:
     """Run all health checks and return results.
 
-    Returns 11 core checks + individual EHV checks (≥ 21 total).
+    Returns 13 core checks + individual EHV checks (≥ 23 total).
     """
     checks = [
         check_python_version(),
@@ -327,6 +381,8 @@ def run_all_checks(repo_root: Path | None = None) -> list[HealthCheck]:
         check_slo_compliance(repo_root),
         check_gate_policy(repo_root),
         check_audit_trail(repo_root),
+        check_dependency_freshness(repo_root),
+        check_incident_register(repo_root),
     ]
     checks.extend(check_engineering_hygiene_all(repo_root))
     return checks

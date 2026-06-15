@@ -4,6 +4,10 @@ stages:
   - build
   - schedule
 
+default:
+  tags:
+    - shell
+
 variables:
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.pip-cache"
   GIT_DEPTH: "1"
@@ -34,7 +38,6 @@ ruff-lint:
 
 compile-check:
   stage: lint
-  image: python:3.13-slim
   script:
     - python -m compileall src/
   rules:
@@ -46,7 +49,6 @@ gate-isolation:
   # Blocking gate: scoped to example_gates.py only, matching unit test scope in test_risk_mitigations.py.
   # publication_gate.py probe import (try/except ImportError) is intentionally excluded from this check.
   stage: lint
-  image: python:3.13-slim
   script:
     - |
       if grep -rn \
@@ -149,22 +151,29 @@ pip-audit:
 
 unit-tests-py312:
   # TC-H02: Coverage flags added to match GitHub Actions build-and-test.yml.
+  # TC-RH10: Coverage ratchet — fails if coverage drops >2% from baseline (79%).
   extends: .test-base
-  image: python:3.12
   variables:
-    PYTHON_VERSION: "3.12"
     PYTHONPATH: src
+    COVERAGE_BASELINE: "79"
   script:
     - >
       python -m pytest tests/unit -v --timeout=60
       --junitxml=report-unit-py312.xml
       --cov=src/plugin_examples --cov-report=term-missing --cov-fail-under=70
+      | tee pytest-output.txt
+    - |
+      # Coverage ratchet: extract coverage % from first run output (no second pytest run)
+      COV_PCT=$(grep "^TOTAL" pytest-output.txt | awk '{print int($NF)}' || echo "0")
+      if [ "$COV_PCT" -gt 0 ] && [ "$COV_PCT" -lt "$((COVERAGE_BASELINE - 2))" ]; then
+        echo "COVERAGE RATCHET FAIL: ${COV_PCT}% < baseline ${COVERAGE_BASELINE}% - 2%"
+        exit 1
+      fi
+      echo "Coverage ratchet OK: ${COV_PCT}% (baseline: ${COVERAGE_BASELINE}%)"
 
 unit-tests-py313:
   extends: .test-base
-  image: python:3.13
   variables:
-    PYTHON_VERSION: "3.13"
     PYTHONPATH: src
   script:
     - >
@@ -174,9 +183,7 @@ unit-tests-py313:
 
 integration-tests-py312:
   extends: .test-base
-  image: python:3.12
   variables:
-    PYTHON_VERSION: "3.12"
     PYTHONPATH: src
   script:
     - >
@@ -185,9 +192,7 @@ integration-tests-py312:
 
 integration-tests-py313:
   extends: .test-base
-  image: python:3.13
   variables:
-    PYTHON_VERSION: "3.13"
     PYTHONPATH: src
   script:
     - >
@@ -256,7 +261,6 @@ compliance-gate:
 
 dotnet-build:
   stage: build
-  image: mcr.microsoft.com/dotnet/sdk:8.0
   script:
     - dotnet build tools/DllReflector/DllReflector.csproj -c Release
   rules:
@@ -289,12 +293,15 @@ weekly-discovery:
   # Triggers: GitLab schedule with SCHEDULE_TYPE=weekly-discovery, or manual pipeline.
   # Replaces GITHUB_TOKEN git push with CI_JOB_TOKEN credential injection.
   stage: schedule
-  image: python:3.13-slim
   variables:
     PYTHONPATH: src
     GIT_STRATEGY: clone
+  cache:
+    key: pip-schedule
+    paths:
+      - .pip-cache/
   before_script:
-    - python -m venv .pip-cache/venv
+    - python -m venv --clear .pip-cache/venv
     - source .pip-cache/venv/Scripts/activate
     - pip install -e .
     - git config user.name "pipeline-bot"
@@ -312,22 +319,24 @@ weekly-discovery:
 
 monthly-refresh:
   # TC-H10: Port of .github/workflows/monthly-package-refresh.yml (refresh job).
-  # Uses mcr.microsoft.com/dotnet/sdk:8.0 (Linux) instead of windows-latest.
+  # Shell executor: uses host Python + .NET SDK (no Docker).
   # gl_pat exposed as GITHUB_TOKEN so pipeline code needs no changes.
   stage: schedule
-  image: mcr.microsoft.com/dotnet/sdk:8.0
   variables:
     PYTHONPATH: src
     GITHUB_TOKEN: $gl_pat
+  cache:
+    key: pip-schedule
+    paths:
+      - .pip-cache/
   before_script:
-    - apt-get update -qq && apt-get install -y -qq python3 python3-pip python3-venv
-    - python3 -m venv /opt/venv
-    - /opt/venv/bin/pip install --upgrade pip
-    - /opt/venv/bin/pip install -e .
+    - python -m venv --clear .pip-cache/venv
+    - source .pip-cache/venv/Scripts/activate
+    - pip install -e .
     - dotnet build tools/DllReflector/DllReflector.csproj -c Release
   script:
-    - /opt/venv/bin/python -m plugin_examples run --family ${REFRESH_FAMILY:-cells} ${REFRESH_DRY_RUN:+--dry-run}
-    - /opt/venv/bin/python -m pytest tests/unit/test_denominator_model.py tests/unit/test_scenario_contracts.py -q --tb=short
+    - python -m plugin_examples run --family ${REFRESH_FAMILY:-cells} ${REFRESH_DRY_RUN:+--dry-run}
+    - python -m pytest tests/unit/test_denominator_model.py tests/unit/test_scenario_contracts.py -q --tb=short
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_TYPE == "monthly-refresh"'
     - if: '$CI_PIPELINE_SOURCE == "web"'
@@ -337,19 +346,21 @@ monthly-regression-check:
   # TC-H10: Port of .github/workflows/monthly-package-refresh.yml (regression-check job).
   # Depends on monthly-refresh completing successfully.
   stage: schedule
-  image: mcr.microsoft.com/dotnet/sdk:8.0
   needs: [monthly-refresh]
   variables:
     PYTHONPATH: src
     GITHUB_TOKEN: $gl_pat
+  cache:
+    key: pip-schedule
+    paths:
+      - .pip-cache/
   before_script:
-    - apt-get update -qq && apt-get install -y -qq python3 python3-pip python3-venv
-    - python3 -m venv /opt/venv
-    - /opt/venv/bin/pip install --upgrade pip
-    - /opt/venv/bin/pip install -e .
+    - python -m venv --clear .pip-cache/venv
+    - source .pip-cache/venv/Scripts/activate
+    - pip install -e .
     - dotnet build tools/DllReflector/DllReflector.csproj -c Release
   script:
-    - /opt/venv/bin/python scripts/validate_published_examples_build.py
+    - python scripts/validate_published_examples_build.py
   artifacts:
     when: always
     paths:

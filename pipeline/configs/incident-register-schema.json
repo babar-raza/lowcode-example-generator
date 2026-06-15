@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "severity", "timestamp", "title", "root_cause", "resolution"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^INC-[0-9]+$"},
+    "severity": {"type": "string", "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]},
+    "timestamp": {"type": "string"},
+    "title": {"type": "string", "minLength": 1},
+    "root_cause": {"type": "string", "minLength": 1},
+    "resolution": {"type": "string", "minLength": 1},
+    "duration_minutes": {"type": "integer", "minimum": 0},
+    "affected_families": {"type": "array", "items": {"type": "string"}},
+    "regression_test_added": {"type": "boolean"},
+    "post_mortem_url": {"type": "string"}
+  },
+  "additionalProperties": false
+}

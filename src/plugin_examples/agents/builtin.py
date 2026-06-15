@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from plugin_examples.agents.base import Agent, AgentCapability, AgentResult
 from plugin_examples.agents.context import SharedContext
+from plugin_examples.agents.protocol import MessageType
 
 
 class ConservationCheckAgent(Agent):
@@ -39,6 +40,11 @@ class ConservationCheckAgent(Agent):
                 all_pass = False
 
         context.set("conservation_result", all_pass)
+        context.post_message(
+            sender=self.agent_id,
+            msg_type=MessageType.INFORM,
+            payload={"conservation_all_pass": all_pass, "families_checked": len(families)},
+        )
         return AgentResult(
             changed=False,
             data={"conservation_all_pass": all_pass, "families": families, "changed": False},
@@ -66,6 +72,11 @@ class VersionDriftAgent(Agent):
 
         denoms = _load_denominators(context.repo_root)
         versions = {f: denoms.get(f, {}).get("source_version", "?") for f in ACTIVE_FAMILIES}
+        context.post_message(
+            sender=self.agent_id,
+            msg_type=MessageType.INFORM,
+            payload={"versions": versions, "families_checked": len(versions)},
+        )
         return AgentResult(
             changed=False,
             data={"versions": versions, "status": "checked", "changed": False},
@@ -152,4 +163,9 @@ class BlockerRecheckAgent(Agent):
         elif action_id == "PERMANENTLY_BLOCKED_WATCH":
             data["status"] = "confirmed_unchanged"
 
+        context.post_message(
+            sender=self.agent_id,
+            msg_type=MessageType.INFORM,
+            payload={"action_id": action_id, "changed": changed},
+        )
         return AgentResult(changed=changed, data=data)

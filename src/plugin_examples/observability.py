@@ -10,6 +10,7 @@ Fields emitted on every log record:
   timestamp   — ISO-8601 UTC
   level       — DEBUG | INFO | WARNING | ERROR | CRITICAL
   logger      — dotted module name
+  trace_id    — UUID4 correlation ID (auto-generated per-run via bind())
   run_id      — pipeline run identifier (set per-run via bind())
   stage       — current pipeline stage name (set via bind())
   family      — family being processed (set via bind())
@@ -30,6 +31,7 @@ import json
 import logging
 import os
 import sys
+import uuid
 from datetime import UTC, datetime, timezone
 from typing import Any
 
@@ -41,12 +43,22 @@ class _LogContext:
     """Thread-local-style log context bound to the current pipeline run."""
 
     def __init__(self) -> None:
+        self._trace_id: str = ""
         self._run_id: str = ""
         self._stage: str = ""
         self._family: str = ""
 
-    def bind(self, *, run_id: str = "", stage: str = "", family: str = "") -> None:
-        """Update the current pipeline context fields."""
+    def bind(self, *, trace_id: str = "", run_id: str = "", stage: str = "", family: str = "") -> None:
+        """Update the current pipeline context fields.
+
+        If *trace_id* is not supplied and no trace_id has been set yet, a new
+        UUID4 is generated automatically so every pipeline run gets a unique
+        correlation identifier without callers needing to manage it.
+        """
+        if trace_id:
+            self._trace_id = trace_id
+        elif not self._trace_id:
+            self._trace_id = uuid.uuid4().hex
         if run_id:
             self._run_id = run_id
         if stage:
@@ -55,9 +67,14 @@ class _LogContext:
             self._family = family
 
     def clear(self) -> None:
+        self._trace_id = ""
         self._run_id = ""
         self._stage = ""
         self._family = ""
+
+    @property
+    def trace_id(self) -> str:
+        return self._trace_id
 
     @property
     def run_id(self) -> str:
@@ -75,9 +92,9 @@ class _LogContext:
 _context = _LogContext()
 
 
-def bind_context(*, run_id: str = "", stage: str = "", family: str = "") -> None:
+def bind_context(*, trace_id: str = "", run_id: str = "", stage: str = "", family: str = "") -> None:
     """Bind pipeline context fields to all subsequent log records."""
-    _context.bind(run_id=run_id, stage=stage, family=family)
+    _context.bind(trace_id=trace_id, run_id=run_id, stage=stage, family=family)
 
 
 def clear_context() -> None:
@@ -97,6 +114,7 @@ class _JsonFormatter(logging.Formatter):
             "timestamp": datetime.fromtimestamp(record.created, tz=UTC).isoformat(),
             "level": record.levelname,
             "logger": record.name,
+            "trace_id": _context.trace_id,
             "run_id": _context.run_id,
             "stage": _context.stage,
             "family": _context.family,

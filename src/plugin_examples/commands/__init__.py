@@ -74,3 +74,6 @@ def register_all(subparsers):
     from plugin_examples.commands.verify_remote import add_parser as _verify_remote
 
     _verify_remote(subparsers)
+    from plugin_examples.commands.metrics_summary import add_parser as _metrics_summary
+
+    _metrics_summary(subparsers)

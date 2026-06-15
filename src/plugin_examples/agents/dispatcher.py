@@ -48,6 +48,12 @@ class AgentDispatcher:
 
         return result
 
+    def flush_messages(self) -> list[dict]:
+        """Return all queued messages and clear the bus for the next cycle."""
+        messages = self._context.message_bus.to_list()
+        self._context.message_bus.clear()
+        return messages
+
     def save_catalog(self, output_dir: Path) -> Path:
         """Write agent catalog to evidence directory."""
         catalog_path = output_dir / "agent-catalog.json"

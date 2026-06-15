@@ -3,9 +3,10 @@ display_name: Aspose.PSD for .NET
 enabled: true
 status: discovery_only
 # REFLECTION_BLOCKED: Newtonsoft.Json dependency fixed by include_all_tfm_groups (2026-05-09).
-# New blocker: Aspose.JavaAttributes Version=1.0.0.0 - internal Aspose assembly NOT available on NuGet.org.
-# LowCode namespace existence is UNKNOWN until Aspose.JavaAttributes becomes downloadable.
-# Do NOT mark as CONFIRMED_NO_LOWCODE — reflection has not yet completed successfully.
+# BLOCKER_RECONFIRMED (2026-06-15): Aspose.JavaAttributes v1.0.0.0 still NOT on NuGet.org
+#   (api.nuget.org/v3-flatcontainer/aspose.javaattributes/index.json → 404).
+#   Unlike OCR (where Aspose.AI.LLM mapped to NuGet "Aspose.LLM"), no alternate package found.
+# Do NOT mark as CONFIRMED_NO_LOWCODE — reflection has not completed.
 # Blocker details: workspace/verification/latest/psd-reflection-blocker.json
 
 nuget:

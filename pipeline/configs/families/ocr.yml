@@ -2,11 +2,12 @@ family: ocr
 display_name: Aspose.OCR for .NET
 enabled: true
 status: discovery_only
-# REFLECTION_BLOCKED: Aspose.Drawing.Common dependency fixed by extra_packages (2026-05-09).
-# New blocker: Aspose.AI.LLM Version=25.12.0.0 - internal Aspose assembly NOT available on NuGet.org.
-# LowCode namespace existence is UNKNOWN until Aspose.AI.LLM becomes downloadable.
-# Do NOT mark as CONFIRMED_NO_LOWCODE — reflection has not yet completed successfully.
-# Blocker details: workspace/verification/latest/ocr-reflection-blocker.json
+# REFLECTION_BLOCKED (2026-05-09): Aspose.Drawing.Common dependency fixed by extra_packages.
+# BLOCKER_RESOLVED (2026-06-15): Aspose.AI.LLM assembly maps to NuGet package "Aspose.LLM"
+#   (versions 26.2.0-26.5.0 confirmed on api.nuget.org/v3-flatcontainer/aspose.llm/index.json).
+#   Previous blocker checked for "aspose.ai.llm" (assembly name) instead of "aspose.llm" (NuGet ID).
+#   Added Aspose.LLM to extra_packages below.
+# Do NOT mark as CONFIRMED_NO_LOWCODE — reflection needs re-run to confirm.
 
 nuget:
   package_id: Aspose.OCR
@@ -23,6 +24,7 @@ nuget:
     max_depth: 3
     extra_packages:
       - Aspose.Drawing.Common
+      - Aspose.LLM
 
 plugin_detection:
   namespace_patterns:

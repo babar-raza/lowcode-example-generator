@@ -19,6 +19,11 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parents[2]
 VERIFICATION = REPO_ROOT / "workspace" / "verification" / "latest"
 
+pytestmark = pytest.mark.skipif(
+    not VERIFICATION.exists(),
+    reason="workspace/verification detracked — artifacts not present in CI",
+)
+
 ROLE_CLASSIFICATION = VERIFICATION / "words-type-role-classification.json"
 CONSUMER_RELATIONSHIPS = VERIFICATION / "words-consumer-relationships.json"
 OPTIONS_REVIEW = VERIFICATION / "words-options-usage-review.json"

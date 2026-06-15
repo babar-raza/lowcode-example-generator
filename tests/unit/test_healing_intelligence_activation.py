@@ -22,6 +22,11 @@ from plugin_examples.healing_intelligence.loader import HealingIntelligenceLoade
 
 REGISTRY_DIR = Path("workspace/verification/latest/healing-intelligence")
 
+pytestmark = pytest.mark.skipif(
+    not REGISTRY_DIR.exists(),
+    reason="healing-intelligence registry detracked — artifacts not present in CI",
+)
+
 EXPECTED_FAILURE_PATTERN_IDS = {
     "FP-001",
     "FP-002",

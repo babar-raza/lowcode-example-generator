@@ -12,6 +12,11 @@ import pytest
 REPO = Path(__file__).resolve().parents[2]
 README_DIR = REPO / "reports/sprint67/root-readme/per-family"
 
+pytestmark = pytest.mark.skipif(
+    not README_DIR.exists(),
+    reason="reports/ detracked — sprint67 artifacts not present in CI",
+)
+
 # Types that must have input cardinality markers in sprint67 READMEs
 # Format: (family, example_slug, annotation_expected_substring)
 MULTI_INPUT_TYPES = [

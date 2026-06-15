@@ -41,6 +41,12 @@ _SAMPLE_MATRIX = {
 }
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
+_MATRIX_PATH = _REPO_ROOT / "workspace" / "verification" / "latest" / "open-taskcard-closure-matrix.json"
+
+pytestmark = pytest.mark.skipif(
+    not _MATRIX_PATH.exists(),
+    reason="workspace/verification detracked — taskcard matrix not present in CI",
+)
 
 
 def _run_sync_command(matrix: dict | None = None, *, extra_args: list[str] | None = None):

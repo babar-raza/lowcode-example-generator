@@ -97,6 +97,7 @@ class TestDiscoveryReadinessPreservation:
         cells_entry = next(e for e in merged if e["family"] == "cells")
         assert cells_entry["plugin_type_count"] == 22, "Cells entry must remain unchanged"
 
+    @pytest.mark.skipif(not _RANK_PATH.exists(), reason="workspace/ detracked — rank file not in CI")
     def test_no_manual_repopulation_needed_after_single_family_discovery(self):
         """The current rank file must have all 3 families — no manual fix needed.
 

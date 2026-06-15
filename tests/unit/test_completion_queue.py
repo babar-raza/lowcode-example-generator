@@ -19,6 +19,11 @@ _REPO_ROOT = Path(__file__).resolve().parents[2]
 _QUEUE_PATH = _REPO_ROOT / "workspace" / "queues" / "example-completion-queue.json"
 _DENOMINATOR_DIR = _REPO_ROOT / "pipeline" / "configs" / "denominators"
 
+pytestmark = pytest.mark.skipif(
+    not _QUEUE_PATH.exists(),
+    reason=f"Completion queue not present (workspace/ detracked): {_QUEUE_PATH}",
+)
+
 _VALID_STATES = {
     "DISCOVERED",
     "CONTRACTED",

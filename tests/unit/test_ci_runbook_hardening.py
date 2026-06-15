@@ -9,6 +9,11 @@ _REPO_ROOT = Path(__file__).resolve().parents[2]
 _RUNBOOK_PATH = _REPO_ROOT / "workspace" / "verification" / "latest" / "monthly-maintenance-runbook.json"
 _CI_DOCS_PATH = _REPO_ROOT / "docs" / "reference" / "environment-variables.md"
 
+pytestmark = pytest.mark.skipif(
+    not _RUNBOOK_PATH.exists(),
+    reason="workspace/verification detracked — runbook not present in CI",
+)
+
 
 class TestMonthlyRunbook:
     """Validate monthly-maintenance-runbook.json for correctness."""

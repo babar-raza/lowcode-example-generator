@@ -1,0 +1,76 @@
+version: 1
+description: >
+  Sprint governance configuration for the post-sprint autonomy loop.
+  Referenced by the sprint_governance.project_adapter module.
+
+quality_rubric:
+  acceptance_threshold: 4
+  scale_min: 1
+  scale_max: 5
+  required_dimensions:
+    - requirement_correctness
+    - implementation_correctness
+    - integration_completeness
+    - pipeline_compatibility
+    - governance_compliance
+    - evidence_completeness
+    - test_coverage
+    - repeatability
+    - rollback_safety
+    - production_readiness
+  optional_dimensions:
+    - validator_coverage
+    - idempotency
+    - downstream_consumer_readiness
+    - agentic_consumption_quality
+    - documentation_sync
+
+issue_taxonomy:
+  levels:
+    - L1
+    - L2
+    - L3
+  severities:
+    - critical
+    - high
+    - medium
+    - low
+
+loop_controller:
+  max_iterations: 3
+  escalate_on_max_iterations: true
+
+project_adapter:
+  project_name: lowcode-example-generator
+  repo_root: "."
+  default_branch: main
+  evidence_paths:
+    - .local/evidences/
+  plan_paths:
+    - .claude/plans/
+  taskcard_paths:
+    - taskcards/
+  prompt_folder_path: autonomous/supervisor/prompts/
+  prompt_registry_path: autonomous/supervisor/prompts/prompt-registry.yaml
+  test_commands:
+    unit: "python -m pytest tests/unit -x --timeout=60"
+  lint_commands:
+    ruff: "ruff check src/ tests/"
+  governance_commands:
+    doctor: "plugin-examples doctor"
+  protected_paths:
+    - .gitlab-ci.yml
+    - AGENTS.md
+    - CODEOWNERS
+  allowed_mutation_paths:
+    - src/
+    - tests/
+    - docs/
+    - autonomous/
+    - pipeline/configs/
+  docs_paths:
+    - docs/
+  skills_paths:
+    - skills/
+  agent_instruction_paths:
+    - AGENTS.md

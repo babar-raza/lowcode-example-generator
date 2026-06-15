@@ -1,0 +1,65 @@
+version: 1
+description: Contract for parsing Stage 3 execution summaries.
+
+summary_classifications:
+  - STRUCTURED_ALL_GREEN
+  - STRUCTURED_NOT_GREEN
+  - PROSE_ONLY
+  - MISSING
+  - CONTRADICTORY
+  - EVIDENCE_MISSING
+  - SCORES_MISSING
+  - TASKCARDS_INCOMPLETE
+  - BLOCKED_EXTERNAL
+
+required_yaml_fields:
+  - run_id
+  - timestamp
+  - verdict
+  - taskcards_attempted
+  - taskcards_completed
+  - taskcards_blocked
+  - taskcards_rerouted
+  - quality_evaluations
+  - evidence_path
+
+optional_yaml_fields:
+  - issues
+  - lane_results
+  - reroute_log
+  - self_review
+
+classification_rules:
+  MISSING:
+    condition: No summary content provided or file not found
+  PROSE_ONLY:
+    condition: Content exists but cannot be parsed as valid YAML with required fields
+  STRUCTURED_ALL_GREEN:
+    condition: >
+      Valid YAML with all required fields AND
+      taskcards_blocked == 0 AND taskcards_rerouted == 0 AND
+      all quality scores >= 4 AND evidence_path exists AND
+      no open issues in issues list
+  STRUCTURED_NOT_GREEN:
+    condition: >
+      Valid YAML with all required fields BUT
+      taskcards_blocked > 0 OR taskcards_rerouted > 0 OR
+      open issues exist
+  CONTRADICTORY:
+    condition: >
+      Valid YAML claims all-green verdict BUT
+      reroute_log has entries OR issues list has blockers
+  EVIDENCE_MISSING:
+    condition: Valid YAML but evidence_path is empty or points to nonexistent location
+  SCORES_MISSING:
+    condition: Valid YAML but quality_evaluations is empty or missing scores
+  TASKCARDS_INCOMPLETE:
+    condition: Valid YAML but taskcards_attempted != taskcards_completed + taskcards_blocked + taskcards_rerouted
+  BLOCKED_EXTERNAL:
+    condition: Valid YAML with verdict containing BLOCKED_EXTERNAL
+
+validation_errors:
+  - Missing required field returns error with field name
+  - Non-integer in integer field returns type error
+  - Negative counts return range error
+  - Quality scores outside 1-5 return range error

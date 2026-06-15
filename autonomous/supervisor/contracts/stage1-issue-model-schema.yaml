@@ -1,0 +1,92 @@
+version: 1
+description: Schema for Stage 1 (Post-Sprint Audit) issue records.
+
+issue_levels:
+  - L1  # Sprint execution issues
+  - L2  # Integration and connect-point issues
+  - L3  # System weakness issues
+
+claim_classifications:
+  - ACCEPTED_VERIFIED
+  - ACCEPTED_WITH_LIMITATIONS
+  - PARTIAL
+  - UNVERIFIED
+  - FAILED
+  - STALE
+  - MISLEADING
+  - DAMAGED_OR_REGRESSED
+  - EXTERNAL_BLOCKED
+
+evidence_verdicts:
+  - STRONG
+  - ADEQUATE_WITH_LIMITATIONS
+  - WEAK
+  - INSUFFICIENT
+  - MISLEADING
+
+sprint_verdicts:
+  - SPRINT_ALL_GREEN_VERIFIED
+  - SPRINT_ACCEPTED_WITH_LIMITATIONS
+  - SPRINT_REQUIRES_PLAN_HARDENING
+  - SPRINT_REQUIRES_REEXECUTION
+  - SPRINT_REQUIRES_EVIDENCE_REPAIR
+  - SPRINT_BLOCKED_EXTERNAL
+  - SPRINT_SUMMARY_INSUFFICIENT
+
+issue_record:
+  required_fields:
+    - issue_id
+    - issue_level
+    - title
+    - description
+    - root_cause
+    - severity
+    - blocker
+    - recommended_next_stage
+  optional_fields:
+    - evidence
+    - missing_evidence
+    - why_not_only_symptom
+    - affected_files
+    - affected_components
+    - affected_connection_points
+    - recurrence_risk
+    - required_fix_type
+    - requires_plan_update
+    - requires_taskcard
+    - requires_system_healing
+    - requires_reexecution
+    - requires_governance_change
+    - requires_evidence_repair
+    - acceptance_impact
+
+  field_types:
+    issue_id: string
+    issue_level: enum[L1, L2, L3]
+    title: string
+    description: string
+    evidence: string
+    missing_evidence: string
+    root_cause: string  # REQUIRED - issues without root cause are rejected
+    why_not_only_symptom: string
+    affected_files: list[string]
+    affected_components: list[string]
+    affected_connection_points: list[string]
+    severity: enum[critical, high, medium, low]
+    blocker: boolean
+    recurrence_risk: enum[low, medium, high]
+    required_fix_type: string
+    requires_plan_update: boolean
+    requires_taskcard: boolean
+    requires_system_healing: boolean
+    requires_reexecution: boolean
+    requires_governance_change: boolean
+    requires_evidence_repair: boolean
+    recommended_next_stage: enum[AUDIT, HARDEN, EXECUTE]
+    acceptance_impact: string
+
+  validation_rules:
+    - root_cause must be non-empty for all issues
+    - issue_level must be one of L1, L2, L3
+    - blocker issues must have recommended_next_stage
+    - every issue must have at least evidence or missing_evidence populated

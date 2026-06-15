@@ -1,0 +1,75 @@
+version: 1
+description: Taskcard state machine defining valid transitions.
+
+states:
+  - PROPOSED
+  - READY
+  - BLOCKED
+  - IN_PROGRESS
+  - IMPLEMENTED
+  - VERIFIED
+  - SCORED
+  - REROUTED
+  - REWORKING
+  - REWORKED
+  - ACCEPTED
+  - ACCEPTED_WITH_LIMITATIONS
+  - BLOCKED_EXTERNAL
+  - DEFERRED_WITH_REASON
+
+terminal_states:
+  - ACCEPTED
+  - ACCEPTED_WITH_LIMITATIONS
+  - BLOCKED_EXTERNAL
+  - DEFERRED_WITH_REASON
+
+initial_states:
+  - PROPOSED
+
+transitions:
+  PROPOSED:
+    - READY
+    - BLOCKED
+    - DEFERRED_WITH_REASON
+  READY:
+    - IN_PROGRESS
+    - BLOCKED
+    - DEFERRED_WITH_REASON
+  IN_PROGRESS:
+    - IMPLEMENTED
+    - BLOCKED
+    - REROUTED
+  IMPLEMENTED:
+    - VERIFIED
+    - REROUTED
+    - BLOCKED
+  VERIFIED:
+    - SCORED
+    - REROUTED
+  SCORED:
+    - ACCEPTED
+    - ACCEPTED_WITH_LIMITATIONS
+    - REROUTED
+  REROUTED:
+    - REWORKING
+    - BLOCKED_EXTERNAL
+    - DEFERRED_WITH_REASON
+  REWORKING:
+    - REWORKED
+    - BLOCKED
+    - BLOCKED_EXTERNAL
+  REWORKED:
+    - VERIFIED
+    - REROUTED
+  BLOCKED:
+    - READY
+    - BLOCKED_EXTERNAL
+    - DEFERRED_WITH_REASON
+
+invariants:
+  - Terminal states have no outgoing transitions.
+  - ACCEPTED requires prior passage through VERIFIED and SCORED.
+  - ACCEPTED_WITH_LIMITATIONS requires prior passage through SCORED.
+  - REROUTED items must go through REWORKING -> REWORKED -> VERIFIED -> SCORED before acceptance.
+  - State history is append-only (no history deletion).
+  - Invalid transitions raise ValueError.

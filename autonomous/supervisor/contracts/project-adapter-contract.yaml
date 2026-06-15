@@ -1,0 +1,50 @@
+version: 1
+description: Contract for project adapter configuration.
+
+required_fields:
+  - project_name
+  - repo_root
+  - evidence_paths
+  - prompt_folder_path
+  - test_commands
+
+optional_fields:
+  - default_branch
+  - plan_paths
+  - taskcard_paths
+  - prompt_registry_path
+  - lint_commands
+  - validator_commands
+  - build_commands
+  - governance_commands
+  - protected_paths
+  - allowed_mutation_paths
+  - docs_paths
+  - skills_paths
+  - agent_instruction_paths
+  - final_package_format
+  - evidence_declaration_template
+  - project_specific_gates
+  - external_blockers
+
+field_types:
+  project_name: string
+  repo_root: path
+  evidence_paths: list[path]
+  prompt_folder_path: path
+  test_commands: mapping[string, string]
+  lint_commands: mapping[string, string]
+  validator_commands: list[string]
+  build_commands: list[string]
+  governance_commands: mapping[string, string]
+  protected_paths: list[path]
+  allowed_mutation_paths: list[path]
+
+validation_rules:
+  - project_name must be non-empty
+  - repo_root must be a valid directory
+  - evidence_paths must have at least one entry
+  - prompt_folder_path must point to a directory with prompt assets
+  - test_commands must have at least one entry
+  - protected_paths and allowed_mutation_paths must not overlap
+  - adapter without test_commands is classified as incomplete

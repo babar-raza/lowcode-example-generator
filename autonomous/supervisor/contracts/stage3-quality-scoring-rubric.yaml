@@ -1,0 +1,88 @@
+version: 1
+description: Quality scoring rubric for Stage 3 (Controlled Execution).
+
+scoring_scale:
+  min: 1
+  max: 5
+  acceptance_threshold: 4
+  description: >
+    1 = Not addressed
+    2 = Attempted but incomplete or incorrect
+    3 = Partially correct but significant gaps
+    4 = Correct with minor limitations
+    5 = Fully correct and production-ready
+
+dimensions:
+  - name: requirement_correctness
+    description: Does the implementation match what was required?
+    required: true
+
+  - name: implementation_correctness
+    description: Is the code correct, safe, and free of bugs?
+    required: true
+
+  - name: integration_completeness
+    description: Is the change properly integrated with consumers and upstream/downstream?
+    required: true
+
+  - name: pipeline_compatibility
+    description: Does the change work within CI/CD and pipeline constraints?
+    required: true
+
+  - name: governance_compliance
+    description: Does the change follow project governance rules?
+    required: true
+
+  - name: evidence_completeness
+    description: Is there sufficient evidence to prove the change works?
+    required: true
+
+  - name: test_coverage
+    description: Are there adequate tests covering the change?
+    required: true
+
+  - name: validator_coverage
+    description: Do validators cover the changed behavior?
+    required: false
+
+  - name: repeatability
+    description: Can the result be reproduced reliably?
+    required: true
+
+  - name: idempotency
+    description: Does rerunning produce the same result?
+    required: false
+
+  - name: downstream_consumer_readiness
+    description: Are downstream consumers ready to use the change?
+    required: false
+
+  - name: agentic_consumption_quality
+    description: Can an agent consume and act on the outputs?
+    required: false
+
+  - name: rollback_safety
+    description: Can the change be safely rolled back?
+    required: true
+
+  - name: documentation_sync
+    description: Are docs, skills, and agent instructions updated?
+    required: false
+
+  - name: production_readiness
+    description: Is the change ready for production use?
+    required: true
+
+acceptance_rules:
+  - All required dimensions must score >= 4/5
+  - Any required dimension below 4/5 triggers REROUTED state
+  - Optional dimensions below 4/5 are logged but do not block acceptance
+  - Rerouted items must be reworked and rescored before acceptance
+
+reroute_rules:
+  - Mark taskcard state as REROUTED
+  - Record reroute reason with dimension name and score
+  - Assign rework to original lane owner
+  - After rework, rerun verification and rescore
+  - Accept only when all required dimensions >= 4/5
+  - If external blocker prevents fix, classify BLOCKED_EXTERNAL with evidence

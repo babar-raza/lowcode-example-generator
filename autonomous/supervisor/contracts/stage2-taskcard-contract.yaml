@@ -1,0 +1,74 @@
+version: 1
+description: Schema for Stage 2 (Plan Hardening) taskcard records.
+
+taskcard_states:
+  - PROPOSED
+  - READY
+  - BLOCKED
+  - IN_PROGRESS
+  - IMPLEMENTED
+  - VERIFIED
+  - SCORED
+  - REROUTED
+  - REWORKING
+  - REWORKED
+  - ACCEPTED
+  - ACCEPTED_WITH_LIMITATIONS
+  - BLOCKED_EXTERNAL
+  - DEFERRED_WITH_REASON
+
+terminal_states:
+  - ACCEPTED
+  - ACCEPTED_WITH_LIMITATIONS
+  - BLOCKED_EXTERNAL
+  - DEFERRED_WITH_REASON
+
+taskcard_record:
+  required_fields:
+    - taskcard_id
+    - title
+    - source_issue_id
+    - state
+    - lane
+    - acceptance_criteria
+  optional_fields:
+    - source_issue_level
+    - source_audit_finding
+    - why_it_matters
+    - risk_addressed
+    - lane_owner
+    - supervisor_role
+    - required_implementation_or_investigation
+    - required_verification
+    - required_evidence
+    - quality_dimensions
+    - scoring_rubric
+    - reroute_rule_if_score_below_4
+    - stop_conditions
+    - allowed_actions
+    - forbidden_actions
+    - dependencies
+    - closeout_rules
+    - machine_state
+    - attempts
+    - max_attempts
+    - history
+
+  field_types:
+    taskcard_id: string
+    title: string
+    source_issue_id: string
+    source_issue_level: enum[L1, L2, L3]
+    state: enum[taskcard_states]
+    lane: string
+    quality_dimensions: list[string]
+    attempts: integer
+    max_attempts: integer
+    history: list[object]
+
+  validation_rules:
+    - taskcard_id must be unique within a sprint
+    - source_issue_id must reference a valid Stage 1 issue
+    - state must be one of taskcard_states
+    - acceptance_criteria must be non-empty
+    - ACCEPTED state requires passing through VERIFIED and SCORED first

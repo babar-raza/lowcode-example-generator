@@ -1,0 +1,152 @@
+version: 1
+description: >
+  Registry of post-sprint autonomy loop prompt assets.
+  Each prompt has a stable ID, description, required inputs/outputs,
+  successor-stage rules, and validation rules.
+
+prompts:
+  - id: PSA-P1
+    name: p1-post-sprint-audit
+    file: p1-post-sprint-audit.md
+    stage: AUDIT
+    description: >
+      Strict evidence-based sprint audit with three-level issue discovery,
+      root-cause review, claim classification, and next-stage recommendation.
+    required_inputs:
+      - sprint evidence directory or bundle
+      - repository state (git log, test results, lint results)
+    required_outputs:
+      - stage1-sprint-audit-summary.md
+      - stage1-achievement-proof-summary.md
+      - stage1-final-outcome-impact.md
+      - stage1-l1-execution-issues.yaml
+      - stage1-l2-integration-issues.yaml
+      - stage1-l3-system-weaknesses.yaml
+      - stage1-root-cause-map.md
+      - stage1-claim-classification-matrix.csv
+      - stage1-evidence-quality-verdict.md
+      - stage1-next-stage-recommendation.yaml
+    successor_stages:
+      - condition: all_green_strong_evidence
+        next: ACCEPT
+      - condition: issues_require_plan_changes
+        next: HARDEN
+      - condition: evidence_packaging_missing_only
+        next: EXECUTE
+      - condition: execution_defects_remain
+        next: HARDEN
+      - condition: summary_missing_or_insufficient
+        next: AUDIT
+      - condition: external_blocker
+        next: ESCALATE
+    validation_rules:
+      - every issue must have a root_cause
+      - every claim must have a proof_level
+      - output must not be prose-only
+
+  - id: PSA-P2
+    name: p2-plan-hardening
+    file: p2-plan-hardening.md
+    stage: HARDEN
+    description: >
+      Plan hardening agent that reads Stage 1 audit outputs, extracts gaps,
+      creates taskcards, and produces an execution-ready hardened plan.
+    required_inputs:
+      - stage1 issue files (L1, L2, L3 YAML)
+      - stage1-next-stage-recommendation.yaml
+      - active master plan (if available)
+      - current repository state
+    required_outputs:
+      - stage2-enhanced-master-plan.md
+      - stage2-taskcard-index.yaml
+      - stage2-taskcards/*.yaml
+      - stage2-verification-matrix.md
+      - stage2-anti-overclaim-rules.md
+      - stage2-ready-for-execution-verdict.yaml
+    successor_stages:
+      - condition: plan_hardened_ready
+        next: EXECUTE
+      - condition: plan_context_partial
+        next: EXECUTE
+      - condition: audit_plan_mismatch
+        next: AUDIT
+      - condition: missing_audit_summary
+        next: AUDIT
+      - condition: external_blocker
+        next: ESCALATE
+    validation_rules:
+      - every actionable issue must have a taskcard
+      - prose-only recommendations without taskcards are rejected
+      - plan delta must link to source issue IDs
+
+  - id: PSA-P3
+    name: p3-controlled-execution
+    file: p3-controlled-execution.md
+    stage: EXECUTE
+    description: >
+      Controlled taskcard execution with multi-lane management, quality scoring,
+      reroute logic, evidence bundling, and final Prompt 1-style self-review.
+    required_inputs:
+      - stage2-enhanced-master-plan.md
+      - stage2-taskcard-index.yaml
+      - stage2-taskcards/*.yaml
+      - stage2-verification-matrix.md
+      - stage2-quality-scoring-rubric.md
+      - stage2-reroute-rules.md
+    required_outputs:
+      - stage3-final-sprint-summary.yaml
+      - stage3-quality-evaluations.yaml
+      - stage3-taskcard-status.yaml
+      - stage3-evidence-manifest.yaml
+      - stage3-self-review-l1-execution-issues.yaml
+      - declaration-review-package-{run_id}.zip
+    successor_stages:
+      - condition: execution_complete_verified
+        next: DECIDE
+      - condition: execution_rerouted
+        next: DECIDE
+      - condition: plan_not_ready
+        next: HARDEN
+      - condition: blocked_by_gate
+        next: HARDEN
+      - condition: external_blocker
+        next: ESCALATE
+    validation_rules:
+      - final summary must be structured YAML not prose-only
+      - every executed taskcard must be scored
+      - every taskcard with evidence must have evidence output
+      - quality scores below 4/5 must trigger reroute
+
+  - id: PSA-LC
+    name: loop-controller
+    file: loop-controller.md
+    stage: DECIDE
+    description: >
+      Autonomous loop controller that classifies Stage 3 summaries,
+      decides the next stage, and enforces all-green acceptance.
+    required_inputs:
+      - stage3-final-sprint-summary.yaml
+      - stage3-quality-evaluations.yaml
+      - stage3-reroute-log.yaml
+      - stage3-evidence-manifest.yaml
+    required_outputs:
+      - loop-summary-classification.yaml
+      - loop-decision.yaml
+      - loop-open-items.yaml
+      - loop-final-state-verdict.md
+    successor_stages:
+      - condition: structured_all_green
+        next: ACCEPT
+      - condition: structured_not_green
+        next: HARDEN
+      - condition: prose_only
+        next: HARDEN
+      - condition: missing
+        next: AUDIT
+      - condition: external_blocker
+        next: ESCALATE
+    validation_rules:
+      - must never return NEXT_PROMPT_NEEDED as final state
+      - must never accept prose-only summaries
+      - must never accept missing evidence
+      - must never accept scores below 4/5

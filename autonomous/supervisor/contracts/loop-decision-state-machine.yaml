@@ -1,0 +1,86 @@
+version: 1
+description: Loop decision state machine for the post-sprint autonomy loop.
+
+stages:
+  - AUDIT     # Run Prompt 1
+  - HARDEN    # Run Prompt 2
+  - EXECUTE   # Run Prompt 3
+  - DECIDE    # Loop controller evaluates
+  - ACCEPT    # Terminal: sprint accepted
+  - ESCALATE  # Terminal: needs human or external blocker
+
+terminal_stages:
+  - ACCEPT
+  - ESCALATE
+
+initial_stage: AUDIT
+
+transitions:
+  AUDIT:
+    - HARDEN
+    - ESCALATE
+  HARDEN:
+    - EXECUTE
+    - AUDIT
+    - ESCALATE
+  EXECUTE:
+    - DECIDE
+    - HARDEN
+    - ESCALATE
+  DECIDE:
+    - ACCEPT
+    - HARDEN
+    - AUDIT
+    - EXECUTE
+    - ESCALATE
+
+decision_rules:
+  from_summary_classification:
+    MISSING:
+      next_stage: AUDIT
+      reason: No summary found; full audit required
+    PROSE_ONLY:
+      next_stage: HARDEN
+      reason: Summary is prose-only; plan hardening required
+    STRUCTURED_NOT_GREEN:
+      next_stage: HARDEN
+      reason: Open issues remain; plan hardening required
+    SCORES_MISSING:
+      next_stage: EXECUTE
+      reason: Quality scores missing; re-execute scoring lane
+    EVIDENCE_MISSING:
+      next_stage: EXECUTE
+      reason: Evidence bundle missing; re-execute evidence lane
+    TASKCARDS_INCOMPLETE:
+      next_stage: HARDEN
+      reason: Taskcards not all terminal; plan update required
+    CONTRADICTORY:
+      next_stage: HARDEN
+      reason: Summary contradicts issue/reroute state
+    BLOCKED_EXTERNAL:
+      next_stage: ESCALATE
+      reason: External blocker prevents progress
+    STRUCTURED_ALL_GREEN:
+      next_stage: ACCEPT
+      reason: All gates passed, all scores acceptable
+
+max_iterations: 3
+escalate_on_max_iterations: true
+
+invalid_final_states:
+  - NEXT_PROMPT_NEEDED
+  - HUMAN_REVIEW_NEEDED_BEFORE_AGENT_REVIEW
+  - PROSE_ONLY_ACCEPTED
+  - SUMMARY_MISSING_ACCEPTED
+  - SCORE_BELOW_4_ACCEPTED
+  - EVIDENCE_PACKAGE_MISSING_ACCEPTED
+  - PLAN_UPDATED_NOT_EXECUTED
+  - EXECUTED_NOT_EVALUATED
+  - PROMPT_ASSETS_DISCONNECTED
+  - TASKCARDS_MISSING_ACCEPTED
+
+invariants:
+  - Loop must always terminate (max_iterations enforced)
+  - ACCEPT requires STRUCTURED_ALL_GREEN classification
+  - ESCALATE requires either max_iterations exceeded or BLOCKED_EXTERNAL
+  - Controller must never return an invalid_final_state

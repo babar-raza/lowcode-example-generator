@@ -1,0 +1,47 @@
+version: 1
+description: Evidence bundle contract defining required artifacts per stage.
+
+stage1_required_artifacts:
+  - stage1-sprint-audit-summary.md
+  - stage1-l1-execution-issues.yaml
+  - stage1-l2-integration-issues.yaml
+  - stage1-l3-system-weaknesses.yaml
+  - stage1-next-stage-recommendation.yaml
+
+stage2_required_artifacts:
+  - stage2-enhanced-master-plan.md
+  - stage2-taskcard-index.yaml
+  - stage2-ready-for-execution-verdict.yaml
+
+stage3_required_artifacts:
+  - stage3-final-sprint-summary.yaml
+  - stage3-quality-evaluations.yaml
+  - stage3-taskcard-status.yaml
+  - stage3-evidence-manifest.yaml
+
+loop_required_artifacts:
+  - loop-summary-classification.yaml
+  - loop-decision.yaml
+
+evidence_declaration_required_fields:
+  - run_id
+  - repo_root
+  - branch
+  - base_commit
+  - timestamp
+  - prompt_folder
+  - verdict
+
+validation_rules:
+  manifest_vs_contents:
+    - Every file listed in evidence manifest must exist in bundle directory
+    - Every required artifact for the stage must be present
+    - Manifest must not reference files outside the bundle directory
+  content_validation:
+    - YAML files must parse without errors
+    - CSV files must have headers matching expected schema
+    - Markdown files must be non-empty
+  declaration_validation:
+    - All required fields must be populated
+    - run_id must be non-empty
+    - verdict must be from the stage's valid verdict set

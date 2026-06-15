@@ -1,0 +1,51 @@
+version: 1
+description: >
+  Master governance contract for the post-sprint autonomy loop.
+  These rules are enforced by the loop controller and cannot be overridden
+  by individual prompts or agents.
+
+acceptance_rules:
+  - Prose-only summaries are never accepted as final state.
+  - Missing summaries are never accepted as final state.
+  - Quality scores below 4/5 on required dimensions block acceptance.
+  - Missing evidence bundles block acceptance.
+  - Taskcards in non-terminal states block acceptance.
+  - Contradictory summaries (all-green + open reroutes) block acceptance.
+  - Executed-but-not-evaluated taskcards block acceptance.
+  - Rerouted items marked accepted without re-evaluation block acceptance.
+  - Plan updates without linked issue IDs are rejected.
+  - Issues without root causes are rejected.
+  - Achievements without proof levels are rejected.
+
+loop_rules:
+  - The loop controller always chooses the next stage; it never returns NEXT_PROMPT_NEEDED.
+  - The loop must terminate within max_iterations (default 3).
+  - If max_iterations is exceeded without all-green, the loop escalates.
+  - ACCEPT requires STRUCTURED_ALL_GREEN from the summary parser.
+  - ESCALATE is the only valid terminal state for unresolvable situations.
+
+evidence_rules:
+  - Every sprint must produce an evidence bundle.
+  - Evidence bundles must pass manifest-vs-contents validation.
+  - Evidence declarations must have all required fields.
+  - Evidence referenced in taskcards must exist in the bundle.
+
+taskcard_rules:
+  - Every actionable issue must have a taskcard.
+  - Taskcards must follow the state machine (no invalid transitions).
+  - ACCEPTED requires prior VERIFIED and SCORED states.
+  - Rerouted items must go through rework cycle before acceptance.
+  - Terminal states have no outgoing transitions.
+
+scoring_rules:
+  - All required quality dimensions must be scored.
+  - Acceptance threshold is 4/5 for all required dimensions.
+  - Reroute is mandatory for any required dimension below 4/5.
+  - Optional dimensions below threshold are logged but do not block.
+
+agent_rules:
+  - Agent-side review must happen before requesting human review.
+  - Agents must not claim work is complete without evidence.
+  - Agents must not accept artifact existence as proof of behavior.
+  - Agents must not treat synthetic tests as production proof.
+  - Agents must not stop after the first issue in a multi-issue sprint.

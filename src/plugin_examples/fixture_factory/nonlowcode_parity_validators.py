@@ -156,15 +156,15 @@ def check_ppv_11_folder_layout(
     """
     parts = example_dir.parts
     if namespace_source == "LOWCODE":
-        expected = ("examples", family, "lowcode", slug)
-        ok = len(parts) >= 4 and parts[-4:] == expected
+        expected_lc = ("examples", family, "lowcode", slug)
+        ok = len(parts) >= 4 and parts[-4:] == expected_lc
         if not ok:
             result.fail("PPV-11", f"LowCode example must be at examples/{family}/lowcode/{slug}/, found: {example_dir}")
         else:
             result.ok("PPV-11", f"Folder layout correct: examples/{family}/lowcode/{slug}/")
     else:
-        expected = ("examples", family, slug)
-        ok = len(parts) >= 3 and parts[-3:] == expected
+        expected_nlc = ("examples", family, slug)
+        ok = len(parts) >= 3 and parts[-3:] == expected_nlc
         if not ok:
             result.fail("PPV-11", f"Non-LowCode example must be at examples/{family}/{slug}/, found: {example_dir}")
         else:

@@ -4,7 +4,7 @@ import json
 import os
 import subprocess
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 
 from ..plugin_code_registry.models import PluginEntry
 from .templates import FamilyTemplate, FamilyTemplateRegistry
@@ -124,7 +124,7 @@ class ExamplePackageGenerator:
     def package_dir(self, entry: PluginEntry) -> Path:
         return self.output_root / entry.family / entry.plugin_slug
 
-    def generate_scaffold(self, entry: PluginEntry, program_cs: str, extra_packages: list = None) -> Path:
+    def generate_scaffold(self, entry: PluginEntry, program_cs: str, extra_packages: list | None = None) -> Path:
         """Generate the package scaffold (csproj, README, provenance). Returns package dir."""
         template = self.templates.get(entry.family)
         if not template:
@@ -199,7 +199,7 @@ class ExamplePackageGenerator:
 
     def build_and_run(self, pkg_dir: Path) -> dict:
         """Run dotnet restore, build, run. Returns result dict with logs."""
-        result = {"restore": None, "build": None, "run": None, "output_files": [], "verdict": "UNKNOWN"}
+        result: dict[str, Any] = {"restore": None, "build": None, "run": None, "output_files": [], "verdict": "UNKNOWN"}
 
         for step, cmd in [
             ("restore", ["dotnet", "restore"]),

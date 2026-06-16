@@ -556,6 +556,7 @@ def _stage_dependency_resolution(ctx: PipelineContext) -> dict:
     )
 
     cfg = ctx.config.nuget
+    assert ctx.download_manifest is not None, "download_manifest must be set before dependency resolution"
     nupkg_path = Path(ctx.download_manifest["cached_path"])
 
     if not cfg.dependency_resolution.enabled:
@@ -578,6 +579,7 @@ def _stage_dependency_resolution(ctx: PipelineContext) -> dict:
 def _stage_extraction(ctx: PipelineContext) -> dict:
     from plugin_examples.nupkg_extractor import extract_package
 
+    assert ctx.download_manifest is not None, "download_manifest must be set before extraction"
     nupkg_path = Path(ctx.download_manifest["cached_path"])
     dep_paths = [Path(d["cached_path"]) for d in (ctx.deps or []) if d.get("status") == "ok" and d.get("cached_path")]
     ctx.extraction = extract_package(
@@ -602,6 +604,7 @@ def _stage_reflection(ctx: PipelineContext) -> dict:
     catalog_dir.mkdir(parents=True, exist_ok=True)
     output_path = catalog_dir / "api-catalog.json"
 
+    assert ctx.extraction is not None, "extraction must be set before reflection"
     dep_dll_paths = [Path(p) for p in ctx.extraction.get("dependency_dll_paths", []) if p]
 
     ctx.catalog = build_catalog(
@@ -612,6 +615,7 @@ def _stage_reflection(ctx: PipelineContext) -> dict:
         namespace_filter=ctx.config.plugin_detection.namespace_patterns,
     )
     ctx.catalog_path = output_path
+    assert ctx.catalog is not None, "catalog must be set after build_catalog"
     ns_count = len(ctx.catalog.get("namespaces", []))
     return {"catalog_path": str(output_path), "namespace_count": ns_count}
 
@@ -620,6 +624,8 @@ def _check_namespace_drift(ctx: PipelineContext) -> None:
     """Detect new namespaces in DLL and check if expected_namespace has arrived."""
     expected_ns = getattr(ctx.config.plugin_detection, "expected_namespace", "")
     if not expected_ns and not ctx.catalog:
+        return
+    if ctx.catalog is None:
         return
 
     current_namespaces = {ns["namespace"] for ns in ctx.catalog.get("namespaces", [])}
@@ -670,6 +676,10 @@ def _stage_plugin_detection(ctx: PipelineContext) -> dict:
         assert_nonlowcode_source_of_truth_eligible,
         write_nonlowcode_source_of_truth_proof,
     )
+
+    assert ctx.catalog is not None, "catalog must be set before plugin detection"
+    assert ctx.download_manifest is not None, "download_manifest must be set before plugin detection"
+    assert ctx.extraction is not None, "extraction must be set before plugin detection"
 
     ctx.detection = detect_plugin_namespaces(
         ctx.catalog,
@@ -904,6 +914,7 @@ def _stage_api_delta(ctx: PipelineContext) -> dict:
     from plugin_examples.api_delta import compute_delta
     from plugin_examples.api_delta.delta_engine import write_delta_report
 
+    assert ctx.catalog is not None, "catalog must be set before API delta computation"
     ctx.delta = compute_delta(ctx.catalog, old_catalog=None)
     write_delta_report(ctx.delta, ctx.evidence_dir)
     return {
@@ -995,6 +1006,8 @@ def _stage_scenario_planning(ctx: PipelineContext) -> dict:
         write_type_role_classification,
     )
 
+    assert ctx.catalog is not None, "catalog must be set before scenario planning"
+
     matched_ns = [m.namespace for m in ctx.detection.matched_namespaces]
     fixture_dict = _fixture_registry_to_dict(getattr(ctx, "_fixture_registry", None))
 
@@ -1033,10 +1046,12 @@ def _stage_scenario_planning(ctx: PipelineContext) -> dict:
     _write_catalog_hash_evidence(catalog_hash_result, ctx.evidence_dir)
     # Evidence is written first; now enforce strict blocking on mismatch
     if catalog_hash_result.match is False:
+        _current = catalog_hash_result.current_hash or ""
+        _denom = catalog_hash_result.denominator_hash or ""
         raise CatalogHashMismatchError(
             f"Catalog hash MISMATCH for {ctx.family}: "
-            f"current={catalog_hash_result.current_hash[:16]}... "
-            f"denominator={catalog_hash_result.denominator_hash[:16]}... "
+            f"current={_current[:16]}... "
+            f"denominator={_denom[:16]}... "
             f"The API catalog has changed since the denominator was created. "
             f"Update the denominator file to proceed."
         )
@@ -1232,7 +1247,7 @@ def _stage_generation(ctx: PipelineContext) -> dict:
         return {"examples_generated": 0, "reason": "no ready scenarios"}
 
     # Load healing intelligence registries (advisory layer — does not override config)
-    healing_evidence = {"loaded": False, "registries": {}, "constraints_applied": []}
+    healing_evidence: dict[str, Any] = {"loaded": False, "registries": {}, "constraints_applied": []}
     if ctx.healing_intelligence is None:
         try:
             from plugin_examples.healing_intelligence.loader import HealingIntelligenceLoader
@@ -1340,6 +1355,7 @@ def _stage_generation(ctx: PipelineContext) -> dict:
                             }
                         )
 
+                assert ctx.catalog is not None, "catalog must be set before generation"
                 packet = build_packet(
                     scenario_dict,
                     ctx.catalog,
@@ -1356,7 +1372,7 @@ def _stage_generation(ctx: PipelineContext) -> dict:
             project = generate_project(
                 example,
                 package_id=ctx.config.nuget.package_id,
-                package_version=ctx.download_manifest.get("version", "*"),
+                package_version=(ctx.download_manifest or {}).get("version", "*"),
                 target_framework="net8.0",
                 output_dir=output_dir,
                 input_strategy=getattr(scenario, "input_strategy", "none"),

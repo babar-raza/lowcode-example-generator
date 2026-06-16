@@ -2,6 +2,7 @@
 
 import os
 from pathlib import Path
+from typing import Any
 
 import yaml
 
@@ -137,7 +138,7 @@ class PluginCodeRegistryLoader:
 
     def build_readiness_matrix(self) -> dict:
         """Build full status matrix for reporting."""
-        matrix = {"families": {}, "status_counts": {}, "violations": []}
+        matrix: dict[str, Any] = {"families": {}, "status_counts": {}, "violations": []}
         for family, reg in self.non_protected_families().items():
             family_row = {"ready": 0, "code_harvested": 0, "needs_mapping": 0, "blocked": 0, "other": 0}
             for p in reg.plugins:

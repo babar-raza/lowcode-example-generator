@@ -291,7 +291,7 @@ def run_all_plugin_identity_validators(
 
     Returns dict: package_key -> PivResult
     """
-    results = {}
+    results: dict[str, PivResult] = {}
     if not examples_base.exists():
         return results
     for family_dir in sorted(examples_base.iterdir()):

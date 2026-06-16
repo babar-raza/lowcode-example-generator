@@ -237,7 +237,7 @@ def write_type_role_classification(
     latest.mkdir(parents=True, exist_ok=True)
     path = latest / "plugin-type-role-classification.json"
 
-    summary = {}
+    summary: dict[str, list[str]] = {}
     for r in roles:
         summary.setdefault(r.role, []).append(r.name)
 

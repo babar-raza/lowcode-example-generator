@@ -9,6 +9,7 @@ from __future__ import annotations
 import json as _json
 import logging
 import zipfile
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -189,7 +190,7 @@ def generate_html(dest: Path) -> bool:
 # Dispatch table and public API
 # ---------------------------------------------------------------------------
 
-_FORMAT_GENERATORS: dict[str, callable] = {
+_FORMAT_GENERATORS: dict[str, Callable[[Path], bool]] = {
     ".xlsx": generate_xlsx,
     ".docx": generate_docx,
     ".csv": generate_csv,

@@ -84,7 +84,7 @@ def check_build_results_vs_invariants(
 
 def check_build_results_no_stale_errors(build_results_path: Path) -> list[ConsistencyViolation]:
     """CV-02: Build results must not contain error_snippet with BUILD_FAILED for PASS entries."""
-    violations = []
+    violations: list[ConsistencyViolation] = []
     if not build_results_path.exists():
         return violations
 
@@ -111,7 +111,7 @@ def check_publication_matrix_matches_invariants(
     invariant_results_path: Path,
 ) -> list[ConsistencyViolation]:
     """CV-03: Publication matrix must agree with invariant results on classifications."""
-    violations = []
+    violations: list[ConsistencyViolation] = []
     if not pub_matrix_path.exists() or not invariant_results_path.exists():
         return violations
 
@@ -142,7 +142,7 @@ def check_cumulative_ledger_count(
     expected_transformed: int,
 ) -> list[ConsistencyViolation]:
     """CV-04: Cumulative ledger total_dryrun_packages must match actual sum."""
-    violations = []
+    violations: list[ConsistencyViolation] = []
     if not ledger_path.exists():
         return violations
 
@@ -176,7 +176,7 @@ def check_cumulative_ledger_count(
 
 def check_no_duplicate_package_keys(ledger_path: Path) -> list[ConsistencyViolation]:
     """CV-05: No package key should appear in multiple waves."""
-    violations = []
+    violations: list[ConsistencyViolation] = []
     if not ledger_path.exists():
         return violations
 

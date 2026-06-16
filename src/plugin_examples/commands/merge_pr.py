@@ -95,6 +95,7 @@ def handle(args) -> int:
     if target_owner is None:
         print(f"ERROR: No publish target configured for family '{family}'")
         return 1
+    assert target_repo_name is not None
 
     # Locate clean-checkout evidence (used by both modes)
     clean_checkout_path = verification_dir / "latest" / f"{family}-live-pr-clean-checkout-validation.json"

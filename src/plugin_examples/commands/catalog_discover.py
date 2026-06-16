@@ -602,7 +602,7 @@ def _expand_registry_entries(
         package_id = _FAMILY_PACKAGE_IDS.get(fam_slug, f"Aspose.{fam_slug.title()}")
 
         for slug_info in slugs_to_add:
-            new_entry = {
+            new_entry: dict[str, object] = {
                 "family": fam_slug,
                 "plugin_slug": slug_info["slug"],
                 "operation_kind": slug_info["kind"],

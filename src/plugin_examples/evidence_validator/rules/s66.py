@@ -324,8 +324,8 @@ class RemoteProofRules:
                     # Old proof: if it claims merged=true and has no per-example state model
                     families = data.get("families", data.get("repos", {}))
                     if isinstance(families, dict):
-                        first_family = next(iter(families.values()), {})
-                        if "remote_example_present" not in first_family and "approval_blocked" not in first_family:
+                        first_family_raw: object = next(iter(families.values()), {})
+                        if not isinstance(first_family_raw, dict) or ("remote_example_present" not in first_family_raw and "approval_blocked" not in first_family_raw):
                             return RuleResult(
                                 rule_id=rule_id,
                                 description="Publication state must use separate fields",

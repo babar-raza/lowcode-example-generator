@@ -52,6 +52,7 @@ def run_reviewer_preflight(
     if not path_configured:
         issues.append("EXAMPLE_REVIEWER_PATH not set and no --reviewer-path given")
     else:
+        assert rpath is not None
         rp = Path(rpath)
         path_exists = rp.exists() and rp.is_dir()
         if not path_exists:

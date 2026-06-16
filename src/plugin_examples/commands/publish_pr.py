@@ -307,6 +307,8 @@ def handle(args) -> int:
         if target_owner is None:
             print(f"ERROR: No publish target configured for family '{family}'")
             return 1
+        assert target_repo_name is not None
+        assert target_branch is not None
 
         # README audit gate — must have a content-based, passing audit before live publish
         from plugin_examples.publisher.readme_audit_gate import (

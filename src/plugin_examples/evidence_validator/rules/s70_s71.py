@@ -489,8 +489,9 @@ class Sprint70to71Rules:
             )
         try:
             data = json.loads(matrix_file.read_text(encoding="utf-8"))
-            records = data.get("records", data.get("examples", [])) if isinstance(data, dict) else data
-            missing = []
+            raw_records = data.get("records", data.get("examples", [])) if isinstance(data, dict) else data
+            records: list = list(raw_records) if raw_records else []
+            missing: list[str] = []
             for rec in records:
                 hp = rec.get("handoff_package_path", "")
                 if hp:

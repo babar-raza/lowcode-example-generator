@@ -52,7 +52,7 @@ def aoc_01_output_dir_exists(pkg_dir: Path, key: str) -> AocViolation | None:
 
 def aoc_02_no_zero_byte_primary_output(pkg_dir: Path, key: str) -> list[AocViolation]:
     """AOC-02: Primary output files must not be zero bytes."""
-    violations = []
+    violations: list[AocViolation] = []
     ov_path = pkg_dir / "output-validation.json"
     if not ov_path.exists():
         return violations
@@ -237,7 +237,7 @@ def aoc_08_canonical_url_not_placeholder(pkg_dir: Path, key: str) -> AocViolatio
 
 def aoc_09_package_manifest_consistent(pkg_dir: Path, key: str) -> list[AocViolation]:
     """AOC-09: package-manifest.json must match source-provenance.json on nuget_package/version."""
-    violations = []
+    violations: list[AocViolation] = []
     sp_path = pkg_dir / "source-provenance.json"
     pm_path = pkg_dir / "package-manifest.json"
     if not sp_path.exists() or not pm_path.exists():
@@ -323,7 +323,7 @@ def aoc_14_no_duplicate_output_files(pkg_dir: Path, key: str) -> AocViolation | 
     output_dir = pkg_dir / "output"
     if not output_dir.exists():
         return None
-    seen_sizes = {}
+    seen_sizes: dict[int, Path] = {}
     for f in output_dir.iterdir():
         if not f.is_file():
             continue

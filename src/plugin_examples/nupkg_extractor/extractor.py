@@ -159,7 +159,7 @@ def _extract_dependency(
     stem = dep_nupkg.stem  # "Dep.One.2.0.0"
     parts = stem.split(".")
     # Find where the version starts (first part that's a digit)
-    dep_id_parts = []
+    dep_id_parts: list[str] = []
     for part in parts:
         if part.isdigit() and dep_id_parts:
             break

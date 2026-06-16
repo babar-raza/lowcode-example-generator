@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import re
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -32,7 +33,7 @@ class GeneratedExample:
 def generate_example(
     packet: PromptPacket,
     *,
-    llm_generate: callable | None = None,
+    llm_generate: Callable[..., str] | None = None,
     max_repairs: int = 1,
 ) -> GeneratedExample:
     """Generate a C# example from a prompt packet.

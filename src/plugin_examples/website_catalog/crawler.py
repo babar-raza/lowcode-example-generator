@@ -148,8 +148,8 @@ class WebsiteCatalog:
             else:
                 from_cache = False
                 time.sleep(delay_s)
-                content = _fetch_url(normalized)
-                if content is None:
+                fetched_content = _fetch_url(normalized)
+                if fetched_content is None:
                     errors.append(f"Failed to fetch {url}")
                     entries.append(
                         PluginEntry(
@@ -162,6 +162,7 @@ class WebsiteCatalog:
                         )
                     )
                     continue
+                content = fetched_content
                 _write_cache(cache_file, content)
 
             page_hash = compute_page_hash(content)

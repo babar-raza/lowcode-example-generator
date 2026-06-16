@@ -54,7 +54,7 @@ def handle(args) -> int:
     config_dir = repo_root / "pipeline" / "configs" / "families"
     verification_dir = repo_root / "workspace" / "verification"
 
-    families_input = []
+    families_input: list[tuple[str, object, str]] = []
     for fname in args.families:
         config_path = config_dir / f"{fname}.yml"
         try:

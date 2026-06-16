@@ -144,7 +144,7 @@ class MetricsSession:
                 run_duration_ms=duration_ms,
                 token_usage=token_usage,
                 api_calls_count=api_calls_count,
-                job_type_override=self.job_type_override,
+                job_type_override=self.job_type_override or "",
                 test_mode=test_mode,
             )
             result["payload"] = payload

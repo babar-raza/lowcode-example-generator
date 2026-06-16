@@ -13,7 +13,7 @@ from datetime import UTC, datetime, timezone
 from pathlib import Path
 
 from plugin_examples.publisher.aspose_links import build_aspose_net_links
-from plugin_examples.publisher.readme_facts import extract_example_readme_facts
+from plugin_examples.publisher.readme_facts import ExampleFact, extract_example_readme_facts
 
 logger = logging.getLogger(__name__)
 
@@ -265,16 +265,18 @@ def build_readme_context(
         generation_date = datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC")
 
     # --- Pull fields from family config ---
-    display_name: str = getattr(family_config, "display_name", None)
-    if not display_name:
+    _display_name = getattr(family_config, "display_name", None)
+    if not _display_name:
         raise ValueError(f"family_config.display_name is required for family '{family}'")
+    display_name: str = _display_name
 
     nuget_cfg = getattr(family_config, "nuget", None)
     if nuget_cfg is None:
         raise ValueError(f"family_config.nuget is required for family '{family}'")
-    nuget_package_id: str = getattr(nuget_cfg, "package_id", None)
-    if not nuget_package_id:
+    _nuget_package_id = getattr(nuget_cfg, "package_id", None)
+    if not _nuget_package_id:
         raise ValueError(f"family_config.nuget.package_id is required for family '{family}'")
+    nuget_package_id: str = _nuget_package_id
 
     tf_preference = getattr(nuget_cfg, "target_framework_preference", [])
     target_framework = _pick_target_framework(tf_preference)
@@ -386,7 +388,7 @@ def build_readme_context(
                 )
 
     # Build a lookup from facts if available
-    facts_by_name: dict[str, object] = {}
+    facts_by_name: dict[str, ExampleFact] = {}
     if facts is not None:
         for fact in facts.facts:
             facts_by_name[fact.example_name] = fact
@@ -397,15 +399,15 @@ def build_readme_context(
         if not name:
             continue
 
-        fact = facts_by_name.get(name)
-        if fact is not None:
+        matched_fact = facts_by_name.get(name)
+        if matched_fact is not None:
             # Source-truth-driven: use facts from Program.cs
-            input_fmt = fact.input_extension
-            output_format = fact.output_extension
-            api_class = fact.api_symbol or _infer_api_class(name)
-            source_snippet = fact.snippet_content
-            source_file_path = fact.source_file_path
-            snippet_sha256 = fact.snippet_content_sha256
+            input_fmt = matched_fact.input_extension
+            output_format = matched_fact.output_extension
+            api_class = matched_fact.api_symbol or _infer_api_class(name)
+            source_snippet = matched_fact.snippet_content
+            source_file_path = matched_fact.source_file_path
+            snippet_sha256 = matched_fact.snippet_content_sha256
         else:
             # Legacy heuristic fallback (no package_path provided)
             output_format = ex.get("output_format", "") or ex.get("run_output_format", "")

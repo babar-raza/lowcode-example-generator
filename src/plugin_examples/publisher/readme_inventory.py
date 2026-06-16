@@ -48,7 +48,7 @@ def _scan_package_examples(
     package_path: Path,
 ) -> list[InventoryEntry]:
     """Scan a single PR dry-run package for example directories."""
-    entries = []
+    entries: list[InventoryEntry] = []
     examples_root = package_path / "examples" / family / "lowcode"
     if not examples_root.exists():
         return entries
@@ -72,7 +72,7 @@ def _load_post_merge_examples(
     verification_dir: Path,
 ) -> list[InventoryEntry]:
     """Load examples from post-merge validation JSON (published to remote)."""
-    entries = []
+    entries: list[InventoryEntry] = []
     pm_path = verification_dir / "latest" / f"{family}-post-merge-clean-checkout-validation.json"
     if not pm_path.exists():
         return entries

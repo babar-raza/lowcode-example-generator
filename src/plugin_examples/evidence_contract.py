@@ -497,8 +497,8 @@ class StrictEvidenceContractV2(StrictEvidenceContract):
             result.failures.append("v2: test-summary.json is not valid JSON.")
             return
         if isinstance(data, dict):
-            failed = int(data.get("failed", data.get("errors", 0)))
-            passed = int(data.get("passed", data.get("total", 0)))
+            failed = int(data.get("failed", data.get("errors", 0)) or 0)
+            passed = int(data.get("passed", data.get("total", 0)) or 0)
             if failed > 0:
                 result.failures.append(f"v2: test-summary.json reports {failed} failed tests — must be 0.")
             if passed == 0:
@@ -1745,7 +1745,7 @@ class StrictEvidenceContractV6(StrictEvidenceContractV5):
         if isinstance(data, list):
             families = [str(f).lower() for f in data]
         elif isinstance(data, dict):
-            families = [str(f).lower() for f in data.get("families_needing_work", data.get("families", []))]
+            families = [str(f).lower() for f in (data.get("families_needing_work") or data.get("families") or [])]
         else:
             families = []
         stale = [f for f in families if f in ("email", "slides")]

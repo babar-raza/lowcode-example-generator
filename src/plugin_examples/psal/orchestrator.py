@@ -14,7 +14,7 @@ import logging
 import time
 from enum import StrEnum
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     from plugin_examples.psal.evidence import AllFamiliesReport, FamilyExecutionRecord
@@ -208,7 +208,7 @@ def _execute_family_loop(
         # Extract sufficiency and scenario counts from pipeline report
         # stages is a list of {name, status, artifacts, ...} dicts
         raw_stages = pipeline_report.get("stages", [])
-        planning = {}
+        planning: dict[str, Any] = {}
         if isinstance(raw_stages, list):
             for s in raw_stages:
                 if isinstance(s, dict) and s.get("name") == "scenario_planning":

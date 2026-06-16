@@ -12,6 +12,7 @@ factory methods, save options, etc.).
 from __future__ import annotations
 
 import re
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -242,7 +243,7 @@ Console.WriteLine("Probe complete: " + outputPath);
 # Template dispatcher
 # ---------------------------------------------------------------------------
 
-_FAMILY_RENDERERS: dict[str, callable] = {
+_FAMILY_RENDERERS: dict[str, Callable[..., str] | None] = {
     "drawing": None,  # dispatched by slug below
     "finance": _render_finance,
     "html": _render_html,
@@ -253,7 +254,7 @@ _FAMILY_RENDERERS: dict[str, callable] = {
 }
 
 
-def _select_renderer(entry: dict) -> callable:
+def _select_renderer(entry: dict) -> Callable[..., str]:
     """Select the best renderer for the given registry entry."""
     family = entry.get("family", "")
     slug = entry.get("plugin_slug", "")

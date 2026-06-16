@@ -57,7 +57,7 @@ def score_entrypoint(
         role=role.role,
     )
 
-    signals = []
+    signals: list[dict[str, object]] = []
 
     # --- Positive signals ---
 
@@ -154,9 +154,10 @@ def score_entrypoint(
         signals.append({"signal": "no_methods", "weight": -3.0, "detail": "No public methods"})
 
     # Compute score
-    total_positive = sum(s["weight"] for s in signals if s["weight"] > 0)
-    total_negative = sum(abs(s["weight"]) for s in signals if s["weight"] < 0)
-    net_score = sum(s["weight"] for s in signals)
+    weights = [float(str(s["weight"])) for s in signals]
+    total_positive = sum(w for w in weights if w > 0)
+    total_negative = sum(abs(w) for w in weights if w < 0)
+    net_score = sum(weights)
 
     result.signals = signals
     result.score = net_score

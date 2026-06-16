@@ -95,6 +95,22 @@ Aspose.Cells for .NET — config at `pipeline/configs/families/cells.yml`.
 - **Publication repo allowlist:** Target repos for merge operations must be in the `APPROVED_PUBLICATION_REPOS` allowlist (see `merge_approval_gate.py`). Attempting to merge to a fixture source repo is `REVIEW_POLICY_BLOCKED`. Never merge to a fixture source repo.
 - **Fixture source repos are read-only:** Repos used for fixture discovery (e.g., `aspose-barcode/Aspose.BarCode-for-.NET`) must never be written to. The allowlist in `merge_approval_gate.py` enforces this separation.
 
+## Multi-Agent Framework
+
+The project includes a multi-agent coordination framework at `src/plugin_examples/agents/`:
+
+| Component | File | Purpose |
+|-----------|------|---------|
+| Agent ABC | `base.py` | Abstract agent with `execute(context)` and `AgentCapability` enum |
+| Registry | `registry.py` | Discovers and instantiates agents by capability |
+| Dispatcher | `dispatcher.py` | Coordinates multiple agents over shared context |
+| SharedContext | `context.py` | Thread-safe state sharing between agents |
+| Protocol | `protocol.py` | A6-level coordination protocol with `MessageBus` |
+
+**Builtin agents:** ConservationCheckAgent (validation), VersionDriftAgent (monitoring), BlockerRecheckAgent (remediation).
+
+**Coordination model (A6):** The planner loop dispatches agents by capability, collects structured results from SharedContext, and makes phase-transition decisions. Agents do not self-schedule or modify the dispatch sequence.
+
 ## Discovery
 
 Current-state findings: `docs/_archive/discovery/current-state.md`

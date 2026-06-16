@@ -13,7 +13,7 @@ plugins:
   transformation_readiness_reason: CODE_HARVESTED; canonical URL confirmed as image-converter;
     Image.Save() pattern confirmed
   page_hash: 7b7d01b33fbfdbc0
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: LOAD_SAVE_OPTIONS
   code_hashes:
@@ -28,7 +28,7 @@ plugins:
   - JpegOptions
   github_links:
   - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/ConvertImageWithGrayscale.cs
-  next_action: Transform to dry-run example package; confirmed READY_FOR_TRANSFORMATION
+  next_action: PUBLICATION_CANDIDATE_LOCAL — build re-verified 2026-06-16
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
@@ -52,7 +52,11 @@ plugins:
     status: CANONICAL_PRIMARY_MIGRATED
     analyst_notes: 'Sprint lowcode-plugin-canonical-primary-wave8-20260605. Wave 8
       canonical advancement: ''convert-image'' -> ''image-converter''.'
-  dryrun_package_path: reports/lowcode-plugin-canonical-primary-wave8-20260605/dryrun/examples/imaging/image-converter
+  - date: '2026-06-16'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Build re-verified during imaging promotion sprint. dotnet build
+      PASS 0 warnings 0 errors.
+  dryrun_package_path: reports/lowcode-plugin-canonical-primary-wave8-20260605/wave8/dryrun/examples/imaging/image-converter
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
   legacy_aliases:
@@ -69,8 +73,8 @@ plugins:
   source_link_origin: GITHUB_REPO
   transformation_readiness_reason: CODE_HARVESTED; canonical URL confirmed as image-resizer
   page_hash: decbb2536acebb5c
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
-  dryrun_package_path: reports/lowcode-plugin-canonical-primary-wave8-20260605/dryrun/examples/imaging/image-resizer
+  registry_status: CANONICAL_PACKAGE_PROVEN
+  dryrun_package_path: reports/lowcode-plugin-canonical-primary-wave8-20260605/wave8/dryrun/examples/imaging/image-resizer
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
   blocker_type: null
@@ -84,7 +88,7 @@ plugins:
   - image.Save()
   github_links:
   - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Plugins/Aspose.UmbracoImageResizer/AfterSaveHandler.cs
-  next_action: Example package validated DRYRUN_PASS; advance to PUBLICATION_CANDIDATE_LOCAL
+  next_action: PUBLICATION_CANDIDATE_LOCAL — build re-verified 2026-06-16
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
@@ -102,6 +106,10 @@ plugins:
     status: CANONICAL_PRIMARY_MIGRATED
     analyst_notes: 'Sprint lowcode-plugin-canonical-primary-wave8-20260605. Wave 8
       canonical advancement: ''resize-image'' -> ''image-resizer''.'
+  - date: '2026-06-16'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Build re-verified during imaging promotion sprint. dotnet build
+      PASS 0 warnings 0 errors.
   legacy_aliases:
   - resize-image
   display_plugin_name: Image Resizer for .NET
@@ -116,7 +124,7 @@ plugins:
   source_link_origin: GITHUB_REPO
   transformation_readiness_reason: CODE_HARVESTED; canonical URL confirmed as image-compressor
   page_hash: b8d2b69a85ef86c6
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: LOAD_SAVE_OPTIONS
   code_hashes:
@@ -131,7 +139,7 @@ plugins:
   - SvgRasterizationOptions
   github_links:
   - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/CompressedVectorFormats.cs
-  next_action: Transform to dry-run example package
+  next_action: PUBLICATION_CANDIDATE_LOCAL — build re-verified 2026-06-16
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
@@ -154,6 +162,10 @@ plugins:
     status: CANONICAL_PRIMARY_MIGRATED
     analyst_notes: 'Sprint lowcode-plugin-canonical-package-wave9-20260605. Wave 9
       canonical migration: ''compress-image'' -> ''image-compressor''.'
+  - date: '2026-06-16'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Build re-verified during imaging promotion sprint. dotnet build
+      PASS 0 warnings 0 errors.
   dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/imaging/image-compressor
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
@@ -171,7 +183,7 @@ plugins:
   source_link_origin: GITHUB_REPO
   transformation_readiness_reason: CODE_HARVESTED; Image.Crop(Rectangle) pattern confirmed
   page_hash: null
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/imaging/image-cropper
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
@@ -188,7 +200,7 @@ plugins:
   - RasterImage
   github_links:
   - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/CroppingbyRectangle.cs
-  next_action: Example package validated DRYRUN_PASS; advance to PUBLICATION_CANDIDATE_LOCAL
+  next_action: PUBLICATION_CANDIDATE_LOCAL — build re-verified 2026-06-16
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
@@ -210,6 +222,10 @@ plugins:
     status: CANONICAL_PRIMARY_MIGRATED
     analyst_notes: 'Sprint lowcode-plugin-canonical-package-wave9-20260605. Wave 9
       canonical migration: ''crop-image'' -> ''image-cropper''.'
+  - date: '2026-06-16'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Build re-verified during imaging promotion sprint. dotnet build
+      PASS 0 warnings 0 errors.
   legacy_aliases:
   - crop-image
   display_plugin_name: Image Cropper for .NET
@@ -225,7 +241,7 @@ plugins:
   transformation_readiness_reason: CODE_HARVESTED; RasterImage.Filter(GaussWienerFilterOptions)
     pattern confirmed
   page_hash: null
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/imaging/image-filters
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
@@ -242,7 +258,7 @@ plugins:
   - GaussWienerFilterOptions
   github_links:
   - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/ApplyGaussWienerFilter.cs
-  next_action: Example package validated DRYRUN_PASS; advance to PUBLICATION_CANDIDATE_LOCAL
+  next_action: PUBLICATION_CANDIDATE_LOCAL — build re-verified 2026-06-16
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
@@ -264,6 +280,10 @@ plugins:
     status: CANONICAL_PRIMARY_MIGRATED
     analyst_notes: 'Sprint lowcode-plugin-canonical-package-wave9-20260605. Wave 9
       canonical migration: ''filter-image'' -> ''image-filters''.'
+  - date: '2026-06-16'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Build re-verified during imaging promotion sprint. dotnet build
+      PASS 0 warnings 0 errors.
   legacy_aliases:
   - filter-image
   display_plugin_name: Image Filters for .NET
@@ -279,7 +299,7 @@ plugins:
   transformation_readiness_reason: CODE_HARVESTED; Graphics.DrawImage pattern confirmed
     for merge
   page_hash: null
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/imaging/image-merger
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
@@ -297,7 +317,7 @@ plugins:
   - FileCreateSource
   github_links:
   - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/CombiningImages.cs
-  next_action: Example package validated DRYRUN_PASS; advance to PUBLICATION_CANDIDATE_LOCAL
+  next_action: PUBLICATION_CANDIDATE_LOCAL — build re-verified 2026-06-16
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
@@ -319,6 +339,10 @@ plugins:
     status: CANONICAL_PRIMARY_MIGRATED
     analyst_notes: 'Sprint lowcode-plugin-canonical-package-wave9-20260605. Wave 9
       canonical migration: ''merge-images'' -> ''image-merger''.'
+  - date: '2026-06-16'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Build re-verified during imaging promotion sprint. dotnet build
+      PASS 0 warnings 0 errors.
   legacy_aliases:
   - merge-images
   display_plugin_name: Image Merger for .NET
@@ -334,7 +358,7 @@ plugins:
   transformation_readiness_reason: CODE_HARVESTED; Graphics+Matrix rotation watermark
     pattern confirmed
   page_hash: null
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/imaging/add-watermark
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
@@ -354,7 +378,7 @@ plugins:
   - StringFormat
   github_links:
   - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/AddDiagonalWatermarkToImage.cs
-  next_action: Example package validated DRYRUN_PASS; advance to PUBLICATION_CANDIDATE_LOCAL
+  next_action: PUBLICATION_CANDIDATE_LOCAL — build re-verified 2026-06-16
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
@@ -376,6 +400,10 @@ plugins:
     status: CANONICAL_PRIMARY_MIGRATED
     analyst_notes: 'Sprint lowcode-plugin-canonical-package-wave9-20260605. Wave 9
       canonical migration: ''watermark-image'' -> ''add-watermark''.'
+  - date: '2026-06-16'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Build re-verified during imaging promotion sprint. dotnet build
+      PASS 0 warnings 0 errors.
   legacy_aliases:
   - watermark-image
   display_plugin_name: Add Watermark to Image for .NET
@@ -391,7 +419,7 @@ plugins:
   transformation_readiness_reason: CODE_HARVESTED; RasterImage.Rotate(angle) pattern
     confirmed
   page_hash: null
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/imaging/image-rotator
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
@@ -409,7 +437,7 @@ plugins:
   - FileMode
   github_links:
   - https://raw.githubusercontent.com/aspose-imaging/Aspose.Imaging-for-.NET/master/Examples/CSharp/ModifyingAndConvertingImages/RotatingAnImage.cs
-  next_action: Example package validated DRYRUN_PASS; advance to PUBLICATION_CANDIDATE_LOCAL
+  next_action: PUBLICATION_CANDIDATE_LOCAL — build re-verified 2026-06-16
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
@@ -431,6 +459,10 @@ plugins:
     status: CANONICAL_PRIMARY_MIGRATED
     analyst_notes: 'Sprint lowcode-plugin-canonical-package-wave9-20260605. Wave 9
       canonical migration: ''rotate-image'' -> ''image-rotator''.'
+  - date: '2026-06-16'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Build re-verified during imaging promotion sprint. dotnet build
+      PASS 0 warnings 0 errors.
   legacy_aliases:
   - rotate-image
   display_plugin_name: Image Rotator for .NET

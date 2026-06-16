@@ -616,6 +616,49 @@ def _stage_reflection(ctx: PipelineContext) -> dict:
     return {"catalog_path": str(output_path), "namespace_count": ns_count}
 
 
+def _check_namespace_drift(ctx: PipelineContext) -> None:
+    """Detect new namespaces in DLL and check if expected_namespace has arrived."""
+    expected_ns = getattr(ctx.config.plugin_detection, "expected_namespace", "")
+    if not expected_ns and not ctx.catalog:
+        return
+
+    current_namespaces = {ns["namespace"] for ns in ctx.catalog.get("namespaces", [])}
+    if not current_namespaces:
+        return
+
+    if expected_ns and expected_ns in current_namespaces:
+        logger.warning(
+            "EXPECTED_NAMESPACE_ARRIVED: '%s' detected in %s DLL — "
+            "classification_override may be removable",
+            expected_ns,
+            ctx.family,
+        )
+
+    # Compare against last-known namespaces from proof file
+    proof_path = getattr(ctx, "proof_path", None)
+    if not proof_path:
+        return
+    import json
+
+    proof_file = Path(proof_path)
+    if not proof_file.exists():
+        return
+    try:
+        with open(proof_file) as f:
+            proof = json.load(f)
+        previous_ns = set(proof.get("catalog_namespaces", []))
+        if previous_ns:
+            new_ns = current_namespaces - previous_ns
+            if new_ns:
+                logger.info(
+                    "NAMESPACE_DRIFT_DETECTED in %s: new namespaces %s",
+                    ctx.family,
+                    sorted(new_ns),
+                )
+    except (json.JSONDecodeError, OSError):
+        pass
+
+
 def _stage_plugin_detection(ctx: PipelineContext) -> dict:
     from plugin_examples.plugin_detector import (
         assert_source_of_truth_eligible,
@@ -658,6 +701,9 @@ def _stage_plugin_detection(ctx: PipelineContext) -> dict:
         detection_result=ctx.detection,
         verification_dir=ctx.evidence_dir,
     )
+
+    # Namespace drift detection: check if expected namespace has arrived
+    _check_namespace_drift(ctx)
 
     # Gate: assert source-of-truth eligible
     has_fallback = getattr(ctx.config.plugin_detection, "fallback_strategy", None)

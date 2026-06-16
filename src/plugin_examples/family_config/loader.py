@@ -83,9 +83,12 @@ def _build_model(data: dict) -> FamilyConfig:
         ),
     )
 
+    pd_data = data["plugin_detection"]
     plugin_detection = PluginDetection(
-        namespace_patterns=data["plugin_detection"]["namespace_patterns"],
-        fallback_strategy=data["plugin_detection"].get("fallback_strategy"),
+        namespace_patterns=pd_data["namespace_patterns"],
+        fallback_strategy=pd_data.get("fallback_strategy"),
+        classification_override=pd_data.get("classification_override", ""),
+        expected_namespace=pd_data.get("expected_namespace", ""),
     )
 
     github_data = data["github"]

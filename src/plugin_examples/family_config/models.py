@@ -45,10 +45,22 @@ class PluginDetection:
     discovery_method: str = ""
     target_repo: str = ""
     branch_prefix: str = ""
+    # Override: force classification when DLL namespace doesn't follow standard naming.
+    # Set to "LOWCODE" or "NON_LOWCODE_PLUGIN" to bypass the derived logic.
+    # Empty string means no override (use derived classification).
+    classification_override: str = ""
+    # Expected future namespace: when this namespace appears in a DLL scan,
+    # the pipeline logs EXPECTED_NAMESPACE_ARRIVED so the override can be retired.
+    expected_namespace: str = ""
 
     @property
     def namespace_source(self) -> str:
-        """Derived: LOWCODE if namespace patterns are primary; NON_LOWCODE_PLUGIN if fallback only."""
+        """Derived: LOWCODE if namespace patterns are primary; NON_LOWCODE_PLUGIN if fallback only.
+
+        If classification_override is set, it takes precedence over the derived logic.
+        """
+        if self.classification_override:
+            return self.classification_override
         return "NON_LOWCODE_PLUGIN" if self.fallback_strategy is not None and not self.namespace_patterns else "LOWCODE"
 
     @property

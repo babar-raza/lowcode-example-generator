@@ -119,6 +119,17 @@
           "enum": ["capability_registry", "heuristic_only", null],
           "default": null,
           "description": "When set, enables non-LowCode fallback discovery for this family. null = LowCode pipeline only (default)."
+        },
+        "classification_override": {
+          "type": "string",
+          "enum": ["", "LOWCODE", "NON_LOWCODE_PLUGIN"],
+          "default": "",
+          "description": "Force classification when DLL namespace does not follow standard naming. Overrides derived namespace_source."
+        },
+        "expected_namespace": {
+          "type": "string",
+          "default": "",
+          "description": "Expected future DLL namespace. Pipeline logs EXPECTED_NAMESPACE_ARRIVED when detected, signaling the override can be retired."
         }
       }
     },

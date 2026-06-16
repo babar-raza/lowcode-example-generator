@@ -1,7 +1,7 @@
 family: html
 display_name: Aspose.HTML for .NET
-enabled: false
-status: disabled
+enabled: true
+status: discovery_only
 # NO_LOWCODE_CONFIRMED (Sprint 89): Binary string scan of Aspose.HTML.dll 26.4.0
 # found ZERO LowCode namespace references (UTF-8/UTF-16). DllReflector failure was
 # masking absence, not blocking discovery. Evidence: reports/sprint89/next-family/html-reflection-result.json

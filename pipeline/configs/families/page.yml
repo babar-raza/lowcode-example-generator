@@ -1,7 +1,7 @@
 family: page
 display_name: Aspose.Page for .NET
-enabled: false
-status: disabled
+enabled: true
+status: discovery_only
 # CONFIRMED_NO_LOWCODE: All-family discovery run 2026-05-09 found no LowCode namespace.
 # NuGet package resolved successfully; DllReflector found 0 plugin types.
 # Do not re-enable without evidence of a new LowCode namespace release.

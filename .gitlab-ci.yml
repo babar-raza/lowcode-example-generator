@@ -80,7 +80,7 @@ secret-scan:
     - pip install detect-secrets
   script:
     - detect-secrets scan --baseline .secrets.baseline
-    - detect-secrets audit --report --baseline .secrets.baseline
+    - detect-secrets audit --report .secrets.baseline
   rules:
     - if: '$CI_PIPELINE_SOURCE == "push"'
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'

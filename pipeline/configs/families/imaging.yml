@@ -35,7 +35,7 @@ github:
     branch: master
   published_plugin_examples_repo:
     owner: aspose-imaging-net
-    repo: Aspose.Imaging.LowCode-for-.NET-Examples
+    repo: Aspose.Imaging.Plugins-for-.NET-Examples
     branch: main
 
 fixtures:

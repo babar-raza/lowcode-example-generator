@@ -34,7 +34,7 @@ github:
     branch: master
   published_plugin_examples_repo:
     owner: aspose-tasks-net
-    repo: Aspose.Tasks.LowCode-for-.NET-Examples
+    repo: Aspose.Tasks.Plugins-for-.NET-Example
     branch: main
 
 fixtures:

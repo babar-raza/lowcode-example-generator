@@ -34,7 +34,7 @@ github:
     branch: master
   published_plugin_examples_repo:
     owner: aspose-zip-net
-    repo: Aspose.ZIP.LowCode-for-.NET-Examples
+    repo: Aspose.ZIP.Plugins-for-.NET-Examples
     branch: main
 
 fixtures:

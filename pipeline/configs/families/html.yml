@@ -33,7 +33,7 @@ github:
     branch: master
   published_plugin_examples_repo:
     owner: aspose-html-net
-    repo: Aspose.HTML.LowCode-for-.NET-Examples
+    repo: Aspose.HTML.Plugins-for-.NET-Examples
     branch: main
 
 fixtures:

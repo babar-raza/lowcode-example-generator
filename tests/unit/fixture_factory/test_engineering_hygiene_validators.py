@@ -1,4 +1,4 @@
-"""Unit tests for engineering hygiene validators EHV-01..10."""
+"""Unit tests for engineering hygiene validators EHV-01..11."""
 
 from __future__ import annotations
 
@@ -13,6 +13,7 @@ from plugin_examples.fixture_factory.engineering_hygiene_validators import (
     _find_silent_bare_excepts,
     check_bandit_config,
     check_bare_excepts,
+    check_broad_exception_handlers,
     check_codeowners,
     check_contributing_guide,
     check_integration_test_count,
@@ -238,10 +239,10 @@ class TestEHV10ContributingGuide:
 
 
 class TestRunAllEHVValidators:
-    def test_returns_10_results(self, tmp_path: Path) -> None:
-        """run_all_ehv_validators always returns exactly 10 results (EHV-01..10)."""
+    def test_returns_11_results(self, tmp_path: Path) -> None:
+        """run_all_ehv_validators always returns exactly 11 results (EHV-01..11)."""
         results = run_all_ehv_validators(repo_root=tmp_path)
-        assert len(results) == 10
+        assert len(results) == 11
 
     def test_validator_ids_are_unique(self, tmp_path: Path) -> None:
         results = run_all_ehv_validators(repo_root=tmp_path)
@@ -260,3 +261,37 @@ class TestRunAllEHVValidators:
             assert "validator_id" in d
             assert "passed" in d
             assert "message" in d
+
+
+class TestEHV11BroadExceptionHandlers:
+    def test_passes_when_below_threshold(self, tmp_path: Path) -> None:
+        src = tmp_path / "src"
+        src.mkdir()
+        (src / "ok.py").write_text(textwrap.dedent("""
+            def foo():
+                try:
+                    x = int("abc")
+                except Exception:
+                    print("handled")
+        """), encoding="utf-8")
+        result = check_broad_exception_handlers(repo_root=tmp_path)
+        assert result.passed
+        assert "EHV-11" in result.validator_id
+
+    def test_passes_when_src_missing(self, tmp_path: Path) -> None:
+        result = check_broad_exception_handlers(repo_root=tmp_path)
+        assert result.passed
+        assert "SKIP" in result.message
+
+    def test_fails_when_above_threshold(self, tmp_path: Path) -> None:
+        src = tmp_path / "src"
+        src.mkdir()
+        # Create a file with many broad except handlers
+        handlers = "\n".join(
+            f"    try:\n        x{i} = int('a')\n    except Exception:\n        print('handled {i}')"
+            for i in range(170)
+        )
+        (src / "many.py").write_text(f"def foo():\n{handlers}\n", encoding="utf-8")
+        result = check_broad_exception_handlers(repo_root=tmp_path)
+        assert not result.passed
+        assert "exceed" in result.message.lower()

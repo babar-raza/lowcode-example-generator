@@ -46,6 +46,45 @@ compile-check:
     - if: '$CI_PIPELINE_SOURCE == "push"'
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
+mypy-check:
+  # Type checking gate: validates type annotations across src/.
+  # Advisory (allow_failure) until error count is ratcheted down.
+  # Baseline: ~99 errors as of 2026-06-16. Target: reduce to 0 over time.
+  stage: lint
+  allow_failure: true
+  cache:
+    key: pip-mypy
+    paths:
+      - .pip-cache/
+  before_script:
+    - python -m venv --clear .pip-cache/mypy-venv
+    - source .pip-cache/mypy-venv/Scripts/activate
+    - pip install mypy -e .
+  script:
+    - mypy src/plugin_examples/ --ignore-missing-imports
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+secret-scan:
+  # Blocking gate: detect-secrets scans for accidentally committed secrets.
+  # Baseline generated with: detect-secrets scan > .secrets.baseline
+  stage: lint
+  cache:
+    key: pip-secrets
+    paths:
+      - .pip-cache/
+  before_script:
+    - python -m venv --clear .pip-cache/secrets-venv
+    - source .pip-cache/secrets-venv/Scripts/activate
+    - pip install detect-secrets
+  script:
+    - detect-secrets scan --baseline .secrets.baseline
+    - detect-secrets audit --report --baseline .secrets.baseline
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
 gate-isolation:
   # TC-H14: RISK-10 — gate modules must not import AI/LLM modules.
   # Blocking gate: scoped to example_gates.py only, matching unit test scope in test_risk_mitigations.py.
@@ -107,6 +146,7 @@ license-check:
 
 pip-audit:
   # TC-H04: Advisory dependency vulnerability scan. Never blocks the pipeline.
+  # Policy rationale documented in ADR-008 (docs/adr/ADR-008-pip-audit-advisory-policy.md).
   # Shell executor: isolated venv at .pip-cache/audit-venv so pip upgrade
   # doesn't corrupt the shared venv used by ruff-lint and test jobs.
   stage: lint
@@ -162,7 +202,9 @@ unit-tests-py312:
     - >
       python -m pytest tests/unit -v --timeout=60
       --junitxml=report-unit-py312.xml
-      --cov=src/plugin_examples --cov-report=term-missing --cov-fail-under=70
+      --cov=src/plugin_examples --cov-report=term-missing
+      --cov-report=html:coverage-html --cov-report=xml:coverage.xml
+      --cov-fail-under=70
       | tee pytest-output.txt
     - |
       # Coverage ratchet: extract coverage % from first run output (no second pytest run)
@@ -172,6 +214,17 @@ unit-tests-py312:
         exit 1
       fi
       echo "Coverage ratchet OK: ${COV_PCT}% (baseline: ${COVERAGE_BASELINE}%)"
+  artifacts:
+    when: always
+    paths:
+      - coverage-html/
+      - coverage.xml
+    reports:
+      junit: report-unit-py312.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml
+    expire_in: 30 days
 
 unit-tests-py313:
   extends: .test-base
@@ -181,7 +234,9 @@ unit-tests-py313:
     - >
       python -m pytest tests/unit -v --timeout=60
       --junitxml=report-unit-py313.xml
-      --cov=src/plugin_examples --cov-report=term-missing --cov-fail-under=70
+      --cov=src/plugin_examples --cov-report=term-missing
+      --cov-report=xml:coverage-py313.xml
+      --cov-fail-under=70
 
 integration-tests-py312:
   extends: .test-base

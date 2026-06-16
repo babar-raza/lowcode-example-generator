@@ -2,6 +2,28 @@
 
 This document describes how to revert pipeline changes or published examples when a release introduces regressions.
 
+## CI Failure Triage
+
+Before rolling back, determine whether the failure is blocking or advisory:
+
+| Job | Blocking | Action on Failure |
+|-----|----------|-------------------|
+| ruff-lint | Yes | Fix lint violations before merge |
+| compile-check | Yes | Fix syntax errors |
+| gate-isolation | Yes | Remove AI/LLM imports from gate modules |
+| bandit-sast | Yes | Fix security findings or add justified skip |
+| license-check | Yes | Add license to allowlist or replace dependency |
+| secret-scan | Yes | Remove secret, rotate credential, update baseline |
+| mypy-check | No | Track type errors; ratchet down over time |
+| pip-audit | No | Review monthly; escalate HIGH/CRITICAL (ADR-008) |
+| unit-tests | Yes | Fix failing tests |
+| integration-tests | Yes | Fix failing tests |
+| mutation-testing | No | Docker-dependent; review when Docker available |
+| compliance-gate | Yes | Fix doctor health check failures |
+| containerized-build | No | Docker-dependent; host build is primary |
+
+Advisory failures (allow_failure: true) produce a yellow warning but do not block the pipeline.
+
 ## Pipeline Rollback (Source Code)
 
 ### Revert a Wave Commit

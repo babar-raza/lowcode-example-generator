@@ -1,4 +1,4 @@
-"""Engineering hygiene validators — EHV-01..08.
+"""Engineering hygiene validators — EHV-01..11.
 
 Detects recurring code quality regressions that lower the Recruitize Engineering
 Practices (P) and Readiness (R) scores. These validators run as part of the
@@ -13,6 +13,9 @@ Validators:
     EHV-06: pyproject.toml version matches CHANGELOG.md top entry
     EHV-07: pyproject.toml version follows semver pattern
     EHV-08: Dependency licenses are in the approved allowlist
+    EHV-09: SECURITY.md presence
+    EHV-10: CONTRIBUTING.md presence
+    EHV-11: Broad except Exception: handler count ratchet
 """
 
 from __future__ import annotations
@@ -467,6 +470,63 @@ def check_contributing_guide(repo_root: Path | None = None) -> EHVResult:
 
 
 # ---------------------------------------------------------------------------
+# EHV-11: Broad except Exception: handler count ratchet
+# ---------------------------------------------------------------------------
+
+_BROAD_EXCEPT_THRESHOLD = 160  # Baseline: 153 as of 2026-06-16. Ratchet down over time.
+
+
+def _count_broad_except_handlers(source_dir: Path) -> int:
+    """Count all `except Exception:` handlers (not just silent pass ones)."""
+    count = 0
+    for py_file in source_dir.rglob("*.py"):
+        try:
+            tree = ast.parse(py_file.read_text(encoding="utf-8", errors="replace"))
+        except SyntaxError:
+            continue
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.ExceptHandler) or node.type is None:
+                continue
+            type_name = ""
+            if isinstance(node.type, ast.Name):
+                type_name = node.type.id
+            elif isinstance(node.type, ast.Attribute):
+                type_name = node.type.attr
+            if type_name == "Exception":
+                count += 1
+    return count
+
+
+def check_broad_exception_handlers(repo_root: Path | None = None) -> EHVResult:
+    """EHV-11: Track broad `except Exception:` handler count against ratchet baseline."""
+    if repo_root is None:
+        repo_root = Path(__file__).resolve().parents[3]
+    src_dir = repo_root / "src"
+    if not src_dir.is_dir():
+        return EHVResult("EHV-11", passed=True, message="EHV-11: SKIP — src/ directory not found")
+
+    count = _count_broad_except_handlers(src_dir)
+    if count > _BROAD_EXCEPT_THRESHOLD:
+        return EHVResult(
+            "EHV-11",
+            passed=False,
+            message=(
+                f"EHV-11: FAIL — {count} broad except Exception: handlers "
+                f"exceed ratchet threshold ({_BROAD_EXCEPT_THRESHOLD})"
+            ),
+            detail=f"Reduce broad handlers to stay below {_BROAD_EXCEPT_THRESHOLD}",
+        )
+    return EHVResult(
+        "EHV-11",
+        passed=True,
+        message=(
+            f"EHV-11: PASS — {count} broad except Exception: handlers "
+            f"(ratchet threshold: {_BROAD_EXCEPT_THRESHOLD})"
+        ),
+    )
+
+
+# ---------------------------------------------------------------------------
 # Run all EHV validators
 # ---------------------------------------------------------------------------
 
@@ -486,4 +546,5 @@ def run_all_ehv_validators(repo_root: Path | None = None) -> list[EHVResult]:
         check_dependency_licenses(repo_root),
         check_security_policy(repo_root),
         check_contributing_guide(repo_root),
+        check_broad_exception_handlers(repo_root),
     ]

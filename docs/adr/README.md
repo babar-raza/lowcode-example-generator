@@ -12,6 +12,10 @@ ADRs document significant technical and governance decisions: the context that p
 | [ADR-002](ADR-002-gate-isolation-determinism.md) | Gate Isolation — No AI/LLM Imports in Gate Modules | Accepted | 2026-06-01 |
 | [ADR-003](ADR-003-evidence-first-pipeline.md) | Evidence-First Pipeline Architecture | Accepted | 2026-06-01 |
 | [ADR-004](ADR-004-approval-token-model.md) | Dual Approval Token Model for Live Operations | Accepted | 2026-06-04 |
+| [ADR-005](ADR-005-evidence-protocol-v3.md) | Evidence Authority Protocol v3 | Accepted | 2026-06-10 |
+| [ADR-006](ADR-006-non-lowcode-fallback-strategy.md) | Non-LowCode Fallback Strategy | Accepted | 2026-06-13 |
+| [ADR-007](ADR-007-wave-based-versioning.md) | Wave-Based Versioning | Accepted | 2026-06-14 |
+| [ADR-008](ADR-008-pip-audit-advisory-policy.md) | pip-audit Advisory-Only Policy | Accepted | 2026-06-16 |
 
 ## Format
 

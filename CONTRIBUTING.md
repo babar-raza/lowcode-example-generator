@@ -21,7 +21,7 @@ pip install -e ".[dev]"
 pre-commit install
 ```
 
-**Requirements**: Python 3.12 or later, .NET SDK 8.0 (for DllReflector builds only).
+**Requirements**: Python 3.12 or later, .NET SDK 9.0 (for DllReflector builds only).
 
 ## Coding Standards
 
@@ -30,7 +30,7 @@ This project uses [ruff](https://docs.astral.sh/ruff/) for linting and formattin
 - **Line length**: 120 characters
 - **Target Python**: 3.12+
 - **Style**: ruff format (Black-compatible)
-- **Lint rules**: pyflakes (F), pycodestyle (E/W), isort (I), pyupgrade (UP)
+- **Lint rules**: pyflakes (F), pycodestyle (E/W), isort (I), pyupgrade (UP), simplify (SIM)
 
 Run locally before committing:
 
@@ -98,7 +98,10 @@ Prefixes: `feat`, `fix`, `chore`, `test`, `docs`, `refactor`, `ci`, `perf`.
 | license-check | lint | Yes |
 | unit-tests | test | Yes |
 | integration-tests | test | Yes |
+| secret-scan | lint | Yes |
 | pip-audit | lint | No (advisory) |
+| mypy-check | lint | No (advisory) |
+| compliance-gate | test | Yes |
 
 ## Architecture Decisions
 

@@ -6,6 +6,18 @@ build-backend = "setuptools.build_meta"
 name = "plugin-examples"
 version = "0.31.0"
 requires-python = ">=3.12"
+description = "Pipeline for generating, validating, and publishing SDK-style C# examples for Aspose .NET plugin APIs"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "Pipeline Architecture Team"}]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Code Generators",
+]
 dependencies = [
     "jsonschema>=4.21",
     "Jinja2>=3.1",
@@ -22,7 +34,13 @@ dev = [
     "pre-commit>=3.7",
     "mutmut>=2.4",
     "hypothesis>=6.0",
+    "mypy>=1.10",
+    "detect-secrets>=1.5",
 ]
+
+[project.urls]
+Repository = "https://gitlab.recruitize.ai/sialkot/cantt-smallize/lowcode-example-generator"
+Documentation = "https://gitlab.recruitize.ai/sialkot/cantt-smallize/lowcode-example-generator/-/tree/main/docs"
 
 [project.scripts]
 plugin-examples = "plugin_examples.__main__:main"
@@ -84,6 +102,14 @@ markers = [
 # B701: jinja2_autoescape_false — Jinja2 renders C# code templates, not HTML
 skips = ["B101", "B404", "B603", "B607", "B105", "B107", "B108", "B310", "B314", "B405", "B608", "B701"]
 targets = ["src"]
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = false
+warn_unused_configs = true
+ignore_missing_imports = true
+check_untyped_defs = false
+disable_error_code = ["attr-defined"]
 
 [tool.mutmut]
 paths_to_mutate = "src/plugin_examples/gates/,src/plugin_examples/policy/loader.py,src/plugin_examples/reliability/slo_monitor.py,src/plugin_examples/compliance/reporter.py,src/plugin_examples/reliability/slo_remediator.py,src/plugin_examples/contracts/stage_contracts.py"

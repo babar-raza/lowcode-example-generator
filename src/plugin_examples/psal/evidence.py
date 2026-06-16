@@ -26,6 +26,10 @@ class FamilyExecutionRecord:
     error: str | None = None
     duration_ms: int = 0
     decisions: list[dict] = field(default_factory=list)
+    # Diagnostic fields (TC-PSAL-19) — populated for ESCALATED families
+    diagnostic_category: str = ""
+    suggested_action: str = ""
+    registry_summary: dict = field(default_factory=dict)
 
     def to_dict(self) -> dict:
         return asdict(self)

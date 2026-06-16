@@ -83,3 +83,6 @@ def register_all(subparsers):
     from plugin_examples.commands.psal_run import add_parser as _psal_run
 
     _psal_run(subparsers)
+    from plugin_examples.commands.probe_registry import register as _probe_registry
+
+    _probe_registry(subparsers)

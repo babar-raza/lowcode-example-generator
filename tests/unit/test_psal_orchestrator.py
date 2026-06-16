@@ -235,3 +235,154 @@ class TestExecuteFamilyLoop:
 
         # governance says ACCEPT but sufficiency is not SUFFICIENT
         assert record.terminal_state == FamilyTerminalState.ACCEPTED_WITH_LIMITATIONS
+
+
+# ---------------------------------------------------------------------------
+# TC-PSAL-20: Epub early-exit
+# ---------------------------------------------------------------------------
+
+class TestEpubEarlyExit:
+    @patch("plugin_examples.psal.orchestrator._run_pipeline_safe")
+    @patch("plugin_examples.psal.config_patcher.ensure_runnable_config")
+    def test_epub_blocked_external_no_pipeline(self, mock_config, mock_pipeline, tmp_path):
+        """epub should reach BLOCKED_EXTERNAL with 0 iterations (no pipeline run)."""
+        from plugin_examples.psal.orchestrator import _read_original_config
+
+        # Create an epub config with status: discovery_blocked
+        config_dir = tmp_path / "pipeline" / "configs" / "families"
+        config_dir.mkdir(parents=True)
+        import yaml
+        (config_dir / "epub.yml").write_text(yaml.dump({
+            "family": "epub",
+            "status": "discovery_blocked",
+            "enabled": False,
+        }), encoding="utf-8")
+
+        mock_config.return_value = tmp_path / "fake.yml"
+
+        record = _execute_family_loop(
+            family="epub",
+            max_iterations=3,
+            dry_run=True,
+            template_mode=True,
+            repo_root=tmp_path,
+        )
+
+        assert record.terminal_state == FamilyTerminalState.BLOCKED_EXTERNAL
+        assert record.iterations == 0
+        assert record.diagnostic_category == "NO_NUGET_PACKAGE"
+        # Pipeline should NOT have been called
+        mock_pipeline.assert_not_called()
+
+    @patch("plugin_examples.psal.config_patcher.ensure_runnable_config")
+    def test_epub_no_config_proceeds_normally(self, mock_config, tmp_path):
+        """If epub config doesn't exist, it proceeds to pipeline (and may fail there)."""
+        # No config file created — _read_original_config returns {}
+        # The family loop should proceed past the early-exit check
+        mock_config.return_value = tmp_path / "fake.yml"
+
+        # It will crash on pipeline run since nothing is mocked — that's fine
+        # The point is it didn't early-exit
+        with patch("plugin_examples.psal.orchestrator._run_pipeline_safe") as mock_pipeline:
+            mock_pipeline.side_effect = Exception("expected crash")
+            with patch("plugin_examples.psal.orchestrator._diagnose_family") as mock_diag:
+                mock_diag.return_value = ("NO_REGISTRY", "Create registry", {})
+                record = _execute_family_loop(
+                    family="epub",
+                    max_iterations=1,
+                    dry_run=True,
+                    template_mode=True,
+                    repo_root=tmp_path,
+                )
+        # Should have attempted pipeline (and crashed/escalated)
+        assert record.iterations >= 1
+
+
+# ---------------------------------------------------------------------------
+# TC-PSAL-19: Diagnostic metadata on ESCALATED families
+# ---------------------------------------------------------------------------
+
+class TestDiagnosticMetadata:
+    def test_entries_unprobed_diagnostic(self, tmp_path):
+        """Family with REFLECTION_CANDIDATE entries gets ENTRIES_UNPROBED."""
+        import yaml
+
+        from plugin_examples.psal.orchestrator import _diagnose_family
+
+        reg_dir = tmp_path / "pipeline" / "plugin-capability-registry"
+        reg_dir.mkdir(parents=True)
+        (reg_dir / "drawing.yaml").write_text(yaml.dump({"entries": [
+            {"plugin_slug": "a", "status": "REFLECTION_CANDIDATE"},
+            {"plugin_slug": "b", "status": "REFLECTION_CANDIDATE"},
+        ]}), encoding="utf-8")
+
+        cat, action, summary = _diagnose_family("drawing", tmp_path)
+        assert cat == "ENTRIES_UNPROBED"
+        assert "probe-registry" in action
+        assert summary["total"] == 2
+        assert summary["REFLECTION_CANDIDATE"] == 2
+
+    def test_no_registry_diagnostic(self, tmp_path):
+        from plugin_examples.psal.orchestrator import _diagnose_family
+
+        cat, action, summary = _diagnose_family("nonexistent", tmp_path)
+        assert cat == "NO_REGISTRY"
+
+    def test_all_probes_failed_diagnostic(self, tmp_path):
+        import yaml
+
+        from plugin_examples.psal.orchestrator import _diagnose_family
+
+        reg_dir = tmp_path / "pipeline" / "plugin-capability-registry"
+        reg_dir.mkdir(parents=True)
+        (reg_dir / "drawing.yaml").write_text(yaml.dump({"entries": [
+            {"plugin_slug": "a", "status": "PROBE_FAILED"},
+            {"plugin_slug": "b", "status": "PROBE_FAILED"},
+        ]}), encoding="utf-8")
+
+        cat, action, summary = _diagnose_family("drawing", tmp_path)
+        assert cat == "ALL_PROBES_FAILED"
+
+    def test_dependency_blocked_diagnostic(self, tmp_path):
+        import yaml
+
+        from plugin_examples.psal.orchestrator import _diagnose_family
+
+        reg_dir = tmp_path / "pipeline" / "plugin-capability-registry"
+        reg_dir.mkdir(parents=True)
+        (reg_dir / "gis.yaml").write_text(yaml.dump({"entries": [
+            {"plugin_slug": "a", "status": "WEBSITE_DISCOVERED", "blocker_type": "PROBE_BLOCKED_API"},
+        ]}), encoding="utf-8")
+
+        cat, action, summary = _diagnose_family("gis", tmp_path)
+        assert cat == "DEPENDENCY_BLOCKED"
+
+    def test_probed_but_insufficient(self, tmp_path):
+        import yaml
+
+        from plugin_examples.psal.orchestrator import _diagnose_family
+
+        reg_dir = tmp_path / "pipeline" / "plugin-capability-registry"
+        reg_dir.mkdir(parents=True)
+        (reg_dir / "barcode.yaml").write_text(yaml.dump({"entries": [
+            {"plugin_slug": "a", "status": "PROBE_CONFIRMED"},
+        ]}), encoding="utf-8")
+
+        cat, action, summary = _diagnose_family("barcode", tmp_path)
+        assert cat == "PROBED_BUT_INSUFFICIENT"
+
+
+# ---------------------------------------------------------------------------
+# TC-PSAL-21: Tier classification
+# ---------------------------------------------------------------------------
+
+class TestTierClassification:
+    def test_epub_is_last(self):
+        assert NON_LOWCODE_FAMILIES[-1] == "epub"
+
+    def test_total_19_families(self):
+        assert len(NON_LOWCODE_FAMILIES) == 19
+
+    def test_tier_1_proven_first(self):
+        tier1 = NON_LOWCODE_FAMILIES[:6]
+        assert set(tier1) == {"barcode", "imaging", "zip", "cad", "font", "tasks"}

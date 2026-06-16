@@ -98,6 +98,14 @@ def extract_package(
     if warnings:
         _write_json(warnings_path, warnings)
 
+    # Sibling DLLs bundled in the same framework directory (e.g., Aspose.Drawing.Common
+    # shipped inside Aspose.OCR) are needed by the reflector as dependency assemblies.
+    sibling_dll_paths: list[str] = []
+    if fw_dir.exists():
+        for sibling in fw_dir.glob("*.dll"):
+            if sibling != dll_path:
+                sibling_dll_paths.append(str(sibling))
+
     # Extract dependencies
     dep_dll_paths: list[str] = []
     extracted_dep_paths: list[str] = []
@@ -128,7 +136,7 @@ def extract_package(
         "dll_path": str(dll_path),
         "xml_path": str(xml_path) if xml_path else None,
         "xml_warning": xml_warning,
-        "dependency_dll_paths": dep_dll_paths,
+        "dependency_dll_paths": sibling_dll_paths + dep_dll_paths,
         "extracted_primary_path": str(primary_dir),
         "extracted_dependency_paths": extracted_dep_paths,
     }

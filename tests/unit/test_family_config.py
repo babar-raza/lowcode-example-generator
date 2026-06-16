@@ -356,11 +356,11 @@ class TestExtraPackagesConfig:
         assert cells_config.nuget.dependency_resolution.extra_packages == []
 
     def test_ocr_config_has_extra_packages(self):
-        """ocr.yml declares Aspose.Drawing.Common as an extra_package."""
+        """ocr.yml declares Aspose.Drawing as an extra_package (provides Aspose.Drawing.Common.dll)."""
         ocr_config_path = REPO_ROOT / "pipeline" / "configs" / "families" / "ocr.yml"
         config = load_family_config(ocr_config_path)
         extras = config.nuget.dependency_resolution.extra_packages
-        assert "Aspose.Drawing.Common" in extras
+        assert "Aspose.Drawing" in extras
 
     def test_extra_packages_loaded_from_yaml(self, tmp_path):
         """extra_packages list is parsed correctly from YAML."""

@@ -36,20 +36,21 @@ _TERMINAL_STAGE_MAP = {
     "ESCALATE": FamilyTerminalState.ESCALATED,
 }
 
-# Non-LowCode families ordered by tier:
-# Tier 1: proven (enabled, discovery_only, have registry entries)
-# Tier 2: enabled but blocked (ocr, psd)
-# Tier 3: disabled with registry
-# Tier 4: disabled without registry
-# Tier 5: epub (discovery_blocked)
+# Non-LowCode families ordered by tier (TC-PSAL-21):
 NON_LOWCODE_FAMILIES = [
-    # Tier 1: proven
+    # Tier 1: proven (enabled, PROBE_CONFIRMED entries exist)
     "barcode", "imaging", "zip", "cad", "font", "tasks",
-    # Tier 2: enabled, may be blocked
+    # Tier 2: enabled, may have reflection blockers
     "ocr", "psd",
-    # Tier 3: disabled, have registries
-    "drawing", "finance", "gis", "html", "note", "omr", "page", "svg", "tex", "threed",
-    # Tier 5: epub
+    # Tier 3A: disabled, reflection succeeded, entries exist, no dep issues
+    "drawing", "finance", "page", "omr",
+    # Tier 3B: disabled, reflection succeeded, dependency resolved manually
+    "html", "svg",
+    # Tier 3C: disabled, reflection succeeded, license/dep complications
+    "threed", "gis",
+    # Tier 4: disabled, reflection deferred (large DLL)
+    "note", "tex",
+    # Tier 5: permanently blocked (no NuGet package)
     "epub",
 ]
 
@@ -150,6 +151,19 @@ def _execute_family_loop(
     from plugin_examples.sprint_governance.models import LoopState
 
     start_time = time.monotonic()
+
+    # TC-PSAL-20: epub early-exit — no NuGet package, skip pipeline entirely
+    original_config = _read_original_config(family, repo_root)
+    if original_config.get("status") == "discovery_blocked":
+        return FamilyExecutionRecord(
+            family=family,
+            terminal_state=FamilyTerminalState.BLOCKED_EXTERNAL,
+            iterations=0,
+            duration_ms=int((time.monotonic() - start_time) * 1000),
+            diagnostic_category="NO_NUGET_PACKAGE",
+            suggested_action=f"No action possible. {family} package not available on NuGet.org.",
+        )
+
     config_path = ensure_runnable_config(family, repo_root)
 
     state = LoopState()
@@ -240,7 +254,8 @@ def _execute_family_loop(
             family, iteration, next_stage,
         )
 
-    # Max iterations reached without terminal — escalate
+    # Max iterations reached without terminal — escalate with diagnostics
+    diag_cat, diag_action, reg_summary = _diagnose_family(family, repo_root)
     return FamilyExecutionRecord(
         family=family,
         terminal_state=FamilyTerminalState.ESCALATED,
@@ -253,6 +268,9 @@ def _execute_family_loop(
         error=f"Max iterations ({max_iterations}) reached without terminal state",
         duration_ms=int((time.monotonic() - start_time) * 1000),
         decisions=decisions,
+        diagnostic_category=diag_cat,
+        suggested_action=diag_action,
+        registry_summary=reg_summary,
     )
 
 
@@ -273,6 +291,78 @@ def _run_pipeline_safe(
         template_mode=template_mode,
         repo_root=repo_root,
         family_config_path=str(config_path),
+    )
+
+
+def _read_original_config(family: str, repo_root: Path) -> dict:
+    """Read the original (unpatched) family config YAML."""
+    import yaml
+
+    config_path = repo_root / "pipeline" / "configs" / "families" / f"{family}.yml"
+    if not config_path.exists():
+        return {}
+    try:
+        return yaml.safe_load(config_path.read_text(encoding="utf-8")) or {}
+    except Exception:
+        return {}
+
+
+def _diagnose_family(family: str, repo_root: Path) -> tuple[str, str, dict]:
+    """Produce diagnostic category, suggested action, and registry summary.
+
+    Returns:
+        (diagnostic_category, suggested_action, registry_summary)
+    """
+    import yaml
+
+    registry_path = repo_root / "pipeline" / "plugin-capability-registry" / f"{family}.yaml"
+    if not registry_path.exists():
+        return (
+            "NO_REGISTRY",
+            f"Create capability registry at pipeline/plugin-capability-registry/{family}.yaml",
+            {},
+        )
+
+    try:
+        data = yaml.safe_load(registry_path.read_text(encoding="utf-8")) or {}
+    except Exception:
+        return ("NO_REGISTRY", "Registry YAML is unreadable", {})
+
+    entries = data.get("entries", [])
+    if not entries:
+        return ("NO_REGISTRY", "Registry exists but has no entries", {"total": 0})
+
+    counts: dict[str, int] = {}
+    for e in entries:
+        status = e.get("status", "UNKNOWN")
+        counts[status] = counts.get(status, 0) + 1
+
+    summary = {"total": len(entries), **counts}
+
+    confirmed = counts.get("PROBE_CONFIRMED", 0) + counts.get("VERIFIED_PUBLISHABLE", 0)
+    failed = counts.get("PROBE_FAILED", 0)
+
+    if confirmed > 0:
+        return ("PROBED_BUT_INSUFFICIENT", f"Family has {confirmed} confirmed entries but governance did not accept", summary)
+
+    if failed > 0 and failed == len(entries):
+        return ("ALL_PROBES_FAILED", f"All {failed} probes failed. Check probe evidence for fix hints.", summary)
+
+    # Check for dependency/reflection blockers
+    blocked_entries = [e for e in entries if e.get("blocker_type")]
+    if blocked_entries:
+        blocker_types = {e.get("blocker_type") for e in blocked_entries}
+        return (
+            "DEPENDENCY_BLOCKED",
+            f"Blocked by: {', '.join(sorted(blocker_types))}. Resolve dependencies first.",
+            summary,
+        )
+
+    # Default: entries exist but unprobed
+    return (
+        "ENTRIES_UNPROBED",
+        f"Run: probe-registry --family {family} --execute --promote",
+        summary,
     )
 
 

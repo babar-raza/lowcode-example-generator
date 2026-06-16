@@ -40,7 +40,7 @@ github:
     branch: master
   published_plugin_examples_repo:
     owner: aspose-ocr-net
-    repo: Aspose.OCR.LowCode-for-.NET-Examples
+    repo: Aspose.OCR.Plugins-for-.NET-Examples
     branch: main
 
 fixtures:

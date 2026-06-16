@@ -182,11 +182,17 @@ def handle(args) -> int:
                     if isinstance(entry, dict) and "slug" in entry:
                         existing_by_slug[entry["slug"]] = entry
             elif isinstance(existing_data, dict) and "families" in existing_data:
-                for fam_slug, fam_entries in existing_data["families"].items():
-                    if isinstance(fam_entries, list):
-                        for entry in fam_entries:
-                            if isinstance(entry, dict) and "slug" in entry:
-                                existing_by_slug[entry["slug"]] = entry
+                fam_data = existing_data["families"]
+                if isinstance(fam_data, dict):
+                    for _fam_slug, fam_entries in fam_data.items():
+                        if isinstance(fam_entries, list):
+                            for entry in fam_entries:
+                                if isinstance(entry, dict) and "slug" in entry:
+                                    existing_by_slug[entry["slug"]] = entry
+                elif isinstance(fam_data, list):
+                    for entry in fam_data:
+                        if isinstance(entry, dict) and "slug" in entry:
+                            existing_by_slug[entry["slug"]] = entry
         except (json.JSONDecodeError, KeyError, TypeError):
             pass
 
@@ -496,6 +502,12 @@ _KNOWN_PLUGIN_SLUGS: dict[str, list[dict[str, str]]] = {
     ],
     "cad": [
         {"slug": "conversion", "kind": "CAD_CONVERSION"},
+    ],
+    "tex": [
+        {"slug": "convert-latex-to-pdf", "kind": "TEX_CONVERSION"},
+        {"slug": "latex-figure-renderer", "kind": "TEX_RENDERING"},
+        {"slug": "latex-math-renderer", "kind": "TEX_RENDERING"},
+        {"slug": "convert-tex-to-svg", "kind": "TEX_CONVERSION"},
     ],
 }
 

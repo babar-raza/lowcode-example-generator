@@ -51,6 +51,11 @@ FAMILY_CONFIG = {
         "nuget_id": "Aspose.OCR",
         "nuget_version": "24.12.0",
     },
+    "tex": {
+        "display_name": "Aspose.TeX",
+        "nuget_id": "Aspose.TeX",
+        "nuget_version": "24.12.0",
+    },
 }
 
 

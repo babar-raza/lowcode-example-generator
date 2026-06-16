@@ -1,30 +1,287 @@
-# Plugin capability registry entry — Aspose.Imaging
-# TC-IMPL-002B: Updated with probe verdict 2026-06-04
-# Validates against pipeline/plugin-capability-registry/schema.json
-
 entries:
-  - family: imaging
-    package_id: Aspose.Imaging
-    type_name: Image
-    namespace: Aspose.Imaging
-    method_name: Save
-    status: PROBE_CONFIRMED
-    confidence_score: 0.80
-    confidence_rationale: >
-      DllReflector confirmed Image.Save in Aspose.Imaging (net8.0, v26.6.0).
-      Image is abstract; static Load factory returns concrete PngImage at runtime.
-      Manual mapping (STATIC_MAPPING_REQUIRED from heuristic; MANUAL_MAPPING applied).
-      Probe ran to completion: restore OK, build OK, run OK, JPEG output 1075 bytes.
-      TIER-1 programmatic PNG fixture (69 bytes) used as input.
-    probe_evidence: reports/lowcode-non-lowcode-fallback-implementation-20260604/prototypes/imaging/output-validation.json
-    failure_taxonomy: null
-    rejection_reason: null
-    ai_source_flag: false
-    assembly_fingerprint: 511467dc6a13f883468cf57c5d45b55d5555b2ba0fa31c990f006a4315b87392
-    plugin_page_hash: null
-    last_validated: "2026-06-04T00:00:00Z"
-    bootstrap_status: PROBE_CONFIRMED
-    next_action: READY_FOR_EXAMPLE_GENERATION
-    blocker_type: null
-    last_reflected_package_version: "26.6.0"
-    refresh_due: "2026-09-04"
+- family: imaging
+  package_id: Aspose.Imaging
+  type_name: Image
+  namespace: Aspose.Imaging
+  method_name: Save
+  status: PROBE_CONFIRMED
+  confidence_score: 0.8
+  confidence_rationale: 'DllReflector confirmed Image.Save in Aspose.Imaging (net8.0,
+    v26.6.0). Image is abstract; static Load factory returns concrete PngImage at
+    runtime. Manual mapping (STATIC_MAPPING_REQUIRED from heuristic; MANUAL_MAPPING
+    applied). Probe ran to completion: restore OK, build OK, run OK, JPEG output 1075
+    bytes. TIER-1 programmatic PNG fixture (69 bytes) used as input.
+
+    '
+  probe_evidence: reports/lowcode-non-lowcode-fallback-implementation-20260604/prototypes/imaging/output-validation.json
+  failure_taxonomy: null
+  rejection_reason: null
+  ai_source_flag: false
+  assembly_fingerprint: 511467dc6a13f883468cf57c5d45b55d5555b2ba0fa31c990f006a4315b87392
+  plugin_page_hash: null
+  last_validated: '2026-06-04T00:00:00Z'
+  bootstrap_status: PROBE_CONFIRMED
+  next_action: READY_FOR_EXAMPLE_GENERATION
+  blocker_type: null
+  last_reflected_package_version: 26.6.0
+  refresh_due: '2026-09-04'
+- family: imaging
+  plugin_slug: animation-maker
+  operation_kind: IMAGE_ANIMATION
+  package_id: Aspose.Imaging
+  type_name: null
+  namespace: null
+  method_name: null
+  candidate_api_types: []
+  candidate_methods: []
+  selected_api_mapping: null
+  status: WEBSITE_DISCOVERED
+  confidence_score: 0.5
+  confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
+    Needs reflection probe to confirm API mapping.
+  probe_evidence: null
+  failure_taxonomy: null
+  rejection_reason: null
+  ai_source_flag: false
+  assembly_fingerprint: null
+  plugin_page_hash: null
+  last_validated: '2026-06-16T19:25:08Z'
+  bootstrap_status: WEBSITE_DISCOVERED
+  next_action: PROBE_PENDING
+  blocker_type: null
+  last_reflected_package_version: null
+  refresh_due: null
+- family: imaging
+  plugin_slug: image-converter
+  operation_kind: IMAGE_CONVERSION
+  package_id: Aspose.Imaging
+  type_name: null
+  namespace: null
+  method_name: null
+  candidate_api_types: []
+  candidate_methods: []
+  selected_api_mapping: null
+  status: WEBSITE_DISCOVERED
+  confidence_score: 0.5
+  confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
+    Needs reflection probe to confirm API mapping.
+  probe_evidence: null
+  failure_taxonomy: null
+  rejection_reason: null
+  ai_source_flag: false
+  assembly_fingerprint: null
+  plugin_page_hash: null
+  last_validated: '2026-06-16T19:25:08Z'
+  bootstrap_status: WEBSITE_DISCOVERED
+  next_action: PROBE_PENDING
+  blocker_type: null
+  last_reflected_package_version: null
+  refresh_due: null
+- family: imaging
+  plugin_slug: image-compressor
+  operation_kind: IMAGE_COMPRESSION
+  package_id: Aspose.Imaging
+  type_name: null
+  namespace: null
+  method_name: null
+  candidate_api_types: []
+  candidate_methods: []
+  selected_api_mapping: null
+  status: WEBSITE_DISCOVERED
+  confidence_score: 0.5
+  confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
+    Needs reflection probe to confirm API mapping.
+  probe_evidence: null
+  failure_taxonomy: null
+  rejection_reason: null
+  ai_source_flag: false
+  assembly_fingerprint: null
+  plugin_page_hash: null
+  last_validated: '2026-06-16T19:25:08Z'
+  bootstrap_status: WEBSITE_DISCOVERED
+  next_action: PROBE_PENDING
+  blocker_type: null
+  last_reflected_package_version: null
+  refresh_due: null
+- family: imaging
+  plugin_slug: image-merger
+  operation_kind: IMAGE_MERGE
+  package_id: Aspose.Imaging
+  type_name: null
+  namespace: null
+  method_name: null
+  candidate_api_types: []
+  candidate_methods: []
+  selected_api_mapping: null
+  status: WEBSITE_DISCOVERED
+  confidence_score: 0.5
+  confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
+    Needs reflection probe to confirm API mapping.
+  probe_evidence: null
+  failure_taxonomy: null
+  rejection_reason: null
+  ai_source_flag: false
+  assembly_fingerprint: null
+  plugin_page_hash: null
+  last_validated: '2026-06-16T19:25:08Z'
+  bootstrap_status: WEBSITE_DISCOVERED
+  next_action: PROBE_PENDING
+  blocker_type: null
+  last_reflected_package_version: null
+  refresh_due: null
+- family: imaging
+  plugin_slug: image-resizer
+  operation_kind: IMAGE_RESIZE
+  package_id: Aspose.Imaging
+  type_name: null
+  namespace: null
+  method_name: null
+  candidate_api_types: []
+  candidate_methods: []
+  selected_api_mapping: null
+  status: WEBSITE_DISCOVERED
+  confidence_score: 0.5
+  confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
+    Needs reflection probe to confirm API mapping.
+  probe_evidence: null
+  failure_taxonomy: null
+  rejection_reason: null
+  ai_source_flag: false
+  assembly_fingerprint: null
+  plugin_page_hash: null
+  last_validated: '2026-06-16T19:25:08Z'
+  bootstrap_status: WEBSITE_DISCOVERED
+  next_action: PROBE_PENDING
+  blocker_type: null
+  last_reflected_package_version: null
+  refresh_due: null
+- family: imaging
+  plugin_slug: photo-album-maker
+  operation_kind: IMAGE_ALBUM
+  package_id: Aspose.Imaging
+  type_name: null
+  namespace: null
+  method_name: null
+  candidate_api_types: []
+  candidate_methods: []
+  selected_api_mapping: null
+  status: WEBSITE_DISCOVERED
+  confidence_score: 0.5
+  confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
+    Needs reflection probe to confirm API mapping.
+  probe_evidence: null
+  failure_taxonomy: null
+  rejection_reason: null
+  ai_source_flag: false
+  assembly_fingerprint: null
+  plugin_page_hash: null
+  last_validated: '2026-06-16T19:25:08Z'
+  bootstrap_status: WEBSITE_DISCOVERED
+  next_action: PROBE_PENDING
+  blocker_type: null
+  last_reflected_package_version: null
+  refresh_due: null
+- family: imaging
+  plugin_slug: image-cropper
+  operation_kind: IMAGE_CROP
+  package_id: Aspose.Imaging
+  type_name: null
+  namespace: null
+  method_name: null
+  candidate_api_types: []
+  candidate_methods: []
+  selected_api_mapping: null
+  status: WEBSITE_DISCOVERED
+  confidence_score: 0.5
+  confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
+    Needs reflection probe to confirm API mapping.
+  probe_evidence: null
+  failure_taxonomy: null
+  rejection_reason: null
+  ai_source_flag: false
+  assembly_fingerprint: null
+  plugin_page_hash: null
+  last_validated: '2026-06-16T19:25:08Z'
+  bootstrap_status: WEBSITE_DISCOVERED
+  next_action: PROBE_PENDING
+  blocker_type: null
+  last_reflected_package_version: null
+  refresh_due: null
+- family: imaging
+  plugin_slug: image-effect-creator
+  operation_kind: IMAGE_EFFECT
+  package_id: Aspose.Imaging
+  type_name: null
+  namespace: null
+  method_name: null
+  candidate_api_types: []
+  candidate_methods: []
+  selected_api_mapping: null
+  status: WEBSITE_DISCOVERED
+  confidence_score: 0.5
+  confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
+    Needs reflection probe to confirm API mapping.
+  probe_evidence: null
+  failure_taxonomy: null
+  rejection_reason: null
+  ai_source_flag: false
+  assembly_fingerprint: null
+  plugin_page_hash: null
+  last_validated: '2026-06-16T19:25:08Z'
+  bootstrap_status: WEBSITE_DISCOVERED
+  next_action: PROBE_PENDING
+  blocker_type: null
+  last_reflected_package_version: null
+  refresh_due: null
+- family: imaging
+  plugin_slug: image-deskew
+  operation_kind: IMAGE_DESKEW
+  package_id: Aspose.Imaging
+  type_name: null
+  namespace: null
+  method_name: null
+  candidate_api_types: []
+  candidate_methods: []
+  selected_api_mapping: null
+  status: WEBSITE_DISCOVERED
+  confidence_score: 0.5
+  confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
+    Needs reflection probe to confirm API mapping.
+  probe_evidence: null
+  failure_taxonomy: null
+  rejection_reason: null
+  ai_source_flag: false
+  assembly_fingerprint: null
+  plugin_page_hash: null
+  last_validated: '2026-06-16T19:25:08Z'
+  bootstrap_status: WEBSITE_DISCOVERED
+  next_action: PROBE_PENDING
+  blocker_type: null
+  last_reflected_package_version: null
+  refresh_due: null
+- family: imaging
+  plugin_slug: image-rotate-flip
+  operation_kind: IMAGE_ROTATE_FLIP
+  package_id: Aspose.Imaging
+  type_name: null
+  namespace: null
+  method_name: null
+  candidate_api_types: []
+  candidate_methods: []
+  selected_api_mapping: null
+  status: WEBSITE_DISCOVERED
+  confidence_score: 0.5
+  confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
+    Needs reflection probe to confirm API mapping.
+  probe_evidence: null
+  failure_taxonomy: null
+  rejection_reason: null
+  ai_source_flag: false
+  assembly_fingerprint: null
+  plugin_page_hash: null
+  last_validated: '2026-06-16T19:25:08Z'
+  bootstrap_status: WEBSITE_DISCOVERED
+  next_action: PROBE_PENDING
+  blocker_type: null
+  last_reflected_package_version: null
+  refresh_due: null

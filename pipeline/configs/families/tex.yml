@@ -41,7 +41,7 @@ github:
     branch: master
   published_plugin_examples_repo:
     owner: aspose-tex-net
-    repo: Aspose.TeX.LowCode-for-.NET-Examples
+    repo: Aspose.TeX.Plugins-for-.NET-Examples
     branch: main
 
 fixtures:

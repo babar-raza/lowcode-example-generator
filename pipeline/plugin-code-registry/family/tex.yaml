@@ -102,3 +102,81 @@ plugins:
   canonical_package_path: reports/lowcode-plugin-canonical-package-wave14-20260606/wave14-dryrun/examples/tex/convert-latex-to-pdf
   canonical_package_wave: wave14
   canonical_package_proven_at: '2026-06-06'
+- plugin_slug: latex-math-renderer
+  canonical_plugin_slug: latex-math-renderer
+  identity_status: CANONICAL_IDENTITY_VERIFIED
+  plugin_url: https://products.aspose.net/tex/latex-math-renderer/
+  canonical_url: https://products.aspose.net/tex/latex-math-renderer/
+  page_source_status: PAGE_CRAWLED_THIS_SPRINT
+  source_link_origin: PRODUCT_PAGE
+  transformation_readiness_reason: MathRendererPlugin.Process() + PngMathRendererPluginOptions
+    confirmed on product page and in validation snippet
+  implementation_model: DEDICATED_PLUGIN_CLASS
+  registry_status: CANONICAL_PACKAGE_PROVEN
+  blocker_type: null
+  code_hashes: []
+  namespaces_used:
+  - Aspose.TeX.Plugins
+  classes_used:
+  - MathRendererPlugin
+  - PngMathRendererPluginOptions
+  - StringDataSource
+  - StreamDataSource
+  next_action: PUBLICATION_CANDIDATE_LOCAL — build verified 2026-06-17
+  evidence_paths:
+  - reports/lowcode-plugin-registry-expansion-20260604/manual-analysis/family/tex.md
+  - reports/lowcode-plugin-registry-expansion-20260604/validation/snippets/tex-latex-math-renderer/
+  history:
+  - date: '2026-06-04'
+    status: READY_FOR_TRANSFORMATION
+    analyst_notes: Sprint lowcode-plugin-registry-expansion-20260604. New canonical page.
+      DEDICATED_PLUGIN_CLASS model.
+  - date: '2026-06-17'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Sprint nonlowcode-expansion-20260616. Build verified PASS 0 warnings
+      0 errors.
+  dryrun_package_path: reports/nonlowcode-expansion-20260616/dryrun/examples/tex/latex-math-renderer
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-17'
+  canonical_package_path: reports/nonlowcode-expansion-20260616/dryrun/examples/tex/latex-math-renderer
+  canonical_package_proven_at: '2026-06-17'
+  display_plugin_name: LaTeX Math Renderer for .NET
+- plugin_slug: convert-tex-to-svg
+  canonical_plugin_slug: convert-tex-to-svg
+  identity_status: CANONICAL_IDENTITY_VERIFIED
+  plugin_url: https://products.aspose.net/tex/convert-tex-to-svg/
+  canonical_url: https://products.aspose.net/tex/convert-tex-to-svg/
+  page_source_status: STATIC_FALLBACK_DISCOVERED
+  source_link_origin: PRODUCT_PAGE
+  transformation_readiness_reason: TeXJob + SvgDevice pattern — same as convert-latex-to-pdf
+    but targeting SVG output
+  implementation_model: STATIC_CONVERTER_CLASS
+  registry_status: CANONICAL_PACKAGE_PROVEN
+  blocker_type: null
+  code_hashes: []
+  namespaces_used:
+  - Aspose.TeX
+  - Aspose.TeX.IO
+  - Aspose.TeX.Presentation.Svg
+  classes_used:
+  - TeXOptions
+  - TeXConfig
+  - TeXJob
+  - SvgDevice
+  - InputFileSystemDirectory
+  - OutputFileSystemDirectory
+  - OutputFileTerminal
+  next_action: PUBLICATION_CANDIDATE_LOCAL — build verified 2026-06-17
+  evidence_paths:
+  - reports/nonlowcode-expansion-20260616/dryrun/examples/tex/convert-tex-to-svg/
+  history:
+  - date: '2026-06-17'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Sprint nonlowcode-expansion-20260616. New plugin discovered via static
+      fallback. Build verified PASS 0 warnings 0 errors.
+  dryrun_package_path: reports/nonlowcode-expansion-20260616/dryrun/examples/tex/convert-tex-to-svg
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-17'
+  canonical_package_path: reports/nonlowcode-expansion-20260616/dryrun/examples/tex/convert-tex-to-svg
+  canonical_package_proven_at: '2026-06-17'
+  display_plugin_name: TeX to SVG Converter for .NET

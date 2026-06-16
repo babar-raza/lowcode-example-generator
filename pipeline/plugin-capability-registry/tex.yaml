@@ -1,62 +1,136 @@
-# Plugin capability registry — Aspose.TeX
-# TRAIN D: Plugin-level entries (v26.4.0)
-# Reflection: deferred — 17.3MB DLL
-
 entries:
-  - family: tex
-    plugin_slug: convert-tex-to-pdf
-    operation_kind: TEX_CONVERSION
-    package_id: Aspose.TeX
-    type_name: TeXJob
-    namespace: Aspose.TeX
-    method_name: Run
-    candidate_api_types:
-      - Aspose.TeX.TeXJob
-    candidate_methods:
-      - Run
-    selected_api_mapping:
-      note: AI_DRAFT — pending DllReflector confirmation
-    status: WEBSITE_DISCOVERED
-    confidence_score: 0.58
-    confidence_rationale: >
-      TeX to PDF: TeXJob with PdfSaveOptions → Run(). 17.3MB DLL.
-    probe_evidence: null
-    failure_taxonomy: null
-    rejection_reason: null
-    ai_source_flag: true
-    assembly_fingerprint: null
-    plugin_page_hash: null
-    last_validated: "2026-06-04T00:00:00Z"
-    bootstrap_status: WEBSITE_DISCOVERED
-    next_action: REFLECTION_DEFERRED_LARGE_DLL
-    blocker_type: REFLECTION_BLOCKED
-    last_reflected_package_version: null
-    refresh_due: "2026-09-04"
+- family: tex
+  plugin_slug: convert-tex-to-pdf
+  operation_kind: TEX_CONVERSION
+  package_id: Aspose.TeX
+  type_name: TeXJob
+  namespace: Aspose.TeX
+  method_name: Run
+  candidate_api_types:
+  - Aspose.TeX.TeXJob
+  candidate_methods:
+  - Run
+  selected_api_mapping:
+    note: AI_DRAFT — pending DllReflector confirmation
+  status: WEBSITE_DISCOVERED
+  confidence_score: 0.58
+  confidence_rationale: 'TeX to PDF: TeXJob with PdfSaveOptions → Run(). 17.3MB DLL.
 
-  - family: tex
-    plugin_slug: convert-latex-to-pdf
-    operation_kind: TEX_CONVERSION
-    package_id: Aspose.TeX
-    type_name: TeXJob
-    namespace: Aspose.TeX
-    method_name: Run
-    candidate_api_types:
-      - Aspose.TeX.TeXJob
-    candidate_methods:
-      - Run
-    selected_api_mapping: null
-    status: WEBSITE_DISCOVERED
-    confidence_score: 0.56
-    confidence_rationale: LaTeX is TeX dialect; same TeXJob API.
-    probe_evidence: null
-    failure_taxonomy: null
-    rejection_reason: null
-    ai_source_flag: true
-    assembly_fingerprint: null
-    plugin_page_hash: null
-    last_validated: "2026-06-04T00:00:00Z"
-    bootstrap_status: WEBSITE_DISCOVERED
-    next_action: REFLECTION_DEFERRED_LARGE_DLL
-    blocker_type: REFLECTION_BLOCKED
-    last_reflected_package_version: null
-    refresh_due: "2026-09-04"
+    '
+  probe_evidence: null
+  failure_taxonomy: null
+  rejection_reason: null
+  ai_source_flag: true
+  assembly_fingerprint: null
+  plugin_page_hash: null
+  last_validated: '2026-06-04T00:00:00Z'
+  bootstrap_status: WEBSITE_DISCOVERED
+  next_action: REFLECTION_DEFERRED_LARGE_DLL
+  blocker_type: REFLECTION_BLOCKED
+  last_reflected_package_version: null
+  refresh_due: '2026-09-04'
+- family: tex
+  plugin_slug: convert-latex-to-pdf
+  operation_kind: TEX_CONVERSION
+  package_id: Aspose.TeX
+  type_name: TeXJob
+  namespace: Aspose.TeX
+  method_name: Run
+  candidate_api_types:
+  - Aspose.TeX.TeXJob
+  candidate_methods:
+  - Run
+  selected_api_mapping: null
+  status: WEBSITE_DISCOVERED
+  confidence_score: 0.56
+  confidence_rationale: LaTeX is TeX dialect; same TeXJob API.
+  probe_evidence: null
+  failure_taxonomy: null
+  rejection_reason: null
+  ai_source_flag: true
+  assembly_fingerprint: null
+  plugin_page_hash: null
+  last_validated: '2026-06-04T00:00:00Z'
+  bootstrap_status: WEBSITE_DISCOVERED
+  next_action: REFLECTION_DEFERRED_LARGE_DLL
+  blocker_type: REFLECTION_BLOCKED
+  last_reflected_package_version: null
+  refresh_due: '2026-09-04'
+- family: tex
+  plugin_slug: latex-figure-renderer
+  operation_kind: TEX_RENDERING
+  package_id: Aspose.TeX
+  type_name: null
+  namespace: null
+  method_name: null
+  candidate_api_types: []
+  candidate_methods: []
+  selected_api_mapping: null
+  status: WEBSITE_DISCOVERED
+  confidence_score: 0.5
+  confidence_rationale: Discovered from products.aspose.net/tex/ plugin page. Needs
+    reflection probe to confirm API mapping.
+  probe_evidence: null
+  failure_taxonomy: null
+  rejection_reason: null
+  ai_source_flag: false
+  assembly_fingerprint: null
+  plugin_page_hash: null
+  last_validated: '2026-06-16T19:25:08Z'
+  bootstrap_status: WEBSITE_DISCOVERED
+  next_action: PROBE_PENDING
+  blocker_type: null
+  last_reflected_package_version: null
+  refresh_due: null
+- family: tex
+  plugin_slug: latex-math-renderer
+  operation_kind: TEX_RENDERING
+  package_id: Aspose.TeX
+  type_name: null
+  namespace: null
+  method_name: null
+  candidate_api_types: []
+  candidate_methods: []
+  selected_api_mapping: null
+  status: WEBSITE_DISCOVERED
+  confidence_score: 0.5
+  confidence_rationale: Discovered from products.aspose.net/tex/ plugin page. Needs
+    reflection probe to confirm API mapping.
+  probe_evidence: null
+  failure_taxonomy: null
+  rejection_reason: null
+  ai_source_flag: false
+  assembly_fingerprint: null
+  plugin_page_hash: null
+  last_validated: '2026-06-16T19:25:08Z'
+  bootstrap_status: WEBSITE_DISCOVERED
+  next_action: PROBE_PENDING
+  blocker_type: null
+  last_reflected_package_version: null
+  refresh_due: null
+- family: tex
+  plugin_slug: convert-tex-to-svg
+  operation_kind: TEX_CONVERSION
+  package_id: Aspose.TeX
+  type_name: null
+  namespace: null
+  method_name: null
+  candidate_api_types: []
+  candidate_methods: []
+  selected_api_mapping: null
+  status: WEBSITE_DISCOVERED
+  confidence_score: 0.5
+  confidence_rationale: Discovered from products.aspose.net/tex/ plugin page. Needs
+    reflection probe to confirm API mapping.
+  probe_evidence: null
+  failure_taxonomy: null
+  rejection_reason: null
+  ai_source_flag: false
+  assembly_fingerprint: null
+  plugin_page_hash: null
+  last_validated: '2026-06-16T19:25:08Z'
+  bootstrap_status: WEBSITE_DISCOVERED
+  next_action: PROBE_PENDING
+  blocker_type: null
+  last_reflected_package_version: null
+  refresh_due: null

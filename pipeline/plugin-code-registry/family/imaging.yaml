@@ -468,3 +468,77 @@ plugins:
   display_plugin_name: Image Rotator for .NET
   migration_status: CANONICAL_PRIMARY_MIGRATED
   migrated_from: rotate-image
+- plugin_slug: animation-maker
+  canonical_plugin_slug: animation-maker
+  identity_status: CANONICAL_IDENTITY_VERIFIED
+  plugin_url: https://products.aspose.net/imaging/animation-maker/
+  canonical_url: https://products.aspose.net/imaging/animation-maker/
+  page_source_status: STATIC_FALLBACK_DISCOVERED
+  source_link_origin: PRODUCT_PAGE
+  transformation_readiness_reason: GifImage + GifFrameBlock + SavePixels pattern confirmed
+  implementation_model: LOAD_SAVE_OPTIONS
+  registry_status: CANONICAL_PACKAGE_PROVEN
+  blocker_type: null
+  code_hashes: []
+  namespaces_used:
+  - Aspose.Imaging
+  - Aspose.Imaging.FileFormats.Gif
+  - Aspose.Imaging.FileFormats.Gif.Blocks
+  - Aspose.Imaging.ImageOptions
+  - Aspose.Imaging.Sources
+  classes_used:
+  - Image
+  - GifImage
+  - GifFrameBlock
+  - GifOptions
+  - StreamSource
+  next_action: PUBLICATION_CANDIDATE_LOCAL — build verified 2026-06-17
+  evidence_paths:
+  - reports/nonlowcode-expansion-20260616/dryrun/examples/imaging/animation-maker/
+  history:
+  - date: '2026-06-17'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Sprint nonlowcode-expansion-20260616. New plugin discovered via static
+      fallback. Build verified PASS 0 warnings 0 errors.
+  dryrun_package_path: reports/nonlowcode-expansion-20260616/dryrun/examples/imaging/animation-maker
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-17'
+  canonical_package_path: reports/nonlowcode-expansion-20260616/dryrun/examples/imaging/animation-maker
+  canonical_package_proven_at: '2026-06-17'
+  display_plugin_name: Animation Maker for .NET
+- plugin_slug: image-deskew
+  canonical_plugin_slug: image-deskew
+  identity_status: CANONICAL_IDENTITY_VERIFIED
+  plugin_url: https://products.aspose.net/imaging/image-deskew/
+  canonical_url: https://products.aspose.net/imaging/image-deskew/
+  page_source_status: STATIC_FALLBACK_DISCOVERED
+  source_link_origin: PRODUCT_PAGE
+  transformation_readiness_reason: RasterImage.NormalizeAngle() deskew pattern confirmed
+  implementation_model: LOAD_SAVE_OPTIONS
+  registry_status: CANONICAL_PACKAGE_PROVEN
+  blocker_type: null
+  code_hashes: []
+  namespaces_used:
+  - Aspose.Imaging
+  - Aspose.Imaging.FileFormats.Bmp
+  - Aspose.Imaging.ImageOptions
+  - Aspose.Imaging.Sources
+  classes_used:
+  - Image
+  - RasterImage
+  - BmpOptions
+  - StreamSource
+  next_action: PUBLICATION_CANDIDATE_LOCAL — build verified 2026-06-17
+  evidence_paths:
+  - reports/nonlowcode-expansion-20260616/dryrun/examples/imaging/image-deskew/
+  history:
+  - date: '2026-06-17'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Sprint nonlowcode-expansion-20260616. New plugin discovered via static
+      fallback. Build verified PASS 0 warnings 0 errors.
+  dryrun_package_path: reports/nonlowcode-expansion-20260616/dryrun/examples/imaging/image-deskew
+  dryrun_validation_status: DRYRUN_PASS
+  dryrun_validated_at: '2026-06-17'
+  canonical_package_path: reports/nonlowcode-expansion-20260616/dryrun/examples/imaging/image-deskew
+  canonical_package_proven_at: '2026-06-17'
+  display_plugin_name: Image Deskew for .NET

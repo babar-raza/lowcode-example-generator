@@ -123,7 +123,7 @@ def _render_html(entry: dict, mapping: dict) -> str:
     """HTML conversion: Converter.ConvertHTML(content, options, path). Proven W20."""
     slug = entry.get("plugin_slug", "")
     if "image" in slug:
-        save_options = "new ImageSaveOptions(ImageFormat.Png)"
+        save_options = "new ImageSaveOptions(Aspose.Html.Rendering.Image.ImageFormat.Png)"
         ext = "png"
     elif "word" in slug:
         save_options = "new DocSaveOptions()"
@@ -150,7 +150,7 @@ def _render_svg(entry: dict, mapping: dict) -> str:
     """SVG conversion: Converter.ConvertSVG(). Proven W20."""
     slug = entry.get("plugin_slug", "")
     if "png" in slug or "image" in slug:
-        save_options = "new ImageSaveOptions(ImageFormat.Png)"
+        save_options = "new ImageSaveOptions(Aspose.Svg.Rendering.Image.ImageFormat.Png)"
         ext = "png"
     else:
         save_options = "new PdfSaveOptions()"
@@ -205,6 +205,22 @@ Console.WriteLine("Probe complete: " + outputPath);
 """
 
 
+def _render_gis(entry: dict, mapping: dict) -> str:
+    """GIS: VectorLayer type accessibility probe (static API, needs input files)."""
+    return """\
+// Auto-generated registry probe — Aspose.GIS
+using System;
+using Aspose.Gis;
+
+var outputPath = args.Length > 0 ? args[0] : "probe-output.txt";
+// VectorLayer uses static factory methods — verify type accessibility
+var driver = Drivers.GeoJson;
+Console.WriteLine("GIS driver accessible: " + driver.GetType().FullName);
+File.WriteAllText(outputPath, "GIS probe: driver type = " + driver.GetType().FullName);
+Console.WriteLine("Probe complete: " + outputPath);
+"""
+
+
 def _render_generic(entry: dict, mapping: dict) -> str:
     """Generic fallback: new Type(); obj.Method(outputPath)."""
     ns = mapping.get("namespace", entry.get("namespace", "Unknown"))
@@ -233,6 +249,7 @@ _FAMILY_RENDERERS: dict[str, callable] = {
     "svg": _render_svg,
     "threed": _render_threed,
     "omr": _render_omr,
+    "gis": _render_gis,
 }
 
 

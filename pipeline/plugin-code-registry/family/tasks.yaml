@@ -13,7 +13,7 @@ plugins:
   transformation_readiness_reason: Canonical URL confirmed; code fetched from official
     demo; Project.Save() pattern confirmed on page
   page_hash: 652dc2460994d483
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: LOAD_SAVE_OPTIONS
   code_hashes:
@@ -54,6 +54,8 @@ plugins:
   dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/tasks/project-to-pdf-converter
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/tasks/project-to-pdf-converter
+  canonical_package_proven_at: '2026-06-16'
   legacy_aliases:
   - convert-mpp-to-pdf
   display_plugin_name: Project to PDF Converter for .NET
@@ -64,7 +66,7 @@ plugins:
   identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/tasks/net/convert-mpp-to-excel
   page_hash: 04409e41e63edc00
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: LOAD_SAVE_OPTIONS
   code_hashes:
@@ -99,6 +101,8 @@ plugins:
   dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/tasks/mpp-to-excel
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/tasks/mpp-to-excel
+  canonical_package_proven_at: '2026-06-16'
   canonical_url: https://products.aspose.net/tasks/mpp-to-excel/
   legacy_aliases:
   - convert-mpp-to-excel

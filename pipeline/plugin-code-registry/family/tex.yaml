@@ -14,10 +14,12 @@ plugins:
     + PngFigureRendererPluginOptions confirmed on product page
   implementation_model: STATIC_CONVERTER_CLASS
   page_hash: 78715798ae6d3afb
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   dryrun_package_path: reports/lowcode-plugin-example-factory-wave-20260605/dryrun/examples/tex/latex-figure-renderer
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave10-20260605/dryrun/examples/tex/latex-figure-renderer
+  canonical_package_proven_at: '2026-06-16'
   blocker_type: null
   code_hashes:
   - 5f220c08fa8dd9c24ee963616f1afd21

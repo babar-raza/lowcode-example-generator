@@ -73,7 +73,7 @@ plugins:
   source_link_origin: PRODUCT_PAGE
   transformation_readiness_reason: New canonical page fetched; PsdImage + TimeLine
     animation confirmed
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: LOAD_SAVE_OPTIONS
   code_hashes: []
@@ -109,6 +109,8 @@ plugins:
   dryrun_package_path: reports/lowcode-plugin-canonical-identity-wave7-20260605/dryrun/examples/psd/animation-maker
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave10-20260605/dryrun/examples/psd/animation-maker
+  canonical_package_proven_at: '2026-06-16'
   display_plugin_name: PSD Animation Maker for .NET
   legacy_aliases:
   - psd-image-converter
@@ -121,7 +123,7 @@ plugins:
   source_link_origin: PRODUCT_PAGE
   transformation_readiness_reason: New canonical page fetched; PsdImage batch processing
     confirmed
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: LOAD_SAVE_OPTIONS
   code_hashes: []
@@ -155,6 +157,8 @@ plugins:
   dryrun_package_path: reports/lowcode-plugin-canonical-identity-wave7-20260605/dryrun/examples/psd/photo-processor
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave10-20260605/dryrun/examples/psd/photo-processor
+  canonical_package_proven_at: '2026-06-16'
   display_plugin_name: PSD Photo Processor for .NET
   legacy_aliases:
   - edit-psd-layers

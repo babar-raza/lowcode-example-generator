@@ -8,7 +8,7 @@ plugins:
   identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/note/net/convert-one-to-pdf
   page_hash: 5d310ca97989c769
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: LOAD_SAVE_OPTIONS
   code_hashes:
@@ -42,13 +42,15 @@ plugins:
   display_plugin_name: OneNote to PDF Converter for .NET
   migration_status: CANONICAL_PRIMARY_MIGRATED
   migrated_from: convert-one-to-pdf
-  dryrun_package_path: reports/lowcode-plugin-canonical-primary-wave8-20260605/dryrun/examples/note/convert-onenote-to-pdf
+  dryrun_package_path: reports/lowcode-plugin-canonical-primary-wave8-20260605/wave8/dryrun/examples/note/convert-onenote-to-pdf
+  canonical_package_path: reports/lowcode-plugin-canonical-primary-wave8-20260605/wave8/dryrun/examples/note/convert-onenote-to-pdf
+  canonical_package_proven_at: '2026-06-16'
 - plugin_slug: convert-onenote-to-word
   canonical_plugin_slug: convert-onenote-to-word
   identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/note/net/convert-one-to-word
   page_hash: 01e44912c61d9f2d
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: LOAD_SAVE_OPTIONS
   code_hashes:
@@ -81,6 +83,8 @@ plugins:
   dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/note/convert-onenote-to-word
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/note/convert-onenote-to-word
+  canonical_package_proven_at: '2026-06-16'
   canonical_url: https://products.aspose.net/note/convert-onenote-to-word/
   legacy_aliases:
   - convert-one-to-word
@@ -92,7 +96,7 @@ plugins:
   identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/note/net/convert-one-to-image
   page_hash: 42ff83ffec19bab4
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: LOAD_SAVE_OPTIONS
   code_hashes:
@@ -127,6 +131,8 @@ plugins:
   dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/note/convert-onenote-to-image
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/note/convert-onenote-to-image
+  canonical_package_proven_at: '2026-06-16'
   canonical_url: https://products.aspose.net/note/convert-onenote-to-image/
   legacy_aliases:
   - convert-one-to-image

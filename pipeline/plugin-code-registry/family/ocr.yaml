@@ -37,7 +37,7 @@ plugins:
   transformation_readiness_reason: Best-match canonical page /ocr/scanned-image-to-text/;
     same AsposeOcr + OcrInput + api.Recognize() pattern confirmed
   page_hash: 3ff7f5d06d923aea
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: RECOGNITION_EXTRACTION_API
   code_hashes:
@@ -64,6 +64,11 @@ plugins:
     status: TRANSFORMED_TO_EXAMPLE_DRYRUN
     analyst_notes: Sprint lowcode-plugin-example-factory-closeout-wave5-20260605.
       Wave 5 dry-run package built and validated. 0 real invariant violations. PUBLICATION_CANDIDATE_LOCAL_CLEAN.
+  - date: '2026-06-16'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Build re-verified during DRYRUN promotion sprint. dotnet build exit 0.
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave10-20260605/dryrun/examples/ocr/scan-document
+  canonical_package_proven_at: '2026-06-16'
   display_plugin_name: Document Scanner for .NET
 - plugin_slug: image-text-finder
   canonical_plugin_slug: image-text-finder
@@ -74,7 +79,7 @@ plugins:
   source_link_origin: GITHUB_REPO
   transformation_readiness_reason: New canonical page fetched; same OcrInput pattern
     as scanned-image-to-text
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: RECOGNITION_EXTRACTION_API
   code_hashes:
@@ -99,6 +104,8 @@ plugins:
   dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/ocr/image-text-finder
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave10-20260605/dryrun/examples/ocr/image-text-finder
+  canonical_package_proven_at: '2026-06-16'
   display_plugin_name: Image Text Finder for .NET
 - plugin_slug: invoice-to-text
   canonical_plugin_slug: invoice-to-text
@@ -109,7 +116,7 @@ plugins:
   source_link_origin: GITHUB_REPO
   transformation_readiness_reason: New canonical page fetched; same AsposeOcr + OcrInput
     + api.Recognize() pattern as all OCR plugins
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: RECOGNITION_EXTRACTION_API
   code_hashes:
@@ -133,6 +140,8 @@ plugins:
   dryrun_package_path: reports/lowcode-plugin-example-factory-wave6-20260605/dryrun/examples/ocr/invoice-to-text
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave10-20260605/dryrun/examples/ocr/invoice-to-text
+  canonical_package_proven_at: '2026-06-16'
   display_plugin_name: Invoice to Text Converter for .NET
 - plugin_slug: photo-to-text
   canonical_plugin_slug: photo-to-text
@@ -143,7 +152,7 @@ plugins:
   source_link_origin: GITHUB_REPO
   transformation_readiness_reason: New canonical page fetched; same AsposeOcr + OcrInput
     + api.Recognize() pattern as all OCR plugins
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: RECOGNITION_EXTRACTION_API
   code_hashes:
@@ -167,6 +176,8 @@ plugins:
   dryrun_package_path: reports/lowcode-plugin-canonical-identity-wave7-20260605/dryrun/examples/ocr/photo-to-text
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave10-20260605/dryrun/examples/ocr/photo-to-text
+  canonical_package_proven_at: '2026-06-16'
   display_plugin_name: Photo to Text Converter for .NET
 - plugin_slug: table-to-text
   canonical_plugin_slug: table-to-text
@@ -177,7 +188,7 @@ plugins:
   source_link_origin: GITHUB_REPO
   transformation_readiness_reason: New canonical page fetched; same AsposeOcr + OcrInput
     + api.Recognize() pattern as all OCR plugins
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: RECOGNITION_EXTRACTION_API
   code_hashes:
@@ -201,4 +212,6 @@ plugins:
   dryrun_package_path: reports/lowcode-plugin-canonical-identity-wave7-20260605/dryrun/examples/ocr/table-to-text
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave10-20260605/dryrun/examples/ocr/table-to-text
+  canonical_package_proven_at: '2026-06-16'
   display_plugin_name: Table to Text Converter for .NET

@@ -13,7 +13,7 @@ plugins:
   transformation_readiness_reason: CODE_HARVESTED + canonical URL confirmed; Converter.ConvertHTML()
     confirmed on page and in fetched source
   page_hash: e067cedc86125d4b
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: STATIC_CONVERTER_CLASS
   code_hashes:
@@ -56,9 +56,11 @@ plugins:
     status: CANONICAL_PRIMARY_MIGRATED
     analyst_notes: 'Sprint lowcode-plugin-canonical-primary-wave8-20260605. Wave 8
       canonical advancement: ''convert-html-to-pdf'' -> ''html-to-pdf-converter''.'
-  dryrun_package_path: reports/lowcode-plugin-canonical-primary-wave8-20260605/dryrun/examples/html/html-to-pdf-converter
+  dryrun_package_path: reports/lowcode-plugin-canonical-primary-wave8-20260605/wave8/dryrun/examples/html/html-to-pdf-converter
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  canonical_package_path: reports/lowcode-plugin-canonical-primary-wave8-20260605/wave8/dryrun/examples/html/html-to-pdf-converter
+  canonical_package_proven_at: '2026-06-16'
   legacy_aliases:
   - convert-html-to-pdf
   display_plugin_name: HTML to PDF Converter for .NET
@@ -69,7 +71,7 @@ plugins:
   identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/html/net/convert-html-to-word
   page_hash: 04566ec714400b34
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: STATIC_CONVERTER_CLASS
   code_hashes:
@@ -112,6 +114,8 @@ plugins:
   dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/html/html-to-docx-converter
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/html/html-to-docx-converter
+  canonical_package_proven_at: '2026-06-16'
   canonical_url: https://products.aspose.net/html/html-to-docx-converter/
   legacy_aliases:
   - convert-html-to-word
@@ -123,7 +127,7 @@ plugins:
   identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/html/net/convert-html-to-image
   page_hash: a9b3cc7d51950bbe
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: STATIC_CONVERTER_CLASS
   code_hashes:
@@ -160,6 +164,8 @@ plugins:
   dryrun_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/html/html-to-image-converter
   dryrun_validation_status: DRYRUN_PASS
   dryrun_validated_at: '2026-06-05'
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave9-20260605/dryrun/examples/html/html-to-image-converter
+  canonical_package_proven_at: '2026-06-16'
   canonical_url: https://products.aspose.net/html/html-to-image-converter/
   legacy_aliases:
   - convert-html-to-image

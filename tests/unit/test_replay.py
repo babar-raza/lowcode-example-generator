@@ -493,13 +493,17 @@ class TestRestoreGeneratedProjects:
         proj_dir.mkdir(parents=True)
         (proj_dir / "Program.cs").write_text("// code", encoding="utf-8")
 
-        # Index points at a stale path in a different run
+        # Index points at a stale path inside repo_root that no longer exists on disk.
+        # Using a path within tmp_repo so the absolute-path escape check passes on all
+        # platforms (on Linux, /nonexistent/... is absolute and triggers the check;
+        # on Windows it is root-relative without a drive so the check is skipped).
+        stale_dir = tmp_repo / "stale-run" / "words-converter"
         examples = [
             {
                 "scenario_id": "words-converter",
-                "project_dir": "/nonexistent/path/words-converter",
-                "program_path": "/nonexistent/path/words-converter/Program.cs",
-                "csproj_path": "/nonexistent/path/words-converter/words-converter.csproj",
+                "project_dir": str(stale_dir),
+                "program_path": str(stale_dir / "Program.cs"),
+                "csproj_path": str(stale_dir / "words-converter.csproj"),
                 "package_id": "Aspose.Words",
                 "status": "generated",
                 "input_strategy": "none",

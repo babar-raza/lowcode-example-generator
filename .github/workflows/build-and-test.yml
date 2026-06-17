@@ -48,8 +48,9 @@ jobs:
 
       - name: SAST scan (bandit)
         # Non-blocking: produces artifact for evidence; will be gated after baseline established.
+        # Uses pyproject.toml [tool.bandit] skips for parity with GitLab CI bandit-sast job.
         run: |
-          bandit -r src/ -ll -ii --format json -o bandit-report.json || true
+          bandit -c pyproject.toml -r src/ --format json -o bandit-report.json || true
           echo "=== Bandit high findings ===" && python -c "
           import json, sys
           try:

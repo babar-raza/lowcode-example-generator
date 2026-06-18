@@ -13,7 +13,7 @@ Last verified: 2026-06-17
 | `src/plugin_examples/psal/` | PSAL multi-family orchestration loop. |
 | `src/plugin_examples/compliance/` | Incident register, release receipt, audit trail, compliance reporter. |
 | `pipeline/configs/` | Runtime configuration (family YAMLs, metrics, denominators). |
-| `pipeline/plugin-capability-registry/` | Non-LowCode plugin capability registry (18 family YAMLs). |
+| `pipeline/plugin-capability-registry/` | Non-LowCode plugin capability registry (18 family YAMLs + `schema.yaml`). |
 | `pipeline/plugin-code-registry/` | Plugin code registry entries per family. |
 | `pipeline/schemas/` | JSON schemas (11 total: api-catalog, family-config, scenario, validation-result, etc.). |
 | `pipeline/contracts/` | Scenario contracts (6 LowCode families). |

@@ -21,11 +21,12 @@ pip install -e ".[dev]"
 pre-commit install
 ```
 
-**Requirements**: Python 3.12 or later, .NET SDK 9.0 (for DllReflector builds only).
+**Requirements**: Python 3.12 or later, .NET SDK 10.0 or newer (CI uses 10.0.204; for DllReflector builds only).
 
 ## Coding Standards
 
-This project uses [ruff](https://docs.astral.sh/ruff/) for linting and formatting:
+This project uses [ruff](https://docs.astral.sh/ruff/) for linting and formatting.
+For documentation contributions, follow the [Documentation Style Guide](docs/development/style-guide.md) — key rules: reference pages instead of copying tables, use the guide template for new guides, and update `Last verified` frontmatter when making source-verified changes.
 
 - **Line length**: 120 characters
 - **Target Python**: 3.12+

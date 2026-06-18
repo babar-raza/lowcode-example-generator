@@ -4,7 +4,7 @@ Checks only local relative file links (not external URLs). Ignores archive
 and audit directories by default to avoid noise from historical files.
 
 Usage:
-    python scripts/check_doc_links.py [--root docs/] [--include-archive]
+    python scripts/check_doc_links.py [--root docs/] [--include-archive] [--include-root]
 
 Exits with code 1 if any broken relative links are found.
 """
@@ -16,7 +16,6 @@ import re
 import sys
 from pathlib import Path
 from urllib.parse import urlparse
-
 
 _LINK_PATTERN = re.compile(r"\[([^\]]*)\]\(([^)]+)\)")
 _ANCHOR_PATTERN = re.compile(r"^#")
@@ -54,10 +53,17 @@ def _resolve(source_file: Path, href: str, repo_root: Path) -> Path | None:
     return target
 
 
-def check_links(root: Path, include_archive: bool = False) -> list[str]:
+_ROOT_FILES = ("AGENTS.md", "README.md", "CONTRIBUTING.md", "SECURITY.md", "CHANGELOG.md")
+
+
+def check_links(
+    root: Path, include_archive: bool = False, extra_files: list[Path] | None = None
+) -> list[str]:
     """Return a list of broken-link error messages."""
     errors: list[str] = []
     md_files = sorted(root.rglob("*.md"))
+    if extra_files:
+        md_files = sorted(set(md_files) | set(extra_files))
 
     for md_file in md_files:
         # Skip archive/audit unless explicitly included
@@ -98,6 +104,12 @@ def main() -> int:
         default=False,
         help="Include _archive/ and _audit/ directories in link check",
     )
+    parser.add_argument(
+        "--include-root",
+        action="store_true",
+        default=False,
+        help="Also check root-level .md files (AGENTS.md, README.md, CONTRIBUTING.md, etc.)",
+    )
     args = parser.parse_args()
 
     repo_root = Path(__file__).parent.parent
@@ -107,8 +119,14 @@ def main() -> int:
         print(f"ERROR: directory not found: {docs_root}", file=sys.stderr)
         return 1
 
+    extra: list[Path] = []
+    if args.include_root:
+        extra = [repo_root / f for f in _ROOT_FILES if (repo_root / f).exists()]
+
     print(f"Checking relative links in {docs_root} ...")
-    errors = check_links(docs_root, include_archive=args.include_archive)
+    if extra:
+        print(f"  + root files: {[f.name for f in extra]}")
+    errors = check_links(docs_root, include_archive=args.include_archive, extra_files=extra)
 
     if errors:
         print(f"\nLINK CHECK FAILED ({len(errors)} broken links):")

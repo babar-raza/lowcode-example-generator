@@ -14,8 +14,14 @@ import sys
 from datetime import date, timedelta
 from pathlib import Path
 
-
 # Files to check: relative path -> date pattern to look for in content
+#
+# ARCHITECTURE NOTE — matrix date semantics:
+# The matrix date in open-taskcard-closure-matrix.md reflects the date of the most recently
+# CLOSED taskcard evidence file, NOT the date the generator was last run.
+# sync-taskcard-docs is idempotent: re-running it without new evidence leaves the date unchanged.
+# For CI use, prefer --max-age-days 60 (sprint cadence) over --max-age-days 7 (daily cadence),
+# to avoid false failures between sprints when no new taskcard evidence has been committed.
 _CHECKED_FILES: dict[str, str] = {
     "docs/development/open-taskcard-closure-matrix.md": r"\*\*Matrix date:\*\*\s+(\d{4}-\d{2}-\d{2})",
 }

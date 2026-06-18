@@ -66,4 +66,24 @@ Key outcomes:
 | Schema coverage | schemas-and-contracts.md covers all 11 schemas |
 | Environment variables | environment-variables.md covers all discovered env vars |
 
-**Final verification**: 0 broken links · 0 CLI drift · all gate scripts exit 0
+**Final verification**: 0 broken links · 0 CLI drift · docs-link-check exit 0 · docs-freshness-check exit 1 at 7-day threshold (matrix date 2026-05-13; threshold corrected to 60 days in DOC-CONSOLIDATION-20260617-HARDEN)
+
+---
+
+## Sprint Summary — DOC-CONSOLIDATION-20260617-HARDEN
+
+**Status**: COMPLETE — all taskcards closed (2026-06-18).
+
+Hardening sprint resolving 7 residual gaps found in independent audit of the parent sprint.
+
+| Taskcard | Gap resolved | Evidence |
+|---|---|---|
+| TC-HN-1 | Removed false "all gate scripts exit 0" claim | `grep "all gate scripts exit 0" docs/_audit/README.md` → 0 results |
+| TC-HN-2 | Freshness gate threshold corrected to 60 days; architecture comment added | `python scripts/check_doc_freshness.py --max-age-days 60` → exit 0 |
+| TC-HN-3 | CONTRIBUTING.md: SDK 9.0 → 10.0; style guide link added | `grep "style-guide" CONTRIBUTING.md` → 1 result |
+| TC-HN-4 | operator-quickstart.md LLM intro "exclusive endpoint" contradiction removed | `grep "exclusive LLM endpoint" docs/getting-started/operator-quickstart.md` → 0 results |
+| TC-HN-5 | 34 unit tests added for 3 gate scripts | `pytest tests/unit/test_check_doc_scripts.py` → 34 passed, 0 failed |
+| TC-HN-6 | check_doc_links.py extended with `--include-root` flag; CI job updated | `python scripts/check_doc_links.py --root docs --include-root` → exit 0 |
+| TC-HN-7 | repo-structure.md: "18 family YAMLs" → "18 family YAMLs + schema.yaml" | `grep "schema.yaml" docs/development/repo-structure.md` → 1 result |
+
+**Final verification (2026-06-18)**: 0 broken links (docs + root files) · 0 CLI drift · docs-freshness-check exit 0 at 60-day threshold · 34 unit tests passed

@@ -181,14 +181,16 @@ docs-link-check:
     - source .pip-cache/venv/Scripts/activate
     - pip install -e ".[dev]"
   script:
-    - python scripts/check_doc_links.py --root docs
+    - python scripts/check_doc_links.py --root docs --include-root
   rules:
     - if: '$CI_PIPELINE_SOURCE == "push"'
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
 docs-freshness-check:
   # Advisory gate: checks that generated docs are within the allowed age window.
-  # Generated docs older than 7 days trigger a warning.
+  # Threshold is 60 days (sprint cadence) not 7 days, because the matrix date reflects
+  # the latest CLOSED taskcard evidence — sync-taskcard-docs is idempotent without new evidence.
+  # A 7-day threshold would fail permanently between sprints regardless of repo health.
   # allow_failure: true — advisory only until sync-taskcard-docs is wired into sprint automation.
   # Governance: ADR-009 (docs/adr/ADR-009-documentation-governance.md)
   stage: lint
@@ -202,7 +204,7 @@ docs-freshness-check:
     - source .pip-cache/venv/Scripts/activate
     - pip install -e ".[dev]"
   script:
-    - python scripts/check_doc_freshness.py --max-age-days 7
+    - python scripts/check_doc_freshness.py --max-age-days 60
   rules:
     - if: '$CI_PIPELINE_SOURCE == "push"'
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'

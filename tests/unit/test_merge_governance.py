@@ -386,9 +386,14 @@ class TestPostMergePlanWritten(unittest.TestCase):
         self.assertIn("runbook", plan)
 
     def test_post_merge_runbook_written(self):
-        """post-merge-verification-runbook.md exists."""
+        """Post-merge verification canonical doc exists with required content.
+
+        The original runbook at docs/publishing/post-merge-verification-runbook.md was
+        consolidated into docs/operations/post-merge-verification.md in sprint
+        DOC-CONSOLIDATION-20260617 (near-duplicate consolidation).
+        """
         runbook_path = (
-            Path(__file__).resolve().parents[2] / "docs" / "publishing" / "post-merge-verification-runbook.md"
+            Path(__file__).resolve().parents[2] / "docs" / "operations" / "post-merge-verification.md"
         )
         self.assertTrue(runbook_path.exists(), f"Expected {runbook_path} to exist")
         content = runbook_path.read_text()

@@ -35,7 +35,7 @@ export GITHUB_TOKEN="$GH_TOKEN"
 
 ## LLM Endpoint Access
 
-The pipeline uses `https://llm.professionalize.com/v1/` as its exclusive LLM endpoint. This is enforced by an approved-providers whitelist in the LLM router — the pipeline will reject any other endpoint at preflight and abort before generation.
+The pipeline uses `https://llm.professionalize.com/v1/` as its production LLM endpoint, enforced by an approved-providers whitelist in the LLM router. For local development and offline testing, `ollama` is also approved (see [Local Development Provider](#local-development-provider-ollama) below). Any other endpoint is blocked at preflight.
 
 ### Required Environment Variables
 

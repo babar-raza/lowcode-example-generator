@@ -15,6 +15,9 @@ Source of truth: `pipeline/schemas/`, `pipeline/contracts/`, tests under `tests/
 | `pipeline/schemas/example-manifest.schema.json` | Example manifest shape. |
 | `pipeline/schemas/validation-result.schema.json` | Validation result shape. |
 | `pipeline/schemas/denominator.schema.json` | Denominator model shape. |
+| `pipeline/schemas/ai-suggestion-schema.json` | AI suggestion/generation output shape. |
+| `pipeline/schemas/operation-kind-matrix.schema.json` | Operation kind matrix shape for scenario planning. |
+| `pipeline/schemas/plugin-capability-registry-schema.json` | Non-LowCode capability registry entry shape. |
 
 ## Contracts
 

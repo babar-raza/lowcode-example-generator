@@ -4,7 +4,7 @@ Audience: Operator, Contributor
 
 Source of truth: `pyproject.toml`, `src/plugin_examples/__main__.py`
 
-Last verified from audit: 2026-05-25
+Last verified: 2026-06-17
 
 The package exposes the `plugin-examples` console script and can also be run as a module:
 
@@ -58,6 +58,13 @@ See [Metrics](metrics.md) and [Environment Variables](environment-variables.md).
 | `target-repo-health` | Verify target repos for confirmed LowCode families. | `--family`, `--output`, `--json` |
 | `next-actions` | Compute the portfolio action board. | `--output`, `--markdown`, `--json` |
 | `execute-next-actions` | Execute safe next actions through the planner loop. | `--evidence-dir`, `--max-cycles`, `--dry-run-remote`, `--json` |
+| `catalog-discover` | Scrape products.aspose.net to discover non-LowCode plugin slugs and NuGet packages. | `--family`, `--families`, `--all-families`, `--replay`, `--sitemap`, `--output`, `--delay-ms`, `--enrich-registry`, `--expand-registry`, shared metrics flags |
+| `doctor` | Run startup health checks for the pipeline environment. | `--json` |
+| `metrics-summary` | Show pipeline metrics summary from evidence files. | `--repo-root`, `--json` |
+| `probe-registry` | Generate C# probe code from capability-registry entries, optionally run dotnet restore/build/run, and promote results. | `--family`, `--slug`, `--execute`, `--promote`, `--timeout`, `--json` |
+| `psal-run` | Run PSAL multi-family autonomous governance loop across non-LowCode families. | `--families`, `--max-iterations`, `--dry-run`, `--template-mode`, `--repo-root`, `--json` |
+| `sprint-governance` | Coordinate sprint loop: classify P3 summary, decide next stage (AUDIT/HARDEN/EXECUTE/ACCEPT/ESCALATE). | `--sprint-name`, `--summary-file`, `--max-iterations`, `--repo-root`, `--json` |
+| `verify-remote` | Verify remote repository state against a publication record. | `--publication-record`, `--output` |
 
 ## `run` Tiers
 

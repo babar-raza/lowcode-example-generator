@@ -4,7 +4,7 @@ Audience: Operator, Contributor
 
 Source of truth: `src/plugin_examples/__main__.py`, `src/plugin_examples/publisher/`
 
-Last verified from audit: 2026-05-25
+Last verified: 2026-06-17
 
 ## Publishing Model
 

@@ -4,7 +4,7 @@ Audience: Operator, Contributor
 
 Source of truth: `src/plugin_examples/family_config/`, `pipeline/schemas/family-config.schema.json`, `pipeline/configs/`
 
-Last verified from audit: 2026-05-25
+Last verified: 2026-06-17
 
 ## Family Config Files
 

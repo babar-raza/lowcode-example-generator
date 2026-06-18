@@ -165,6 +165,48 @@ pip-audit:
     - if: '$CI_PIPELINE_SOURCE == "push"'
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
+docs-link-check:
+  # Advisory gate: checks relative links in docs/ for broken targets.
+  # Uses Python-based checker (no npm dependency) to stay within shell executor constraints.
+  # allow_failure: true — advisory only until baseline is verified across all branches.
+  # Governance: ADR-009 (docs/adr/ADR-009-documentation-governance.md)
+  stage: lint
+  allow_failure: true
+  cache:
+    key: pip-lint
+    paths:
+      - .pip-cache/
+  before_script:
+    - python -m venv --clear .pip-cache/venv
+    - source .pip-cache/venv/Scripts/activate
+    - pip install -e ".[dev]"
+  script:
+    - python scripts/check_doc_links.py --root docs
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+docs-freshness-check:
+  # Advisory gate: checks that generated docs are within the allowed age window.
+  # Generated docs older than 7 days trigger a warning.
+  # allow_failure: true — advisory only until sync-taskcard-docs is wired into sprint automation.
+  # Governance: ADR-009 (docs/adr/ADR-009-documentation-governance.md)
+  stage: lint
+  allow_failure: true
+  cache:
+    key: pip-lint
+    paths:
+      - .pip-cache/
+  before_script:
+    - python -m venv --clear .pip-cache/venv
+    - source .pip-cache/venv/Scripts/activate
+    - pip install -e ".[dev]"
+  script:
+    - python scripts/check_doc_freshness.py --max-age-days 7
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
 # ── Tests ────────────────────────────────────────────────────
 
 .test-base:

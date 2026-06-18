@@ -1,8 +1,10 @@
 # Documentation Style Guide
 
-Purpose: keep documentation clear, code-aligned, and non-duplicative.
+Audience: Contributor
+Status: Active
+Promoted: 2026-06-17 (from docs/_audit/style_guide.md — IA migration accepted)
 
-This is a planning artifact under `_audit/`. It should be promoted into contributor docs only after the IA migration is accepted.
+Purpose: keep documentation clear, code-aligned, and non-duplicative.
 
 ## Core Rules
 

@@ -5,7 +5,7 @@ Audience: Operator
 ## Prerequisites
 
 - Python 3.12 or newer.
-- .NET SDK 8.0 for reflector and generated project validation.
+- .NET SDK 8.0 or newer for reflector and generated project validation. (The CI environment uses SDK 10.0.204; generated projects default to `net8.0` target framework but compile with any SDK 8.0+.)
 - Dependencies installed with `pip install -e ".[dev]"` for test workflows or `pip install -e .` for basic operation.
 - `GH_TOKEN` set as a Windows system environment variable (classic PAT, `repo` scope) for live GitHub operations.
 
@@ -86,9 +86,13 @@ The LLM endpoint is only used during the `generation` stage. All other pipeline 
 
 Contact your team lead or infrastructure administrator for API key provisioning. The endpoint is an internal service — credentials are not self-service.
 
-### Legacy Providers (Not Approved)
+### Local Development Provider (ollama)
 
-The router code retains fallback branches for `OPENAI_API_KEY`, `LLM_API_KEY`, and `OLLAMA_HOST`. These are not approved for production use and are blocked by the approved-providers policy. Do not set these variables as substitutes for the `GPT_OSS_*` variables.
+`ollama` is an approved provider for local development and offline testing. It uses `codellama` by default and connects to `http://localhost:11434`. Set `OLLAMA_HOST` to override the endpoint. Ollama is not for production inference — production runs require `llm_professionalize`.
+
+### Forbidden Providers
+
+`openai` (direct), `azure_openai`, and `gpt_oss` as a provider family are explicitly blocked by the approved-providers policy (`src/plugin_examples/llm_router/provider_policy.py`). Do not set `OPENAI_API_KEY` or `LLM_API_KEY` as substitutes. The model name `gpt-4o-mini` is also forbidden.
 
 ## GitHub Organization Access
 
@@ -96,14 +100,30 @@ The pipeline publishes examples to family-specific repositories in Aspose GitHub
 
 ### Target Repositories
 
+Each family has a dedicated GitHub repository for published examples. The repository path is configured in `pipeline/configs/families/{family}.yml` under `github.published_plugin_examples_repo`.
+
+**Published families (as of 2026-06-17):**
+
 | Family | Repository |
 |---|---|
+| Barcode | `aspose-barcode-net/Aspose.BarCode.Plugins-for-.NET-Examples` |
+| CAD | `aspose-cad-net/Aspose.CAD.Plugins-for-.NET-Examples` |
 | Cells | `aspose-cells-net/Aspose.Cells.LowCode-for-.NET-Examples` |
 | Diagram | `aspose-diagram-net/Aspose.Diagram.LowCode-for-.NET-Examples` |
 | Email | `aspose-email-net/Aspose.Email.LowCode-for-.NET-Examples` |
+| HTML | `aspose-html-net/Aspose.HTML.Plugins-for-.NET-Examples` |
+| Imaging | `aspose-imaging-net/Aspose.Imaging.Plugins-for-.NET-Examples` |
+| OCR | `aspose-ocr-net/Aspose.OCR.Plugins-for-.NET-Examples` |
+| Page | `aspose-page-net/Aspose.Page.Plugins-for-.NET-Examples` |
 | PDF | `aspose-pdf-net/Aspose.PDF.LowCode-for-.NET-Examples` |
 | Slides | `aspose-slides-net/Aspose.Slides.LowCode-for-.NET-Examples` |
+| SVG | `aspose-svg-net/Aspose.SVG.Plugins-for-.NET-Examples` |
+| Tasks | `aspose-tasks-net/Aspose.Tasks.Plugins-for-.NET-Examples` |
+| TeX | `aspose-tex-net/Aspose.TeX.Plugins-for-.NET-Examples` |
 | Words | `aspose-words-net/Aspose.Words.LowCode-for-.NET-Examples` |
+| ZIP | `aspose-zip-net/Aspose.ZIP.Plugins-for-.NET-Examples` |
+
+Families blocked by missing external repos (examples ready, repos not yet created): font, note, psd.
 
 ### Token Requirements
 

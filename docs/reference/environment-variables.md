@@ -4,7 +4,7 @@ Audience: Operator, Contributor
 
 Source of truth: `src/plugin_examples/__main__.py`, `src/plugin_examples/llm_router/router.py`, `src/plugin_examples/metrics/config.py`, `src/plugin_examples/publisher/`, `src/plugin_examples/verifier_bridge/`
 
-Last verified from audit: 2026-05-25
+Last verified: 2026-06-17
 
 ## GitHub Tokens
 
@@ -30,6 +30,9 @@ Use a classic PAT beginning with `ghp_` and `repo` scope for org-owned target re
 |---|---|---|
 | `PLUGIN_EXAMPLES_LIVE_PUBLISH_APPROVAL` | `APPROVE_LIVE_PR` | Fallback approval token for live PR creation and README PR publication. |
 | `PLUGIN_EXAMPLES_MERGE_PR_APPROVAL` | `APPROVE_MERGE_PR` | Fallback approval token for live merge. |
+| `PLUGIN_EXAMPLES_README_AUDIT_APPROVAL` | operator-defined | Override token for README audit gate. |
+| `APPROVE_LIVE_MERGE` | `1` | Agent auto-merge authority gate. Set to `1` to allow `gh pr merge --squash` when all AMG gates pass. |
+| `APPROVE_DELETE_BRANCH` | `1` | Post-merge branch deletion gate. Set to `1` to enable branch deletion after verified merge. |
 
 `APPROVE_LIVE_PR` is rejected for merge. Publishing and merging require separate approvals.
 
@@ -37,30 +40,24 @@ Approval token values are human operator inputs. They must NOT be stored as CI s
 
 ## LLM
 
-Repository governance requires all LLM inference to use:
+Two provider families are approved (enforced in `src/plugin_examples/llm_router/provider_policy.py`):
 
-```text
-https://llm.professionalize.com/v1/
-```
+| Variable | Provider | Required / Optional | Purpose |
+|---|---|---|---|
+| `GPT_OSS_ENDPOINT` | `llm_professionalize` | Required for production | Base URL. Default: `https://llm.professionalize.com/v1/`. If missing or empty, generation aborts. |
+| `GPT_OSS_MODEL` | `llm_professionalize` | Required for production | Model name served by `llm.professionalize.com`. |
+| `GPT_OSS_API_KEY` | `llm_professionalize` | Required for production | API key. |
+| `OLLAMA_HOST` | `ollama` | Optional (local dev only) | Base URL for local ollama provider. Default: `http://localhost:11434`. |
 
-Required governance variables:
+Forbidden provider variables (blocked by policy — `openai`, `azure_openai` are unapproved provider families):
 
-| Variable | Required behavior |
+| Variable | Status |
 |---|---|
-| `GPT_OSS_ENDPOINT` | Must be `https://llm.professionalize.com/v1/`. If missing or different, generation is governed as blocked. |
-| `GPT_OSS_MODEL` | Model name served by `llm.professionalize.com`. |
-| `GPT_OSS_API_KEY` | API key for `llm.professionalize.com`. |
+| `LLM_API_KEY` | Unapproved. Not a valid substitute. |
+| `OPENAI_API_KEY` | Unapproved. Not a valid substitute. |
+| `OPENAI_MODEL` | Unapproved. Not a valid substitute. |
 
-Known code gap from the audit: the current router still contains non-authoritative fallbacks and branches for generic/OpenAI/Ollama-style providers. Documentation must not recommend those fallbacks for live generation.
-
-Code-visible variables that remain in implementation and should be treated as legacy or internal until code is aligned:
-
-| Variable | Current code visibility |
-|---|---|
-| `LLM_API_KEY` | Fallback read in router code. Not an approved governance substitute. |
-| `OPENAI_API_KEY` | Fallback read in router code. Not an approved governance substitute. |
-| `OPENAI_MODEL` | Fallback read in router code. Not an approved governance substitute. |
-| `OLLAMA_HOST` | Used for evidence/base URL metadata; local Ollama is not an approved live-generation fallback under repo governance. |
+See [AGENTS.md](../../AGENTS.md) for provider governance rules.
 
 ## Reviewer
 
@@ -78,6 +75,25 @@ Code-visible variables that remain in implementation and should be treated as le
 | `AGENT_METRICS_ENDPOINT` | Metrics POST endpoint. |
 | `AGENT_METRICS_TOKEN` | Metrics POST token. |
 | `AGENT_METRICS_PRODUCTION_ENABLED` | Enables production metrics behavior when set to `true`. |
+
+## Logging
+
+| Variable | Purpose |
+|---|---|
+| `LOG_LEVEL` | Log level override (e.g., `DEBUG`, `INFO`, `WARNING`). Default: `INFO`. Read by `src/plugin_examples/observability.py`. |
+| `PLUGIN_EXAMPLES_LOG_FORMAT` | Set to `json` to enable JSON-structured log output. |
+
+## Catalog Discovery
+
+| Variable | Purpose |
+|---|---|
+| `CATALOG_CRAWL_DELAY_MS` | Override crawl delay in milliseconds for `catalog-discover`. Default: set by `_DEFAULT_DELAY_MS` in crawler.py. |
+
+## Runtime Behavior
+
+| Variable | Purpose |
+|---|---|
+| `ACCEPT_VERSION_DRIFT` | Set to `1` to suppress version drift errors in the runner (for local development). |
 
 ## Local Development
 

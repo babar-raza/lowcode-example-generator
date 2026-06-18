@@ -16,6 +16,7 @@ ADRs document significant technical and governance decisions: the context that p
 | [ADR-006](ADR-006-non-lowcode-fallback-strategy.md) | Non-LowCode Fallback Strategy | Accepted | 2026-06-13 |
 | [ADR-007](ADR-007-wave-based-versioning.md) | Wave-Based Versioning | Accepted | 2026-06-14 |
 | [ADR-008](ADR-008-pip-audit-advisory-policy.md) | pip-audit Advisory-Only Policy | Accepted | 2026-06-16 |
+| [ADR-009](ADR-009-documentation-governance.md) | Documentation Governance — Docs-as-Code Synchronization Policy | Accepted | 2026-06-17 |
 
 ## Format
 

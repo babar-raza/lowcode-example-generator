@@ -25,6 +25,7 @@ Code and schemas are the source of truth. Reference pages in `docs/reference/` a
 | Verify after merge | [Post-Merge Verification](operations/post-merge-verification.md) | [Publishing and GitHub](reference/publishing-and-github.md), [File Contracts](reference/file-contracts.md) |
 | Monthly maintenance | [Monthly Maintenance](operations/monthly-maintenance.md) | [CLI](reference/cli.md), [Config](reference/config.md), [File Contracts](reference/file-contracts.md) |
 | Troubleshoot a run | [Troubleshooting](operations/troubleshooting.md) | [CLI](reference/cli.md), [Gates and Verdicts](reference/gates-and-verdicts.md) |
+| Probe non-LowCode capability entries | [Probe Registry Guide](guides/probe-registry-guide.md) | [CLI](reference/cli.md) |
 
 ## Canonical References
 
@@ -47,6 +48,7 @@ Code and schemas are the source of truth. Reference pages in `docs/reference/` a
 - [Testing and CI](development/testing.md)
 - [Repository Structure](development/repo-structure.md)
 - [Taskcards](development/taskcards.md)
+- [Documentation Style Guide](development/style-guide.md)
 
 ## Archive and Audits
 

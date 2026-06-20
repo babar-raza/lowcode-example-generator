@@ -69,9 +69,13 @@ def add_parser(subparsers):
     )
 
     parser.add_argument(
-        "--strict-output-validation",
+        "--no-strict-output",
         action="store_true",
-        help="Block publication when output validation fails (default: advisory only)",
+        help=(
+            "Disable strict output validation (default: strict mode ON). "
+            "When set, advisory_no_output and advisory_failed are treated as advisory-only "
+            "and do not block publication. Use for families with known output limitations."
+        ),
     )
 
     # Agent metrics flags (shared across commands)
@@ -142,6 +146,7 @@ def handle(args) -> int:
         metrics_strict=getattr(args, "metrics_strict", False),
         metrics_force_repost=getattr(args, "metrics_force_repost", False),
         family_config_path=getattr(args, "family_config", None),
+        strict_output_validation=not getattr(args, "no_strict_output", False),
     )
     gs = report.get("gate_summary", {})
     verdict = report.get("verdict", "UNKNOWN")

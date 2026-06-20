@@ -47,6 +47,17 @@ def add_parser(subparsers):
         action="store_true",
         help="Write report to workspace/verification/latest/",
     )
+    parser.add_argument(
+        "--batch-size",
+        type=int,
+        default=0,
+        metavar="N",
+        help=(
+            "Limit the number of PRs created per run to N. "
+            "Use to avoid hitting GitHub API rate limits during batch publishing. "
+            "0 (default) means no limit."
+        ),
+    )
 
     _add_metrics_flags(parser)
     parser.set_defaults(func=handle)

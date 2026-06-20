@@ -24,11 +24,16 @@ from __future__ import annotations
 import base64
 import json
 import logging
+import time
 import urllib.error
 import urllib.request
 from pathlib import Path
+from typing import Any
 
 logger = logging.getLogger(__name__)
+
+# Warn and pause when remaining API budget falls to this threshold.
+_RATE_LIMIT_WARN_THRESHOLD = 100
 
 GITHUB_API_BASE = "https://api.github.com"
 
@@ -72,6 +77,42 @@ def _build_headers(github_token: str) -> dict[str, str]:
     }
 
 
+def _check_rate_limit(headers: Any, url: str) -> None:
+    """Inspect GitHub rate-limit headers and sleep if budget is low.
+
+    If X-RateLimit-Remaining falls below _RATE_LIMIT_WARN_THRESHOLD, log a
+    warning. If it reaches 0, sleep until X-RateLimit-Reset (+ 1 s buffer).
+    """
+    if headers is None:
+        return
+    remaining_raw = headers.get("X-RateLimit-Remaining")
+    reset_raw = headers.get("X-RateLimit-Reset")
+    if remaining_raw is None:
+        return
+    try:
+        remaining = int(remaining_raw)
+    except ValueError:
+        return
+
+    if remaining < _RATE_LIMIT_WARN_THRESHOLD:
+        logger.warning(
+            "github_rate_limit_low remaining=%d url=%s",
+            remaining,
+            url,
+        )
+    if remaining == 0 and reset_raw is not None:
+        try:
+            reset_ts = int(reset_raw)
+            sleep_secs = max(0, reset_ts - int(time.time())) + 1
+        except ValueError:
+            sleep_secs = 60
+        logger.warning(
+            "github_rate_limit_exhausted sleeping=%ds",
+            sleep_secs,
+        )
+        time.sleep(sleep_secs)
+
+
 def _api_request(
     method: str,
     url: str,
@@ -101,9 +142,11 @@ def _api_request(
     req = urllib.request.Request(url, data=data, method=method, headers=req_headers)
     try:
         with urllib.request.urlopen(req) as resp:
+            _check_rate_limit(resp.headers, url)
             resp_body = resp.read().decode("utf-8")
             return json.loads(resp_body) if resp_body.strip() else {}
     except urllib.error.HTTPError as exc:
+        _check_rate_limit(exc.headers, url)
         error_body = exc.read().decode("utf-8", errors="replace")
         # Truncate to avoid leaking large response bodies in logs
         raise PublishingError(f"GitHub API {method} {url} returned HTTP {exc.code}: " f"{error_body[:400]}") from exc

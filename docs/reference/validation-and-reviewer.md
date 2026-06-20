@@ -57,6 +57,23 @@ Fixture discovery is part of pipeline planning and evidence collection. The exte
 
 Fixture and example mining evidence is documented in [File and Evidence Contracts](file-contracts.md).
 
+## Strict Output Validation
+
+Strict output validation is **enabled by default** as of 2026-06-20.
+
+When strict mode is active, examples with `advisory_no_output` or `advisory_failed` output
+validation status are blocked from PR creation with verdict `EXAMPLE_BLOCKED_OUTPUT_VALIDATION_FAILED`.
+
+To disable strict mode for families with known output limitations (e.g., conversion-only
+tools that produce a file but no stdout), pass `--no-strict-output` to the `run` command:
+
+```bash
+python -m plugin_examples run --family barcode --no-strict-output
+```
+
+This promotes advisory output failures back to advisory-only, allowing the example to proceed
+to PR creation while the failure is still visible in the gate evidence.
+
 ## Required vs Degraded Behavior
 
 CLI flags can require validation or reviewer availability:

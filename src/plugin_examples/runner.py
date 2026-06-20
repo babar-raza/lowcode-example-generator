@@ -87,7 +87,7 @@ class PipelineContext:
     fallback_candidates: list | None = None
     # Strict output validation — when True, advisory_no_output and advisory_failed
     # block publication instead of being advisory-only.
-    strict_output_validation: bool = False
+    strict_output_validation: bool = True
 
 
 # ---------------------------------------------------------------------------
@@ -2350,6 +2350,7 @@ def run_pipeline(
     metrics_strict: bool = False,
     metrics_force_repost: bool = False,
     family_config_path: str | None = None,
+    strict_output_validation: bool = True,
 ) -> dict:
     """Run the full pipeline and return a structured report dict."""
     # Verify stage I/O contracts are consistent at startup (advisory — logs warnings only)
@@ -2387,6 +2388,7 @@ def run_pipeline(
         run_dir=run_dir,
         evidence_dir=evidence_dir,
         metrics_collector=metrics_collector,
+        strict_output_validation=strict_output_validation,
     )
     ctx._allow_experimental = allow_experimental
     ctx._family_config_path = family_config_path
@@ -2586,6 +2588,7 @@ def run_pipeline(
         reviewer_passed=reviewer_pass,
         skip_run=skip_run,
         contract_blocking_mode=True,
+        strict_output_validation=ctx.strict_output_validation,
     )
     write_example_gate_results(example_gates, evidence_dir)
 

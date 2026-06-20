@@ -139,6 +139,16 @@ def add_parser(subparsers):
         action="store_true",
         help="Create new capability registry entries for discovered plugins not yet in registry YAMLs",
     )
+    parser.add_argument(
+        "--static-manifest",
+        metavar="PATH",
+        help=(
+            "Load plugin discovery data from a pre-built JSON manifest instead of crawling "
+            "products.aspose.net. Use when the website is blocked (e.g. WAF/403). "
+            "The manifest must be a JSON file with the same structure as website-catalog.json: "
+            '{"families": {"<family>": [{"slug": "...", "url": "...", ...}]}}'
+        ),
+    )
     parser.set_defaults(func=handle)
     return parser
 
@@ -200,6 +210,19 @@ def handle(args) -> int:
     all_entries: list[dict] = []
     total_errors: list[str] = []
 
+    # --static-manifest: load from pre-built JSON instead of crawling the web.
+    # Use when products.aspose.net is blocked (WAF/403).
+    static_manifest_path = getattr(args, "static_manifest", None)
+    if static_manifest_path:
+        return _handle_static_manifest(
+            manifest_path=Path(static_manifest_path),
+            families=families,
+            output_path=output_path,
+            timestamp=timestamp,
+            repo_root=repo_root,
+            args=args,
+        )
+
     use_replay = getattr(args, "replay", False)
     use_sitemap = getattr(args, "sitemap", False)
 
@@ -239,6 +262,91 @@ def handle(args) -> int:
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(catalog, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"Catalog written: {output_path} ({catalog['total_entries']} entries)")
+
+    if getattr(args, "enrich_registry", False):
+        enriched = _enrich_registry_hashes(repo_root, families_map)
+        print(f"Registry enrichment: {enriched} entries updated with plugin_page_hash")
+
+    if getattr(args, "expand_registry", False):
+        added = _expand_registry_entries(repo_root, families_map)
+        print(f"Registry expansion: {added} new entries created")
+
+    return 0
+
+
+# ---------------------------------------------------------------------------
+# Static manifest loader (WAF workaround)
+# ---------------------------------------------------------------------------
+
+
+def _handle_static_manifest(
+    *,
+    manifest_path: Path,
+    families: list[str],
+    output_path: Path,
+    timestamp: str,
+    repo_root: Path,
+    args: object,
+) -> int:
+    """Load discovery data from a pre-built JSON file instead of crawling the web.
+
+    The manifest must follow the same structure as website-catalog.json:
+        {"families": {"<family_slug>": [{"slug": "...", "url": "...", ...}]}}
+
+    Entries for families not in the requested --family/--families list are ignored
+    (unless --all-families is specified, in which case all manifest families are used).
+    """
+    if not manifest_path.exists():
+        print(f"Error: static manifest not found: {manifest_path}")
+        return 1
+
+    try:
+        manifest_data = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        print(f"Error: static manifest is not valid JSON: {exc}")
+        return 1
+
+    manifest_families: dict[str, list[dict]] = {}
+    if isinstance(manifest_data, dict) and "families" in manifest_data:
+        manifest_families = manifest_data.get("families") or {}
+    elif isinstance(manifest_data, list):
+        # Flat list — group by family_slug field
+        for entry in manifest_data:
+            if isinstance(entry, dict):
+                fam = entry.get("family_slug") or entry.get("family", "unknown")
+                manifest_families.setdefault(fam, []).append(entry)
+    else:
+        print("Error: static manifest must have a 'families' dict or be a flat list")
+        return 1
+
+    # Filter to requested families
+    use_all = getattr(args, "all_families", False)
+    selected_families = list(manifest_families.keys()) if use_all else families
+
+    families_map: dict[str, list[dict]] = {}
+    total_errors: list[str] = []
+    for fam_slug in selected_families:
+        entries = manifest_families.get(fam_slug, [])
+        if not entries:
+            total_errors.append(f"Family '{fam_slug}' not found in static manifest")
+            print(f"  {fam_slug}: 0 entries (not in manifest)")
+        else:
+            families_map[fam_slug] = entries
+            print(f"  {fam_slug}: {len(entries)} entries (from static manifest)")
+
+    catalog = {
+        "generated_at": timestamp,
+        "source": "static_manifest",
+        "manifest_path": str(manifest_path),
+        "total_entries": sum(len(v) for v in families_map.values()),
+        "families_discovered": list(families_map.keys()),
+        "errors": total_errors,
+        "families": families_map,
+    }
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(catalog, indent=2, ensure_ascii=False), encoding="utf-8")
+    print(f"Catalog written: {output_path} ({catalog['total_entries']} entries, source=static_manifest)")
 
     if getattr(args, "enrich_registry", False):
         enriched = _enrich_registry_hashes(repo_root, families_map)

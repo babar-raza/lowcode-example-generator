@@ -58,21 +58,21 @@ entries:
     load_method: Load
     input_format: DWG
     output_format: PDF
-  status: REFLECTION_CANDIDATE
+  status: PROBE_FAILED
   confidence_score: 0.78
   confidence_rationale: 'DWG is a primary CAD format. Aspose.CAD.Image.Load accepts
     DWG files. PdfOptions in CAD controls output format.
 
     '
-  probe_evidence: null
-  failure_taxonomy: null
+  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\cad\convert-dwg-to-pdf\probe-outcome.json
+  failure_taxonomy: PROBE_FAILED_BUILD
   rejection_reason: null
   ai_source_flag: false
   assembly_fingerprint: null
   plugin_page_hash: null
   last_validated: '2026-06-04T00:00:00Z'
   bootstrap_status: REFLECTION_CANDIDATE
-  next_action: PROBE_CANDIDATE_PENDING_PROBE
+  next_action: NEEDS_API_MAPPING_FIX
   blocker_type: null
   last_reflected_package_version: 26.1.0
   refresh_due: '2026-09-04'
@@ -93,21 +93,21 @@ entries:
     method_name: Save
     input_format: DXF
     output_format: PDF
-  status: REFLECTION_CANDIDATE
+  status: PROBE_FAILED
   confidence_score: 0.75
   confidence_rationale: 'DXF is a secondary CAD format. Same Image.Load → Save API
     as DWG.
 
     '
-  probe_evidence: null
-  failure_taxonomy: null
+  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\cad\convert-dxf-to-pdf\probe-outcome.json
+  failure_taxonomy: PROBE_FAILED_BUILD
   rejection_reason: null
   ai_source_flag: false
   assembly_fingerprint: null
   plugin_page_hash: null
   last_validated: '2026-06-04T00:00:00Z'
   bootstrap_status: REFLECTION_CANDIDATE
-  next_action: PROBE_CANDIDATE_PENDING_PROBE
+  next_action: NEEDS_API_MAPPING_FIX
   blocker_type: null
   last_reflected_package_version: 26.1.0
   refresh_due: '2026-09-04'
@@ -127,20 +127,20 @@ entries:
     namespace: Aspose.CAD
     method_name: Save
     output_format: PNG
-  status: REFLECTION_CANDIDATE
+  status: PROBE_FAILED
   confidence_score: 0.73
   confidence_rationale: 'Image rasterization uses same Load → Save pattern with PngOptions/JpegOptions.
 
     '
-  probe_evidence: null
-  failure_taxonomy: null
+  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\cad\convert-cad-to-image\probe-outcome.json
+  failure_taxonomy: PROBE_FAILED_BUILD
   rejection_reason: null
   ai_source_flag: false
   assembly_fingerprint: null
   plugin_page_hash: null
   last_validated: '2026-06-04T00:00:00Z'
   bootstrap_status: REFLECTION_CANDIDATE
-  next_action: PROBE_CANDIDATE_PENDING_PROBE
+  next_action: NEEDS_API_MAPPING_FIX
   blocker_type: null
   last_reflected_package_version: 26.1.0
   refresh_due: '2026-09-04'
@@ -161,20 +161,20 @@ entries:
     method_name: Save
     input_format: DWG
     output_format: JPEG
-  status: REFLECTION_CANDIDATE
+  status: PROBE_FAILED
   confidence_score: 0.72
   confidence_rationale: 'DWG to JPG uses Image.Load(dwgFile) → Save(jpgPath, JpegOptions).
 
     '
-  probe_evidence: null
-  failure_taxonomy: null
+  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\cad\convert-dwg-to-jpg\probe-outcome.json
+  failure_taxonomy: PROBE_FAILED_BUILD
   rejection_reason: null
   ai_source_flag: false
   assembly_fingerprint: null
   plugin_page_hash: null
   last_validated: '2026-06-04T00:00:00Z'
   bootstrap_status: REFLECTION_CANDIDATE
-  next_action: PROBE_CANDIDATE_PENDING_PROBE
+  next_action: NEEDS_API_MAPPING_FIX
   blocker_type: null
   last_reflected_package_version: 26.1.0
   refresh_due: '2026-09-04'
@@ -188,19 +188,20 @@ entries:
   candidate_api_types: []
   candidate_methods: []
   selected_api_mapping: null
-  status: WEBSITE_DISCOVERED
+  status: PROBE_FAILED
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/cad/ plugin page. Needs
     reflection probe to confirm API mapping.
-  probe_evidence: null
-  failure_taxonomy: null
+  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\cad\conversion
+  failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
+    got ''NoneType'''
   rejection_reason: null
   ai_source_flag: false
   assembly_fingerprint: null
   plugin_page_hash: null
   last_validated: '2026-06-16T19:25:08Z'
   bootstrap_status: WEBSITE_DISCOVERED
-  next_action: PROBE_PENDING
+  next_action: NEEDS_API_MAPPING_FIX
   blocker_type: null
   last_reflected_package_version: null
   refresh_due: null

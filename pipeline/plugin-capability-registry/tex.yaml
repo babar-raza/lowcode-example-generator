@@ -12,20 +12,20 @@ entries:
   - Run
   selected_api_mapping:
     note: AI_DRAFT — pending DllReflector confirmation
-  status: WEBSITE_DISCOVERED
+  status: PROBE_FAILED
   confidence_score: 0.58
   confidence_rationale: 'TeX to PDF: TeXJob with PdfSaveOptions → Run(). 17.3MB DLL.
 
     '
-  probe_evidence: null
-  failure_taxonomy: null
+  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\tex\convert-tex-to-pdf\probe-outcome.json
+  failure_taxonomy: PROBE_FAILED_BUILD
   rejection_reason: null
   ai_source_flag: true
   assembly_fingerprint: null
   plugin_page_hash: null
   last_validated: '2026-06-04T00:00:00Z'
   bootstrap_status: WEBSITE_DISCOVERED
-  next_action: REFLECTION_DEFERRED_LARGE_DLL
+  next_action: NEEDS_API_MAPPING_FIX
   blocker_type: REFLECTION_BLOCKED
   last_reflected_package_version: null
   refresh_due: '2026-09-04'
@@ -41,18 +41,18 @@ entries:
   candidate_methods:
   - Run
   selected_api_mapping: null
-  status: WEBSITE_DISCOVERED
+  status: PROBE_FAILED
   confidence_score: 0.56
   confidence_rationale: LaTeX is TeX dialect; same TeXJob API.
-  probe_evidence: null
-  failure_taxonomy: null
+  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\tex\convert-latex-to-pdf\probe-outcome.json
+  failure_taxonomy: PROBE_FAILED_BUILD
   rejection_reason: null
   ai_source_flag: true
   assembly_fingerprint: null
   plugin_page_hash: null
   last_validated: '2026-06-04T00:00:00Z'
   bootstrap_status: WEBSITE_DISCOVERED
-  next_action: REFLECTION_DEFERRED_LARGE_DLL
+  next_action: NEEDS_API_MAPPING_FIX
   blocker_type: REFLECTION_BLOCKED
   last_reflected_package_version: null
   refresh_due: '2026-09-04'
@@ -66,19 +66,20 @@ entries:
   candidate_api_types: []
   candidate_methods: []
   selected_api_mapping: null
-  status: WEBSITE_DISCOVERED
+  status: PROBE_FAILED
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/tex/ plugin page. Needs
     reflection probe to confirm API mapping.
-  probe_evidence: null
-  failure_taxonomy: null
+  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\tex\latex-figure-renderer
+  failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
+    got ''NoneType'''
   rejection_reason: null
   ai_source_flag: false
   assembly_fingerprint: null
   plugin_page_hash: null
   last_validated: '2026-06-16T19:25:08Z'
   bootstrap_status: WEBSITE_DISCOVERED
-  next_action: PROBE_PENDING
+  next_action: NEEDS_API_MAPPING_FIX
   blocker_type: null
   last_reflected_package_version: null
   refresh_due: null
@@ -92,19 +93,20 @@ entries:
   candidate_api_types: []
   candidate_methods: []
   selected_api_mapping: null
-  status: WEBSITE_DISCOVERED
+  status: PROBE_FAILED
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/tex/ plugin page. Needs
     reflection probe to confirm API mapping.
-  probe_evidence: null
-  failure_taxonomy: null
+  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\tex\latex-math-renderer
+  failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
+    got ''NoneType'''
   rejection_reason: null
   ai_source_flag: false
   assembly_fingerprint: null
   plugin_page_hash: null
   last_validated: '2026-06-16T19:25:08Z'
   bootstrap_status: WEBSITE_DISCOVERED
-  next_action: PROBE_PENDING
+  next_action: NEEDS_API_MAPPING_FIX
   blocker_type: null
   last_reflected_package_version: null
   refresh_due: null
@@ -118,19 +120,20 @@ entries:
   candidate_api_types: []
   candidate_methods: []
   selected_api_mapping: null
-  status: WEBSITE_DISCOVERED
+  status: PROBE_FAILED
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/tex/ plugin page. Needs
     reflection probe to confirm API mapping.
-  probe_evidence: null
-  failure_taxonomy: null
+  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\tex\convert-tex-to-svg
+  failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
+    got ''NoneType'''
   rejection_reason: null
   ai_source_flag: false
   assembly_fingerprint: null
   plugin_page_hash: null
   last_validated: '2026-06-16T19:25:08Z'
   bootstrap_status: WEBSITE_DISCOVERED
-  next_action: PROBE_PENDING
+  next_action: NEEDS_API_MAPPING_FIX
   blocker_type: null
   last_reflected_package_version: null
   refresh_due: null

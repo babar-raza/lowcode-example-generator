@@ -1,63 +1,59 @@
-# Plugin capability registry — Aspose.Note
-# TRAIN D: Plugin-level entries (v26.4.0)
-# Reflection: deferred — 41.2MB DLL, too large for current DllReflector timeout
-
 entries:
-  - family: note
-    plugin_slug: convert-one-to-pdf
-    operation_kind: NOTE_CONVERSION
-    package_id: Aspose.Note
-    type_name: Document
-    namespace: Aspose.Note
-    method_name: Save
-    candidate_api_types:
-      - Aspose.Note.Document
-    candidate_methods:
-      - Save
-    selected_api_mapping:
-      note: AI_DRAFT — pending DllReflector confirmation (large DLL)
-    status: WEBSITE_DISCOVERED
-    confidence_score: 0.62
-    confidence_rationale: >
-      OneNote to PDF: Document(onePath) → Save(pdfPath, SaveFormat.Pdf).
-      41.2MB DLL, deferred for next reflection wave.
-    probe_evidence: null
-    failure_taxonomy: null
-    rejection_reason: null
-    ai_source_flag: true
-    assembly_fingerprint: null
-    plugin_page_hash: null
-    last_validated: "2026-06-04T00:00:00Z"
-    bootstrap_status: WEBSITE_DISCOVERED
-    next_action: REFLECTION_DEFERRED_LARGE_DLL
-    blocker_type: REFLECTION_BLOCKED
-    last_reflected_package_version: null
-    refresh_due: "2026-09-04"
+- family: note
+  plugin_slug: convert-one-to-pdf
+  operation_kind: NOTE_CONVERSION
+  package_id: Aspose.Note
+  type_name: Document
+  namespace: Aspose.Note
+  method_name: Save
+  candidate_api_types:
+  - Aspose.Note.Document
+  candidate_methods:
+  - Save
+  selected_api_mapping:
+    note: AI_DRAFT — pending DllReflector confirmation (large DLL)
+  status: PROBE_FAILED
+  confidence_score: 0.62
+  confidence_rationale: 'OneNote to PDF: Document(onePath) → Save(pdfPath, SaveFormat.Pdf).
+    41.2MB DLL, deferred for next reflection wave.
 
-  - family: note
-    plugin_slug: convert-one-to-word
-    operation_kind: NOTE_CONVERSION
-    package_id: Aspose.Note
-    type_name: Document
-    namespace: Aspose.Note
-    method_name: Save
-    candidate_api_types:
-      - Aspose.Note.Document
-    candidate_methods:
-      - Save
-    selected_api_mapping: null
-    status: WEBSITE_DISCOVERED
-    confidence_score: 0.60
-    confidence_rationale: Same Document.Save with SaveFormat.Docx.
-    probe_evidence: null
-    failure_taxonomy: null
-    rejection_reason: null
-    ai_source_flag: true
-    assembly_fingerprint: null
-    plugin_page_hash: null
-    last_validated: "2026-06-04T00:00:00Z"
-    bootstrap_status: WEBSITE_DISCOVERED
-    next_action: REFLECTION_DEFERRED_LARGE_DLL
-    blocker_type: REFLECTION_BLOCKED
-    last_reflected_package_version: null
-    refresh_due: "2026-09-04"
+    '
+  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\note\convert-one-to-pdf\probe-outcome.json
+  failure_taxonomy: PROBE_FAILED_RESTORE
+  rejection_reason: null
+  ai_source_flag: true
+  assembly_fingerprint: null
+  plugin_page_hash: null
+  last_validated: '2026-06-04T00:00:00Z'
+  bootstrap_status: WEBSITE_DISCOVERED
+  next_action: NEEDS_DEPENDENCY_FIX
+  blocker_type: REFLECTION_BLOCKED
+  last_reflected_package_version: null
+  refresh_due: '2026-09-04'
+- family: note
+  plugin_slug: convert-one-to-word
+  operation_kind: NOTE_CONVERSION
+  package_id: Aspose.Note
+  type_name: Document
+  namespace: Aspose.Note
+  method_name: Save
+  candidate_api_types:
+  - Aspose.Note.Document
+  candidate_methods:
+  - Save
+  selected_api_mapping: null
+  status: PROBE_FAILED
+  confidence_score: 0.6
+  confidence_rationale: Same Document.Save with SaveFormat.Docx.
+  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\note\convert-one-to-word\probe-outcome.json
+  failure_taxonomy: PROBE_FAILED_RESTORE
+  rejection_reason: null
+  ai_source_flag: true
+  assembly_fingerprint: null
+  plugin_page_hash: null
+  last_validated: '2026-06-04T00:00:00Z'
+  bootstrap_status: WEBSITE_DISCOVERED
+  next_action: NEEDS_DEPENDENCY_FIX
+  blocker_type: REFLECTION_BLOCKED
+  last_reflected_package_version: null
+  refresh_due: '2026-09-04'

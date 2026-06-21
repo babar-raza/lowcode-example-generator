@@ -1,69 +1,63 @@
-# Plugin capability registry — Aspose.OCR
-# TRAIN D: Plugin-level entries (v26.5.0)
-# Reflection: BLOCKED — needs Aspose.Drawing.Common v26.3.0 dep (not in standard NuGet cache)
-
 entries:
-  # Plugin 1: Recognize Text in Image (recognize-text)
-  - family: ocr
-    plugin_slug: recognize-text
-    operation_kind: OCR_RECOGNITION
-    package_id: Aspose.OCR
-    type_name: AsposeOcr
-    namespace: Aspose.OCR
-    method_name: Recognize
-    candidate_api_types:
-      - Aspose.OCR.AsposeOcr
-    candidate_methods:
-      - Recognize
-      - RecognizeImage
-    selected_api_mapping:
-      type_name: AsposeOcr
-      namespace: Aspose.OCR
-      method_name: RecognizeImage
-      note: AI_DRAFT — pending DllReflector confirmation
-    status: WEBSITE_DISCOVERED
-    confidence_score: 0.65
-    confidence_rationale: >
-      Known OCR API: AsposeOcr → RecognizeImage(filePath) → OcrResult.
-      Reflection deferred: DLL is 35.9MB with complex dependencies.
-    probe_evidence: null
-    failure_taxonomy: null
-    rejection_reason: null
-    ai_source_flag: true
-    assembly_fingerprint: null
-    plugin_page_hash: null
-    last_validated: "2026-06-04T00:00:00Z"
-    bootstrap_status: WEBSITE_DISCOVERED
-    next_action: REFLECTION_DEFERRED_DEPENDENCY_CONFLICT
-    blocker_type: REFLECTION_BLOCKED
-    last_reflected_package_version: null
-    refresh_due: "2026-09-04"
-
-  # Plugin 2: Extract Text from Image (extract-text)
-  - family: ocr
-    plugin_slug: extract-text
-    operation_kind: OCR_RECOGNITION
-    package_id: Aspose.OCR
+- family: ocr
+  plugin_slug: recognize-text
+  operation_kind: OCR_RECOGNITION
+  package_id: Aspose.OCR
+  type_name: AsposeOcr
+  namespace: Aspose.OCR
+  method_name: Recognize
+  candidate_api_types:
+  - Aspose.OCR.AsposeOcr
+  candidate_methods:
+  - Recognize
+  - RecognizeImage
+  selected_api_mapping:
     type_name: AsposeOcr
     namespace: Aspose.OCR
     method_name: RecognizeImage
-    candidate_api_types:
-      - Aspose.OCR.AsposeOcr
-    candidate_methods:
-      - RecognizeImage
-    selected_api_mapping: null
-    status: WEBSITE_DISCOVERED
-    confidence_score: 0.63
-    confidence_rationale: Same as recognize-text; same API.
-    probe_evidence: null
-    failure_taxonomy: null
-    rejection_reason: null
-    ai_source_flag: true
-    assembly_fingerprint: null
-    plugin_page_hash: null
-    last_validated: "2026-06-04T00:00:00Z"
-    bootstrap_status: WEBSITE_DISCOVERED
-    next_action: REFLECTION_DEFERRED_DEPENDENCY_CONFLICT
-    blocker_type: REFLECTION_BLOCKED
-    last_reflected_package_version: null
-    refresh_due: "2026-09-04"
+    note: AI_DRAFT — pending DllReflector confirmation
+  status: PROBE_FAILED
+  confidence_score: 0.65
+  confidence_rationale: 'Known OCR API: AsposeOcr → RecognizeImage(filePath) → OcrResult.
+    Reflection deferred: DLL is 35.9MB with complex dependencies.
+
+    '
+  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\ocr\recognize-text\probe-outcome.json
+  failure_taxonomy: PROBE_FAILED_BUILD
+  rejection_reason: null
+  ai_source_flag: true
+  assembly_fingerprint: null
+  plugin_page_hash: null
+  last_validated: '2026-06-04T00:00:00Z'
+  bootstrap_status: WEBSITE_DISCOVERED
+  next_action: NEEDS_API_MAPPING_FIX
+  blocker_type: REFLECTION_BLOCKED
+  last_reflected_package_version: null
+  refresh_due: '2026-09-04'
+- family: ocr
+  plugin_slug: extract-text
+  operation_kind: OCR_RECOGNITION
+  package_id: Aspose.OCR
+  type_name: AsposeOcr
+  namespace: Aspose.OCR
+  method_name: RecognizeImage
+  candidate_api_types:
+  - Aspose.OCR.AsposeOcr
+  candidate_methods:
+  - RecognizeImage
+  selected_api_mapping: null
+  status: PROBE_FAILED
+  confidence_score: 0.63
+  confidence_rationale: Same as recognize-text; same API.
+  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\ocr\extract-text\probe-outcome.json
+  failure_taxonomy: PROBE_FAILED_BUILD
+  rejection_reason: null
+  ai_source_flag: true
+  assembly_fingerprint: null
+  plugin_page_hash: null
+  last_validated: '2026-06-04T00:00:00Z'
+  bootstrap_status: WEBSITE_DISCOVERED
+  next_action: NEEDS_API_MAPPING_FIX
+  blocker_type: REFLECTION_BLOCKED
+  last_reflected_package_version: null
+  refresh_due: '2026-09-04'

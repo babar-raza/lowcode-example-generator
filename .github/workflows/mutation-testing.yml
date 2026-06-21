@@ -48,41 +48,37 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -e ".[dev]"
-          pip install mutmut
+          # Pin mutmut to 2.x — v3 changed CLI interface (--paths-to-mutate deprecated)
+          pip install "mutmut<3"
 
       - name: Run mutation testing on critical modules
         id: mutmut
         run: |
-          # Critical modules: 20 most important for pipeline correctness
-          # These are the modules most likely to have silent logic errors.
-          TARGET_PATHS="\
-            src/plugin_examples/gates/example_gates.py \
-            src/plugin_examples/runner.py \
-            src/plugin_examples/publisher/github_pr_publisher.py \
-            src/plugin_examples/publisher/publisher.py \
-            src/plugin_examples/quality/example_scorer.py \
-            src/plugin_examples/commands/catalog_discover.py \
-            src/plugin_examples/commands/run.py \
-            src/plugin_examples/family_config.py \
-            src/plugin_examples/replay.py \
-            src/plugin_examples/probe_executor/executor.py"
-
-          # Run mutmut on each target module (fail-safe: continue on individual failures)
+          # Targeted scope: 3 highest-priority gate and quality modules.
+          # mutmut 2.x CLI: --paths-to-mutate and --tests-dir are supported.
           mutmut run \
-            --paths-to-mutate src/plugin_examples/gates/example_gates.py \
-                              src/plugin_examples/quality/example_scorer.py \
-                              src/plugin_examples/publisher/github_pr_publisher.py \
+            --paths-to-mutate src/plugin_examples/gates/example_gates.py,src/plugin_examples/quality/example_scorer.py,src/plugin_examples/publisher/github_pr_publisher.py \
             --tests-dir tests/unit \
             || true
 
+          # Print results summary to log
           mutmut results || true
 
       - name: Save mutation results
         if: always()
         run: |
           mkdir -p workspace/evidence/mutation
-          mutmut results --json > workspace/evidence/mutation/mutmut-results.json 2>/dev/null || echo '{"status":"no_results"}' > workspace/evidence/mutation/mutmut-results.json
-          mutmut show > workspace/evidence/mutation/mutmut-summary.txt 2>/dev/null || echo "No summary available" > workspace/evidence/mutation/mutmut-summary.txt
+          # mutmut 2.x: junitxml output via --xml flag
+          mutmut results \
+            > workspace/evidence/mutation/mutmut-summary.txt 2>&1 \
+            || echo "No summary available" > workspace/evidence/mutation/mutmut-summary.txt
+          # Emit a lightweight JSON with killed/survived counts extracted from summary
+          killed=$(grep -oP '\d+ (?=killed)' workspace/evidence/mutation/mutmut-summary.txt | head -1 || echo "0")
+          survived=$(grep -oP '\d+ (?=survived)' workspace/evidence/mutation/mutmut-summary.txt | head -1 || echo "0")
+          total=$((${killed:-0} + ${survived:-0}))
+          score=$(python3 -c "k,t=${killed:-0},${total}; print(f'{k/t*100:.1f}%' if t>0 else 'N/A')")
+          echo "{\"killed\": ${killed:-0}, \"survived\": ${survived:-0}, \"total\": $total, \"score\": \"$score\"}" \
+            > workspace/evidence/mutation/mutmut-results.json
           echo "Mutation testing complete. Results saved."
           cat workspace/evidence/mutation/mutmut-summary.txt || true
 

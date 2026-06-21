@@ -54,10 +54,12 @@ jobs:
       - name: Run mutation testing on critical modules
         id: mutmut
         run: |
-          # Targeted scope: 3 highest-priority gate and quality modules.
+          # Targeted scope: example_scorer.py only (smallest critical module, fits in 60 min).
+          # Full 3-module run timed out at 60 min (GHA run 27899842949, 2026-06-21).
+          # Once baseline is established, expand scope in future runs.
           # mutmut 2.x CLI: --paths-to-mutate and --tests-dir are supported.
           mutmut run \
-            --paths-to-mutate src/plugin_examples/gates/example_gates.py,src/plugin_examples/quality/example_scorer.py,src/plugin_examples/publisher/github_pr_publisher.py \
+            --paths-to-mutate src/plugin_examples/quality/example_scorer.py \
             --tests-dir tests/unit \
             || true
 

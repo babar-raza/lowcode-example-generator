@@ -34,6 +34,7 @@ EXAMPLE_VERDICTS = frozenset(
         "EXAMPLE_BLOCKED_MISSING_FIXTURE",
         "EXAMPLE_BLOCKED_RUNTIME_CONTEXT_REQUIRED",
         "EXAMPLE_NOT_EVALUATED",
+        "EXAMPLE_BLOCKED_QUALITY_GATE",
     }
 )
 
@@ -587,6 +588,54 @@ def _verdict_to_scenario_status(verdict: str) -> str:
         "EXAMPLE_NOT_EVALUATED": "blocked_not_evaluated",
     }
     return mapping.get(verdict, "blocked_unknown")
+
+
+# --- Quality gate (TC-SRHP-13) ---
+
+
+def evaluate_quality_gate(
+    generated_projects: list[dict],
+    allow_low_quality: bool = False,
+) -> tuple[bool, list[str]]:
+    """Check if any example scores below the quality threshold (TC-SRHP-13).
+
+    Imports quality scorer lazily to preserve RISK-10 gate isolation — the scorer
+    uses only regex patterns and has no AI/LLM dependencies.
+
+    Args:
+        generated_projects: List of generated project dicts (each may have quality_score).
+        allow_low_quality: When True, log a warning but do NOT block publication.
+
+    Returns:
+        (gate_blocks, low_quality_ids) where gate_blocks is True iff publication
+        should be blocked (LOW-quality examples found and allow_low_quality is False).
+    """
+    from plugin_examples.quality.example_scorer import PASSING_THRESHOLD  # noqa: PLC0415
+
+    low_quality_ids = [
+        proj.get("scenario_id", "unknown")
+        for proj in generated_projects
+        if proj.get("quality_score", 1.0) < PASSING_THRESHOLD
+    ]
+
+    if not low_quality_ids:
+        return False, []
+
+    if allow_low_quality:
+        logger.warning(
+            "quality_gate_bypassed: %d LOW-quality examples allowed via --allow-low-quality: %s",
+            len(low_quality_ids),
+            low_quality_ids,
+        )
+        return False, low_quality_ids
+
+    logger.error(
+        "quality_gate_blocked: %d examples scored below threshold %s: %s",
+        len(low_quality_ids),
+        PASSING_THRESHOLD,
+        low_quality_ids,
+    )
+    return True, low_quality_ids
 
 
 # --- Writers ---

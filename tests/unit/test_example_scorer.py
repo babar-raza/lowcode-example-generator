@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pytest
 
+from plugin_examples.gates.example_gates import evaluate_quality_gate
 from plugin_examples.quality.example_scorer import (
     PASSING_THRESHOLD,
     TOTAL_CRITERIA,
@@ -258,3 +259,53 @@ def test_build_quality_manifest_empty() -> None:
     manifest = build_quality_manifest([])
     assert manifest["total_examples"] == 0
     assert manifest["average_quality_score"] == 0.0
+
+
+# ---------------------------------------------------------------------------
+# Tests: evaluate_quality_gate (TC-SRHP-13)
+# ---------------------------------------------------------------------------
+
+
+def test_quality_gate_blocks_low_score() -> None:
+    """Gate blocks when at least one example scores below threshold."""
+    projects = [
+        {"scenario_id": "words-convert", "quality_score": 1.0},
+        {"scenario_id": "words-stub", "quality_score": 0.4},
+    ]
+    blocked, low_ids = evaluate_quality_gate(projects, allow_low_quality=False)
+    assert blocked is True
+    assert "words-stub" in low_ids
+
+
+def test_quality_gate_passes_when_all_above_threshold() -> None:
+    """Gate does NOT block when all examples meet or exceed the threshold."""
+    projects = [
+        {"scenario_id": "words-convert", "quality_score": 1.0},
+        {"scenario_id": "words-extract", "quality_score": 0.6},
+    ]
+    blocked, low_ids = evaluate_quality_gate(projects, allow_low_quality=False)
+    assert blocked is False
+    assert low_ids == []
+
+
+def test_quality_gate_bypassed_with_allow_flag() -> None:
+    """Gate does NOT block when allow_low_quality=True, but still identifies low IDs."""
+    projects = [{"scenario_id": "words-stub", "quality_score": 0.2}]
+    blocked, low_ids = evaluate_quality_gate(projects, allow_low_quality=True)
+    assert blocked is False
+    assert "words-stub" in low_ids
+
+
+def test_quality_gate_empty_projects_not_blocked() -> None:
+    """Gate does not block when there are no generated projects."""
+    blocked, low_ids = evaluate_quality_gate([], allow_low_quality=False)
+    assert blocked is False
+    assert low_ids == []
+
+
+def test_quality_gate_missing_score_defaults_to_passing() -> None:
+    """Projects without a quality_score key default to 1.0 (passing)."""
+    projects = [{"scenario_id": "words-no-score"}]
+    blocked, low_ids = evaluate_quality_gate(projects, allow_low_quality=False)
+    assert blocked is False
+    assert low_ids == []

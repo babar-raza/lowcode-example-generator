@@ -78,6 +78,16 @@ def add_parser(subparsers):
         ),
     )
 
+    parser.add_argument(
+        "--allow-low-quality",
+        action="store_true",
+        help=(
+            "Allow examples with quality_score < 0.6 to proceed to PR creation (TC-SRHP-13). "
+            "By default, LOW-quality examples block PR creation (quality hard gate). "
+            "Use for families where known limitations prevent high quality scores."
+        ),
+    )
+
     # Agent metrics flags (shared across commands)
     _add_metrics_flags(parser)
     parser.set_defaults(func=handle)
@@ -147,6 +157,7 @@ def handle(args) -> int:
         metrics_force_repost=getattr(args, "metrics_force_repost", False),
         family_config_path=getattr(args, "family_config", None),
         strict_output_validation=not getattr(args, "no_strict_output", False),
+        allow_low_quality=getattr(args, "allow_low_quality", False),
     )
     gs = report.get("gate_summary", {})
     verdict = report.get("verdict", "UNKNOWN")

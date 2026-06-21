@@ -47,7 +47,7 @@ metrics:
     probe-publish-permissions: "Permission Probes"
     sync-taskcard-docs: "Taskcard Documents"
 
-  # All 22 verdicts from src/plugin_examples/gates/models.py
+  # All 23 verdicts from src/plugin_examples/gates/models.py
   verdict_to_status:
     FULL_E2E_PASSED: "success"
     PR_READY: "success"
@@ -71,6 +71,7 @@ metrics:
     BLOCKED_NO_PUBLISHABLE_EXAMPLES: "failure"
     VALIDATION_BLOCKED: "failure"
     GENERATION_BLOCKED: "failure"
+    BLOCKED_QUALITY_GATE: "failure"
 
   allowed_statuses:
     - "success"

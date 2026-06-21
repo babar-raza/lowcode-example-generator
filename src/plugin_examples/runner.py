@@ -88,6 +88,9 @@ class PipelineContext:
     # Strict output validation — when True, advisory_no_output and advisory_failed
     # block publication instead of being advisory-only.
     strict_output_validation: bool = True
+    # Quality hard gate — when False (default), LOW-quality examples block PR creation.
+    # Set to True via --allow-low-quality to bypass for families with known limitations.
+    allow_low_quality: bool = False
 
 
 # ---------------------------------------------------------------------------
@@ -1399,6 +1402,38 @@ def _stage_generation(ctx: PipelineContext) -> dict:
 
     write_example_index(ctx.generated_projects, ctx.evidence_dir)
 
+    # TC-SRHP-03: Score generated examples and write quality manifest
+    _quality_scores = []
+    try:
+        from plugin_examples.quality.example_scorer import (
+            build_quality_manifest,
+            score_project_directory,
+        )
+
+        for _proj in ctx.generated_projects:
+            _proj_dir = Path(_proj.get("project_dir", ""))
+            _sid = _proj.get("scenario_id", "unknown")
+            _score = score_project_directory(_sid, _proj_dir)
+            _proj["quality_score"] = _score.quality_score
+            _proj["quality_label"] = _score.quality_label
+            _quality_scores.append(_score)
+
+        if _quality_scores:
+            import json as _json
+
+            _qm = build_quality_manifest(_quality_scores)
+            _qm_path = ctx.evidence_dir / "latest" / "quality-manifest.json"
+            _qm_path.parent.mkdir(parents=True, exist_ok=True)
+            _qm_path.write_text(_json.dumps(_qm, indent=2), encoding="utf-8")
+            logger.info(
+                "Quality scoring complete: %d/%d examples passing (avg=%.2f)",
+                _qm["passing_examples"],
+                _qm["total_examples"],
+                _qm["average_quality_score"],
+            )
+    except Exception:
+        logger.debug("Quality scoring skipped (non-critical)", exc_info=True)
+
     # Write generated fixtures evidence
     from plugin_examples.fixture_registry.fixture_factory import (
         GeneratedFixture,
@@ -1455,12 +1490,15 @@ def _stage_generation(ctx: PipelineContext) -> dict:
         "template": "TEMPLATE_CATALOG",
     }
 
+    _passing_quality = sum(1 for p in ctx.generated_projects if p.get("quality_score", 0) >= 0.6)
     return {
         "examples_generated": len(ctx.generated_projects),
         "generation_mode": gen_mode,
         "generation_quality_tier": _tier_map.get(gen_mode, gen_mode.upper()),
         "fixtures_generated": len(all_fixtures),
         "healing_intelligence_loaded": healing_evidence.get("loaded", False),
+        "quality_scored": len(_quality_scores),
+        "quality_passing": _passing_quality,
     }
 
 
@@ -2351,6 +2389,7 @@ def run_pipeline(
     metrics_force_repost: bool = False,
     family_config_path: str | None = None,
     strict_output_validation: bool = True,
+    allow_low_quality: bool = False,
 ) -> dict:
     """Run the full pipeline and return a structured report dict."""
     # Verify stage I/O contracts are consistent at startup (advisory — logs warnings only)
@@ -2389,6 +2428,7 @@ def run_pipeline(
         evidence_dir=evidence_dir,
         metrics_collector=metrics_collector,
         strict_output_validation=strict_output_validation,
+        allow_low_quality=allow_low_quality,
     )
     ctx._allow_experimental = allow_experimental
     ctx._family_config_path = family_config_path
@@ -2619,6 +2659,24 @@ def run_pipeline(
         gen_mode = gen_stage.artifacts.get("generation_mode", "template") if gen_stage else "template"
         ctx.gate_verdict.verdict = compute_partitioned_verdict(aggregate, ctx, gen_mode)
         ctx.gate_verdict.publishable = ctx.gate_verdict.verdict in ("PR_READY", "FULL_E2E_PASSED")
+
+    # Quality hard gate (TC-SRHP-13) — runs after partitioned verdict so it can
+    # override a PR_READY or FULL_E2E_PASSED verdict when LOW-quality examples exist.
+    if ctx.generated_projects:
+        from plugin_examples.gates.example_gates import evaluate_quality_gate  # noqa: PLC0415
+
+        _quality_blocked, _low_quality_ids = evaluate_quality_gate(
+            ctx.generated_projects, allow_low_quality=ctx.allow_low_quality
+        )
+        if _quality_blocked:
+            ctx.gate_verdict.verdict = "BLOCKED_QUALITY_GATE"
+            ctx.gate_verdict.publishable = False
+            ctx.gate_verdict.blocking_gates.append("QUALITY_HARD_GATE")
+            logger.error(
+                "pipeline_blocked_quality_gate: %d examples below threshold: %s",
+                len(_low_quality_ids),
+                _low_quality_ids,
+            )
 
     write_gate_results(ctx.gate_verdict, evidence_dir)
 

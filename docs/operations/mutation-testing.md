@@ -118,17 +118,38 @@ Score = killed / (killed + survived)
 
 ---
 
-## Baseline Score (as of 2026-06-20)
+## Baseline Score
 
-Status: PENDING first successful GitHub Actions run.
+### First Successful Run — 2026-06-21
 
-Once the first run completes, update this table:
+| Field | Value |
+|---|---|
+| GitHub Actions run URL | https://github.com/babar-raza/lowcode-example-generator/actions/runs/27901328201 |
+| Date | 2026-06-21 |
+| Python version | 3.12.13 |
+| mutmut version | 2.x (pinned `mutmut<3`) |
+| Scope | `src/plugin_examples/quality/example_scorer.py` only |
+| Run duration | ~49 minutes |
 
-| Module | Killed | Survived | Score |
-|---|---|---|---|
-| `gates/example_gates.py` | TBD | TBD | TBD |
-| `quality/example_scorer.py` | TBD | TBD | TBD |
-| `publisher/github_pr_publisher.py` | TBD | TBD | TBD |
-| **Overall** | TBD | TBD | TBD |
+| Module | Killed | Survived | Timeouts | Total | Score |
+|---|---|---|---|---|---|
+| `quality/example_scorer.py` | 109 | 0 | 0 | 109 | **100%** 🎉 |
+
+**Interpretation:** GREEN — perfect mutation score. All 109 mutants killed. The 21 tests
+in `tests/unit/test_example_scorer.py` cover every reachable code path with discriminating
+assertions. No test additions are needed at this time.
+
+**Status: >= 80% target MET. Candidate for future blocking gate once remaining modules are baselined.**
+
+### Pending Baseline Modules
+
+These modules were not included in the first run (3-module run timed out at 60 min,
+GHA run 27899842949). To be baselined in future weekly runs:
+
+| Module | Priority | Notes |
+|---|---|---|
+| `gates/example_gates.py` | High | Gate logic; add in next weekly run |
+| `publisher/github_pr_publisher.py` | Medium | PR creation; add after gates baselined |
 
 Evidence path: `workspace/evidence/mutation/mutmut-results.json`
+GHA artifact: `mutation-testing-results` (30-day retention)

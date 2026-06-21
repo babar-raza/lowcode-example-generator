@@ -2662,7 +2662,13 @@ def run_pipeline(
 
     # Quality hard gate (TC-SRHP-13) — runs after partitioned verdict so it can
     # override a PR_READY or FULL_E2E_PASSED verdict when LOW-quality examples exist.
-    if ctx.generated_projects:
+    # Only fires when the verdict could lead to PR creation (not prototype/template modes).
+    _pr_eligible_verdicts = frozenset({
+        "PR_READY", "FULL_E2E_PASSED", "PR_DRY_RUN_READY",
+        "PARTIAL_PR_READY", "PARTIAL_PR_DRY_RUN_READY",
+        "CANONICAL_TEMPLATE_GENERATION_PASS", "CANONICAL_LLM_GENERATION_PASS",
+    })
+    if ctx.generated_projects and ctx.gate_verdict.verdict in _pr_eligible_verdicts:
         from plugin_examples.gates.example_gates import evaluate_quality_gate  # noqa: PLC0415
 
         _quality_blocked, _low_quality_ids = evaluate_quality_gate(

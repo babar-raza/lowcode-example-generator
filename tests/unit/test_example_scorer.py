@@ -309,3 +309,11 @@ def test_quality_gate_missing_score_defaults_to_passing() -> None:
     blocked, low_ids = evaluate_quality_gate(projects, allow_low_quality=False)
     assert blocked is False
     assert low_ids == []
+
+
+def test_quality_gate_threshold_boundary() -> None:
+    """Score exactly at threshold (0.6) is NOT blocked."""
+    projects = [{"scenario_id": "words-boundary", "quality_score": 0.6}]
+    blocked, low_ids = evaluate_quality_gate(projects, allow_low_quality=False)
+    assert blocked is False
+    assert low_ids == []

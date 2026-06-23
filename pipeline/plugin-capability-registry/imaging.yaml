@@ -29,269 +29,319 @@ entries:
   plugin_slug: animation-maker
   operation_kind: IMAGE_ANIMATION
   package_id: Aspose.Imaging
-  type_name: null
-  namespace: null
-  method_name: null
-  candidate_api_types: []
-  candidate_methods: []
-  selected_api_mapping: null
-  status: PROBE_FAILED
+  type_name: Image
+  namespace: Aspose.Imaging
+  method_name: Save
+  candidate_api_types:
+  - Aspose.Imaging.Image
+  candidate_methods:
+  - Save
+  selected_api_mapping:
+    type_name: Image
+    namespace: Aspose.Imaging
+    method_name: Save
+    note: DllReflector confirmed Aspose.Imaging.Image.Save exists in v26.6.0
+  status: PROBE_CANDIDATE
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
     Needs reflection probe to confirm API mapping.
-  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
-  failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
-    got ''NoneType'''
+  probe_evidence: null
+  failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false
-  assembly_fingerprint: null
+  assembly_fingerprint: imaging-26.6.0-dllreflector-confirmed-20260623
   plugin_page_hash: null
   last_validated: '2026-06-16T19:25:08Z'
   bootstrap_status: WEBSITE_DISCOVERED
-  next_action: NEEDS_API_MAPPING_FIX
+  next_action: NEEDS_PROBING
   blocker_type: null
-  last_reflected_package_version: null
+  last_reflected_package_version: 26.6.0
   refresh_due: null
 - family: imaging
   plugin_slug: image-converter
   operation_kind: IMAGE_CONVERSION
   package_id: Aspose.Imaging
-  type_name: null
-  namespace: null
-  method_name: null
-  candidate_api_types: []
-  candidate_methods: []
-  selected_api_mapping: null
-  status: PROBE_FAILED
+  type_name: Image
+  namespace: Aspose.Imaging
+  method_name: Save
+  candidate_api_types:
+  - Aspose.Imaging.Image
+  candidate_methods:
+  - Save
+  selected_api_mapping:
+    type_name: Image
+    namespace: Aspose.Imaging
+    method_name: Save
+    note: DllReflector confirmed Aspose.Imaging.Image.Save exists in v26.6.0
+  status: PROBE_CANDIDATE
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
     Needs reflection probe to confirm API mapping.
-  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
-  failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
-    got ''NoneType'''
+  probe_evidence: null
+  failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false
-  assembly_fingerprint: null
+  assembly_fingerprint: imaging-26.6.0-dllreflector-confirmed-20260623
   plugin_page_hash: null
   last_validated: '2026-06-16T19:25:08Z'
   bootstrap_status: WEBSITE_DISCOVERED
-  next_action: NEEDS_API_MAPPING_FIX
+  next_action: NEEDS_PROBING
   blocker_type: null
-  last_reflected_package_version: null
+  last_reflected_package_version: 26.6.0
   refresh_due: null
 - family: imaging
   plugin_slug: image-compressor
   operation_kind: IMAGE_COMPRESSION
   package_id: Aspose.Imaging
-  type_name: null
-  namespace: null
-  method_name: null
-  candidate_api_types: []
-  candidate_methods: []
-  selected_api_mapping: null
-  status: PROBE_FAILED
+  type_name: Image
+  namespace: Aspose.Imaging
+  method_name: Save
+  candidate_api_types:
+  - Aspose.Imaging.Image
+  candidate_methods:
+  - Save
+  selected_api_mapping:
+    type_name: Image
+    namespace: Aspose.Imaging
+    method_name: Save
+    note: DllReflector confirmed Aspose.Imaging.Image.Save exists in v26.6.0
+  status: PROBE_CANDIDATE
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
     Needs reflection probe to confirm API mapping.
-  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
-  failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
-    got ''NoneType'''
+  probe_evidence: null
+  failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false
-  assembly_fingerprint: null
+  assembly_fingerprint: imaging-26.6.0-dllreflector-confirmed-20260623
   plugin_page_hash: null
   last_validated: '2026-06-16T19:25:08Z'
   bootstrap_status: WEBSITE_DISCOVERED
-  next_action: NEEDS_API_MAPPING_FIX
+  next_action: NEEDS_PROBING
   blocker_type: null
-  last_reflected_package_version: null
+  last_reflected_package_version: 26.6.0
   refresh_due: null
 - family: imaging
   plugin_slug: image-merger
   operation_kind: IMAGE_MERGE
   package_id: Aspose.Imaging
-  type_name: null
-  namespace: null
-  method_name: null
-  candidate_api_types: []
-  candidate_methods: []
-  selected_api_mapping: null
-  status: PROBE_FAILED
+  type_name: Image
+  namespace: Aspose.Imaging
+  method_name: Create
+  candidate_api_types:
+  - Aspose.Imaging.Image
+  candidate_methods:
+  - Create
+  selected_api_mapping:
+    type_name: Image
+    namespace: Aspose.Imaging
+    method_name: Create
+    note: DllReflector confirmed Aspose.Imaging.Image.Create exists in v26.6.0
+  status: PROBE_CANDIDATE
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
     Needs reflection probe to confirm API mapping.
-  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
-  failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
-    got ''NoneType'''
+  probe_evidence: null
+  failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false
-  assembly_fingerprint: null
+  assembly_fingerprint: imaging-26.6.0-dllreflector-confirmed-20260623
   plugin_page_hash: null
   last_validated: '2026-06-16T19:25:08Z'
   bootstrap_status: WEBSITE_DISCOVERED
-  next_action: NEEDS_API_MAPPING_FIX
+  next_action: NEEDS_PROBING
   blocker_type: null
-  last_reflected_package_version: null
+  last_reflected_package_version: 26.6.0
   refresh_due: null
 - family: imaging
   plugin_slug: image-resizer
   operation_kind: IMAGE_RESIZE
   package_id: Aspose.Imaging
-  type_name: null
-  namespace: null
-  method_name: null
-  candidate_api_types: []
-  candidate_methods: []
-  selected_api_mapping: null
-  status: PROBE_FAILED
+  type_name: Image
+  namespace: Aspose.Imaging
+  method_name: Resize
+  candidate_api_types:
+  - Aspose.Imaging.Image
+  candidate_methods:
+  - Resize
+  selected_api_mapping:
+    type_name: Image
+    namespace: Aspose.Imaging
+    method_name: Resize
+    note: DllReflector confirmed Aspose.Imaging.Image.Resize exists in v26.6.0
+  status: PROBE_CANDIDATE
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
     Needs reflection probe to confirm API mapping.
-  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
-  failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
-    got ''NoneType'''
+  probe_evidence: null
+  failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false
-  assembly_fingerprint: null
+  assembly_fingerprint: imaging-26.6.0-dllreflector-confirmed-20260623
   plugin_page_hash: null
   last_validated: '2026-06-16T19:25:08Z'
   bootstrap_status: WEBSITE_DISCOVERED
-  next_action: NEEDS_API_MAPPING_FIX
+  next_action: NEEDS_PROBING
   blocker_type: null
-  last_reflected_package_version: null
+  last_reflected_package_version: 26.6.0
   refresh_due: null
 - family: imaging
   plugin_slug: photo-album-maker
   operation_kind: IMAGE_ALBUM
   package_id: Aspose.Imaging
-  type_name: null
-  namespace: null
-  method_name: null
-  candidate_api_types: []
-  candidate_methods: []
-  selected_api_mapping: null
-  status: PROBE_FAILED
+  type_name: Image
+  namespace: Aspose.Imaging
+  method_name: Save
+  candidate_api_types:
+  - Aspose.Imaging.Image
+  candidate_methods:
+  - Save
+  selected_api_mapping:
+    type_name: Image
+    namespace: Aspose.Imaging
+    method_name: Save
+    note: DllReflector confirmed Aspose.Imaging.Image.Save exists in v26.6.0
+  status: PROBE_CANDIDATE
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
     Needs reflection probe to confirm API mapping.
-  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
-  failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
-    got ''NoneType'''
+  probe_evidence: null
+  failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false
-  assembly_fingerprint: null
+  assembly_fingerprint: imaging-26.6.0-dllreflector-confirmed-20260623
   plugin_page_hash: null
   last_validated: '2026-06-16T19:25:08Z'
   bootstrap_status: WEBSITE_DISCOVERED
-  next_action: NEEDS_API_MAPPING_FIX
+  next_action: NEEDS_PROBING
   blocker_type: null
-  last_reflected_package_version: null
+  last_reflected_package_version: 26.6.0
   refresh_due: null
 - family: imaging
   plugin_slug: image-cropper
   operation_kind: IMAGE_CROP
   package_id: Aspose.Imaging
-  type_name: null
-  namespace: null
-  method_name: null
-  candidate_api_types: []
-  candidate_methods: []
-  selected_api_mapping: null
-  status: PROBE_FAILED
+  type_name: Image
+  namespace: Aspose.Imaging
+  method_name: Crop
+  candidate_api_types:
+  - Aspose.Imaging.Image
+  candidate_methods:
+  - Crop
+  selected_api_mapping:
+    type_name: Image
+    namespace: Aspose.Imaging
+    method_name: Crop
+    note: DllReflector confirmed Aspose.Imaging.Image.Crop exists in v26.6.0
+  status: PROBE_CANDIDATE
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
     Needs reflection probe to confirm API mapping.
-  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
-  failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
-    got ''NoneType'''
+  probe_evidence: null
+  failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false
-  assembly_fingerprint: null
+  assembly_fingerprint: imaging-26.6.0-dllreflector-confirmed-20260623
   plugin_page_hash: null
   last_validated: '2026-06-16T19:25:08Z'
   bootstrap_status: WEBSITE_DISCOVERED
-  next_action: NEEDS_API_MAPPING_FIX
+  next_action: NEEDS_PROBING
   blocker_type: null
-  last_reflected_package_version: null
+  last_reflected_package_version: 26.6.0
   refresh_due: null
 - family: imaging
   plugin_slug: image-effect-creator
   operation_kind: IMAGE_EFFECT
   package_id: Aspose.Imaging
-  type_name: null
-  namespace: null
-  method_name: null
-  candidate_api_types: []
-  candidate_methods: []
-  selected_api_mapping: null
-  status: PROBE_FAILED
+  type_name: Image
+  namespace: Aspose.Imaging
+  method_name: Save
+  candidate_api_types:
+  - Aspose.Imaging.Image
+  candidate_methods:
+  - Save
+  selected_api_mapping:
+    type_name: Image
+    namespace: Aspose.Imaging
+    method_name: Save
+    note: DllReflector confirmed Aspose.Imaging.Image.Save exists in v26.6.0
+  status: PROBE_CANDIDATE
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
     Needs reflection probe to confirm API mapping.
-  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
-  failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
-    got ''NoneType'''
+  probe_evidence: null
+  failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false
-  assembly_fingerprint: null
+  assembly_fingerprint: imaging-26.6.0-dllreflector-confirmed-20260623
   plugin_page_hash: null
   last_validated: '2026-06-16T19:25:08Z'
   bootstrap_status: WEBSITE_DISCOVERED
-  next_action: NEEDS_API_MAPPING_FIX
+  next_action: NEEDS_PROBING
   blocker_type: null
-  last_reflected_package_version: null
+  last_reflected_package_version: 26.6.0
   refresh_due: null
 - family: imaging
   plugin_slug: image-deskew
   operation_kind: IMAGE_DESKEW
   package_id: Aspose.Imaging
-  type_name: null
-  namespace: null
-  method_name: null
-  candidate_api_types: []
-  candidate_methods: []
-  selected_api_mapping: null
-  status: PROBE_FAILED
+  type_name: Image
+  namespace: Aspose.Imaging
+  method_name: Rotate
+  candidate_api_types:
+  - Aspose.Imaging.Image
+  candidate_methods:
+  - Rotate
+  selected_api_mapping:
+    type_name: Image
+    namespace: Aspose.Imaging
+    method_name: Rotate
+    note: DllReflector confirmed Aspose.Imaging.Image.Rotate exists in v26.6.0
+  status: PROBE_CANDIDATE
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
     Needs reflection probe to confirm API mapping.
-  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
-  failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
-    got ''NoneType'''
+  probe_evidence: null
+  failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false
-  assembly_fingerprint: null
+  assembly_fingerprint: imaging-26.6.0-dllreflector-confirmed-20260623
   plugin_page_hash: null
   last_validated: '2026-06-16T19:25:08Z'
   bootstrap_status: WEBSITE_DISCOVERED
-  next_action: NEEDS_API_MAPPING_FIX
+  next_action: NEEDS_PROBING
   blocker_type: null
-  last_reflected_package_version: null
+  last_reflected_package_version: 26.6.0
   refresh_due: null
 - family: imaging
   plugin_slug: image-rotate-flip
   operation_kind: IMAGE_ROTATE_FLIP
   package_id: Aspose.Imaging
-  type_name: null
-  namespace: null
-  method_name: null
-  candidate_api_types: []
-  candidate_methods: []
-  selected_api_mapping: null
-  status: PROBE_FAILED
+  type_name: Image
+  namespace: Aspose.Imaging
+  method_name: RotateFlip
+  candidate_api_types:
+  - Aspose.Imaging.Image
+  candidate_methods:
+  - RotateFlip
+  selected_api_mapping:
+    type_name: Image
+    namespace: Aspose.Imaging
+    method_name: RotateFlip
+    note: DllReflector confirmed Aspose.Imaging.Image.RotateFlip exists in v26.6.0
+  status: PROBE_CANDIDATE
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
     Needs reflection probe to confirm API mapping.
-  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
-  failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
-    got ''NoneType'''
+  probe_evidence: null
+  failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false
-  assembly_fingerprint: null
+  assembly_fingerprint: imaging-26.6.0-dllreflector-confirmed-20260623
   plugin_page_hash: null
   last_validated: '2026-06-16T19:25:08Z'
   bootstrap_status: WEBSITE_DISCOVERED
-  next_action: NEEDS_API_MAPPING_FIX
+  next_action: NEEDS_PROBING
   blocker_type: null
-  last_reflected_package_version: null
+  last_reflected_package_version: 26.6.0
   refresh_due: null

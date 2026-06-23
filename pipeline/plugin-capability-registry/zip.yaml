@@ -28,80 +28,96 @@ entries:
   plugin_slug: universal-compressor
   operation_kind: ARCHIVE_COMPRESS
   package_id: Aspose.ZIP
-  type_name: null
-  namespace: null
-  method_name: null
-  candidate_api_types: []
-  candidate_methods: []
-  selected_api_mapping: null
-  status: PROBE_FAILED
+  type_name: Archive
+  namespace: Aspose.Zip
+  method_name: Save
+  candidate_api_types:
+  - Aspose.Zip.Archive
+  candidate_methods:
+  - Save
+  selected_api_mapping:
+    type_name: Archive
+    namespace: Aspose.Zip
+    method_name: Save
+    note: DllReflector confirmed Aspose.Zip.Archive.Save exists in v26.6.0
+  status: PROBE_CANDIDATE
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/zip/ plugin page. Needs
     reflection probe to confirm API mapping.
-  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
-  failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
-    got ''NoneType'''
+  probe_evidence: null
+  failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false
-  assembly_fingerprint: null
+  assembly_fingerprint: zip-26.6.0-dllreflector-confirmed-20260623
   plugin_page_hash: null
   last_validated: '2026-06-16T19:25:08Z'
   bootstrap_status: WEBSITE_DISCOVERED
-  next_action: NEEDS_API_MAPPING_FIX
+  next_action: NEEDS_PROBING
   blocker_type: null
-  last_reflected_package_version: null
+  last_reflected_package_version: 26.6.0
   refresh_due: null
 - family: zip
   plugin_slug: universal-extractor
   operation_kind: ARCHIVE_EXTRACT
   package_id: Aspose.ZIP
-  type_name: null
-  namespace: null
-  method_name: null
-  candidate_api_types: []
-  candidate_methods: []
-  selected_api_mapping: null
-  status: PROBE_FAILED
+  type_name: Archive
+  namespace: Aspose.Zip
+  method_name: ExtractToDirectory
+  candidate_api_types:
+  - Aspose.Zip.Archive
+  candidate_methods:
+  - ExtractToDirectory
+  selected_api_mapping:
+    type_name: Archive
+    namespace: Aspose.Zip
+    method_name: ExtractToDirectory
+    note: DllReflector confirmed Aspose.Zip.Archive.ExtractToDirectory exists in v26.6.0
+  status: PROBE_CANDIDATE
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/zip/ plugin page. Needs
     reflection probe to confirm API mapping.
-  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
-  failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
-    got ''NoneType'''
+  probe_evidence: null
+  failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false
-  assembly_fingerprint: null
+  assembly_fingerprint: zip-26.6.0-dllreflector-confirmed-20260623
   plugin_page_hash: null
   last_validated: '2026-06-16T19:25:08Z'
   bootstrap_status: WEBSITE_DISCOVERED
-  next_action: NEEDS_API_MAPPING_FIX
+  next_action: NEEDS_PROBING
   blocker_type: null
-  last_reflected_package_version: null
+  last_reflected_package_version: 26.6.0
   refresh_due: null
 - family: zip
   plugin_slug: rar-extractor
   operation_kind: RAR_EXTRACT
   package_id: Aspose.ZIP
-  type_name: null
-  namespace: null
-  method_name: null
-  candidate_api_types: []
-  candidate_methods: []
-  selected_api_mapping: null
-  status: PROBE_FAILED
+  type_name: RarArchive
+  namespace: Aspose.Zip.Rar
+  method_name: ExtractToDirectory
+  candidate_api_types:
+  - Aspose.Zip.Rar.RarArchive
+  candidate_methods:
+  - ExtractToDirectory
+  selected_api_mapping:
+    type_name: RarArchive
+    namespace: Aspose.Zip.Rar
+    method_name: ExtractToDirectory
+    note: DllReflector confirmed Aspose.Zip.Rar.RarArchive.ExtractToDirectory exists
+      in v26.6.0
+  status: PROBE_CANDIDATE
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/zip/ plugin page. Needs
     reflection probe to confirm API mapping.
-  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
-  failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
-    got ''NoneType'''
+  probe_evidence: null
+  failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false
-  assembly_fingerprint: null
+  assembly_fingerprint: zip-26.6.0-dllreflector-confirmed-20260623
   plugin_page_hash: null
   last_validated: '2026-06-16T19:25:08Z'
   bootstrap_status: WEBSITE_DISCOVERED
-  next_action: NEEDS_API_MAPPING_FIX
+  next_action: NEEDS_PROBING
   blocker_type: null
-  last_reflected_package_version: null
+  last_reflected_package_version: 26.6.0
   refresh_due: null

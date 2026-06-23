@@ -14,10 +14,11 @@ entries:
     note: AI_DRAFT — pending DllReflector confirmation
   status: PROBE_FAILED
   confidence_score: 0.58
-  confidence_rationale: 'TeX to PDF: TeXJob with PdfSaveOptions → Run(). 17.3MB DLL.
+  confidence_rationale: 'TeX to PDF: TeXJob with PdfSaveOptions → Run(). 17.3MB
+    DLL.
 
     '
-  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
+  probe_evidence: null
   failure_taxonomy: PROBE_FAILED_BUILD
   rejection_reason: null
   ai_source_flag: true
@@ -44,7 +45,7 @@ entries:
   status: PROBE_FAILED
   confidence_score: 0.56
   confidence_rationale: LaTeX is TeX dialect; same TeXJob API.
-  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
+  probe_evidence: null
   failure_taxonomy: PROBE_FAILED_BUILD
   rejection_reason: null
   ai_source_flag: true
@@ -60,80 +61,95 @@ entries:
   plugin_slug: latex-figure-renderer
   operation_kind: TEX_RENDERING
   package_id: Aspose.TeX
-  type_name: null
-  namespace: null
-  method_name: null
-  candidate_api_types: []
-  candidate_methods: []
-  selected_api_mapping: null
-  status: PROBE_FAILED
+  type_name: TeXJob
+  namespace: Aspose.TeX
+  method_name: Run
+  candidate_api_types:
+  - Aspose.TeX.TeXJob
+  candidate_methods:
+  - Run
+  selected_api_mapping:
+    type_name: TeXJob
+    namespace: Aspose.TeX
+    method_name: Run
+    note: DllReflector confirmed Aspose.TeX.TeXJob.Run exists in v26.6.0
+  status: PROBE_CANDIDATE
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/tex/ plugin page. Needs
     reflection probe to confirm API mapping.
-  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
-  failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
-    got ''NoneType'''
+  probe_evidence: null
+  failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false
-  assembly_fingerprint: null
+  assembly_fingerprint: tex-26.6.0-dllreflector-confirmed-20260623
   plugin_page_hash: null
   last_validated: '2026-06-16T19:25:08Z'
   bootstrap_status: WEBSITE_DISCOVERED
-  next_action: NEEDS_API_MAPPING_FIX
+  next_action: NEEDS_PROBING
   blocker_type: null
-  last_reflected_package_version: null
+  last_reflected_package_version: 26.6.0
   refresh_due: null
 - family: tex
   plugin_slug: latex-math-renderer
   operation_kind: TEX_RENDERING
   package_id: Aspose.TeX
-  type_name: null
-  namespace: null
-  method_name: null
-  candidate_api_types: []
-  candidate_methods: []
-  selected_api_mapping: null
-  status: PROBE_FAILED
+  type_name: TeXJob
+  namespace: Aspose.TeX
+  method_name: Run
+  candidate_api_types:
+  - Aspose.TeX.TeXJob
+  candidate_methods:
+  - Run
+  selected_api_mapping:
+    type_name: TeXJob
+    namespace: Aspose.TeX
+    method_name: Run
+    note: DllReflector confirmed Aspose.TeX.TeXJob.Run exists in v26.6.0
+  status: PROBE_CANDIDATE
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/tex/ plugin page. Needs
     reflection probe to confirm API mapping.
-  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
-  failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
-    got ''NoneType'''
+  probe_evidence: null
+  failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false
-  assembly_fingerprint: null
+  assembly_fingerprint: tex-26.6.0-dllreflector-confirmed-20260623
   plugin_page_hash: null
   last_validated: '2026-06-16T19:25:08Z'
   bootstrap_status: WEBSITE_DISCOVERED
-  next_action: NEEDS_API_MAPPING_FIX
+  next_action: NEEDS_PROBING
   blocker_type: null
-  last_reflected_package_version: null
+  last_reflected_package_version: 26.6.0
   refresh_due: null
 - family: tex
   plugin_slug: convert-tex-to-svg
   operation_kind: TEX_CONVERSION
   package_id: Aspose.TeX
-  type_name: null
-  namespace: null
-  method_name: null
-  candidate_api_types: []
-  candidate_methods: []
-  selected_api_mapping: null
-  status: PROBE_FAILED
+  type_name: TeXJob
+  namespace: Aspose.TeX
+  method_name: Run
+  candidate_api_types:
+  - Aspose.TeX.TeXJob
+  candidate_methods:
+  - Run
+  selected_api_mapping:
+    type_name: TeXJob
+    namespace: Aspose.TeX
+    method_name: Run
+    note: DllReflector confirmed Aspose.TeX.TeXJob.Run exists in v26.6.0
+  status: PROBE_CANDIDATE
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/tex/ plugin page. Needs
     reflection probe to confirm API mapping.
-  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
-  failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
-    got ''NoneType'''
+  probe_evidence: null
+  failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false
-  assembly_fingerprint: null
+  assembly_fingerprint: tex-26.6.0-dllreflector-confirmed-20260623
   plugin_page_hash: null
   last_validated: '2026-06-16T19:25:08Z'
   bootstrap_status: WEBSITE_DISCOVERED
-  next_action: NEEDS_API_MAPPING_FIX
+  next_action: NEEDS_PROBING
   blocker_type: null
-  last_reflected_package_version: null
+  last_reflected_package_version: 26.6.0
   refresh_due: null

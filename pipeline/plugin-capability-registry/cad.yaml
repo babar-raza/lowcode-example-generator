@@ -64,7 +64,7 @@ entries:
     DWG files. PdfOptions in CAD controls output format.
 
     '
-  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
+  probe_evidence: null
   failure_taxonomy: PROBE_FAILED_BUILD
   rejection_reason: null
   ai_source_flag: false
@@ -99,7 +99,7 @@ entries:
     as DWG.
 
     '
-  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
+  probe_evidence: null
   failure_taxonomy: PROBE_FAILED_BUILD
   rejection_reason: null
   ai_source_flag: false
@@ -129,10 +129,11 @@ entries:
     output_format: PNG
   status: PROBE_FAILED
   confidence_score: 0.73
-  confidence_rationale: 'Image rasterization uses same Load → Save pattern with PngOptions/JpegOptions.
+  confidence_rationale: 'Image rasterization uses same Load → Save pattern with
+    PngOptions/JpegOptions.
 
     '
-  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
+  probe_evidence: null
   failure_taxonomy: PROBE_FAILED_BUILD
   rejection_reason: null
   ai_source_flag: false
@@ -166,7 +167,7 @@ entries:
   confidence_rationale: 'DWG to JPG uses Image.Load(dwgFile) → Save(jpgPath, JpegOptions).
 
     '
-  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
+  probe_evidence: null
   failure_taxonomy: PROBE_FAILED_BUILD
   rejection_reason: null
   ai_source_flag: false
@@ -182,26 +183,31 @@ entries:
   plugin_slug: conversion
   operation_kind: CAD_CONVERSION
   package_id: Aspose.CAD
-  type_name: null
-  namespace: null
-  method_name: null
-  candidate_api_types: []
-  candidate_methods: []
-  selected_api_mapping: null
-  status: PROBE_FAILED
+  type_name: Image
+  namespace: Aspose.CAD
+  method_name: Save
+  candidate_api_types:
+  - Aspose.CAD.Image
+  candidate_methods:
+  - Save
+  selected_api_mapping:
+    type_name: Image
+    namespace: Aspose.CAD
+    method_name: Save
+    note: DllReflector confirmed Aspose.CAD.Image.Save exists in v26.1.0
+  status: PROBE_CANDIDATE
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/cad/ plugin page. Needs
     reflection probe to confirm API mapping.
-  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
-  failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
-    got ''NoneType'''
+  probe_evidence: null
+  failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false
-  assembly_fingerprint: null
+  assembly_fingerprint: cad-26.1.0-dllreflector-confirmed-20260623
   plugin_page_hash: null
   last_validated: '2026-06-16T19:25:08Z'
   bootstrap_status: WEBSITE_DISCOVERED
-  next_action: NEEDS_API_MAPPING_FIX
+  next_action: NEEDS_PROBING
   blocker_type: null
-  last_reflected_package_version: null
+  last_reflected_package_version: 26.1.0
   refresh_due: null

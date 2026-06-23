@@ -70,19 +70,27 @@ jobs:
         if: always()
         run: |
           mkdir -p workspace/evidence/mutation
-          # mutmut 2.x: junitxml output via --xml flag
-          mutmut results \
-            > workspace/evidence/mutation/mutmut-summary.txt 2>&1 \
-            || echo "No summary available" > workspace/evidence/mutation/mutmut-summary.txt
-          # Emit a lightweight JSON with killed/survived counts extracted from summary
-          killed=$(grep -oP '\d+ (?=killed)' workspace/evidence/mutation/mutmut-summary.txt | head -1 || echo "0")
-          survived=$(grep -oP '\d+ (?=survived)' workspace/evidence/mutation/mutmut-summary.txt | head -1 || echo "0")
-          total=$((${killed:-0} + ${survived:-0}))
-          score=$(python3 -c "k,t=${killed:-0},${total}; print(f'{k/t*100:.1f}%' if t>0 else 'N/A')")
-          echo "{\"killed\": ${killed:-0}, \"survived\": ${survived:-0}, \"total\": $total, \"score\": \"$score\"}" \
-            > workspace/evidence/mutation/mutmut-results.json
-          echo "Mutation testing complete. Results saved."
-          cat workspace/evidence/mutation/mutmut-summary.txt || true
+          # Query the .mutmut-cache SQLite database directly — more reliable than
+          # parsing `mutmut results` stdout, which outputs no text when all mutants
+          # are killed (TC-SRHP-22: fix for broken regex `\d+ (?=killed)` that never
+          # matched the progress-bar format `🎉 109`).
+          python3 - <<'PYEOF' > workspace/evidence/mutation/mutmut-results.json
+import sqlite3, json
+try:
+    c = sqlite3.connect('.mutmut-cache')
+    killed   = c.execute("SELECT COUNT(*) FROM mutant WHERE status='Killed'").fetchone()[0]
+    survived = c.execute("SELECT COUNT(*) FROM mutant WHERE status='Survived'").fetchone()[0]
+    timeout  = c.execute("SELECT COUNT(*) FROM mutant WHERE status='Timeout'").fetchone()[0]
+    total    = killed + survived + timeout
+    score    = f"{killed/total*100:.1f}%" if total > 0 else "N/A"
+    print(json.dumps({"killed": killed, "survived": survived,
+                      "timeout": timeout, "total": total, "score": score}))
+except Exception as e:
+    print(json.dumps({"killed": 0, "survived": 0, "timeout": 0,
+                      "total": 0, "score": "N/A", "error": str(e)}))
+PYEOF
+          echo "Mutation results:"
+          cat workspace/evidence/mutation/mutmut-results.json
 
       - name: Upload mutation results
         if: always()

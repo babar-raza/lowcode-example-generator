@@ -116,6 +116,14 @@ Score = killed / (killed + survived)
 - **GitHub Actions is the reliable path**: Uses `ubuntu-latest` — no Docker
   or WSL needed. This is the primary mutation testing CI path.
 
+- **`mutmut results` outputs no text when all mutants are killed** (TC-SRHP-22):
+  The progress-bar format `🎉 109` printed during the run does NOT appear in
+  `mutmut results` output when all mutants are killed. The prior `grep -oP '\d+
+  (?=killed)'` regex never matched this format, causing `mutmut-results.json` to
+  always report `{"killed": 0, "survived": 0, "total": 0, "score": "N/A"}` on
+  perfect-score runs. Fixed in commit (TC-SRHP-22) by querying the `.mutmut-cache`
+  SQLite database directly: `SELECT COUNT(*) FROM mutant WHERE status='Killed'`.
+
 ---
 
 ## Baseline Score

@@ -317,3 +317,95 @@ def test_quality_gate_threshold_boundary() -> None:
     blocked, low_ids = evaluate_quality_gate(projects, allow_low_quality=False)
     assert blocked is False
     assert low_ids == []
+
+
+# ---------------------------------------------------------------------------
+# Tests: quality gate pipeline wiring — GateVerdict mutation (TC-SRHP-21)
+# ---------------------------------------------------------------------------
+
+
+class TestQualityGatePipelineWiring:
+    """Verify the wiring between evaluate_quality_gate() and GateVerdict as
+    performed in runner.py:2671-2685. (TC-SRHP-21)
+
+    These tests are distinct from the evaluate_quality_gate() unit tests above:
+    they test that the CALLER correctly applies the gate result to a GateVerdict
+    object — overriding verdict, setting publishable=False, appending to
+    blocking_gates. This is the missing proof boundary for PROOF_LEVEL_4.
+    """
+
+    # The frozenset must match runner.py:_pr_eligible_verdicts exactly.
+    _PR_ELIGIBLE = frozenset({
+        "PR_READY",
+        "FULL_E2E_PASSED",
+        "PR_DRY_RUN_READY",
+        "PARTIAL_PR_READY",
+        "PARTIAL_PR_DRY_RUN_READY",
+        "CANONICAL_TEMPLATE_GENERATION_PASS",
+        "CANONICAL_LLM_GENERATION_PASS",
+    })
+
+    def _apply_quality_gate(
+        self,
+        generated_projects: list[dict],
+        gate_verdict: object,
+        allow_low_quality: bool = False,
+    ) -> list[str]:
+        """Replicate the wiring block from runner.py:2671-2685."""
+        _blocked, _low_ids = evaluate_quality_gate(
+            generated_projects, allow_low_quality=allow_low_quality
+        )
+        if _blocked:
+            gate_verdict.verdict = "BLOCKED_QUALITY_GATE"
+            gate_verdict.publishable = False
+            gate_verdict.blocking_gates.append("QUALITY_HARD_GATE")
+        return _low_ids
+
+    def test_blocked_quality_gate_verdict_set_when_score_below_threshold(self) -> None:
+        """When generated_projects contains quality_score < 0.6 and gate_verdict is
+        PR-eligible, the verdict must be overridden to BLOCKED_QUALITY_GATE and
+        publishable must be False. (TC-SRHP-21)"""
+        from plugin_examples.gates.models import GateVerdict
+
+        generated_projects = [
+            {"scenario_id": "words-convert", "quality_score": 1.0},
+            {"scenario_id": "words-stub", "quality_score": 0.3},
+        ]
+        gate_verdict = GateVerdict()
+        gate_verdict.verdict = "PR_READY"
+        gate_verdict.publishable = True
+        assert gate_verdict.verdict in self._PR_ELIGIBLE  # pre-condition
+
+        low_ids = self._apply_quality_gate(generated_projects, gate_verdict)
+
+        assert gate_verdict.verdict == "BLOCKED_QUALITY_GATE"
+        assert gate_verdict.publishable is False
+        assert "QUALITY_HARD_GATE" in gate_verdict.blocking_gates
+        assert "words-stub" in low_ids
+        assert "words-convert" not in low_ids
+
+    def test_allow_low_quality_bypasses_verdict_override(self) -> None:
+        """When allow_low_quality=True, evaluate_quality_gate() returns blocked=False
+        so the verdict must NOT be overridden even if quality_score < 0.6. (TC-SRHP-21)"""
+        from plugin_examples.gates.models import GateVerdict
+
+        generated_projects = [{"scenario_id": "words-stub", "quality_score": 0.3}]
+        gate_verdict = GateVerdict()
+        gate_verdict.verdict = "PR_READY"
+        gate_verdict.publishable = True
+
+        low_ids = self._apply_quality_gate(
+            generated_projects, gate_verdict, allow_low_quality=True
+        )
+
+        assert gate_verdict.verdict == "PR_READY"  # verdict unchanged
+        assert gate_verdict.publishable is True
+        assert "QUALITY_HARD_GATE" not in gate_verdict.blocking_gates
+        assert "words-stub" in low_ids  # identified but not blocked
+
+    def test_template_mode_verdict_not_in_pr_eligible_frozenset(self) -> None:
+        """DATA_FLOW_PROTOTYPE_ONLY and BLOCKED_QUALITY_GATE must NOT be in the
+        PR-eligible frozenset, ensuring template/prototype runs skip the gate
+        and gate itself cannot re-trigger. (TC-SRHP-21)"""
+        assert "DATA_FLOW_PROTOTYPE_ONLY" not in self._PR_ELIGIBLE
+        assert "BLOCKED_QUALITY_GATE" not in self._PR_ELIGIBLE

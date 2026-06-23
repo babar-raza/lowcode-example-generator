@@ -41,8 +41,10 @@ DllReflector --dll <primary.dll> --output <catalog.json> --deps <dep1.dll> <dep2
 | Family | Package | Issue | Root Cause | Fix Applied | Evidence |
 |---|---|---|---|---|---|
 | OCR | `Aspose.OCR` | `Aspose.Drawing.Common` assembly missing at reflection time | `Aspose.OCR.dll` references `Aspose.Drawing.Common` which is provided by the `Aspose.Drawing` NuGet package (NOT Microsoft's `System.Drawing.Common`) | `extra_packages: [Aspose.Drawing, Aspose.LLM]` in `pipeline/configs/families/ocr.yml` | `pipeline/configs/families/ocr.yml:26` |
-| OMR | `Aspose.OMR` | `Newtonsoft.Json.dll` missing at reflection time | `Aspose.OMR.dll` references Json.NET which is not in the default NuGet resolution for the netstandard2.0 TFM group | `extra_packages: [Newtonsoft.Json]` in `pipeline/configs/families/omr.yml` | `pipeline/configs/families/omr.yml:22` |
+| OMR | `Aspose.OMR` | `Newtonsoft.Json.dll` missing at reflection time | `Aspose.OMR.dll` references Json.NET which is not in the default NuGet resolution for the netstandard2.0 TFM group | `extra_packages: [Newtonsoft.Json]` in `pipeline/configs/families/omr.yml` — **CAVEAT: `extra_packages` is only honored in `discovery_sweep.py` (probe path), NOT in the full `run` pipeline's `nupkg_extractor`. Full `run` still fails.** | `pipeline/configs/families/omr.yml:22` |
 | Drawing | `Aspose.Drawing` | CS0433 ambiguity between `Aspose.Drawing.Common` and `System.Drawing.Common` | Both `Aspose.Drawing` and `System.Drawing.Common` define `System.Drawing.*` types. Adding `System.Drawing.Common` as a dep causes CS0433 type conflicts at build time. | Do NOT add `System.Drawing.Common` as a dep. `Aspose.Drawing` IS the System.Drawing replacement — use it alone. | MEMORY.md PSAL Probe Pipeline Sprint 20260616 |
+| HTML | `Aspose.HTML` | `Microsoft.Extensions.Logging.Abstractions 7.0.0` assembly missing at reflection time | `Aspose.HTML.dll` references `Microsoft.Extensions.Logging.Abstractions` which is not transitively resolved under netstandard2.0. `dependency_resolution: enabled: false` in `html.yml` means no extra packages are downloaded. | Fix: set `dependency_resolution: enabled: true` and add `Microsoft.Extensions.Logging.Abstractions` to `extra_packages` in `pipeline/configs/families/html.yml`. **Also requires nupkg_extractor to honor `extra_packages` (see Architecture Gap below).** | TC-SRHP-24 fixture audit 2026-06-23 |
+| SVG | `Aspose.SVG` | `Microsoft.Extensions.Logging.Abstractions 7.0.0` assembly missing at reflection time | Same root cause as HTML — `Aspose.SVG.dll` references `Microsoft.Extensions.Logging.Abstractions`; `dependency_resolution: enabled: false` in `svg.yml`. | Fix: same as HTML family. | TC-SRHP-24 fixture audit 2026-06-23 |
 
 ---
 
@@ -100,6 +102,25 @@ If this warning fires after a package version bump:
 4. Rerun the probe: `python -m plugin_examples probe-registry --family <family> --execute`.
 5. Confirm the type count increases.
 6. Update this file with the new entry in the table above.
+
+---
+
+## Architecture Gap: extra_packages Not Honored in Full Run Pipeline
+
+**Discovered:** TC-SRHP-24 fixture audit, 2026-06-23
+
+`extra_packages` is only processed in `src/plugin_examples/discovery_sweep.py` (the probe
+path invoked by `probe-registry --execute`). The full `run` pipeline's `nupkg_extractor`
+stage does NOT read `extra_packages` from the family config and therefore never passes those
+DLLs to DllReflector via `--deps`.
+
+**Affected families at time of discovery:** OMR (Newtonsoft.Json), HTML (Microsoft.Extensions.Logging.Abstractions), SVG (Microsoft.Extensions.Logging.Abstractions)
+
+**Fix required in:** `src/plugin_examples/nupkg_extractor/extractor.py` — the extractor must
+read `dep_cfg.extra_packages` from the loaded family config and download + include them in
+`dependency_dll_paths` alongside the transitive dependency DLLs.
+
+Until this fix is applied, `extra_packages` only affects probe execution, not the full generation pipeline.
 
 ---
 

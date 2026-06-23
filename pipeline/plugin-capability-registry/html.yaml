@@ -24,7 +24,7 @@ entries:
     HallucinationValidator not required: reflection-confirmed, not AI_DRAFT.
 
     '
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\html\convert-html-to-pdf\probe-outcome.json
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false
@@ -59,7 +59,7 @@ entries:
     types).
 
     '
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\html\convert-html-to-word\probe-outcome.json
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false
@@ -93,7 +93,7 @@ entries:
     DllReflector confirmed (v26.5.0, 613 types).
 
     '
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\html\convert-html-to-image\probe-outcome.json
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false

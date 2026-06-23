@@ -25,7 +25,7 @@ entries:
     Save.
 
     '
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\drawing\convert-drawing\probe-outcome.json
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false
@@ -65,7 +65,7 @@ entries:
     DllReflector confirmed Graphics.DrawString, DrawRectangle, etc.
 
     '
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\drawing\create-drawing\probe-outcome.json
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false

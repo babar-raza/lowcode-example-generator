@@ -23,7 +23,7 @@ entries:
     GIS datasets.
 
     '
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\gis\convert-gis-data\probe-outcome.json
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: true
@@ -51,7 +51,7 @@ entries:
   confidence_score: 0.72
   confidence_rationale: 'GIS layer reading: VectorLayer.Open(path, driver) → iterate
     features.'
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\gis\read-gis-data\probe-outcome.json
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: true

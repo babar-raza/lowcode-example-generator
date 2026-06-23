@@ -1,13 +1,14 @@
 # Blocked External Repositories
 
 Audience: Operator, External stakeholder
-Last updated: 2026-06-20
+Last updated: 2026-06-22
 
 This file documents product families that have validated, packaged examples ready for
 publication but cannot be published because the target GitHub repository does not yet
 exist or is not accessible.
 
-**TC-SRHP-02 — Unblock font, psd, note Publication**
+**TC-SRHP-02** — Unblock font, psd, note Publication
+**TC-SRHP-20** — Generate First Examples for threed and gis Families
 
 ---
 
@@ -18,8 +19,10 @@ exist or is not accessible.
 | font | 2 | `aspose-font-net/Aspose.Font.Plugins-for-.NET-Examples` | Unknown | 2026-06-16 | Create repo or confirm org/name |
 | psd | 4 | `aspose-psd-net/Aspose.PSD.Plugins-for-.NET-Examples` | Unknown | 2026-06-16 | Create repo or confirm org/name |
 | note | 3 | `aspose-note-net/Aspose.Note.Plugins-for-.NET-Examples` | Unknown | 2026-06-16 | Create repo or confirm org/name |
+| threed | 2 probe-confirmed | `aspose-threed-net/Aspose.3D.LowCode-for-.NET-Examples` | Unverified | 2026-06-22 | Verify repo; enable `pipeline/configs/families/threed.yml` |
+| gis | 2 probe-confirmed (AI-draft) | `aspose-gis-net/Aspose.GIS.LowCode-for-.NET-Examples` | Unverified | 2026-06-22 | Verify repo; re-confirm probes via DllReflector |
 
-**Total blocked examples: 9**
+**Total blocked families: 5 (font, psd, note, threed, gis)**
 
 ---
 
@@ -58,6 +61,38 @@ exist or is not accessible.
 - **Note:** products.aspose.net/note/ was unverified (HTTP 403 WAF) as of 2026-06-14.
   Confirm product page URL before PR title generation.
 - **Next action:** Confirm target repo name with org owner, then publish.
+
+### threed (2 probe-confirmed entries — generation not started)
+
+- **Package:** `Aspose.3D`
+- **Source examples repo:** `https://github.com/aspose-threed/Aspose.3D-for-.NET`
+- **Expected target repo:** `aspose-threed-net/Aspose.3D.LowCode-for-.NET-Examples`
+- **Family config:** `pipeline/configs/families/threed.yml` — exists but `enabled: false`
+- **Config note:** "CONFIRMED_NO_LOWCODE (2026-05-09) — Do not re-enable without evidence of a new LowCode namespace release."
+  This note predates the PSAL probe sprint (2026-06-16). The capability registry now has
+  2 PROBE_CONFIRMED entries via the `capability_registry` fallback strategy. The config
+  can be re-enabled once the target repo is confirmed to exist.
+- **Capability registry:** `pipeline/plugin-capability-registry/threed.yaml`
+  — `convert-3d-model` and `compress-3d-scene` both PROBE_CONFIRMED (PSAL probe sprint, 2026-06-16)
+- **Blocker type:** Target repo unverified; config disabled.
+- **Next action:** Verify `aspose-threed-net/Aspose.3D.LowCode-for-.NET-Examples` exists.
+  If yes: enable threed.yml, run dry-run, then generate. If no: create repo or rename target.
+
+### gis (2 probe-confirmed entries — AI-draft; generation not started)
+
+- **Package:** `Aspose.GIS`
+- **Source examples repo:** `https://github.com/aspose-gis/Aspose.GIS-for-.NET`
+- **Expected target repo:** `aspose-gis-net/Aspose.GIS.LowCode-for-.NET-Examples`
+- **Family config:** `pipeline/configs/families/gis.yml` — exists but `enabled: false`
+- **Capability registry:** `pipeline/plugin-capability-registry/gis.yaml`
+  — both entries `PROBE_CONFIRMED` but `ai_source_flag: true` and `assembly_fingerprint: null`
+  — API mappings are AI-drafted (`note: AI_DRAFT — pending DllReflector confirmation`)
+  — Probes were not independently verified by DllReflector
+- **Blocker type:** Target repo unverified; config disabled; gis probes need DllReflector re-confirmation.
+- **Next action:**
+  1. Re-run DllReflector on `Aspose.GIS` to confirm VectorLayer.Convert and VectorLayer.Open exist.
+  2. Verify `aspose-gis-net/Aspose.GIS.LowCode-for-.NET-Examples` exists.
+  3. Enable gis.yml and run generation.
 
 ---
 

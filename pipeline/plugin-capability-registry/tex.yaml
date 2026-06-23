@@ -17,7 +17,7 @@ entries:
   confidence_rationale: 'TeX to PDF: TeXJob with PdfSaveOptions → Run(). 17.3MB DLL.
 
     '
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\tex\convert-tex-to-pdf\probe-outcome.json
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: PROBE_FAILED_BUILD
   rejection_reason: null
   ai_source_flag: true
@@ -44,7 +44,7 @@ entries:
   status: PROBE_FAILED
   confidence_score: 0.56
   confidence_rationale: LaTeX is TeX dialect; same TeXJob API.
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\tex\convert-latex-to-pdf\probe-outcome.json
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: PROBE_FAILED_BUILD
   rejection_reason: null
   ai_source_flag: true
@@ -70,7 +70,7 @@ entries:
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/tex/ plugin page. Needs
     reflection probe to confirm API mapping.
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\tex\latex-figure-renderer
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
     got ''NoneType'''
   rejection_reason: null
@@ -97,7 +97,7 @@ entries:
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/tex/ plugin page. Needs
     reflection probe to confirm API mapping.
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\tex\latex-math-renderer
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
     got ''NoneType'''
   rejection_reason: null
@@ -124,7 +124,7 @@ entries:
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/tex/ plugin page. Needs
     reflection probe to confirm API mapping.
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\tex\convert-tex-to-svg
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
     got ''NoneType'''
   rejection_reason: null

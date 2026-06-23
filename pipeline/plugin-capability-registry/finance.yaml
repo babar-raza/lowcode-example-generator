@@ -21,7 +21,7 @@ entries:
     (3 overloads). XBRL conversion: load document → transform → Save to target format.
 
     '
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\finance\convert-xbrl\probe-outcome.json
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false
@@ -56,7 +56,7 @@ entries:
     DllReflector confirmed XbrlDocument namespace with Save + data properties.
 
     '
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\finance\parse-xbrl\probe-outcome.json
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: false

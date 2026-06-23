@@ -38,7 +38,7 @@ entries:
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/zip/ plugin page. Needs
     reflection probe to confirm API mapping.
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\zip\universal-compressor
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
     got ''NoneType'''
   rejection_reason: null
@@ -65,7 +65,7 @@ entries:
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/zip/ plugin page. Needs
     reflection probe to confirm API mapping.
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\zip\universal-extractor
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
     got ''NoneType'''
   rejection_reason: null
@@ -92,7 +92,7 @@ entries:
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/zip/ plugin page. Needs
     reflection probe to confirm API mapping.
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\zip\rar-extractor
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
     got ''NoneType'''
   rejection_reason: null

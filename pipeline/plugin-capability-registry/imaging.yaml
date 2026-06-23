@@ -39,7 +39,7 @@ entries:
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
     Needs reflection probe to confirm API mapping.
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\imaging\animation-maker
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
     got ''NoneType'''
   rejection_reason: null
@@ -66,7 +66,7 @@ entries:
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
     Needs reflection probe to confirm API mapping.
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\imaging\image-converter
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
     got ''NoneType'''
   rejection_reason: null
@@ -93,7 +93,7 @@ entries:
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
     Needs reflection probe to confirm API mapping.
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\imaging\image-compressor
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
     got ''NoneType'''
   rejection_reason: null
@@ -120,7 +120,7 @@ entries:
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
     Needs reflection probe to confirm API mapping.
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\imaging\image-merger
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
     got ''NoneType'''
   rejection_reason: null
@@ -147,7 +147,7 @@ entries:
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
     Needs reflection probe to confirm API mapping.
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\imaging\image-resizer
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
     got ''NoneType'''
   rejection_reason: null
@@ -174,7 +174,7 @@ entries:
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
     Needs reflection probe to confirm API mapping.
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\imaging\photo-album-maker
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
     got ''NoneType'''
   rejection_reason: null
@@ -201,7 +201,7 @@ entries:
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
     Needs reflection probe to confirm API mapping.
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\imaging\image-cropper
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
     got ''NoneType'''
   rejection_reason: null
@@ -228,7 +228,7 @@ entries:
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
     Needs reflection probe to confirm API mapping.
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\imaging\image-effect-creator
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
     got ''NoneType'''
   rejection_reason: null
@@ -255,7 +255,7 @@ entries:
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
     Needs reflection probe to confirm API mapping.
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\imaging\image-deskew
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
     got ''NoneType'''
   rejection_reason: null
@@ -282,7 +282,7 @@ entries:
   confidence_score: 0.5
   confidence_rationale: Discovered from products.aspose.net/imaging/ plugin page.
     Needs reflection probe to confirm API mapping.
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\imaging\image-rotate-flip
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: 'Code generation failed: expected string or bytes-like object,
     got ''NoneType'''
   rejection_reason: null

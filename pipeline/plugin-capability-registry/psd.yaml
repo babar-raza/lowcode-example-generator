@@ -23,7 +23,7 @@ entries:
     Reflection deferred due to Newtonsoft.Json dependency conflict.
 
     '
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\psd\convert-psd-to-pdf\probe-outcome.json
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: PROBE_FAILED_BUILD
   rejection_reason: null
   ai_source_flag: true
@@ -50,7 +50,7 @@ entries:
   status: PROBE_FAILED
   confidence_score: 0.66
   confidence_rationale: Same Image.Load → Save with PngOptions.
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\psd\convert-psd-to-png\probe-outcome.json
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: PROBE_FAILED_BUILD
   rejection_reason: null
   ai_source_flag: true

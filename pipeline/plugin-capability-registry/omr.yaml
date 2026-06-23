@@ -21,7 +21,7 @@ entries:
     OmrPage. Likely license-restricted in trial mode.
 
     '
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\omr\recognize-omr\probe-outcome.json
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: true
@@ -48,7 +48,7 @@ entries:
   status: PROBE_CONFIRMED
   confidence_score: 0.6799999999999999
   confidence_rationale: OMR template generation uses OmrEngine.GenerateTemplate(textDefinition).
-  probe_evidence: C:\Users\prora\OneDrive\Documents\GitHub\lowcode-example-generator-gitlab\.local\psal\probes\omr\generate-omr-template\probe-outcome.json
+  probe_evidence: null  # local-only: .local/psal/probes/ is gitignored; not reproducible from checkout
   failure_taxonomy: null
   rejection_reason: null
   ai_source_flag: true

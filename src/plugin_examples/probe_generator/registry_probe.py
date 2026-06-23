@@ -27,6 +27,15 @@ class ProbeFiles:
     csproj_content: str
 
 
+class NoApiMappingError(ValueError):
+    """Raised when a registry entry has no usable API mapping and no family renderer.
+
+    This is a clean failure — not a code bug. The registry entry needs either a
+    type_name+namespace populated via DLL reflection, or a family-specific renderer
+    registered in _FAMILY_RENDERERS.
+    """
+
+
 # ---------------------------------------------------------------------------
 # Family-specific C# template renderers
 # ---------------------------------------------------------------------------
@@ -224,9 +233,9 @@ Console.WriteLine("Probe complete: " + outputPath);
 
 def _render_generic(entry: dict, mapping: dict) -> str:
     """Generic fallback: new Type(); obj.Method(outputPath)."""
-    ns = mapping.get("namespace", entry.get("namespace", "Unknown"))
-    type_name = mapping.get("type_name", entry.get("type_name", "Unknown"))
-    method = mapping.get("method_name", entry.get("method_name", "Save"))
+    ns = mapping.get("namespace") or entry.get("namespace") or "Unknown"
+    type_name = mapping.get("type_name") or entry.get("type_name") or "Unknown"
+    method = mapping.get("method_name") or entry.get("method_name") or "Save"
     return f"""\
 // Auto-generated registry probe — generic fallback
 using System;
@@ -348,12 +357,32 @@ def generate_probe_from_registry(
     if isinstance(mapping, str):
         mapping = {}
 
+    # Guard: entries with no API mapping and no dedicated family renderer cannot
+    # produce meaningful probe code. Fail cleanly with NoApiMappingError rather
+    # than generating broken C# that fails to compile or triggering a TypeError
+    # from _slug(None) when type_name is null in the YAML.
+    family = entry.get("family", "")
+    _has_dedicated_renderer = family in _FAMILY_RENDERERS or family in ("drawing", "page")
+    if (
+        not _has_dedicated_renderer
+        and not mapping
+        and not entry.get("type_name")
+        and not entry.get("namespace")
+    ):
+        slug = entry.get("plugin_slug", "unknown")
+        raise NoApiMappingError(
+            f"{family}/{slug}: no API mapping available (type_name, namespace, and "
+            "selected_api_mapping are all null) and no dedicated family renderer is "
+            "registered. Provide type_name+namespace in the registry entry or add a "
+            "renderer to _FAMILY_RENDERERS."
+        )
+
     renderer = _select_renderer(entry)
     cs_content = renderer(entry, mapping)
     csproj_content = _render_csproj(entry)
 
     cs_path = output_dir / "Program.cs"
-    type_name = entry.get("type_name", "Probe")
+    type_name = entry.get("type_name") or "Probe"
     csproj_path = output_dir / f"{_slug(type_name)}Probe.csproj"
 
     cs_path.write_text(cs_content, encoding="utf-8")

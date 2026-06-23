@@ -15,6 +15,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 
 from plugin_examples.probe_generator.registry_probe import (
+    NoApiMappingError,
     generate_probe_from_registry,
 )
 from plugin_examples.probe_generator.runner import ProbeResult, ProbeRunner
@@ -93,6 +94,17 @@ class ProbeExecutor:
         t0 = time.monotonic()
         try:
             probe_files = generate_probe_from_registry(entry, probe_dir)
+        except NoApiMappingError as exc:
+            return ProbeOutcome(
+                family=family,
+                plugin_slug=slug,
+                new_status="PROBE_FAILED_NO_API_MAPPING",
+                probe_result=None,
+                probe_evidence_path=str(probe_dir),
+                entry=entry,
+                duration_ms=int((time.monotonic() - t0) * 1000),
+                error=str(exc),
+            )
         except Exception as exc:
             return ProbeOutcome(
                 family=family,

@@ -19,6 +19,10 @@ from plugin_examples.probe_generator.generator import (
     ProbeFiles,
     ProbeGenerator,
 )
+from plugin_examples.probe_generator.registry_probe import (
+    NoApiMappingError,
+    generate_probe_from_registry,
+)
 from plugin_examples.probe_generator.runner import ProbeResult, ProbeRunner
 
 # ---------------------------------------------------------------------------
@@ -193,3 +197,81 @@ class TestProbeRunnerTaxonomy:
         assert result.output_validated is True
         assert result.output_size_bytes > 0
         assert result.failure_taxonomy is None
+
+
+# ---------------------------------------------------------------------------
+# generate_probe_from_registry — TC-SRHP-17: empty/null API mapping guard
+# ---------------------------------------------------------------------------
+
+
+class TestRegistryProbeNoApiMappingGuard:
+    def test_raises_no_api_mapping_error_for_null_fields_without_family_renderer(self, tmp_path):
+        """Entry with null type_name/namespace/selected_api_mapping and no family renderer
+        must raise NoApiMappingError — not a Python TypeError from _slug(None). (TC-SRHP-17)"""
+        entry = {
+            "family": "imaging",
+            "plugin_slug": "image-converter",
+            "package_id": "Aspose.Imaging",
+            "type_name": None,
+            "namespace": None,
+            "method_name": None,
+            "candidate_api_types": [],
+            "candidate_methods": [],
+            "selected_api_mapping": None,
+            "status": "PROBE_FAILED",
+        }
+        with pytest.raises(NoApiMappingError, match="image-converter"):
+            generate_probe_from_registry(entry, tmp_path / "probe")
+
+    def test_raises_no_api_mapping_error_for_empty_candidate_list(self, tmp_path):
+        """Entry with empty candidate_api_types list and all-null API fields raises
+        NoApiMappingError regardless of candidate_methods. (TC-SRHP-17)"""
+        entry = {
+            "family": "barcode",
+            "plugin_slug": "some-barcode-op",
+            "package_id": "Aspose.BarCode",
+            "type_name": None,
+            "namespace": None,
+            "method_name": None,
+            "candidate_api_types": [],
+            "candidate_methods": [],
+            "selected_api_mapping": None,
+        }
+        with pytest.raises(NoApiMappingError, match="barcode/some-barcode-op"):
+            generate_probe_from_registry(entry, tmp_path / "probe")
+
+    def test_succeeds_for_entry_with_type_name_set(self, tmp_path):
+        """Entry with type_name + namespace populated bypasses NoApiMappingError
+        and generates probe files. (TC-SRHP-17)"""
+        entry = {
+            "family": "imaging",
+            "plugin_slug": "image-save",
+            "package_id": "Aspose.Imaging",
+            "type_name": "Image",
+            "namespace": "Aspose.Imaging",
+            "method_name": "Save",
+            "selected_api_mapping": None,
+        }
+        result = generate_probe_from_registry(entry, tmp_path / "probe")
+        assert result.cs_path.exists()
+        assert result.csproj_path.exists()
+
+    def test_succeeds_for_threed_entry_with_null_type_name(self, tmp_path):
+        """threed family has a dedicated renderer so null type_name is allowed —
+        NoApiMappingError must NOT be raised for families in _FAMILY_RENDERERS. (TC-SRHP-17)"""
+        entry = {
+            "family": "threed",
+            "plugin_slug": "convert-3d-model",
+            "package_id": "Aspose.3D",
+            "type_name": None,
+            "namespace": None,
+            "method_name": None,
+            "selected_api_mapping": None,
+        }
+        result = generate_probe_from_registry(entry, tmp_path / "probe")
+        assert result.cs_path.exists()
+        assert "Aspose.ThreeD" in result.cs_content
+
+    def test_no_api_mapping_error_is_subclass_of_value_error(self):
+        """NoApiMappingError must be a ValueError subclass for consistent except clauses."""
+        assert issubclass(NoApiMappingError, ValueError)

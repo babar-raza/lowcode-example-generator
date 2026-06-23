@@ -121,8 +121,12 @@ Score = killed / (killed + survived)
   `mutmut results` output when all mutants are killed. The prior `grep -oP '\d+
   (?=killed)'` regex never matched this format, causing `mutmut-results.json` to
   always report `{"killed": 0, "survived": 0, "total": 0, "score": "N/A"}` on
-  perfect-score runs. Fixed in commit (TC-SRHP-22) by querying the `.mutmut-cache`
-  SQLite database directly: `SELECT COUNT(*) FROM mutant WHERE status='Killed'`.
+  perfect-score runs. Fixed via `scripts/mutmut_results.py` (commits 9dd49783,
+  f70fe819): queries `.mutmut-cache` SQLite with `SELECT status, COUNT(*) FROM
+  Mutant GROUP BY status`. Note: mutmut 2.x stores killed mutants as
+  `status='ok_killed'` (not `'Killed'`). Artifact verified by GHA run 28020606194:
+  `{"killed": 109, "survived": 0, "timeout": 0, "total": 109, "score": "100.0%",
+  "raw_statuses": {"ok_killed": 109}}`.
 
 ---
 
@@ -148,6 +152,22 @@ in `tests/unit/test_example_scorer.py` cover every reachable code path with disc
 assertions. No test additions are needed at this time.
 
 **Status: >= 80% target MET. Candidate for future blocking gate once remaining modules are baselined.**
+
+### Artifact Verification Run — 2026-06-23 (TC-SRHP-22)
+
+| Field | Value |
+|---|---|
+| GitHub Actions run URL | https://github.com/babar-raza/lowcode-example-generator/actions/runs/28020606194 |
+| Date | 2026-06-23 |
+| Python version | 3.12.13 |
+| mutmut version | 2.5.1 (pinned `mutmut<3`) |
+| Scope | `src/plugin_examples/quality/example_scorer.py` only |
+| Run duration | ~57 minutes |
+| Artifact | `{"killed": 109, "survived": 0, "timeout": 0, "total": 109, "score": "100.0%", "raw_statuses": {"ok_killed": 109}}` |
+
+**Purpose:** Verify the SQLite-based artifact extraction fix in `scripts/mutmut_results.py`.
+Confirmed that `ok_killed` is the correct status key in mutmut 2.x. Score now correctly
+captured in artifact. Previous artifact always showed `score: "N/A"` due to wrong status key.
 
 ### Pending Baseline Modules
 

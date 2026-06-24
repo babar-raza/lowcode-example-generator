@@ -585,6 +585,42 @@ def _stage_extraction(ctx: PipelineContext) -> dict:
     assert ctx.download_manifest is not None, "download_manifest must be set before extraction"
     nupkg_path = Path(ctx.download_manifest["cached_path"])
     dep_paths = [Path(d["cached_path"]) for d in (ctx.deps or []) if d.get("status") == "ok" and d.get("cached_path")]
+
+    # ARCH-01 fix: download extra_packages declared in family config for extraction.
+    # These packages are referenced by the primary DLL but absent from its nuspec deps
+    # (e.g. Newtonsoft.Json for Aspose.OMR, Aspose.Drawing for Aspose.OCR).
+    # Mirrors discovery_sweep.py:188-215 which handles the probe path.
+    extra_pkgs = ctx.config.nuget.dependency_resolution.extra_packages
+    if extra_pkgs:
+        from plugin_examples.nuget_fetcher.cache import check_cache
+        from plugin_examples.nuget_fetcher.fetcher import (
+            _download_nupkg,
+            resolve_latest_stable,
+        )
+
+        extra_dir = ctx.run_dir / "packages" / ctx.family / "extra-deps"
+        extra_dir.mkdir(parents=True, exist_ok=True)
+        for extra_pkg_id in extra_pkgs:
+            try:
+                extra_version = resolve_latest_stable(extra_pkg_id)
+                extra_path = extra_dir / f"{extra_pkg_id}.{extra_version}.nupkg"
+                if not check_cache(extra_path):
+                    _download_nupkg(extra_pkg_id, extra_version, extra_path)
+                dep_paths.append(extra_path)
+                logger.info(
+                    "Extra package resolved for %s extraction: %s %s",
+                    ctx.family,
+                    extra_pkg_id,
+                    extra_version,
+                )
+            except Exception as exc:
+                logger.warning(
+                    "Failed to download extra_package %s for %s: %s",
+                    extra_pkg_id,
+                    ctx.family,
+                    exc,
+                )
+
     ctx.extraction = extract_package(
         nupkg_path,
         package_id=ctx.config.nuget.package_id,

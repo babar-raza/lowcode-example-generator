@@ -116,6 +116,20 @@ class Program
 }
 """
 
+# Represents a published example that uses relative paths (safe in CI/CD) but no AppContext.
+# Under the corrected PATH_SAFETY criterion (path_safe = not has_hardcoded), this PASSES.
+_RELATIVE_PATH_ONLY = """\
+using Aspose.Html;
+using Aspose.Html.Converters;
+using Aspose.Html.Saving;
+using System.IO;
+
+Directory.CreateDirectory("output");
+string outputPath = Path.Combine("output", "output.pdf");
+Converter.ConvertHTML("<html><body>test</body></html>", ".", new PdfSaveOptions(), outputPath);
+Console.WriteLine($"PDF saved: {outputPath}");
+"""
+
 
 # ---------------------------------------------------------------------------
 # Tests: score_example
@@ -165,28 +179,46 @@ def test_hardcoded_path_fails_path_safety() -> None:
     assert not ps.passed
 
 
+def test_relative_path_passes_path_safety() -> None:
+    """Code using only relative paths (no AppContext, no hardcoded absolute) passes PATH_SAFETY.
+
+    This is the TC-QUAL-01 regression guard: relative paths are safe in CI/CD contexts.
+    The corrected criterion checks 'not has_hardcoded' rather than 'has_safe_path and not has_hardcoded'.
+    """
+    result = score_example("relative-path", _RELATIVE_PATH_ONLY)
+    ps = next(c for c in result.criteria if c.name == "PATH_SAFETY")
+    assert ps.passed, f"Expected PATH_SAFETY=PASS for relative-path example, got: {ps.detail}"
+
+
+def test_relative_path_detail_message() -> None:
+    """PATH_SAFETY pass detail says 'No hardcoded absolute paths found' (not AppContext message)."""
+    result = score_example("relative-path", _RELATIVE_PATH_ONLY)
+    ps = next(c for c in result.criteria if c.name == "PATH_SAFETY")
+    assert "hardcoded" in ps.detail.lower(), f"Unexpected detail: {ps.detail}"
+
+
 def test_score_returns_correct_total_criteria() -> None:
     """Always returns exactly TOTAL_CRITERIA criterion results."""
     result = score_example("any", _GOOD_EXAMPLE)
     assert len(result.criteria) == TOTAL_CRITERIA
 
 
-def test_quality_label_medium_for_partial_pass() -> None:
-    """3 out of 5 criteria passing yields MEDIUM label."""
-    result = score_example("no-output", _NO_OUTPUT)  # fails CONSOLE_OUTPUT only
-    # _NO_OUTPUT passes: SYMBOL_USAGE, NO_TODO_STUBS, EXCEPTION_HANDLING, PATH_SAFETY (4/5)
-    # So it's HIGH — let's use a code that scores 3/5
+def test_quality_label_low_for_minimal_pass() -> None:
+    """2 out of 5 criteria passing yields LOW label.
+
+    low_code has hardcoded paths (PATH_SAFETY=F), no Console output (CONSOLE_OUTPUT=F),
+    no try/catch (EXCEPTION_HANDLING=F). Only SYMBOL_USAGE and NO_TODO_STUBS pass → 2/5=0.40 LOW.
+    Note: PATH_SAFETY=FAIL here because has_hardcoded=True (C:\\\\Users\\\\foo\\\\).
+    """
     low_code = """\
 using Aspose.Words;
 class Program {
     static void Main() {
-        // No output, no exception handling, no path safety
         var doc = new Document("C:\\\\Users\\\\foo\\\\input.docx");
         doc.Save("C:\\\\Users\\\\foo\\\\output.pdf");
     }
 }
 """
-    # passes: SYMBOL_USAGE, NO_TODO_STUBS (2/5) → LOW
     r2 = score_example("low-quality", low_code)
     assert r2.quality_score == 0.4
     assert r2.quality_label == "LOW"

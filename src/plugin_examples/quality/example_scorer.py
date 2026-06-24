@@ -9,7 +9,7 @@ Criteria
 2. NO_TODO_STUBS     — code does not contain TODO or NotImplementedException
 3. CONSOLE_OUTPUT    — code contains Console.Write* or meaningful output call
 4. EXCEPTION_HANDLING — code contains a try/catch or using block
-5. PATH_SAFETY       — code uses AppContext.BaseDirectory, not hardcoded absolute paths
+5. PATH_SAFETY       — code does not contain hardcoded absolute paths (C:\\, /home/, /root/, /Users/)
 
 Each criterion is PASS or FAIL. The quality_score is (passed_count / total_criteria).
 A score < 0.6 (fewer than 3/5) is considered LOW.
@@ -108,16 +108,18 @@ def score_example(example_id: str, code: str) -> ExampleScoreResult:
         detail="try/catch or using block found" if has_handling else "No try/catch or using block",
     ))
 
-    # Criterion 5: PATH_SAFETY — uses AppContext.BaseDirectory, not hardcoded paths
+    # Criterion 5: PATH_SAFETY — no hardcoded absolute paths (C:\, /home/, /root/, /Users/)
+    # Relative paths like Path.Combine("output","file.pdf") are safe in CI/CD contexts.
+    # AppContext.BaseDirectory is a style recommendation; only hardcoded machine paths are unsafe.
     has_hardcoded = bool(_RE_HARDCODED_PATH.search(code))
-    has_safe_path = bool(_RE_BASE_DIR.search(code))
-    path_safe = has_safe_path and not has_hardcoded
+    has_safe_path = bool(_RE_BASE_DIR.search(code))  # retained for observability
+    path_safe = not has_hardcoded
     criteria.append(CriterionResult(
         name="PATH_SAFETY",
         passed=path_safe,
         detail=(
-            "Uses AppContext.BaseDirectory" if path_safe
-            else ("Hardcoded absolute path detected" if has_hardcoded else "No AppContext.BaseDirectory found")
+            "No hardcoded absolute paths found" if path_safe
+            else "Hardcoded absolute path detected"
         ),
     ))
 

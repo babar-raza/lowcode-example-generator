@@ -1082,3 +1082,132 @@ class TestVersionDriftPreflight:
         assert drift_idx > nuget_idx, "version_drift_preflight must appear after nuget_fetch in STAGE_DEFINITIONS"
         dep_idx = names.index("dependency_resolution")
         assert drift_idx < dep_idx, "version_drift_preflight must appear before dependency_resolution"
+
+
+# ---------------------------------------------------------------------------
+# Tests: _stage_extraction extra_packages (TC-HEAL-01 / ARCH-01)
+# ---------------------------------------------------------------------------
+
+
+class TestStageExtractionExtraPackages:
+    """Verify ARCH-01 fix: extra_packages declared in family config are downloaded
+    and appended to dep_paths before extract_package is called. (TC-HEAL-01)
+
+    All network, NuGet, and extraction calls are mocked.
+    """
+
+    def _make_extraction_ctx(self, tmp_path: Path, extra_packages: list) -> PipelineContext:
+        """Build a minimal PipelineContext for extraction stage tests."""
+        ctx = _make_ctx(tmp_path, family="ocr")
+        # Fake .nupkg — must exist so Path(...) doesn't raise
+        nupkg = tmp_path / "Aspose.OCR.26.5.0.nupkg"
+        nupkg.write_bytes(b"fake")
+        ctx.download_manifest = {"cached_path": str(nupkg)}
+        ctx.deps = []
+
+        # Wire a MagicMock config with the required extra_packages
+        mock_cfg = MagicMock()
+        mock_cfg.nuget.package_id = "Aspose.OCR"
+        mock_cfg.nuget.target_framework_preference = ["net8.0"]
+        mock_cfg.nuget.dependency_resolution.extra_packages = extra_packages
+        ctx.config = mock_cfg
+        return ctx
+
+    @patch("plugin_examples.nupkg_extractor.extract_package")
+    @patch("plugin_examples.nuget_fetcher.fetcher._download_nupkg")
+    @patch("plugin_examples.nuget_fetcher.fetcher.resolve_latest_stable")
+    @patch("plugin_examples.nuget_fetcher.cache.check_cache")
+    def test_extra_packages_appended_to_dep_paths(
+        self, mock_check_cache, mock_resolve, mock_download, mock_extract, tmp_path
+    ):
+        """When extra_packages is set, resolved .nupkg paths are appended to dep_paths
+        before extract_package is called. (TC-HEAL-01)"""
+        from plugin_examples.runner import _stage_extraction
+
+        mock_resolve.return_value = "24.1.0"
+        mock_check_cache.return_value = False  # force download
+        mock_extract.return_value = {
+            "selected_framework": "net8.0",
+            "dll_path": str(tmp_path / "Aspose.OCR.dll"),
+            "xml_path": None,
+        }
+        ctx = self._make_extraction_ctx(tmp_path, extra_packages=["Aspose.Drawing"])
+
+        _stage_extraction(ctx)
+
+        mock_resolve.assert_called_once_with("Aspose.Drawing")
+        mock_download.assert_called_once()
+        # dependency_nupkgs passed to extract_package must include the extra package path
+        call_kwargs = mock_extract.call_args
+        dep_nupkgs = call_kwargs.kwargs.get("dependency_nupkgs") or call_kwargs[1].get("dependency_nupkgs")
+        assert dep_nupkgs is not None, "dependency_nupkgs must be passed to extract_package"
+        assert any("Aspose.Drawing" in str(p) for p in dep_nupkgs), (
+            f"Expected Aspose.Drawing in dep_nupkgs, got: {dep_nupkgs}"
+        )
+
+    @patch("plugin_examples.nupkg_extractor.extract_package")
+    @patch("plugin_examples.nuget_fetcher.fetcher._download_nupkg")
+    @patch("plugin_examples.nuget_fetcher.fetcher.resolve_latest_stable")
+    @patch("plugin_examples.nuget_fetcher.cache.check_cache")
+    def test_cached_extra_package_not_redownloaded(
+        self, mock_check_cache, mock_resolve, mock_download, mock_extract, tmp_path
+    ):
+        """When extra_package is already cached (check_cache=True), _download_nupkg is NOT called."""
+        from plugin_examples.runner import _stage_extraction
+
+        mock_resolve.return_value = "24.1.0"
+        mock_check_cache.return_value = True  # already cached
+        mock_extract.return_value = {
+            "selected_framework": "net8.0",
+            "dll_path": str(tmp_path / "Aspose.OCR.dll"),
+            "xml_path": None,
+        }
+        ctx = self._make_extraction_ctx(tmp_path, extra_packages=["Aspose.Drawing"])
+
+        _stage_extraction(ctx)
+
+        mock_download.assert_not_called()  # cached — no re-download
+
+    @patch("plugin_examples.nupkg_extractor.extract_package")
+    @patch("plugin_examples.nuget_fetcher.fetcher._download_nupkg")
+    @patch("plugin_examples.nuget_fetcher.fetcher.resolve_latest_stable")
+    @patch("plugin_examples.nuget_fetcher.cache.check_cache")
+    def test_extra_package_download_failure_warns_and_continues(
+        self, mock_check_cache, mock_resolve, mock_download, mock_extract, tmp_path
+    ):
+        """A download failure for an extra_package logs a warning but does NOT raise —
+        extraction continues without that package. (TC-HEAL-01 graceful degradation)"""
+        from plugin_examples.runner import _stage_extraction
+
+        mock_resolve.side_effect = RuntimeError("NuGet unavailable")
+        mock_extract.return_value = {
+            "selected_framework": "net8.0",
+            "dll_path": str(tmp_path / "Aspose.OCR.dll"),
+            "xml_path": None,
+        }
+        ctx = self._make_extraction_ctx(tmp_path, extra_packages=["Aspose.Drawing"])
+
+        # Must not raise — degraded extraction is allowed
+        _stage_extraction(ctx)
+        mock_extract.assert_called_once()
+
+    @patch("plugin_examples.nupkg_extractor.extract_package")
+    def test_no_extra_packages_skips_download_logic(self, mock_extract, tmp_path):
+        """When extra_packages is empty (default), the download block is skipped entirely."""
+        from plugin_examples.runner import _stage_extraction
+
+        mock_extract.return_value = {
+            "selected_framework": "net8.0",
+            "dll_path": str(tmp_path / "Aspose.dll"),
+            "xml_path": None,
+        }
+        ctx = self._make_extraction_ctx(tmp_path, extra_packages=[])
+
+        _stage_extraction(ctx)
+
+        # extract_package still called — just with dep_paths=None (no extra packages)
+        mock_extract.assert_called_once()
+        call_kwargs = mock_extract.call_args
+        dep_nupkgs = call_kwargs.kwargs.get("dependency_nupkgs") or call_kwargs[1].get("dependency_nupkgs")
+        # Empty dep_paths → None passed to extract_package
+        assert dep_nupkgs is None or dep_nupkgs == []

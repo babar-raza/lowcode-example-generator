@@ -1,10 +1,11 @@
 family: finance
 display_name: Aspose.Finance for .NET
-enabled: false
-status: disabled
-# CONFIRMED_NO_LOWCODE: All-family discovery run 2026-05-09 found no LowCode namespace.
-# NuGet package resolved successfully; DllReflector found 0 plugin types.
-# Do not re-enable without evidence of a new LowCode namespace release.
+enabled: true
+status: non_lowcode_plugin
+# Enabled as non_lowcode_plugin (sprint lowcode-all-family-recon-healing-20260623-01).
+# No LowCode namespace; uses capability_registry fallback path (LOAD_SAVE_OPTIONS model).
+# Wave10 dryrun examples proven 2026-06-05: convert-xbrl (+ parse-xbrl already CANONICAL).
+# PR publication BLOCKED_EXTERNAL: target repo does not exist (escalate to babar-raza).
 # NOTE: package_id below uses standard Aspose naming convention.
 # Verify exact NuGet package ID at nuget.org before enabling generation.
 # Discovery run will fail gracefully if package does not exist.

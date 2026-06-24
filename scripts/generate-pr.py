@@ -56,6 +56,16 @@ FAMILY_CONFIG = {
         "nuget_id": "Aspose.TeX",
         "nuget_version": "24.12.0",
     },
+    "drawing": {
+        "display_name": "Aspose.Drawing",
+        "nuget_id": "Aspose.Drawing",
+        "nuget_version": "24.12.0",
+    },
+    "finance": {
+        "display_name": "Aspose.Finance",
+        "nuget_id": "Aspose.Finance",
+        "nuget_version": "24.12.0",
+    },
 }
 
 

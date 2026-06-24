@@ -8,7 +8,7 @@ plugins:
   identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/finance/net/convert-xbrl
   page_hash: adc5e449572d1ed8
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: LOAD_SAVE_OPTIONS
   code_hashes:
@@ -18,8 +18,6 @@ plugins:
   - SaveOptions
   github_links:
   - https://raw.githubusercontent.com/aspose-finance/Aspose.Finance-for-.NET/master/CSharp/Conversion/ConvertXbrlToIXbrl.cs
-  next_action: Extract symbols from ConvertXbrlToIXbrl.cs and validate against DllReflector;
-    then advance to READY_FOR_TRANSFORMATION
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
@@ -33,8 +31,16 @@ plugins:
     status: TRANSFORMED_TO_EXAMPLE_DRYRUN
     analyst_notes: Sprint lowcode-plugin-example-factory-closeout-wave5-20260605.
       Wave 5 dry-run package built and validated. 0 real invariant violations. PUBLICATION_CANDIDATE_LOCAL_CLEAN.
+  - date: '2026-06-24'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Sprint lowcode-all-family-recon-healing-20260623-01 TC-HEAL-06.
+      Wave10 dryrun package quality score 0.80 HIGH (file-load pattern). Promoted
+      from TRANSFORMED_TO_EXAMPLE_DRYRUN.
   canonical_url: https://products.aspose.net/finance/convert-xbrl/
   display_plugin_name: XBRL Converter for .NET
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave10-20260605/dryrun/examples/finance/convert-xbrl
+  canonical_package_wave: wave10
+  canonical_package_proven_at: '2026-06-05'
 - plugin_slug: parse-xbrl
   canonical_plugin_slug: parse-xbrl
   identity_status: CANONICAL_IDENTITY_VERIFIED

@@ -8,7 +8,7 @@ plugins:
   identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/drawing/net/convert-drawing
   page_hash: a5cad0ccf9fb8adb
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: RENDERING_API
   code_hashes:
@@ -17,8 +17,6 @@ plugins:
   - Bitmap
   github_links:
   - https://raw.githubusercontent.com/aspose-drawing/Aspose.Drawing-for-.NET/master/Examples/CSharp/GraphicsFileFormats/LoadSave.cs
-  next_action: Extract symbols from LoadSave.cs and validate against DllReflector;
-    then advance to READY_FOR_TRANSFORMATION
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
@@ -32,14 +30,21 @@ plugins:
     status: TRANSFORMED_TO_EXAMPLE_DRYRUN
     analyst_notes: Sprint lowcode-plugin-example-factory-closeout-wave5-20260605.
       Wave 5 dry-run package built and validated. 0 real invariant violations. PUBLICATION_CANDIDATE_LOCAL_CLEAN.
+  - date: '2026-06-24'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Sprint lowcode-all-family-recon-healing-20260623-01 TC-HEAL-05.
+      Wave10 dryrun package quality score 0.80 HIGH. Promoted from TRANSFORMED_TO_EXAMPLE_DRYRUN.
   canonical_url: https://products.aspose.net/drawing/net/convert-drawing/
   display_plugin_name: Drawing Converter for .NET
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave10-20260605/dryrun/examples/drawing/convert-drawing
+  canonical_package_wave: wave10
+  canonical_package_proven_at: '2026-06-05'
 - plugin_slug: create-drawing
   canonical_plugin_slug: create-drawing
   identity_status: CANONICAL_IDENTITY_VERIFIED
   plugin_url: https://products.aspose.net/drawing/net/create-drawing
   page_hash: db82df20d794551a
-  registry_status: TRANSFORMED_TO_EXAMPLE_DRYRUN
+  registry_status: CANONICAL_PACKAGE_PROVEN
   blocker_type: null
   implementation_model: RENDERING_API
   code_hashes:
@@ -48,8 +53,6 @@ plugins:
   - Bitmap
   github_links:
   - https://raw.githubusercontent.com/aspose-drawing/Aspose.Drawing-for-.NET/master/Examples/CSharp/LinesCurvesShapes/DrawArc.cs
-  next_action: Extract symbols from DrawArc.cs and validate against DllReflector;
-    then advance to READY_FOR_TRANSFORMATION
   evidence_paths:
   - reports/lowcode-plugin-code-registry-20260604/crawl/plugin-page-inventory.json
   - reports/lowcode-plugin-code-registry-20260604/code-harvest/raw-code-cache-manifest.json
@@ -63,5 +66,12 @@ plugins:
     status: TRANSFORMED_TO_EXAMPLE_DRYRUN
     analyst_notes: Sprint lowcode-plugin-example-factory-closeout-wave5-20260605.
       Wave 5 dry-run package built and validated. 0 real invariant violations. PUBLICATION_CANDIDATE_LOCAL_CLEAN.
+  - date: '2026-06-24'
+    status: CANONICAL_PACKAGE_PROVEN
+    analyst_notes: Sprint lowcode-all-family-recon-healing-20260623-01 TC-HEAL-05.
+      Wave10 dryrun package quality score 0.80 HIGH. Promoted from TRANSFORMED_TO_EXAMPLE_DRYRUN.
   canonical_url: https://products.aspose.net/drawing/net/create-drawing/
   display_plugin_name: Drawing Creator for .NET
+  canonical_package_path: reports/lowcode-plugin-canonical-package-wave10-20260605/dryrun/examples/drawing/create-drawing
+  canonical_package_wave: wave10
+  canonical_package_proven_at: '2026-06-05'

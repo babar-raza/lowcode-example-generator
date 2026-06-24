@@ -101,6 +101,13 @@ def build_packet(
         "NEVER pass null for LowCodeLoadOptions or LowCodeSaveOptions parameters.",
         "If you use LowCodeLoadOptions, you MUST set its InputFile property before passing it to Process().",
         "If you use LowCodeSaveOptions, you MUST set its OutputFile property before passing it to Process().",
+        # Quality rubric (TC-QUAL-03): baked into generation to prevent regressions.
+        # Mirrors the 5 scoring criteria in example_scorer.py. Enforced at generation time
+        # so the quality gate at publish time sees examples that already comply.
+        "REQUIRED for quality: Wrap the main API call in try { ... } catch (Exception ex) "
+        "{ Console.Error.WriteLine(ex.Message); throw; }",
+        "REQUIRED for quality: For ALL output file paths use Path.Combine(AppContext.BaseDirectory, \"output\", filename) "
+        "rather than bare relative or absolute paths.",
     ]
 
     # Add input-strategy-specific constraints

@@ -31,6 +31,13 @@ jobs:
       - name: Install dependencies
         run: pip install -e .
 
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Build DllReflector
+        run: dotnet build tools/DllReflector/DllReflector.csproj -c Release
+
       - name: Run discovery sweep
         run: |
           python -m plugin_examples discover-lowcode --all-families
@@ -41,7 +48,7 @@ jobs:
         run: |
           git config user.name "pipeline-bot"
           git config user.email "pipeline-bot@pipeline"
-          git add workspace/verification/latest/
+          git add -f workspace/verification/latest/
           git diff --cached --quiet || \
             git commit -m "chore(discovery): weekly sweep $(date -u +%Y-%m-%d)"
           git push

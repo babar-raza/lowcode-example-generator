@@ -414,12 +414,13 @@ weekly-discovery:
     - python -m venv --clear .pip-cache/venv
     - source .pip-cache/venv/Scripts/activate
     - pip install -e .
+    - dotnet build tools/DllReflector/DllReflector.csproj -c Release
     - git config user.name "pipeline-bot"
     - git config user.email "pipeline-bot@pipeline"
     - git remote set-url origin "https://oauth2:${gl_pat}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
   script:
     - python -m plugin_examples discover-lowcode --all-families
-    - git add workspace/verification/latest/
+    - git add -f workspace/verification/latest/
     - 'git diff --cached --quiet || git commit -m "chore(discovery): weekly sweep $(date -u +%Y-%m-%d)"'
     - 'git diff HEAD~1..HEAD --quiet || git push origin HEAD:${CI_COMMIT_BRANCH}'
   rules:

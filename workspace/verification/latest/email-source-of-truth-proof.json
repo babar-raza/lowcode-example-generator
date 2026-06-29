@@ -1,0 +1,40 @@
+{
+  "package_id": "Aspose.Email",
+  "resolved_version": "26.5.0",
+  "nupkg_sha256": "884460a1b5438fceb91bed9ba46234952db29737a55c841c3622aec255fb6f4f",
+  "selected_target_framework": "netstandard2.0",
+  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260629-105208/extracted/email/primary/lib/netstandard2.0/Aspose.Email.dll",
+  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260629-105208/extracted/email/primary/lib/netstandard2.0/Aspose.Email.xml",
+  "xml_warning": null,
+  "dependency_count": 8,
+  "dependency_paths": [
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260629-105208/packages/email/deps/System.Security.Cryptography.Pkcs.7.0.3.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260629-105208/packages/email/deps/System.Formats.Asn1.7.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260629-105208/packages/email/deps/System.Buffers.4.5.1.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260629-105208/packages/email/deps/System.Memory.4.5.5.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260629-105208/packages/email/deps/System.Security.Cryptography.Cng.5.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260629-105208/packages/email/deps/System.Text.Encoding.CodePages.5.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260629-105208/packages/email/deps/System.Runtime.CompilerServices.Unsafe.5.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260629-105208/packages/email/deps/System.Drawing.Common.8.0.4.nupkg"
+  ],
+  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260629-105208/catalog/email/api-catalog.json",
+  "namespace_count": 2,
+  "matched_plugin_namespaces": [
+    {
+      "namespace": "Aspose.Email.LowCode",
+      "matched_by_pattern": "Aspose.Email.LowCode",
+      "public_type_count": 3,
+      "public_method_count": 11
+    }
+  ],
+  "unmatched_patterns": [
+    {
+      "pattern": "Aspose.Email.LowCode.*",
+      "reason": "No namespace in catalog matches pattern 'Aspose.Email.LowCode.*'"
+    }
+  ],
+  "public_plugin_type_count": 3,
+  "public_plugin_method_count": 11,
+  "eligibility_status": "eligible",
+  "eligibility_reason": "Plugin namespaces found: Aspose.Email.LowCode"
+}

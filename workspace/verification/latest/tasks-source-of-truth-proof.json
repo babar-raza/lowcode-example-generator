@@ -1,0 +1,35 @@
+{
+  "package_id": "Aspose.Tasks",
+  "resolved_version": "26.6.0",
+  "nupkg_sha256": "fc3ebc5791c0d9dba0c0d012cd4ced0794df9ffbbe63bae865b9c3526b9df2ff",
+  "selected_target_framework": "netstandard2.0",
+  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260629-105311/extracted/tasks/primary/lib/netstandard2.0/Aspose.Tasks.dll",
+  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260629-105311/extracted/tasks/primary/lib/netstandard2.0/Aspose.Tasks.xml",
+  "xml_warning": null,
+  "dependency_count": 6,
+  "dependency_paths": [
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260629-105311/packages/tasks/deps/System.Drawing.Common.4.7.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260629-105311/packages/tasks/deps/System.Security.Permissions.4.5.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260629-105311/packages/tasks/deps/System.Security.AccessControl.4.5.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260629-105311/packages/tasks/deps/System.Text.Encoding.CodePages.4.5.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260629-105311/packages/tasks/deps/System.Runtime.CompilerServices.Unsafe.4.5.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260629-105311/packages/tasks/deps/Aspose.Drawing.23.5.0.nupkg"
+  ],
+  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260629-105311/catalog/tasks/api-catalog.json",
+  "namespace_count": 2,
+  "matched_plugin_namespaces": [],
+  "unmatched_patterns": [
+    {
+      "pattern": "Aspose.Tasks.LowCode",
+      "reason": "No namespace in catalog matches pattern 'Aspose.Tasks.LowCode'"
+    },
+    {
+      "pattern": "Aspose.Tasks.LowCode.*",
+      "reason": "No namespace in catalog matches pattern 'Aspose.Tasks.LowCode.*'"
+    }
+  ],
+  "public_plugin_type_count": 0,
+  "public_plugin_method_count": 0,
+  "eligibility_status": "not_eligible",
+  "eligibility_reason": "No configured plugin namespace patterns matched any namespace in the API catalog"
+}

@@ -1,0 +1,52 @@
+{
+  "package_id": "Aspose.Cells",
+  "resolved_version": "26.6.0",
+  "nupkg_sha256": "d0a78d28a92a0a9128ad1127c91dd3d61eb8cb5cf20318f6b827d25dc6b22e02",
+  "selected_target_framework": "netstandard2.0",
+  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cells-20260629-105158/extracted/cells/primary/lib/netstandard2.0/Aspose.Cells.dll",
+  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cells-20260629-105158/extracted/cells/primary/lib/netstandard2.0/Aspose.Cells.xml",
+  "xml_warning": null,
+  "dependency_count": 12,
+  "dependency_paths": [
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cells-20260629-105158/packages/cells/deps/System.Text.Encoding.CodePages.4.7.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cells-20260629-105158/packages/cells/deps/System.Runtime.CompilerServices.Unsafe.4.7.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cells-20260629-105158/packages/cells/deps/System.Drawing.Common.5.0.3.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cells-20260629-105158/packages/cells/deps/System.Security.Cryptography.Pkcs.6.0.5.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cells-20260629-105158/packages/cells/deps/System.Formats.Asn1.6.0.1.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cells-20260629-105158/packages/cells/deps/System.Buffers.4.5.1.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cells-20260629-105158/packages/cells/deps/System.Memory.4.5.4.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cells-20260629-105158/packages/cells/deps/System.Security.Cryptography.Cng.5.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cells-20260629-105158/packages/cells/deps/SkiaSharp.2.88.9.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cells-20260629-105158/packages/cells/deps/SkiaSharp.NativeAssets.Win32.2.88.9.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cells-20260629-105158/packages/cells/deps/SkiaSharp.NativeAssets.macOS.2.88.9.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cells-20260629-105158/packages/cells/deps/System.Memory.4.5.5.nupkg"
+  ],
+  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cells-20260629-105158/catalog/cells/api-catalog.json",
+  "namespace_count": 4,
+  "matched_plugin_namespaces": [
+    {
+      "namespace": "Aspose.Cells.LowCode",
+      "matched_by_pattern": "Aspose.Cells.LowCode",
+      "public_type_count": 22,
+      "public_method_count": 33
+    }
+  ],
+  "unmatched_patterns": [
+    {
+      "pattern": "Aspose.Cells.LowCode.*",
+      "reason": "No namespace in catalog matches pattern 'Aspose.Cells.LowCode.*'"
+    },
+    {
+      "pattern": "Aspose.Cells.Plugins",
+      "reason": "No namespace in catalog matches pattern 'Aspose.Cells.Plugins'"
+    },
+    {
+      "pattern": "Aspose.Cells.Plugins.*",
+      "reason": "No namespace in catalog matches pattern 'Aspose.Cells.Plugins.*'"
+    }
+  ],
+  "public_plugin_type_count": 22,
+  "public_plugin_method_count": 33,
+  "eligibility_status": "eligible",
+  "eligibility_reason": "Plugin namespaces found: Aspose.Cells.LowCode"
+}

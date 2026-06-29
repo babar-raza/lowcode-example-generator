@@ -1,0 +1,42 @@
+{
+  "package_id": "Aspose.Slides.NET",
+  "resolved_version": "26.6.0",
+  "nupkg_sha256": "45a071d38b4db721e8104b77a2a4dccd032086388f25e653168787f7b0546bcf",
+  "selected_target_framework": "netstandard2.0",
+  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-slides-20260629-105307/extracted/slides/primary/lib/netstandard2.0/Aspose.Slides.dll",
+  "xml_path": null,
+  "xml_warning": "XML documentation not found: Aspose.Slides.NET.xml in /home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-slides-20260629-105307/extracted/slides/primary/lib/netstandard2.0",
+  "dependency_count": 10,
+  "dependency_paths": [
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-slides-20260629-105307/packages/slides/deps/System.Text.Encoding.CodePages.4.4.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-slides-20260629-105307/packages/slides/deps/System.Drawing.Common.5.0.3.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-slides-20260629-105307/packages/slides/deps/System.Text.Json.6.0.11.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-slides-20260629-105307/packages/slides/deps/Microsoft.Bcl.AsyncInterfaces.6.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-slides-20260629-105307/packages/slides/deps/System.Runtime.CompilerServices.Unsafe.6.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-slides-20260629-105307/packages/slides/deps/System.Text.Encodings.Web.6.0.1.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-slides-20260629-105307/packages/slides/deps/System.Buffers.4.5.1.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-slides-20260629-105307/packages/slides/deps/System.Memory.4.5.4.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-slides-20260629-105307/packages/slides/deps/System.Numerics.Vectors.4.5.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-slides-20260629-105307/packages/slides/deps/System.Threading.Tasks.Extensions.4.5.4.nupkg"
+  ],
+  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-slides-20260629-105307/catalog/slides/api-catalog.json",
+  "namespace_count": 2,
+  "matched_plugin_namespaces": [
+    {
+      "namespace": "Aspose.Slides.LowCode",
+      "matched_by_pattern": "Aspose.Slides.LowCode",
+      "public_type_count": 5,
+      "public_method_count": 36
+    }
+  ],
+  "unmatched_patterns": [
+    {
+      "pattern": "Aspose.Slides.LowCode.*",
+      "reason": "No namespace in catalog matches pattern 'Aspose.Slides.LowCode.*'"
+    }
+  ],
+  "public_plugin_type_count": 5,
+  "public_plugin_method_count": 36,
+  "eligibility_status": "eligible",
+  "eligibility_reason": "Plugin namespaces found: Aspose.Slides.LowCode"
+}

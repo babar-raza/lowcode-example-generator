@@ -1,0 +1,15 @@
+{
+  "family": "diagram",
+  "total_input_paths": 4,
+  "kept_count": 4,
+  "excluded_count": 0,
+  "dedup_by": "assembly_simple_name",
+  "kept": [
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260629-105205/extracted/diagram/resolved-libs/System.Text.Encoding.CodePages.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260629-105205/extracted/diagram/resolved-libs/System.Runtime.CompilerServices.Unsafe.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260629-105205/extracted/diagram/resolved-libs/System.Drawing.Common.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260629-105205/extracted/diagram/resolved-libs/Aspose.Drawing.Common.dll"
+  ],
+  "excluded": [],
+  "conflicts": []
+}

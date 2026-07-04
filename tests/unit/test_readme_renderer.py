@@ -464,7 +464,7 @@ class TestPackageWorkflowRendersReadme:
 _WORKSPACE_DIR = _REPO_ROOT / "workspace"
 
 
-@pytest.mark.skipif(not _WORKSPACE_DIR.exists(), reason="workspace/ detracked — CLI tests need local artifacts")
+@pytest.mark.skipif(not (_WORKSPACE_DIR / "pr-dry-run" / "cells-controlled-pilot").exists(), reason="workspace/pr-dry-run/cells-controlled-pilot absent — CLI tests need local artifacts")
 class TestCLIRenderRootReadme:
     def _run_cli(self, args: list[str], cwd: Path | None = None) -> subprocess.CompletedProcess:
         return subprocess.run(

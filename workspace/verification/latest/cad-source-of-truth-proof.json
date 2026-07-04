@@ -1,0 +1,36 @@
+{
+  "package_id": "Aspose.CAD",
+  "resolved_version": "26.1.0",
+  "nupkg_sha256": "3f11f4aa2b00404acb5e179352ac6cb02ce2b6ea9354bc3c8582c0ab0a65856d",
+  "selected_target_framework": "netstandard2.0",
+  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cad-20260629-105154/extracted/cad/primary/lib/netstandard2.0/Aspose.CAD.dll",
+  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cad-20260629-105154/extracted/cad/primary/lib/netstandard2.0/Aspose.CAD.xml",
+  "xml_warning": null,
+  "dependency_count": 7,
+  "dependency_paths": [
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cad-20260629-105154/packages/cad/deps/System.Text.Encoding.CodePages.8.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cad-20260629-105154/packages/cad/deps/System.Memory.4.5.5.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cad-20260629-105154/packages/cad/deps/System.Runtime.CompilerServices.Unsafe.6.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cad-20260629-105154/packages/cad/deps/System.Security.Cryptography.Pkcs.8.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cad-20260629-105154/packages/cad/deps/System.Formats.Asn1.8.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cad-20260629-105154/packages/cad/deps/System.Buffers.4.5.1.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cad-20260629-105154/packages/cad/deps/System.Security.Cryptography.Cng.5.0.0.nupkg"
+  ],
+  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-cad-20260629-105154/catalog/cad/api-catalog.json",
+  "namespace_count": 2,
+  "matched_plugin_namespaces": [],
+  "unmatched_patterns": [
+    {
+      "pattern": "Aspose.CAD.LowCode",
+      "reason": "No namespace in catalog matches pattern 'Aspose.CAD.LowCode'"
+    },
+    {
+      "pattern": "Aspose.CAD.LowCode.*",
+      "reason": "No namespace in catalog matches pattern 'Aspose.CAD.LowCode.*'"
+    }
+  ],
+  "public_plugin_type_count": 0,
+  "public_plugin_method_count": 0,
+  "eligibility_status": "not_eligible",
+  "eligibility_reason": "No configured plugin namespace patterns matched any namespace in the API catalog"
+}

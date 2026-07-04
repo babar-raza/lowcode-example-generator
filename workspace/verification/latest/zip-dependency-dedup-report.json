@@ -1,0 +1,14 @@
+{
+  "family": "zip",
+  "total_input_paths": 3,
+  "kept_count": 3,
+  "excluded_count": 0,
+  "dedup_by": "assembly_simple_name",
+  "kept": [
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-zip-20260629-105330/extracted/zip/resolved-libs/System.Text.Encoding.CodePages.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-zip-20260629-105330/extracted/zip/resolved-libs/System.Runtime.CompilerServices.Unsafe.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-zip-20260629-105330/extracted/zip/resolved-libs/System.Buffers.dll"
+  ],
+  "excluded": [],
+  "conflicts": []
+}

@@ -1,0 +1,34 @@
+{
+  "package_id": "Aspose.Imaging",
+  "resolved_version": "26.6.0",
+  "nupkg_sha256": "52fabe866f195cf357500fcdb617a82cf5cfeb3520aee8fd46bcf2e5e4308621",
+  "selected_target_framework": "netstandard2.0",
+  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260629-105216/extracted/imaging/primary/lib/netstandard2.0/Aspose.Imaging.dll",
+  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260629-105216/extracted/imaging/primary/lib/netstandard2.0/Aspose.Imaging.xml",
+  "xml_warning": null,
+  "dependency_count": 5,
+  "dependency_paths": [
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260629-105216/packages/imaging/deps/System.Text.Encoding.CodePages.7.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260629-105216/packages/imaging/deps/System.Memory.4.5.5.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260629-105216/packages/imaging/deps/System.Runtime.CompilerServices.Unsafe.6.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260629-105216/packages/imaging/deps/Newtonsoft.Json.13.0.1.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260629-105216/packages/imaging/deps/System.Drawing.Common.6.0.0.nupkg"
+  ],
+  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260629-105216/catalog/imaging/api-catalog.json",
+  "namespace_count": 2,
+  "matched_plugin_namespaces": [],
+  "unmatched_patterns": [
+    {
+      "pattern": "Aspose.Imaging.LowCode",
+      "reason": "No namespace in catalog matches pattern 'Aspose.Imaging.LowCode'"
+    },
+    {
+      "pattern": "Aspose.Imaging.LowCode.*",
+      "reason": "No namespace in catalog matches pattern 'Aspose.Imaging.LowCode.*'"
+    }
+  ],
+  "public_plugin_type_count": 0,
+  "public_plugin_method_count": 0,
+  "eligibility_status": "not_eligible",
+  "eligibility_reason": "No configured plugin namespace patterns matched any namespace in the API catalog"
+}

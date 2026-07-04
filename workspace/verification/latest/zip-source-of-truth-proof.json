@@ -1,0 +1,32 @@
+{
+  "package_id": "Aspose.ZIP",
+  "resolved_version": "26.6.0",
+  "nupkg_sha256": "28fc29e056a68f27a09b71694484d93032e7063eb3bfa1dc188623ba411b8a17",
+  "selected_target_framework": "netstandard2.0",
+  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-zip-20260629-105330/extracted/zip/primary/lib/netstandard2.0/Aspose.Zip.dll",
+  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-zip-20260629-105330/extracted/zip/primary/lib/netstandard2.0/Aspose.Zip.xml",
+  "xml_warning": null,
+  "dependency_count": 3,
+  "dependency_paths": [
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-zip-20260629-105330/packages/zip/deps/System.Text.Encoding.CodePages.4.5.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-zip-20260629-105330/packages/zip/deps/System.Runtime.CompilerServices.Unsafe.4.5.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-zip-20260629-105330/packages/zip/deps/System.Buffers.4.5.1.nupkg"
+  ],
+  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-zip-20260629-105330/catalog/zip/api-catalog.json",
+  "namespace_count": 2,
+  "matched_plugin_namespaces": [],
+  "unmatched_patterns": [
+    {
+      "pattern": "Aspose.ZIP.LowCode",
+      "reason": "No namespace in catalog matches pattern 'Aspose.ZIP.LowCode'"
+    },
+    {
+      "pattern": "Aspose.ZIP.LowCode.*",
+      "reason": "No namespace in catalog matches pattern 'Aspose.ZIP.LowCode.*'"
+    }
+  ],
+  "public_plugin_type_count": 0,
+  "public_plugin_method_count": 0,
+  "eligibility_status": "not_eligible",
+  "eligibility_reason": "No configured plugin namespace patterns matched any namespace in the API catalog"
+}

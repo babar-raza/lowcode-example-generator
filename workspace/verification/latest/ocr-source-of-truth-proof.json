@@ -1,0 +1,41 @@
+{
+  "package_id": "Aspose.OCR",
+  "resolved_version": "26.5.1",
+  "nupkg_sha256": "eaad695fc4acbb0fbb14ab2f67098f5c82af584e5919636c264fe9f6929cdcf2",
+  "selected_target_framework": "netstandard2.0",
+  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260629-105220/extracted/ocr/primary/lib/netstandard2.0/Aspose.OCR.dll",
+  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260629-105220/extracted/ocr/primary/lib/netstandard2.0/Aspose.OCR.xml",
+  "xml_warning": null,
+  "dependency_count": 12,
+  "dependency_paths": [
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260629-105220/packages/ocr/deps/Microsoft.ML.OnnxRuntime.1.22.1.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260629-105220/packages/ocr/deps/System.Text.Encoding.CodePages.7.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260629-105220/packages/ocr/deps/System.Memory.4.5.5.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260629-105220/packages/ocr/deps/System.Buffers.4.5.1.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260629-105220/packages/ocr/deps/System.Numerics.Vectors.4.4.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260629-105220/packages/ocr/deps/System.Runtime.CompilerServices.Unsafe.4.5.3.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260629-105220/packages/ocr/deps/System.Runtime.CompilerServices.Unsafe.6.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260629-105220/packages/ocr/deps/System.Text.Json.9.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260629-105220/packages/ocr/deps/Microsoft.Bcl.AsyncInterfaces.9.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260629-105220/packages/ocr/deps/System.Threading.Tasks.Extensions.4.5.4.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260629-105220/packages/ocr/deps/System.IO.Pipelines.9.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260629-105220/packages/ocr/deps/System.Text.Encodings.Web.9.0.0.nupkg"
+  ],
+  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260629-105220/catalog/ocr/api-catalog.json",
+  "namespace_count": 2,
+  "matched_plugin_namespaces": [],
+  "unmatched_patterns": [
+    {
+      "pattern": "Aspose.OCR.LowCode",
+      "reason": "No namespace in catalog matches pattern 'Aspose.OCR.LowCode'"
+    },
+    {
+      "pattern": "Aspose.OCR.LowCode.*",
+      "reason": "No namespace in catalog matches pattern 'Aspose.OCR.LowCode.*'"
+    }
+  ],
+  "public_plugin_type_count": 0,
+  "public_plugin_method_count": 0,
+  "eligibility_status": "not_eligible",
+  "eligibility_reason": "No configured plugin namespace patterns matched any namespace in the API catalog"
+}

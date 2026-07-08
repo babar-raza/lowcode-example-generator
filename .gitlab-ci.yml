@@ -1,11 +1,16 @@
+# GitLab CI — Windows-host validation gate
+#
+# Runner: id=154 (local-docker-lowcode), shell executor (Git Bash), concurrent=1
+# Platform role: GitLab CI validates on Windows. GitHub Actions is the primary CI
+# (full matrix testing, SAST, schedules, Docker builds).
+#
+# Jobs: 5 blocking, 0 advisory, 0 schedule. Pipeline is binary: green or red.
+
 stages:
   - lint
   - test
   - build
-  - schedule
 
-# NOTE: Runner id=154 (local-docker-lowcode) is a shell executor on Windows (Git Bash).
-# All jobs run on the host — image: directives are NOT used.
 default:
   tags:
     - shell
@@ -17,78 +22,34 @@ variables:
   GIT_FETCH_EXTRA_FLAGS: "--filter=blob:none"
   GET_SOURCES_ATTEMPTS: "3"
 
-# ── Lint ─────────────────────────────────────────────────────
+.on-code-change:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
-ruff-lint:
-  # Blocking gate: ruff check src/ tests/ exits 0 after TC-H09 fixes.
-  # Scope matches CI: src/ and tests/ only (scripts/ and reports/ are legacy generated files).
-  # Shell executor: venv in .pip-cache/ (excluded from git clean) avoids system Python admin requirement.
+# ── Lint ─────────────────────────────────────────────────────
+# Consolidates ruff, compile, mypy, detect-secrets, license-check, and gate-isolation
+# into one job. With concurrent=1, separate jobs were already sequential — this saves
+# 6 redundant venv creations (~3 min overhead).
+
+lint:
   stage: lint
+  extends: .on-code-change
   cache:
     key: pip-lint
     paths:
       - .pip-cache/
   before_script:
-    - python -m venv --clear .pip-cache/venv
-    - source .pip-cache/venv/Scripts/activate
-    - pip install "ruff>=0.15"
+    - python -m venv --clear .pip-cache/lint-venv
+    - source .pip-cache/lint-venv/Scripts/activate
+    - pip install "ruff>=0.15" mypy detect-secrets pip-licenses -e .
   script:
     - ruff check src/ tests/
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "push"'
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-
-compile-check:
-  stage: lint
-  script:
     - python -m compileall src/
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "push"'
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-
-mypy-check:
-  # Type checking gate: validates type annotations across src/.
-  # Blocking since 2026-06-16: 0 errors with current config.
-  stage: lint
-  cache:
-    key: pip-mypy
-    paths:
-      - .pip-cache/
-  before_script:
-    - python -m venv --clear .pip-cache/mypy-venv
-    - source .pip-cache/mypy-venv/Scripts/activate
-    - pip install mypy -e .
-  script:
     - mypy src/plugin_examples/ --ignore-missing-imports
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "push"'
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-
-secret-scan:
-  # Blocking gate: detect-secrets scans for accidentally committed secrets.
-  # Baseline generated with: detect-secrets scan > .secrets.baseline
-  stage: lint
-  cache:
-    key: pip-secrets
-    paths:
-      - .pip-cache/
-  before_script:
-    - python -m venv --clear .pip-cache/secrets-venv
-    - source .pip-cache/secrets-venv/Scripts/activate
-    - pip install detect-secrets
-  script:
     - detect-secrets scan --baseline .secrets.baseline
     - detect-secrets audit --report .secrets.baseline
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "push"'
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-
-gate-isolation:
-  # TC-H14: RISK-10 — gate modules must not import AI/LLM modules.
-  # Blocking gate: scoped to example_gates.py only, matching unit test scope in test_risk_mitigations.py.
-  # publication_gate.py probe import (try/except ImportError) is intentionally excluded from this check.
-  stage: lint
-  script:
+    - pip-licenses --ignore-packages plugin-examples --allow-only="MIT License;MIT;BSD License;BSD;BSD-2-Clause;BSD-3-Clause;Apache Software License;Apache-2.0;ISC License;ISC;Python Software Foundation License;PSF-2.0;Mozilla Public License 2.0 (MPL 2.0);Public Domain;The Unlicense (Unlicense);UNKNOWN"
     - |
       if grep -rn \
         "from plugin_examples\.llm_router\|import plugin_examples\.llm_router\|from plugin_examples\.healing_intelligence\|import plugin_examples\.healing_intelligence\|from plugin_examples\.generator\|import plugin_examples\.generator" \
@@ -96,146 +57,32 @@ gate-isolation:
         echo "RISK-10 VIOLATION: Gate modules must not import AI/LLM modules"
         exit 1
       fi
-      echo "Gate isolation check passed — no AI imports found in example_gates.py"
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "push"'
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-
-bandit-sast:
-  # Blocking SAST gate: bandit scans src/ for security issues.
-  # Skips configured in pyproject.toml [tool.bandit] section.
-  stage: lint
-  cache:
-    key: pip-bandit
-    paths:
-      - .pip-cache/
-  before_script:
-    - python -m venv --clear .pip-cache/bandit-venv
-    - source .pip-cache/bandit-venv/Scripts/activate
-    - pip install "bandit[toml]>=1.7"
-  script:
-    - bandit -c pyproject.toml -r src/ -f json -o bandit-report.json || true
-    - bandit -c pyproject.toml -r src/
-  artifacts:
-    when: always
-    paths:
-      - bandit-report.json
-    expire_in: 7 days
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "push"'
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-
-license-check:
-  # Blocking gate: dependency licenses must be in the approved allowlist.
-  stage: lint
-  cache:
-    key: pip-license
-    paths:
-      - .pip-cache/
-  before_script:
-    - python -m venv --clear .pip-cache/license-venv
-    - source .pip-cache/license-venv/Scripts/activate
-    - pip install pip-licenses -e .
-  script:
-    - pip-licenses --ignore-packages plugin-examples --allow-only="MIT License;MIT;BSD License;BSD;BSD-2-Clause;BSD-3-Clause;Apache Software License;Apache-2.0;ISC License;ISC;Python Software Foundation License;PSF-2.0;Mozilla Public License 2.0 (MPL 2.0);Public Domain;The Unlicense (Unlicense);UNKNOWN"
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "push"'
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-
-pip-audit:
-  # TC-H04: Advisory dependency vulnerability scan. Never blocks the pipeline.
-  # Policy rationale documented in ADR-008 (docs/adr/ADR-008-pip-audit-advisory-policy.md).
-  # Shell executor: isolated venv at .pip-cache/audit-venv so pip upgrade
-  # doesn't corrupt the shared venv used by ruff-lint and test jobs.
-  stage: lint
-  allow_failure: true
-  cache:
-    key: pip-audit
-    paths:
-      - .pip-cache/
-  before_script:
-    - python -m venv .pip-cache/audit-venv
-    - source .pip-cache/audit-venv/Scripts/activate
-    - python -m pip install --upgrade pip
-    - pip install pip-audit
-    - pip install -e ".[dev]"
-  script:
-    - pip-audit --skip-editable
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "push"'
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-
-docs-link-check:
-  # Advisory gate: checks relative links in docs/ for broken targets.
-  # Uses Python-based checker (no npm dependency) to stay within shell executor constraints.
-  # allow_failure: true — advisory only until baseline is verified across all branches.
-  # Governance: ADR-009 (docs/adr/ADR-009-documentation-governance.md)
-  stage: lint
-  allow_failure: true
-  cache:
-    key: pip-lint
-    paths:
-      - .pip-cache/
-  before_script:
-    - python -m venv --clear .pip-cache/venv
-    - source .pip-cache/venv/Scripts/activate
-    - pip install -e ".[dev]"
-  script:
-    - python scripts/check_doc_links.py --root docs --include-root
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "push"'
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-
-docs-freshness-check:
-  # Advisory gate: checks that generated docs are within the allowed age window.
-  # Threshold is 60 days (sprint cadence) not 7 days, because the matrix date reflects
-  # the latest CLOSED taskcard evidence — sync-taskcard-docs is idempotent without new evidence.
-  # A 7-day threshold would fail permanently between sprints regardless of repo health.
-  # allow_failure: true — advisory only until sync-taskcard-docs is wired into sprint automation.
-  # Governance: ADR-009 (docs/adr/ADR-009-documentation-governance.md)
-  stage: lint
-  allow_failure: true
-  cache:
-    key: pip-lint
-    paths:
-      - .pip-cache/
-  before_script:
-    - python -m venv --clear .pip-cache/venv
-    - source .pip-cache/venv/Scripts/activate
-    - pip install -e ".[dev]"
-  script:
-    - python scripts/check_doc_freshness.py --max-age-days 60
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "push"'
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      echo "Gate isolation check passed"
 
 # ── Tests ────────────────────────────────────────────────────
+# Single Python version (py313). GHA tests py312+py313 on Linux.
+# GitLab's unique value is Windows-host validation.
 
 .test-base:
-  # Shell executor: venv in .pip-cache/ persists between jobs (excluded from git clean).
-  # --clear recreates the venv on every job to prevent stale/corrupted venv from blocking tests.
-  # Wheels are still cached via PIP_CACHE_DIR so reinstall is fast.
   stage: test
+  extends: .on-code-change
+  variables:
+    PYTHONPATH: src
   cache:
     key: pip-test
     paths:
       - .pip-cache/
   before_script:
-    - python -m venv --clear .pip-cache/venv
-    - source .pip-cache/venv/Scripts/activate
+    - python -m venv --clear .pip-cache/test-venv
+    - source .pip-cache/test-venv/Scripts/activate
     - pip install -e ".[dev]"
   artifacts:
     when: always
     reports:
       junit: report-*.xml
     expire_in: 7 days
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "push"'
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
-unit-tests-py312:
-  # TC-H02: Coverage flags added to match GitHub Actions build-and-test.yml.
-  # TC-RH10: Coverage ratchet — fails if coverage drops >2% from baseline (79%).
+unit-tests:
   extends: .test-base
   variables:
     PYTHONPATH: src
@@ -243,13 +90,12 @@ unit-tests-py312:
   script:
     - >
       python -m pytest tests/unit -v --timeout=60
-      --junitxml=report-unit-py312.xml
+      --junitxml=report-unit.xml
       --cov=src/plugin_examples --cov-report=term-missing
       --cov-report=html:coverage-html --cov-report=xml:coverage.xml
       --cov-fail-under=70
       | tee pytest-output.txt
     - |
-      # Coverage ratchet: extract coverage % from first run output (no second pytest run)
       COV_PCT=$(grep "^TOTAL" pytest-output.txt | awk '{print int($NF)}' || echo "0")
       if [ "$COV_PCT" -gt 0 ] && [ "$COV_PCT" -lt "$((COVERAGE_BASELINE - 2))" ]; then
         echo "COVERAGE RATCHET FAIL: ${COV_PCT}% < baseline ${COVERAGE_BASELINE}% - 2%"
@@ -262,76 +108,20 @@ unit-tests-py312:
       - coverage-html/
       - coverage.xml
     reports:
-      junit: report-unit-py312.xml
+      junit: report-unit.xml
       coverage_report:
         coverage_format: cobertura
         path: coverage.xml
     expire_in: 30 days
 
-unit-tests-py313:
+integration-tests:
   extends: .test-base
-  variables:
-    PYTHONPATH: src
-  script:
-    - >
-      python -m pytest tests/unit -v --timeout=60
-      --junitxml=report-unit-py313.xml
-      --cov=src/plugin_examples --cov-report=term-missing
-      --cov-report=xml:coverage-py313.xml
-      --cov-fail-under=70
-
-integration-tests-py312:
-  extends: .test-base
-  variables:
-    PYTHONPATH: src
   script:
     - >
       python -m pytest tests/integration -v --timeout=120
-      --junitxml=report-integration-py312.xml
-
-integration-tests-py313:
-  extends: .test-base
-  variables:
-    PYTHONPATH: src
-  script:
-    - >
-      python -m pytest tests/integration -v --timeout=120
-      --junitxml=report-integration-py313.xml
-
-mutation-testing:
-  # Docker-based mutation testing — runs mutmut inside python:3.13-slim container.
-  # Replaces WSL approach: no WSL dependency, portable, deterministic Linux environment.
-  # Scope: gates/, policy/loader, slo_monitor, compliance/reporter, slo_remediator, stage_contracts
-  # Target threshold: 70% mutation score
-  # allow_failure: Docker Desktop may not be running when shell executor picks up the job.
-  stage: test
-  allow_failure: true
-  script:
-    - bash scripts/docker-mutmut.sh
-    - |
-      python -c "
-      import json, sys
-      try:
-          d = json.load(open('mutmut-summary.json'))
-      except FileNotFoundError:
-          print('No mutmut-summary.json found'); sys.exit(0)
-      print(f'Mutation score: {d[\"score\"]}% ({d[\"killed\"]}/{d[\"total\"]} killed)')
-      if d['score'] < 70:
-          print(f'WARN: mutation score {d[\"score\"]}% < 70% threshold'); sys.exit(1)
-      print('PASS: mutation score meets threshold')
-      "
-  artifacts:
-    when: always
-    paths:
-      - mutmut-summary.json
-    expire_in: 7 days
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "push"'
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      --junitxml=report-integration.xml
 
 compliance-gate:
-  # Policy-as-code compliance gate: runs doctor health checks including
-  # SLO compliance, gate policy, and all EHV validators.
   extends: .test-base
   script:
     - python -m plugin_examples doctor --json > doctor-report.json
@@ -350,195 +140,10 @@ compliance-gate:
       - doctor-report.json
     expire_in: 7 days
 
-# ── .NET Build ───────────────────────────────────────────────
+# ── Build ────────────────────────────────────────────────────
 
 dotnet-build:
   stage: build
+  extends: .on-code-change
   script:
     - dotnet build tools/DllReflector/DllReflector.csproj -c Release
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "push"'
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-
-containerized-build:
-  # Docker-based .NET build — proves the project builds in a clean Linux container.
-  # Eliminates host-dependency assumptions; demonstrates P4 (containerized build) capability.
-  # allow_failure: Docker Desktop may not be running when shell executor picks up the job.
-  stage: build
-  allow_failure: true
-  script:
-    - >
-      MSYS_NO_PATHCONV=1 docker run --rm
-      -v "$(pwd):/app"
-      -w /app
-      mcr.microsoft.com/dotnet/sdk:9.0
-      dotnet build tools/DllReflector/DllReflector.csproj -c Release
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "push"'
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-
-# ── Scheduled Jobs ────────────────────────────────────────────
-#
-# TC-H10: Port weekly-discovery and monthly-refresh to GitLab CI scheduled pipelines.
-#
-# Setup required (GitLab admin):
-#   1. Go to CI/CD → Schedules in the GitLab project UI.
-#   2. Create a schedule for weekly discovery:
-#        Description: "Weekly Discovery Sweep"
-#        Cron: "0 6 * * 1"  (every Monday 06:00 UTC)
-#        Variable: SCHEDULE_TYPE = weekly-discovery
-#   3. Create a schedule for monthly refresh:
-#        Description: "Monthly Package Refresh"
-#        Cron: "0 6 1 * *"  (1st of month 06:00 UTC)
-#        Variable: SCHEDULE_TYPE = monthly-refresh
-#   4. Required CI/CD variables (Settings → CI/CD → Variables):
-#        gl_pat — personal/project access token with write_repository + api scope
-#                 Already set as a Windows system env var; mirror it to GitLab CI/CD Variables.
-#
-# BLOCKED_EXTERNAL: EXT-01 (runner availability), EXT-03 (variable configuration)
-# Remote execution unverified until TC-H11 confirmed.
-
-weekly-discovery:
-  # TC-H10: Port of .github/workflows/weekly-discovery.yml
-  # Triggers: GitLab schedule with SCHEDULE_TYPE=weekly-discovery, or manual pipeline.
-  # Replaces GITHUB_TOKEN git push with CI_JOB_TOKEN credential injection.
-  stage: schedule
-  variables:
-    PYTHONPATH: src
-    GIT_STRATEGY: clone
-  cache:
-    key: pip-schedule
-    paths:
-      - .pip-cache/
-  before_script:
-    - python -m venv --clear .pip-cache/venv
-    - source .pip-cache/venv/Scripts/activate
-    - pip install -e .
-    - dotnet build tools/DllReflector/DllReflector.csproj -c Release
-    - git config user.name "pipeline-bot"
-    - git config user.email "pipeline-bot@pipeline"
-    - git remote set-url origin "https://oauth2:${gl_pat}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
-  script:
-    - python -m plugin_examples discover-lowcode --all-families
-    - git add -f workspace/verification/latest/
-    - 'git diff --cached --quiet || git commit -m "chore(discovery): weekly sweep $(date -u +%Y-%m-%d)"'
-    - 'git diff HEAD~1..HEAD --quiet || git push origin HEAD:${CI_COMMIT_BRANCH}'
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_TYPE == "weekly-discovery"'
-    - if: '$CI_PIPELINE_SOURCE == "web"'
-      when: manual
-
-monthly-refresh:
-  # TC-H10: Port of .github/workflows/monthly-package-refresh.yml (refresh job).
-  # Shell executor: uses host Python + .NET SDK (no Docker).
-  # gl_pat exposed as GITHUB_TOKEN so pipeline code needs no changes.
-  stage: schedule
-  variables:
-    PYTHONPATH: src
-    GITHUB_TOKEN: $gl_pat
-  cache:
-    key: pip-schedule
-    paths:
-      - .pip-cache/
-  before_script:
-    - python -m venv --clear .pip-cache/venv
-    - source .pip-cache/venv/Scripts/activate
-    - pip install -e .
-    - dotnet build tools/DllReflector/DllReflector.csproj -c Release
-  script:
-    - python -m plugin_examples run --family ${REFRESH_FAMILY:-cells} ${REFRESH_DRY_RUN:+--dry-run}
-    - python -m pytest tests/unit/test_denominator_model.py tests/unit/test_scenario_contracts.py -q --tb=short
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_TYPE == "monthly-refresh"'
-    - if: '$CI_PIPELINE_SOURCE == "web"'
-      when: manual
-
-monthly-regression-check:
-  # TC-H10: Port of .github/workflows/monthly-package-refresh.yml (regression-check job).
-  # Depends on monthly-refresh completing successfully.
-  stage: schedule
-  needs: [monthly-refresh]
-  variables:
-    PYTHONPATH: src
-    GITHUB_TOKEN: $gl_pat
-  cache:
-    key: pip-schedule
-    paths:
-      - .pip-cache/
-  before_script:
-    - python -m venv --clear .pip-cache/venv
-    - source .pip-cache/venv/Scripts/activate
-    - pip install -e .
-    - dotnet build tools/DllReflector/DllReflector.csproj -c Release
-  script:
-    - python scripts/validate_published_examples_build.py
-  artifacts:
-    when: always
-    paths:
-      - workspace/verification/latest/monthly-build-regression-report.json
-    expire_in: 30 days
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_TYPE == "monthly-refresh"'
-    - if: '$CI_PIPELINE_SOURCE == "web"'
-      when: manual
-
-github-ci-sync-check:
-  # TC-HRD-06: Divergence detection gate.
-  # Verifies that the GitHub mirror CI is green for the current HEAD SHA.
-  # Runs on weekly schedule (same as weekly-discovery) and on-demand via web.
-  # Advisory: allow_failure:true prevents this from blocking the pipeline if
-  # the GitHub token is unavailable or the API is transient. Graduate to
-  # blocking after first successful cycle confirms the check is reliable.
-  stage: schedule
-  allow_failure: true
-  variables:
-    GH_REPO: "babar-raza/lowcode-example-generator"
-    GITHUB_TOKEN: $gl_pat
-  script:
-    - |
-      SHA="${CI_COMMIT_SHA}"
-      echo "Checking GitHub CI status for SHA ${SHA:0:10} on repo ${GH_REPO}..."
-      RESULT=$(python3 -c "
-      import urllib.request, json, sys, os
-      sha = os.environ['CI_COMMIT_SHA']
-      repo = os.environ['GH_REPO']
-      token = os.environ.get('GITHUB_TOKEN', '')
-      url = f'https://api.github.com/repos/{repo}/commits/{sha}/check-suites'
-      req = urllib.request.Request(url, headers={
-          'Authorization': f'Bearer {token}',
-          'Accept': 'application/vnd.github+json',
-          'X-GitHub-Api-Version': '2022-11-28',
-      })
-      try:
-          with urllib.request.urlopen(req, timeout=15) as r:
-              d = json.load(r)
-          suites = [s for s in d.get('check_suites', []) if s.get('app', {}).get('name') == 'GitHub Actions']
-          if not suites:
-              print('NO_SUITES')
-          else:
-              conclusions = [s.get('conclusion') for s in suites if s.get('conclusion')]
-              statuses = [s.get('status') for s in suites]
-              print(f'conclusions={conclusions} statuses={statuses}')
-              if all(c == 'success' for c in conclusions):
-                  print('GITHUB_CI_GREEN')
-              elif any(c == 'failure' for c in conclusions):
-                  print('GITHUB_CI_FAILED')
-              else:
-                  print('GITHUB_CI_PENDING_OR_UNKNOWN')
-      except Exception as e:
-          print(f'API_ERROR: {e}')
-          sys.exit(0)  # Don't fail on transient API errors
-      ")
-      echo "GitHub CI check result: $RESULT"
-      if echo "$RESULT" | grep -q "GITHUB_CI_FAILED"; then
-        echo "ERROR: GitHub CI is failing for this commit. Check https://github.com/${GH_REPO}/actions"
-        exit 1
-      elif echo "$RESULT" | grep -q "GITHUB_CI_GREEN"; then
-        echo "OK: GitHub CI is green for this commit."
-      else
-        echo "INFO: GitHub CI status is unknown or pending — treating as advisory pass."
-      fi
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_TYPE == "weekly-discovery"'
-    - if: '$CI_PIPELINE_SOURCE == "web"'
-      when: manual

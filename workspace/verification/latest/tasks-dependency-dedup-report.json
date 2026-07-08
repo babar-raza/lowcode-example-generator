@@ -5,12 +5,12 @@
   "excluded_count": 0,
   "dedup_by": "assembly_simple_name",
   "kept": [
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260629-105311/extracted/tasks/resolved-libs/System.Drawing.Common.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260629-105311/extracted/tasks/resolved-libs/System.Security.Permissions.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260629-105311/extracted/tasks/resolved-libs/System.Security.AccessControl.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260629-105311/extracted/tasks/resolved-libs/System.Text.Encoding.CodePages.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260629-105311/extracted/tasks/resolved-libs/System.Runtime.CompilerServices.Unsafe.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260629-105311/extracted/tasks/resolved-libs/Aspose.Drawing.dll"
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260706-101359/extracted/tasks/resolved-libs/System.Drawing.Common.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260706-101359/extracted/tasks/resolved-libs/System.Security.Permissions.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260706-101359/extracted/tasks/resolved-libs/System.Security.AccessControl.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260706-101359/extracted/tasks/resolved-libs/System.Text.Encoding.CodePages.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260706-101359/extracted/tasks/resolved-libs/System.Runtime.CompilerServices.Unsafe.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260706-101359/extracted/tasks/resolved-libs/Aspose.Drawing.dll"
   ],
   "excluded": [],
   "conflicts": []

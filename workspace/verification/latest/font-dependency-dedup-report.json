@@ -5,9 +5,9 @@
   "excluded_count": 0,
   "dedup_by": "assembly_simple_name",
   "kept": [
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260706-101321/extracted/font/resolved-libs/System.Security.Permissions.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260706-101321/extracted/font/resolved-libs/System.Security.AccessControl.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260706-101321/extracted/font/resolved-libs/System.Text.Encoding.CodePages.dll"
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260713-092012/extracted/font/resolved-libs/System.Security.Permissions.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260713-092012/extracted/font/resolved-libs/System.Security.AccessControl.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260713-092012/extracted/font/resolved-libs/System.Text.Encoding.CodePages.dll"
   ],
   "excluded": [],
   "conflicts": []

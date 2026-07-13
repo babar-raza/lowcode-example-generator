@@ -3,18 +3,18 @@
   "resolved_version": "26.6.0",
   "nupkg_sha256": "1e2a3cd5fecfeb9d29ca4ea37e805ea473403d4f90f1d05aba6c7930faf4acfa",
   "selected_target_framework": "netstandard2.0",
-  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tex-20260706-101400/extracted/tex/primary/lib/netstandard2.0/Aspose.TeX.dll",
-  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tex-20260706-101400/extracted/tex/primary/lib/netstandard2.0/Aspose.TeX.xml",
+  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tex-20260713-092047/extracted/tex/primary/lib/netstandard2.0/Aspose.TeX.dll",
+  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tex-20260713-092047/extracted/tex/primary/lib/netstandard2.0/Aspose.TeX.xml",
   "xml_warning": null,
   "dependency_count": 5,
   "dependency_paths": [
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tex-20260706-101400/packages/tex/deps/System.Drawing.Common.5.0.3.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tex-20260706-101400/packages/tex/deps/System.Security.Permissions.5.0.0.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tex-20260706-101400/packages/tex/deps/System.Security.AccessControl.5.0.0.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tex-20260706-101400/packages/tex/deps/System.Text.Encoding.CodePages.5.0.0.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tex-20260706-101400/packages/tex/deps/System.Runtime.CompilerServices.Unsafe.5.0.0.nupkg"
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tex-20260713-092047/packages/tex/deps/System.Drawing.Common.5.0.3.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tex-20260713-092047/packages/tex/deps/System.Security.Permissions.5.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tex-20260713-092047/packages/tex/deps/System.Security.AccessControl.5.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tex-20260713-092047/packages/tex/deps/System.Text.Encoding.CodePages.5.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tex-20260713-092047/packages/tex/deps/System.Runtime.CompilerServices.Unsafe.5.0.0.nupkg"
   ],
-  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tex-20260706-101400/catalog/tex/api-catalog.json",
+  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tex-20260713-092047/catalog/tex/api-catalog.json",
   "namespace_count": 6,
   "matched_plugin_namespaces": [
     {

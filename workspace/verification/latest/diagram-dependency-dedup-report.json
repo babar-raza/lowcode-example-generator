@@ -5,10 +5,10 @@
   "excluded_count": 0,
   "dedup_by": "assembly_simple_name",
   "kept": [
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260706-101317/extracted/diagram/resolved-libs/System.Text.Encoding.CodePages.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260706-101317/extracted/diagram/resolved-libs/System.Runtime.CompilerServices.Unsafe.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260706-101317/extracted/diagram/resolved-libs/System.Drawing.Common.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260706-101317/extracted/diagram/resolved-libs/Aspose.Drawing.Common.dll"
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260713-092007/extracted/diagram/resolved-libs/System.Text.Encoding.CodePages.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260713-092007/extracted/diagram/resolved-libs/System.Runtime.CompilerServices.Unsafe.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260713-092007/extracted/diagram/resolved-libs/System.Drawing.Common.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260713-092007/extracted/diagram/resolved-libs/Aspose.Drawing.Common.dll"
   ],
   "excluded": [],
   "conflicts": []

@@ -3,16 +3,16 @@
   "resolved_version": "26.6.0",
   "nupkg_sha256": "024b13f22f5165d385d2b6777461cf9099556ed3829d4390403905b8f54bc892",
   "selected_target_framework": "netstandard2.0",
-  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260713-092012/extracted/font/primary/lib/netstandard2.0/Aspose.Font.dll",
-  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260713-092012/extracted/font/primary/lib/netstandard2.0/Aspose.Font.xml",
+  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260720-085250/extracted/font/primary/lib/netstandard2.0/Aspose.Font.dll",
+  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260720-085250/extracted/font/primary/lib/netstandard2.0/Aspose.Font.xml",
   "xml_warning": null,
   "dependency_count": 3,
   "dependency_paths": [
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260713-092012/packages/font/deps/System.Security.Permissions.5.0.0.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260713-092012/packages/font/deps/System.Security.AccessControl.5.0.0.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260713-092012/packages/font/deps/System.Text.Encoding.CodePages.4.4.0.nupkg"
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260720-085250/packages/font/deps/System.Security.Permissions.5.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260720-085250/packages/font/deps/System.Security.AccessControl.5.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260720-085250/packages/font/deps/System.Text.Encoding.CodePages.4.4.0.nupkg"
   ],
-  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260713-092012/catalog/font/api-catalog.json",
+  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260720-085250/catalog/font/api-catalog.json",
   "namespace_count": 2,
   "matched_plugin_namespaces": [],
   "unmatched_patterns": [

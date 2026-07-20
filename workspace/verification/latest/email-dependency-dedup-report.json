@@ -5,14 +5,14 @@
   "excluded_count": 0,
   "dedup_by": "assembly_simple_name",
   "kept": [
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260713-092009/extracted/email/resolved-libs/System.Security.Cryptography.Pkcs.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260713-092009/extracted/email/resolved-libs/System.Formats.Asn1.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260713-092009/extracted/email/resolved-libs/System.Buffers.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260713-092009/extracted/email/resolved-libs/System.Memory.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260713-092009/extracted/email/resolved-libs/System.Security.Cryptography.Cng.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260713-092009/extracted/email/resolved-libs/System.Text.Encoding.CodePages.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260713-092009/extracted/email/resolved-libs/System.Runtime.CompilerServices.Unsafe.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260713-092009/extracted/email/resolved-libs/System.Drawing.Common.dll"
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260720-085248/extracted/email/resolved-libs/System.Security.Cryptography.Pkcs.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260720-085248/extracted/email/resolved-libs/System.Formats.Asn1.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260720-085248/extracted/email/resolved-libs/System.Buffers.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260720-085248/extracted/email/resolved-libs/System.Memory.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260720-085248/extracted/email/resolved-libs/System.Security.Cryptography.Cng.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260720-085248/extracted/email/resolved-libs/System.Text.Encoding.CodePages.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260720-085248/extracted/email/resolved-libs/System.Runtime.CompilerServices.Unsafe.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260720-085248/extracted/email/resolved-libs/System.Drawing.Common.dll"
   ],
   "excluded": [],
   "conflicts": []

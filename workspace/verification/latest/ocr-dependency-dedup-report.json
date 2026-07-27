@@ -5,48 +5,48 @@
   "excluded_count": 4,
   "dedup_by": "assembly_simple_name",
   "kept": [
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260720-085256/extracted/ocr/primary/lib/netstandard2.0/Aspose.Drawing.Common.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260720-085256/extracted/ocr/primary/lib/netstandard2.0/Aspose.AI.LLM.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260720-085256/extracted/ocr/primary/lib/netstandard2.0/Aspose.PDF.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260720-085256/extracted/ocr/resolved-libs/System.Text.Encoding.CodePages.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260720-085256/extracted/ocr/resolved-libs/System.Memory.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260720-085256/extracted/ocr/resolved-libs/System.Buffers.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260720-085256/extracted/ocr/resolved-libs/System.Numerics.Vectors.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260720-085256/extracted/ocr/resolved-libs/System.Runtime.CompilerServices.Unsafe.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260720-085256/extracted/ocr/resolved-libs/System.Text.Json.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260720-085256/extracted/ocr/resolved-libs/Microsoft.Bcl.AsyncInterfaces.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260720-085256/extracted/ocr/resolved-libs/System.Threading.Tasks.Extensions.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260720-085256/extracted/ocr/resolved-libs/System.IO.Pipelines.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260720-085256/extracted/ocr/resolved-libs/System.Text.Encodings.Web.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260720-085256/extracted/ocr/resolved-libs/Aspose.Drawing.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260720-085256/extracted/ocr/resolved-libs/Aspose.LLM.dll"
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260727-094418/extracted/ocr/primary/lib/netstandard2.0/Aspose.PDF.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260727-094418/extracted/ocr/primary/lib/netstandard2.0/Aspose.AI.LLM.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260727-094418/extracted/ocr/primary/lib/netstandard2.0/Aspose.Drawing.Common.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260727-094418/extracted/ocr/resolved-libs/System.Text.Encoding.CodePages.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260727-094418/extracted/ocr/resolved-libs/System.Memory.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260727-094418/extracted/ocr/resolved-libs/System.Buffers.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260727-094418/extracted/ocr/resolved-libs/System.Numerics.Vectors.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260727-094418/extracted/ocr/resolved-libs/System.Runtime.CompilerServices.Unsafe.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260727-094418/extracted/ocr/resolved-libs/System.Text.Json.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260727-094418/extracted/ocr/resolved-libs/Microsoft.Bcl.AsyncInterfaces.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260727-094418/extracted/ocr/resolved-libs/System.Threading.Tasks.Extensions.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260727-094418/extracted/ocr/resolved-libs/System.IO.Pipelines.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260727-094418/extracted/ocr/resolved-libs/System.Text.Encodings.Web.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260727-094418/extracted/ocr/resolved-libs/Aspose.Drawing.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260727-094418/extracted/ocr/resolved-libs/Aspose.LLM.dll"
   ],
   "excluded": [
     {
       "assembly_name": "System.Runtime.CompilerServices.Unsafe",
-      "excluded_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260720-085256/extracted/ocr/resolved-libs/System.Runtime.CompilerServices.Unsafe.dll",
-      "kept_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260720-085256/extracted/ocr/resolved-libs/System.Runtime.CompilerServices.Unsafe.dll",
+      "excluded_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260727-094418/extracted/ocr/resolved-libs/System.Runtime.CompilerServices.Unsafe.dll",
+      "kept_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260727-094418/extracted/ocr/resolved-libs/System.Runtime.CompilerServices.Unsafe.dll",
       "same_file": true,
       "reason": "duplicate_assembly_name"
     },
     {
       "assembly_name": "System.Buffers",
-      "excluded_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260720-085256/extracted/ocr/resolved-libs/System.Buffers.dll",
-      "kept_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260720-085256/extracted/ocr/resolved-libs/System.Buffers.dll",
+      "excluded_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260727-094418/extracted/ocr/resolved-libs/System.Buffers.dll",
+      "kept_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260727-094418/extracted/ocr/resolved-libs/System.Buffers.dll",
       "same_file": true,
       "reason": "duplicate_assembly_name"
     },
     {
       "assembly_name": "System.Memory",
-      "excluded_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260720-085256/extracted/ocr/resolved-libs/System.Memory.dll",
-      "kept_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260720-085256/extracted/ocr/resolved-libs/System.Memory.dll",
+      "excluded_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260727-094418/extracted/ocr/resolved-libs/System.Memory.dll",
+      "kept_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260727-094418/extracted/ocr/resolved-libs/System.Memory.dll",
       "same_file": true,
       "reason": "duplicate_assembly_name"
     },
     {
       "assembly_name": "System.Runtime.CompilerServices.Unsafe",
-      "excluded_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260720-085256/extracted/ocr/resolved-libs/System.Runtime.CompilerServices.Unsafe.dll",
-      "kept_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260720-085256/extracted/ocr/resolved-libs/System.Runtime.CompilerServices.Unsafe.dll",
+      "excluded_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260727-094418/extracted/ocr/resolved-libs/System.Runtime.CompilerServices.Unsafe.dll",
+      "kept_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-ocr-20260727-094418/extracted/ocr/resolved-libs/System.Runtime.CompilerServices.Unsafe.dll",
       "same_file": true,
       "reason": "duplicate_assembly_name"
     }

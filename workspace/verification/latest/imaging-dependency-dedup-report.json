@@ -5,11 +5,11 @@
   "excluded_count": 0,
   "dedup_by": "assembly_simple_name",
   "kept": [
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260803-093739/extracted/imaging/resolved-libs/System.Text.Encoding.CodePages.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260803-093739/extracted/imaging/resolved-libs/System.Memory.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260803-093739/extracted/imaging/resolved-libs/System.Runtime.CompilerServices.Unsafe.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260803-093739/extracted/imaging/resolved-libs/Newtonsoft.Json.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260803-093739/extracted/imaging/resolved-libs/System.Drawing.Common.dll"
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260810-072539/extracted/imaging/resolved-libs/System.Text.Encoding.CodePages.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260810-072539/extracted/imaging/resolved-libs/System.Memory.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260810-072539/extracted/imaging/resolved-libs/System.Runtime.CompilerServices.Unsafe.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260810-072539/extracted/imaging/resolved-libs/Newtonsoft.Json.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260810-072539/extracted/imaging/resolved-libs/System.Drawing.Common.dll"
   ],
   "excluded": [],
   "conflicts": []

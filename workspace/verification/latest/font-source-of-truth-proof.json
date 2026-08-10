@@ -1,18 +1,18 @@
 {
   "package_id": "Aspose.Font",
-  "resolved_version": "26.6.0",
-  "nupkg_sha256": "024b13f22f5165d385d2b6777461cf9099556ed3829d4390403905b8f54bc892",
+  "resolved_version": "26.8.0",
+  "nupkg_sha256": "7a51e82049cacce78824e9fbfeed92248c20690f94c2c311900d2b91972e9555",
   "selected_target_framework": "netstandard2.0",
-  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260803-093736/extracted/font/primary/lib/netstandard2.0/Aspose.Font.dll",
-  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260803-093736/extracted/font/primary/lib/netstandard2.0/Aspose.Font.xml",
+  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260810-072537/extracted/font/primary/lib/netstandard2.0/Aspose.Font.dll",
+  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260810-072537/extracted/font/primary/lib/netstandard2.0/Aspose.Font.xml",
   "xml_warning": null,
   "dependency_count": 3,
   "dependency_paths": [
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260803-093736/packages/font/deps/System.Security.Permissions.5.0.0.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260803-093736/packages/font/deps/System.Security.AccessControl.5.0.0.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260803-093736/packages/font/deps/System.Text.Encoding.CodePages.4.4.0.nupkg"
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260810-072537/packages/font/deps/System.Security.Permissions.5.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260810-072537/packages/font/deps/System.Security.AccessControl.5.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260810-072537/packages/font/deps/System.Text.Encoding.CodePages.4.4.0.nupkg"
   ],
-  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260803-093736/catalog/font/api-catalog.json",
+  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-font-20260810-072537/catalog/font/api-catalog.json",
   "namespace_count": 2,
   "matched_plugin_namespaces": [],
   "unmatched_patterns": [

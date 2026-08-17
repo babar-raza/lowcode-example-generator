@@ -3,21 +3,21 @@
   "resolved_version": "26.7.0",
   "nupkg_sha256": "eacd023c18b4425883e6e44139d20764d07b186f09d567ddc1085089b69a8f93",
   "selected_target_framework": "netstandard2.0",
-  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260810-072535/extracted/email/primary/lib/netstandard2.0/Aspose.Email.dll",
-  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260810-072535/extracted/email/primary/lib/netstandard2.0/Aspose.Email.xml",
+  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260817-064706/extracted/email/primary/lib/netstandard2.0/Aspose.Email.dll",
+  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260817-064706/extracted/email/primary/lib/netstandard2.0/Aspose.Email.xml",
   "xml_warning": null,
   "dependency_count": 8,
   "dependency_paths": [
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260810-072535/packages/email/deps/System.Security.Cryptography.Pkcs.7.0.3.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260810-072535/packages/email/deps/System.Formats.Asn1.7.0.0.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260810-072535/packages/email/deps/System.Buffers.4.5.1.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260810-072535/packages/email/deps/System.Memory.4.5.5.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260810-072535/packages/email/deps/System.Security.Cryptography.Cng.5.0.0.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260810-072535/packages/email/deps/System.Text.Encoding.CodePages.5.0.0.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260810-072535/packages/email/deps/System.Runtime.CompilerServices.Unsafe.5.0.0.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260810-072535/packages/email/deps/System.Drawing.Common.8.0.4.nupkg"
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260817-064706/packages/email/deps/System.Security.Cryptography.Pkcs.7.0.3.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260817-064706/packages/email/deps/System.Formats.Asn1.7.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260817-064706/packages/email/deps/System.Buffers.4.5.1.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260817-064706/packages/email/deps/System.Memory.4.5.5.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260817-064706/packages/email/deps/System.Security.Cryptography.Cng.5.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260817-064706/packages/email/deps/System.Text.Encoding.CodePages.5.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260817-064706/packages/email/deps/System.Runtime.CompilerServices.Unsafe.5.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260817-064706/packages/email/deps/System.Drawing.Common.8.0.4.nupkg"
   ],
-  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260810-072535/catalog/email/api-catalog.json",
+  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-email-20260817-064706/catalog/email/api-catalog.json",
   "namespace_count": 2,
   "matched_plugin_namespaces": [
     {

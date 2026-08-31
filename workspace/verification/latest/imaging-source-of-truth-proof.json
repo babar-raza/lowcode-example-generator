@@ -3,18 +3,18 @@
   "resolved_version": "26.8.0",
   "nupkg_sha256": "bdf35f70ea7409de9327e2b515853f02aa0347c0a7329526a95123b41cf7a04b",
   "selected_target_framework": "netstandard2.0",
-  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260824-065118/extracted/imaging/primary/lib/netstandard2.0/Aspose.Imaging.dll",
-  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260824-065118/extracted/imaging/primary/lib/netstandard2.0/Aspose.Imaging.xml",
+  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260831-123652/extracted/imaging/primary/lib/netstandard2.0/Aspose.Imaging.dll",
+  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260831-123652/extracted/imaging/primary/lib/netstandard2.0/Aspose.Imaging.xml",
   "xml_warning": null,
   "dependency_count": 5,
   "dependency_paths": [
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260824-065118/packages/imaging/deps/System.Text.Encoding.CodePages.7.0.0.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260824-065118/packages/imaging/deps/System.Memory.4.5.5.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260824-065118/packages/imaging/deps/System.Runtime.CompilerServices.Unsafe.6.0.0.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260824-065118/packages/imaging/deps/Newtonsoft.Json.13.0.1.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260824-065118/packages/imaging/deps/System.Drawing.Common.6.0.0.nupkg"
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260831-123652/packages/imaging/deps/System.Text.Encoding.CodePages.7.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260831-123652/packages/imaging/deps/System.Memory.4.5.5.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260831-123652/packages/imaging/deps/System.Runtime.CompilerServices.Unsafe.6.0.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260831-123652/packages/imaging/deps/Newtonsoft.Json.13.0.1.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260831-123652/packages/imaging/deps/System.Drawing.Common.6.0.0.nupkg"
   ],
-  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260824-065118/catalog/imaging/api-catalog.json",
+  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-imaging-20260831-123652/catalog/imaging/api-catalog.json",
   "namespace_count": 2,
   "matched_plugin_namespaces": [],
   "unmatched_patterns": [

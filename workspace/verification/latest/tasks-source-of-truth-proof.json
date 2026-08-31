@@ -3,19 +3,19 @@
   "resolved_version": "26.8.0",
   "nupkg_sha256": "641fe75f5012432f58b6a3d7ef7ab3cc5d8fc4f9573e27cd10dd457391e08e97",
   "selected_target_framework": "netstandard2.0",
-  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260824-065147/extracted/tasks/primary/lib/netstandard2.0/Aspose.Tasks.dll",
-  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260824-065147/extracted/tasks/primary/lib/netstandard2.0/Aspose.Tasks.xml",
+  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260831-123720/extracted/tasks/primary/lib/netstandard2.0/Aspose.Tasks.dll",
+  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260831-123720/extracted/tasks/primary/lib/netstandard2.0/Aspose.Tasks.xml",
   "xml_warning": null,
   "dependency_count": 6,
   "dependency_paths": [
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260824-065147/packages/tasks/deps/System.Drawing.Common.4.7.0.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260824-065147/packages/tasks/deps/System.Security.Permissions.4.5.0.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260824-065147/packages/tasks/deps/System.Security.AccessControl.4.5.0.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260824-065147/packages/tasks/deps/System.Text.Encoding.CodePages.4.5.0.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260824-065147/packages/tasks/deps/System.Runtime.CompilerServices.Unsafe.4.5.0.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260824-065147/packages/tasks/deps/Aspose.Drawing.26.5.0.nupkg"
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260831-123720/packages/tasks/deps/System.Drawing.Common.4.7.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260831-123720/packages/tasks/deps/System.Security.Permissions.4.5.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260831-123720/packages/tasks/deps/System.Security.AccessControl.4.5.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260831-123720/packages/tasks/deps/System.Text.Encoding.CodePages.4.5.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260831-123720/packages/tasks/deps/System.Runtime.CompilerServices.Unsafe.4.5.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260831-123720/packages/tasks/deps/Aspose.Drawing.26.5.0.nupkg"
   ],
-  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260824-065147/catalog/tasks/api-catalog.json",
+  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-tasks-20260831-123720/catalog/tasks/api-catalog.json",
   "namespace_count": 2,
   "matched_plugin_namespaces": [],
   "unmatched_patterns": [

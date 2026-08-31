@@ -5,11 +5,11 @@
   "excluded_count": 0,
   "dedup_by": "assembly_simple_name",
   "kept": [
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20260824-065129/extracted/page/resolved-libs/System.Drawing.Common.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20260824-065129/extracted/page/resolved-libs/System.Security.Permissions.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20260824-065129/extracted/page/resolved-libs/System.Security.AccessControl.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20260824-065129/extracted/page/resolved-libs/System.Text.Encoding.CodePages.dll",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20260824-065129/extracted/page/resolved-libs/System.Runtime.CompilerServices.Unsafe.dll"
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20260831-123704/extracted/page/resolved-libs/System.Drawing.Common.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20260831-123704/extracted/page/resolved-libs/System.Security.Permissions.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20260831-123704/extracted/page/resolved-libs/System.Security.AccessControl.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20260831-123704/extracted/page/resolved-libs/System.Text.Encoding.CodePages.dll",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20260831-123704/extracted/page/resolved-libs/System.Runtime.CompilerServices.Unsafe.dll"
   ],
   "excluded": [],
   "conflicts": []

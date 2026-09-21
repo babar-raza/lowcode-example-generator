@@ -3,17 +3,17 @@
   "resolved_version": "26.9.0",
   "nupkg_sha256": "455aabcc06001e30691862434268f58923042213effad638d6c3dd005aa3b25e",
   "selected_target_framework": "netstandard2.0",
-  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260914-114229/extracted/diagram/primary/lib/netstandard2.0/Aspose.Diagram.dll",
-  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260914-114229/extracted/diagram/primary/lib/netstandard2.0/Aspose.Diagram.xml",
+  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260921-115458/extracted/diagram/primary/lib/netstandard2.0/Aspose.Diagram.dll",
+  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260921-115458/extracted/diagram/primary/lib/netstandard2.0/Aspose.Diagram.xml",
   "xml_warning": null,
   "dependency_count": 4,
   "dependency_paths": [
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260914-114229/packages/diagram/deps/System.Text.Encoding.CodePages.4.7.0.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260914-114229/packages/diagram/deps/System.Runtime.CompilerServices.Unsafe.4.7.0.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260914-114229/packages/diagram/deps/System.Drawing.Common.4.7.2.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260914-114229/packages/diagram/deps/Aspose.Drawing.Common.26.4.0.nupkg"
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260921-115458/packages/diagram/deps/System.Text.Encoding.CodePages.4.7.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260921-115458/packages/diagram/deps/System.Runtime.CompilerServices.Unsafe.4.7.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260921-115458/packages/diagram/deps/System.Drawing.Common.4.7.2.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260921-115458/packages/diagram/deps/Aspose.Drawing.Common.26.4.0.nupkg"
   ],
-  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260914-114229/catalog/diagram/api-catalog.json",
+  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-diagram-20260921-115458/catalog/diagram/api-catalog.json",
   "namespace_count": 2,
   "matched_plugin_namespaces": [
     {

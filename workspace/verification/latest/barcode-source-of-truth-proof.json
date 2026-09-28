@@ -3,17 +3,17 @@
   "resolved_version": "26.8.0",
   "nupkg_sha256": "57bc4574db967a2884af32a083806a9b205547a63c45ff3dd85eeeed3b0b691c",
   "selected_target_framework": "netstandard2.0",
-  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-barcode-20260921-115449/extracted/barcode/primary/lib/netstandard2.0/Aspose.BarCode.dll",
-  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-barcode-20260921-115449/extracted/barcode/primary/lib/netstandard2.0/Aspose.BarCode.xml",
+  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-barcode-20260928-124941/extracted/barcode/primary/lib/netstandard2.0/Aspose.BarCode.dll",
+  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-barcode-20260928-124941/extracted/barcode/primary/lib/netstandard2.0/Aspose.BarCode.xml",
   "xml_warning": null,
   "dependency_count": 4,
   "dependency_paths": [
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-barcode-20260921-115449/packages/barcode/deps/Aspose.Drawing.Common.26.8.0.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-barcode-20260921-115449/packages/barcode/deps/System.Text.Encoding.CodePages.9.0.2.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-barcode-20260921-115449/packages/barcode/deps/System.Memory.4.5.5.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-barcode-20260921-115449/packages/barcode/deps/System.Runtime.CompilerServices.Unsafe.6.0.0.nupkg"
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-barcode-20260928-124941/packages/barcode/deps/Aspose.Drawing.Common.26.8.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-barcode-20260928-124941/packages/barcode/deps/System.Text.Encoding.CodePages.9.0.2.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-barcode-20260928-124941/packages/barcode/deps/System.Memory.4.5.5.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-barcode-20260928-124941/packages/barcode/deps/System.Runtime.CompilerServices.Unsafe.6.0.0.nupkg"
   ],
-  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-barcode-20260921-115449/catalog/barcode/api-catalog.json",
+  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-barcode-20260928-124941/catalog/barcode/api-catalog.json",
   "namespace_count": 2,
   "matched_plugin_namespaces": [],
   "unmatched_patterns": [

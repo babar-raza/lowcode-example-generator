@@ -1,20 +1,20 @@
 {
   "package_id": "Aspose.Page",
-  "resolved_version": "26.9.0",
-  "nupkg_sha256": "2be7023d5c68d0741465a477734220570ab6ea76aad15ce2f20e00314f0b943b",
+  "resolved_version": "26.10.0",
+  "nupkg_sha256": "afbd3e65e2927426d7ee4850192a1e50560edd57d5e810f9ad512754881a45e1",
   "selected_target_framework": "netstandard2.0",
-  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20261019-120204/extracted/page/primary/lib/netstandard2.0/Aspose.Page.dll",
-  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20261019-120204/extracted/page/primary/lib/netstandard2.0/Aspose.Page.xml",
+  "dll_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20261026-121241/extracted/page/primary/lib/netstandard2.0/Aspose.Page.dll",
+  "xml_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20261026-121241/extracted/page/primary/lib/netstandard2.0/Aspose.Page.xml",
   "xml_warning": null,
   "dependency_count": 5,
   "dependency_paths": [
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20261019-120204/packages/page/deps/System.Drawing.Common.5.0.3.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20261019-120204/packages/page/deps/System.Security.Permissions.4.5.0.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20261019-120204/packages/page/deps/System.Security.AccessControl.4.5.0.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20261019-120204/packages/page/deps/System.Text.Encoding.CodePages.4.5.1.nupkg",
-    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20261019-120204/packages/page/deps/System.Runtime.CompilerServices.Unsafe.4.5.2.nupkg"
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20261026-121241/packages/page/deps/System.Drawing.Common.5.0.3.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20261026-121241/packages/page/deps/System.Security.Permissions.4.5.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20261026-121241/packages/page/deps/System.Security.AccessControl.4.5.0.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20261026-121241/packages/page/deps/System.Text.Encoding.CodePages.4.5.1.nupkg",
+    "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20261026-121241/packages/page/deps/System.Runtime.CompilerServices.Unsafe.4.5.2.nupkg"
   ],
-  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20261019-120204/catalog/page/api-catalog.json",
+  "api_catalog_path": "/home/runner/work/lowcode-example-generator/lowcode-example-generator/workspace/runs/discovery-page-20261026-121241/catalog/page/api-catalog.json",
   "namespace_count": 2,
   "matched_plugin_namespaces": [],
   "unmatched_patterns": [
